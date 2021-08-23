@@ -143,7 +143,7 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
-  - Security Data: besLH_project_info.md
+  - Security Assessment Reports: besLH_project_info.md
   - Visualization : besLH_vishualization.md
 #  - Tech stack: tech_stack.md
 #  - Tracked OSS projects: projects_we_track.md

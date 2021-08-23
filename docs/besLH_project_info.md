@@ -8,40 +8,96 @@ hide:
 
 
 
+## **Hygieia**  3.0  
+**Last scanned  : 18/08/2021 10 IST**
 
-## **Hyperledger Cello**
+
+ | CRITICAL  |  HIGH   |    MEDIUM  |   LOW  |   
+ |-----------|---------|------------|--------|
+ |  75       |  152    |   74       |    15  |
 
 
-### **Base info**
+### **Summary**
+<!-- 
+    Deserialization of Untrusted data [CVE-2015-4852, CVE-2015-7501, CWE-502]
 
-Hyperledger Cello is a blockchain provision and operation system, which helps manage blockchain networks in an efficient way.
- 
+    Arbitrary code execution [CVE-2018-1273, CWE-94]
 
-### **Security data from Snyk**
+    Prototype Pollution [CWE-400]     -->
 
-    Vulnerability | CVE-2020-19498
-        Introduced through: docker-image | python@3.8
-
-    
-
-    Vulnerability | CWE-125
-        Introduced through: libheif/libheif1@1.3.2-2
+    CVE-2015-4852 CVE-2015-7501 CWE-502 
+    CVE-2018-1273 CWE-94 
+    CVE-2021-21351 
+    CWE-502 CWE-400 CVE-2019-12814 CWE-502
+    CVE-2020-9546 CVE-2020-9547 CVE-2020-9548 CWE-502 
+    CVE-2017-15095 CWE-184
 
 ---
 
-## **Drupal**
+## **Odoo**   14.0
+**Last scanned  : 18/08/2021 10 IST**
+
+ | CRITICAL  |  HIGH   |    MEDIUM  |   LOW  |   
+ |-----------|---------|------------|--------|
+ |  75       |  152    |   74       |    15  |
+
+### **Summary**
+
+    CVE-2019-17626 CWE-94 
+    CVE-2021-25289 CWE-120 
+    CVE-2019-18874 CWE-415 
+    CVE-2020-5313 CWE-119 
+    CVE-2020-5312 CWE-119 
+    CVE-2020-5310 CWE-190 
+    CVE-2020-26137 CWE-644 
+    CVE-2021-27923 CWE-400
+
+---
+
+## **Hyperledger Fabric**  2.4.0-beta
+**Last scanned  : 18/08/2021 10 IST**
+
+ | CRITICAL  |  HIGH   |    MEDIUM  |   LOW  |   
+ |-----------|---------|------------|--------|
+ |  75       |  152    |   64       |    1   |
+
+### **Summary**
+
+    CVE-2021-20270 CWE-400
+    CVE-2020-9283 CWE-347
+    CVE-2018-1098 CWE-352
+    CVE-2016-3697 CWE-264
+
+---
 
 
-### **Base info**
-Drupal is an open source content management platform supporting a variety of websites ranging from personal weblogs to large community-driven websites. For more information, visit the Drupal website, Drupal.org, and join the Drupal community.
+
+## **TensorFlow**  2.4.3
+**Last scanned  : 18/08/2021 10 IST**
+
+ | CRITICAL  |  HIGH   |    MEDIUM  |   LOW  |   
+ |-----------|---------|------------|--------|
+ |  0        |  0      |   0        |    0   |
 
 
-### **Security data from Snyk**
 
-    Vulnerability | CVE-200
-        Introduced through: docker-image | python@3.8
+### **Summary**
 
-    
+    TBD
 
-    Vulnerability | CVE-1245-19498
-        Introduced through: libheif/libheif1@1.3.2-2
+---
+
+## **ZAP**  2.10.0
+**Last scanned  : 18/08/2021 10 IST**
+
+ | CRITICAL  |  HIGH   |    MEDIUM  |   LOW  |   
+ |-----------|---------|------------|--------|
+ |  0        |  0      |    0       |    0   |
+
+### **Summary**
+
+    TBD
+
+---
+
+
