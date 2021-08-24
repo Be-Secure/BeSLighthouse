@@ -79,6 +79,9 @@ Symlink Attack &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
  |-----------|---------|------------|--------|
  |  0        |  0      |   0        |    0   |
 
+ | CRITICAL  |  HIGH   |    MEDIUM  |   LOW  |   
+ |-----------|---------|------------|--------|
+ |  0        |  0      |   0        |    0   |
 
 
 ### **Summary**
