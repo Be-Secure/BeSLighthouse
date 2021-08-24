@@ -3,9 +3,9 @@
 {% block styles %}
     {{ super() }}
     {% set title = config.site_name %}
-    <link rel="stylesheet" href="./assets/stylesheets/extra.css">
+    <!-- <link rel="stylesheet" href="./assets/stylesheets/extra.css"> -->
     <style>
-        .grow img{
+        /* .grow img{
         transition: 1s ease;
         }
 
@@ -14,7 +14,88 @@
         -ms-transform: scale(1.2);
         transform: scale(1.2);
         transition: 1s ease;
+        } */
+        /* table, th, td {
+        border: transparent;
+        border-collapse: collapse;
+        background-color: transparent;
+        } */
+        th, td {
+        padding: 5px;
+        /* text-align: left;   */
+        font-size: 18px;
+        color: black;
         }
+        .iconDetails {
+        margin-left:2%;
+        float:left; 
+        height:300px;
+        width:300px;	
+        }
+        
+        .iconDetails2 {
+        margin-right:2%;
+        float:right; 
+        height:300px;
+        width:300px;	
+        } 
+
+        .container2 {
+            width:100%;
+            height:auto;
+            padding: 50px;
+            float: left;
+        }
+        .fs
+        {
+            font-size: 20px;
+            color: black;
+            margin: 0px;
+        }
+        .fs2
+        {
+            font-size: 20px;
+            color: black;
+            margin: 0px;
+            float: right;
+        }
+        .button{
+            display:inline-flex;
+            font-size:14px;
+            letter-spacing:0px;
+            font-weight:600;
+            line-height:16px;
+            text-decoration:none !important;
+            text-transform:uppercase;
+            background-color:#242830;
+            color:#fff !important;
+            border:none;
+            border-radius:2px;
+            cursor:pointer;
+            justify-content:center;
+            padding:16px 32px;
+            height:48px;
+            text-align:center;
+            white-space:nowrap
+        }
+
+        .button-primary{
+            background:#097dea;
+            background:linear-gradient(65deg, #0270D7 0, #0F8AFD 100%)
+        }
+        .button-primary:hover{
+            background:#0982f4;
+            background:linear-gradient(65deg, #0275e1 0, #198ffd 100%)
+        }
+        .hero{
+            text-align:center;
+            padding-top:48px;
+            padding-bottom:88px
+        }
+        .section-paragraph{
+        padding-left:90px;
+        padding-right:90px
+    }
     </style>
 {% endblock %}
 {% block content %}
@@ -38,10 +119,16 @@
                 <div class="container">
                     <div class="hero-inner">
 						<div class="hero-copy">
-	                        <h1 class="hero-title mt-0">Open Source Tech Stacks for Developers</h1>
-	                        <p class="hero-paragraph">Community Dashboard for security assessment of TAVOSS components. </p>
-                            <div class="hero-cta"><a class="button button-primary" href="#">Browse</a></div>
-						</div>
+	                        <h1 class="hero-title mt-0">Community Dashboard for security assessment of Open Source Security Tech Stacks </h1>
+                            <img src="./assets/images/favicon.png" alt="favicon" width="350px" height="350px">
+	                        <p style="font-size: 22px;" class="hero-paragraph">Click on LAUNCH to view our tracked open source projects and BROWSE to view our security reports</p>
+                            <div class="hero-cta">
+                                <a class="button button-primary" href="{{ page.next_page.url | url }}" title="Click to view our security report">Browse</a>
+
+                                <a class="button button-primary" href="https://Be-Secure.github.io/BeSLighthouse/bes_visualisation.html" title="Click to launch visualisation" target="_blank">Launch</a>
+                   
+                            </div>
+                        </div>
                        
 						<!-- <div class="hero-figure anime-element">
 							<svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
@@ -66,152 +153,103 @@
             <div class="container">
             <!-- <div class="hero-inner"> -->
             <!-- <p style="text-align: center;color: rgb(0, 0, 0);">Our Open Source Security Tech Stacks</p> -->
-            <h2 style="text-align: center;color: rgb(0, 0, 0);">Our Open Source Security Tech Stacks</h2>
+            <h1 style="text-align: center;color: rgb(0, 0, 0);">Our Open Source Security Tech Stacks</h1>
             <!-- </div> -->
             </div>
-            
-            <section class="features section">
-                <div class="container">
-					<div class="features-inner section-inner has-bottom-divider">
-                        <div class="features-wrap grow">
-                            <!-- ***Application Tech Stack*** -->
-                            <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-										<a href="https://be-secure.github.io/Be-Secure/bes-app-tech-stack.html" target="_blank"><img src="./assets/images/app_logo.png" alt="Feature 01" width="300px" height="300px"></a>
-                                    </div>
-                                    <!-- <h4 class="feature-title mt-24">Application</h4>  -->
-                                    <p style="padding-top: 20px;" class="text-sm mb-0">For fully function open source applications</p>
-                                    <h4 class="feature-title mt-24">No. of projects: 21</h4>
-                                    <div style="color: black;" class="container">
-                                        
-                                        <p style="font-size: 20px; text-align: center; font-weight: bold;"> Sample projects
-                                            <!-- <ul style="text-align: left; color: black;">
-                                                <li>FarmOS</li>
-                                                <li>Odoo</li>
-                                                <li>OpenCV</li>
-                                            </ul> -->
-                                            <p>FarmOS</p>
-                                            <p>Odoo</p>
-                                            <p>OpenCV</p>
-                                        </p>
 
-                                    </div>
-                                  
-                                </div>
-                            </div>
-                            <!-- ***DevOps*** -->
-							<div class="feature text-center is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-										<a href="https://be-secure.github.io/Be-Secure/bes-devops-tech-stack.html" target="_blank"><img src="./assets/images/devops_logo.png" alt="Feature 02" width="300px" height="300px"></a>
-                                    </div>
-                                    <p style="padding-top: 20px;" class="text-sm mb-0">To secure open source devops tools</p>
-                                    <h4 class="feature-title mt-24">No. of projects: 16</h4>
-                                    <div style="color: black;" class="container">
-                                        <p style="font-size: 20px; text-align: center; font-weight: bold;"> Sample projects
-                                            <!-- <ul style="text-align: left; color: black;">
-                                                <li>DefectDojo</li>
-                                                <li>Hygeia</li>
-                                                <li>Grafana</li>
-                                            </ul> -->
-                                            <p>DefectDojo</p>
-                                            <p>Hygeia</p>
-                                            <p>Grafana</p>
-                                        </p>
-
-                                    </div>
-                                    <!-- <p class="text-sm mb-0">Fermentum posuere urna nec tincidunt praesent semper feugiat nibh. A arcu cursus vitae congue mauris. Nam at lectus urna duis convallis. Mauris rhoncus aenean vel elit scelerisque mauris.</p> -->
-                                </div>
-                            </div>
-                            <!-- ***Distributed and Decentralised*** -->
-                            <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <a href="https://be-secure.github.io/Be-Secure/bes-dist-decent-tech-stack.html" target="_blank"><img src="./assets/images/dist_app_logo.png" alt="Feature 02" width="300px" height="300px"></a>
-									</div>
-                                    <p style="padding-top: 20px;" class="text-sm mb-0">For distributed and decentralized Distributed application</p>
-                                    <h4 class="feature-title mt-24">No. of projects: 12</h4>
-                                    <div style="color: black;" class="container">
-                                        <p style="font-size: 20px; text-align: center; font-weight: bold;"> Sample projects
-                                            <!-- <ul style="text-align: left; color: black;">
-                                                <li>Fabric</li>
-                                                <li>Sawtooth</li>
-                                                <li>Aries</li>
-                                            </ul> -->
-                                            <p>Fabric</p>
-                                            <p>Sawtooth</p>
-                                            <p>Aries</p>
-                                        </p>
-
-                                    </div>
-                                    <!-- <h4 class="feature-title mt-24">Trusted Service Offerings</h4>
-                                    <p class="text-sm mb-0">Fermentum posuere urna nec tincidunt praesent semper feugiat nibh. A arcu cursus vitae congue mauris. Nam at lectus urna duis convallis. Mauris rhoncus aenean vel elit scelerisque mauris.</p> -->
-                                </div>
-                            </div>
-                            <!-- ***Language and Framwork -->
-                            <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <a href="https://be-secure.github.io/Be-Secure/bes-lang-framework-tech-stack.html" target="_blank"><img src="./assets/images/lan_logo.png" alt="Feature 02" width="300px" height="300px">                                    </a></div>
-                                        <p style="padding-top: 20px;" style="color: black;" class="text-sm mb-0">To secure language and framework built on generic languages</p>
-                                    <h4 class="feature-title mt-24">No. of projects: 21</h4>
-                                    <div style="color: black;" class="container">
-                                        <p style="font-size: 20px; text-align: center; font-weight: bold;"> Sample projects
-                                            <!-- <ul style="text-align: left; color: black;">
-                                                <li>TensorFlow</li>
-                                                <li>Koha</li>
-                                                <li>MongoDB</li>
-                                            </ul> -->
-                                            <p>TensorFlow</p>
-                                            <p>Koha</p>
-                                            <p>MongoDB</p>
-                                        </p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ***Security Tools*** -->
-							 <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <a href="https://be-secure.github.io/Be-Secure/bes-open-source-security-tool-tech-stack.html" target="_blank"><img src="./assets/images/sec_logo.png" alt="Feature 02" width="300px" height="300px"></a>
-										
-                                    </div>
-                                    <p style="padding-top: 20px;" class="text-sm mb-0">For open source security tools.</p>
-                                    <h4 class="feature-title mt-24">No. of projects: 53</h4>
-                                    <div style="color: black;" class="container">
-                                        <p style="font-size: 20px; text-align: center; font-weight: bold;"> Sample projects
-                                            <!-- <ul style="text-align: left; color: black;">
-                                                <li>Fuzzbench</li>
-                                                <li>Beef</li>
-                                                <li>Zaproxy</li>
-                                            </ul> -->
-                                            <p>Fuzzbench</p>
-                                            <p>beef</p>
-                                            <p>Zaproxy</p>
-                                        </p>
-
-                                    </div>
-                                    <!-- <h4 class="feature-title mt-24">Be Productive</h4>
-                                    <p class="text-sm mb-0">Fermentum posuere urna nec tincidunt praesent semper feugiat nibh. A arcu cursus vitae congue mauris. Nam at lectus urna duis convallis. Mauris rhoncus aenean vel elit scelerisque mauris.</p> -->
-                                </div>
-                            </div>
-                            <!--
-                            <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-										<img src="dist/images/feature-icon-06.svg" alt="Feature 06">
-                                    </div>
-                                    <h4 class="feature-title mt-24">Be Productive</h4>
-                                    <p class="text-sm mb-0">Fermentum posuere urna nec tincidunt praesent semper feugiat nibh. A arcu cursus vitae congue mauris. Nam at lectus urna duis convallis. Mauris rhoncus aenean vel elit scelerisque mauris.</p>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
+            <div class='container2 grow img'>
+                <div>
+                    <img src='./assets/images/app_logo.png' alt="App logo" class='iconDetails'>
+                </div>	
+                <div style='margin-left:60px;' class="fs">
+                <!-- <h4 style="margin: 0px;padding-top: 100px;">Facebook</h4> -->
+                <p style="padding-top: 100px;">For fully function open source applications</p>
+                <p>No. of projects: 21</p>
+                <p>Sample projects: FarmOS, OpenCV, Odoo</p>
+                <!-- For fully function open source applications -->
+                <!-- <div style="font-size: 18px;">fine location, GPS, coarse location</div> -->
+                <!-- <div style="float:right;font-size:.6em;padding-top: 35px;">0 mins ago</div> -->
                 </div>
-            </section>
+            </div>
 
+            <div class='container2 grow img'>
+                <div>
+                    <img src='./assets/images/devops_logo.png' class='iconDetails2'>
+                </div>	
+                <div class="fs2">
+                <!-- <h4 style="margin: 0px;padding-top: 100px;">Facebook</h4> -->
+                <p style="padding-top: 100px;">To secure open source devops tools</p>
+                <p>No. of projects: 16</p>
+                <p>Sample projects: DefectDojo, Hygeia, Grafana</p>
+                <!-- For fully function open source applications -->
+                <!-- <div style="font-size: 18px;">fine location, GPS, coarse location</div> -->
+                <!-- <div style="float:right;font-size:.6em;padding-top: 35px;">0 mins ago</div> -->
+                </div>
+            </div>
+
+            <div class='container2 grow img'>
+                <div>
+                    <img src='./assets/images/dist_app_logo.png' class='iconDetails'>
+                </div>	
+                <div style='margin-left:60px;' class="fs">
+                <!-- <h4 style="margin: 0px;padding-top: 100px;">Facebook</h4> -->
+                <p style="padding-top: 100px;">For distributed and decentralized Distributed application</p>
+                <p>No. of projects: 12</p>
+                <p>Sample projects: Fabric, Sawtooth, Aries</p>
+                <!-- For fully function open source applications -->
+                <!-- <div style="font-size: 18px;">fine location, GPS, coarse location</div> -->
+                <!-- <div style="float:right;font-size:.6em;padding-top: 35px;">0 mins ago</div> -->
+                </div>
+            </div>
+
+            <div class='container2 grow img'>
+                <div>
+                    <img src='./assets/images/lan_logo.png' class='iconDetails2'>
+                </div>	
+                <div class="fs2">
+                <!-- <h4 style="margin: 0px;padding-top: 100px;">Facebook</h4> -->
+                <p style="padding-top: 100px;">To secure language and framework built on generic languages</p>
+                <p>No. of projects: 21</p>
+                <p>Sample projects: TensorFlow, Koha, MongoDB</p>
+                <!-- For fully function open source applications -->
+                <!-- <div style="font-size: 18px;">fine location, GPS, coarse location</div> -->
+                <!-- <div style="float:right;font-size:.6em;padding-top: 35px;">0 mins ago</div> -->
+                </div>
+            </div>
+
+            <div class='container2 grow img'>
+                <div>
+                    <img src='./assets/images/sec_logo.png' class='iconDetails'>
+                </div>	
+                <div style='margin-left:60px;' class="fs">
+                <!-- <h4 style="margin: 0px;padding-top: 100px;">Facebook</h4> -->
+                <p style="padding-top: 100px;">For open source security tools</p>
+                <p>No. of projects: 53</p>
+                <p>Sample projects: Fuzzbench, Beef, Zaproxy</p>
+                <!-- For fully function open source applications -->
+                <!-- <div style="font-size: 18px;">fine location, GPS, coarse location</div> -->
+                <!-- <div style="float:right;font-size:.6em;padding-top: 35px;">0 mins ago</div> -->
+                </div>
+            </div>
+            <!-- <table style="width: 100%; float: left;">
+                <tr>
+                    <th rowspan="3">
+                        <img src="./assets/images/app_logo.png" alt="Feature 01" width="300px" height="300px">
+                    </th>
+                    <td style="font-size: 18px;">
+                        For fully function open source applications
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        No. of projects: 21
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sample projects: FarmOS, OpenCV, Odoo</td>
+                </tr>
+            </table> -->
+            
             <!-- <section class="pricing section">
                 <div class="container-sm">
                     <div class="pricing-inner section-inner">
