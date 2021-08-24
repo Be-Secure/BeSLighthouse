@@ -1,6 +1,6 @@
 ---
-template: main.html
-title: DO tech stack
+template: overrides/home.html
+title: BeSLighthouse
 hide: 
     - navigation
     - toc
