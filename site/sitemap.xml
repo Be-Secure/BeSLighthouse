@@ -2,22 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>None</loc>
-         <lastmod>2021-08-23</lastmod>
+         <lastmod>2021-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>None</loc>
-         <lastmod>2021-08-23</lastmod>
+         <lastmod>2021-08-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>None</loc>
-         <lastmod>2021-08-23</lastmod>
+         <lastmod>2021-08-24</lastmod>
+<<<<<<< HEAD
+=======
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>None</loc>
-         <lastmod>2021-08-23</lastmod>
+         <lastmod>2021-08-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2021-08-24</lastmod>
+>>>>>>> 0c78312044d9d237516b15aac914452f5cbaad67
          <changefreq>daily</changefreq>
     </url>
 </urlset>
