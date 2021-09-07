@@ -1,0 +1,118 @@
+name: Track new project
+description: Request us to track a new OSS project
+title: "[Name of the project]: "
+labels: [Untracked, triage]
+  
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out to us. Please fill out the below details.
+  # - type: input
+  #   id: tech_stack_classification
+  #   attributes:
+  #     label: Tech Stack
+  #     description: Tech stack the project belongs to. [Learn more](https://be-secure.github.io/Be-Secure/tech_stack.html)
+  #     placeholder: Application [A]/DevOps [DO]
+  #   validations:
+  #     required: true
+  # - type: checkboxes
+  #   id: tech_stack
+  #   attributes:
+  #     label: Tech Stack
+  #     description: Mention the tech stack the project belongs to. [Learn more](https://be-secure.github.io/Be-Secure/tech_stack.html)
+  #     options:
+  #       - label: DevOps [DO]
+  #         required: false
+  #       - label: Language and Framwork [L&F]
+  #       - label: Application [A]
+  #       - label: Distributed and Decentralized Application [DA]
+  #       - label: Open-source Security Tool [S]
+  #   validations:
+  #     required: true
+
+  - type: dropdown
+    id: tech_stack
+    attributes:
+      label: Tech Stack
+      description: Select the Tech Stack. [Learn more](https://be-secure.github.io/Be-Secure/tech_stack.html)
+      options:
+        - DevOps [DO]
+        - Language and Framwork [L&F]
+        - Application [A]
+        - Distributed and Decentralized Application [DA]
+        - Open-source Security Tool [S]
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Project details
+      description: Enter details about the project.
+      placeholder: |
+        Tell us about
+        1. What the project is 
+        2. What does it do
+        3. Key features
+    validations:
+      required: true
+      
+  - type: input
+    id: lang
+    attributes:
+      label: Languages used
+      placeholder: Enter the languages used.
+    validations:
+      required: true
+
+  - type: input
+    id: repo
+    attributes:
+      label: Repo URL
+      placeholder: Enter the project repo url
+    validations:
+      required: true
+    
+  - type: input
+    id: site
+    attributes:
+      label: Webpage
+      placeholder: Enter the url to the projects webpage.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: license
+    attributes:
+      label: License
+      description: Select the type of license
+      options:
+        - Apache-2.0
+        - BSD-3-Clause
+        - BSD-2-Clause
+        - GPL
+        - LGPL
+        - MIT
+        - MPL-2.0
+        - CDDL-1.0
+        - EPL-2.0
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Why we should track it.
+      placeholder: |
+        Talk about its
+        1. business relevance 
+        2. impact in the current market
+        3. merits over similar projects etc.
+        
+
+
+
+
+
+  
+      
