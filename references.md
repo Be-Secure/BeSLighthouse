@@ -61,7 +61,7 @@
 | Wallet App                                | TD-C-Wlt   |
 
 | Open Source project type                  | COM        |
-|-------------------------------------------|------------|
+|-------------------------------------------|
 | **Foundation led projects**               |            
 | OCA                                       |
 | OpenSSF                                   |
