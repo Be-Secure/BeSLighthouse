@@ -66,6 +66,46 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      description: Specify the domain the project belongs to. [Learn more](../../references.md)
+      options:
+        - Security
+        - Technology
+  
+  - type: dropdown
+    id: industry
+    attributes:
+      label: Industry
+      options:
+        - Banking & Financial Institutions
+        - Healthcare & Life Scienses
+        - Consumer 
+        - Retail
+        - Agritech
+        - Education
+        - Non Profit & Govt
+        - Energy & Utilities
+        - All
+        - Automotive
+        - Telecom
+        - Cybersecurity
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: com
+    attributes:
+      label: Open Source Project type
+      options:
+        - Foundation led
+        - Community led
+        - Others
+    validations:
+      required: true
+
   - type: input
     id: repo
     attributes:
