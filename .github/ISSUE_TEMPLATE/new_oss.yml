@@ -1,5 +1,5 @@
 name: Track new project
-description: Request us to track a new OSS project
+description: Request to track a new OSS project
 title: "[Name of the project]: "
 labels: [Untracked, triage]
   
@@ -8,28 +8,6 @@ body:
     attributes:
       value: |
         Thanks for reaching out to us. Please fill out the below details.
-  # - type: input
-  #   id: tech_stack_classification
-  #   attributes:
-  #     label: Tech Stack
-  #     description: Tech stack the project belongs to. [Learn more](https://be-secure.github.io/Be-Secure/tech_stack.html)
-  #     placeholder: Application [A]/DevOps [DO]
-  #   validations:
-  #     required: true
-  # - type: checkboxes
-  #   id: tech_stack
-  #   attributes:
-  #     label: Tech Stack
-  #     description: Mention the tech stack the project belongs to. [Learn more](https://be-secure.github.io/Be-Secure/tech_stack.html)
-  #     options:
-  #       - label: DevOps [DO]
-  #         required: false
-  #       - label: Language and Framwork [L&F]
-  #       - label: Application [A]
-  #       - label: Distributed and Decentralized Application [DA]
-  #       - label: Open-source Security Tool [S]
-  #   validations:
-  #     required: true
 
   - type: dropdown
     id: tech_stack
@@ -137,8 +115,17 @@ body:
         - MPL-2.0
         - CDDL-1.0
         - EPL-2.0
+        - others
     validations:
       required: true
+
+  - type: input
+    id: license_others
+    attributes:
+      label: Other license
+      description: If the license of the project is not displayed in the above list, please mention it below.
+    validations:
+      required: false
 
   - type: textarea
     attributes:
