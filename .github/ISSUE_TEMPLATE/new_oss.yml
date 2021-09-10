@@ -60,6 +60,7 @@ body:
       options:
         - Security
         - Technology
+        - Both
   
   - type: dropdown
     id: industry
