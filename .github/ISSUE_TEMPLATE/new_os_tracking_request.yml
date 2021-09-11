@@ -1,5 +1,5 @@
-name: Track new project
-description: Request to track a new OSS project
+name: New TAVOSS Tracking Request
+description: Request BeSecure to track new /existing open source project/version
 title: "[Name of the project]: "
 labels: [Untracked, triage]
   
