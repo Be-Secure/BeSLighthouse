@@ -1,13 +1,16 @@
 name: New TAVOSS Tracking Request
 description: Request Be-Secure to track new /existing open source project/version
-title: "[Name of the project]: "
+title: "TAVOSS-TR:<Enter the name of the project here>"
 labels: [Untracked, triage]
   
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reaching out to us. Please fill out the below details.
+        Thanks for reaching out to us. Please fill out the below details. 
+        Please make sure that the title of the project is in the format - TAVOSS-TR:[name of the project].
+        Eg:- TAVOSS-TR:Sawtooth
+      
   
   - type: input
     id: version
