@@ -105,12 +105,23 @@ body:
       required: true
     
   - type: input
+    id: sub_project
+    attributes:
+      label: URL to sub-project
+      description: Enter the url to the repository of the sub-project, if any.
+      placeholder: Enter the url here
+    validations:
+      required: false
+
+  - type: input
     id: site
     attributes:
       label: Webpage
       placeholder: Enter the url to the projects webpage.
     validations:
       required: false
+
+  
 
   - type: dropdown
     id: license
