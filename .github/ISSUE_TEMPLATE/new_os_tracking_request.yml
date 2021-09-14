@@ -107,7 +107,7 @@ body:
   - type: input
     id: sub_project
     attributes:
-      label: URL to sub-project
+      label: Sub-project repo URL
       description: Enter the url to the repository of the sub-project, if any.
       placeholder: Enter the url here
     validations:
