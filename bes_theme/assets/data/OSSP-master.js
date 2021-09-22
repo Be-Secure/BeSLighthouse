@@ -1,6 +1,7 @@
 [
     {
         "id": 50,
+        "github_id": 391939220,
         "bes_tracking_id": 50,
         "name": "prometheus",
         "description": "The Prometheus monitoring system and time series database.",
