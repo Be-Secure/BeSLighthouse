@@ -119,5 +119,60 @@
         }
             
           
+    },
+    {
+        "id": 58,
+        "github_id": 306240483,
+        "bes_tracking_id": 58,
+        "name": "Hygieia",
+        "description": "CapitalOne DevOps Dashboard",
+        "cvedetails": {                                                  
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "",                      
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/hygieia/hygieia",
+            "main_bes_url": "https://github.com/Be-Secure/hygieia",
+            "all_projects": {                                                                         
+                "main_project_xxx" : "",
+                "sub_project_xxx":""
+            },
+            "all_bes_repos": {                                                                      
+                 "sub_project_xxx":""
+           }   
+        },
+        "license": {
+            "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": "Apache-2.0",
+            "url": "https://api.github.com/licenses/apache-2.0",
+            "node_id": "MDc6TGljZW5zZTI="
+          },
+        "language": [
+
+            "JavaScript",
+            "HTML",
+            "Less",
+            "Gherkin",
+            "Java",
+            "Dockerfile",
+            "Shell"
+
+        ],
+        "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "COM": {
+                "Community led": "Hygieia"
+            },
+            "TD-U": [
+                "TD-U-Msg"
+            ]
+
+        }
+            
+          
     }
 ]
