@@ -1,8 +1,8 @@
 [
   {
-    "Tracked Open Source Software Projects Master": {
+    "TOSS-PM": {
 
-            "Be-Secure Open Source Security tool stack": {
+        "bes_oss_tech_stack": {
           "DO" : {
                   "id": 3333824398,
                   "node_id": "MDU6TGFiZWwzMzMzODI0Mzk4",
@@ -51,7 +51,7 @@
             "name" : "BOS-STS"
         },
 
-        "Core Security Theme": {
+        "CST": {
 
             "CST-SC" : {
                 "id": 3377711536,
@@ -112,12 +112,10 @@
                 "color": "EA86E4",
                 "default": false,
                 "description": "Managing Third Party/ Supply Chain Risk"
-            },
-            "name" : "CST"
-
+            }
         },
 
-        "Security Domain": {
+        "SD": {
             "SD-SRM" :   {
                 "id": 3333839231,
                 "node_id": "MDU6TGFiZWwzMzMzODM5MjMx",
@@ -215,12 +213,10 @@
                 "color": "00b050",
                 "default": false,
                 "description": "Security Domain : IoT/OT Security"
-            },
-            "name" : "SD"
-
+            }
         },
         
-        "Technology Domain (Usage)" : {
+        "TD-U" : {
             "TD-U-W" :   {
                 "id": 3340553126,
                 "node_id": "MDU6TGFiZWwzMzQwNTUzMTI2",
@@ -309,11 +305,10 @@
                 "color": "0070c0",
                 "default": false,
                 "description": "Technology  Domain  Classifier: Usage :  Type :  IoT"
-            },
-            "name": "TD-U"
+            }
         },
 
-        "Industry": {
+        "IND": {
             
             "BFSI" :   {
                 "id": 3333851551,
@@ -433,13 +428,10 @@
                 "color": "7030a0",
                 "default": false,
                 "description": "Industry-Cybersecurity"
-            },
-
-        "name": "IND"    
+            } 
         },
-        
 
-        "Technology Domain Composition": {
+        "TD-C": {
             "TD-C-CA" :   {
                 "id": 3374488303,
                 "node_id": "LA_kwDOFx7Zis7JIprv",
@@ -536,12 +528,10 @@
                 "color": "749812",
                 "default": false,
                 "description": "Technology  Domain  Classifier: Composition:  Type :  Wallet App"
-            },
-            "name": "TD-C"
-
+            }
         },
 
-        "Open Source project type": {
+        "COM": {
             "COM - C" : {
                 "id": 3333867901,
                 "node_id": "MDU6TGFiZWwzMzMzODY3OTAx",
@@ -570,10 +560,8 @@
                 "color": "69c3d7",
                 "default": false,
                 "description": "Foundation led projects"
-            },
-            "name": "COM"
+            }
         }
-    },
-    "name": "TOSS-PM"
+    }
   }
 ]
