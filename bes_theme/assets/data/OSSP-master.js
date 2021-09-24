@@ -1,7 +1,6 @@
 [
     {
-        "id": 50,
-        "github_id": 391939220,
+        "id": 50,      
         "bes_tracking_id": 50,
         "name": "prometheus",
         "description": "The Prometheus monitoring system and time series database.",
@@ -11,14 +10,16 @@
             "cvedetails_vendor_id": "20905"
         }, 
         "project_repos": {
+            "main_repo_id": 391939220,
             "main_github_url": "https://github.com/prometheus/prometheus",
             "main_bes_url": "https://github.com/Be-Secure/prometheus",
             "all_projects": {                                                                         
-                "main_project_xxx" : "",
-                "sub_project_xxx":""
+                "prometheus": "https://github.com/prometheus/prometheus",
+                // "sub_project_xxx":""
             },
             "all_bes_repos": {                                                                      
-                 "sub_project_xxx":""
+                //  "sub_project_xxx":""
+                "prometheus": "https://github.com/Be-Secure/prometheus"
            }   
         },
         "license": {
@@ -63,7 +64,7 @@
     },
     {
         "id": 57,
-        "github_id": 382212966,
+        
         "bes_tracking_id": 57,
         "name": "django-DefectDojo",
         "description": "DefectDojo is an open-source application vulnerability correlation and security orchestration tool.",
@@ -73,14 +74,15 @@
             "cvedetails_vendor_id": ""
         }, 
         "project_repos": {
+            "main_repo_id": 382212966,
             "main_github_url": "https://github.com/DefectDojo/django-DefectDojo",
             "main_bes_url": "https://github.com/Be-Secure/django-DefectDojo",
             "all_projects": {                                                                         
-                "main_project_xxx" : "",
-                "sub_project_xxx":""
+                "django-DefectDojo" : "https://github.com/DefectDojo/django-DefectDojo",
+                // "sub_project_xxx":""
             },
             "all_bes_repos": {                                                                      
-                 "sub_project_xxx":""
+                 "django-DefectDojo":"https://github.com/Be-Secure/django-DefectDojo"
            }   
         },
         "license": {
@@ -122,7 +124,6 @@
     },
     {
         "id": 58,
-        "github_id": 306240483,
         "bes_tracking_id": 58,
         "name": "Hygieia",
         "description": "CapitalOne DevOps Dashboard",
@@ -132,14 +133,15 @@
             "cvedetails_vendor_id": ""
         }, 
         "project_repos": {
+            "main_repo_id": 306240483,
             "main_github_url": "https://github.com/hygieia/hygieia",
             "main_bes_url": "https://github.com/Be-Secure/hygieia",
             "all_projects": {                                                                         
-                "main_project_xxx" : "",
-                "sub_project_xxx":""
+                "Hygieia": "https://github.com/hygieia/hygieia",
+                // "sub_project_xxx":""
             },
             "all_bes_repos": {                                                                      
-                 "sub_project_xxx":""
+                "Hygieia": "https://github.com/Be-Secure/hygieia",
            }   
         },
         "license": {
