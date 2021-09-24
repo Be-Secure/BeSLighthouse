@@ -10,17 +10,20 @@
             "cvedetails_vendor_id": "20905"
         }, 
         "project_repos": {
-            "main_repo_id": 391939220,
             "main_github_url": "https://github.com/prometheus/prometheus",
             "main_bes_url": "https://github.com/Be-Secure/prometheus",
             "all_projects": {                                                                         
                 "prometheus": "https://github.com/prometheus/prometheus",
                 // "sub_project_xxx":""
             },
-            "all_bes_repos": {                                                                      
-                //  "sub_project_xxx":""
-                "prometheus": "https://github.com/Be-Secure/prometheus"
-           }   
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 391939220,
+                    "name": "prometheus",
+                    "url": "https://github.com/Be-Secure/prometheus"
+                }
+                
+            ]
         },
         "license": {
             "key": "apache-2.0",
@@ -74,16 +77,19 @@
             "cvedetails_vendor_id": ""
         }, 
         "project_repos": {
-            "main_repo_id": 382212966,
             "main_github_url": "https://github.com/DefectDojo/django-DefectDojo",
             "main_bes_url": "https://github.com/Be-Secure/django-DefectDojo",
             "all_projects": {                                                                         
                 "django-DefectDojo" : "https://github.com/DefectDojo/django-DefectDojo",
                 // "sub_project_xxx":""
             },
-            "all_bes_repos": {                                                                      
-                 "django-DefectDojo":"https://github.com/Be-Secure/django-DefectDojo"
-           }   
+            "all_bes_repos": [
+                {   
+                    "id": 382212966,
+                    "name": "django-DefectDojo",                                                           
+                    "url": "https://github.com/Be-Secure/django-DefectDojo"
+                }   
+            ]
         },
         "license": {
             "key": "bsd-3-clause",
@@ -133,16 +139,20 @@
             "cvedetails_vendor_id": ""
         }, 
         "project_repos": {
-            "main_repo_id": 306240483,
+            
             "main_github_url": "https://github.com/hygieia/hygieia",
             "main_bes_url": "https://github.com/Be-Secure/hygieia",
             "all_projects": {                                                                         
                 "Hygieia": "https://github.com/hygieia/hygieia",
                 // "sub_project_xxx":""
             },
-            "all_bes_repos": {                                                                      
-                "Hygieia": "https://github.com/Be-Secure/hygieia",
-           }   
+            "all_bes_repos": [
+                {
+                    "id": 306240483,
+                    "name": "Hygieia",
+                    "url": "https://github.com/Be-Secure/hygieia",
+                }
+            ]
         },
         "license": {
             "key": "apache-2.0",
