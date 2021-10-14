@@ -166,13 +166,13 @@ modelDataAvailable({
                 "ALL"
             ],
             "SD": [
-                "SD-SOC"
+                ""
             ],
             "COM": {
-                "Community led": "OWASP"
+                "Community led": ""
             },
             "TD-U": [
-                "TD-U-Msg"
+                "TD-U-W"
             ]
 
         }
@@ -263,7 +263,9 @@ modelDataAvailable({
             "IND": [
                 "ALL"
             ],
-
+            "SD": [
+                ""
+            ],
             "COM": {
                 "Foundation": "Apache"
             },
@@ -351,7 +353,7 @@ modelDataAvailable({
             ],
 
             "COM": {
-                "Community": ""
+                "Community": "PostgreSQL"
             },
             "TD-U": [
                 "TD-U-Db"
@@ -629,7 +631,7 @@ modelDataAvailable({
                 "COM-F": "CNCF"
             },
             "TD-U": [
-                "TD-U-DAA"
+                ""
             ]
 
         }
