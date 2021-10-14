@@ -166,13 +166,13 @@ modelDataAvailable({
                 "ALL"
             ],
             "SD": [
-                ""
+                "SD-SOC"
             ],
             "COM": {
-                "Community": ""
+                "Community led": "OWASP"
             },
             "TD-U": [
-                ""
+                "TD-U-Msg"
             ]
 
         }
