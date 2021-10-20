@@ -68,6 +68,52 @@
 
     }
 
+    .cve_table {
+
+font-family: Arial, Helvetica, sans-serif;
+
+border-collapse: collapse;
+
+width: 100%;
+
+padding-top: 20px;
+
+}
+
+
+
+.cve_table td, .cve_table th {
+
+border: 1px solid #ddd;
+
+padding: 8px;
+
+}
+
+
+
+.cve_table tr:nth-child(even){background-color: #f2f2f2;}
+
+
+
+.cve_table tr:hover {background-color: #ddd;}
+
+
+
+.cve_table th {
+
+padding-top: 12px;
+
+padding-bottom: 12px;
+
+text-align: left;
+
+background-color: #526cfe;
+
+color: white;
+
+}
+
   .home_btn {
     height: 30px;
      width: 50px;
@@ -493,7 +539,7 @@
   <div id="cve_stats" style="align-content: center;">
     <button id="home_button" onclick="refreshPage()" class="home_btn">Home</button>
     <h2 id="cve_header"></h2>
-    <table id="table" border="1" class="cve_stats"></table>
+    <table id="table" border="1" class="cve_table"></table>
     <div id='vulntypeschart' class="piechart"></div>
     <div id="vulnsbytypeandyearchart" class="piechart"></div>
     <div id="bar_chart_vuln_by_year" class="barchart"></div>
