@@ -24,6 +24,110 @@
       text-align: center;
       line-height: 1.05;
     }
+    .barchart {
+      border-collapse: collapse;
+    /* padding: 0px 0px 0px 20px; */
+    font-size: 50px;
+    font-family: Arial,Helvetica;
+    /* margin: 0px 0px 0px 0px; */
+    /* border: 2px solid #ccc; */
+    float: left;
+    height: 500px;
+    width: 1000px;
+    position: relative;
+    white-space: nowrap;
+    margin-left: 200px;
+    }
+
+    .piechart {
+      border-collapse: collapse;
+    /* padding: 0px 0px 0px 20px; */
+    font-size: 50px;
+    font-family: Arial,Helvetica;
+    /* padding-top: 50px; */
+    float: left;
+    align-content: center;
+    height: 500px;
+    width: 1000px;
+    position: relative;
+    white-space: nowrap;
+    margin-left: 200px;
+    }
+
+    .cve_stats {
+
+      border-collapse: collapse;
+    padding: 0px 0px 0px 0px;
+    font-size: 15px;
+    font-family: Arial,Helvetica;
+    margin: 50px 50px 50px 70px;
+    border: 2px solid #ccc;
+    float: left;
+    height: 180px;
+    white-space: nowrap;
+
+    }
+
+    .cve_table {
+
+font-family: Arial, Helvetica, sans-serif;
+
+border-collapse: collapse;
+
+width: 100%;
+
+padding-top: 20px;
+
+}
+
+
+
+.cve_table td, .cve_table th {
+
+border: 1px solid #ddd;
+
+padding: 8px;
+
+}
+
+
+
+.cve_table tr:nth-child(even){background-color: #f2f2f2;}
+
+
+
+.cve_table tr:hover {background-color: #ddd;}
+
+
+
+.cve_table th {
+
+padding-top: 12px;
+
+padding-bottom: 12px;
+
+text-align: left;
+
+background-color: #526cfe;
+
+color: white;
+
+}
+
+  .home_btn {
+    height: 30px;
+     width: 50px;
+     float: right;
+     font-size: 8pt;
+     font-family: tahoma;
+     margin-top: 5px;
+     margin-right: 5px;
+     /* position:absolute; */
+     top:0;
+     right:0;
+     visibility: hidden;
+    
+  }
   </style>
 
   <!-- The CSS for this demo hsla(50, 80%, 85%, 1.0); -->
@@ -175,6 +279,11 @@
         width: 60%;
       }
 
+      #details .cvecount {
+        margin: 30px auto;
+        width: 60%;
+      }
+
       #details .close {
         position: absolute;
         top: 0;
@@ -236,37 +345,82 @@
     }
 
   </style>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.js"></script>
+  <script language="javascript" type="text/javascript" src="./assets/javascripts/jqplot/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" href="./assets/stylesheets/jqplot/jquery.jqplot.min.css">
+  <script language="javascript" type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.barRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pointLabels.min.js"></script>
+  <script type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+  <script type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+  <script type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.highlighter.min.js"></script>
 
+  <script src="assets/javascripts/bessearch.foamtree.js"></script>
+  <script src="assets/javascripts/bessearch.foamtree.util.loading.js"></script>
+  <script src="assets/javascripts/bessearch.foamtree.util.relaxationprogress.js"></script>
+
+
+  
+   <!-- Include Hammer.js for mobile interactions -->
+   <script src="./assets/javascripts/hammer.min.js"></script>
+ 
+   <!-- A number of utilities we'll need -->
+   <script src="assets/javascripts/bessearch.jsonp.js"></script>
+   <script src="assets/javascripts/bessearch.template.js"></script>
+   <!-- <script src="assets/javascripts/jquery-2.0.3.min.js"></script> -->
+   <script src="assets/javascripts/moment.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  
+   <script type="text/javascript" src="./assets/javascripts/run.js"></script>
   <!-- HTML template for the slide-in details panel -->
   <script id="details-template" type="text/template">
-      <img class="avatar" src="<%- owner.avatar_url %>"/>
-      <div class="info">
-        <h2><a target="_blank" href="<%- owner.html_url %>"><%- owner.login %></a>/&#8203;<a target="_blank" href="<%- html_url %>"><%- name %></a></h2>
-        <div class="stats">
-          <img src="assets/images/star.svg"/> <span><%- stargazers_count %></span>
-          <img class="watchers" src="assets/images/eye.svg"/> <span><%- watchers_count %></span>
-          <img class="forks" src="assets/images/fork.svg"/> <span><%- forks_count %></span>
-        </div>
+    <img class="avatar" src="<%- owner.avatar_url %>"/>
+    <div class="info">
+      <h2><a target="_blank" href="<%- owner.html_url %>"><%- owner.login %></a>/&#8203;<a target="_blank" href="<%- html_url %>"><%- name %></a></h2>
+      <div class="stats">
+        <img src="./assets/images/star.svg"/> <span><%- stargazers_count %></span>
+        <img class="watchers" src="./assets/images/eye.svg"/> <span><%- watchers_count %></span>
+        <img class="forks" src="./assets/images/fork.svg"/> <span><%- forks_count %></span>
 
-        <div class="description"><%- description %></div>
-        <a target="_blank" href="<%- homepage %>"><%- homepage %></a>
-
-        <hr/>
-
-        <div style="color: #888">
-          created: <span><%- moment(created_at).fromNow() %></span><br/>
-          last push: <span><%- moment(pushed_at).fromNow() %></span><br/>
-          last update: <span><%- moment(updated_at).fromNow() %></span>
-        </div>
       </div>
-      <div class="close">&times;</div>
-    </script>
+      <div class="description"><%- description %></div>
+      <a target="_blank" href="<%- homepage %>"><%- homepage %></a>
+      <!-- var a = <div id="repo_id"><%- id %></div> -->
+      <hr/>
+      <!-- <script>
+        // function load_data(id, name)
+
+
+      </script> -->
+      <div style="color: #888">
+        created: <span><%- moment(created_at).fromNow() %></span><br/>
+        last push: <span><%- moment(pushed_at).fromNow() %></span><br/>
+        last update: <span><%- moment(updated_at).fromNow() %></span>
+      </div>
+      <div class="cvecount">
+      CVE count : <%- cvedetails.count %> 
+      </br>
+      Year : <%- cvedetails.year %>
+      </div>
+
+      <button id="cve_button" onmouseover="enabledisable(<%- cvedetails.count %>)" onclick="load_data(<%- id %>,'<%- name %>')">Learn more</button>
+    </br>
+      <p id="cve_unavilable"></p>
+      
+    </div>
+
+    <div class="close">&times;</div>
+  </script>
   <!-- jts -->
-  <link rel="stylesheet" href="assets/stylesheets/github.css">
+  <link rel="stylesheet" href="./assets/stylesheets/github.css">
   <!-- /jts -->
 </head>
 
 <body>
+  <div id="content">
   <div id="container">
     <div id="visualization"></div>
 
@@ -331,7 +485,7 @@
             <label><input type="radio" name="weighting" value="watchers_count" checked> Watchers count</label>
             <label><input type="radio" name="weighting" value="forks_count"> Fork count</label>
             <label><input type="radio" name="weighting" value="size"> Repository size</label>
-            <!-- <label><input type="radio" name="weighting" value="size"> Repository size</label> -->
+            <!-- <label><input type="radio" name="weighting" value="cvedetails.count"> CVE count</label> -->
             <label><input type="radio" name="weighting" value="open_issues"> Open issues</label>
           </div>
         </div>
@@ -384,25 +538,21 @@
       <button onclick="logout()">Log out</button>
     </div> -->
   </div>
-  
+  </div>
+  <div id="cve_stats" style="align-content: center;">
+    <button id="home_button" onclick="refreshPage()" class="home_btn">Home</button>
+    <h2 id="cve_header"></h2>
+    <table id="table" border="1" class="cve_table"></table>
+    <div id='vulntypeschart' class="piechart"></div>
+    <div id="vulnsbytypeandyearchart" class="piechart"></div>
+    <div id="bar_chart_vuln_by_year" class="barchart"></div>
+    <div id="bar_chart_vuln_by_type" class="barchart" style="padding-top: 30px;"></div>
+  </div>
   <div id="fps"></div>
   <div id="details"></div>
 
   <!-- Include FoamTree visualization code and some utilities -->
   <!-- <script src="assets/javascripts/bessearch.foamtree.js"></script> -->
-  <script src="assets/javascripts/bessearch.foamtree.js"></script>
-  <script src="assets/javascripts/bessearch.foamtree.util.loading.js"></script>
-  <script src="assets/javascripts/bessearch.foamtree.util.relaxationprogress.js"></script>
-
-  <!-- Include Hammer.js for mobile interactions -->
-  <script src="assets/javascripts/hammer.min.js"></script>
-
-  <!-- A number of utilities we'll need -->
-  <script src="assets/javascripts/bessearch.jsonp.js"></script>
-  <script src="assets/javascripts/bessearch.template.js"></script>
-  <script src="assets/javascripts/jquery-2.0.3.min.js"></script>
-  <script src="assets/javascripts/moment.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   <script>
     WebFont.load({
       google: {
@@ -811,7 +961,7 @@
           "<div class='font'>Loading and preparing<br />the awesome...</div>");
         foamtreeLoader.started();
 
-        JSONP.load("./assets/data/be-secure-repos.js", "modelDataAvailable", setDataObject);
+        JSONP.load("./assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
 
         /**
          * Initializes the search form.
