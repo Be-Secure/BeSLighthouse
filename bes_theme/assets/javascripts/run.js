@@ -5,6 +5,7 @@ function enabledisable(count)
   console.log("inside enabledisable");
   if (count == 0) {
     document.getElementById("cve_button").disabled = true;
+    document.getElementById("cve_unavilable").innerHTML = "CVE details are not available at the moment";
   } else {
     document.getElementById("cve_button").disabled = false;
   }
