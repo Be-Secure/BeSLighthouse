@@ -1,10 +1,4 @@
-/**
- * Carrot Search FoamTree HTML5 (commercial variant)
- * v3.4.10, bugfix/3.4.x/b18f7427, build FOAMTREE-SOFTWARE4-DIST-78, Nov 29, 2019
- * 
- * Carrot Search confidential.
- * Copyright 2002-2021,Be-Secure Community, All Rights Reserved.
- */
+
 (function() {var v=function(){var e=window.navigator.userAgent,m;try{window.localStorage.setItem("ftap5caavc","ftap5caavc"),window.localStorage.removeItem("ftap5caavc"),m=!0}catch(g){m=!1}return{qf:function(){return/webkit/i.test(e)},oi:function(){return/Mac/.test(e)},of:function(){return/iPad|iPod|iPhone/.test(e)},lf:function(){return/Android/.test(e)},ki:function(){return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch},ji:function(){return m},ii:function(){var d=document.createElement("canvas");
 return!(!d.getContext||!d.getContext("2d"))},Gd:function(d,c){return[].forEach&&v.ii()?d&&d():c&&c()}}}();var ba=function(){function e(){return window.performance&&(window.performance.now||window.performance.mozNow||window.performance.msNow||window.performance.oNow||window.performance.webkitNow)||Date.now}var m=e();return{create:function(){return{now:function(){var g=e();return function(){return g.call(window.performance)}}()}},now:function(){return m.call(window.performance)}}}();function da(){function e(){if(!f)throw"AF0";var d=ba.now();0!==l&&(g.Nd=d-l);l=d;c=c.filter(function(a){return null!==a});g.frames++;for(var b=0;b<c.length;b++){var a=c[b];null!==a&&(!0===a.Be.call(a.Zg)?c[b]=null:D.Uc(a.repeat)&&(a.repeat=a.repeat-1,0>=a.repeat&&(c[b]=null)))}c=c.filter(function(a){return null!==a});f=!1;m();d=ba.now()-d;0!==d&&(g.Md=d);g.totalTime+=d;g.Re=1E3*g.frames/g.totalTime;l=0===c.length?0:ba.now()}function m(){0<c.length&&!f&&(f=!0,d(e))}var g=this.sg={frames:0,totalTime:0,
 Md:0,Nd:0,Re:0};fa=g;var d=function(){return v.of()?function(c){window.setTimeout(c,0)}:window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(){var c=ba.create();return function(b){var a=0;window.setTimeout(function(){var f=c.now();b();a=c.now()-f},16>a?16-a:0)}}()}(),c=[],f=!1,l=0;this.repeat=function(f,b,a){this.cancel(f);c.push({Be:f,Zg:a,repeat:b});m()};this.d=function(c,b){this.repeat(c,
