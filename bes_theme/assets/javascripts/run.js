@@ -25,7 +25,7 @@ function refreshPage(){
 
 function button_visibility()
 {
-  // console.log("inside visibility")
+  console.log("inside visibility")
   var x = document.getElementById('home_button');
   x.style.visibility = 'visible';
 
@@ -423,7 +423,10 @@ function closePanel() {
   console.log("inside close panel");
   $("#details").toggleClass("showing", false);
 }
-
+function generate_env_table()
+{
+  document.getElementById("env_table").innerHTML = "<table><tr> <th>Environment Name</th><th>Environment type</th><th> Project version</th><th>Vulnerability exploited</th><th>Exploit details</th><th>Patch availability</th><th>Date of patch published</th> </tr><tr><td>Hello world</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>"
+}
 function load_data(id,name)
 {
 
@@ -443,7 +446,11 @@ function load_data(id,name)
     bar_chart_by_type(data);
     replace_div();
     closePanel();
-    button_visibility()
+    button_visibility();
+    // if (name == "drupal")
+    // {
+    //   generate_env_table();
+    // }
     // closeSidebar();
   })
   .catch(function (err) {
