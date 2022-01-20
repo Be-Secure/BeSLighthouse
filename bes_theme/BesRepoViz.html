@@ -37,6 +37,7 @@
     position: relative;
     white-space: nowrap;
     margin-left: 200px;
+    z-index: -1
     }
 
     .piechart {
@@ -52,6 +53,7 @@
     position: relative;
     white-space: nowrap;
     margin-left: 200px;
+    z-index: -1
     }
 
     .cve_stats {
@@ -68,7 +70,30 @@
 
     }
 
-    .cve_table {
+  .cve_table {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    border-collapse: collapse;
+
+    width: 100%;
+
+    padding-top: 20px;
+
+    z-index: -1
+
+}
+
+/* .env_table {
+  position:relative; 
+  left: -80px; 
+  right: 1100px;
+  bottom: -1890px;
+  z-index:-1
+
+} */
+
+.env_table {
 
 font-family: Arial, Helvetica, sans-serif;
 
@@ -78,9 +103,16 @@ width: 100%;
 
 padding-top: 20px;
 
+padding-bottom: 20px;
+
+/* z-index: -1 */
+position:relative; 
+  /* left: -80px;  */
+  right: 1100px;
+  bottom: -1890px;
+  z-index:-1
+
 }
-
-
 
 .cve_table td, .cve_table th {
 
@@ -96,8 +128,8 @@ padding: 8px;
 
 
 
-.cve_table tr:hover {background-color: #ddd;}
 
+.cve_table tr:hover {background-color: #ddd;}
 
 
 .cve_table th {
@@ -114,21 +146,53 @@ color: white;
 
 }
 
-  .home_btn {
-    height: 30px;
-     width: 50px;
-     float: right;
-     font-size: 8pt;
-     font-family: tahoma;
-     margin-top: 5px;
-     margin-right: 5px;
-     /* position:absolute; */
-     top:0;
-     right:0;
-     visibility: hidden;
-    
-  }
-  </style>
+.env_table td, .env_table th {
+
+border: 1px solid #ddd;
+
+padding: 8px;
+
+}
+
+
+
+.env_table tr:nth-child(even){background-color: #f2f2f2;}
+
+
+
+
+.env_table tr:hover {background-color: #ddd;}
+
+
+.env_table th {
+
+padding-top: 12px;
+
+padding-bottom: 20px;
+
+text-align: left;
+
+background-color: #526cfe;
+
+color: white;
+
+}
+
+.home_btn {
+  height: 30px;
+  width: 50px;
+  float: right;
+  font-size: 8pt;
+  font-family: tahoma;
+  margin-top: 5px;
+  margin-right: 5px;
+  /* position:absolute; */
+  top:0;
+  right:0;
+  visibility: hidden;
+  
+}
+</style>
 
   <!-- The CSS for this demo hsla(50, 80%, 85%, 1.0); -->
   <style type="text/css">
@@ -547,6 +611,8 @@ color: white;
     <div id="vulnsbytypeandyearchart" class="piechart"></div>
     <div id="bar_chart_vuln_by_year" class="barchart"></div>
     <div id="bar_chart_vuln_by_type" class="barchart" style="padding-top: 30px;"></div>
+  </br></br></br></br></br>
+    <!-- <div id="env_table" class="env_table"></div> -->
   </div>
   <div id="fps"></div>
   <div id="details"></div>
