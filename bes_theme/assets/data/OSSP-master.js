@@ -1578,6 +1578,81 @@ modelDataAvailable({
         ]
 
     }
+},
+{
+    "id": 116,      
+    "bes_tracking_id": 116,
+    "name": "laravel",
+    "full_name": "Be-Secure/laravel",
+    "description": "A PHP framework for web artisans.",
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "size": 10320,
+    "open_issues": 0,
+    "created_at": "2022-01-04T09:41:21Z",
+    "updated_at": "2022-01-04T09:41:22Z",
+    "pushed_at": "2022-01-03T15:02:45Z",
+    "git_url": "git://github.com/Be-Secure/laravel.git",
+    "clone_url": "https://github.com/Be-Secure/laravel.git",
+    "html_url": "https://github.com/Be-Secure/laravel",
+    "homepage": "https://laravel.com",
+    "owner": {
+        "login": "Be-Secure",
+        "id": 416246472,
+        "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+        "html_url": "https://github.com/Be-Secure",
+      },
+    "cvedetails": {    
+   
+        "count": 2,  
+        "year":2021, 
+        "bes_cve_details_id": "",                      
+        "cvedetails_product_id":"38139",                 
+        "cvedetails_vendor_id": "16542"
+    },
+    "project_repos": {
+        "main_github_url": "https://github.com/laravel/laravel",
+        "main_bes_url": "https://github.com/Be-Secure/laravel",
+        "all_projects": [
+            {
+                "name": "laravel",
+                "url": "https://github.com/laravel/laravel",
+            }
+
+        ],                                                                      
+           
+            // "sub_project_xxx":""
+        "all_bes_repos": [                                                                  
+            {
+                "id": 444363115,
+                "name": "laravel",
+                "url": "https://github.com/Be-Secure/laravel"
+            }
+           
+        ]
+    },
+    "license": null,
+    "language": [
+
+        "PHP",
+        "Blade",
+        "Shell"
+
+    ],
+    "tags": {
+        "IND": [
+            "ALL"
+        ],
+
+        "COM-C": {
+            "Community": "Laravel"
+        },
+        "TD-U": [
+            "TD-U-W"
+        ]
+
+    }
 }
 ]
 });
