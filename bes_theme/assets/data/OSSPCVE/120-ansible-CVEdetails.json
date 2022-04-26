@@ -1,6 +1,6 @@
 [
     {
-      "Year": "2018",
+      "Year": 2018,
       "No_of_Vulnerabilities": 1,
       "DoS": null,
       "Code_Execution": 1,
