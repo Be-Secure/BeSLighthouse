@@ -1401,6 +1401,92 @@ modelDataAvailable({
 
     }     
 },
+{
+    "id": 120,      
+    "bes_tracking_id": 120,
+    "name": "ansible",
+    "full_name": "Be-Secure/ansible",
+    "description": "Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy and maintain. Automate everything from code deployment to network configuration to cloud management, in a language that approaches plain English, using SSH, with no agents to install on remote systems. https://docs.ansible.com.",
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "size": 214467,
+    "open_issues": 0,
+    "created_at": "2022-04-26T09:35:04Z",
+    "updated_at": "2022-04-26T08:25:09Z",
+    "pushed_at": "2022-04-26T01:58:31Z",
+    "git_url": "git://github.com/Be-Secure/ansible.git",
+    "clone_url": "https://github.com/Be-Secure/ansible.git",
+    "html_url": "https://github.com/Be-Secure/ansible",
+    "homepage": "https://www.ansible.com/",
+    "owner": {
+        "login": "Be-Secure",
+        "id": 416246472,
+        "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+        "html_url": "https://github.com/Be-Secure",
+      },
+    "cvedetails": {    
+   
+        "count": 1,  
+        "year": 2018,                                            
+        "bes_cve_details_id": "",                      
+        "cvedetails_product_id": "38977",                      
+        "cvedetails_vendor_id": "15207"
+    },
+    "project_repos": {
+        "main_github_url": "https://github.com/ansible/ansible",
+        "main_bes_url": "https://github.com/Be-Secure/ansible",
+        "all_projects": [
+            {
+                "name": "ansible",
+                "url": "https://github.com/ansible/ansible",
+            }
+
+        ],                                                                      
+           
+            // "sub_project_xxx":""
+        "all_bes_repos": [                                                                  
+            {
+                "id": 485720718,
+                "name": "ansible",
+                "url": "https://github.com/Be-Secure/ansible"
+            }
+           
+        ]
+    },
+    "license": {
+        "key": "gpl-3.0",
+        "name": "GNU General Public License v3.0",
+        "spdx_id": "GPL-3.0",
+        "url": "https://api.github.com/licenses/gpl-3.0",
+        "node_id": "MDc6TGljZW5zZTk="
+    },
+    "language": [
+
+        "Python",
+        "PowerShell",
+        "Shell",
+        "C#",
+        "Jinja",
+        "Makefile",
+        "Go",
+        "Roff",
+        "Batchfile"
+    ],
+    "tags": {
+        "IND": [
+            "ALL"
+        ],
+
+        "COM-C": {
+            "Community": "Ansible community"
+        },
+        "TD-C": [
+            "TD-C-DA"
+        ]
+
+    }     
+},
 
 ]
 });
