@@ -1311,9 +1311,96 @@ modelDataAvailable({
             "TD-U-W"
         ]
 
-    }
-       
-     
-}
+    }     
+},
+{
+    "id": 119,      
+    "bes_tracking_id": 119,
+    "name": "angular",
+    "full_name": "Be-Secure/angular",
+    "description": "The modern web developer’s platform",
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "size": 322983,
+    "open_issues": 0,
+    "created_at": "2022-01-04T09:53:51Z",
+    "updated_at": "2022-04-26T08:17:19Z",
+    "pushed_at": "2022-04-26T08:15:05Z",
+    "git_url": "git://github.com/Be-Secure/angular.git",
+    "clone_url": "https://github.com/Be-Secure/angular.git",
+    "html_url": "https://github.com/Be-Secure/angular",
+    "homepage": "https://angular.io",
+    "owner": {
+        "login": "Be-Secure",
+        "id": 416246472,
+        "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+        "html_url": "https://github.com/Be-Secure",
+      },
+    "cvedetails": {    
+   
+        "count": 0,  
+        "year": null,                                            
+        "bes_cve_details_id": "",                      
+        "cvedetails_product_id": "",                      
+        "cvedetails_vendor_id": ""
+    },
+    "project_repos": {
+        "main_github_url": "https://github.com/angular/angular",
+        "main_bes_url": "https://github.com/Be-Secure/angular",
+        "all_projects": [
+            {
+                "name": "angular",
+                "url": "https://github.com/angular/angular",
+            }
+
+        ],                                                                      
+           
+            // "sub_project_xxx":""
+        "all_bes_repos": [                                                                  
+            {
+                "id": 444366863,
+                "name": "angular",
+                "url": "https://github.com/Be-Secure/angular"
+            }
+           
+        ]
+    },
+    "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "language": [
+
+        "TypeScript",
+        "JavaScript",
+        "Starlark",
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Shell",
+        "Dockerfile",
+        "PHP",
+        "jq",
+        "Less"
+    ],
+    "tags": {
+        "IND": [
+            "ALL"
+        ],
+
+        "COM-C": {
+            "Community": "Angular community"
+        },
+        "TD-U": [
+            "TD-U-W"
+        ]
+
+    }     
+},
+
 ]
 });
