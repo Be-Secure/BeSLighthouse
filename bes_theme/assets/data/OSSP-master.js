@@ -47,7 +47,7 @@ modelDataAvailable({
             "all_bes_repos": [                                                                  
                 {
                     "id": 		392989261,
-                    "name": "symfony",
+                    "name": "trellis",
                     "url": "https://github.com/Be-Secure/trellis"
                 }
                 
@@ -62,7 +62,7 @@ modelDataAvailable({
             },   
         "language": [
 		
-            "PHP", "Typescript", "Java script","HTML", "Shell"
+            "jinja", "python","ruby"
 
         ],
         "
