@@ -4,8 +4,7 @@ modelDataAvailable({
     "items":
 [  		   
 
-    
-    {
+        {
         "id": 135,      
         "bes_tracking_id": 135,
         "name": "Trelli",
