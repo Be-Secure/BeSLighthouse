@@ -20,7 +20,7 @@ modelDataAvailable({
         "git_url": 	"git://github.com/Be-Secure/django.git",
         "clone_url": "https://github.com/Be-Secure/django.git",
         "html_url": "https://github.com/Be-Secure/django",
-        "homepage": 	"",
+        "homepage": 	"https://www.djangoproject.com/",
         "owner": {
             "login": "Be-Secure",
             "id": 44028837,
