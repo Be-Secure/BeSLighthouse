@@ -3,6 +3,7 @@ modelDataAvailable({
     "incomplete_results": false,
     "items":
 [  		   
+<<<<<<< HEAD
     {
         "id": 126,      
         "bes_tracking_id": 126,
@@ -21,6 +22,26 @@ modelDataAvailable({
         "clone_url": "https://github.com/Be-Secure/saleor.git",
         "html_url": "https://github.com/Be-Secure/saleor",
         "homepage": "https://saleor.io",
+=======
+	  {
+        "id": 137,      
+        "bes_tracking_id": 137,
+        "name": "django",
+        "full_name": "Be-Secure/django",
+        "description": "  Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 216109,
+        "open_issues": 0,
+        "created_at": "2022-01-04T09:33:20Z",
+        "updated_at": "2022-02-02T12:55:38Z",
+        "pushed_at": 	"2022-02-02T12:54:44Z",
+        "git_url": 	"git://github.com/Be-Secure/django.git",
+        "clone_url": "https://github.com/Be-Secure/django.git",
+        "html_url": "https://github.com/Be-Secure/django",
+        "homepage": 	"https://www.djangoproject.com/",
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
         "owner": {
             "login": "Be-Secure",
             "id": 44028837,
@@ -29,6 +50,7 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
+<<<<<<< HEAD
             "count":1 ,    
             "year": 2022,                                         
             "bes_cve_details_id": "",                      
@@ -40,18 +62,38 @@ modelDataAvailable({
             "main_bes_url": "https://github.com/Be-Secure/saleor",
             "all_projects": {                                                                         
                 "saleor": "https://github.com/saleor/",
+=======
+            "count": "8",    
+            "year": "2021",                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "18211",                      
+            "cvedetails_vendor_id": "10199"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/django/django/",
+            "main_bes_url": "https://github.com/Be-Secure/django",
+            "all_projects": {                                                                         
+                "trellis": "https://github.com/django/",
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
                 // "sub_project_xxx":""
             },
             "all_bes_repos": [                                                                  
                 {
+<<<<<<< HEAD
                     "id": 		392990385
                     "name": "saleor",
                     "url": "https://github.com/Be-Secure/saleor"
+=======
+                    "id": 	444360776,
+                    "name": "django",
+                    "url": "https://github.com/Be-Secure/django"
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
                 }
                 
             ]
         },
         "license": {
+<<<<<<< HEAD
 	    "key": "other",
             "name": "other",
             "spdx_id": 	"NOASSERTION",
@@ -67,21 +109,46 @@ modelDataAvailable({
 	    "tags": {
             "IND": [
                 "retail"
+=======
+	    "key": "bsd-3-clause",
+            "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+            "spdx_id": 	"BSD-3-Clause",
+            "url": 	"https://api.github.com/licenses/bsd-3-clause",
+            "node_id": "MDc6TGljZW5zZTU="	
+            },   
+        "language": [
+		
+            "python","smarty","CSS","HTML","Shell","Javascript"
+
+        ],
+        "
+	    "tags": {
+            "IND": [
+                "ALL"
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
             ],
             "SD": [
                 ""
             ],
             "COM": {
+<<<<<<< HEAD
                 "community led"
             },
             "TD-U": [
                 "TD-U-W"
+=======
+                "Community led"
+            },
+            "TD-U": [
+                "TU-U-W"
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
             ]
 
        
  }
             
           
+<<<<<<< HEAD
     },	
     
     
@@ -187,6 +254,29 @@ modelDataAvailable({
         "clone_url": "https://github.com/Be-Secure/pytorch.git",
         "html_url": "https://github.com/Be-Secure/pytorch",
         "homepage": "https://pytorch.org",
+=======
+    },
+
+
+	  {
+        "id": 136,      
+        "bes_tracking_id": 136,
+        "name": "powerfulseal",
+        "full_name": "Be-Secure/powerfulseal",
+        "description": " PowerfulSeal injects failure into your Kubernetes clusters, so that you can detect problems as early as possible. It allows for writing scenarios describing complete chaos experiments.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 8545,
+        "open_issues": 0,
+        "created_at": "2021-08-05T09:52:53Z",
+        "updated_at": "2021-08-05T09:52:54Z",
+        "pushed_at": 	"2021-07-19T15:09:24Z",
+        "git_url": 	"git://github.com/Be-Secure/powerfulseal.git",
+        "clone_url": "https://github.com/Be-Secure/powerfulseal.git",
+        "html_url": "https://github.com/Be-Secure/powerfulseal",
+        "homepage": 	"",
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
         "owner": {
             "login": "Be-Secure",
             "id": 44028837,
@@ -198,6 +288,7 @@ modelDataAvailable({
             "count": ,    
             "year": ,                                         
             "bes_cve_details_id": "",                      
+<<<<<<< HEAD
             "cvedetails_product_id":"",                      
             "cvedetails_vendor_id": ""
         }, 
@@ -206,18 +297,35 @@ modelDataAvailable({
             "main_bes_url": "https://github.com/Be-Secure/pytorch",
             "all_projects": {                                                                         
                 "pytorch": "https://github.com/pytorch/",
+=======
+            "cvedetails_product_id": ",                      
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/roots/powerfulseal/",
+            "main_bes_url": "https://github.com/Be-Secure/powerfulseal",
+            "all_projects": {                                                                         
+                "trellis": "https://github.com/powerfulseal/",
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
                 // "sub_project_xxx":""
             },
             "all_bes_repos": [                                                                  
                 {
+<<<<<<< HEAD
                     "id": 		444370326
                     "name": "pytorch",
                     "url": "https://github.com/Be-Secure/pytorch"
+=======
+                    "id": 	392989987,
+                    "name": "powerfulseal",
+                    "url": "https://github.com/Be-Secure/powerfulseal"
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
                 }
                 
             ]
         },
         "license": {
+<<<<<<< HEAD
 	    "key": "other",
             "name": "other",
             "spdx_id": 	"NOASSERTION",
@@ -388,10 +496,17 @@ modelDataAvailable({
             "name": "Apache License 2.0",
             "spdx_id": 	"Apache- 2.0",
             "url": 		"https://api.github.com/licenses/apache-2.0",
+=======
+	    "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
             "node_id": "MDc6TGljZW5zZTI="	
             },   
         "language": [
 		
+<<<<<<< HEAD
             "javas","kotlin","c++","c","swift","objective-c"
 
         ],
@@ -880,6 +995,12 @@ modelDataAvailable({
 
         ],
         
+=======
+            "python"
+
+        ],
+        "
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
 	    "tags": {
             "IND": [
                 "ALL"
@@ -888,17 +1009,28 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
+<<<<<<< HEAD
                 "Community led project"
             },
             "TD-U": [
                 "TD-U-W"
+=======
+                "Linux foundation"
+            },
+            "TD-U": [
+                ""
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
             ]
 
        
  }
             
           
+<<<<<<< HEAD
     },	
+=======
+    },
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
         {
         "id": 135,      
         "bes_tracking_id": 135,
@@ -915,7 +1047,7 @@ modelDataAvailable({
         "pushed_at": 	"2021-08-25T09:43:50Z",
         "git_url": 	"git://github.com/Be-Secure/Trelli.git",
         "clone_url": "https://github.com/Be-Secure/Trelli.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/Trelli",
         "homepage": 	"https://roots.io/trellis/",
         "owner": {
             "login": "Be-Secure",
@@ -995,7 +1127,7 @@ modelDataAvailable({
         "pushed_at": 	"2022-02-02T12:48:05Z",
         "git_url": 	"git://github.com/Be-Secure/symfony.git",
         "clone_url": "https://github.com/Be-Secure/symfony.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/symfony",
         "homepage": 	"https://www.symfony.com/",
         "owner": {
             "login": "Be-Secure",
@@ -1076,7 +1208,7 @@ modelDataAvailable({
         "pushed_at": 	"2021-08-05T09:31:23Z",
         "git_url": 	"git://github.com/Be-Secure/tensorflow.git",
         "clone_url": "https://github.com/Be-Secure/tensorflow.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/tensorflow",
         "homepage": 	"https://www.tensorflow.org/",
         "owner": {
             "login": "Be-Secure",
@@ -1156,7 +1288,7 @@ modelDataAvailable({
         "pushed_at": 	"2021-07-14T18:37:41Z",
         "git_url": 	"git://github.com/Be-Secure/deploy.git",
         "clone_url": "https://github.com/Be-Secure/deploy.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/deploy",
         "homepage": 	"https://ansistrano.com",
         "owner": {
             "login": "Be-Secure",
@@ -1237,7 +1369,7 @@ modelDataAvailable({
         "pushed_at": 	"2022-04-26T01:58:31Z",
         "git_url": 	"git://github.com/Be-Secure/ansible.git",
         "clone_url": "https://github.com/Be-Secure/ansible.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/ansible",
         "homepage": "https://ansible.com",
         "owner": {
             "login": "Be-Secure",
@@ -1319,7 +1451,7 @@ modelDataAvailable({
         "pushed_at": 	"2022-01-04T09:44:29Z",
         "git_url": 	"git://github.com/Be-Secure/node.git",
         "clone_url": "https://github.com/Be-Secure/node.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/node",
         "homepage": "https://nodejs.org",
         "owner": {
             "login": "Be-Secure",
@@ -1399,7 +1531,7 @@ modelDataAvailable({
         "pushed_at": 	"2022-06-20T05:16:11Z",
         "git_url": 	"git://github.com/Be-Secure/fastjson.git",
         "clone_url": "https://github.com/Be-Secure/fastjson.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/fastjson",
         "homepage": "https://github.com/alibaba/fastjson/wiki",
         "owner": {
             "login": "Be-Secure",
@@ -1478,7 +1610,7 @@ modelDataAvailable({
         "pushed_at": "2021-08-02T12:20:19Z",
         "git_url": "git://github.com/Be-Secure/prometheus.git",
         "clone_url": "https://github.com/Be-Secure/prometheus.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/prometheus",
         "homepage": 	"https://prometheus.io/",
         "owner": {
             "login": "Be-Secure",
@@ -1566,7 +1698,7 @@ modelDataAvailable({
         "pushed_at": "2021-09-04T00:40:07Z",
         "git_url": "git://github.com/Be-Secure/WordPress.git",
         "clone_url": "https://github.com/Be-Secure/WordPress.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/WordPress",
         "homepage": "https://wordpress.org",
         "owner": {
             "login": "Be-Secure",
@@ -1655,7 +1787,7 @@ modelDataAvailable({
         "pushed_at": "2021-08-11T05:42:30Z",
         "git_url": "git://github.com/Be-Secure/couchdb.git",
         "clone_url": "https://github.com/Be-Secure/couchdb.git",
-        "html_url": "https://github.com/Be-Secure",
+        "html_url": "https://github.com/Be-Secure/couchdb",
         "homepage": "https://couchdb.apache.org/",
         "owner": {
             "login": "Be-Secure",
