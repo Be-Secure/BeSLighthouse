@@ -41,7 +41,7 @@ modelDataAvailable({
         "clone_url": "https://github.com/Be-Secure/django.git",
         "html_url": "https://github.com/Be-Secure/django",
         "homepage": 	"https://www.djangoproject.com/",
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
+
         "owner": {
             "login": "Be-Secure",
             "id": 44028837,
@@ -49,6 +49,44 @@ modelDataAvailable({
             "html_url": "https://github.com/Be-Secure",
           },
         "cvedetails": {     
+		"count": "8",    
+            "year": "2021",                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "18211",                      
+            "cvedetails_vendor_id": "10199"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/django/django/",
+            "main_bes_url": "https://github.com/Be-Secure/django",
+            "all_projects": {                                                                         
+                "django": "https://github.com/django/",
+		// "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	444360776,
+                    "name": "django",
+                    "url": "https://github.com/Be-Secure/django"	
+		  }
+                
+            ]
+        },
+        "license": {	
+		"key": "bsd-3-clause",
+            "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+            "spdx_id": 	"BSD-3-Clause",
+            "url": 	"https://api.github.com/licenses/bsd-3-clause",
+            "node_id": "MDc6TGljZW5zZTU="	
+            },   
+        "language": [
+		
+            "python","smarty","CSS","HTML","Shell","Javascript"
+
+        ],
+        "
+	    "tags": {
+            "IND": [
+                "ALL"
         
 <<<<<<< HEAD
             "count":1 ,    
@@ -63,36 +101,11 @@ modelDataAvailable({
             "all_projects": {                                                                         
                 "saleor": "https://github.com/saleor/",
 =======
-            "count": "8",    
-            "year": "2021",                                         
-            "bes_cve_details_id": "",                      
-            "cvedetails_product_id": "18211",                      
-            "cvedetails_vendor_id": "10199"
-        }, 
-        "project_repos": {
-            "main_github_url": "https://github.com/django/django/",
-            "main_bes_url": "https://github.com/Be-Secure/django",
-            "all_projects": {                                                                         
-                "django": "https://github.com/django/",
+           
 >>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-                // "sub_project_xxx":""
-            },
-            "all_bes_repos": [                                                                  
-                {
-<<<<<<< HEAD
-                    "id": 		392990385
-                    "name": "saleor",
-                    "url": "https://github.com/Be-Secure/saleor"
-=======
-                    "id": 	444360776,
-                    "name": "django",
-                    "url": "https://github.com/Be-Secure/django"
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-                }
                 
-            ]
-        },
-        "license": {
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
+              
 <<<<<<< HEAD
 	    "key": "other",
             "name": "other",
@@ -110,21 +123,7 @@ modelDataAvailable({
             "IND": [
                 "retail"
 =======
-	    "key": "bsd-3-clause",
-            "name": "BSD 3-Clause \"New\" or \"Revised\" License",
-            "spdx_id": 	"BSD-3-Clause",
-            "url": 	"https://api.github.com/licenses/bsd-3-clause",
-            "node_id": "MDc6TGljZW5zZTU="	
-            },   
-        "language": [
-		
-            "python","smarty","CSS","HTML","Shell","Javascript"
-
-        ],
-        "
-	    "tags": {
-            "IND": [
-                "ALL"
+	    
 >>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
             ],
             "SD": [
@@ -496,17 +495,10 @@ modelDataAvailable({
             "name": "Apache License 2.0",
             "spdx_id": 	"Apache- 2.0",
             "url": 		"https://api.github.com/licenses/apache-2.0",
-=======
-	    "key": "apache-2.0",
-            "name": "Apache License 2.0",
-            "spdx_id": 	"Apache-2.0",
-            "url": 	"https://api.github.com/licenses/apache-2.0",
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-            "node_id": "MDc6TGljZW5zZTI="	
+ 	    "node_id": "MDc6TGljZW5zZTI="	
             },   
         "language": [
-		
-<<<<<<< HEAD
+
             "javas","kotlin","c++","c","swift","objective-c"
 
         ],
@@ -2063,7 +2055,7 @@ modelDataAvailable({
         "created_at": "2021-07-02T02:51:21Z",
         "updated_at": "2021-09-11T15:44:08Z",
         "pushed_at": "2021-09-11T15:43:42Z",
-        "git_url": "git://github.com/Be-Secure/django-DefectDojo.git",
+        "git_url": "git://github.com/Be-Secure/-DefectDojo.git",
         "clone_url": "https://github.com/Be-Secure/django-DefectDojo.git",
         "html_url": "https://github.com/Be-Secure/django-DefectDojo",
         "homepage": "https://www.defectdojo.org/",
@@ -2908,3 +2900,12 @@ modelDataAvailable({
 }
 ]
 });
+
+	       "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+>>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
+ "id": 		392990385
+                    "name": "saleor",
+                    "url": "https://github.com/Be-Secure/saleor"
