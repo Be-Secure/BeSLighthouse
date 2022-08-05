@@ -58,7 +58,7 @@ modelDataAvailable({
             "cvedetails_vendor_id": "26617"
         }, 
         "project_repos": {
-            "main_github_url": "https://github.com/wagtail/saleor",
+            "main_github_url": "https://github.com/saleor/saleor",
             "main_bes_url": "https://github.com/Be-Secure/saleor",
             "all_projects": {                                                                         
                 "saleor": "https://github.com/saleor/",
