@@ -73,7 +73,7 @@ modelDataAvailable({
             "main_github_url": "https://github.com/django/django/",
             "main_bes_url": "https://github.com/Be-Secure/django",
             "all_projects": {                                                                         
-                "trellis": "https://github.com/django/",
+                "django": "https://github.com/django/",
 >>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
                 // "sub_project_xxx":""
             },
@@ -305,7 +305,7 @@ modelDataAvailable({
             "main_github_url": "https://github.com/roots/powerfulseal/",
             "main_bes_url": "https://github.com/Be-Secure/powerfulseal",
             "all_projects": {                                                                         
-                "trellis": "https://github.com/powerfulseal/",
+                "powerfulseal": "https://github.com/powerfulseal/",
 >>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
                 // "sub_project_xxx":""
             },
@@ -1034,8 +1034,8 @@ modelDataAvailable({
         {
         "id": 135,      
         "bes_tracking_id": 135,
-        "name": "Trelli",
-        "full_name": "Be-Secure/Trelli",
+        "name": "Trellis",
+        "full_name": "Be-Secure/Trellis",
         "description": " Trellis is a tool to create WordPress web servers and deploy WordPress sites.",
         "watchers_count": 0,
         "forks_count": 0,
@@ -1045,9 +1045,9 @@ modelDataAvailable({
         "created_at": "2021-08-05T09:50:31Z",
         "updated_at": "2021-08-05T09:50:31Z",
         "pushed_at": 	"2021-08-25T09:43:50Z",
-        "git_url": 	"git://github.com/Be-Secure/Trelli.git",
-        "clone_url": "https://github.com/Be-Secure/Trelli.git",
-        "html_url": "https://github.com/Be-Secure/Trelli",
+        "git_url": 	"git://github.com/Be-Secure/Trellis.git",
+        "clone_url": "https://github.com/Be-Secure/Trellis.git",
+        "html_url": "https://github.com/Be-Secure/Trellis",
         "homepage": 	"https://roots.io/trellis/",
         "owner": {
             "login": "Be-Secure",
