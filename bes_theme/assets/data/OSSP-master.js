@@ -5,6 +5,821 @@ modelDataAvailable({
 [  		   
 
 
+{
+        "id": 157,      
+        "bes_tracking_id": 157,
+        "name": "kaa",
+        "full_name": "Be-Secure/kaa",
+        "description": "Kaa is a highly flexible and scalable IoT platform for building IoT solutions and managing connected devices.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 235274
+        "open_issues": 0,
+        "created_at": 	"2021-08-11T05:15:33Z",
+        "updated_at": 	"2021-08-11T05:15:34Z",
+        "pushed_at": 	"2021-08-04T12:47:40Z",
+        "git_url": 	"git://github.com/Be-Secure/kaa.git",
+        "clone_url": "https://github.com/Be-Secure/kaa.git",
+        "html_url": "https://github.com/Be-Secure/kaa",
+        "homepage": 		"http://www.kaaproject.org",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,    
+            "year": 2020                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "88959"                  
+            "cvedetails_vendor_id": "23795"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/kaaproject/kaa
+            "main_bes_url": "https://github.com/Be-Secure/kaa",
+            "all_projects": {                                                                         
+                "kaa": "https://github.com/kaaproject/kaa
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 394870470,
+                    "name": "kaa",
+                    "url": "https://github.com/Be-Secure/kaa"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"",
+            "name": "",
+            "spdx_id": 	"",
+            "url": 	"",
+            "node_id": ""
+          },   
+        "language": [
+		
+            "Go"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "Automotive
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-IoT"
+           
+ ]
+
+       
+ }
+            
+          
+    },		
+{
+        "id": 156,      
+        "bes_tracking_id": 156,
+        "name": "pimcore",
+        "full_name": "Be-Secure/pimcore",
+        "description": "aggregates, enriches, and manages enterprise data and provides up-to-date, consistent, and personalized experiences to customers.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 432096,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T08:50:28Z",
+        "updated_at": 	"2021-08-05T08:50:29Z",
+        "pushed_at": 	"2021-08-05T08:06:07Z",
+        "git_url": 	"git://github.com/Be-Secure/pimcore.git",
+        "clone_url": "https://github.com/Be-Secure/pimcore.git",
+        "html_url": "https://github.com/Be-Secure/pimcore",
+        "homepage": 		"http://www.pimcore.org/",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 10,    
+            "year": 2021,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "27498",                      
+            "cvedetails_vendor_id": "13251"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/pimcore/pimcore",
+            "main_bes_url": "https://github.com/Be-Secure/pimcore",
+            "all_projects": {                                                                         
+                "pimcore": "https://github.com/pimcore/pimcore",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 		392971412,
+                    "name": "pimcore",
+                    "url": "https://github.com/Be-Secure/pimcore"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"gpl-3.0",
+            "name": "GNU General Public License v3.0",
+            "spdx_id": 	"GPL-3.0",
+            "url": 	"https://api.github.com/licenses/gpl-3.0",
+            "node_id": "MDc6TGljZW5zZTk="
+          },   
+        "language": [
+		
+            "Javascript","PHP","HTML","CSS","Twig","SCSS"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-DkA"
+           
+ ]
+
+       
+ }
+            
+          
+    },		
+{
+        "id": 155,      
+        "bes_tracking_id": 155,
+        "name": "espocrm",
+        "full_name": "Be-Secure/espocrm",
+        "description": "web application with a frontend designed as a single page application and REST API backend written in PHP.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 43659,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T08:47:45Z",
+        "updated_at": 	"2021-08-05T08:47:46Z",
+        "pushed_at": 	"2021-08-05T08:01:36Z",
+        "git_url": 	"git://github.com/Be-Secure/espocrm.git",
+        "clone_url": "https://github.com/Be-Secure/espocrm.git",
+        "html_url": "https://github.com/Be-Secure/espocrm",
+        "homepage": 		"https://www.espocrm.com",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,    
+            "year": 2021,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "29283",                      
+            "cvedetails_vendor_id": "14206"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/espocrm/espocrm",
+            "main_bes_url": "https://github.com/Be-Secure/espocrm",
+            "all_projects": {                                                                         
+                "espocrm": "https://github.com/espocrm/espocrm",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 		392970608,
+                    "name": "espocrm",
+                    "url": "https://github.com/Be-Secure/espocrm"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"gpl-3.0",
+            "name": "GNU General Public License v3.0",
+            "spdx_id": 	"GPL-3.0",
+            "url": 	"https://api.github.com/licenses/gpl-3.0",
+            "node_id": "MDc6TGljZW5zZTk="
+          },   
+        "language": [
+		
+            "Javascript","PHP","Less","Smarty"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-DkA"
+           
+ ]
+
+       
+ }
+            
+          
+    },	
+ {
+        "id": 154,      
+        "bes_tracking_id": 154,
+        "name": "koha",
+        "full_name": "Be-Secure/koha",
+        "description": "Koha is a free software integrated library system",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 4320411,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T17:17:14Z",
+        "updated_at": 	"2021-08-05T17:17:15Z",
+        "pushed_at": 	"2021-08-04T12:07:03Z",
+        "git_url": 	"git://github.com/Be-Secure/koha.git",
+        "clone_url": "https://github.com/Be-Secure/koha.git",
+        "html_url": "https://github.com/Be-Secure/koha",
+        "homepage": 		"https://koha-community.org/",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 4,    
+            "year": 2020,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "21648",                      
+            "cvedetails_vendor_id": "11706"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/koha-community/koha",
+            "main_bes_url": "https://github.com/Be-Secure/koha",
+            "all_projects": {                                                                         
+                "koha": "https://github.com/koha-community/koha",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	393121129,
+                    "name": "koha",
+                    "url": "https://github.com/Be-Secure/koha"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"gpl-3.0",
+            "name": "GNU General Public License v3.0",
+            "spdx_id": 	"GPL-3.0",
+            "url": 	"https://api.github.com/licenses/gpl-3.0",
+            "node_id": "MDc6TGljZW5zZTk="
+          },   
+        "language": [
+		
+            "Javascript","HTML","Raku","SCSS","XSLT"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "NG"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },
+	{
+        "id": 153,      
+        "bes_tracking_id": 153,
+        "name": "bit",
+        "full_name": "Be-Secure/bit",
+        "description": "Bit is a tool chain for composable software development",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 86380,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T10:04:22Z",
+        "updated_at": 	"2021-08-05T10:04:23Z",
+        "pushed_at": 	"2021-08-05T09:18:48Z",
+        "git_url": 	"git://github.com/Be-Secure/bit.git",
+        "clone_url": "https://github.com/Be-Secure/bit.git",
+        "html_url": "https://github.com/Be-Secure/bit",
+        "homepage": 		"https://bit.dev",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": ,    
+            "year": ,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "82132",                      
+            "cvedetails_vendor_id": "23065"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/teambit/bit",
+            "main_bes_url": "https://github.com/Be-Secure/bit",
+            "all_projects": {                                                                         
+                "bit": "https://github.com/teambit/bit",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	392993316,
+                    "name": "bit",
+                    "url": "https://github.com/Be-Secure/bit"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+            "node_id": "MDc6TGljZW5zZTI="
+          },   
+        "language": [
+		
+            "Javascript","Typescript","Shell","powershell","Vue","SCSS"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "Independent-project"
+            },
+            "TD-U": [
+                "TD-U-W"
+           
+ ]
+
+       
+ }
+            
+          
+    },
+ {
+        "id": 152,      
+        "bes_tracking_id": 152,
+        "name": "joplin",
+        "full_name": "Be-Secure/joplin",
+        "description": "Joplin is a free, open source note taking and to-do application",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 215192,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T10:03:20Z",
+        "updated_at": 	"2021-08-05T10:03:22Z",
+        "pushed_at": 	"2021-08-05T03:41:34Z",
+        "git_url": 	"git://github.com/Be-Secure/joplin.git",
+        "clone_url": "https://github.com/Be-Secure/joplin.git",
+        "html_url": "https://github.com/Be-Secure/joplin",
+        "homepage": 	"https://joplinapp.org/",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,    
+            "year": 2021,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "99830",                      
+            "cvedetails_vendor_id": "25298"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/laurent22/joplin",
+            "main_bes_url": "https://github.com/Be-Secure/joplin",
+            "all_projects": {                                                                         
+                "joplin": "https://github.com/laurent22/joplin",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 392993011,
+                    "name": "joplin",
+                    "url": "https://github.com/Be-Secure/joplin"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"mit",
+            "name": "mit license",
+            "spdx_id": 	"MIT",
+            "url": 	"https://api.github.com/licenses/mit",
+            "node_id": "MDc6TGljZW5zZTEz"
+          },   
+        "language": [
+		
+            "Javascript","Java","CSS","HTML","Typescript","Mustache"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-W"
+           
+ ]
+
+       
+ }
+            
+          
+    },
+ {
+        "id": 151,      
+        "bes_tracking_id": 151,
+        "name": "hexo",
+        "full_name": "Be-Secure/hexo",
+        "description": "A fast, simple & powerful blog framework, powered by Node.js.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 7205,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T10:02:05Z",
+        "updated_at": 	"2021-08-05T10:02:07Z",
+        "pushed_at": 	"2021-08-01T08:53:48Z",
+        "git_url": 	"git://github.com/Be-Secure/hexo.git",
+        "clone_url": "https://github.com/Be-Secure/hexo.git",
+        "html_url": "https://github.com/Be-Secure/hexo",
+        "homepage": 	"https://hexo.io",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,    
+            "year": 2021,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "105979",                      
+            "cvedetails_vendor_id": "25968"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/hexojs/hexo",
+            "main_bes_url": "https://github.com/Be-Secure/hexo",
+            "all_projects": {                                                                         
+                "hexo": "https://github.com/hexojs/hexo",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 392992675,
+                    "name": "hexo",
+                    "url": "https://github.com/Be-Secure/hexo"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"mit",
+            "name": "mit license",
+            "spdx_id": 	"MIT",
+            "url": 	"https://api.github.com/licenses/mit",
+            "node_id": "MDc6TGljZW5zZTEz"
+          },   
+        "language": [
+		
+            "Javascript","Shell","CSS"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-W"
+           
+ ]
+
+       
+ }
+            
+          
+    },		
+ {
+        "id": 150,      
+        "bes_tracking_id": 150,
+        "name": "wallabag",
+        "full_name": "Be-Secure/wallabag",
+        "description": "wallabag is a web application allowing you to save web pages for later reading.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 90041,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T10:01:23Z",
+        "updated_at": 	"2021-09-10T07:23:25Z",
+        "pushed_at": 	"2021-09-10T07:23:17Z",
+        "git_url": 	"git://github.com/Be-Secure/wallabag.git",
+        "clone_url": "https://github.com/Be-Secure/wallabag.git",
+        "html_url": "https://github.com/Be-Secure/wallabag",
+        "homepage": 	"https://wallabag.org",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,    
+            "year": 2018,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "67943",                      
+            "cvedetails_vendor_id": "21707"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/wallabag/wallabag",
+            "main_bes_url": "https://github.com/Be-Secure/wallabag",
+            "all_projects": {                                                                         
+                "wallabag": "https://github.com/wallabag/wallabag",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	392992423,
+                    "name": "wallabag",
+                    "url": "https://github.com/Be-Secure/wallabag"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"mit",
+            "name": "mit license",
+            "spdx_id": 	"MIT",
+            "url": 	"https://api.github.com/licenses/mit",
+            "node_id": "MDc6TGljZW5zZTEz"
+          },   
+        "language": [
+		
+            "PHP","Javascript","Shell","CSS","Twig","SCSS"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-W"
+           
+ ]
+
+       
+ }
+            
+          
+    },	
+		
+	
+ {
+        "id": 149,      
+        "bes_tracking_id": 149,
+        "name": "akaunting",
+        "full_name": "Be-Secure/akaunting",
+        "description": "It is built with modern technologies such as Laravel, VueJS, Tailwind, RESTful API etc.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 28918,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T08:52:09Z",
+        "updated_at": 	"2021-08-05T08:52:11Z",
+        "pushed_at": 	"2021-08-05T00:15:40Z",
+        "git_url": 	"git://github.com/Be-Secure/akaunting.git",
+        "clone_url": "https://github.com/Be-Secure/akaunting.git",
+        "html_url": "https://github.com/Be-Secure/akaunting",
+        "homepage": 	"https://akaunting.com/",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 8,    
+            "year": 2021,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "82472",                      
+            "cvedetails_vendor_id": "20511"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/akaunting/akaunting",
+            "main_bes_url": "https://github.com/Be-Secure/akaunting",
+            "all_projects": {                                                                         
+                "akaunting": "https://github.com/akaunting/akaunting",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 392971892,
+                    "name": "akaunting",
+                    "url": "https://github.com/Be-Secure/akaunting"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": 	"gpl-3.0",
+            "name": "GNU General Public License v3.0",
+            "spdx_id": 	"GPL-3.0",
+            "url": 	"https://api.github.com/licenses/gpl-3.0",
+            "node_id": "MDc6TGljZW5zZTk="
+          },   
+        "language": [
+		
+            "PHP","Blade","Vue"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "BFSI"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-W"
+           
+ ]
+
+       
+ }
+            
+          
+    },	
+	
+ {
+        "id": 148,      
+        "bes_tracking_id": 148,
+        "name": "grav",
+        "full_name": "Be-Secure/grav",
+        "description": "Grav is a Fast, Simple, and Flexible, file-based Web-platform..",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 22751,
+        "open_issues": 0,
+        "created_at": 	"2021-08-05T10:00:50Z",
+        "updated_at": 	"2021-08-05T10:00:51Z",
+        "pushed_at": 	"2021-08-05T10:00:51Z",
+        "git_url": 	"git://github.com/Be-Secure/grav.git",
+        "clone_url": "https://github.com/Be-Secure/grav.git",
+        "html_url": "https://github.com/Be-Secure/grav",
+        "homepage": 	"https://getgrav.org/",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 4,    
+            "year": 2021,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "82472",                      
+            "cvedetails_vendor_id": "20511"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/getgrav/grav",
+            "main_bes_url": "https://github.com/Be-Secure/grav",
+            "all_projects": {                                                                         
+                "grav": "https://github.com/getgrav/grav",
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 392992220,
+                    "name": "grav",
+                    "url": "https://github.com/Be-Secure/grav"
+                }
+                
+            ]
+        },
+        "license": {
+            "key": "mit",
+            "name": "MIT license",
+            "spdx_id": 	"MIT",
+            "url": 	"https://api.github.com/licenses/mit",
+            "node_id": "MDc6TGljZW5zZTEz"
+          },   
+        "language": [
+		
+            "PHP",
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "ALL"
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                "community-led"
+            },
+            "TD-U": [
+                "TD-U-W"
+           
+ ]
+
+       
+ }
+            
+          
+    },
+
+	
  {
         "id": 147      
         "bes_tracking_id": 147
