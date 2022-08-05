@@ -3,7 +3,7 @@ modelDataAvailable({
     "incomplete_results": false,
     "items":
 [  		   
-<<<<<<< HEAD
+
     {
         "id": 126,      
         "bes_tracking_id": 126,
@@ -22,7 +22,66 @@ modelDataAvailable({
         "clone_url": "https://github.com/Be-Secure/saleor.git",
         "html_url": "https://github.com/Be-Secure/saleor",
         "homepage": "https://saleor.io",
-=======
+	"owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {   
+	"count":1 ,    
+            "year": 2022,                                         
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id":"111245",                      
+            "cvedetails_vendor_id": "26617"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/saleor/saleor",
+            "main_bes_url": "https://github.com/Be-Secure/saleor",
+            "all_projects": {                                                                         
+                "saleor": "https://github.com/saleor/",
+		    // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+		   
+		     "id": 		392990385
+                    "name": "saleor",
+                    "url": "https://github.com/Be-Secure/saleor"  
+		 }
+                
+            ]
+        },
+        "license": {	
+		"key": "other",
+            "name": "other",
+            "spdx_id": 	"NOASSERTION",
+            "url": 		"null",
+            "node_id": "MDc6TGljZW5zZTA="	
+            },   
+        "language": [
+		
+            "python", "HTML"
+
+        ],
+        
+	    "tags": {
+            "IND": [
+                "retail"
+		  ],
+            "SD": [
+                ""
+            ],
+            "COM": {  
+		     "community led"
+            },
+            "TD-U": [
+                "TD-U-W"
+		   ]
+	    }
+}
+		    
+
 	  {
         "id": 137,      
         "bes_tracking_id": 137,
@@ -87,71 +146,23 @@ modelDataAvailable({
 	    "tags": {
             "IND": [
                 "ALL"
-        
-<<<<<<< HEAD
-            "count":1 ,    
-            "year": 2022,                                         
-            "bes_cve_details_id": "",                      
-            "cvedetails_product_id":"111245",                      
-            "cvedetails_vendor_id": "26617"
-        }, 
-        "project_repos": {
-            "main_github_url": "https://github.com/saleor/saleor",
-            "main_bes_url": "https://github.com/Be-Secure/saleor",
-            "all_projects": {                                                                         
-                "saleor": "https://github.com/saleor/",
-=======
-           
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-                
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-              
-<<<<<<< HEAD
-	    "key": "other",
-            "name": "other",
-            "spdx_id": 	"NOASSERTION",
-            "url": 		"null",
-            "node_id": "MDc6TGljZW5zZTA="	
-            },   
-        "language": [
-		
-            "python", "HTML"
-
-        ],
-        
-	    "tags": {
-            "IND": [
-                "retail"
-=======
-	    
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-            ],
-            "SD": [
+		]
+	 "SD": [
                 ""
             ],
             "COM": {
-<<<<<<< HEAD
                 "community led"
             },
             "TD-U": [
                 "TD-U-W"
-=======
-                "Community led"
-            },
-            "TD-U": [
-                "TU-U-W"
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
             ]
 
-       
- }
+        }
             
           
-<<<<<<< HEAD
-    },	
-    
-    
-   
+    },
+        
+
     {
         "id": 125,      
         "bes_tracking_id": 125,
@@ -253,42 +264,17 @@ modelDataAvailable({
         "clone_url": "https://github.com/Be-Secure/pytorch.git",
         "html_url": "https://github.com/Be-Secure/pytorch",
         "homepage": "https://pytorch.org",
-=======
-    },
-
-
-	  {
-        "id": 136,      
-        "bes_tracking_id": 136,
-        "name": "powerfulseal",
-        "full_name": "Be-Secure/powerfulseal",
-        "description": " PowerfulSeal injects failure into your Kubernetes clusters, so that you can detect problems as early as possible. It allows for writing scenarios describing complete chaos experiments.",
-        "watchers_count": 0,
-        "forks_count": 0,
-        "stargazers_count": 0,
-        "size": 8545,
-        "open_issues": 0,
-        "created_at": "2021-08-05T09:52:53Z",
-        "updated_at": "2021-08-05T09:52:54Z",
-        "pushed_at": 	"2021-07-19T15:09:24Z",
-        "git_url": 	"git://github.com/Be-Secure/powerfulseal.git",
-        "clone_url": "https://github.com/Be-Secure/powerfulseal.git",
-        "html_url": "https://github.com/Be-Secure/powerfulseal",
-        "homepage": 	"",
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-        "owner": {
+	"owner": {
             "login": "Be-Secure",
             "id": 44028837,
             "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
             "html_url": "https://github.com/Be-Secure",
           },
-        "cvedetails": {     
-        
-            "count": ,    
+        "cvedetails": { 	
+	    "count": ,    
             "year": ,                                         
-            "bes_cve_details_id": "",                      
-<<<<<<< HEAD
-            "cvedetails_product_id":"",                      
+            "bes_cve_details_id": "", 
+		"cvedetails_product_id":"",                      
             "cvedetails_vendor_id": ""
         }, 
         "project_repos": {
@@ -296,36 +282,17 @@ modelDataAvailable({
             "main_bes_url": "https://github.com/Be-Secure/pytorch",
             "all_projects": {                                                                         
                 "pytorch": "https://github.com/pytorch/",
-=======
-            "cvedetails_product_id": ",                      
-            "cvedetails_vendor_id": ""
-        }, 
-        "project_repos": {
-            "main_github_url": "https://github.com/roots/powerfulseal/",
-            "main_bes_url": "https://github.com/Be-Secure/powerfulseal",
-            "all_projects": {                                                                         
-                "powerfulseal": "https://github.com/powerfulseal/",
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-                // "sub_project_xxx":""
-            },
-            "all_bes_repos": [                                                                  
-                {
-<<<<<<< HEAD
-                    "id": 		444370326
+			//"sub_project_xxx":""
+		"all_bes_repos":[
+			{
+			"id": 		444370326
                     "name": "pytorch",
-                    "url": "https://github.com/Be-Secure/pytorch"
-=======
-                    "id": 	392989987,
-                    "name": "powerfulseal",
-                    "url": "https://github.com/Be-Secure/powerfulseal"
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-                }
-                
-            ]
-        },
-        "license": {
-<<<<<<< HEAD
-	    "key": "other",
+                    "url": "https://github.com/Be-Secure/pytorch"		
+			}
+		]
+	    },
+	"license":{	    
+	"key": "other",
             "name": "other",
             "spdx_id": 	"NOASSERTION",
             "url": 		"null",
@@ -355,9 +322,85 @@ modelDataAvailable({
  }
             
           
-    },	
-    
-    
+    },		
+
+    },
+
+
+	  {
+        "id": 136,      
+        "bes_tracking_id": 136,
+        "name": "powerfulseal",
+        "full_name": "Be-Secure/powerfulseal",
+        "description": " PowerfulSeal injects failure into your Kubernetes clusters, so that you can detect problems as early as possible. It allows for writing scenarios describing complete chaos experiments.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0,
+        "size": 8545,
+        "open_issues": 0,
+        "created_at": "2021-08-05T09:52:53Z",
+        "updated_at": "2021-08-05T09:52:54Z",
+        "pushed_at": 	"2021-07-19T15:09:24Z",
+        "git_url": 	"git://github.com/Be-Secure/powerfulseal.git",
+        "clone_url": "https://github.com/Be-Secure/powerfulseal.git",
+        "html_url": "https://github.com/Be-Secure/powerfulseal",
+        "homepage": 	"",
+	"owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": ,    
+            "year": ,
+	"bes_cve_details_id":"",	    
+	"cvedetails_product_id": ",                      
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/roots/powerfulseal/",
+            "main_bes_url": "https://github.com/Be-Secure/powerfulseal",
+            "all_projects": {                                                                         
+                "powerfulseal": "https://github.com/powerfulseal/",
+		//"sub_project_xxx":""
+	    },
+		 "all_bes_repos":[
+			 {
+                    "id": 	392989987,
+                    "name": "powerfulseal",
+                    "url": "https://github.com/Be-Secure/powerfulseal"	
+			 }
+		]
+	 },
+		 
+		"license":{
+		      "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",	
+		"node_id": "MDc6TGljZW5zZTI="
+		},
+		"language":[
+			
+	 "python"
+
+        ],   
+	"tags":{
+	"IND":[
+		"ALL"
+	"SD":[
+		""
+	]
+	"COM":{	
+	"Linux foundation"
+            },
+            "TD-U": [
+                ""
+	]
+	}
+  },		  
    
     {
         "id": 142,      
@@ -849,7 +892,7 @@ modelDataAvailable({
     {
         "id": 116,      
         "bes_tracking_id": 116,
-        "name": "flask",
+        "name": "laravel",
         "full_name": "Be-Secure/laravel",
         "description": "Laravel takes the pain out of development by easing common tasks used in many web projects",
         "watchers_count": 0,
@@ -986,14 +1029,7 @@ modelDataAvailable({
             "python"
 
         ],
-        
-=======
-            "python"
-
-        ],
-        "
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-	    "tags": {
+         "tags": {
             "IND": [
                 "ALL"
             ],
@@ -1001,28 +1037,15 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-<<<<<<< HEAD
-                "Community led project"
+		     "Community led project"
             },
             "TD-U": [
                 "TD-U-W"
-=======
-                "Linux foundation"
-            },
-            "TD-U": [
-                ""
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
-            ]
-
-       
+		     ]
  }
-            
-          
-<<<<<<< HEAD
-    },	
-=======
-    },
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
+       
+ },
+
         {
         "id": 135,      
         "bes_tracking_id": 135,
@@ -2899,13 +2922,6 @@ modelDataAvailable({
      
 }
 ]
-});
+})
 
-	       "key": "apache-2.0",
-            "name": "Apache License 2.0",
-            "spdx_id": 	"Apache-2.0",
-            "url": 	"https://api.github.com/licenses/apache-2.0",
->>>>>>> 9579681f49a9ae47c56a0b79465aa5c0b8271ddc
- "id": 		392990385
-                    "name": "saleor",
-                    "url": "https://github.com/Be-Secure/saleor"
+
