@@ -32,8 +32,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count": 0,
+            "year":  0,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -112,8 +112,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count": 0,
+            "year":  0,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -352,8 +352,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year":  0,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -513,8 +513,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count": 0,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -593,8 +593,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -673,8 +673,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -753,8 +753,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count": 0,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -833,8 +833,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count": 0,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -913,8 +913,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -993,8 +993,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "17488"             
             "cvedetails_vendor_id": "9781"
@@ -1073,8 +1073,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1153,8 +1153,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count": 0,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1233,8 +1233,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1313,8 +1313,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,
-            "year":  ,                                   
+            "count":0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1473,8 +1473,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count":0  ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1553,8 +1553,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count": 0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1633,8 +1633,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count":0  ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1713,8 +1713,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count": 0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1793,8 +1793,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count": 0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2033,8 +2033,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count": 0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2113,8 +2113,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count": 0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2193,8 +2193,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count": 0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2273,8 +2273,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count": 0 ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2353,8 +2353,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count":  ,
-            "year":  ,                                   
+            "count":0  ,
+            "year": 0 ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2513,8 +2513,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year":   ,                                      
+            "count":0 ,    
+            "year":  0 ,                                      
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -2593,8 +2593,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year":   ,                                      
+            "count":0 ,    
+            "year": 0  ,                                      
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -2673,8 +2673,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year":   ,                                      
+            "count":0 ,    
+            "year": 0  ,                                      
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -3154,8 +3154,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year":                                         
+            "count":0 ,    
+            "year":  0,                                       
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -3234,8 +3234,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year":                                         
+            "count":0 ,    
+            "year":  0,                                       
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -3720,8 +3720,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year": ,                                         
+            "count":0 ,    
+            "year": 0,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "82132",                      
             "cvedetails_vendor_id": "23065"
@@ -4452,8 +4452,8 @@ modelDataAvailable({
       },
     "cvedetails": {    
    
-        "count": ,  
-        "year": ,                                            
+        "count":0 ,  
+        "year": 0,                                            
         "bes_cve_details_id": "",                      
         "cvedetails_product_id": "",                      
         "cvedetails_vendor_id": ""
@@ -4533,8 +4533,8 @@ modelDataAvailable({
       },
     "cvedetails": {    
    
-        "count": ,  
-        "year": ,                                            
+        "count": 0,  
+        "year": 0,                                            
         "bes_cve_details_id": "",                      
         "cvedetails_product_id": "",                      
         "cvedetails_vendor_id": ""
@@ -4615,8 +4615,8 @@ modelDataAvailable({
       },
     "cvedetails": {    
    
-        "count": ,  
-        "year": ,                                            
+        "count":0 ,  
+        "year": 0,                                            
         "bes_cve_details_id": "",                      
         "cvedetails_product_id": "",                      
         "cvedetails_vendor_id": ""
@@ -4937,8 +4937,8 @@ modelDataAvailable({
             "html_url": "https://github.com/Be-Secure",
           },
         "cvedetails": { 	
-	    "count": ,    
-            "year": ,                                         
+	    "count":0 ,    
+            "year":0 ,                                         
             "bes_cve_details_id": "", 
 		"cvedetails_product_id":"",                      
             "cvedetails_vendor_id": ""
@@ -5019,8 +5019,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year": ,
+            "count":0 ,    
+            "year":0 ,
 	"bes_cve_details_id":"",	    
 	"cvedetails_product_id": ",                      
             "cvedetails_vendor_id": ""
@@ -5094,8 +5094,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year": ,                                         
+            "count":0 ,    
+            "year":0 ,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id":"",                      
             "cvedetails_vendor_id": ""
@@ -5738,8 +5738,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year": ,                                         
+            "count":0 ,    
+            "year":0 ,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ",                      
             "cvedetails_vendor_id": ""
@@ -5818,8 +5818,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year": ,                                         
+            "count":0 ,    
+            "year":0 ,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "22402,                      
             "cvedetails_vendor_id": "11981"
@@ -5899,8 +5899,8 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": ,    
-            "year": ,                                         
+            "count":0 ,    
+            "year":0 ,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "86745,                      
             "cvedetails_vendor_id": "23502"
