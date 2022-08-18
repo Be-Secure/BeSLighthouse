@@ -7,6 +7,328 @@ modelDataAvailable({
 	
 	
 {
+        "id": 209 , 
+        "bes_tracking_id": 209,
+        "name": "zeek"
+        "full_name": "Be-Secure/  zeek   ",
+        "description": "Zeek is a powerful network analysis framework",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 	113514
+        "open_issues": 0,
+        "created_at": 	"2021-07-07T09:27:43Z",
+        "updated_at": 		"2021-07-07T09:27:44Z",
+        "pushed_at":     "2021-06-24T15:28:23Z",
+        "git_url": 	"git://github.com/Be-Secure/zeek.git",
+        "clone_url": "https://github.com/Be-Secure/zeek.git",
+        "html_url": "https://github.com/Be-Secure/zeek",
+        "homepage": 	,
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,
+            "year":  2021,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "57109"             
+            "cvedetails_vendor_id": "20112"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/zeek/zeek",
+            "main_bes_url": "https://github.com/Be-Secure/zeek",
+            "all_projects": {                                                                         
+               "zeek": "https://github.com/zeek/zeek"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	383743694,
+                    "name": "zeek",
+                    "url": "https://github.com/Be-Secure/zeek"
+                }
+                
+            ]
+        },
+        "license": {
+           "key": "other",
+            "name": "other",
+            "spdx_id": 	"NOASSERTION",
+            "url": 	null,
+            "node_id": 	"MDc6TGljZW5zZTA="
+          },   
+        "language": [
+		
+            "C++", "Cmake", "Shell", "zeek", "Lex", "Yacc"
+        ],
+        
+	    "tags": {
+            "IND": [
+                "Cyber security"
+            ],
+            "SD": [
+                "SD-NS"
+            ],
+            "COM": {
+                "Community led"
+            },
+            "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },				
+{
+        "id": 208 , 
+        "bes_tracking_id": 208,
+        "name": "ossec-hids"
+        "full_name": "Be-Secure/  ossec-hids   ",
+        "description": "OSSEC is an Open Source Host-based Intrusion Detection System that performs log analysis, file integrity checking, policy monitoring, rootkit detection, real-time alerting and active response.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 20403
+        "open_issues": 0,
+        "created_at": 	"2021-07-07T09:27:43Z",
+        "updated_at": 		"2021-07-07T09:27:44Z",
+        "pushed_at":     "2021-06-24T15:28:23Z",
+        "git_url": 	"git://github.com/Be-Secure/ossec-hids.git",
+        "clone_url": "https://github.com/Be-Secure/ossec-hids.git",
+        "html_url": "https://github.com/Be-Secure/ossec-hids",
+        "homepage": 	"http://www.ossec.net",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 0,
+            "year":  null,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": ""             
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/ossec/ossec-hids",
+            "main_bes_url": "https://github.com/Be-Secure/ossec-hids",
+            "all_projects": {                                                                         
+               "ossec-hids": "https://github.com/ossec/ossec-hids"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	383743694,
+                    "name": "ossec-hids",
+                    "url": "https://github.com/Be-Secure/ossec-hids"
+                }
+                
+            ]
+        },
+        "license": {
+           "key": "other",
+            "name": "other",
+            "spdx_id": 	"NOASSERTION",
+            "url": 	null,
+            "node_id": 	"MDc6TGljZW5zZTA="
+          },   
+        "language": [
+		
+            "Python","Shell","Makefile","C","Perl"
+        ],
+        
+	    "tags": {
+            "IND": [
+                "Cyber security"
+            ],
+            "SD": [
+                "SD-NS"
+            ],
+            "COM": {
+                "Community led"
+            },
+            "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },				
+	
+{
+        "id": 207 , 
+        "bes_tracking_id": 207,
+        "name": "malcolm"
+        "full_name": "Be-Secure/   malcolm  ",
+        "description": "Malcolm is a powerful, easily deployable network traffic analysis tool suite for full packet capture artifacts (PCAP files) and Zeek logs",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 39896
+        "open_issues": 0,
+        "created_at": 	"2021-07-01T06:58:03Z",
+        "updated_at": 	"2021-07-01T06:58:04Z",
+        "pushed_at":     "2021-06-28T16:03:01Z",
+        "git_url": 	"git://github.com/Be-Secure/malcolm.git",
+        "clone_url": "https://github.com/Be-Secure/malcolm.git",
+        "html_url": "https://github.com/Be-Secure/malcolm",
+        "homepage": 	null,
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 0,
+            "year":  null,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": ""             
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/cisagov/malcolm",
+            "main_bes_url": "https://github.com/Be-Secure/malcolm",
+            "all_projects": {                                                                         
+               "malcolm": "https://github.com/cisagov/malcolm"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	381939268,
+                    "name": "malcolm",
+                    "url": "https://github.com/Be-Secure/malcolm"
+                }
+                
+            ]
+        },
+        "license": {
+           "key": "other",
+            "name": "other",
+            "spdx_id": 	"NOASSERTION",
+            "url": 	null,
+            "node_id": 	"MDc6TGljZW5zZTA="
+          },   
+        "language": [
+		
+            "Python","Shell", "Zeek", "Javascript", "CSS", "Dockerfile"
+        ],
+        
+	    "tags": {
+            "IND": [
+                "Cyber security"
+            ],
+            "SD": [
+                "SD-NS"
+            ],
+            "COM": {
+                "Organization led"
+            },
+            "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },				
+{
+        "id": 206 , 
+        "bes_tracking_id": 206,
+        "name": "stix-shifter	"
+        "full_name": "Be-Secure/stix-shifter",
+        "description": "This project consists of an open source library allowing software to connect to data repositories using STIX Patterning, and return results as STIX Observations.",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 6247
+        "open_issues": 0,
+        "created_at": 	"2021-07-02T02:53:16Z",
+        "updated_at": 		"2021-07-02T02:53:17Z",
+        "pushed_at": "2021-06-29T23:04:06Z",
+        "git_url": 	"git://github.com/Be-Secure/stix-shifter.git",
+        "clone_url": "https://github.com/Be-Secure/stix-shifter.git",
+        "html_url": "https://github.com/Be-Secure/stix-shifter",
+        "homepage": 	null,
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 0,
+            "year":  null,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": ""             
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/opencybersecurityalliance/stix-shifter",
+            "main_bes_url": "https://github.com/Be-Secure/stix-shifter",
+            "all_projects": {                                                                         
+               "stix-shifter": "https://github.com/opencybersecurityalliance/stix-shifter"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	382213306,
+                    "name": "stix-shifter",
+                    "url": "https://github.com/Be-Secure/stix-shifter"
+                }
+                
+            ]
+        },
+        "license": {
+           "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+            "node_id": 	"MDc6TGljZW5zZTI="
+          },   
+        "language": [
+		
+            "Python"
+        ],
+        
+	    "tags": {
+            "IND": [
+                "Cyber security"
+            ],
+            "SD": [
+                "SD-SRM"
+            ],
+            "COM": {
+                "OCA"
+            },
+            "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },			
+	
+{
         "id": 205 , 
         "bes_tracking_id": 205,
         "name": "cset	"
@@ -436,7 +758,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0,
-            "year":  0,                                   
+            "year":  null,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -516,7 +838,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0,
-            "year":  0,                                   
+            "year":  null,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -756,7 +1078,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year":  0,                                   
+            "year":  null,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -917,7 +1239,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0,
-            "year": 0 ,                                   
+            "year": null,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -997,7 +1319,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1077,7 +1399,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year": 0 ,                                   
+            "year": null,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1157,7 +1479,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1237,7 +1559,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0,
-            "year": 0 ,                                   
+            "year": null,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1317,7 +1639,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1397,7 +1719,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "17488"             
             "cvedetails_vendor_id": "9781"
@@ -1477,7 +1799,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1557,7 +1879,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1637,7 +1959,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1717,7 +2039,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1877,7 +2199,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0  ,
-            "year": 0 ,                                   
+            "year": null,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -1957,7 +2279,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2037,7 +2359,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0  ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2117,7 +2439,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2197,7 +2519,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2437,7 +2759,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2517,7 +2839,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2597,7 +2919,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2677,7 +2999,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 0 ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2757,7 +3079,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0  ,
-            "year": 0 ,                                   
+            "year": null ,                                   
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""             
             "cvedetails_vendor_id": ""
@@ -2917,7 +3239,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":  0 ,                                      
+            "year":  null ,                                      
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -2997,7 +3319,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year": 0  ,                                      
+            "year": null  ,                                      
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -3077,7 +3399,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year": 0  ,                                      
+            "year": null ,                                      
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -3558,7 +3880,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":  0,                                       
+            "year":  null,                                       
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -3638,7 +3960,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":  0,                                       
+            "year":  null,                                       
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ""                  
             "cvedetails_vendor_id": ""
@@ -3719,7 +4041,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 1,    
-            "year": 2012                                         
+            "year": 2012,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "23743"                  
             "cvedetails_vendor_id": "109"
@@ -3800,7 +4122,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count": 1,    
-            "year": 2020                                         
+            "year": 2020,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "88959"                  
             "cvedetails_vendor_id": "23795"
@@ -4124,7 +4446,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year": 0,                                         
+            "year": null,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "82132",                      
             "cvedetails_vendor_id": "23065"
@@ -4614,11 +4936,11 @@ modelDataAvailable({
           },
         "cvedetails": {     
         
-            "count": 6    
-            "year": 2021                                        
+            "count": 6,    
+            "year": 2021,                                        
             "bes_cve_details_id": "",                      
-            "cvedetails_product_id":"128                     
-            "cvedetails_vendor_id": "74
+            "cvedetails_product_id":"128"                     
+            "cvedetails_vendor_id": "74"
         }, 
         "project_repos": {
             "main_github_url": "https://github.com/php-pm/php-pm",
@@ -4695,7 +5017,7 @@ modelDataAvailable({
     "cvedetails": {    
    
         "count": 1,  
-        "year": 2018                                           
+        "year": 2018,                                           
         "bes_cve_details_id": "",                      
         "cvedetails_product_id": "40412"                  
         "cvedetails_vendor_id": "61"
@@ -4856,7 +5178,7 @@ modelDataAvailable({
     "cvedetails": {    
    
         "count":0 ,  
-        "year": 0,                                            
+        "year": null,                                            
         "bes_cve_details_id": "",                      
         "cvedetails_product_id": "",                      
         "cvedetails_vendor_id": ""
@@ -4937,7 +5259,7 @@ modelDataAvailable({
     "cvedetails": {    
    
         "count": 0,  
-        "year": 0,                                            
+        "year": null,                                            
         "bes_cve_details_id": "",                      
         "cvedetails_product_id": "",                      
         "cvedetails_vendor_id": ""
@@ -5019,7 +5341,7 @@ modelDataAvailable({
     "cvedetails": {    
    
         "count":0 ,  
-        "year": 0,                                            
+        "year": null,                                            
         "bes_cve_details_id": "",                      
         "cvedetails_product_id": "",                      
         "cvedetails_vendor_id": ""
@@ -5177,8 +5499,8 @@ modelDataAvailable({
             "html_url": "https://github.com/Be-Secure",
           },
         "cvedetails": {     
-		"count": "8",    
-            "year": "2021",                                         
+		"count": 8,    
+            "year": 2021,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "18211",                      
             "cvedetails_vendor_id": "10199"
@@ -5341,7 +5663,7 @@ modelDataAvailable({
           },
         "cvedetails": { 	
 	    "count":0 ,    
-            "year":0 ,                                         
+            "year":null ,                                         
             "bes_cve_details_id": "", 
 		"cvedetails_product_id":"",                      
             "cvedetails_vendor_id": ""
@@ -5423,7 +5745,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":0 ,
+            "year":null ,
 	"bes_cve_details_id":"",	    
 	"cvedetails_product_id": ",                      
             "cvedetails_vendor_id": ""
@@ -5498,7 +5820,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":0 ,                                         
+            "year":null ,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id":"",                      
             "cvedetails_vendor_id": ""
@@ -6142,7 +6464,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":0 ,                                         
+            "year":null ,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": ",                      
             "cvedetails_vendor_id": ""
@@ -6222,7 +6544,7 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":0 ,                                         
+            "year":null ,                                         
             "bes_cve_details_id": "",                      
             "cvedetails_product_id": "22402,                      
             "cvedetails_vendor_id": "11981"
@@ -6303,9 +6625,9 @@ modelDataAvailable({
         "cvedetails": {     
         
             "count":0 ,    
-            "year":0 ,                                         
+            "year":null ,                                         
             "bes_cve_details_id": "",                      
-            "cvedetails_product_id": "86745,                      
+            "cvedetails_product_id": "86745",                      
             "cvedetails_vendor_id": "23502"
         }, 
         "project_repos": {
@@ -6385,7 +6707,7 @@ modelDataAvailable({
             "count": 1,    
             "year": 2017,                                         
             "bes_cve_details_id": "",                      
-            "cvedetails_product_id": "55584,                      
+            "cvedetails_product_id": "55584",                      
             "cvedetails_vendor_id": "15865"
         }, 
         "project_repos": {
@@ -6466,7 +6788,7 @@ modelDataAvailable({
             "count": 1,    
             "year": 2018,                                         
             "bes_cve_details_id": "",                      
-            "cvedetails_product_id": "38977,                      
+            "cvedetails_product_id": "38977",                      
             "cvedetails_vendor_id": "15207"
         }, 
         "project_repos": {
@@ -6548,7 +6870,7 @@ modelDataAvailable({
             "count": 1,    
             "year": 2014,                                         
             "bes_cve_details_id": "",                      
-            "cvedetails_product_id": "22804,                      
+            "cvedetails_product_id": "22804",                      
             "cvedetails_vendor_id": "12113"
         }, 
         "project_repos": {
@@ -6628,7 +6950,7 @@ modelDataAvailable({
             "count": 1,    
             "year": 2022,                                         
             "bes_cve_details_id": "",                      
-            "cvedetails_product_id": "65951,                      
+            "cvedetails_product_id": "65951",                      
             "cvedetails_vendor_id": "6086"
         }, 
         "project_repos": {
