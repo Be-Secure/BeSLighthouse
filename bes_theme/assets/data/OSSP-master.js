@@ -13,7 +13,7 @@ modelDataAvailable({
         "watchers_count": 0,
         "forks_count": 0,
         "stargazers_count": 0, 
-        "size": 3843
+        "size": 20823
         "open_issues": 0,
         "created_at": 		"2020-07-09T06:31:53Z",
         "updated_at": 		"2020-07-09T06:31:55Z",
