@@ -7,6 +7,827 @@ modelDataAvailable({
 {
         "id": , 
         "bes_tracking_id": ,
+        "name": "druid"
+        "full_name": "Be-Secure/druid",
+        "description": " high performance real-time analytics database. Druid's main value add is to reduce time to insight and action. ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 237444
+        "open_issues": 0,
+        "created_at": 	"2021-12-14T04:51:35Z",
+        "updated_at": "2021-12-14T04:51:36Z",
+        "pushed_at":    "2021-12-14T03:06:01Z",
+        "git_url": 	"git://github.com/Be-Secure/druid.git",
+        "clone_url": "https://github.com/Be-Secure/druid.git",
+        "html_url": "https://github.com/Be-Secure/druid",
+        "homepage":"https://druid.apache.org/",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 2,
+            "year":  2022,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "81604"             
+            "cvedetails_vendor_id": "45"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/apache/druid",
+            "main_bes_url": "https://github.com/Be-Secure/druid",
+            "all_projects": {                                                                         
+               "druid": "https://github.com/apache/druid"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 438121602,
+                    "name": "druid",
+                    "url": "https://github.com/Be-Secure/druid"
+                }
+                
+            ]
+        },
+        "license": {
+            	 "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+            "node_id": 	"MDc6TGljZW5zZTI="
+  
+          },   
+        "language": [
+		
+         "Java","Shell","Python","Typescript","SCSS","Tex"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		
+	
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "flink"
+        "full_name": "Be-Secure/flink",
+        "description": "Flink is an open source stream processing framework with powerful stream- and batch-processing capabilities.  ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 462016
+        "open_issues": 0,
+        "created_at": "2021-12-14T04:52:55Z",
+        "updated_at": "2022-08-26T01:33:55Z",
+        "pushed_at":   "2022-08-26T01:32:46Z",
+        "git_url": 	"git://github.com/Be-Secure/flink.git",
+        "clone_url": "https://github.com/Be-Secure/flink.git",
+        "html_url": "https://github.com/Be-Secure/flink",
+        "homepage":null,
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 2,
+            "year":  2021,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "88972"             
+            "cvedetails_vendor_id": "45"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/apache/flink",
+            "main_bes_url": "https://github.com/Be-Secure/flink ",
+            "all_projects": {                                                                         
+               "flink": "https://github.com/apache/flink"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 438121874,
+                    "name": "flink",
+                    "url": "https://github.com/Be-Secure/flink"
+                }
+                
+            ]
+        },
+        "license": {
+            	  "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+            "node_id": 	"MDc6TGljZW5zZTI="
+  
+          },   
+        "language": [
+		
+         "Java","Shell","Python","Typescript","Scala","HivaQL"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		
+
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "solr"
+        "full_name": "Be-Secure/solr",
+        "description": "fast open source search platform for all your enterprise, e-commerce, and analytics needs  ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 	463806
+        "open_issues": 0,
+        "created_at": 	"2021-12-14T04:51:09Z",
+        "updated_at": "2022-08-26T01:35:42Z",
+        "pushed_at":    	"2022-08-26T01:34:01Z",
+        "git_url": 	"git://github.com/Be-Secure/solr.git",
+        "clone_url": "https://github.com/Be-Secure/solr.git",
+        "html_url": "https://github.com/Be-Secure/solr",
+        "homepage":"https://solr.apache.org/",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 7,
+            "year":  2021,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "18263"             
+            "cvedetails_vendor_id": "45"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/apache/solr",
+            "main_bes_url": "https://github.com/Be-Secure/solr",
+            "all_projects": {                                                                         
+               "solr": "https://github.com/apache/solr"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 438121508,
+                    "name": "solr",
+                    "url": "https://github.com/Be-Secure/solr"
+                }
+                
+            ]
+        },
+        "license": {
+            	 "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+            "node_id": 	"MDc6TGljZW5zZTI="
+  
+          },   
+        "language": [
+		
+         "Java","Shell","Batchfile","CSS","HTML","Python"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		    
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "Nettacker"
+        "full_name": "Be-Secure/Nettacker",
+        "description": "THIS SOFTWARE WAS CREATED FOR AUTOMATED PENETRATION TESTING AND INFORMATION GATHERING.  ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 8203
+        "open_issues": 0,
+        "created_at": 	"2021-12-14T15:27:57Z",
+        "updated_at": "2022-08-26T01:35:02Z",
+        "pushed_at":    "2022-08-26T01:34:56Z",
+        "git_url": 	"git://github.com/Be-Secure/Nettacker.git",
+        "clone_url": "https://github.com/Be-Secure/Nettacker.git",
+        "html_url": "https://github.com/Be-Secure/Nettacker",
+        "homepage":null,
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 0,
+            "year":  null,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": ""             
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/OWASP/Nettacker",
+            "main_bes_url": "https://github.com/Be-Secure/Nettacker",
+            "all_projects": {                                                                         
+               "Nettacker": "https://github.com/OWASP/Nettacker"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 438304070,
+                    "name": "Nettacker",
+                    "url": "https://github.com/Be-Secure/Nettacker"
+                }
+                
+            ]
+        },
+        "license": {
+            	 "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+            "node_id": 	"MDc6TGljZW5zZTI="
+  
+          },   
+        "language": [
+		
+         "HTML","Python","Javascript","CSS"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		    
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "elasticsearch"
+        "full_name": "Be-Secure/elasticsearch",
+        "description": " use Elasticsearch to store, search, and manage data ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 989354
+        "open_issues": 0,
+        "created_at": 		"2021-12-14T04:55:04Z",
+        "updated_at": "2022-08-26T01:37:39Z",
+        "pushed_at":    "2022-08-26T01:36:06Z",
+        "git_url": 	"git://github.com/Be-Secure/elasticsearch.git",
+        "clone_url": "https://github.com/Be-Secure/elasticsearch.git",
+        "html_url": "https://github.com/Be-Secure/elasticsearch",
+        "homepage":"https://www.elastic.co/products/elasticsearch",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 2,
+            "year":  2022,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "51138"             
+            "cvedetails_vendor_id": "16559"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/elastic/elasticsearch",
+            "main_bes_url": "https://github.com/Be-Secure/elasticsearch",
+            "all_projects": {                                                                         
+               "elasticsearch": "https://github.com/elastic/elasticsearch"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id":438122324,
+                    "name": "elasticsearch",
+                    "url": "https://github.com/Be-Secure/elasticsearch"
+                }
+                
+            ]
+        },
+        "license": {
+            	 "key": "other",
+    		"name": "other",
+   		 "MIT","NOASSERTION"
+   		 "url": null,
+    		"node_id": "MDc6TGljZW5zZTA="
+  
+          },   
+        "language": [
+		
+         "Groovy","Shell","Java","Python","ANTLR","Dockerfile"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		    
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "logstash"
+        "full_name": "Be-Secure/logstash",
+        "description": "is a server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite "stash".  ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 118312
+        "open_issues": 0,
+        "created_at": 	"2021-12-14T04:54:57Z",
+        "updated_at": "2022-08-26T01:37:48Z",
+        "pushed_at":    "2022-08-26T01:37:07Z",
+        "git_url": 	"git://github.com/Be-Secure/logstash.git",
+        "clone_url": "https://github.com/Be-Secure/logstash.git",
+        "html_url": "https://github.com/Be-Secure/logstash",
+        "homepage":"https://www.elastic.co/products/logstash",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,
+            "year":  2021,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "61290"             
+            "cvedetails_vendor_id": "16559"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/elastic/logstash",
+            "main_bes_url": "https://github.com/Be-Secure/logstash",
+            "all_projects": {                                                                         
+               "logstash": "https://github.com/elastic/logstash"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 438122296,
+                    "name": "logstash",
+                    "url": "https://github.com/Be-Secure/logstash"
+                }
+                
+            ]
+        },
+        "license": {
+            	 "key": "other",
+    		"name": "other",
+   		 "MIT": "NOASSERTION",
+   		 "url": null,
+    		"node_id": "MDc6TGljZW5zZTA="
+  
+          },   
+        "language": [
+		
+         "Java","Shell","Python","Ruby","HTML","CSS"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		    
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "struts"
+        "full_name": "Be-Secure/struts",
+        "description": " free open-source solution for creating Java web applications. ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 77600
+        "open_issues": 0,
+        "created_at": 	"2021-12-14T04:50:27Z",
+        "updated_at": "2021-12-14T04:50:28Z",
+        "pushed_at":    "2021-12-12T12:24:40Z",
+        "git_url": 	"git://github.com/Be-Secure/struts.git",
+        "clone_url": "https://github.com/Be-Secure/struts.git",
+        "html_url": "https://github.com/Be-Secure/struts",
+        "homepage":null,
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 1,
+            "year":  2022,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": "6117"             
+            "cvedetails_vendor_id": "45"
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/apache/struts",
+            "main_bes_url": "https://github.com/Be-Secure/struts",
+            "all_projects": {                                                                         
+               "struts": "https://github.com/apache/struts"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 438121340,
+                    "name": "struts",
+                    "url": "https://github.com/Be-Secure/struts"
+                }
+                
+            ]
+        },
+        "license": {
+            	 "key": "apache-2.0",
+            "name": "Apache License 2.0",
+            "spdx_id": 	"Apache-2.0",
+            "url": 	"https://api.github.com/licenses/apache-2.0",
+            "node_id": 	"MDc6TGljZW5zZTI="
+  
+          },   
+        "language": [
+		
+         "Java","HTML","FreeMarker"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		    
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "primeng"
+        "full_name": "Be-Secure/primeng",
+        "description": "Angular UI Component Library  ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 90552
+        "open_issues": 0,
+        "created_at": 	"2021-12-09T05:55:05Z",
+        "updated_at": "2022-08-26T01:40:15Z",
+        "pushed_at":    "2022-08-26T01:38:55Z",
+        "git_url": 	"git://github.com/Be-Secure/primeng.git",
+        "clone_url": "https://github.com/Be-Secure/primeng.git",
+        "html_url": "https://github.com/Be-Secure/primeng",
+        "homepage":"https://www.primefaces.org/angular",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 0,
+            "year":  null,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": ""             
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/primefaces/primeng",
+            "main_bes_url": "https://github.com/Be-Secure/primeng",
+            "all_projects": {                                                                         
+               "primeng": "https://github.com/primefaces/primeng"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 	436499200,
+                    "name": "primeng",
+                    "url": "https://github.com/Be-Secure/primeng"
+                }
+                
+            ]
+        },
+        "license": {
+            	 "key": "mit",
+    		"name": "MIT License",
+   		 "MIT",
+   		 "url": "https://api.github.com/licenses/mit",
+    		"node_id": "MDc6TGljZW5zZTEz"
+  
+          },   
+        "language": [
+		
+         "CSS","HTML","Typescript"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },	
+	    
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "ThreatPlaybook"
+        "full_name": "Be-Secure/ThreatPlaybook",
+        "description": "unified DevSecOps Framework that allows you to go from iterative, collaborative Threat Modeling to Application Security Test Orchestration  ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 3019
+        "open_issues": 0,
+        "created_at": 		"2021-12-20T08:58:39Z",
+        "updated_at": "2021-12-20T08:58:40Z",
+        "pushed_at":    	"2021-12-04T00:11:26Z",
+        "git_url": 	"git://github.com/Be-Secure/ThreatPlaybook.git",
+        "clone_url": "https://github.com/Be-Secure/ThreatPlaybook.git",
+        "html_url": "https://github.com/Be-Secure/ThreatPlaybook",
+        "homepage":"https://threatplaybook.io",
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 0,
+            "year":  null,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": ""             
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/we45/ThreatPlaybook",
+            "main_bes_url": "https://github.com/Be-Secure/ThreatPlaybook",
+            "all_projects": {                                                                         
+               "ThreatPlaybook": "https://github.com/we45/ThreatPlaybook"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 440103696,
+                    "name": "ThreatPlaybook",
+                    "url": "https://github.com/Be-Secure/ThreatPlaybook"
+                }
+                
+            ]
+        },
+        "license": {
+            	 null
+  
+          },   
+        "language": [
+		
+         "Python","Javascript","Vue"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		    
+	    
+{
+        "id": , 
+        "bes_tracking_id": ,
+        "name": "toit"
+        "full_name": "Be-Secure/toit",
+        "description": "Program your microcontrollers in a fast and robust high-level language.  ",
+        "watchers_count": 0,
+        "forks_count": 0,
+        "stargazers_count": 0, 
+        "size": 5122
+        "open_issues": 0,
+        "created_at": 	"2021-11-26T08:55:57Z",
+        "updated_at": "2021-11-26T08:55:58Z",
+        "pushed_at":    "2021-11-26T07:21:45Z",
+        "git_url": 	"git://github.com/Be-Secure/toit.git",
+        "clone_url": "https://github.com/Be-Secure/toit.git",
+        "html_url": "https://github.com/Be-Secure/toit",
+        "homepage":null,
+        "owner": {
+            "login": "Be-Secure",
+            "id": 44028837,
+            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+            "html_url": "https://github.com/Be-Secure",
+          },
+        "cvedetails": {     
+        
+            "count": 0,
+            "year":  null,                                   
+            "bes_cve_details_id": "",                      
+            "cvedetails_product_id": ""             
+            "cvedetails_vendor_id": ""
+        }, 
+        "project_repos": {
+            "main_github_url": "https://github.com/toitlang/toit",
+            "main_bes_url": "https://github.com/Be-Secure/toit",
+            "all_projects": {                                                                         
+               "toit": "https://github.com/toitlang/toit"
+                // "sub_project_xxx":""
+            },
+            "all_bes_repos": [                                                                  
+                {
+                    "id": 432112968,
+                    "name": "toit",
+                    "url": "https://github.com/Be-Secure/toit"
+                }
+                
+            ]
+        },
+        "license": {
+            	  "key": "lgpl-2.1",
+            "name": "GNU Lesser General Public License v2.1",
+            "spdx_id": 	"LGPL-2.1",
+            "url": 	"https://api.github.com/licenses/lgpl-2.1",
+            "node_id": 		"MDc6TGljZW5zZTEx"
+  
+          },   
+        "language": [
+		
+         "Go","Cmake","C++"
+        ],
+        
+	    "tags": {
+            "IND": [
+                ""
+            ],
+            "SD": [
+                ""
+            ],
+            "COM": {
+                ""
+            },
+          
+  "TD-U": [
+                ""
+           
+ ]
+
+       
+ }
+            
+          
+    },		    
+	    
+{
+        "id": , 
+        "bes_tracking_id": ,
         "name": "plexus-interop"
         "full_name": "Be-Secure/plexus-interop",
         "description": "enable development of extensible workflows connecting independent apps developed by different organizations in different technologies  ",
