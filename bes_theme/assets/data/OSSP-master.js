@@ -1655,89 +1655,7 @@ modelDataAvailable({
           
     },		    
 	    
-{
-        "id": , 
-        "bes_tracking_id": ,
-        "name": "catkin"
-        "full_name": "Be-Secure/catkin",
-        "description": "A CMake-based build system that is used to build all packages in ROS.  ",
-        "watchers_count": 0,
-        "forks_count": 0,
-        "stargazers_count": 0, 
-        "size": 3755
-        "open_issues": 0,
-        "created_at": 	"2021-08-18T04:24:52Z",
-        "updated_at": "2021-08-18T04:24:53Z",
-        "pushed_at":    "2021-08-06T23:16:35Z",
-        "git_url": 	"git://github.com/Be-Secure/catkin.git",
-        "clone_url": "https://github.com/Be-Secure/catkin.git",
-        "html_url": "https://github.com/Be-Secure/catkin",
-        "homepage":"http://wiki.ros.org/catkin",
-        "owner": {
-            "login": "Be-Secure",
-            "id": 44028837,
-            "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
-            "html_url": "https://github.com/Be-Secure",
-          },
-        "cvedetails": {     
-        
-            "count": 0,
-            "year":  null,                                   
-            "bes_cve_details_id": "",                      
-            "cvedetails_product_id": ""             
-            "cvedetails_vendor_id": ""
-        }, 
-        "project_repos": {
-            "main_github_url": "https://github.com/ros/catkin",
-            "main_bes_url": "https://github.com/Be-Secure/catkin",
-            "all_projects": {                                                                         
-               "catkin": "https://github.com/ros/catkin"
-                // "sub_project_xxx":""
-            },
-            "all_bes_repos": [                                                                  
-                {
-                    "id": 	397471497,
-                    "name": "catkin",
-                    "url": "https://github.com/Be-Secure/catkin"
-                }
-                
-            ]
-        },
-        "license": {
-            	 "key": "bsd-3-clause",
-    		"name": "BSD 3-Clause \"New\" or \"Revised\" License",
-   		 "spdx_id": "BSD-3-Clause",
-   		 "url": "https://api.github.com/licenses/bsd-3-clause",
-    		"node_id": "MDc6TGljZW5zZTU="
-  
-          },   
-        "language": [
-		
-         "Python","Shell","Cmake"
-        ],
-        
-	    "tags": {
-            "IND": [
-                ""
-            ],
-            "SD": [
-                ""
-            ],
-            "COM": {
-                ""
-            },
-          
-  "TD-U": [
-                ""
-           
- ]
 
-       
- }
-            
-          
-    },		
-	
 {
         "id":265 , 
         "bes_tracking_id": 265,
@@ -4203,8 +4121,8 @@ modelDataAvailable({
           
     },
 {
-        "id": , 
-        "bes_tracking_id": ,
+        "id":294 , 
+        "bes_tracking_id":294 ,
         "name": "spiderfoot"
         "full_name": "Be-Secure/spiderfoot",
         "description": "SpiderFoot automates OSINT for threat intelligence and mapping your attack surface. ",
@@ -4287,8 +4205,8 @@ modelDataAvailable({
 		
 
 {
-        "id": , 
-        "bes_tracking_id": ,
+        "id":295 , 
+        "bes_tracking_id":295 ,
         "name": "codeclimate"
         "full_name": "Be-Secure/codeclimate",
         "description": "It allows you to run Code Climate engines on your local machine inside of Docker containers.",
