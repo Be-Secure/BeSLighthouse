@@ -77,7 +77,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -155,17 +155,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -241,17 +241,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "APACHE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -324,17 +324,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "APACHE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -407,17 +407,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "APACHE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -489,17 +489,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "OWASP"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -571,17 +571,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "ELASTIC COMMUNITY"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -653,17 +653,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "ELASTIC COMMUNITY"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -735,17 +735,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "APACHE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -817,17 +817,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -896,13 +896,13 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
-                ""
+                "SD-AS"
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
@@ -979,17 +979,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "AM"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-IoT"
            
  ]
 
@@ -1062,17 +1062,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "FINOS"
             },
           
   "TD-U": [
-                ""
+                "TD-U-DKA"
            
  ]
 
@@ -1145,17 +1145,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TU-U-AI/ML"
            
  ]
 
@@ -1228,17 +1228,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "SHIFTLEFT SECURITY"
             },
           
   "TD-U": [
-                ""
+                "TU-U-DA"
            
  ]
 
@@ -1311,17 +1311,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "APACHE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -1394,17 +1394,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "SD-NS"
            
  ]
 
@@ -1477,17 +1477,17 @@ modelDataAvailable({
              
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-APD"
            
  ]
 
@@ -1560,17 +1560,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -1643,17 +1643,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -1726,17 +1726,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -1809,17 +1809,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "APACHE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -1893,7 +1893,7 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
@@ -1903,7 +1903,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -1976,7 +1976,7 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "HLS"
             ],
             "SD": [
                 ""
@@ -1986,7 +1986,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-MoA"
            
  ]
 
@@ -2059,17 +2059,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "GRAIL"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -2141,17 +2141,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-BLN"
            
  ]
 
@@ -2219,17 +2219,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-BLN"
            
  ]
 
@@ -2302,17 +2302,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-BLN"
            
  ]
 
@@ -2384,17 +2384,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-BLN"
            
  ]
 
@@ -2467,17 +2467,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "HLS"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -2550,17 +2550,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "FINOS"
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -2570,7 +2570,7 @@ modelDataAvailable({
           
     },		    
 	    
-	    
+	     
 	    
 	    
 {
@@ -2636,13 +2636,13 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "CYS"
             ],
             "SD": [
-                ""
+                "SD-CS"
             ],
             "COM": {
-                ""
+                "NETFLIX"
             },
           
   "TD-U": [
@@ -2724,7 +2724,7 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
@@ -2734,7 +2734,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -2812,10 +2812,10 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "CYS"
             ],
             "SD": [
-                ""
+                "SD-AS"
             ],
             "COM": {
                 ""
@@ -2900,17 +2900,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "BFSI"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "MOJALOOP"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -2984,17 +2984,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "NG"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "BECKN"
             },
           
   "TD-U": [
-                ""
+                "TD-U-BLN"
            
  ]
 
@@ -3067,17 +3067,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "AM"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "OPEN VEHICLE MONITORING"
             },
           
   "TD-U": [
-                ""
+                "TD-U-IoT"
            
  ]
 
@@ -3150,17 +3150,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ED"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "OPENEDX"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -3237,17 +3237,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "HLS"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "OPENMRS"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -3325,17 +3325,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "TEL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "OPEN NETWORKING"
             },
           
   "TD-U": [
-                ""
+                "TD-U-IoT"
            
  ]
 
@@ -3413,17 +3413,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -3501,17 +3501,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "PHP"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -3587,17 +3587,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "ORACLE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -3673,17 +3673,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "SPRING CENTRAL"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -3759,17 +3759,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "VUE"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -3845,17 +3845,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "MONGO"
             },
           
   "TD-U": [
-                ""
+                "TD-U-Db"
            
  ]
 
@@ -3931,17 +3931,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "MARIADB"
             },
           
   "TD-U": [
-                ""
+                "TD-U-Db"
            
  ]
 
@@ -4017,17 +4017,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "MARIADB"
             },
           
   "TD-U": [
-                ""
+                "TD-U-Db"
            
  ]
 
@@ -4103,17 +4103,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "DIASPORA"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -4189,17 +4189,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "HYPERLEDGER"
             },
           
   "TD-U": [
-                ""
+                "TD-U-Bln"
            
  ]
 
@@ -4275,13 +4275,13 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "CYS"
             ],
             "SD": [
-                ""
+                "SD-AS"
             ],
             "COM": {
-                ""
+                "APACHE"
             },
           
   "TD-U": [
@@ -4367,7 +4367,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -4451,7 +4451,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -4540,7 +4540,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -4629,7 +4629,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-DAA"
            
  ]
 
@@ -4708,17 +4708,17 @@ modelDataAvailable({
         
 	    "tags": {
             "IND": [
-                ""
+                "ALL"
             ],
             "SD": [
                 ""
             ],
             "COM": {
-                ""
+                "PYTHON"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -4802,11 +4802,11 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                "community led"
+                "DEEPFENCE community led"
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -4892,7 +4892,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -4978,7 +4978,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -5064,7 +5064,7 @@ modelDataAvailable({
             },
           
   "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -5662,7 +5662,7 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                "Community led"
+                "HT2 Community led"
             },
           
   "TD-U": [
@@ -5751,7 +5751,7 @@ modelDataAvailable({
                 "Community led"
             },
             "TD-U": [
-                ""
+                "TD-U-MoA"
            
  ]
 
