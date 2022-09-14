@@ -11759,7 +11759,7 @@ modelDataAvailable({
                 "Automotive"
             ],
             "SD": [
-                ""
+                "SD-IoTS"
             ],
             "COM": {
                 "community-led"
@@ -12166,7 +12166,7 @@ modelDataAvailable({
                 "community-led"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -12652,7 +12652,7 @@ modelDataAvailable({
                 "community-led"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
            
  ]
 
@@ -13224,7 +13224,7 @@ modelDataAvailable({
                 "Independent project
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
        
@@ -13305,7 +13305,7 @@ modelDataAvailable({
             "Community led"
         },
         "TD-U": [
-            ""
+            "TD-U-W"
         ]
 
     }
@@ -13547,7 +13547,7 @@ modelDataAvailable({
             "Community led"
         },
         "TD-U": [
-            ""
+            "TD-U-W"
         ]
 
     }
@@ -14030,7 +14030,7 @@ modelDataAvailable({
 	"Linux foundation"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
 	]
 	}
   },		  
@@ -14748,10 +14748,10 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                ""
+                "ROOTS COMMUNITY"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
        
@@ -14828,10 +14828,10 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                ""
+                "SYMFONY CORE TEAM COMMUNITY"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
        
@@ -14909,10 +14909,10 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                ""
+                "TENSORFLOW COMMUNITY"
             },
             "TD-U": [
-                ""
+                "TD-U-AI/ML"
             ]
 
        
@@ -14989,10 +14989,10 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                ""
+                "ANSISTRANO"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
        
@@ -15070,10 +15070,10 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                ""
+                "COM"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
         }
@@ -15152,10 +15152,10 @@ modelDataAvailable({
                 ""
             ],
             "COM": {
-                ""
+                "NODEJS COMMUNITY"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
         }
@@ -15235,7 +15235,7 @@ modelDataAvailable({
                 "Alibaba"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
         }
@@ -15861,7 +15861,7 @@ modelDataAvailable({
                 "COM-F": "CNCF"
             },
             "TD-U": [
-                ""
+                "TD-U-W"
             ]
 
         }
@@ -16250,6 +16250,9 @@ modelDataAvailable({
           "COM": {
           "COM-C": "bridgecrewio"
           }
+		"TD-U": [
+                "TD-U-W"
+            ]
         }
   },
       {
@@ -16320,7 +16323,9 @@ modelDataAvailable({
         "COM": {
         "COM-C": "kubernetes"
         },
-  
+  	"TD-U": [
+                "TD-U-W"
+            ]
         } 
           },
           {
@@ -16392,7 +16397,9 @@ modelDataAvailable({
           "COM": {
           "COM-C": "ansible-community"
         },
-  
+  	"TD-U": [
+                "TD-U-W"
+            ]
     } 
 },
 {
