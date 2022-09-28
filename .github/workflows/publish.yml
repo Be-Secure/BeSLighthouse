@@ -42,7 +42,7 @@ jobs:
 
       - run: mkdocs build
       # - run: mkdocs gh-deploy
-
+      - run: ${{ github.ref }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         # if: ${{ github.ref == 'refs/heads/release' }}
