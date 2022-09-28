@@ -40,7 +40,8 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r ./requirements.txt
 
-      - run: mkdocs build
+      # - run: mkdocs build
+
       - run: mkdocs gh-deploy
 
       - name: Deploy
