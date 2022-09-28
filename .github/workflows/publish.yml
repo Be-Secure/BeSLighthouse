@@ -41,7 +41,7 @@ jobs:
         run: python3 -m pip install -r ./requirements.txt
 
       # - run: mkdocs build
-
+      - run: git pull origin release
       - run: mkdocs gh-deploy
 
       - name: Deploy
