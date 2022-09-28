@@ -40,9 +40,8 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r ./requirements.txt
 
-      # - run: mkdocs build
-      - run: git pull origin release
-      - run: mkdocs gh-deploy
+      - run: mkdocs build
+      # - run: mkdocs gh-deploy
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
