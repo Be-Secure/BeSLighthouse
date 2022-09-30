@@ -6,13 +6,15 @@
   <title>BeS Lighthouse search visualization</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <meta property="og:image" content=""/> -->
+  <script>var base_url = '..';</script>
 
   <meta charset="utf-8" />
-  <link href="./assets/stylesheets/bootstrap.min.css" rel="stylesheet" />
-  <link href="./assets/stylesheets/common.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/stylesheets/bootstrap.min.css">
+  <!-- <link href="../assets/stylesheets/bootstrap.min.css" rel="stylesheet" /> -->
+  <link href="../assets/stylesheets/common.css" rel="stylesheet" />
 
   <!-- The CSS for the loading indicator container-->
-  <link href="assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
+  <link href="../assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     .visualization-loading>div {
@@ -411,43 +413,43 @@ color: white;
   </style>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.js"></script>
-  <script language="javascript" type="text/javascript" src="./assets/javascripts/jqplot/jquery.jqplot.min.js"></script>
-  <link rel="stylesheet" href="./assets/stylesheets/jqplot/jquery.jqplot.min.css">
-  <script language="javascript" type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
-  <script language="javascript" type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="../assets/javascripts/jqplot/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" href="../assets/stylesheets/jqplot/jquery.jqplot.min.css">
+  <script language="javascript" type="text/javascript" src="../assets/javascripts/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="../assets/javascripts/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.barRenderer.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.categoryAxisRenderer.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pointLabels.min.js"></script>
-  <script type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-  <script type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
-  <script type="text/javascript" src="./assets/javascripts/jqplot/plugins/jqplot.highlighter.min.js"></script>
+  <script type="text/javascript" src="../assets/javascripts/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+  <script type="text/javascript" src="../assets/javascripts/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+  <script type="text/javascript" src="../assets/javascripts/jqplot/plugins/jqplot.highlighter.min.js"></script>
 
-  <script src="assets/javascripts/bessearch.foamtree.js"></script>
-  <script src="assets/javascripts/bessearch.foamtree.util.loading.js"></script>
-  <script src="assets/javascripts/bessearch.foamtree.util.relaxationprogress.js"></script>
+  <script src="../assets/javascripts/bessearch.foamtree.js"></script>
+  <script src="../assets/javascripts/bessearch.foamtree.util.loading.js"></script>
+  <script src="../assets/javascripts/bessearch.foamtree.util.relaxationprogress.js"></script>
 
 
   
    <!-- Include Hammer.js for mobile interactions -->
-   <script src="./assets/javascripts/hammer.min.js"></script>
+   <script src="../assets/javascripts/hammer.min.js"></script>
  
    <!-- A number of utilities we'll need -->
-   <script src="assets/javascripts/bessearch.jsonp.js"></script>
-   <script src="assets/javascripts/bessearch.template.js"></script>
-   <!-- <script src="assets/javascripts/jquery-2.0.3.min.js"></script> -->
-   <script src="assets/javascripts/moment.min.js"></script>
+   <script src="../assets/javascripts/bessearch.jsonp.js"></script>
+   <script src="../assets/javascripts/bessearch.template.js"></script>
+   <!-- <script src="../assets/javascripts/jquery-2.0.3.min.js"></script> -->
+   <script src="../assets/javascripts/moment.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
   
-   <script type="text/javascript" src="./assets/javascripts/run.js"></script>
+   <script type="text/javascript" src="../assets/javascripts/run.js"></script>
   <!-- HTML template for the slide-in details panel -->
   <script id="details-template" type="text/template">
     <img class="avatar" src="<%- owner.avatar_url %>"/>
     <div class="info">
       <h2><a target="_blank" href="<%- owner.html_url %>"><%- owner.login %></a>/&#8203;<a target="_blank" href="<%- html_url %>"><%- name %></a></h2>
       <div class="stats">
-        <img src="./assets/images/star.svg"/> <span><%- stargazers_count %></span>
-        <img class="watchers" src="./assets/images/eye.svg"/> <span><%- watchers_count %></span>
-        <img class="forks" src="./assets/images/fork.svg"/> <span><%- forks_count %></span>
+        <img src="../assets/images/star.svg"/> <span><%- stargazers_count %></span>
+        <img class="watchers" src="../assets/images/eye.svg"/> <span><%- watchers_count %></span>
+        <img class="forks" src="../assets/images/fork.svg"/> <span><%- forks_count %></span>
 
       </div>
       <div class="description"><%- description %></div>
@@ -479,7 +481,7 @@ color: white;
     <div class="close">&times;</div>
   </script>
   <!-- jts -->
-  <link rel="stylesheet" href="./assets/stylesheets/github.css">
+  <link rel="stylesheet" href="../assets/stylesheets/github.css">
   <!-- /jts -->
 </head>
 
@@ -500,7 +502,7 @@ color: white;
       </div> -->
       <div class="github-header">
         <div class="border-box">
-          <img class="github-img" src="assets/images/favicon.png" />
+          <img class="github-img" src="../assets/images/favicon.png" />
         </div>
         <div class="github-title">
          
@@ -582,7 +584,7 @@ color: white;
       </div>
       <div class="info-box">
           <div class="icon">
-            <img src="assets/images/info.svg" alt="">
+            <img src="../assets/images/info.svg" alt="">
           </div>
           <div class="info">
             Click polygon for more details. Use mouse wheel or pinch to zoom
@@ -658,8 +660,8 @@ color: white;
         var isMobile = screen.width <= 1080;
 
         // Load some static SVG images we'll draw inside FoamTree polygons
-        var fork = createImage("assets/images/fork.svg");
-        var eye = createImage("assets/images/eye.svg");
+        var fork = createImage("../assets/images/fork.svg");
+        var eye = createImage("../assets/images/eye.svg");
 
         // Initialize FoamTree
         var foamtree = new BeSSearchFoamTree({
@@ -1027,7 +1029,7 @@ color: white;
           "<div class='font'>Loading and preparing<br />the awesome...</div>");
         foamtreeLoader.started();
 
-        JSONP.load("./assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
+        JSONP.load("../assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
 
         /**
          * Initializes the search form.

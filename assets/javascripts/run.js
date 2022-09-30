@@ -432,7 +432,7 @@ function load_data(id,name)
 
   document.getElementById("cve_header").innerHTML = "Vulnerability Statistics:"+name;
   // assets/data/OSSPCVE/50-prometheus-CVEdetails.json
-  fetch('./assets/data/OSSPCVE/'+id+'-'+name+'-CVEdetails.json')
+  fetch('../assets/data/OSSPCVE/'+id+'-'+name+'-CVEdetails.json')
   .then(function (response) {
     return response.json();
   })
