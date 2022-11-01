@@ -7,13 +7,13 @@ modelDataAvailable({
 {
         "id": 297, 
         "bes_tracking_id": 297,
-        "name": "appflowy"
+        "name": "appflowy",
         "full_name": "Be-Secure/appflowy",
         "description": "AppFlowy is an open-source alternative to Notion. You are in charge of your data and customizations. Built with Flutter and Rust.   ",
         "watchers_count": 0,
         "forks_count": 0,
         "stargazers_count": 0, 
-        "size": 24619
+        "size": 24619,
         "open_issues": 0,
         "created_at": 	"2021-11-18T16:56:30Z",
         "updated_at": "2022-08-26T01:42:52Z",
@@ -33,7 +33,7 @@ modelDataAvailable({
             "count":0 ,
             "year": null,                                   
             "bes_cve_details_id": "",                      
-            "cvedetails_product_id": ""             
+            "cvedetails_product_id": "",             
             "cvedetails_vendor_id": ""
         }, 
         "project_repos": {
@@ -74,7 +74,7 @@ modelDataAvailable({
             ],
             "COM": {
                 "COM"
-            },
+            ],
           
   "TD-U": [
                 "TD-U-DAA"
