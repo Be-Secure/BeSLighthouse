@@ -29,7 +29,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "31429",
@@ -503,7 +503,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "73864",
@@ -819,7 +819,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2018,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "60804",
@@ -1135,7 +1135,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2017,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "36803",
@@ -1374,7 +1374,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2012,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "23743",
@@ -1454,7 +1454,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2020,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "88959",
@@ -1614,7 +1614,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "29283",
@@ -1854,7 +1854,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "99830",
@@ -1934,7 +1934,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "105979",
@@ -2014,7 +2014,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2018,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "67943",
@@ -2339,7 +2339,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2018,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "40412",
@@ -2418,7 +2418,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "98837",
@@ -2733,7 +2733,7 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-				"count": 1,
+				"count": 0,
 				"year": 2022,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "111245",
@@ -3208,7 +3208,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "56854",
@@ -3289,7 +3289,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2018,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "61450",
@@ -3368,7 +3368,6 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-
 				"count": 2,
 				"year": 2022,
 				"bes_cve_details_id": "",
@@ -3448,7 +3447,6 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-
 				"count": 9,
 				"year": 2021,
 				"bes_cve_details_id": "",
@@ -3686,7 +3684,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2019,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "57169",
@@ -3840,8 +3838,7 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-
-				"count": 0,
+				"count": 1,
 				"year": null,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "22402",
@@ -3920,9 +3917,8 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-
-				"count": 0,
-				"year": null,
+				"count": 6,
+				"year": 2020,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "86745",
 				"cvedetails_vendor_id": "23502"
@@ -4000,7 +3996,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2017,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "55584",
@@ -4079,7 +4075,6 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-
 				"count": 1,
 				"year": 2018,
 				"bes_cve_details_id": "",
@@ -4160,7 +4155,6 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-
 				"count": 1,
 				"year": 2014,
 				"bes_cve_details_id": "",
@@ -4240,7 +4234,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2022,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "65951",
@@ -6083,7 +6077,6 @@ modelDataAvailable({
 				"html_url": "https://github.com/Be-Secure"
 			},
 			"cvedetails": {
-
 				"count": 2,
 				"year": 2022,
 				"bes_cve_details_id": "",
@@ -6165,7 +6158,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "61290",
@@ -6246,7 +6239,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2022,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "6117",
@@ -6809,7 +6802,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2022,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "86699",
@@ -7855,7 +7848,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2022,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "109932",
@@ -8017,7 +8010,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2017,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "42246",
@@ -8098,7 +8091,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2017,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "36511",
@@ -8584,7 +8577,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "43623",
@@ -8908,7 +8901,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 0,
+				"count": 1,
 				"year": null,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "",
@@ -10210,7 +10203,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "89522",
@@ -10375,7 +10368,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "36964",
@@ -10621,7 +10614,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2020,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "32232",
@@ -11193,7 +11186,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2012,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "1608",
@@ -12011,7 +12004,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2019,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "55337",
@@ -12499,7 +12492,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "99237",
@@ -13310,7 +13303,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2020,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "90742",
@@ -13468,7 +13461,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2021,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "57109",
@@ -14109,7 +14102,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2019,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "26385",
@@ -14429,7 +14422,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2022,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "112030",
@@ -14590,7 +14583,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2020,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "88727",
@@ -15561,7 +15554,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2018,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "46790",
@@ -16048,7 +16041,7 @@ modelDataAvailable({
 			},
 			"cvedetails": {
 
-				"count": 1,
+				"count": 0,
 				"year": 2022,
 				"bes_cve_details_id": "",
 				"cvedetails_product_id": "117539",
