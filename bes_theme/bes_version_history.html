@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Version Summary</title>
+    <link href="{{base_url}}/assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script language="JavaScript" type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!-- <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script> -->
+    <script src="{{base_url}}/assets/javascripts/version_summary.js"></script>
+    <style>
+        #body_style {
+            margin: 0
+        }
+        .table {
+          table-layout: auto;
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        .table td, .table th {
+          border: 1px solid #ddd;
+          padding: 8px;       
+        }
+        
+        .table tr:nth-child(even){background-color: #f2f2f2;}
+        
+        .table tr:hover {background-color: #ddd;}
+        
+        .table th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+    </style>
+</head>
+<body id="body_style">
+    <h1 id="heading1"></h1>
+    <div class="version_div" id="version_details">
+
+    </div>
+    <script>
+        window.onload = load_version_data();
+    </script>
+</body>
+
+
+</html>
