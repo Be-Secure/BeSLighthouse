@@ -467,12 +467,11 @@ color: white;
         last update: <span><%- moment(updated_at).fromNow() %></span>
       </div>
       <div class="cvecount">
-      CVE count : <%- cvedetails.count %> 
-      </br>
-      Year : <%- cvedetails.year %>
+        <!-- BeS Tech Stack : <span><%- bes_technology_stack %></span> -->
+        <img src="<%- bes_technology_stack %>"width="200" height="200" alt="Applications">
       </div>
 
-      <button id="cve_button" onmouseover="enabledisable(<%- cvedetails.count %>)" onclick="load_data(<%- id %>,'<%- name %>')">Learn more</button>
+      <button id="cve_button" onclick="load_data(<%- id %>,'<%- name %>')">Learn more</button>
     </br>
       <p id="cve_unavilable"></p>
       

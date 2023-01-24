@@ -26,15 +26,8 @@ modelDataAvailable({
                 "avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
                 "html_url": "https://github.com/Be-Secure"
             },
-            "cvedetails": {
 
-				"count": 1,
-				"year": 2023,
-				"bes_cve_details_id": "",
-				"cvedetails_product_id": "887",
-				"cvedetails_vendor_id": "45"
-			},
-            "bes_technology_stack": "Application",
+            "bes_technology_stack": "https://raw.githubusercontent.com/Be-Secure/Be-Secure/master/docs/assets/images/A_stack.png",
             "project_repos": {
                 "main_github_url": "https://github.com/apache/tomcat",
                 "main_bes_url": "https://github.com/Be-Secure/tomcat",
