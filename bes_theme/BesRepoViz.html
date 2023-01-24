@@ -604,7 +604,7 @@ color: white;
     </div> -->
   </div>
   </div>
-  <div id="cve_stats" style="align-content: center;">
+  <!-- <div id="cve_stats" style="align-content: center;">
     <button id="home_button" onclick="refreshPage()" class="home_btn">Home</button>
     <h2 id="cve_header"></h2>
     <table id="table" border="1" class="cve_table"></table>
@@ -614,7 +614,7 @@ color: white;
     <div id="bar_chart_vuln_by_type" class="barchart" style="padding-top: 30px;"></div>
   </br></br></br></br></br>
     <!-- <div id="env_table" class="env_table"></div> -->
-  </div>
+  </div> -->
   <div id="fps"></div>
   <div id="details"></div>
 
@@ -1194,8 +1194,8 @@ color: white;
 
                     // If the full name is long, insert zero-width spaces after / and -
                     // so that the text layout engine can break lines if needed
-                    name: item.full_name.length > 14 ? item.full_name.split("/").join("/\u200b").split("-").join("\u00ad") : item.full_name,
-
+                    // name: item.full_name.length > 14 ? item.full_name.split("/").join("/\u200b").split("-").join("\u00ad") : item.full_name, 
+                    name: item.full_name,
                     // Set the weight based on the the radio button selection
                     weight: item[weightProperty]
                   };
