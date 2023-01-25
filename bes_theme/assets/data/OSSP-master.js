@@ -27,7 +27,7 @@ modelDataAvailable({
                 "html_url": "https://github.com/Be-Secure"
             },
 
-            "bes_technology_stack": "https://raw.githubusercontent.com/Be-Secure/Be-Secure/master/docs/assets/images/A_stack.png",
+            "bes_technology_stack": "A",
             "project_repos": {
                 "main_github_url": "https://github.com/apache/tomcat",
                 "main_bes_url": "https://github.com/Be-Secure/tomcat",
@@ -89,7 +89,7 @@ modelDataAvailable({
 				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
 				"html_url": "https://github.com/Be-Secure"
 			},
-            "bes_technology_stack": "https://raw.githubusercontent.com/Be-Secure/Be-Secure/master/docs/assets/images/L%26F_stack.png",
+            "bes_technology_stack": "L&F",
 			"project_repos": {
 				"main_github_url": "https://github.com/alibaba/fastjson",
 				"main_bes_url": "https://github.com/Be-Secure/fastjson",

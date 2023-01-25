@@ -468,7 +468,7 @@ color: white;
       </div>
       <div class="cvecount">
         <!-- BeS Tech Stack : <span><%- bes_technology_stack %></span> -->
-        <img src="<%- bes_technology_stack %>"width="200" height="200" alt="Tech Stack">
+        <img src="<%- test_function(bes_technology_stack) %>"width="200" height="200" alt="Tech Stack">
       </div>
 
       <button id="cve_button" onclick="load_data(<%- id %>,'<%- name %>')">Learn more</button>
@@ -624,6 +624,29 @@ color: white;
   </style>
 
   <script>
+    function test_function(tech_stack) {
+      console.log(tech_stack);
+      if(tech_stack == "A")
+        {
+          return `${base_url}/assets/images/app_logo.png`;
+        }
+      else if(tech_stack == "L&F")
+        {
+          return `${base_url}/assets/images/lan_logo.png`;
+        }
+      else if(tech_stack == "DA")
+        {
+          return `${base_url}/assets/images/dist_app_logo.png`;
+        }
+      else if(tech_stack == "DO")
+      {
+        return `${base_url}/assets/images/devops_logo.png`;
+      }
+      else if(tech_stack == "S")
+      {
+        return `${base_url}/assets/images/sec_logo.png`;
+      }
+    }
     (function () {
       // Firefox has problems handling SVG images on canvas
       // (https://bugzilla.mozilla.org/show_bug.cgi?id=1017847),
