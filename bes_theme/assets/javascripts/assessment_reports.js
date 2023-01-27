@@ -1,3 +1,5 @@
+
+// This function is only used to print scorecard report.
 function constructTable(selector, list) {
 
 
@@ -55,28 +57,8 @@ function Headers(list, selector) {
   $(selector).append(header);
     return columns;
 }	
-function print_checks(data)
-{
 
-  json_data = JSON.stringify(data);
-  // console.log(json_data);
-  json_object = JSON.parse(json_data);
-  // console.log("checks:"+json_object[0].name);
-  var table = "<table border='1'>"
-  for (let i in json_object) {
-    table += "<tr><td> name : " + json_object[i].name + "</tr></td>"
-    table += "<tr><td> score : " + json_object[i].score + "</tr></td>"
-    table += "<tr><td> reason : " + json_object[i].reason + "</tr></td>"
-    table += "<tr><td> details : " + json_object[i].details + "</tr></td>"
-    table += "<tr><td></tr></td>"
-    table += "<tr><td></tr></td>"
-
-  }
-  table += "</table>"
-
-  document.getElementById("checks").innerHTML = table;
-}
-function print_summary(data)
+function print_scorecard_summary(data)
 {
   json_data = JSON.stringify(data);
   // console.log(json_data);
@@ -89,11 +71,10 @@ function print_summary(data)
   table += "<tr><td>Score : " + json_object.score + "</tr></td>"    
   table += "</table>"
   document.getElementById("reports").innerHTML = table;
-  // print_checks(json_object.checks);
 }
 function print_scorecard_report(data)
 {
-  print_summary(data);
+  print_scorecard_summary(data);
   document.getElementById("checks_h3").innerHTML = "Checks"
 
   constructTable('#table', data.checks)
@@ -105,14 +86,11 @@ function print_codeql_report(data) {
   json_data = JSON.stringify(data);
   // console.log(json_data);
   json_object = JSON.parse(json_data);
-
   var table = "<table id=table>"
   table += "<tr><th>Number</th><th>Rule</th><th>Description</th><th>Security Severity Level</th><th>Environment</th><th>Message</th><th>Path</th><th>Start Line</th><th>End Line</th></tr>"
   for (let i in json_object) {
     table += "<tr><td>" + json_object[i].number + "</td><td>" + json_object[i].rule.id + "</td><td>" + json_object[i].rule.description + "</td><td>" + json_object[i].rule.security_severity_level + "</td><td>" + json_object[i].most_recent_instance.environment + "</td><td>" + json_object[i].most_recent_instance.message.text + "</td><td>" + json_object[i].most_recent_instance.location.path + "</td><td>" + json_object[i].most_recent_instance.location.start_line + "</td><td>" + json_object[i].most_recent_instance.location.end_line + "</td></tr>"
-    // table += "<tr><td>Description : " + json_object[i].rule.description + "</td>"
-    // table += "<tr><td>Security Severity Level : " + json_object[i].rule.security_severity_level + "</td>"
-    // table += "<tr><td>Score : " + json_object.score + "</tr></td>"  
+
   }
       
   table += "</table>"
@@ -120,17 +98,33 @@ function print_codeql_report(data) {
   
 }
 
+function print_sonarqube_report(data) {
+  json_data = JSON.stringify(data);
+  json_object = JSON.parse(json_data);
+  print_issues = json_object.issues; // The report has to be printed from issues array.
+  console.log("issues:"+ print_issues);
+  var table = "<table id=table>"
+  table += "<tr><th>Key</th><th>Component</th><th>Rule</th><th>Type</th><th>Message</th><th>Line</th></tr>"
+  for (let i in print_issues){
+    table += "<tr><td>" + print_issues[i].key + "</td><td>" + print_issues[i].component + "</td><td>" + print_issues[i].rule +"</td><td>" + print_issues[i].type +"</td><td>" + print_issues[i].message +"</td><td>" + print_issues[i].line +"</td></tr>"
+  }
+  table += "</table>"
+  document.getElementById("reports").innerHTML = table;
+}
+
 function fetch_json()
 {
+  var url;
   var version = localStorage["version"];
   var ossp_name = localStorage["ossp_name"].toLowerCase();
   var report = localStorage["report"];
   console.log(ossp_name);
   console.log("report:"+report);
-  if (report == "codeql") {
-    var url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sast' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
-  } else {
-    var url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
+  if (report == "codeql" || report == "sonarqube") { // The sast reports(codeql, sonarqube, ...) are under sast dir.
+    url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sast' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
+  } 
+    else {
+    url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
 
   }
   
@@ -150,6 +144,7 @@ function fetch_json()
   .then(function (data) {
     // console.log(data);
     console.log("report:"+report);
+    
     if (report == "scorecard") {
      
       print_scorecard_report(data);
@@ -158,8 +153,9 @@ function fetch_json()
       
       print_codeql_report(data);
 
-    } else {
+    } else if (report == "sonarqube"){
       
+      print_sonarqube_report(data);
     }
 
 
