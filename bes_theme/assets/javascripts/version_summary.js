@@ -80,15 +80,24 @@ function load_version_data()
       document.getElementById("version_table"+i).innerHTML = table;
       
       // All the above created elements are added into div tag with id version_details. 
-      element.appendChild(div_tag_bar1);
-      element.appendChild(div_tag_bar2);
+      if (data[i].cve_details == "Not Available") {
+        const na = document.createElement("h3");
+        const na_text = document.createTextNode("CVE reports are not available at the moment");
+        na.appendChild(na_text);
+        element.appendChild(na);
+      } else {
+        
+        element.appendChild(div_tag_bar1);
+        element.appendChild(div_tag_bar2);
+        bar_chart_by_type(data[i].cve_details);
+        bar_chart_by_year(data[i].cve_details);
+      }
+      
       // element.appendChild(line_graph);
       element.appendChild(scorecard_button);
       element.appendChild(codeql_button);
       element.appendChild(sonarqube_button);
       
-      bar_chart_by_type(data[i].cve_details);
-      bar_chart_by_year(data[i].cve_details);
       // line_graph(data[i].cve_details);
 
 
