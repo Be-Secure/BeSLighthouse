@@ -2,8 +2,8 @@
     {
         "version": "6.0.0-GA",
         "release_date": "29-Jan-2019",
-        "criticality_score": null,
-        "scorecard": null,
+        "criticality_score": 0.39203,
+        "scorecard": 3.7,
         "cve_details": 
         [
             
