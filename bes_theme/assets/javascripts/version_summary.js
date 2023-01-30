@@ -80,7 +80,8 @@ function load_version_data()
       document.getElementById("version_table"+i).innerHTML = table;
       
       // All the above created elements are added into div tag with id version_details. 
-      if (data[i].cve_details == "Not Available") {
+
+      if (data[i].cve_details == "Not Available") { // To check if cve details is empty.
         const na = document.createElement("h3");
         const na_text = document.createTextNode("CVE reports are not available at the moment");
         na.appendChild(na_text);
