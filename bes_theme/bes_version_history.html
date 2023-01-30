@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Version Summary</title>
     <link href="{{base_url}}/assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <script language="JavaScript" type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!-- <script language="JavaScript" type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" href="{{base_url}}/assets/stylesheets/jqplot/jquery.jqplot.min.css">
+    <!--[if lt IE 9]><script src="../../libs/jQuery.jqPlot.1.0.9/excanvas.js"></script><![endif]-->
+    <!-- <script src="../../libs/jQuery.jqPlot.1.0.9/jquery.jqplot.min.js"></script> -->
+    <!-- <script src="../../libs/jQuery.jqPlot.1.0.9/plugins/jqplot.dateAxisRenderer.js"></script> -->
+    <script language="javascript" type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.barRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pointLabels.min.js"></script>
+  <script type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+  <script type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+  <script type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.highlighter.min.js"></script>
+
+
     <!-- <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
     <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script> -->
     <script src="{{base_url}}/assets/javascripts/version_summary.js"></script>
     <style>
-        #body_style {
-            margin: 0
+        #container {
+          margin: 20px 20px 20px 20px;
+          width: 100%; height: 650px;
+        }
+        #version_details {
+          width: 50%; height: 550px; float:left;
+        }
+        .class {
+          align-items: center;
+          width: 100%;
+        }
+        #scores {
+          text-align: center;
+          font-size: 30px;
+          width:50%; height: 550px; float:left;
         }
         .table {
           table-layout: auto;
