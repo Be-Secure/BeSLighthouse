@@ -2,7 +2,7 @@
     {
         "version": "8.5.0",
         "release_date": "17-Mar-2016",
-        "criticality_score": "Not Available",
+        "criticality_score": 0.37028,
         "scorecard": 4.9,
         "cve_details": 
         [
