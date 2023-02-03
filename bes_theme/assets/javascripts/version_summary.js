@@ -90,8 +90,8 @@ function load_version_data()
         
         element.appendChild(div_tag_bar1);
         element.appendChild(div_tag_bar2);
-        bar_chart_by_type(data[i].cve_details);
         bar_chart_by_year(data[i].cve_details);
+        bar_chart_by_type(data[i].cve_details);
       }
       
       // element.appendChild(line_graph);
@@ -131,9 +131,10 @@ function load_version_data()
 
 function bar_chart_by_year(data)
 {
+  console.log("Data:"+data);
   var vuln = [];
   var year = [];
-  for (let index = 0; index < data.length; index++) {
+  for (let index = 0; index < data.length-1; index++) {
     year.push(data[index].Year);
     vuln.push(data[index].No_of_Vulnerabilities);
     if (data[index].Year == 2021) {
@@ -189,12 +190,14 @@ function bar_chart_by_year(data)
 }
 function bar_chart_by_type(data){
   var vuln = [];
-
-  vuln.push(data[data.length-2].XSS,data[data.length-2].Code_Execution,data[data.length-2].Bypass_something,data[data.length-2].Gain_Privileges,data[data.length-2].Sql_Injection,data[data.length-2].Gain_Information,data[data.length-2].CSRF,data[data.length-2].DoS,data[data.length-2].Http_Response_Splitting,data[data.length-2].Directory_Traversal);
+  console.log("length:"+Object.keys(data).length);
+  // vuln.push(data[data.length-1].XSS,data[data.length-1].Code_Execution,data[data.length-1].Bypass_something,data[data.length-1].Gain_Privileges,data[data.length-1].Sql_Injection,data[data.length-1].Gain_Information,data[data.length-1].CSRF,data[data.length-1].DoS,data[data.length-1].Http_Response_Splitting,data[data.length-1].Directory_Traversal);
+  console.log(data[data.length-1].XSS);
+  vuln.push(data[data.length-1].XSS,data[data.length-1].Code_Execution,data[data.length-1].Bypass_something,data[data.length-1].Gain_Privileges,data[data.length-1].Sql_Injection,data[data.length-1].Gain_Information,data[data.length-1].CSRF,data[data.length-1].DoS,data[data.length-1].Http_Response_Splitting,data[data.length-1].Directory_Traversal,data[data.length-1].Overflow, data[data.length-1].Memory_Corruption, data[data.length-1].File_Inclusion);
   console.log(vuln);
 
   $.jqplot.config.enablePlugins = true;
-    var type = ['XSS', 'Code_Execution', 'Bypass_something', 'Gain_Privileges', 'Sql_Injection', 'Gain_Information', 'CSRF', 'DoS', 'Http_Response_Splitting', 'Directory_Traversal'];
+    var type = ['XSS', 'Code Execution', 'Bypass something', 'Gain Privileges', 'Sql Injection', 'Gain Information', 'CSRF', 'DoS', 'Http Response Splitting', 'Directory Traversal', 'Overflow', 'Memory Corruption', 'File Inclusion'];
      
     plot1 = $.jqplot('bar_chart_vuln_by_type', [vuln], {
         // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
