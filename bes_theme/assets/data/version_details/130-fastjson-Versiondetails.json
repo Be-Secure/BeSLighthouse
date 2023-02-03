@@ -42,7 +42,25 @@
                 "CSRF": null,
                 "File_Inclusion": null,
                 "No_of_exploits": ""
-            }
+            },
+            {
+                "Year": "Total",
+                "No_of_Vulnerabilities": 2,
+                "DoS": "",
+                "Code_Execution": 1,
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": 1,
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              }
         ]
     }
     
