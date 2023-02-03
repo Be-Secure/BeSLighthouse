@@ -104,9 +104,9 @@ function print_sonarqube_report(data) {
   print_issues = json_object.issues; // The report has to be printed from issues array.
   console.log("issues:"+ print_issues);
   var table = "<table id=table>"
-  table += "<tr><th>Key</th><th>Component</th><th>Rule</th><th>Type</th><th>Message</th><th>Line</th></tr>"
+  table += "<tr><th>Component</th><th>Type</th><th>Message</th><th>Line</th></tr>"
   for (let i in print_issues){
-    table += "<tr><td>" + print_issues[i].key + "</td><td>" + print_issues[i].component + "</td><td>" + print_issues[i].rule +"</td><td>" + print_issues[i].type +"</td><td>" + print_issues[i].message +"</td><td>" + print_issues[i].line +"</td></tr>"
+    table += "<tr><td>" + print_issues[i].component + "</td><td>" + print_issues[i].type +"</td><td>" + print_issues[i].message +"</td><td>" + print_issues[i].line +"</td></tr>"
   }
   table += "</table>"
   document.getElementById("reports").innerHTML = table;
