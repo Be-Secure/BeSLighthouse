@@ -4,64 +4,7 @@
         "release_date": "18-feb-2021",
         "criticality_score": 0.37664,
         "scorecard": 2.8,
-        "cve_details": 
-        [
-            
-            {
-                "Year": "2018",
-                "No_of_Vulnerabilities": 2,
-                "DoS": null,
-                "Code_Execution": null,
-                "Overflow": null,
-                "Memory_Corruption": null,
-                "Sql_Injection": null,
-                "XSS": null,
-                "Directory_Traversal": null,
-                "Http_Response_Splitting": null,
-                "Bypass_something": null,
-                "Gain_Information": null,
-                "Gain_Privileges": null,
-                "CSRF": null,
-                "File_Inclusion": null,
-                "No_of_exploits": null
-            },
-            {
-                "Year": "2021",
-                "No_of_Vulnerabilities": 1,
-                "DoS": null,
-                "Code_Execution": 1,
-                "Overflow": null,
-                "Memory_Corruption": null,
-                "Sql_Injection": null,
-                "XSS": null,
-                "Directory_Traversal": null,
-                "Http_Response_Splitting": null,
-                "Bypass_something": null,
-                "Gain_Information": null,
-                "Gain_Privileges": null,
-                "CSRF": null,
-                "File_Inclusion": null,
-                "No_of_exploits": null
-            },
-            {
-                "Year": "2022",
-                "No_of_Vulnerabilities": 1,
-                "DoS": null,
-                "Code_Execution": 1,
-                "Overflow": null,
-                "Memory_Corruption": null,
-                "Sql_Injection": null,
-                "XSS": null,
-                "Directory_Traversal": null,
-                "Http_Response_Splitting": null,
-                "Bypass_something": null,
-                "Gain_Information": null,
-                "Gain_Privileges": null,
-                "CSRF": null,
-                "File_Inclusion": null,
-                "No_of_exploits": null
-            }
-        ]
+        "cve_details": "Not Available"
     }
     
 ]
