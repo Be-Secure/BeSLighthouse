@@ -1,122 +1,184 @@
-function load_version_data()
-{
-    console.log("called");
-    id = localStorage["id"]
-    console.log("id:"+id);
-    ossp_name = localStorage["name"];
-    console.log("name:"+ossp_name);
+function vulnsbytypeandyearchart(chart_Id, cve_details) {
+
+  let detail_cve = {} 
+  for (let i=0; i<cve_details.length; i++) {
+    const key =  Object.keys(cve_details[i]);
+    for (let j=0; j<key.length; j++) {
+        if (key[j] !== 'Year') {
+          if (!detail_cve[key[j]]) {
+            detail_cve[key[j]] = [];
+          }
+          if (cve_details[i][key[j]] !== null  && cve_details[i][key[j]] !== "") {
+            detail_cve[key[j]].push([parseInt(cve_details[i]["Year"]), cve_details[i][key[j]]]);
+          }
+        }
+    }
+  }
+  const data=[];
+  const vulntypesarray=[];
+  const visible_all_field = []
+  const key = Object.keys(detail_cve);
+  for (let i=0; i<key.length; i++) {
+    if (detail_cve[key[i]].length === 0) {
+      visible_all_field.push({show: false, label: key[i]});
+    } else {
+      visible_all_field.push({show: true, label: key[i]});
+    }
+    vulntypesarray.push(key[i]);
+    data.push(detail_cve[key[i]]);
+  }
+  $.jqplot (chart_Id, data, {
+    seriesColors: [
+      '#69c','#333','#DB045B','#E04807',
+      '#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE','#DB843D', '#92A8CD', '#A47D7C', '#B5CA92','#FF9655','#24CBE5'
+    ],
+    seriesDefaults: {},
+    series:visible_all_field,
+    title:{
+      text: 'Vulnerabilities by type & year',
+      fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
+      fontSize: '12px',
+      color: '#3E576F'
+    },
+    axesDefaults: {
+      labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+      borderColor: '#4572A7',
+    },
+    axes: {
+      xaxis: {
+        label: "Years",
+        color: '#3E576F',
+        pad: 0,
+        min:1999,
+        tickInterval: 1
+      },
+      yaxis: {
+        label: "# Of Vulns",
+        numberTicks : 5,
+        min:0 ,
+        color: '#3E576F'
+      }
+    },
+    legend: {
+      show:true,
+      location: 's',
+      renderer: $.jqplot.EnhancedLegendRenderer,
+      placement: 'outsideGrid',
+      labels: vulntypesarray,
+      rendererOptions:{
+        seriesToggle: true,
+        seriesToggleReplot: {resetAxes:['yaxis']},
+        numberRows: 5,
+        numberColumns: 5
+      },
+      border:'1px solid #909090',
+      fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
+      fontSize: '11px'
+    },
+    highlighter: {
+      show: true,
+      sizeAdjust: 12,
+      useAxesFormatters:false,
+      fadeTooltip: false,
+      formatString: "%d : %s",
+      bringSeriesToFront:true,
+      lineWidthAdjust:10
+    }
+  });
+}
+
+
+function open_report(version, report, project_name) {
+  debugger;
+  localStorage["version"] = version;
+  localStorage["report"] = report;
+  localStorage["ossp_name"] = project_name;
+  window.open("../../bes_assessment_reports", "_self");
+}
+
+function load_version_data() {
+  id = localStorage["id"]
+  ossp_name = localStorage["name"];
 
   fetch('../assets/data/version_details/'+id+'-'+ossp_name+'-Versiondetails.json')
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
-    
-    console.log(data);
-    console.log("length:"+data.length);
-    console.log("version:"+data[0].version);
-    document.getElementById("heading1").innerHTML = "Version Details - " + ossp_name;
+    const container_element = document.getElementById("container");
+    const create_hadder_content = document.getElementById("hadder_page");
+    const span_for_hadder = document.createElement("span");
+    span_for_hadder.className = "hadder-css";
+    span_for_hadder.innerText = "BeSLighthouse"
+    create_hadder_content.append(span_for_hadder);
+    const report_name = document.getElementById("report-name-project");
+    const span_name = `<span class="span-report-css">Version Details: ${ossp_name}</span>`;
+    report_name.innerHTML = span_name;
 
     // For each version of the project, we are creating different tags on the fly.
-    for (let i = 0; i<Object.keys(data).length; i++)
-    {
-      
-      const version_table = document.createElement("TABLE");
+    for (let i = 0; i<Object.keys(data).length; i++) {
+
+      // Main div
+      const main_div_content = document.createElement("div");
+      main_div_content.className = "border-div";
+
+      // version table
+      const version_div_content = document.createElement("div");
+      version_div_content.setAttribute("class", "version_div");
+      version_div_content.setAttribute("id", "version_details");
+      // const version_details_element = document.getElementById("version_details");
+      const version_table = document.createElement("table");
       version_table.setAttribute("id", "version_table"+i);
+      version_table.setAttribute("class", "table-css");
+      const releaseData = data[i].release_date;
+      const version = data[i].version;
+      const scorecard = data[i].scorecard;
+      const criticalityScore = data[i].criticality_score;
+      const html_for_table = `
+      <tr>
+        <th>Release Date</th>
+        <th>version</th>
+        <th>Scorecard</th>
+        <th>Criticality Score</th>
+        <th>Sonarqube</th>
+        <th>Scorecard</th>
+        <th>Codeql</th>
+      </tr>
+      <tr>
+        <td>${releaseData}</td>
+        <td>${version}</td>
+        <td>${scorecard}</td>
+        <td>${criticalityScore}</td>
+        <td><a href='javascript:open_report("${version}", "sonarqube", "${ossp_name}")'>Click</a></td>
+        <td><a href='javascript:open_report("${version}", "scorecard", "${ossp_name}")'>Click</a></td>
+        <td><a href='javascript:open_report("${version}", "codeql", "${ossp_name}")'>Click</a></td>
+      </tr>
+      `;
+      version_table.innerHTML = html_for_table;
+      version_div_content.append(version_table);
 
-      const version = document.createElement("p");
-      const release_date = document.createElement("p");
-      const criticality = document.createElement("p");
-      const scorecard = document.createElement("p");
-      const cve_table = document.createElement("TABLE");
-      const scorecard_button = document.createElement("BUTTON") 
-      const codeql_button = document.createElement("BUTTON") 
-      const sonarqube_button = document.createElement("BUTTON");
-      const div_tag_bar1 = document.createElement("div")
-      const div_tag_bar2 = document.createElement("div")
-      const line_graph = document.createElement("div");
+      // Graph code
+      const chart_Id = `bar_chart_vuln_by_type${i}`;
+      const div_tag_chat_main = document.createElement("div");
+      div_tag_chat_main.setAttribute("class", "graph-style");
+      const div_tag_for_chat = document.createElement("div");
+      div_tag_for_chat.setAttribute("id", chart_Id);
+      div_tag_for_chat.style.height = "400px";
+      div_tag_chat_main.append(div_tag_for_chat);
 
-      cve_table.setAttribute("id", "cve_table"+i) // Setting id for each cve table. i is the loop var so each table would have different ids. Hence, we can create different tables for each cve details.
-      cve_table.setAttribute("class", "table")
-      div_tag_bar1.setAttribute("id", "bar_chart_vuln_by_type")
-      div_tag_bar2.setAttribute("id", "bar_chart_vuln_by_year")
-      line_graph.setAttribute("id", "line_chart");
-      div_tag_bar1.setAttribute("class", "graph");
-      div_tag_bar2.setAttribute("class", "graph");
-      line_graph.setAttribute("class", "graph");
-      
-      const version_data = document.createTextNode("Version:"+data[i].version);
-      const release_date_data = document.createTextNode("Release date:"+data[i].release_date);
-      const criticality_data = document.createTextNode("Criticality Score:"+data[i].criticality_score);
-      const scorecard_data = document.createTextNode("Scorecard:"+data[i].scorecard);
-      const scorecard_button_text = document.createTextNode("Scorecard");
-      const codeql_button_text = document.createTextNode("Codeql");
-      const sonarqube_button_text = document.createTextNode("Sonarqube")
-      
-      scorecard_button.setAttribute("id", data[i].version);
-      scorecard_button.setAttribute("name", "scorecard")
-      codeql_button.setAttribute("id", data[i].version);
-      codeql_button.setAttribute("name", "codeql");
-      sonarqube_button.setAttribute("id", data[i].version);
-      sonarqube_button.setAttribute("name", "sonarqube")
+      // Append in div
+      main_div_content.appendChild(version_div_content);
+      main_div_content.appendChild(div_tag_chat_main);
 
-      version.appendChild(version_data);
-      release_date.appendChild(release_date_data);
-      criticality.appendChild(criticality_data);      
-      scorecard.appendChild(scorecard_data);    
-      scorecard_button.appendChild(scorecard_button_text);  
-      codeql_button.appendChild(codeql_button_text);  
-      sonarqube_button.appendChild(sonarqube_button_text);  
-
-      
-      const element = document.getElementById("version_details");
-      
-
-      element.appendChild(version_table);
-      let table = "<tr><td><h3>Version : " + data[i].version + "</h3></td></tr>"
-      table += "<tr><td>Release date : " + data[i].release_date + "</td></tr>"
-      table += "<tr><td>Criticality Score : " + data[i].criticality_score + "</td></tr>"
-      table += "<tr><td>Scorecard : " + data[i].scorecard + "</td></tr>"
-      document.getElementById("version_table"+i).innerHTML = table;
-      
       // All the above created elements are added into div tag with id version_details. 
+      container_element.appendChild(main_div_content);
+      const bottom_div = document.createElement("div");
+      bottom_div.className = "bottom-div";
+      container_element.appendChild(bottom_div);
 
-      if (data[i].cve_details == "Not Available") { // To check if cve details is empty.
-        const na = document.createElement("h3");
-        const na_text = document.createTextNode("CVE reports are not available at the moment");
-        na.appendChild(na_text);
-        element.appendChild(na);
-      } else {
-        
-        element.appendChild(div_tag_bar1);
-        element.appendChild(div_tag_bar2);
-        bar_chart_by_year(data[i].cve_details);
-        bar_chart_by_type(data[i].cve_details);
-      }
-      
-      // element.appendChild(line_graph);
-      element.appendChild(scorecard_button);
-      element.appendChild(codeql_button);
-      element.appendChild(sonarqube_button);
-      
-      // line_graph(data[i].cve_details);
-
-
-
-      const buttons = document.getElementsByTagName("button");
-
-      const buttonPressed = e => {
-        console.log(e.target.id);  // Get ID of Clicked Element
-        console.log(e.target.name);
-        var version = e.target.id;
-        var report = e.target.name;
-        open_report(version, report, localStorage["name"]);
-      }
-
-      for (let b of buttons) {
-        b.addEventListener("click", buttonPressed);
-      } 
-      
+      $(document).ready(function() {
+        vulnsbytypeandyearchart(chart_Id, data[i].cve_details);
+      });
     }
   
   })
@@ -128,351 +190,3 @@ function load_version_data()
   });
 
 }
-
-function bar_chart_by_year(data)
-{
-  console.log("Data:"+data);
-  var vuln = [];
-  var year = [];
-  for (let index = 0; index < data.length-1; index++) {
-    year.push(data[index].Year);
-    vuln.push(data[index].No_of_Vulnerabilities);
-    if (data[index].Year == 2021) {
-      break;
-    } else {
-      continue;
-    }
-    
-  }
-
-  console.log("vuln:"+vuln);
-  console.log("year:"+year);
-
-    $.jqplot.config.enablePlugins = true;
-
-    plot1 = $.jqplot('bar_chart_vuln_by_year', [vuln], {
-        // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
-        animate: !$.jqplot.use_excanvas,
-        title: "Vulnerabilities by Year",
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions: {
-              barWidth: 15,
-           },
-            pointLabels: { show: true }
-        },
-        axes: {
-            xaxis: {
-                renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: year,
-                label: "Year"
-
-            },
-            yaxis: {
-              label: "# of Vulnerabilities"
-            }
-        },
-        highlighter: { show: false },
-
-        legend: {
-          show: false,
-          location: 'e',
-          placement: 'outside'
-      },
-    });
- 
-    $('#bar_chart_vuln_by_year').bind('jqplotDataClick', 
-        function (ev, seriesIndex, pointIndex, data) {
-            $('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-        }
-    );
-
-}
-function bar_chart_by_type(data){
-  var vuln = [];
-  console.log("length:"+Object.keys(data).length);
-  // vuln.push(data[data.length-1].XSS,data[data.length-1].Code_Execution,data[data.length-1].Bypass_something,data[data.length-1].Gain_Privileges,data[data.length-1].Sql_Injection,data[data.length-1].Gain_Information,data[data.length-1].CSRF,data[data.length-1].DoS,data[data.length-1].Http_Response_Splitting,data[data.length-1].Directory_Traversal);
-  console.log(data[data.length-1].XSS);
-  vuln.push(data[data.length-1].XSS,data[data.length-1].Code_Execution,data[data.length-1].Bypass_something,data[data.length-1].Gain_Privileges,data[data.length-1].Sql_Injection,data[data.length-1].Gain_Information,data[data.length-1].CSRF,data[data.length-1].DoS,data[data.length-1].Http_Response_Splitting,data[data.length-1].Directory_Traversal,data[data.length-1].Overflow, data[data.length-1].Memory_Corruption, data[data.length-1].File_Inclusion);
-  console.log(vuln);
-
-  $.jqplot.config.enablePlugins = true;
-    var type = ['XSS', 'Code Execution', 'Bypass something', 'Gain Privileges', 'Sql Injection', 'Gain Information', 'CSRF', 'DoS', 'Http Response Splitting', 'Directory Traversal', 'Overflow', 'Memory Corruption', 'File Inclusion'];
-     
-    plot1 = $.jqplot('bar_chart_vuln_by_type', [vuln], {
-        // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
-        animate: !$.jqplot.use_excanvas,
-        title: "Vulnerabilities by Type",
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions: {
-              barWidth: 15,
-           },
-            pointLabels: { show: true }
-        },
-        axes: {
-            xaxis: {
-                renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: type,
-                label: "Types of Vulnerabilities"
-
-            },
-            yaxis: {
-              label: "# of Vulnerabilities"
-            }
-            
-        },
-        highlighter: { show: true },
-
-        legend: {
-          show: false,
-          location: 'e',
-          placement: 'outside'
-      },
-    });
- 
-    $('#bar_chart_vuln_by_type').bind('jqplotDataClick', 
-        function (ev, seriesIndex, pointIndex, data) {
-            $('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-        }
-    );
-
-
-}
-function line_graph(data){
-  var chart_vulnsbytypeandyearchart;
-	var vuln=[];
-  var total_array=[];
-  var xss_array=[];
-  var hrs_array=[];
-  var ec_array=[];
-  var sqli_array=[];
-  var gi_array=[];
-  var dos_array=[];
-  var dt_arraay=[];
-  var bs_array=[];
-  var csrf_array=[];
-  var exploits_array=[];
-  var gp_array=[];
-  var fi_array=[];
-	var vulntypesarray=[];
-					vulntypesarray.push("Total");
-
-              for (let i = 0; i < data.length-2; i++) {
-
-
-                 total_array.push([data[i].Year,data[i].No_of_Vulnerabilities]);
-
-              }
-
-                
-              
-							vulntypesarray.push("XSS");
-
-        for (let i = 0; i < data.length-2; i++) {
-
-         
-          xss_array.push([data[i].Year,data[i].XSS]);
-
-        }
-							vulntypesarray.push("Http Response Splitting");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                hrs_array.push([data[i].Year,data[i].Http_Response_Splitting]);
-      
-              }
-				//},
-							vulntypesarray.push("Execute Code");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-               ec_array.push([data[i].Year,data[i].Code_Execution]);
-      
-              }
-							vulntypesarray.push("Sql Injection");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                sqli_array.push([data[i].Year,data[i].Sql_Injection]);
-      
-              }
-							vulntypesarray.push("Gain Information");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                gi_array.push([data[i].Year,data[i].Gain_Information]);
-      
-              }
-							vulntypesarray.push("Denial of Service");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                dos_array.push([data[i].Year,data[i].DoS]);
-      
-              }
-							vulntypesarray.push("Directory Traversal");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                dt_arraay.push([data[i].Year,data[i].Directory_Traversal]);
-      
-              }
-							vulntypesarray.push("Bypass Something");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                bs_array.push([data[i].Year,data[i].Bypass_something]);
-      
-              }
-							vulntypesarray.push("CSRF");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                csrf_array.push([data[i].Year,data[i].CSRF]);
-      
-              }
-							vulntypesarray.push("Exploits");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                 exploits_array.push([data[i].Year,data[i].No_of_exploits]);
-      
-              }
-							vulntypesarray.push("Gain Privilege");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                 gp_array.push([data[i].Year,data[i].Gain_Privileges]);
-      
-              }
-							vulntypesarray.push("File Inclusion");
-              for (let i = 0; i < data.length-2; i++) {
-
-               
-                fi_array.push([data[i].Year,data[i].File_Inclusion]);
-      
-              }
-				//},
-        vuln.push(total_array,xss_array,hrs_array,ec_array,sqli_array,gi_array,dos_array,dt_arraay,bs_array,csrf_array,exploits_array,gp_array,fi_array);
-    console.log("vuln:");
-		console.log(vuln);	
-    console.log("vulntypesarray:");
-    console.log(vulntypesarray);
-	chart_vulnsbytypeandyearchart = $.jqplot ('line_chart', vuln, {
-      seriesColors: [
-		  '#69c','#333','#DB045B','#E04807',
-		  '#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE','#DB843D', '#92A8CD', '#A47D7C', '#B5CA92','#FF9655','#24CBE5'
-		  ],
-      total: "Vulnerabilities by Type and Year",
-		seriesDefaults: {
-		},
-		series:[
-			{show:true, label:"Total"},{show:false, label:"XSS"},{show:false, label:"Http Response Splitting"},{show:true, label:"Execute Code"},{show:false, label:"Sql Injection"},{show:false, label:"Gain Information"},{show:false, label:"Denial of Service"},{show:false, label:"Directory Traversal"},{show:false, label:"Bypass Something"},{show:false, label:"CSRF"},{show:true, label:"Exploits"},{show:false, label:"Gain Privilege"},{show:false, label:"File Inclusion"},		],
-	  title:{
-			text: 'Vulnerabilities by type & year',
-			fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
-			fontSize: '12px',
-			color: '#3E576F'
-	  },
-      axesDefaults: {
-        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-		borderColor: '#4572A7',
-      },
-      axes: {
-        xaxis: {
-          label: "Years",
-		  color: '#3E576F',
-          pad: 0,
-		  min:1999,
-		  tickInterval: 1
-        },
-        yaxis: {
-          label: "# Of Vulns",
-		  numberTicks : 5,
-		  min:0 ,
-		  color: '#3E576F'
-        }
-      },
-	  legend: {
-		  show:true,
-		  location: 's',
-		  renderer: $.jqplot.EnhancedLegendRenderer,
-		  placement: 'outsideGrid',
-		  labels: vulntypesarray,
-		  rendererOptions:{
-			  seriesToggle: true,
-			  seriesToggleReplot: {resetAxes:['yaxis']},
-			  numberRows: 5,
-			  numberColumns: 5
-		  },
-		  border:'1px solid #909090',
-		  fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
-		  fontSize: '11px'
-	  },
-	  highlighter: {
-		  show: true,
-		  sizeAdjust: 12,
-		  fadeTooltip: false,
-		  formatString: "%d : %d",
-		  bringSeriesToFront:true,
-		  lineWidthAdjust:10
-	  }
-    });
-
-	}
-function open_report(version, report, project_name)
-{
-  localStorage["version"] = version;
-  localStorage["report"] = report;
-  localStorage["ossp_name"] = project_name;
-  window.open("../../bes_assessment_reports", "_self");
-}
-
-
-function constructTable(selector, list) {
-
-  console.log("construct table container");
-  // Getting the all column names
-  var cols = Headers(list, selector);
-
-  // Traversing the JSON data
-  for (var i = 0; i < list.length; i++) {
-    var row = $('<tr/>');
-    for (var colIndex = 0; colIndex < cols.length; colIndex++)
-    {
-      var val = list[i][cols[colIndex]];
-      
-      // If there is any key, which is matching
-      // with the column name
-      if (val == null) val = "";
-        row.append($('<td/>').html(val));
-    }
-    
-    // Adding each row to the table
-    $(selector).append(row);
-  }
-  return row;
-}
-
-function Headers(list, selector) {
-  var columns = [];
-  var header = $('<tr/>');
-  
-  for (var i = 0; i < list.length; i++) {
-    var row = list[i];
-    
-    for (var k in row) {
-      if ($.inArray(k, columns) == -1) {
-        columns.push(k);
-        
-        // Creating the header
-        header.append($('<th/>').html(k));
-      }
-    }
-  }
-  
-  // Appending the header to the table
-  $(selector).append(header);
-    return columns;
-}	
