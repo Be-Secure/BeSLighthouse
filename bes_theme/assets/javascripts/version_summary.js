@@ -1,5 +1,12 @@
 function vulnsbytypeandyearchart(chart_Id, cve_details) {
 
+  if (cve_details === "Not Available") {
+    const cve_details = document.getElementById(chart_Id);
+    const changeCssForGraph = document.getElementById("main-div-for-graph-presentation");
+    changeCssForGraph.className = "graph-style-cve-not-available-css";
+    cve_details.innerHTML = `<h3 class="cve-not-available-css">CVE details are not available at the moment</h3>`
+    return;
+  }
   let detail_cve = {} 
   for (let i=0; i<cve_details.length; i++) {
     const key =  Object.keys(cve_details[i]);
@@ -112,7 +119,7 @@ function load_version_data() {
     span_for_hadder.innerText = "BeSLighthouse"
     create_hadder_content.append(span_for_hadder);
     const report_name = document.getElementById("report-name-project");
-    const span_name = `<span class="span-report-css">Version Details: ${ossp_name}</span>`;
+    const span_name = `<span class="span-report-css">Project: ${ossp_name}</span>`;
     report_name.innerHTML = span_name;
 
     // For each version of the project, we are creating different tags on the fly.
@@ -149,9 +156,9 @@ function load_version_data() {
         <td>${version}</td>
         <td>${scorecard}</td>
         <td>${criticalityScore}</td>
-        <td><a href='javascript:open_report("${version}", "sonarqube", "${ossp_name}")'>Click</a></td>
-        <td><a href='javascript:open_report("${version}", "scorecard", "${ossp_name}")'>Click</a></td>
-        <td><a href='javascript:open_report("${version}", "codeql", "${ossp_name}")'>Click</a></td>
+        <td><a href='javascript:open_report("${version}", "sonarqube", "${ossp_name}")'>Click me</a></td>
+        <td><a href='javascript:open_report("${version}", "scorecard", "${ossp_name}")'>Click me</a></td>
+        <td><a href='javascript:open_report("${version}", "codeql", "${ossp_name}")'>Click me</a></td>
       </tr>
       `;
       version_table.innerHTML = html_for_table;
@@ -161,6 +168,7 @@ function load_version_data() {
       const chart_Id = `bar_chart_vuln_by_type${i}`;
       const div_tag_chat_main = document.createElement("div");
       div_tag_chat_main.setAttribute("class", "graph-style");
+      div_tag_chat_main.setAttribute("id", "main-div-for-graph-presentation");
       const div_tag_for_chat = document.createElement("div");
       div_tag_for_chat.setAttribute("id", chart_Id);
       div_tag_for_chat.style.height = "400px";
