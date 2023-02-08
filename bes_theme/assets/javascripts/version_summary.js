@@ -150,8 +150,8 @@ function load_version_data() {
         <td>${scorecard}</td>
         <td>${criticalityScore}</td>
         <td><a href='javascript:open_report("${version}", "sonarqube", "${ossp_name}")'>Click</a></td>
-        <td><a href='javascript:open_report("${version}", "codeql", "${ossp_name}")'>Click</a></td>
         <td><a href='javascript:open_report("${version}", "scorecard", "${ossp_name}")'>Click</a></td>
+        <td><a href='javascript:open_report("${version}", "codeql", "${ossp_name}")'>Click</a></td>
       </tr>
       `;
       version_table.innerHTML = html_for_table;
