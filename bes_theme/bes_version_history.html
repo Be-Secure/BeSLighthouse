@@ -1,47 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Version Summary</title>
     <link href="{{base_url}}/assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- <script language="JavaScript" type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script language="javascript" type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/jquery.jqplot.min.js"></script>
-  <link rel="stylesheet" href="{{base_url}}/assets/stylesheets/jqplot/jquery.jqplot.min.css">
-    <!--[if lt IE 9]><script src="../../libs/jQuery.jqPlot.1.0.9/excanvas.js"></script><![endif]-->
-    <!-- <script src="../../libs/jQuery.jqPlot.1.0.9/jquery.jqplot.min.js"></script> -->
-    <!-- <script src="../../libs/jQuery.jqPlot.1.0.9/plugins/jqplot.dateAxisRenderer.js"></script> -->
-    <script language="javascript" type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <link rel="stylesheet" href="{{base_url}}/style.css">
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.barRenderer.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pointLabels.min.js"></script>
-  <script type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-  <script type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
-  <script type="text/javascript" src="{{base_url}}/assets/javascripts/jqplot/plugins/jqplot.highlighter.min.js"></script>
+	  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.highlighter.min.js"></script>
 
-
-    <!-- <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script> -->
     <script src="{{base_url}}/assets/javascripts/version_summary.js"></script>
     <style>
         #container {
-          margin: 20px 20px 20px 20px;
-
+          text-align: center;
+          padding: 16px;
+          position: absolute;
+          /* width: 100%; */
+          top: 113px;
+          width: 64%;
+          margin-left: 17%;
+          margin-right: 17%;
         }
-
+        #heading1 {
+          padding-bottom: 50px;
+        }
+        #version_details {
+          margin: auto;
+          width: 75%;
+          padding: 10px;
+          right: 16%;
+        }
         .graph {
-          align-items: center;
-          width: 100%;
-          margin-top: 20px;
+          
+          margin-top: 100px;
+          margin-right: 50px;
+          width: auto; height: auto;
         }
         #scores {
+          
+          display: inline-block;
           text-align: center;
+          width:fit-content; height: fit-content; 
+        }
+        #scores > h4 {
+          margin: 0%;
           font-size: 30px;
-          width:50%; height: 550px; float:left;
+        }
+        #scores > p {
+          font-size: 20px;
+          margin: auto;
+          margin-top: 5px;
+        }
+        #scorecard, #criticality {
+          font-size: 15px;
+          display: inline-block;
+          text-align: center;
+          width: fit-content;
         }
         .table {
           table-layout: auto;
@@ -65,20 +88,48 @@
           background-color: #04AA6D;
           color: white;
         }
+        .button {
+          float: left;
+          padding: 5px 5px 5px 5px;
+          margin: 5px 5px 5px 5px;
+        }
+        .jqplot-highlighter-tooltip	{
+			    font-size:11px;
+			    background-color: #eda;
+		    }
+        .sticky {
+          position: fixed;
+          top: 0;
+          width: 100%;
+        }
+        .sticky-report {
+          position: fixed;
+          width: 100%;
+          top: 56px;
+        }
     </style>
 </head>
-<body id="body_style">
-    <div id="container">
-      <h1 id="heading1"></h1>
-      <div class="version_div" id="version_details">
-  
-      </div>
-    </div>
-
+<body class="body-css">
+  <div class="header-status-bar" id="hadder_page"></div>
+  <div id="report-name-project" class="report-name-css"></div>
+  <div id="container" class="container-css"></div>
+  </div>
     <script>
-        window.onload = load_version_data();
+      window.onload = load_version_data();
+      window.onscroll = function() {myFunction()};
+
+      var header = document.getElementById("hadder_page");
+      var sticky = header.offsetTop;
+
+      var report_header = document.getElementById("report-name-project");
+
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+          report_header.classList.add("sticky-report");
+        }
+      }
     </script>
 </body>
-
 
 </html>
