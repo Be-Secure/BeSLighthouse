@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Of Intrest</title>
+    <link rel="stylesheet" href="{{base_url}}/style.css">
+    <script type="text/javascript" src="{{base_url}}/assets/data/poi.js"></script>
+    <script src="{{base_url}}/assets/javascripts/project_of_intrest.js"></script>
+</head>
+<body class="body-css">
+    <div class="header-status-bar" id="hadder_page">
+        <span class="hadder-css">BeSLighthouse: Project Of Intrest</span>
+    </div>
+    <div id="container" class="container-css"></div>
+    <script>
+        window.onload = projectOfIntrest();
+        window.onscroll = function() {fixHeader()};
+
+        var header = document.getElementById("hadder_page");
+        var sticky = header.offsetTop;
+
+        function fixHeader() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            }
+        }
+    </script>
+</body>
+</html>
