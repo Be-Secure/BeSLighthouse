@@ -87,9 +87,9 @@ function print_codeql_report(data) {
   // console.log(json_data);
   json_object = JSON.parse(json_data);
   var table = "<table id=table>"
-  table += "<tr><th>Number</th><th>Rule</th><th>Description</th><th>Security Severity Level</th><th>Environment</th><th>Message</th><th>Path</th><th>Start Line</th><th>End Line</th></tr>"
+  table += "<tr><th>Description</th><th>Security Severity Level</th><th>Environment</th><th>Message</th><th>Path</th><th>Start Line</th><th>End Line</th></tr>"
   for (let i in json_object) {
-    table += "<tr><td>" + json_object[i].number + "</td><td>" + json_object[i].rule.id + "</td><td>" + json_object[i].rule.description + "</td><td>" + json_object[i].rule.security_severity_level + "</td><td>" + json_object[i].most_recent_instance.environment + "</td><td>" + json_object[i].most_recent_instance.message.text + "</td><td>" + json_object[i].most_recent_instance.location.path + "</td><td>" + json_object[i].most_recent_instance.location.start_line + "</td><td>" + json_object[i].most_recent_instance.location.end_line + "</td></tr>"
+    table += "<tr><td>" + json_object[i].rule.description + "</td><td>" + json_object[i].rule.security_severity_level + "</td><td>" + json_object[i].most_recent_instance.environment + "</td><td>" + json_object[i].most_recent_instance.message.text + "</td><td>" + json_object[i].most_recent_instance.location.path + "</td><td>" + json_object[i].most_recent_instance.location.start_line + "</td><td>" + json_object[i].most_recent_instance.location.end_line + "</td></tr>"
 
   }
       
