@@ -96,7 +96,6 @@ function vulnsbytypeandyearchart(chart_Id, cve_details) {
 
 
 function open_report(version, report, project_name) {
-  debugger;
   localStorage["version"] = version;
   localStorage["report"] = report;
   localStorage["ossp_name"] = project_name;

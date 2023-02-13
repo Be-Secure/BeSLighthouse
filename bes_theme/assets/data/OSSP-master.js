@@ -1,9 +1,10 @@
-modelDataAvailable({
+const projectOfIntrestObject = {
 	"total_count": 15,
 	"incomplete_results": false,
 	"items": [
         {
             "id": 309,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/309",
             "bes_tracking_id": 309,
             "name": "tomcat",
             "full_name": "Be-Secure/tomcat",
@@ -67,6 +68,7 @@ modelDataAvailable({
         },
         {
 			"id": 130,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/130",
 			"bes_tracking_id": 130,
 			"name": "fastjson",
 			"full_name": "Be-Secure/fastjson",
@@ -138,6 +140,7 @@ modelDataAvailable({
 		},
         {
 			"id": 277,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/277",
 			"bes_tracking_id": 277,
 			"name": "skywalking",
 			"full_name": "Be-Secure/skywalking",
@@ -209,6 +212,7 @@ modelDataAvailable({
 		},
 		{
 			"id": 311,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/311",
 			"bes_tracking_id": 311,
 			"name": "owlviewer",
 			"full_name": "Be-Secure/owlviewer",
@@ -280,6 +284,7 @@ modelDataAvailable({
 		},
 		{
 			"id": 312,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/312",
 			"bes_tracking_id": 312,
 			"name": "security-analytics-export-tools",
 			"full_name": "Be-Secure/security-analytics-export-tools",
@@ -351,6 +356,7 @@ modelDataAvailable({
 		},
 		{
 			"id": 314,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/314",
 			"bes_tracking_id": 314,
 			"name": "jena",
 			"full_name": "Be-Secure/jena",
@@ -421,6 +427,7 @@ modelDataAvailable({
 		},
 		{
 			"id": 313,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/313",
 			"bes_tracking_id": 313,
 			"name": "spring-boot",
 			"full_name": "Be-Secure/spring-boot",
@@ -443,7 +450,7 @@ modelDataAvailable({
 				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
 				"html_url": "https://github.com/Be-Secure"
 			},
-            "bes_technology_stack": "A",
+            "bes_technology_stack": "L&F",
 			"project_repos": {
 				"main_github_url": "https://github.com/spring-projects/spring-boot",
 				"main_bes_url": "https://github.com/Be-Secure/spring-boot",
@@ -492,4 +499,4 @@ modelDataAvailable({
 
 		},
     ]
-})
+}

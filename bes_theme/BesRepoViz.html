@@ -86,15 +86,6 @@
 
 }
 
-/* .env_table {
-  position:relative; 
-  left: -80px; 
-  right: 1100px;
-  bottom: -1890px;
-  z-index:-1
-
-} */
-
 .env_table {
 
 font-family: Arial, Helvetica, sans-serif;
@@ -428,7 +419,7 @@ color: white;
   <script src="{{base_url}}/assets/javascripts/bessearch.foamtree.util.loading.js"></script>
   <script src="{{base_url}}/assets/javascripts/bessearch.foamtree.util.relaxationprogress.js"></script>
 
-
+  <script type="text/javascript" src="{{base_url}}/assets/data/OSSP-master.js"></script>
   
    <!-- Include Hammer.js for mobile interactions -->
    <script src="{{base_url}}/assets/javascripts/hammer.min.js"></script>
@@ -1041,7 +1032,8 @@ color: white;
           "<div class='font'>Loading and preparing<br />the awesome...</div>");
         foamtreeLoader.started();
 
-        JSONP.load("{{base_url}}/assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
+        // JSONP.load("{{base_url}}/assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
+        setDataObject(projectOfIntrestObject);
 
         /**
          * Initializes the search form.
