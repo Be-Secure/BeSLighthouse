@@ -450,7 +450,7 @@ const projectOfIntrestObject = {
 				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
 				"html_url": "https://github.com/Be-Secure"
 			},
-            "bes_technology_stack": "A",
+            "bes_technology_stack": "L&F",
 			"project_repos": {
 				"main_github_url": "https://github.com/spring-projects/spring-boot",
 				"main_bes_url": "https://github.com/Be-Secure/spring-boot",
