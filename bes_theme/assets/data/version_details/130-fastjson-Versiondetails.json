@@ -1,0 +1,67 @@
+[
+    {
+        "version": "1.2.24",
+        "release_date": "19-Jan-2017",
+        "criticality_score": 0.35369,
+        "scorecard": 4.2,
+        "cve_details": 
+        [
+            
+            {
+                "Year": "2018",
+                "No_of_Vulnerabilities": 1,
+                "DoS": null,
+                "Code_Execution": 1,
+                "Overflow": null,
+                "Memory_Corruption": null,
+                "Sql_Injection": null,
+                "XSS": null,
+                "Directory_Traversal": null,
+                "Http_Response_Splitting": null,
+                "Bypass_something": null,
+                "Gain_Information": null,
+                "Gain_Privileges": null,
+                "CSRF": null,
+                "File_Inclusion": null,
+                "No_of_exploits": ""
+                },
+                {
+                "Year": "2022",
+                "No_of_Vulnerabilities": 1,
+                "DoS": null,
+                "Code_Execution": null,
+                "Overflow": null,
+                "Memory_Corruption": null,
+                "Sql_Injection": null,
+                "XSS": null,
+                "Directory_Traversal": null,
+                "Http_Response_Splitting": null,
+                "Bypass_something": 1,
+                "Gain_Information": null,
+                "Gain_Privileges": null,
+                "CSRF": null,
+                "File_Inclusion": null,
+                "No_of_exploits": ""
+            },
+            {
+                "Year": "Total",
+                "No_of_Vulnerabilities": 2,
+                "DoS": "",
+                "Code_Execution": 1,
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": 1,
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              }
+        ]
+    }
+    
+]

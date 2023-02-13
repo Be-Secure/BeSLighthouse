@@ -1,0 +1,85 @@
+[
+    {
+        "version": "8.5.0",
+        "release_date": "17-Mar-2016",
+        "criticality_score": 0.37028,
+        "scorecard": 4.9,
+        "cve_details": 
+        [
+            {
+                "Year": 2016,
+                "No_of_Vulnerabilities": 1,
+                "DoS": 1,
+                "Code_Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": 2017,
+                "No_of_Vulnerabilities": 12,
+                "DoS": 1,
+                "Code_Execution": 2,
+                "Overflow": 1,
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 1,
+                "Directory_Traversal": 1,
+                "Http_Response_Splitting": "",
+                "Bypass_something": 1,
+                "Gain_Information": 3,
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": 2020,
+                "No_of_Vulnerabilities": 1,
+                "DoS": "",
+                "Code_Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": "Total",
+                "No_of_Vulnerabilities": 14,
+                "DoS": 2,
+                "Code_Execution": 2,
+                "Overflow": 1,
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 1,
+                "Directory_Traversal": 1,
+                "Http_Response_Splitting": "",
+                "Bypass_something": 1,
+                "Gain_Information": 3,
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              }
+        ]
+        
+    }
+    
+]

@@ -429,33 +429,38 @@ function generate_env_table()
 }
 function load_data(id,name)
 {
-
-  document.getElementById("cve_header").innerHTML = "Vulnerability Statistics:"+name;
-  // assets/data/OSSPCVE/50-prometheus-CVEdetails.json
-  fetch('../assets/data/OSSPCVE/'+id+'-'+name+'-CVEdetails.json')
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log("inside load data");
-    constructTable('#table', data);
-    vulntypeschart(data);
-    vulnsbytypeandyearchart(data);
-    // console.log(data.data[0].XSS);
-    bar_chart_by_year(data);
-    bar_chart_by_type(data);
-    replace_div();
-    closePanel();
-    button_visibility();
-    // if (name == "drupal")
-    // {
-    //   generate_env_table();
-    // }
-    // closeSidebar();
-  })
-  .catch(function (err) {
-    console.dir(err);
-  });
+  localStorage["id"] = id;
+  localStorage["name"] = name;
+  window.open("../../bes_version_history");
+  // document.getElementById("cve_header").innerHTML = "Vulnerability Statistics:"+name;
+  // // assets/data/OSSPCVE/50-prometheus-CVEdetails.json
+  // fetch('../assets/data/OSSPCVE/'+id+'-'+name+'-CVEdetails.json')
+  // .then(function (response) {
+  //   return response.json();
+  // })
+  // .then(function (data) {
+  //   localStorage["id"] = id;
+  //   localStorage["name"] = name;
+  //   // window.open("../../bes_version_history");
+  //   // console.log("inside load data");
+  //   // constructTable('#table', data);
+  //   // vulntypeschart(data);
+  //   // vulnsbytypeandyearchart(data);
+  //   // // console.log(data.data[0].XSS);
+  //   // bar_chart_by_year(data);
+  //   // bar_chart_by_type(data);
+  //   // replace_div();
+  //   // closePanel();
+  //   // button_visibility();
+  //   // if (name == "drupal")
+  //   // {
+  //   //   generate_env_table();
+  //   // }
+  //   // closeSidebar();
+  // })
+  // .catch(function (err) {
+  //   console.dir(err);
+  // });
 
 
   
