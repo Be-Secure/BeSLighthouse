@@ -1,7 +1,7 @@
 function totalProject(main_div_content, listOfPOI) {
     const total_project = `
         <div class="css-for-total-project">
-            <h2> Total Project Of Interest: ${listOfPOI.length} </h2>
+            <h2>Project Of Interest: ${listOfPOI.length} </h2>
         </div>
     `
     main_div_content.innerHTML = total_project;
@@ -47,6 +47,12 @@ function numberOfProject(main_div_content, listOfPOI) {
     main_div_content.appendChild(create_div);
 }
 
+function open_bes_version_history(id, name) {
+  localStorage["id"] = id;
+  localStorage["name"] = name;
+  window.open("../../bes_version_history", "_self");
+}
+
 function tableForProject(listOfPOI) {
     const create_div = document.createElement("div");
     create_div.className = "table-for-POI-css";
@@ -66,8 +72,8 @@ function tableForProject(listOfPOI) {
     for (let i=0; i<listOfPOI.length; i++) {
         const tr = document.createElement('TR');
         const data = `
-            <td><a href=${listOfPOI[i]["issue_url"]} target="_blank"> ${listOfPOI[i]["id"]}</a></td>
-            <td><a href=${listOfPOI[i]["html_url"]} target="_blank"> ${listOfPOI[i]["name"]}</a></td>
+            <td><a href=${listOfPOI[i]["html_url"]} target="_blank"> ${listOfPOI[i]["id"]}</a></td>
+            <td><a href='javascript:open_bes_version_history("${listOfPOI[i]["id"]}", "${listOfPOI[i]["name"]}")'> ${listOfPOI[i]["name"]}</a></td>
             <td>${listOfPOI[i]["description"]}</td>
             <td>${listOfPOI[i]["bes_technology_stack"]}</td>
         `;
