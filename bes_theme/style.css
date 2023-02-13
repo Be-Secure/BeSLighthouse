@@ -37,6 +37,16 @@
     top: 30%;
 }
 
+
+.score-color-css {
+    border-radius: 10px;
+    width: 65px;
+    display: block;
+    text-align: center;
+}
+
+
+
 .border-div {
     border: 1px outset black;
     background-color: #fff;    

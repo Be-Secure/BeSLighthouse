@@ -141,6 +141,33 @@ function load_version_data() {
       const version = data[i].version;
       const scorecard = data[i].scorecard;
       const criticalityScore = data[i].criticality_score;
+      
+      // Color coding scorecard scores
+      if (scorecard <= 2.5 ) {
+        scorecard_table_td_data = `<td><span style="background-color:green"; class="score-color-css">${scorecard}</span></td>`
+        
+      } else if (scorecard <= 5 ){
+        scorecard_table_td_data = `<td><span style="background-color:yellow"; class="score-color-css">${scorecard}</span></td>`
+        
+      } else if (scorecard <= 7.5 ){
+        scorecard_table_td_data = `<td><span style="background-color:orange"; class="score-color-css">${scorecard}</span></td>`
+      
+      } else if (scorecard <= 10 ){
+        scorecard_table_td_data = `<td><span style="background-color:red"; class="score-color-css">${scorecard}</span></td>`
+
+      } 
+
+      if (criticalityScore < 0.5 ) {
+        criticalityScore_table_td_data = `<td><span style="background-color:green; color:white" class="score-color-css">${criticalityScore}</span></td>`
+        
+      } else if (criticalityScore == 0.5 ){
+        criticalityScore_table_td_data = `<td><span style="background-color:yellow" class="score-color-css">${criticalityScore}</span></td>`
+        
+      } else if (criticalityScore > 0.5 ){
+        criticalityScore_table_td_data = `<td><span style="background-color:red; color:white" class="score-color-css">${criticalityScore}</span></td>`
+      
+      } 
+
       const html_for_table = `
       <tr>
         <th>Release Date</th>
@@ -154,8 +181,8 @@ function load_version_data() {
       <tr>
         <td>${releaseData}</td>
         <td>${version}</td>
-        <td>${scorecard}</td>
-        <td>${criticalityScore}</td>
+        ${scorecard_table_td_data}
+        ${criticalityScore_table_td_data}        
         <td><a href='javascript:open_report("${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
         <td><a href='javascript:open_report("${version}", "scorecard", "${ossp_name}")'>Click here</a></td>
         <td><a href='javascript:open_report("${version}", "codeql", "${ossp_name}")'>Click here</a></td>
@@ -163,7 +190,7 @@ function load_version_data() {
       `;
       version_table.innerHTML = html_for_table;
       version_div_content.append(version_table);
-
+      
       // Graph code
       const chart_Id = `bar_chart_vuln_by_type${i}`;
       const div_tag_chat_main = document.createElement("div");
