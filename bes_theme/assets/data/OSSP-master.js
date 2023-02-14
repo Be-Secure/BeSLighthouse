@@ -498,5 +498,75 @@ const projectOfIntrestObject = {
 
 
 		},
+		{
+			"id": 165,
+			"bes_tracking_id": 165,
+			"name": "tock",
+			"full_name": "Be-Secure/tock",
+			"description": "embedded operating system designed for running multiple concurrent, mutually distrustful applications on Cortex-M and RISC-V based embedded platforms..",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 155569,
+			"open_issues": 0,
+			"created_at": "2021-08-12T03:30:02Z",
+			"updated_at": "2021-08-12T03:30:03Z",
+			"pushed_at": "2021-08-12T01:25:43Z",
+			"git_url": "git://github.com/Be-Secure/tock.git",
+			"clone_url": "https://github.com/Be-Secure/tock.git",
+			"html_url": "https://github.com/Be-Secure/tock",
+			"homepage": "https://www.tockos.org",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/tock/tock",
+				"main_bes_url": "https://github.com/Be-Secure/tock",
+				"all_projects": {
+					"tock": "https://github.com/tock/tock"
+
+				},
+				"all_bes_repos": [{
+						"id": 395183264,
+						"name": "tock",
+						"url": "https://github.com/Be-Secure/tock"
+					}
+
+				]
+			},
+			"license": {
+				"key": "apache-2.0",
+				"name": "Apache License 2.0",
+				"spdx_id": "Apache-2.0",
+				"url": "https://api.github.com/licenses/apache-2.0",
+				"node_id": "MDc6TGljZW5zZTI="
+			},
+			"language": [
+
+				"C", "Nix", "Rust", "Python", "Shell", "Makefile"
+			],
+
+			"tags": {
+				"IND": [
+					"Automotive"
+				],
+				"SD": [
+					"SD-IoTS"
+				],
+				"COM": [
+					"community-led"
+				],
+				"TD-U": [
+					""
+
+				]
+
+
+			}
+		}
     ]
 }
