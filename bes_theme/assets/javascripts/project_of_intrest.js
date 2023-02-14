@@ -7,46 +7,6 @@ function totalProject(main_div_content, listOfPOI) {
     main_div_content.innerHTML = total_project;
 }
 
-function numberOfProject(main_div_content, listOfPOI) {
-    const create_div = document.createElement("div");
-    create_div.className = "css-div-for-table-language-project"
-    const languageCountTable = document.createElement("table");
-    languageCountTable.setAttribute("id", "languageCountTable");
-    languageCountTable.setAttribute("class", "table-count-css");
-    const tableBody = document.createElement('TBODY');
-    const html_for_table = `
-      <tr>
-        <th>Language</th>
-        <th>Project Count</th>
-      </tr>
-      `;
-    tableBody.innerHTML = html_for_table;
-    let languageCount = {};
-    for (let i=0; i<listOfPOI.length; i++) {
-        for (let j=0; j<listOfPOI[i]["language"].length; j++) {
-            if (!languageCount[listOfPOI[i]["language"][j]]) {
-                languageCount[listOfPOI[i]["language"][j]] = 1;
-                continue;
-            }
-            languageCount[listOfPOI[i]["language"][j]]++;
-        }
-    }
-    const key = Object.keys(languageCount);
-    for (let i=0; i<key.length; i++) {
-        const tr = document.createElement('TR');
-        const data = `
-            <td>${key[i]}</td>
-            <td>${languageCount[key[i]]} </td>
-        `;
-        tr.innerHTML = data;
-        tableBody.appendChild(tr);
-    }
-    
-    languageCountTable.appendChild(tableBody);
-    create_div.appendChild(languageCountTable);
-    main_div_content.appendChild(create_div);
-}
-
 function open_bes_version_history(id, name) {
   localStorage["id"] = id;
   localStorage["name"] = name;
@@ -85,52 +45,17 @@ function tableForProject(listOfPOI) {
     return create_div;
 }
 
-function createDivForPieChart(main_div_content) {
+function createDivForPieChart(main_div_content, css, id) {
     const parentDiv =document.createElement("div");
-    parentDiv.className = "pie-chart-css";
+    parentDiv.className = css;
     const canvas = document.createElement("canvas");
-    canvas.id = "myChart";
+    canvas.id = id;
     parentDiv.append(canvas)
     main_div_content.appendChild(parentDiv);
 }
 
-function pieChartForBesTechStack(listOfPOI) {
-    const BTS = {
-        "L&F": {
-            backgroundColor: "yellow",
-            count: 0
-        },
-        "DO": {
-            backgroundColor: "black",
-            count: 0
-        },
-        "A": {
-            backgroundColor: "red",
-            count: 0
-        },
-        "DA": {
-            backgroundColor: "#10dbc8",
-            count: 0
-        },
-        "S": {
-            backgroundColor: "#6cb6ff",
-            count: 0
-        }
-    }
-    for (let i=0; i<listOfPOI.length; i++) {
-        BTS[listOfPOI[i]["bes_technology_stack"]].count += 1;
-    }
-    let key = Object.keys(BTS);
-    const lableList = [];
-    const dataList = [];
-    const colorList = [];
-    for (let i=0; i<key.length; i++) {
-        if (BTS[key[i]].count === 0) continue;
-        lableList.push(key[i]);
-        dataList.push(BTS[key[i]].count);
-        colorList.push(BTS[key[i]].backgroundColor);
-    }
-    var ctx = document.getElementById('myChart').getContext('2d');
+function pieChart(lableList, dataList, colorList, id) {
+    const ctx = document.getElementById(id).getContext('2d');
     new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -179,16 +104,79 @@ function pieChartForBesTechStack(listOfPOI) {
     });
 }
 
+function pieChartForBesTechStack(listOfPOI, id) {
+    const BTS = {
+        "L&F": {
+            backgroundColor: "yellow",
+            count: 0
+        },
+        "DO": {
+            backgroundColor: "black",
+            count: 0
+        },
+        "A": {
+            backgroundColor: "red",
+            count: 0
+        },
+        "DA": {
+            backgroundColor: "#10dbc8",
+            count: 0
+        },
+        "S": {
+            backgroundColor: "#6cb6ff",
+            count: 0
+        }
+    }
+    for (let i=0; i<listOfPOI.length; i++) {
+        BTS[listOfPOI[i]["bes_technology_stack"]].count += 1;
+    }
+    let key = Object.keys(BTS);
+    const lableList = [];
+    const dataList = [];
+    const colorList = [];
+    for (let i=0; i<key.length; i++) {
+        if (BTS[key[i]].count === 0) continue;
+        lableList.push(key[i]);
+        dataList.push(BTS[key[i]].count);
+        colorList.push(BTS[key[i]].backgroundColor);
+    }
+    pieChart(lableList, dataList, colorList, id);
+}
+
+function pieChartForPoi(listOfPOI, id) {
+    const lableList = [];
+    const dataList = [];
+    const colorList = [];
+    let languageCount = {};
+    for (let i=0; i<listOfPOI.length; i++) {
+        for (let j=0; j<listOfPOI[i]["language"].length; j++) {
+            if (!languageCount[listOfPOI[i]["language"][j]]) {
+                languageCount[listOfPOI[i]["language"][j]] = 1;
+                continue;
+            }
+            languageCount[listOfPOI[i]["language"][j]]++;
+        }
+    }
+    const key = Object.keys(languageCount);
+    for (let i=0; i<key.length; i++) {
+        lableList.push(key[i]);
+        dataList.push(languageCount[key[i]]);
+        colorList.push(colorForLanguages[key[i]]);
+    }
+    pieChart(lableList, dataList, colorList, id);
+}
+
 function projectOfIntrest() {
     const container_element = document.getElementById("container");
     const main_div_content = document.createElement("div");
     main_div_content.className = "border-div-for-project-of-intrest";
     const listOfPOI = projectOfIntrestObject.items;
     totalProject(main_div_content, listOfPOI);
-    numberOfProject(main_div_content, listOfPOI);
-    createDivForPieChart(main_div_content, listOfPOI);
+    createDivForPieChart(main_div_content, "pie-chart-poi-css", "projectOfInterest");
+    createDivForPieChart(main_div_content, "pie-chart-css", "myChart");
     const tablePOI = tableForProject(listOfPOI);
     container_element.append(main_div_content);
     container_element.appendChild(tablePOI);
-    pieChartForBesTechStack(listOfPOI);
+    pieChartForBesTechStack(listOfPOI, "myChart");
+    pieChartForPoi(listOfPOI, "projectOfInterest");
 }
