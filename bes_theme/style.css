@@ -31,7 +31,7 @@
 
 .table-for-POI-css {
     position: relative;
-    top: 255px;
+    top: 373px;
     min-width: 1160px;
     width: 99%;
 }
@@ -113,6 +113,16 @@ a {
     bottom: 186px;
     right: 179px;
     left: 1px;
+    top: 42px;
+}
+
+.pie-chart-poi-css {
+    position: relative;
+    width: 455px;
+    float: left;
+    bottom: 186px;
+    top: 42px;
+    right: 230px;
 }
 
 .table-div {
@@ -132,7 +142,7 @@ a {
     position: absolute;
     min-width: 1157px;
     width: 97%;
-    height: 236px;
+    height: 332px;
 }
 
 .table-css {
