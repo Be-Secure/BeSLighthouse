@@ -31,6 +31,10 @@ function button_visibility()
 
 }
 
+function open_home_page()
+{
+  window.open("../", "_self");
+}
 
 function constructTable(selector, list) {
 	console.log("construct table container");
