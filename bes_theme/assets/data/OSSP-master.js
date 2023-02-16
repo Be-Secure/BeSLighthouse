@@ -1,4 +1,4 @@
-const projectOfIntrestObject = {
+const projectOfInterestObject = {
 	"total_count": 15,
 	"incomplete_results": false,
 	"items": [
