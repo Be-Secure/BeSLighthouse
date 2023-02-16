@@ -2,8 +2,8 @@
     {
         "version": "15.0",
         "release_date": "Not Available",
-        "criticality_score": "Not Available",
-        "scorecard": "Not Available",
+        "criticality_score": 0.47842,
+        "scorecard": 4.7,
         "cve_details": 
         [
             {
