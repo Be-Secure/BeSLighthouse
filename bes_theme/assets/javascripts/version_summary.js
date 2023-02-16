@@ -141,31 +141,45 @@ function load_version_data() {
       const scorecard = data[i].scorecard;
       const criticalityScore = data[i].criticality_score;
       
-      // Color coding scorecard scores
-      if (scorecard <= 2.5 ) {
-        scorecard_table_td_data = `<td><span style="background-color:green"; class="score-color-css">${scorecard}</span></td>`
+      if (scorecard != "Not Available")
+      {
+        // Color coding scorecard scores
+        if (scorecard <= 2.5 ) {
+          scorecard_table_td_data = `<td><span style="background-color:green"; class="score-color-css">${scorecard}</span></td>`
+          
+        } else if (scorecard <= 5 ){
+          scorecard_table_td_data = `<td><span style="background-color:yellow"; class="score-color-css">${scorecard}</span></td>`
+          
+        } else if (scorecard <= 7.5 ){
+          scorecard_table_td_data = `<td><span style="background-color:orange"; class="score-color-css">${scorecard}</span></td>`
         
-      } else if (scorecard <= 5 ){
-        scorecard_table_td_data = `<td><span style="background-color:yellow"; class="score-color-css">${scorecard}</span></td>`
-        
-      } else if (scorecard <= 7.5 ){
-        scorecard_table_td_data = `<td><span style="background-color:orange"; class="score-color-css">${scorecard}</span></td>`
-      
-      } else if (scorecard <= 10 ){
-        scorecard_table_td_data = `<td><span style="background-color:red"; class="score-color-css">${scorecard}</span></td>`
+        } else if (scorecard <= 10 ){
+          scorecard_table_td_data = `<td><span style="background-color:red"; class="score-color-css">${scorecard}</span></td>`
 
-      } 
-
-      if (criticalityScore < 0.5 ) {
-        criticalityScore_table_td_data = `<td><span style="background-color:green; color:white" class="score-color-css">${criticalityScore}</span></td>`
-        
-      } else if (criticalityScore == 0.5 ){
-        criticalityScore_table_td_data = `<td><span style="background-color:yellow" class="score-color-css">${criticalityScore}</span></td>`
-        
-      } else if (criticalityScore > 0.5 ){
-        criticalityScore_table_td_data = `<td><span style="background-color:red; color:white" class="score-color-css">${criticalityScore}</span></td>`
+        } 
+      } else
+      {
+        scorecard_table_td_data=`<td><span class="score-color-css">${scorecard}</span></td>`
+      }
       
-      } 
+      if (criticalityScore != "Not Available")
+      {
+        if (criticalityScore < 0.5 ) {
+          criticalityScore_table_td_data = `<td><span style="background-color:green; color:white" class="score-color-css">${criticalityScore}</span></td>`
+          
+        } else if (criticalityScore == 0.5 ){
+          criticalityScore_table_td_data = `<td><span style="background-color:yellow" class="score-color-css">${criticalityScore}</span></td>`
+          
+        } else if (criticalityScore > 0.5 ){
+          criticalityScore_table_td_data = `<td><span style="background-color:red; color:white" class="score-color-css">${criticalityScore}</span></td>`
+        
+        } 
+      } else
+      {
+        criticalityScore_table_td_data=`<td><span class="score-color-css">${criticalityScore}</span></td>`
+      }
+
+      
 
       const html_for_table = `
       <tr>
