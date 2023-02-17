@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Version Summary</title>
+  <link href="../assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="../style.css">
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasTextRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.highlighter.min.js"></script>
+
+  <script src="../assets/javascripts/version_summary.js"></script>
+  <style>
+      #container {
+        text-align: center;
+        padding: 16px;
+        position: absolute;
+        top: 113px;
+        width: 86%;
+        min-width: 500px;
+        margin-left: 63px;
+      }
+      #heading1 {
+        padding-bottom: 50px;
+      }
+      #version_details {
+        margin: auto;
+        width: 75%;
+        padding: 10px;
+        right: 16%;
+      }
+      .graph {
+        
+        margin-top: 100px;
+        margin-right: 50px;
+        width: auto; height: auto;
+      }
+      #scores {
+        
+        display: inline-block;
+        text-align: center;
+        width:fit-content; height: fit-content; 
+      }
+      #scores > h4 {
+        margin: 0%;
+        font-size: 30px;
+      }
+      #scores > p {
+        font-size: 20px;
+        margin: auto;
+        margin-top: 5px;
+      }
+      #scorecard, #criticality {
+        font-size: 15px;
+        display: inline-block;
+        text-align: center;
+        width: fit-content;
+      }
+      .table {
+        table-layout: auto;
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .table td, .table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      .table tr:nth-child(even){background-color: #f2f2f2;}
+
+      .table tr:hover {background-color: #ddd;}
+
+      .table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+      }
+      .button {
+        float: left;
+        padding: 5px 5px 5px 5px;
+        margin: 5px 5px 5px 5px;
+      }
+      .jqplot-highlighter-tooltip	{
+        font-size:11px;
+        background-color: #eda;
+      }
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      .sticky-report {
+        position: fixed;
+        width: 100%;
+        top: 56px;
+      }
+  </style>
+</head>
+<body class="body-css">
+  <div class="header-status-bar" id="hadder_page"></div>
+  <div id="report-name-project" class="report-name-css"></div>
+  <div id="container" class="container-css"></div>
+  </div>
+  <script>
+    window.onload = load_version_data();
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("hadder_page");
+    var sticky = header.offsetTop;
+
+    var report_header = document.getElementById("report-name-project");
+
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+        report_header.classList.add("sticky-report");
+      }
+    }
+  </script>
+</body>
+
+</html>

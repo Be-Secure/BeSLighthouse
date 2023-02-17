@@ -1,0 +1,66 @@
+[
+    {
+        "version": "15.0",
+        "release_date": "Not Available",
+        "criticality_score": 0.47842,
+        "scorecard": 4.7,
+        "cve_details": 
+        [
+            {
+                "Year": 2019,
+                "No_of_Vulnerabilities": 4,
+                "DoS": "",
+                "Code Execution": 1,
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 1,
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": 2020,
+                "No_of_Vulnerabilities": 12,
+                "DoS": "",
+                "Code Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 4,
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": "Total",
+                "No_of_Vulnerabilities": 16,
+                "DoS": "",
+                "Code Execution": 1,
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 5,
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              }   
+        ]
+    }
+    
+]

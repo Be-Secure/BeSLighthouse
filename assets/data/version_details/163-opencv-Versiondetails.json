@@ -1,0 +1,103 @@
+[
+    {
+        "version": "4.6.0",
+        "release_date": "05-Jun-2022",
+        "criticality_score": 0.42453,
+        "scorecard": 4.4,
+        "cve_details": 
+        [
+            {
+                "Year": 2017,
+                "No_of_Vulnerabilities": 13,
+                "DoS": 5,
+                "Code_Execution": 3,
+                "Overflow": 5,
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": 2018,
+                "No_of_Vulnerabilities": 1,
+                "DoS": 1,
+                "Code_Execution": 1,
+                "Overflow": 1,
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": 2019,
+                "No_of_Vulnerabilities": 5,
+                "DoS": 2,
+                "Code_Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": 2020,
+                "No_of_Vulnerabilities": 1,
+                "DoS": "",
+                "Code_Execution": 1,
+                "Overflow": 1,
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              },
+              {
+                "Year": "Total",
+                "No_of_Vulnerabilities": 20,
+                "DoS": 8,
+                "Code_Execution": 5,
+                "Overflow": 7,
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": "",
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              }
+            
+        ]
+    }
+    
+]

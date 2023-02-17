@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Of Intrest</title>
+    <link rel="stylesheet" href="../style.css">
+    <script type="text/javascript" src="../assets/data/OSSP-master.js"></script>
+    <script type="text/javascript" src="../assets/data/color.js"></script>
+    <script type="text/javascript" src="../assets/data/languages-support.js"></script>
+    <script src="../assets/javascripts/project_of_interest.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+</head>
+<body class="body-css">
+    <div class="header-status-bar" id="hadder_page">
+        <span class="hadder-css">BeSLighthouse</span>
+    </div>
+    <div id="container" class="container-css"></div>
+    <script>
+        window.onload = projectOfInterest();
+        window.onscroll = function() {fixHeader()};
+
+        var header = document.getElementById("hadder_page");
+        var sticky = header.offsetTop;
+
+        function fixHeader() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            }
+        }
+    </script>
+</body>
+</html>

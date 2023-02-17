@@ -86,15 +86,6 @@
 
 }
 
-/* .env_table {
-  position:relative; 
-  left: -80px; 
-  right: 1100px;
-  bottom: -1890px;
-  z-index:-1
-
-} */
-
 .env_table {
 
 font-family: Arial, Helvetica, sans-serif;
@@ -428,7 +419,7 @@ color: white;
   <script src="../assets/javascripts/bessearch.foamtree.util.loading.js"></script>
   <script src="../assets/javascripts/bessearch.foamtree.util.relaxationprogress.js"></script>
 
-
+  <script type="text/javascript" src="../assets/data/OSSP-master.js"></script>
   
    <!-- Include Hammer.js for mobile interactions -->
    <script src="../assets/javascripts/hammer.min.js"></script>
@@ -467,12 +458,11 @@ color: white;
         last update: <span><%- moment(updated_at).fromNow() %></span>
       </div>
       <div class="cvecount">
-      CVE count : <%- cvedetails.count %> 
-      </br>
-      Year : <%- cvedetails.year %>
+        <!-- BeS Tech Stack : <span><%- bes_technology_stack %></span> -->
+        <img src="<%- test_function(bes_technology_stack) %>"width="200" height="200" alt="Tech Stack">
       </div>
 
-      <button id="cve_button" onmouseover="enabledisable(<%- cvedetails.count %>)" onclick="load_data(<%- id %>,'<%- name %>')">Learn more</button>
+      <button id="cve_button" onclick="load_data(<%- id %>,'<%- name %>')">Learn more</button>
     </br>
       <p id="cve_unavilable"></p>
       
@@ -506,14 +496,16 @@ color: white;
         </div>
         <div class="github-title">
          
-          Visual Search for BeS Lighthouse... 
+          Visual Search for BeSLighthouse... 
           
         </div>
         
       </div>
       
       <div style="float: right; font-size: medium;">
-        <a href="https://be-secure.github.io/BeSLighthouse/">Home</a>
+        <!-- <a href="https://be-secure.github.io/BeSLighthouse/">Home</a> -->
+        <a href='javascript:open_home_page()'>Home</a>
+
       </div>
       
 
@@ -605,17 +597,7 @@ color: white;
     </div> -->
   </div>
   </div>
-  <div id="cve_stats" style="align-content: center;">
-    <button id="home_button" onclick="refreshPage()" class="home_btn">Home</button>
-    <h2 id="cve_header"></h2>
-    <table id="table" border="1" class="cve_table"></table>
-    <div id='vulntypeschart' class="piechart"></div>
-    <div id="vulnsbytypeandyearchart" class="piechart"></div>
-    <div id="bar_chart_vuln_by_year" class="barchart"></div>
-    <div id="bar_chart_vuln_by_type" class="barchart" style="padding-top: 30px;"></div>
-  </br></br></br></br></br>
-    <!-- <div id="env_table" class="env_table"></div> -->
-  </div>
+
   <div id="fps"></div>
   <div id="details"></div>
 
@@ -635,6 +617,29 @@ color: white;
   </style>
 
   <script>
+    function test_function(tech_stack) {
+      console.log(tech_stack);
+      if(tech_stack == "A")
+        {
+          return `${base_url}/assets/images/app_logo.png`;
+        }
+      else if(tech_stack == "L&F")
+        {
+          return `${base_url}/assets/images/lan_logo.png`;
+        }
+      else if(tech_stack == "DA")
+        {
+          return `${base_url}/assets/images/dist_app_logo.png`;
+        }
+      else if(tech_stack == "DO")
+      {
+        return `${base_url}/assets/images/devops_logo.png`;
+      }
+      else if(tech_stack == "S")
+      {
+        return `${base_url}/assets/images/sec_logo.png`;
+      }
+    }
     (function () {
       // Firefox has problems handling SVG images on canvas
       // (https://bugzilla.mozilla.org/show_bug.cgi?id=1017847),
@@ -1029,7 +1034,8 @@ color: white;
           "<div class='font'>Loading and preparing<br />the awesome...</div>");
         foamtreeLoader.started();
 
-        JSONP.load("../assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
+        // JSONP.load("../assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
+        setDataObject(projectOfInterestObject);
 
         /**
          * Initializes the search form.
@@ -1195,8 +1201,8 @@ color: white;
 
                     // If the full name is long, insert zero-width spaces after / and -
                     // so that the text layout engine can break lines if needed
-                    name: item.full_name.length > 14 ? item.full_name.split("/").join("/\u200b").split("-").join("\u00ad") : item.full_name,
-
+                    // name: item.full_name.length > 14 ? item.full_name.split("/").join("/\u200b").split("-").join("\u00ad") : item.full_name, 
+                    name: item.full_name,
                     // Set the weight based on the the radio button selection
                     weight: item[weightProperty]
                   };

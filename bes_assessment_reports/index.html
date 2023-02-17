@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment reports</title>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../assets/javascripts/assessment_reports.js"></script>
+    <style>
+        #table {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        #table td, #table th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #table tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #table tr:hover {background-color: #ddd;}
+        
+        #table th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: center;
+          background-color: #04AA6D;
+          color: white;
+        }
+        </style>
+</head>
+<body>
+    <h1 id="report_name"></h1>
+    <div id="reports">
+    </div>
+    <h3 id="checks_h3"></h3>
+    <table id="table" class="checks_table">
+
+    </table>
+    <!-- <div id="checks">
+        
+    </div> -->
+    <script>
+        window.onload = fetch_json();
+    </script>
+</body>
+</html>
