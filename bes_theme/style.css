@@ -17,6 +17,8 @@
     float: left;
     position: relative;
     left: 67px;
+    top: 109px;
+    font-size: 24px;
 }
 
 #container {
@@ -122,7 +124,7 @@ a {
     float: left;
     bottom: 186px;
     top: 42px;
-    right: 230px;
+    left: 410px;
 }
 
 .table-div {
