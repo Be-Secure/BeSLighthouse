@@ -2,8 +2,8 @@
     {
         "version": "v4.1.0",
         "release_date": "26-Nov-2022",
-        "criticality_score": "Not Available",
-        "scorecard": "Not Available",
+        "criticality_score": 0.51352,
+        "scorecard": 3.3,
         "cve_details": 
         [
             {
