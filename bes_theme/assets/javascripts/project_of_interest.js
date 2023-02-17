@@ -166,11 +166,11 @@ function pieChartForPoi(listOfPOI, id) {
     pieChart(lableList, dataList, colorList, id);
 }
 
-function projectOfIntrest() {
+function projectOfInterest() {
     const container_element = document.getElementById("container");
     const main_div_content = document.createElement("div");
     main_div_content.className = "border-div-for-project-of-intrest";
-    const listOfPOI = projectOfIntrestObject.items;
+    const listOfPOI = projectOfInterestObject.items;
     totalProject(main_div_content, listOfPOI);
     createDivForPieChart(main_div_content, "pie-chart-poi-css", "projectOfInterest");
     createDivForPieChart(main_div_content, "pie-chart-css", "myChart");
