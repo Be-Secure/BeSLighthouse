@@ -89,7 +89,7 @@
         <td rowspan="5">
             Be-Secure Open Source Security tool stack (BOS-STS)
         </td>
-        <td>DevOPs Tool</td>
+        <td>DevOPS and Infrastructure Tool</td>
         <td>DO</td>
     </tr>
     <td>
