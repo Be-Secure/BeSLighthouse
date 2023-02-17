@@ -1,6 +1,6 @@
 <!-- | Be-Secure Open Source Security tool stack | BOS-STS |
 |-------------------------------------------|---------|
-| DevOPs Tool                               | DO      |
+| DevOPS and Infrastructure Tool                               | DO      |
 | Language & Framework                      | L&F     |
 | Application                               | A       |
 | Distributed & Decentralized Application   | DA      |
