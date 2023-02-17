@@ -1,0 +1,33 @@
+[
+    {
+        "version": "2.6.0",
+        "release_date": "24.12.2021",
+        "criticality_score": 0.45894,
+        "scorecard": "7.8",
+        "cve_details": 
+        [
+            {
+                "Year": 2020,
+                "No_of_Vulnerabilities": 1,
+                "DoS": "",
+                "Code_Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 1,
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+              }
+             
+              
+        ]
+
+    }
+    
+]
