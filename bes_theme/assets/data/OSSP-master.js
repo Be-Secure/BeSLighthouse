@@ -48,20 +48,13 @@ const projectOfInterestObject = {
 				"node_id": "MDc6TGljZW5zZTI="
 			},
 			"language": ["C"],
-			"tags": {
-				"IND": [
-					"Automotive"
-				],
-				"SD": [
-					""
-				],
-				"COM": [
-					"community-led"
-				],
-				"TD-U": [
-					"TD-U-IoT"
-				]
-			}
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM-C",
+				"TD-U-IoT"
+				
+			]
 		},
 		{
 			"id": 167,
@@ -109,20 +102,13 @@ const projectOfInterestObject = {
 				"node_id": "MDc6TGljZW5zZTI="
 			},
 			"language": ["Javascript", "HTML"],
-			"tags": {
-				"IND": [
-					"Automotive"
-				],
-				"SD": [
-					""
-				],
-				"COM": [
-					"community-led"
-				],
-				"TD-U": [
-					"TD-U-IoT"
-				]
-			}
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM-C",
+				"TD-U-IoT"
+				
+			]
 		},
 		{
 			"id": 168,
@@ -170,20 +156,13 @@ const projectOfInterestObject = {
 				"node_id": "MDc6TGljZW5zZTI="
 			},
 			"language": ["Javascript", "HTML", "C", "C++", "Cmake", "python", "Shell"],
-			"tags": {
-				"IND": [
-					"Automotive"
-				],
-				"SD": [
-					""
-				],
-				"COM": [
-					"community-led"
-				],
-				"TD-U": [
-					"TD-U-IoT"
-				]
-			}
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM-C",
+				"TD-U-IoT",
+				
+			]
 		},
 		{
 			"id": 169,
@@ -231,20 +210,13 @@ const projectOfInterestObject = {
 				"node_id": ""
 			},
 			"language": ["C", "C++", "Cmake", "python", "Shell", "Embarkscript"],
-			"tags": {
-				"IND": [
-					"Automotive"
-				],
-				"SD": [
-					""
-				],
-				"COM": [
-					"community-led"
-				],
-				"TD-U": [
-					"TD-U-IoT"
-				]
-			}
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM-C",
+				"TD-U-IoT"
+				
+			]
 		},
 		{
 			"id": 170,
@@ -292,20 +264,12 @@ const projectOfInterestObject = {
 				"node_id": "MDc6TGljZW5zZTEz"
 			},
 			"language": ["C", "Shell", "PHP", "Pascal", "Bitbake", "NASL"],
-			"tags": {
-				"IND": [
-					"Automotive"
-				],
-				"SD": [
-					""
-				],
-				"COM": [
-					"community-led"
-				],
-				"TD-U": [
-					"TD-U-IoT"
-				]
-			}
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM-C",
+				"TD-U-IoT",
+			]
 		},
 		{
             "id": 309,
