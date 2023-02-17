@@ -1,7 +1,7 @@
 function totalProject(main_div_content, listOfPOI) {
     const total_project = `
         <div class="css-for-total-project">
-            <h2>Project Of Interest: ${listOfPOI.length} </h2>
+            <h2>Projects Of Interest: ${listOfPOI.length} </h2>
         </div>
     `
     main_div_content.innerHTML = total_project;
@@ -54,7 +54,7 @@ function createDivForPieChart(main_div_content, css, id) {
     main_div_content.appendChild(parentDiv);
 }
 
-function pieChart(lableList, dataList, colorList, id) {
+function pieChart(lableList, dataList, colorList, id, name) {
     const ctx = document.getElementById(id).getContext('2d');
     new Chart(ctx, {
         type: 'doughnut',
@@ -70,7 +70,7 @@ function pieChart(lableList, dataList, colorList, id) {
         options: {
             title: {
                 display: true,
-                text: 'BeS Tech Stack',
+                text: name,
                 position: 'top',
                 fontSize: 16,
                 fontColor: '#111',
@@ -140,7 +140,7 @@ function pieChartForBesTechStack(listOfPOI, id) {
         dataList.push(BTS[key[i]].count);
         colorList.push(BTS[key[i]].backgroundColor);
     }
-    pieChart(lableList, dataList, colorList, id);
+    pieChart(lableList, dataList, colorList, id, 'BeS Tech Stack');
 }
 
 function pieChartForPoi(listOfPOI, id) {
@@ -159,11 +159,13 @@ function pieChartForPoi(listOfPOI, id) {
     }
     const key = Object.keys(languageCount);
     for (let i=0; i<key.length; i++) {
-        lableList.push(key[i]);
-        dataList.push(languageCount[key[i]]);
-        colorList.push(colorForLanguages[key[i]]);
+        if (supportedLanguages[key[i].toLocaleLowerCase().trim()]) {
+            lableList.push(key[i]);
+            dataList.push(languageCount[key[i]]);
+            colorList.push(colorForLanguages[key[i]]);
+        }
     }
-    pieChart(lableList, dataList, colorList, id);
+    pieChart(lableList, dataList, colorList, id, "Languages");
 }
 
 function projectOfInterest() {
