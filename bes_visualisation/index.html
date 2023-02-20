@@ -9,6 +9,8 @@
   <script>var base_url = '..';</script>
 
   <meta charset="utf-8" />
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+
   <link rel="stylesheet" href="../assets/stylesheets/bootstrap.min.css">
   <!-- <link href="../assets/stylesheets/bootstrap.min.css" rel="stylesheet" /> -->
   <link href="../assets/stylesheets/common.css" rel="stylesheet" />
@@ -462,7 +464,7 @@ color: white;
         <img src="<%- test_function(bes_technology_stack) %>"width="200" height="200" alt="Tech Stack">
       </div>
 
-      <button id="cve_button" onclick="load_data(<%- id %>,'<%- name %>')">Learn more</button>
+      <button id="cve_button" onclick="load_data(base_url,<%- id %>,'<%- name %>')">Learn more</button>
     </br>
       <p id="cve_unavilable"></p>
       

@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Version Summary</title>
+  <script>var base_url = '..';</script>
   <link href="../assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -114,7 +115,7 @@
   <div id="container" class="container-css"></div>
   </div>
   <script>
-    window.onload = load_version_data();
+    window.onload = load_version_data(base_url);
     window.onscroll = function() {myFunction()};
 
     var header = document.getElementById("hadder_page");
