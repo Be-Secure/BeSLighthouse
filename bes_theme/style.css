@@ -21,6 +21,12 @@
     font-size: 24px;
 }
 
+@media screen and (max-width: 1366px) {
+    .css-for-total-project {
+        font-size: 16px;
+    }
+}
+
 #container {
     text-align: center;
     padding: 16px;
@@ -125,6 +131,12 @@ a {
     bottom: 186px;
     top: 42px;
     left: 410px;
+}
+
+@media screen and (max-width: 1366px) {
+    .pie-chart-poi-css {
+        left: 82px;
+    }
 }
 
 .table-div {
