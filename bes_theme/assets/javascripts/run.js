@@ -431,11 +431,14 @@ function generate_env_table()
 {
   document.getElementById("env_table").innerHTML = "<table><tr> <th>Environment Name</th><th>Environment type</th><th> Project version</th><th>Vulnerability exploited</th><th>Exploit details</th><th>Patch availability</th><th>Date of patch published</th> </tr><tr><td>Hello world</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>"
 }
-function load_data(id,name)
+function load_data(base_url,id,name)
 {
   localStorage["id"] = id;
   localStorage["name"] = name;
-  window.open("../../bes_version_history");
+  console.log("url:"+base_url+"/bes_version_history");
+  window.open(base_url+"/bes_version_history");
+  // window.open("../../bes_version_history");
+
   // document.getElementById("cve_header").innerHTML = "Vulnerability Statistics:"+name;
   // // assets/data/OSSPCVE/50-prometheus-CVEdetails.json
   // fetch('../assets/data/OSSPCVE/'+id+'-'+name+'-CVEdetails.json')

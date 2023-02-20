@@ -95,14 +95,14 @@ function vulnsbytypeandyearchart(chart_Id, cve_details) {
 }
 
 
-function open_report(version, report, project_name) {
+function open_report(base_url,version, report, project_name) {
   localStorage["version"] = version;
   localStorage["report"] = report;
   localStorage["ossp_name"] = project_name;
-  window.open("../../bes_assessment_reports", "_self");
+  window.open(base_url+"/bes_assessment_reports", "_self");
 }
 
-function load_version_data() {
+function load_version_data(base_url) {
   id = localStorage["id"]
   ossp_name = localStorage["name"];
 
@@ -196,9 +196,9 @@ function load_version_data() {
         <td>${version}</td>
         ${scorecard_table_td_data}
         ${criticalityScore_table_td_data}        
-        <td><a href='javascript:open_report("${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
-        <td><a href='javascript:open_report("${version}", "scorecard", "${ossp_name}")'>Click here</a></td>
-        <td><a href='javascript:open_report("${version}", "codeql", "${ossp_name}")'>Click here</a></td>
+        <td><a href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
+        <td><a href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>Click here</a></td>
+        <td><a href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
       </tr>
       `;
       version_table.innerHTML = html_for_table;

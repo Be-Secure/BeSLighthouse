@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://asa1997.github.io/BeSLighthouse/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://asa1997.github.io/BeSLighthouse/bes_assessment_reports/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://asa1997.github.io/BeSLighthouse/bes_version_history/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://asa1997.github.io/BeSLighthouse/bes_visualisation/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://asa1997.github.io/BeSLighthouse/projectOfInterest/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>

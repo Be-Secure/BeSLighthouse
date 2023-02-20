@@ -7,13 +7,13 @@ function totalProject(main_div_content, listOfPOI) {
     main_div_content.innerHTML = total_project;
 }
 
-function open_bes_version_history(id, name) {
+function open_bes_version_history(base_url,id, name) {
   localStorage["id"] = id;
   localStorage["name"] = name;
-  window.open("../../bes_version_history", "_self");
+  window.open(base_url+"/bes_version_history", "_self");
 }
 
-function tableForProject(listOfPOI) {
+function tableForProject(base_url,listOfPOI) {
     const create_div = document.createElement("div");
     create_div.className = "table-for-POI-css";
     const table = document.createElement("table");
@@ -33,7 +33,7 @@ function tableForProject(listOfPOI) {
         const tr = document.createElement('TR');
         const data = `
             <td><a href=${listOfPOI[i]["html_url"]} target="_blank"> ${listOfPOI[i]["id"]}</a></td>
-            <td><a href='javascript:open_bes_version_history("${listOfPOI[i]["id"]}", "${listOfPOI[i]["name"]}")'> ${listOfPOI[i]["name"]}</a></td>
+            <td><a href='javascript:open_bes_version_history("${base_url}","${listOfPOI[i]["id"]}", "${listOfPOI[i]["name"]}")'> ${listOfPOI[i]["name"]}</a></td>
             <td>${listOfPOI[i]["description"]}</td>
             <td>${listOfPOI[i]["bes_technology_stack"]}</td>
         `;
@@ -168,7 +168,7 @@ function pieChartForPoi(listOfPOI, id) {
     pieChart(lableList, dataList, colorList, id, "Languages");
 }
 
-function projectOfInterest() {
+function projectOfInterest(base_url) {
     const container_element = document.getElementById("container");
     const main_div_content = document.createElement("div");
     main_div_content.className = "border-div-for-project-of-intrest";
@@ -176,7 +176,7 @@ function projectOfInterest() {
     totalProject(main_div_content, listOfPOI);
     createDivForPieChart(main_div_content, "pie-chart-poi-css", "projectOfInterest");
     createDivForPieChart(main_div_content, "pie-chart-css", "myChart");
-    const tablePOI = tableForProject(listOfPOI);
+    const tablePOI = tableForProject(base_url,listOfPOI);
     container_element.append(main_div_content);
     container_element.appendChild(tablePOI);
     pieChartForBesTechStack(listOfPOI, "myChart");
