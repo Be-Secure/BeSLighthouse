@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <title>Project Of Intrest</title>
+    <script>var base_url = '{{ base_url }}';</script>
     <link rel="stylesheet" href="{{base_url}}/style.css">
     <script type="text/javascript" src="{{base_url}}/assets/data/OSSP-master.js"></script>
     <script type="text/javascript" src="{{base_url}}/assets/data/color.js"></script>
@@ -19,7 +21,7 @@
     </div>
     <div id="container" class="container-css"></div>
     <script>
-        window.onload = projectOfInterest();
+        window.onload = projectOfInterest(base_url);
         window.onscroll = function() {fixHeader()};
 
         var header = document.getElementById("hadder_page");
