@@ -1,0 +1,48 @@
+[
+    {
+        "version": "server-v2.8.8-beta",
+        "release_date": "24-Jul-2021",
+        "criticality_score": "Not Available",
+        "scorecard": "Not Available",
+        "cve_details": 
+        [
+            {
+                "Year": 2022,
+                "# of Vulnerabilities": 1,
+                "DoS": "",
+                "Code Execution": 1,
+                "Overflow": "",
+                "Memory Corruption": "",
+                "Sql Injection": "",
+                "XSS": 1,
+                "Directory Traversal": "",
+                "Http Response Splitting": "",
+                "Bypass something": "",
+                "Gain Information": "",
+                "Gain Privileges": "",
+                "CSRF": "",
+                "File Inclusion": "",
+                "# of exploits": ""
+              },
+              {
+                "Year": "Total",
+                "# of Vulnerabilities": 1,
+                "DoS": "",
+                "Code Execution": 1,
+                "Overflow": "",
+                "Memory Corruption": "",
+                "Sql Injection": "",
+                "XSS": 1,
+                "Directory Traversal": "",
+                "Http Response Splitting": "",
+                "Bypass something": "",
+                "Gain Information": "",
+                "Gain Privileges": "",
+                "CSRF": "",
+                "File Inclusion": "",
+                "# of exploits": ""
+              }
+        ]
+    }
+    
+]

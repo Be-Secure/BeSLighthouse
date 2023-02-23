@@ -1399,6 +1399,83 @@ const projectOfInterestObject = {
 			   
 			]
 
+		},
+		{
+			"id": 152,
+			"bes_tracking_id": 152,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/152",
+			"name": "joplin",
+			"full_name": "Be-Secure/joplin",
+			"description": "Joplin - an open source note taking and to-do application with synchronization capabilities for Windows, macOS, Linux, Android and iOS. Forum: https://discourse.joplinapp.org/",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 215192,
+			"open_issues": 0,
+			"created_at": "2017-01-16T21:49:41Z",
+    		"updated_at": "2023-02-23T18:59:10Z",
+    		"pushed_at": "2023-02-23T16:42:53Z",
+			"git_url": "git://github.com/Be-Secure/joplin.git",
+			"clone_url": "https://github.com/Be-Secure/joplin.git",
+			"html_url": "https://github.com/Be-Secure/joplin",
+			"homepage": "https://joplinapp.org",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/laurent22/joplin",
+				"main_bes_url": "https://github.com/Be-Secure/joplin",
+				"all_projects": {
+					"joplin": "https://github.com/laurent22/joplin"
+
+				},
+				"all_bes_repos": [{
+						"id": 79162682,
+						"name": "joplin",
+						"url": "https://github.com/Be-Secure/joplin"
+					}
+
+				]
+			},
+			"license": {
+				"key": "other",
+				"name": "Other",
+				"spdx_id": "NOASSERTION",
+				"url": null,
+				"node_id": "MDc6TGljZW5zZTA="
+			},
+			"language": [
+				{
+					"TypeScript": 3501550,
+					"JavaScript": 2959974,
+					"HTML": 130183,
+					"CSS": 101881,
+					"Mustache": 48814,
+					"Handlebars": 31635,
+					"Shell": 22781,
+					"Java": 20784,
+					"Objective-C": 16633,
+					"Ruby": 2194,
+					"Starlark": 1920,
+					"C": 419,
+					"Batchfile": 140
+				}
+			],
+
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-W",
+				"TD-U-DkA",
+				"TD-U-MoA",
+			   
+			]
+
 		}
 
 
