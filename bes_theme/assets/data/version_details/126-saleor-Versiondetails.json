@@ -1,14 +1,14 @@
 [
     {
-        "version": "2.7.0",
-        "release_date": "18-Jul-2022",
+        "version": "3.0.0-b7",
+        "release_date": "04-Aug-2021",
         "criticality_score": "Not Available",
         "scorecard": "Not Available",
         "cve_details": 
         [
             {
-                "Year": 2021,
-                "No_of_Vulnerabilities": 1,
+                "Year": 2022,
+                "No_of_Vulnerabilities": 2,
                 "DoS": "",
                 "Code_Execution": "",
                 "Overflow": "",
@@ -22,17 +22,17 @@
                 "Gain_Privileges": "",
                 "CSRF": "",
                 "File_Inclusion": "",
-                "No_of_ exploits": ""
+                "No_of_exploits": ""
               },
               {
-                "Year": 2022,
-                "No_of_Vulnerabilities": 8,
+                "Year": "Total",
+                "No_of_Vulnerabilities": 2,
                 "DoS": "",
                 "Code_Execution": "",
                 "Overflow": "",
                 "Memory_Corruption": "",
                 "Sql_Injection": "",
-                "XSS": 5,
+                "XSS": "",
                 "Directory_Traversal": "",
                 "Http_Response_Splitting": "",
                 "Bypass_something": "",
@@ -40,26 +40,9 @@
                 "Gain_Privileges": "",
                 "CSRF": "",
                 "File_Inclusion": "",
-                "No_of_ exploits": ""
-              },
-              {
-                "Year": "Total",
-                "No_of_Vulnerabilities": 9,
-                "DoS": "",
-                "Code_Execution": "",
-                "Overflow": "",
-                "Memory_Corruption": "",
-                "Sql_Injection": "",
-                "XSS": 5,
-                "Directory_Traversal": "",
-                "Http_Response_Splitting": "",
-                "Bypass_something": "",
-                "GainInformation": "",
-                "Gain_Privileges": "",
-                "CSRF": "",
-                "File_Inclusion": "",
                 "No_of_exploits": ""
-              },
+              }
+           
         ]
     }
     
