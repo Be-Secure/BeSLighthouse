@@ -56,9 +56,6 @@ const projectOfInterestObject = {
 				
 			]
 		},
-
-		
-		
 		{
 			"id": 167,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/167",
