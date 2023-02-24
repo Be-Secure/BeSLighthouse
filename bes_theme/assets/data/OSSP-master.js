@@ -1335,7 +1335,147 @@ const projectOfInterestObject = {
 			   
 			]
 
+		},
+
+		{
+			"id": 162,
+			"bes_tracking_id": 162,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/162",
+			"name": "odoo",
+			"full_name": "Be-Secure/odoo",
+			"description": "Odoo is a suite of web based open source business apps.",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 3712670,
+			"open_issues": 0,
+			"created_at": "2021-08-11T14:32:10Z",
+			"updated_at": "2021-08-11T14:32:13Z",
+			"pushed_at": "2021-08-11T14:31:51Z",
+			"git_url": "git://github.com/Be-Secure/odoo.git",
+			"clone_url": "https://github.com/Be-Secure/odoo.git",
+			"html_url": "https://github.com/Be-Secure/odoo",
+			"homepage": "https://www.odoo.com",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/odoo/odoo",
+				"main_bes_url": "https://github.com/Be-Secure/odoo",
+				"all_projects": {
+					"odoo": "https://github.com/odoo/odoo"
+
+				},
+				"all_bes_repos": [{
+						"id": 395018421,
+						"name": "odoo",
+						"url": "https://github.com/Be-Secure/odoo"
+					}
+
+				]
+			},
+			"license": {
+				"key": "other",
+				"name": "Other",
+				"spdx_id": "NOASSERTION",
+				"url": "null",
+				"node_id": "MDc6TGljZW5zZTA="
+			},
+			"language": [
+
+				"Javascript", "HTML", "CSS", "Python", "Shell", "SCSS"
+			],
+
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-DkA",
+		   
+			] 
+
+
+		},
+		{
+			"id": 145,
+			"bes_tracking_id": 145,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/145",
+			"name": "chatwoot",
+			"full_name": "Be-Secure/chatwoot",
+			"description": "Open-source customer engagement suite, an alternative to Intercom, Zendesk, Salesforce Service Cloud etc. 🔥💬.",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 47491,
+			"open_issues": 0,
+			"created_at": "2021-08-05T09:58:34Z",
+            "updated_at": "2021-08-05T09:58:35Z",
+            "pushed_at": "2021-08-05T09:23:42Z",
+			
+			"git_url": "git://github.com/Be-Secure/chatwoot.git",
+			"clone_url": "https://github.com/Be-Secure/chatwoot.git",
+			"html_url": "https://github.com/Be-Secure/chatwoot",
+			"homepage": "https://www.chatwoot.com/help-center",
+			
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/chatwoot/chatwoot",
+				"main_bes_url": "https://github.com/Be-Secure/chatwoot",
+				"all_projects": {
+					"chatwoot": "https://github.com/chatwoot/chatwoot"
+
+				},
+				"all_bes_repos": [{
+						"id": 202291859,
+						"name": "chatwoot",
+						"url": "https://github.com/Be-Secure/chatwoot"
+					}
+
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT License",
+				"spdx_id": "MIT",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			  },
+			
+			"language": [
+
+				{
+					"Ruby": 1046133,
+					"Vue": 704801,
+					"JavaScript": 661158,
+					"SCSS": 108278,
+					"HTML": 46871,
+					"Shell": 14231,
+					"Liquid": 7895,
+					"Dockerfile": 2841
+				  }
+			],
+
+			"tags": [
+				"A",
+				"IND-RT",
+				"COM - C",
+				"TD-C-WA",
+				
+			   
+			]
+
 		}
+		
 
     ]
 }
