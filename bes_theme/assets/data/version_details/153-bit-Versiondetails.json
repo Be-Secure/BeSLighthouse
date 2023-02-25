@@ -1,11 +1,10 @@
 [
     {
-        "version": "6.2.0",
-        "release_date": "11-May-2022",
+        "version": "v14.8.8",
+        "release_date": "13-Jul-2020",
         "criticality_score": "Not Available",
         "scorecard": "Not Available",
         "cve_details": "Not Available"
-        
     }
     
 ]
