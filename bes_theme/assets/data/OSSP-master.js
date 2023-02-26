@@ -1335,6 +1335,85 @@ const projectOfInterestObject = {
 			]
 
 		}
+		,
+		{
+			"id": 160,
+			"bes_tracking_id": 160,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/160",
+			"name": "Canvas-LMS",
+			"full_name": "Be-Secure/Canvas-LMS",
+			"description": "The open LMS by Instructure, Inc.",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 1231519,
+			"open_issues": 0,
+			"created_at": "2023-02-22T10:29:24Z",
+            "updated_at": "2023-02-22T09:38:29Z",
+            "pushed_at": "2023-02-21T22:22:19Z",
+			"git_url": "git://github.com/Be-Secure/Canvas-LMS.git",
+			"clone_url": "https://github.com/Be-Secure/Canvas-LMS.git",
+			"html_url": "https://github.com/Be-Secure/Canvas-LMS",
+			"homepage": "https://github.com/instructure/canvas-LMS/wiki",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/instructure/canvas-LMS",
+				"main_bes_url": "https://github.com/Be-Secure/Canvas-LMS",
+				"all_projects": {
+					"Canvas-LMS": "https://github.com/instructure/canvas-LMS"
+
+				},
+				"all_bes_repos": [{
+						"id": 605046755,
+						"name": "Canvas-LMS",
+						"url": "https://github.com/Be-Secure/Canvas-LMS"
+					}
+
+				]
+			},
+			"license": {
+				"key": "agpl-3.0",
+				"name": "GNU Affero General Public License v3.0",
+				"spdx_id": "AGPL-3.0",
+				"url": "https://api.github.com/licenses/agpl-3.0",
+				"node_id": "MDc6TGljZW5zZTE="
+			},  
+			"language": [
+
+				{
+					"Ruby": 41012247,
+					"JavaScript": 27907513,
+					"TypeScript": 2694796,
+					"HTML": 2124037,
+					"SCSS": 1146950,
+					"CoffeeScript": 736995,
+					"Handlebars": 486324,
+					"Groovy": 148710,
+					"Shell": 137358,
+					"CSS": 107061,
+					"Dockerfile": 7951,
+					"Python": 3832,
+					"Lua": 3825,
+					"Kotlin": 1322,
+					"Makefile": 313
+				  }
+			],
+
+			"tags": [
+				"A",
+				"IND-ED",
+				"COM - C",
+				"TD-C-A"
+			   
+			]
+
+		}
 
     ]
 }
