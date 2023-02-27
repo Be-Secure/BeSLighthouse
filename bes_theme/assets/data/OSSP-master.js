@@ -1637,7 +1637,6 @@ const projectOfInterestObject = {
 			"html_url": "https://github.com/Be-Secure/chatwoot",
 			"homepage": "https://www.chatwoot.com/help-center",
 			
-			
 			"owner": {
 				"login": "Be-Secure",
 				"id": 44028837,
