@@ -1631,6 +1631,7 @@ const projectOfInterestObject = {
 			"created_at": "2021-08-05T09:58:34Z",
             "updated_at": "2021-08-05T09:58:35Z",
             "pushed_at": "2021-08-05T09:23:42Z",
+			
 			"git_url": "git://github.com/Be-Secure/chatwoot.git",
 			"clone_url": "https://github.com/Be-Secure/chatwoot.git",
 			"html_url": "https://github.com/Be-Secure/chatwoot",
@@ -1932,8 +1933,8 @@ const projectOfInterestObject = {
 			"clone_url": "https://github.com/healthchecks/saleor.git",
 			"html_url": "https://github.com/Be-Secure/saleor",
 			"homepage": "https://saleor.io",
-
-			"git_url": "git://github.com/Be-Secure/saleor.git",
+			
+  			"git_url": "git://github.com/Be-Secure/saleor.git",
 			"clone_url": "https://github.com/Be-Secure/saleor.git",
 			"homepage": "https://www.saleor.io",
 			
