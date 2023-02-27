@@ -16,7 +16,7 @@
                     "Sql_Injection": "",
                     "XSS": "",
                     "Directory_Traversal": "",
-                    "Http_Response_Splitting": "",
+                    "Http_Response_Splitting": "" ,
                     "Bypass_something": "",
                     "Gain_Information": "",
                     "Gain_Privileges": "",

@@ -1631,7 +1631,6 @@ const projectOfInterestObject = {
 			"created_at": "2021-08-05T09:58:34Z",
             "updated_at": "2021-08-05T09:58:35Z",
             "pushed_at": "2021-08-05T09:23:42Z",
-			
 			"git_url": "git://github.com/Be-Secure/chatwoot.git",
 			"clone_url": "https://github.com/Be-Secure/chatwoot.git",
 			"html_url": "https://github.com/Be-Secure/chatwoot",

@@ -14,7 +14,7 @@
                 "Overflow": "",
                 "Memory_Corruption": "",
                 "Sql_Injection": "",
-                "XSS": "",
+                "XSS": "" ,
                 "Directory_Traversal": "",
                 "Http_Response_Splitting": "",
                 "Bypass_something": "",
