@@ -1147,6 +1147,86 @@ const projectOfInterestObject = {
 
 		},
 		{
+			"id": 378,
+			"bes_tracking_id": 378,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/378",
+			"name": "level-zero-spec",
+			"full_name": "Be-Secure/level-zero-spec",
+			"description": null,
+			"bes_technology_stack": "A",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 2790,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:18:44Z",
+			"updated_at": "2023-02-25T19:56:04Z",
+			"pushed_at": "2023-02-25T19:56:21Z",
+			"git_url": "git://github.com/Be-Secure/level-zero-spec.git",
+			"clone_url": "https://github.com/Be-Secure/level-zero-spec.git",
+			"html_url": "https://github.com/Be-Secure/level-zero-spec",
+			"homepage": null,
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/level-zero-spec",
+				"main_bes_url": "https://github.com/Be-Secure/level-zero-spec",
+				"all_projects": [
+					{
+						"id": 467697050,
+						"name": "oneapi-src/level-zero-spec",
+						"url": "https://github.com/oneapi-src/level-zero-spec"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532344,
+						"name": "Be-Secure/level-zero-spec",
+						"url": "https://github.com/Be-Secure/level-zero-spec"
+					}
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT License",
+				"spdx_id": "MIT",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			},
+			"language": {
+				"Python": 80383,
+				"Mako": 28932,
+				"CMake": 2302,
+				"HTML": 137,
+				"CSS": 59
+			},
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-ApD"
+			]
+		},
+		{
+
 			"id": 163,
 			"bes_tracking_id": 163,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/163",
