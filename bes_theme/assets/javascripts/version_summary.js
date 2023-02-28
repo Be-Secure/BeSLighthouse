@@ -141,25 +141,27 @@ function load_version_data(base_url) {
       const scorecard = data[i].scorecard;
       const criticalityScore = data[i].criticality_score;
       
+      const scorecardLink = `<a href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
+
       if (scorecard != "Not Available")
       {
         // Color coding scorecard scores
         if (scorecard <= 2.5 ) {
-          scorecard_table_td_data = `<td><span style="background-color:green"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:green"; class="score-color-css">${scorecardLink}</span></td>`
           
         } else if (scorecard <= 5 ){
-          scorecard_table_td_data = `<td><span style="background-color:yellow"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:yellow"; class="score-color-css">${scorecardLink}</span></td>`
           
         } else if (scorecard <= 7.5 ){
-          scorecard_table_td_data = `<td><span style="background-color:orange"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:orange"; class="score-color-css">${scorecardLink}</span></td>`
         
         } else if (scorecard <= 10 ){
-          scorecard_table_td_data = `<td><span style="background-color:red"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:red"; class="score-color-css">${scorecardLink}</span></td>`
 
         } 
       } else
       {
-        scorecard_table_td_data=`<td><span class="score-color-css">${scorecard}</span></td>`
+        scorecard_table_td_data=`<td><span class="score-color-css">${scorecardLink}</span></td>`
       }
       
       if (criticalityScore != "Not Available")
@@ -188,7 +190,6 @@ function load_version_data(base_url) {
         <th>Scorecard</th>
         <th>Criticality Score</th>
         <th>Sonarqube</th>
-        <th>Scorecard</th>
         <th>Codeql</th>
       </tr>
       <tr>
@@ -197,7 +198,6 @@ function load_version_data(base_url) {
         ${scorecard_table_td_data}
         ${criticalityScore_table_td_data}        
         <td><a href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
-        <td><a href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>Click here</a></td>
         <td><a href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
       </tr>
       `;
