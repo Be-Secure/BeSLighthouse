@@ -1211,6 +1211,88 @@ const projectOfInterestObject = {
 
 		},
 		{
+			"id": 379,
+			"bes_tracking_id": 379,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/379",
+			"name": "unified-runtime",
+			"full_name": "Be-Secure/unified-runtime",
+			"description": null,
+			"bes_technology_stack": "A",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 1644,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:19:16Z",
+			"updated_at": "2023-02-25T19:39:00Z",
+			"pushed_at": "2023-02-25T19:39:40Z",
+			"git_url": "git://github.com/Be-Secure/unified-runtime.git",
+			"clone_url": "https://github.com/Be-Secure/unified-runtime.git",
+			"html_url": "https://github.com/Be-Secure/unified-runtime",
+			"homepage": "https://oneapi-src.github.io/unified-runtime/",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/unified-runtime",
+				"main_bes_url": "https://github.com/Be-Secure/unified-runtime",
+				"all_projects": [
+					{
+						"id": 508062186,
+						"name": "oneapi-src/unified-runtime",
+						"url": "https://github.com/oneapi-src/unified-runtime"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532466,
+						"name": "Be-Secure/unified-runtime",
+						"url": "https://github.com/Be-Secure/unified-runtime"
+					}
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT License",
+				"spdx_id": "MIT",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			},
+			"language": {
+				"C++": 1164013,
+				"C": 442708,
+				"Python": 243537,
+				"Mako": 50832,
+				"CMake": 22327,
+				"Batchfile": 5915,
+				"HTML": 137,
+				"CSS": 59
+			},
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-ApD"
+			]
+		},
+		{
 			"id": 162,
 			"bes_tracking_id": 162,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/162",
