@@ -1794,8 +1794,303 @@ const projectOfInterestObject = {
 			   
 			]
 
+		},
+		{
+			"id": 343,
+			"bes_tracking_id": 343,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/343",
+			"name": "gramine",
+			"full_name": "Be-Secure/gramine",
+			"description": "Gramine (formerly called Graphene) is a lightweight library OS, designed to run a single linux application with minimal host requirements.",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 14106,
+			"open_issues": 0,
+			"created_at": "2023-02-17T05:20:19Z",
+			"updated_at": "2023-02-17T08:26:02Z",
+			"pushed_at": "2023-02-17T10:34:36Z",
+			"git_url": "git://github.com/Be-Secure/gramine.git",
+			"clone_url": "https://github.com/Be-Secure/gramine.git",
+			"html_url": "https://github.com/Be-Secure/gramine",
+			"homepage": "https://gramineproject.io",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+			"bes_technology_stack": "L&F",
+			"project_repos": {
+				"main_github_url": "https://github.com/gramineproject/gramine",
+				"main_bes_url": "https://github.com/Be-Secure/gramine",
+				"all_projects": {
+					"gramine": "https://github.com/gramineproject/gramine"
+		
+				},
+				"all_bes_repos": [{
+						"id": 602866481,
+						"name": "gramine",
+						"url": "https://github.com/Be-Secure/gramine"
+					}
+		
+				]
+			},
+			"license": {
+				"key": "lgpl-3.0",
+				"name": "GNU Lesser General Public License v3.0",
+				"spdx_id": "LGPL-3.0",
+				"url": "https://api.github.com/licenses/lgpl-3.0",
+				"node_id": "MDc6TGljZW5zZTEy"
+			  },
+			"language": [
+				{
+				"C": 3279350,
+				  "Python": 218858,
+				  "Meson": 69516,
+				  "Assembly": 61849,
+				  "Makefile": 46362,
+				  "Shell": 25234,
+				  "C++": 10515,
+				  "Dockerfile": 6210,
+				  "GDB": 4927,
+				  "Rust": 970,
+				  "Emacs Lisp": 478,
+				}
+			],
+		
+			"tags": [
+				"L&F",
+				"SD-AS",
+				"IND-ALL",
+				"COM-C",
+				
+			]
+		
+		},
+		{
+			"id": 289,
+			"bes_tracking_id": 289,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/289",
+			"name": "logstash",
+			"full_name": "Be-Secure/logstash",
+			"description": "Logstash is a server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite stash.",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 123067,
+			"open_issues": 0,
+			"created_at": "2023-02-20T08:40:20Z",
+			"updated_at": "2023-02-20T12:39:17Z",
+			"pushed_at": "2023-02-24T08:21:47Z",
+			"git_url": "git://github.com/Be-Secure/logstash.git",
+			"clone_url": "https://github.com/Be-Secure/logstash.git",
+			"html_url": "https://github.com/Be-Secure/logstash",
+			"homepage": "https://www.elastic.co/products/logstash",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+			"bes_technology_stack": "L&F",
+			"project_repos": {
+				"main_github_url": "https://github.com/elastic/logstash",
+				"main_bes_url": "https://github.com/Be-Secure/logstash",
+				"all_projects": {
+					"gramine": "https://github.com/elastic/logstash"
+		
+				},
+				"all_bes_repos": [{
+						"id": 604056140,
+						"name": "logstash",
+						"url": "https://github.com/Be-Secure/logstash"
+					}
+		
+				]
+			},
+			"license": {
+				"key": "other",
+				"name": "Other",
+				"spdx_id": "NOASSERTION",
+				"url": null,
+				"node_id": "MDc6TGljZW5zZTA="
+			  },
+			"language": [
+		
+				{
+					"Java": 2457732,
+					"Ruby": 2456269,
+					"Shell": 76820,
+					"HTML": 60726,
+					"Python": 17531,
+					"CSS": 14421,
+					"Makefile": 10506,
+					"Groovy": 10043,
+					"PowerShell": 9805,
+					"Batchfile": 8625,
+					"Jinja": 7440,
+					"Go": 6056,
+					"C": 3338,
+					"Dockerfile": 2644
+				  }
+		
+			],
+		
+			"tags": [
+				"L&F",
+				"TD-C-s",
+				"TD-U-DAA",
+				"IND-BFSI",
+				"IND-CyS",
+				"IND-ED",
+				"IND-RT",
+				"IND-TEL",
+				"COM-C",
+				
+			]
+		
+		},
+		{
+			"id": 290,
+			"bes_tracking_id": 290,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/290",
+			"name": "struts",
+			"full_name": "Be-Secure/struts",
+			"description": "The Apache Struts web framework is a free open-source solution for creating Java web applications.",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 78342,
+			"open_issues": 0,
+			"created_at": "2023-02-20T08:41:53Z",
+			"updated_at": "2023-02-20T13:11:53Z",
+			"pushed_at": "2023-02-20T13:34:22Z",
+			"git_url": "git://github.com/Be-Secure/struts.git",
+			"clone_url": "https://github.com/Be-Secure/struts.git",
+			"html_url": "https://github.com/Be-Secure/struts",
+			"homepage": "https://struts.apache.org",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+			"bes_technology_stack": "L&F",
+			"project_repos": {
+				"main_github_url": "https://github.com/apache/struts",
+				"main_bes_url": "https://github.com/Be-Secure/struts",
+				"all_projects": {
+					"gramine": "https://github.com/apache/struts"
+		
+				},
+				"all_bes_repos": [{
+						"id": 604056731,
+						"name": "struts",
+						"url": "https://github.com/Be-Secure/struts"
+					}
+		
+				]
+			},
+			"license": {
+				"key": "apache-2.0",
+				"name": "Apache License 2.0",
+				"spdx_id": "Apache-2.0",
+				"url": "https://api.github.com/licenses/apache-2.0",
+				"node_id": "MDc6TGljZW5zZTI="
+			  },
+			"language": [
+		
+				{
+					"Java": 12478304,
+					"HTML": 1292369,
+					"FreeMarker": 296744,
+					"JavaScript": 33058,
+					"CSS": 22949,
+					"XSLT": 11725
+				}
+	
+			],
+		
+			"tags": [
+				"L&F",
+				"TD-C-WA",
+				"TD-U-W",
+				"IND-BFSI",
+				"IND-ED",
+				"IND-HLS",
+				"IND-NG",
+				"IND-RT",
+				"IND-TEL",
+				"COM-C",
+				
+			]
+		
+		},
+		{
+			"id": 292,
+			"bes_tracking_id": 292,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/292",
+			"name": "ThreatPlaybook",
+			"full_name": "Be-Secure/ThreatPlaybook",
+			"description": "A unified DevSecOps Framework that allows you to go from iterative, collaborative Threat Modeling to Application Security Test Orchestration.",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 3018,
+			"open_issues": 0,
+			"created_at": "2023-02-23T07:25:10Z",
+			"updated_at": "2023-02-23T06:29:36Z",
+			"pushed_at": "2023-02-19T17:06:21Z",
+			"git_url": "git://github.com/Be-Secure/ThreatPlaybook.git",
+			"clone_url": "https://github.com/Be-Secure/ThreatPlaybook.git",
+			"html_url": "https://github.com/Be-Secure/ThreatPlaybook",
+			"homepage": "https://we45.gitbook.io/threatplaybook",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+			"bes_technology_stack": "L&F",
+			"project_repos": {
+				"main_github_url": "https://github.com/we45/ThreatPlaybook",
+				"main_bes_url": "https://github.com/Be-Secure/ThreatPlaybook",
+				"all_projects": {
+					"gramine": "https://github.com/we45/ThreatPlaybook"
+		
+				},
+				"all_bes_repos": [{
+						"id": 440103696,
+						"name": "ThreatPlaybook",
+						"url": "https://github.com/Be-Secure/ThreatPlaybook"
+					}
+		
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT license",
+				"spdx_id": "mit",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			  },
+			"language": [
+		
+				{
+					"Python": 66777
+				}
+	
+			],
+		
+			"tags": [
+				"L&F",
+				"SD-AS",
+				"IND-CyS",
+							
+			]
+		
 		}
-
 
     ]
 }
