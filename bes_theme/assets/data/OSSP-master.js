@@ -1517,6 +1517,81 @@ const projectOfInterestObject = {
 
 		},
 		{
+			"id": 380,
+			"bes_tracking_id": 380,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/380",
+			"name": "visual-quality-inspection",
+			"full_name": "Be-Secure/visual-quality-inspection",
+			"description": "AI Starter Kit for Quality Visual Inspection using Intel\u00ae Extension for Pytorch",
+			"bes_technology_stack": "L&F",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 204,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:20:00Z",
+			"updated_at": "2023-02-25T19:23:57Z",
+			"pushed_at": "2023-02-25T19:24:29Z",
+			"git_url": "git://github.com/Be-Secure/visual-quality-inspection.git",
+			"clone_url": "https://github.com/Be-Secure/visual-quality-inspection.git",
+			"html_url": "https://github.com/Be-Secure/visual-quality-inspection",
+			"homepage": "",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/visual-quality-inspection",
+				"main_bes_url": "https://github.com/Be-Secure/visual-quality-inspection",
+				"all_projects": [
+					{
+						"id": 506429950,
+						"name": "oneapi-src/visual-quality-inspection",
+						"url": "https://github.com/oneapi-src/visual-quality-inspection"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532641,
+						"name": "Be-Secure/visual-quality-inspection",
+						"url": "https://github.com/Be-Secure/visual-quality-inspection"
+					}
+				]
+			},
+			"license": {
+				"key": "bsd-3-clause",
+				"name": "BSD 3-Clause \"New\" or \"Revised\" License",
+				"spdx_id": "BSD-3-Clause",
+				"url": "https://api.github.com/licenses/bsd-3-clause",
+				"node_id": "MDc6TGljZW5zZTU="
+			},
+			"language": {
+				"Python": 56176
+			},
+			"tags": [
+				"L&F",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-AI/ML"
+			]
+		},
+		{
 			"id": 161,
 			"bes_tracking_id": 161,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/161",
