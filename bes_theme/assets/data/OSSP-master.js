@@ -1084,6 +1084,87 @@ const projectOfInterestObject = {
 			]
 		},
 		{
+			"id": 377,
+			"bes_tracking_id": 377,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/377",
+			"name": "level-zero",
+			"full_name": "Be-Secure/level-zero",
+			"description": "oneAPI Level Zero Specification Headers and Loader",
+			"bes_technology_stack": "A",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 2042,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:18:10Z",
+			"updated_at": "2023-02-25T20:06:00Z",
+			"pushed_at": "2023-02-25T20:06:19Z",
+			"git_url": "git://github.com/Be-Secure/level-zero.git",
+			"clone_url": "https://github.com/Be-Secure/level-zero.git",
+			"html_url": "https://github.com/Be-Secure/level-zero",
+			"homepage": "https://spec.oneapi.com/versions/latest/elements/l0/source/index.html",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/level-zero",
+				"main_bes_url": "https://github.com/Be-Secure/level-zero",
+				"all_projects": [
+					{
+						"id": 245246663,
+						"name": "oneapi-src/level-zero",
+						"url": "https://github.com/oneapi-src/level-zero"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532210,
+						"name": "Be-Secure/level-zero",
+						"url": "https://github.com/Be-Secure/level-zero"
+					}
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT License",
+				"spdx_id": "MIT",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			},
+			"language": {
+				"C++": 2918567,
+				"C": 1291721,
+				"Python": 663363,
+				"Mako": 38645,
+				"CMake": 25087,
+				"Dockerfile": 319
+			},
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-ApD",
+				"Tracked"
+			]
+		},
+		{
 			"id": 164,
 			"bes_tracking_id": 164,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/164",
@@ -1147,6 +1228,86 @@ const projectOfInterestObject = {
 
 		},
 		{
+			"id": 378,
+			"bes_tracking_id": 378,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/378",
+			"name": "level-zero-spec",
+			"full_name": "Be-Secure/level-zero-spec",
+			"description": null,
+			"bes_technology_stack": "A",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 2790,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:18:44Z",
+			"updated_at": "2023-02-25T19:56:04Z",
+			"pushed_at": "2023-02-25T19:56:21Z",
+			"git_url": "git://github.com/Be-Secure/level-zero-spec.git",
+			"clone_url": "https://github.com/Be-Secure/level-zero-spec.git",
+			"html_url": "https://github.com/Be-Secure/level-zero-spec",
+			"homepage": null,
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/level-zero-spec",
+				"main_bes_url": "https://github.com/Be-Secure/level-zero-spec",
+				"all_projects": [
+					{
+						"id": 467697050,
+						"name": "oneapi-src/level-zero-spec",
+						"url": "https://github.com/oneapi-src/level-zero-spec"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532344,
+						"name": "Be-Secure/level-zero-spec",
+						"url": "https://github.com/Be-Secure/level-zero-spec"
+					}
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT License",
+				"spdx_id": "MIT",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			},
+			"language": {
+				"Python": 80383,
+				"Mako": 28932,
+				"CMake": 2302,
+				"HTML": 137,
+				"CSS": 59
+			},
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-ApD"
+			]
+		},
+		{
+
 			"id": 163,
 			"bes_tracking_id": 163,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/163",
@@ -1211,6 +1372,88 @@ const projectOfInterestObject = {
 
 		},
 		{
+			"id": 379,
+			"bes_tracking_id": 379,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/379",
+			"name": "unified-runtime",
+			"full_name": "Be-Secure/unified-runtime",
+			"description": null,
+			"bes_technology_stack": "A",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 1644,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:19:16Z",
+			"updated_at": "2023-02-25T19:39:00Z",
+			"pushed_at": "2023-02-25T19:39:40Z",
+			"git_url": "git://github.com/Be-Secure/unified-runtime.git",
+			"clone_url": "https://github.com/Be-Secure/unified-runtime.git",
+			"html_url": "https://github.com/Be-Secure/unified-runtime",
+			"homepage": "https://oneapi-src.github.io/unified-runtime/",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/unified-runtime",
+				"main_bes_url": "https://github.com/Be-Secure/unified-runtime",
+				"all_projects": [
+					{
+						"id": 508062186,
+						"name": "oneapi-src/unified-runtime",
+						"url": "https://github.com/oneapi-src/unified-runtime"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532466,
+						"name": "Be-Secure/unified-runtime",
+						"url": "https://github.com/Be-Secure/unified-runtime"
+					}
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT License",
+				"spdx_id": "MIT",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			},
+			"language": {
+				"C++": 1164013,
+				"C": 442708,
+				"Python": 243537,
+				"Mako": 50832,
+				"CMake": 22327,
+				"Batchfile": 5915,
+				"HTML": 137,
+				"CSS": 59
+			},
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-ApD"
+			]
+		},
+		{
 			"id": 162,
 			"bes_tracking_id": 162,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/162",
@@ -1272,6 +1515,81 @@ const projectOfInterestObject = {
 			] 
 
 
+		},
+		{
+			"id": 380,
+			"bes_tracking_id": 380,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/380",
+			"name": "visual-quality-inspection",
+			"full_name": "Be-Secure/visual-quality-inspection",
+			"description": "AI Starter Kit for Quality Visual Inspection using Intel\u00ae Extension for Pytorch",
+			"bes_technology_stack": "L&F",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 204,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:20:00Z",
+			"updated_at": "2023-02-25T19:23:57Z",
+			"pushed_at": "2023-02-25T19:24:29Z",
+			"git_url": "git://github.com/Be-Secure/visual-quality-inspection.git",
+			"clone_url": "https://github.com/Be-Secure/visual-quality-inspection.git",
+			"html_url": "https://github.com/Be-Secure/visual-quality-inspection",
+			"homepage": "",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/visual-quality-inspection",
+				"main_bes_url": "https://github.com/Be-Secure/visual-quality-inspection",
+				"all_projects": [
+					{
+						"id": 506429950,
+						"name": "oneapi-src/visual-quality-inspection",
+						"url": "https://github.com/oneapi-src/visual-quality-inspection"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532641,
+						"name": "Be-Secure/visual-quality-inspection",
+						"url": "https://github.com/Be-Secure/visual-quality-inspection"
+					}
+				]
+			},
+			"license": {
+				"key": "bsd-3-clause",
+				"name": "BSD 3-Clause \"New\" or \"Revised\" License",
+				"spdx_id": "BSD-3-Clause",
+				"url": "https://api.github.com/licenses/bsd-3-clause",
+				"node_id": "MDc6TGljZW5zZTU="
+			},
+			"language": {
+				"Python": 56176
+			},
+			"tags": [
+				"L&F",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-AI/ML"
+			]
 		},
 		{
 			"id": 161,
