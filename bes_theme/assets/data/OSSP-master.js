@@ -1794,7 +1794,7 @@ const projectOfInterestObject = {
 			   
 			]
 
-		}
+		},
 		{
 			"id": 343,
 			"bes_tracking_id": 343,
@@ -1867,7 +1867,7 @@ const projectOfInterestObject = {
 				
 			]
 		
-		}
+		},
 		{
 			"id": 289,
 			"bes_tracking_id": 289,
@@ -1950,7 +1950,7 @@ const projectOfInterestObject = {
 				
 			]
 		
-		}
+		},
 		{
 			"id": 290,
 			"bes_tracking_id": 290,
@@ -2026,7 +2026,7 @@ const projectOfInterestObject = {
 				
 			]
 		
-		}
+		},
 		{
 			"id": 292,
 			"bes_tracking_id": 292,
