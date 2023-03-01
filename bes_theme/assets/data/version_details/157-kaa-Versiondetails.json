@@ -3,7 +3,7 @@
         "version": "1.4.13",
         "release_date": "04-Aug-2021",
         "criticality_score": "Not Available",
-        "scorecard": "Not Available",
+        "scorecard": 4.4,
         "cve_details": [
         {
             "Year": "2020",

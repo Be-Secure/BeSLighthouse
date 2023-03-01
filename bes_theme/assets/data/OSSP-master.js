@@ -1340,8 +1340,8 @@ const projectOfInterestObject = {
 			"id": 160,
 			"bes_tracking_id": 160,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/160",
-			"name": "Canvas-LMS",
-			"full_name": "Be-Secure/Canvas-LMS",
+			"name": "canvas-lms",
+			"full_name": "Be-Secure/canvas-lms",
 			"description": "The open LMS by Instructure, Inc.",
 			"watchers_count": 0,
 			"forks_count": 0,
@@ -1351,10 +1351,10 @@ const projectOfInterestObject = {
 			"created_at": "2023-02-22T10:29:24Z",
             "updated_at": "2023-02-22T09:38:29Z",
             "pushed_at": "2023-02-21T22:22:19Z",
-			"git_url": "git://github.com/Be-Secure/Canvas-LMS.git",
-			"clone_url": "https://github.com/Be-Secure/Canvas-LMS.git",
-			"html_url": "https://github.com/Be-Secure/Canvas-LMS",
-			"homepage": "https://github.com/instructure/canvas-LMS/wiki",
+			"git_url": "git://github.com/Be-Secure/canvas-lms.git",
+			"clone_url": "https://github.com/Be-Secure/canvas-lms.git",
+			"html_url": "https://github.com/Be-Secure/canvas-lms",
+			"homepage": "https://github.com/instructure/canvas-lms/wiki",
 			"owner": {
 				"login": "Be-Secure",
 				"id": 44028837,
@@ -1363,16 +1363,16 @@ const projectOfInterestObject = {
 			},
             "bes_technology_stack": "A",
 			"project_repos": {
-				"main_github_url": "https://github.com/instructure/canvas-LMS",
-				"main_bes_url": "https://github.com/Be-Secure/Canvas-LMS",
+				"main_github_url": "https://github.com/instructure/canvas-lms",
+				"main_bes_url": "https://github.com/Be-Secure/canvas-lms",
 				"all_projects": {
-					"Canvas-LMS": "https://github.com/instructure/canvas-LMS"
+					"canvas-lms": "https://github.com/instructure/canvas-lms"
 
 				},
 				"all_bes_repos": [{
 						"id": 605046755,
-						"name": "Canvas-LMS",
-						"url": "https://github.com/Be-Secure/Canvas-LMS"
+						"name": "canvas-lms",
+						"url": "https://github.com/Be-Secure/canvas-lms"
 					}
 
 				]
@@ -1414,6 +1414,284 @@ const projectOfInterestObject = {
 			]
 
 		}
+		,
+		{
+			"id": 159,
+			"bes_tracking_id": 159,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/159",
+			"name": "canvas-android",
+			"full_name": "Be-Secure/canvas-android",
+			"description": "Canvas Android apps",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 48897,
+			"open_issues": 0,
+			"created_at": "2023-02-22T10:40:47Z",
+  			"updated_at": "2023-02-01T02:10:46Z",
+ 			"pushed_at": "2023-02-21T15:02:46Z",
+			"git_url": "git://github.com/Be-Secure/canvas-android.git",
+			"clone_url": "https://github.com/Be-Secure/canvas-android.git",
+			"html_url": "https://github.com/Be-Secure/canvas-android",
+			"homepage": "",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/instructure/canvas-android",
+				"main_bes_url": "https://github.com/Be-Secure/canvas-android",
+				"all_projects": {
+					"canvas-android": "https://github.com/instructure/canvas-android"
+
+				},
+				"all_bes_repos": [{
+						"id": 605046755,
+						"name": "canvas-android",
+						"url": "https://github.com/Be-Secure/canvas-android"
+					}
+
+				]
+			},
+			"license": null,  
+			"language": [
+
+				{
+					"Kotlin": 11198575,
+					"Dart": 4964930,
+					"HTML": 184971,
+					"Java": 79793,
+					"Ruby": 36778,
+					"Shell": 27604,
+					"JavaScript": 9505,
+					"Objective-C": 7431,
+					"Groovy": 7123,
+					"Python": 2438,
+					"CSS": 1356,
+					"Swift": 807,
+					"Dockerfile": 112
+				}
+			],
+
+			"tags": [
+				"A",
+				"IND-ALL",
+				"COM - C",
+				"TD-C-A"
+			   
+			]
+
+		}
+		,
+		{
+			"id": 158,
+			"bes_tracking_id": 158,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/158",
+			"name": "ros",
+			"full_name": "Be-Secure/ros",
+			"description": "Core ROS packages",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 14727,
+			"open_issues": 0,
+			"created_at": "2023-02-22T10:40:47Z",
+  			"updated_at": "2023-02-01T02:10:46Z",
+ 			"pushed_at": "2023-02-21T15:02:46Z",
+			"git_url": "git://github.com/Be-Secure/ros.git",
+			"clone_url": "https://github.com/Be-Secure/ros.git",
+			"html_url": "https://github.com/Be-Secure/ros",
+			"homepage": "",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/ros/ros",
+				"main_bes_url": "https://github.com/Be-Secure/ros",
+				"all_projects": {
+					"ros": "https://github.com/ros/ros"
+
+				},
+				"all_bes_repos": [{
+						"id": 605046755,
+						"name": "ros",
+						"url": "https://github.com/Be-Secure/ros"
+					}
+
+				]
+			},
+			"license": 
+			{
+				"key": "bsd-3-clause",
+				"name": "BSD 3-Clause \"New\" or \"Revised\" License",
+				"spdx_id": "BSD-3-Clause",
+				"url": "https://api.github.com/licenses/bsd-3-clause",
+				"node_id": "MDc6TGljZW5zZTU="
+			}
+			,  
+			"language": [
+
+				{
+					"Python": 501993,
+					"CMake": 105676,
+					"C++": 18111,
+					"Makefile": 10138,
+					"Batchfile": 7640,
+					"Shell": 6723,
+					"EmberScript": 4202,
+					"Awk": 639
+				}
+			],
+
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM - C",
+				"TD-C-A"
+			   
+			]
+
+		}
+		,
+		{
+			"id": 157,
+			"bes_tracking_id": 157,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/157",
+			"name": "kaa",
+			"full_name": "Be-Secure/kaa",
+			"description": "Kaa Internet of Things platform for device management, data collection, analytics and visualization, remote control, software updates and more",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 238472,
+			"open_issues": 0,
+			"created_at": "2021-08-11T05:15:33Z",
+			"updated_at": "2022-12-08T16:56:54Z",
+			"pushed_at": "2022-12-08T16:56:45Z",
+			"git_url": "git://github.com/Be-Secure/kaa.git",
+			"clone_url": "https://github.com/Be-Secure/kaa.git",
+			"html_url": "https://github.com/Be-Secure/kaa",
+			"homepage": "http://www.kaaproject.org",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/kaaproject/kaa",
+				"main_bes_url": "https://github.com/Be-Secure/kaa",
+				"all_projects": {
+					"kaa": "https://github.com/kaaproject/kaa"
+
+				},
+				"all_bes_repos": [{
+						"id": 605046755,
+						"name": "kaa",
+						"url": "https://github.com/Be-Secure/kaa"
+					}
+
+				]
+			},
+			"license": 
+			{
+				"key": "bsd-3-clause",
+				"name": "BSD 3-Clause \"New\" or \"Revised\" License",
+				"spdx_id": "BSD-3-Clause",
+				"url": "https://api.github.com/licenses/bsd-3-clause",
+				"node_id": "MDc6TGljZW5zZTU="
+			}
+			,  
+			"language": null,
+
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM - C",
+				"TD-C-A"
+			   
+			]
+
+		}
+		,
+		{
+			"id": 156,
+			"bes_tracking_id": 156,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/156",
+			"name": "pimcore",
+			"full_name": "Be-Secure/pimcore",
+			"description": "Open Source Data & Experience Management Platform (PIM, MDM, CDP, DAM, DXP/CMS & Digital Commerce)",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 507803,
+			"open_issues": 0,
+			"created_at": "2021-08-05T08:50:28Z",
+ 			"updated_at": "2021-08-05T08:50:29Z",
+  			"pushed_at": "2021-08-05T08:06:07Z",
+			"git_url": "git://github.com/Be-Secure/pimcore.git",
+			"clone_url": "https://github.com/Be-Secure/pimcore.git",
+			"html_url": "https://github.com/Be-Secure/pimcore",
+			"homepage": "http://www.pimcore.org/",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "A",
+			"project_repos": {
+				"main_github_url": "https://github.com/pimcore/pimcore",
+				"main_bes_url": "https://github.com/Be-Secure/pimcore",
+				"all_projects": {
+					"pimcore": "https://github.com/pimcore/pimcore"
+
+				},
+				"all_bes_repos": [{
+						"id": 605046755,
+						"name": "pimcore",
+						"url": "https://github.com/Be-Secure/pimcore"
+					}
+
+				]
+			},
+			"license": 
+			{
+				"key": "other",
+				"name": "Other",
+				"spdx_id": "NOASSERTION",
+				"url": null,
+				"node_id": "MDc6TGljZW5zZTA="
+			}
+			,  
+			"language": {
+				"PHP": 9587829,
+				"JavaScript": 5773385,
+				"CSS": 865703,
+				"Twig": 255101,
+				"SCSS": 17150,
+				"HTML": 5274,
+				"Shell": 4538
+			  },
+
+			"tags": [
+				"A",
+				"IND-AM",
+				"COM - C",
+				"TD-C-A"
+			   
+			]
+
+		}
+
 
     ]
 }
