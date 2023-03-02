@@ -8,6 +8,8 @@
     <script>var base_url = '..';</script>
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="../assets/javascripts/assessment_reports.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         #table {
           font-family: Arial, Helvetica, sans-serif;
@@ -31,18 +33,53 @@
           background-color: #04AA6D;
           color: white;
         }
+        
+        #download {
+          font-size:25px
+        }
+        #download:hover{
+          color: green;
+          
+        }
+
+
+        #download:active
+        {
+          font-size: 20px;
+          
+        }
+        #main-div {
+          display: flex;
+      }
+      #download-div {
+        position: relative;
+        top: 28px;
+        margin-left: 6px;
+    }
+
+
         </style>
 </head>
 <body>
-    <h1 id="report_name"></h1>
+  <div id="main-div">
+    <div>
+      <h1 id="report_name"></h1>
+    </div>
+    <div id="download-div">
+      <i class="fa fa-download" id="download" onclick=download_pdf()></i>
+    </div>
+  </div>
+  <div id="content">
     <div id="reports">
     </div>
     <h3 id="checks_h3"></h3>
     <table id="table" class="checks_table">
 
     </table>
+  </div>
+  <div id="editor"></div>
+
     <!-- <div id="checks">
-        
     </div> -->
     <script>
         window.onload = fetch_json();
