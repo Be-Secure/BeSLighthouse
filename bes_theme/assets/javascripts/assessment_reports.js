@@ -32,6 +32,11 @@ function constructTable(selector, list) {
   return row;
 }
 
+function download_pdf()
+{
+  window.print()
+}
+
 function Headers(list, selector) {
   var columns = [];
   var header = $('<tr/>');
