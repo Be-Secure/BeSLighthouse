@@ -3,6 +3,88 @@ const projectOfInterestObject = {
 	"incomplete_results": false,
 	"items": [
 		{
+			"id": 374,
+			"bes_tracking_id": 374,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/374",
+			"name": "oneTBB",
+			"full_name": "Be-Secure/oneTBB",
+			"description": "oneAPI Threading Building Blocks (oneTBB)",
+			"bes_technology_stack": "L&F",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 49023,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:16:09Z",
+			"updated_at": "2023-02-25T20:33:20Z",
+			"pushed_at": "2023-02-25T20:33:37Z",
+			"git_url": "git://github.com/Be-Secure/oneTBB.git",
+			"clone_url": "https://github.com/Be-Secure/oneTBB.git",
+			"html_url": "https://github.com/Be-Secure/oneTBB",
+			"homepage": "https://oneapi-src.github.io/oneTBB/",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/oneTBB",
+				"main_bes_url": "https://github.com/Be-Secure/oneTBB",
+				"all_projects": [
+					{
+						"id": 67641996,
+						"name": "oneapi-src/oneTBB",
+						"url": "https://github.com/oneapi-src/oneTBB"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606531757,
+						"name": "Be-Secure/oneTBB",
+						"url": "https://github.com/Be-Secure/oneTBB"
+					}
+				]
+			},
+			"license": {
+				"key": "apache-2.0",
+				"name": "Apache License 2.0",
+				"spdx_id": "Apache-2.0",
+				"url": "https://api.github.com/licenses/apache-2.0",
+				"node_id": "MDc6TGljZW5zZTI="
+			},
+			"language": {
+				"C++": 5206409,
+				"C": 410496,
+				"CMake": 117973,
+				"Python": 51259,
+				"SWIG": 5111,
+				"Starlark": 3960,
+				"Shell": 717,
+				"Batchfile": 645
+			},
+			"tags": [
+				"L&F",
+				"IND-ALL",
+				"COM - C",
+				"Tracked"
+			]
+		},
+		{
 			"id": 166,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/166",
 			"bes_tracking_id": 166,
