@@ -959,6 +959,88 @@ const projectOfInterestObject = {
 			}
 		},
 		{
+			"id": 375,
+			"bes_tracking_id": 375,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/375",
+			"name": "oneVPL",
+			"full_name": "Be-Secure/oneVPL",
+			"description": "oneAPI Video Processing Library (oneVPL) dispatcher, tools, and examples",
+			"bes_technology_stack": "L&F",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 19926,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:17:05Z",
+			"updated_at": "2023-02-25T20:27:35Z",
+			"pushed_at": "2023-02-25T20:27:46Z",
+			"git_url": "git://github.com/Be-Secure/oneVPL.git",
+			"clone_url": "https://github.com/Be-Secure/oneVPL.git",
+			"html_url": "https://github.com/Be-Secure/oneVPL",
+			"homepage": "",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/oneVPL",
+				"main_bes_url": "https://github.com/Be-Secure/oneVPL",
+				"all_projects": [
+					{
+						"id": 244967696,
+						"name": "oneapi-src/oneVPL",
+						"url": "https://github.com/oneapi-src/oneVPL"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606531959,
+						"name": "Be-Secure/oneVPL",
+						"url": "https://github.com/Be-Secure/oneVPL"
+					}
+				]
+			},
+			"license": {
+				"key": "mit",
+				"name": "MIT License",
+				"spdx_id": "MIT",
+				"url": "https://api.github.com/licenses/mit",
+				"node_id": "MDc6TGljZW5zZTEz"
+			},
+			"language": {
+				"C++": 5836003,
+				"C": 666329,
+				"Python": 426824,
+				"CMake": 101529,
+				"Shell": 41675,
+				"Batchfile": 32315,
+				"Starlark": 25499,
+				"Dockerfile": 3669
+			},
+			"tags": [
+				"L&F",
+				"IND-ALL",
+				"COM - C",
+				"Tracked"
+			]
+		},
+		{
 			"id": 171,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/171",
 			"bes_tracking_id": 171,
@@ -1233,7 +1315,7 @@ const projectOfInterestObject = {
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/378",
 			"name": "level-zero-spec",
 			"full_name": "Be-Secure/level-zero-spec",
-			"description": null,
+			"description": "",
 			"bes_technology_stack": "A",
 			"watchers_count": 0,
 			"forks_count": 0,
@@ -1377,7 +1459,7 @@ const projectOfInterestObject = {
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/379",
 			"name": "unified-runtime",
 			"full_name": "Be-Secure/unified-runtime",
-			"description": null,
+			"description": "",
 			"bes_technology_stack": "A",
 			"watchers_count": 0,
 			"forks_count": 0,
