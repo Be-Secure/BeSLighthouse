@@ -1106,6 +1106,87 @@ const projectOfInterestObject = {
 			}
 		},
 		{
+			"id": 376,
+			"bes_tracking_id": 376,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/376",
+			"name": "oneCCL",
+			"full_name": "Be-Secure/oneCCL",
+			"description": "oneAPI Collective Communications Library (oneCCL)",
+			"bes_technology_stack": "L&F",
+			"watchers_count": 0,
+			"forks_count": 0,
+			"stargazers_count": 0,
+			"size": 129865,
+			"open_issues": 0,
+			"created_at": "2023-02-25T19:17:38Z",
+			"updated_at": "2023-02-25T20:18:33Z",
+			"pushed_at": "2023-02-25T20:18:45Z",
+			"git_url": "git://github.com/Be-Secure/oneCCL.git",
+			"clone_url": "https://github.com/Be-Secure/oneCCL.git",
+			"html_url": "https://github.com/Be-Secure/oneCCL",
+			"homepage": "https://oneapi-src.github.io/oneCCL",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"node_id": "MDEyOk9yZ2FuaXphdGlvbjQ0MDI4ODM3",
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/Be-Secure",
+				"html_url": "https://github.com/Be-Secure",
+				"followers_url": "https://api.github.com/users/Be-Secure/followers",
+				"following_url": "https://api.github.com/users/Be-Secure/following{/other_user}",
+				"gists_url": "https://api.github.com/users/Be-Secure/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/Be-Secure/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/Be-Secure/subscriptions",
+				"organizations_url": "https://api.github.com/users/Be-Secure/orgs",
+				"repos_url": "https://api.github.com/users/Be-Secure/repos",
+				"events_url": "https://api.github.com/users/Be-Secure/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/Be-Secure/received_events",
+				"type": "Organization",
+				"site_admin": false
+			},
+			"project_repos": {
+				"main_github_url": "https://github.com/oneapi-src/oneCCL",
+				"main_bes_url": "https://github.com/Be-Secure/oneCCL",
+				"all_projects": [
+					{
+						"id": 207412282,
+						"name": "oneapi-src/oneCCL",
+						"url": "https://github.com/oneapi-src/oneCCL"
+					}
+				],
+				"all_bes_repos": [
+					{
+						"id": 606532100,
+						"name": "Be-Secure/oneCCL",
+						"url": "https://github.com/Be-Secure/oneCCL"
+					}
+				]
+			},
+			"license": {
+				"key": "other",
+				"name": "Other",
+				"spdx_id": "NOASSERTION",
+				"url": null,
+				"node_id": "MDc6TGljZW5zZTA="
+			},
+			"language": {
+				"C++": 3633515,
+				"C": 107041,
+				"CMake": 87619,
+				"Makefile": 11998,
+				"Shell": 8352
+			},
+			"tags": [
+				"L&F",
+				"IND-ALL",
+				"COM - C",
+				"TD-U-AI/ML",
+				"TD-C-DA",
+				"Tracked"
+			]
+		},
+		{
 			"id": 165,
 			"bes_tracking_id": 165,
 			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/165",
