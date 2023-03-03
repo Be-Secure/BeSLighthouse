@@ -32,6 +32,10 @@
         font-size: 18px;
     }
 }
+.disabled-link {
+    pointer-events: none;
+    color: black;
+  }
 
 #container {
     text-align: center;
