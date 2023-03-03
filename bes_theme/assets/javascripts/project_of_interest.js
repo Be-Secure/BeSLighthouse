@@ -45,6 +45,7 @@ function tableForProject(base_url,listOfPOI) {
     return create_div;
 }
 
+
 function createDivForPieChart(main_div_content, css, id) {
     const parentDiv =document.createElement("div");
     parentDiv.className = css;
