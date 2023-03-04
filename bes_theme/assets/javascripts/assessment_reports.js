@@ -121,7 +121,7 @@ function fetch_json()
 {
   var url;
   var version = localStorage["version"];
-  var ossp_name = localStorage["ossp_name"].toLowerCase();
+  var ossp_name = localStorage["ossp_name"];
   var report = localStorage["report"];
   console.log(ossp_name);
   console.log("report:"+report);
