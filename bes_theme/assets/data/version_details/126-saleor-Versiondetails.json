@@ -2,8 +2,8 @@
     {
         "version": "3.0.0-b7",
         "release_date": "04-Aug-2021",
-        "criticality_score": "0.40449",
-        "scorecard": "4.5",
+        "criticality_score": "0.46258",
+        "scorecard": "5.5",
         "cve_details": 
         [
             {

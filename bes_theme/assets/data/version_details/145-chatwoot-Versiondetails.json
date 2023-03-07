@@ -2,7 +2,7 @@
     {
         "version": "2.7.0",
         "release_date": "18-Jul-2022",
-        "criticality_score": "0.4049",
+        "criticality_score": "0.44494",
         "scorecard": "3.3",
         "cve_details": 
         [
@@ -59,7 +59,7 @@
                 "CSRF": "",
                 "File_Inclusion": "",
                 "No_of_exploits": ""
-              },
+              }
         ]
     }
     

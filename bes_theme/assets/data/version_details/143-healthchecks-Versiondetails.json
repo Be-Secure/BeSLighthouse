@@ -2,10 +2,10 @@
     {
         "version": "2.2.1",
         "release_date": "13-Jun-2020",
-        "criticality_score": "0.42213",
-        "scorecard": "4.2",
+        "criticality_score": "0.40455",
+        "scorecard": "3",
         "cve_details": [
-            {
+            
                 {
                     "Year": 2023,
                     "No_of_Vulnerabilities": 1,
@@ -42,7 +42,7 @@
                     "File_Inclusion": "",
                     "No_of_exploits": ""
                   }
-            }
+            
         ]
        
     }

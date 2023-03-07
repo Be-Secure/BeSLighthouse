@@ -2747,7 +2747,6 @@ const projectOfInterestObject = {
 				id: 44028837 ,
 				avatar_url: "https://avatars.githubusercontent.com/u/44028837?v=4",
         gravatar_id: "",
-        html_url: "https://github.com/Be-Secure",
         url: "https://api.github.com/users/Be-Secure",
         html_url: "https://github.com/Be-Secure",
         followers_url: "https://api.github.com/users/Be-Secure/followers",
