@@ -1,9 +1,9 @@
 [
     {
-        "version": "server-v2.8.8-beta",
-        "release_date": "24-Jul-2021",
-        "criticality_score": "Not Available",
-        "scorecard": "Not Available",
+        "version": "v2.8.8",
+        "release_date": "17-May-2022",
+        "criticality_score": 0.45912,
+        "scorecard": 3.4,
         "cve_details": 
         [
             {
