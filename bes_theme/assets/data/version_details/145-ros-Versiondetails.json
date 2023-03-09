@@ -1,0 +1,48 @@
+[
+    {
+        "version": "1.15.7",
+        "release_date": "29-Sep-2020",
+        "criticality_score": 0.41368,
+        "scorecard": 5.9,
+        "cve_details": 
+        [
+            {
+              "Year": "2012",
+              "of_ Vulnerabilities": 1,
+              "DoS": null,
+              "Code_Execution": null,
+              "Overflow": null,
+              "Memory_Corruption": null,
+              "Sql_Injection": null,
+              "XSS": null,
+              "Directory_Traversal": null,
+              "Http_Response_Splitting": null,
+              "Bypass_something": null,
+              "Gain_Information": 1,
+              "Gain_Privileges": null,
+              "CSRF": null,
+              "File_Inclusion": null,
+              "of_exploits": ""
+            },
+            {
+              "Year": "Total",
+              "of_Vulnerabilities": 1,
+              "DoS": null,
+              "Code_Execution": null,
+              "Overflow": null,
+              "Memory_Corruption": null,
+              "Sql_Injection": null,
+              "XSS": null,
+              "Directory_Traversal": null,
+              "Http_Response_Splitting": null,
+              "Bypass_something": null,
+              "Gain_Information": 1,
+              "Gain Privileges": null,
+              "CSRF": null,
+              "File_Inclusion": null,
+              "of_exploits": ""
+            }
+        ]
+    }
+    
+]

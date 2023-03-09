@@ -1,0 +1,49 @@
+[
+    {
+        "version": "1.4.13",
+        "release_date": "04-Aug-2021",
+        "criticality_score": 0.37326,
+        "scorecard": 4.4,
+        "cve_details": [
+        {
+            "Year": "2020",
+            "of_Vulnerabilities": 1,
+            "DoS": null,
+            "Code_Execution": null,
+            "Overflow": null,
+            "Memory_Corruption": null,
+            "Sql_Injection": null,
+            "XSS": 1,
+            "Directory_Traversal": null,
+            "Http_Response_Splitting": null,
+            "Bypass_something": null,
+            "Gain_Information": null,
+            "Gain_Privileges": null,
+            "CSRF": null,
+            "File_Inclusion": null,
+            "of_exploits": ""
+        },
+        {
+            "Year": "Total",
+            "of_Vulnerabilities": 1,
+            "DoS": null,
+            "Code_Execution": null,
+            "Overflow": null,
+            "Memory_Corruption": null,
+            "Sql_Injection": null,
+            "XSS": 1,
+            "Directory_Traversal": null,
+            "Http_Response_Splitting": null,
+            "Bypass_something": null,
+            "Gain_Information": null,
+            "Gain_Privileges": null,
+            "CSRF": null,
+            "File_Inclusion": null,
+            "of_exploits": ""
+        }
+          
+        ]
+       
+    }
+    
+]
