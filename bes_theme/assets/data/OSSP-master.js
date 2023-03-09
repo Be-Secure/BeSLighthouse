@@ -3323,5 +3323,226 @@ const projectOfInterestObject = {
       },
       tags: ["A", "IND-ALL", "TD-U-IoT"],
     },
+    {
+      id: 197,
+      bes_tracking_id: 197,
+      issue_url: "https://github.com/Be-Secure/Be-Secure/issues/197",
+      name: "bit",
+      full_name: "Be-Secure/bit",
+      description: "A tool for component-driven application development. ",
+      watchers_count: 0,
+      forks_count: 1,
+      stargazers_count: 0,
+      size: 86380,
+      open_issues: 0,
+      created_at: "2021-08-05T10:04:22Z",
+      updated_at: "2021-08-05T10:04:23Z",
+      pushed_at: "2021-08-05T09:18:48Z",
+      git_url: "git://github.com/Be-Secure/bit.git",
+      clone_url: "https://github.com/Be-Secure/bit.git",
+      html_url: "https://github.com/Be-Secure/bit",
+      homepage: "https://bit.dev",
+      owner: {
+          login: "Be-Secure",
+          id: 44028837,
+          avatar_url: "https://avatars.githubusercontent.com/u/44028837?v=4",
+          html_url: "https://github.com/Be-Secure"
+      },
+      bes_technology_stack: "DO",
+      project_repos: {
+          main_github_url: "https://github.com/teambit/bit",
+          main_bes_url: "https://github.com/Be-Secure/bit",
+          all_projects: {
+              joplin: "https://github.com/teambit/bit"
+
+          },
+          all_bes_repos: [{
+                  id: 392993316,
+                  name: "bit",
+                  url: "https://github.com/Be-Secure/bit"
+              }
+
+          ]
+      },
+      license: {
+          key: "other",
+          name: "Other",
+          spdx_id: "NOASSERTION",
+          url: null,
+          node_id: "MDc6TGljZW5zZTA="
+      },
+      language: [
+          {
+              TypeScript: 6366608,
+              JavaScript: 105153,
+              SCSS: 91100,
+              Vue: 23116,
+              Shell: 10631,
+              PowerShell: 4305,
+              CSS: 1730,
+              Ruby: 1031,
+              Stylus: 1003,
+              Dockerfile: 745,
+              Batchfile: 298,
+              Less: 56,
+              Sass: 13
+          }
+      ],
+
+      tags: [
+          "DO",
+          "IND-ALL",
+      ]
+
+  },
+  {
+      id: 148,
+      bes_tracking_id: 148,
+      issue_url: "https://github.com/Be-Secure/Be-Secure/issues/148",
+      name: "Koha",
+      full_name: "Be-Secure/Koha",
+      description: "Koha is a free software integrated library system (ILS). Koha is distributed under the GNU GPL version 3 or later. ***Note: this is a synced mirror of the official Koha repo. Note: This project uses its own bug tracker, see https://bugs.koha-community.org/ to report a bug or submit a patch.",
+      watchers_count: 0,
+      forks_count: 1,
+      stargazers_count: 0,
+      size: 5469472,
+      open_issues: 0,
+      created_at: "2023-02-22T10:48:34Z",
+      updated_at: "2023-02-19T20:11:16Z",
+      pushed_at: "2023-02-21T12:18:58Z",
+      git_url: "git://github.com/Be-Secure/Koha.git",
+      clone_url: "https://github.com/Be-Secure/Koha.git",
+      html_url: "https://github.com/Be-Secure/Koha",
+      homepage: "https://koha-community.org/",
+      owner: {
+          login: "Be-Secure",
+          id: 44028837,
+          avatar_url: "https://avatars.githubusercontent.com/u/44028837?v=4",
+          html_url: "https://github.com/Be-Secure"
+      },
+      bes_technology_stack: "A",
+      project_repos: {
+          main_github_url: "https://github.com/Koha-Community/Koha",
+          main_bes_url: "https://github.com/Be-Secure/Koha",
+          all_projects: {
+              Koha: "https://github.com/Koha-Community/Koha"
+
+          },
+          all_bes_repos: [{
+                  id: 605053733,
+                  name: "Koha",
+                  url: "https://github.com/Be-Secure/Koha"
+              }
+
+          ]
+      },
+      license: {
+          key: "gpl-3.0",
+          name: "GNU General Public License v3.0",
+          spdx_id: "GPL-3.0",
+          url: "https://api.github.com/licenses/gpl-3.0",
+          node_id: "MDc6TGljZW5zZTk="
+      },
+      language: [
+
+          {
+              Perl: 16605505,
+              JavaScript: 6168358,
+              HTML: 2511094,
+              XSLT: 1580514,
+              Raku: 907624,
+              Vue: 296868,
+              SCSS: 256958,
+              CSS: 211311,
+              Pawn: 159454,
+              NASL: 137851,
+              "C++": 68666,
+              TypeScript: 60683,
+              Assembly: 39632,
+              SourcePawn: 25864,
+              Python: 21872,
+              Shell: 21676,
+              "mIRC Script": 8174,
+              PHP: 5166,
+              CoffeeScript: 3009,
+              Makefile: 879
+            }
+      ],
+
+      tags: [
+          "L&F",
+          "IND-ED",
+          "COM - C",
+
+      ]
+  },
+  {
+      id: 195,
+      bes_tracking_id: 195,
+      issue_url: "https://github.com/Be-Secure/Be-Secure/issues/195",
+      name: "espocrm",
+      full_name: "Be-Secure/espocrm",
+      description: "EspoCRM open source CRM application",
+      watchers_count: 0,
+      forks_count: 1,
+      stargazers_count: 0,
+      size: 58786,
+      open_issues: 0,
+      created_at: "2023-02-23T07:23:00Z",
+      updated_at: "2023-02-23T07:02:07Z",
+      pushed_at: "2023-02-22T16:02:08Z",
+      git_url: "git://github.com/Be-Secure/espocrm.git",
+      clone_url: "https://github.com/Be-Secure/espocrm.git",
+      html_url: "https://github.com/Be-Secure/espocrm",
+      homepage: "https://www.espocrm.com",
+      owner: {
+          login: "Be-Secure",
+          id: 44028837,
+          avatar_url: "https://avatars.githubusercontent.com/u/44028837?v=4",
+          html_url: "https://github.com/Be-Secure"
+      },
+      bes_technology_stack: "A",
+      project_repos: {
+          main_github_url: "https://github.com/espocrm/espocrm",
+          main_bes_url: "https://github.com/Be-Secure/espocrm",
+          all_projects: {
+              espocrm: "https://github.com/espocrm/espocrm"
+
+          },
+          all_bes_repos: [{
+                  id: 605452647,
+                  name: "espocrm",
+                  url: "https://github.com/Be-Secure/espocrm"
+              }
+
+          ]
+      },
+      license: {
+          key: "gpl-3.0",
+          name: "GNU General Public License v3.0",
+          spdx_id: "GPL-3.0",
+          url: "https://api.github.com/licenses/gpl-3.0",
+          node_id: "MDc6TGljZW5zZTk="
+      },
+      language: [
+
+          {
+              PHP: 10401846,
+              JavaScript: 4965763,
+              Less: 567511,
+              Smarty: 349915,
+              CSS: 78728,
+              HTML: 2173
+          }
+      ],
+
+      tags: [
+          "A",
+          "IND-ALL",
+          "COM - C"
+      ]
+
+
+  },
   ],
 };
