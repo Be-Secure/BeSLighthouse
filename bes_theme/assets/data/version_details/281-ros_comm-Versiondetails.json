@@ -1,9 +1,9 @@
 [
     {
-        "version": "1.15.14",
+        "version":"1.15.14",
         "release_date": "07.01.2022",
-        "criticality_score": 0.58563,
-        "scorecard": "5.8",
+        "criticality_score": "Not Available",
+        "scorecard": 5.8,
         "cve_details": 
         [
             {
