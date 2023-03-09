@@ -176,14 +176,10 @@ function load_version_data(base_url) {
       const scorecard = data[i].scorecard;
       const criticalityScore = data[i].criticality_score;
       
-<<<<<<< HEAD
-      const scorecardLink = `<a href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
-=======
 
 
 
       const scorecardLink = `<a id="scorecard" href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
->>>>>>> 6043789fcec6b5ac9ee080cefadb4b7a57bd5c40
 
       if (scorecard != "Not Available")
       {
@@ -239,13 +235,8 @@ function load_version_data(base_url) {
         <td>${version}</td>
         ${scorecard_table_td_data}
         ${criticalityScore_table_td_data}        
-<<<<<<< HEAD
-        <td><a href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
-        <td><a href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
-=======
         <td><a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
         <td><a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
->>>>>>> 6043789fcec6b5ac9ee080cefadb4b7a57bd5c40
       </tr>
       `;
       version_table.innerHTML = html_for_table;
