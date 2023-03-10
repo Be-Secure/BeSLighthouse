@@ -224,7 +224,7 @@ function load_version_data(base_url) {
       const html_for_table = `
       <tr>
         <th>Release Date</th>
-        <th>version</th>
+        <th>Version</th>
         <th>Scorecard</th>
         <th>Criticality Score</th>
         <th>Sonarqube</th>
