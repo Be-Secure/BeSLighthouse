@@ -1691,6 +1691,78 @@ const projectOfInterestObject = {
 			]
 
 		}
+		,
+		{
+			"id": 89,
+			"bes_tracking_id": 89,
+			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/89",
+			"name": "opstrace",
+			"full_name": "Be-Secure/opstrace",
+			"description": "The Open Source Observability Distribution",
+			"watchers_count": 0,
+			"forks_count": 1,
+			"stargazers_count": 0,
+			"size": 53863,
+			"open_issues": 0,
+			"created_at": "2021-12-20T08:57:39Z",
+ 			"updated_at": "2021-12-20T08:57:40Z",
+  			"pushed_at": "2021-12-15T00:15:32Z",
+			"git_url": "git://github.com/Be-Secure/opstrace.git",
+			"clone_url": "https://github.com/Be-Secure/opstrace.git",
+			"html_url": "https://github.com/Be-Secure/opstrace",
+			"homepage": "https://opstrace.com",
+			"owner": {
+				"login": "Be-Secure",
+				"id": 44028837,
+				"avatar_url": "https://avatars.githubusercontent.com/u/44028837?v=4",
+				"html_url": "https://github.com/Be-Secure"
+			},
+            "bes_technology_stack": "S",
+			"project_repos": {
+				"main_github_url": "https://github.com/opstrace/opstrace",
+				"main_bes_url": "https://github.com/Be-Secure/opstrace",
+				"all_projects": {
+					"opstrace": "https://github.com/opstrace/opstrace"
+
+				},
+				"all_bes_repos": [{
+						"id": 605046755,
+						"name": "opstrace",
+						"url": "https://github.com/Be-Secure/opstrace"
+					}
+
+				]
+			},
+			"license": 
+			{
+				"key": "apache-2.0",
+				"name": "Apache License 2.0",
+				"spdx_id": "Apache-2.0",
+				"url": "https://api.github.com/licenses/apache-2.0",
+				"node_id": "MDc6TGljZW5zZTI="
+			}
+			,  
+			"language": {
+				"TypeScript": 7367087,
+				"Markdown": 208358,
+				"JavaScript": 178209,
+				"Go": 154702,
+				"Shell": 105012,
+				"Makefile": 38755,
+				"Dockerfile": 16949,
+				"Python": 7706,
+				"PLpgSQL": 1235,
+				"HTML": 626
+			  },
+
+			"tags": [
+				"S",
+				"IND-ALL",
+				"COM - C"
+				
+			]
+
+		}
 
 
     ]
