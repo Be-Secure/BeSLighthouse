@@ -33,6 +33,8 @@ function table_sort()
 function tableForProject(base_url,listOfPOI) {
     const create_div = document.createElement("div");
     create_div.className = "table-for-POI-css";
+    const table_search_input = `<input id="table_search" class="search" type="text" placeholder="Search.." onkeyup='javascript:search_table()'>`
+    create_div.innerHTML = table_search_input;
     const table = document.createElement("table");
     table.setAttribute("id", "projectOfIntreat");
     table.setAttribute("class", "table-css");
@@ -159,6 +161,17 @@ function pieChartForBesTechStack(listOfPOI, id) {
         colorList.push(BTS[key[i]].backgroundColor);
     }
     pieChart(lableList, dataList, colorList, id, 'BeS Tech Stack');
+}
+
+function search_table()
+{
+    var $rows = $('#projectOfIntreat tr');
+    $('#table_search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        $rows.filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1)
+        });
+    });
 }
 
 function pieChartForPoi(listOfPOI, id) {
