@@ -1,0 +1,47 @@
+[
+    {
+        "version": "9.1.0",
+        "release_date": "17-Nov-2022",
+        "criticality_score": "0.50045",
+        "scorecard": "4",
+        "cve_details": 
+        [
+            {
+                "Year": "2021",
+                "# of Vulnerabilities": 1,
+                "DoS": 1,
+                "Code Execution": null,
+                "Overflow": null,
+                "Memory Corruption": null,
+                "Sql Injection": null,
+                "XSS": null,
+                "Directory Traversal": null,
+                "Http Response Splitting": null,
+                "Bypass something": null,
+                "Gain Information": null,
+                "Gain Privileges": null,
+                "CSRF": null,
+                "File Inclusion": null,
+                "# of exploits": ""
+            },
+            {
+                "Year": "Total",
+                "# of Vulnerabilities": 1,
+                "DoS": 1,
+                "Code Execution": null,
+                "Overflow": null,
+                "Memory Corruption": null,
+                "Sql Injection": null,
+                "XSS": null,
+                "Directory Traversal": null,
+                "Http Response Splitting": null,
+                "Bypass something": null,
+                "Gain Information": null,
+                "Gain Privileges": null,
+                "CSRF": null,
+                "File Inclusion": null,
+                "# of exploits": ""
+            }
+        ]
+    }
+]
