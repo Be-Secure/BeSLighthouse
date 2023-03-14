@@ -3,7 +3,7 @@
         "version": "1.15.3",
         "release_date": "23-Nov-2022",
         "criticality_score": "0.55464",
-        "scorecard": "3.8",
+        "scorecard": "3.8", 
         "cve_details": 
         [
             {
