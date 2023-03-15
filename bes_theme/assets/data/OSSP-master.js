@@ -1695,7 +1695,7 @@ const projectOfInterestObject = {
 		{
 			"id": 89,
 			"bes_tracking_id": 89,
-			"issue_url": "https://github.com/Be-Secure/BeSLighthouse/issues/89",
+			"issue_url": "https://github.com/Be-Secure/Be-Secure/issues/89",
 			"name": "opstrace",
 			"full_name": "Be-Secure/opstrace",
 			"description": "The Open Source Observability Distribution",
