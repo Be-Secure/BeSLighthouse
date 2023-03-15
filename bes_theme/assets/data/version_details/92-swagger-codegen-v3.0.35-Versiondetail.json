@@ -1,0 +1,47 @@
+[
+    {
+        "version": "3.0.35",
+        "release_date": "15-Aug-2022",
+        "criticality_score": "0.44798",
+        "scorecard": "3.1",
+        "cve_details": 
+        [
+            {
+                "Year": "2017",
+                "# of Vulnerabilities": 2,
+                "DoS": null,
+                "Code Execution": 2,
+                "Overflow": null,
+                "Memory Corruption": null,
+                "Sql Injection": null,
+                "XSS": null,
+                "Directory Traversal": null,
+                "Http Response Splitting": null,
+                "Bypass something": null,
+                "Gain Information": null,
+                "Gain Privileges": null,
+                "CSRF": null,
+                "File Inclusion": null,
+                "# of exploits": ""
+            },
+            {
+                "Year": "Total",
+                "# of Vulnerabilities": 2,
+                "DoS": null,
+                "Code Execution": 2,
+                "Overflow": null,
+                "Memory Corruption": null,
+                "Sql Injection": null,
+                "XSS": null,
+                "Directory Traversal": null,
+                "Http Response Splitting": null,
+                "Bypass something": null,
+                "Gain Information": null,
+                "Gain Privileges": null,
+                "CSRF": null,
+                "File Inclusion": null,
+                "# of exploits": ""
+            }
+        ]
+    }
+]

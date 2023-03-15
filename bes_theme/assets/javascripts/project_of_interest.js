@@ -13,6 +13,23 @@ function open_bes_version_history(base_url,id, name) {
   window.open(base_url+"/bes_version_history", "_self");
 }
 
+function table_sort()
+{
+    const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+    const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
+        v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+        )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+    // do the work...
+    document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+        const table = th.closest('table');
+        Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+            .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+            .forEach(tr => table.appendChild(tr) );
+    })));
+}
+
 function tableForProject(base_url,listOfPOI) {
     const create_div = document.createElement("div");
     create_div.className = "table-for-POI-css";
@@ -22,10 +39,10 @@ function tableForProject(base_url,listOfPOI) {
     const tableBody = document.createElement('TBODY');
     const html_for_table = `
       <tr>
-        <th>BeS Id</th>
-        <th>Project Name</th>
-        <th>Description</th>
-        <th>BeS Tech Stack</th>
+        <th>BeS Id  <i class="fa fa-sort"></i></th>
+        <th>Project Name <i class="fa fa-sort"></i></th>
+        <th>Description <i class="fa fa-sort"></i></th>
+        <th>BeS Tech Stack <i class="fa fa-sort"></i></th>
       </tr>
       `;
     tableBody.innerHTML = html_for_table;
@@ -44,6 +61,7 @@ function tableForProject(base_url,listOfPOI) {
     create_div.appendChild(table);
     return create_div;
 }
+
 
 function createDivForPieChart(main_div_content, css, id) {
     const parentDiv =document.createElement("div");
@@ -181,4 +199,5 @@ function projectOfInterest(base_url) {
     container_element.appendChild(tablePOI);
     pieChartForBesTechStack(listOfPOI, "myChart");
     pieChartForPoi(listOfPOI, "projectOfInterest");
+    table_sort();
 }

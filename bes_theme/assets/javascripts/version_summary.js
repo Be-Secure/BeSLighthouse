@@ -102,6 +102,41 @@ function open_report(base_url,version, report, project_name) {
   window.open(base_url+"/bes_assessment_reports", "_self");
 }
 
+function check_url(id, version, name)
+{
+  console.log("check called");
+  // var request = new XMLHttpRequest();  
+  if (id == "sonarqube" || id == "codeql")
+  {
+
+    var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/sast/"+name+"-"+version+"-"+id+"-report.json"
+  }else
+  {
+    var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/"+id+"/"+name+"-"+version+"-"+id+"-report.json"
+
+  }
+
+  fetch(url, {
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+    },
+})
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    
+
+
+  })
+  .catch(function (err) {
+    document.getElementById(id).setAttribute('href','javascript:void(0)');
+    document.getElementById(id).innerHTML = "Not Available"
+    document.getElementById(id).classList.add("disabled-link")
+  });
+}
+
 function load_version_data(base_url) {
   id = localStorage["id"]
   ossp_name = localStorage["name"];
@@ -141,25 +176,30 @@ function load_version_data(base_url) {
       const scorecard = data[i].scorecard;
       const criticalityScore = data[i].criticality_score;
       
+
+
+
+      const scorecardLink = `<a id="scorecard" href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
+
       if (scorecard != "Not Available")
       {
         // Color coding scorecard scores
         if (scorecard <= 2.5 ) {
-          scorecard_table_td_data = `<td><span style="background-color:green"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:green"; class="score-color-css">${scorecardLink}</span></td>`
           
         } else if (scorecard <= 5 ){
-          scorecard_table_td_data = `<td><span style="background-color:yellow"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:yellow"; class="score-color-css">${scorecardLink}</span></td>`
           
         } else if (scorecard <= 7.5 ){
-          scorecard_table_td_data = `<td><span style="background-color:orange"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:orange"; class="score-color-css">${scorecardLink}</span></td>`
         
         } else if (scorecard <= 10 ){
-          scorecard_table_td_data = `<td><span style="background-color:red"; class="score-color-css">${scorecard}</span></td>`
+          scorecard_table_td_data = `<td><span style="background-color:red"; class="score-color-css">${scorecardLink}</span></td>`
 
         } 
       } else
       {
-        scorecard_table_td_data=`<td><span class="score-color-css">${scorecard}</span></td>`
+        scorecard_table_td_data=`<td><span class="score-color-css">${scorecardLink}</span></td>`
       }
       
       if (criticalityScore != "Not Available")
@@ -179,16 +219,15 @@ function load_version_data(base_url) {
         criticalityScore_table_td_data=`<td><span class="score-color-css">${criticalityScore}</span></td>`
       }
 
-      
+      console.log("version:"+version);
 
       const html_for_table = `
       <tr>
         <th>Release Date</th>
-        <th>version</th>
+        <th>Version</th>
         <th>Scorecard</th>
         <th>Criticality Score</th>
         <th>Sonarqube</th>
-        <th>Scorecard</th>
         <th>Codeql</th>
       </tr>
       <tr>
@@ -196,9 +235,8 @@ function load_version_data(base_url) {
         <td>${version}</td>
         ${scorecard_table_td_data}
         ${criticalityScore_table_td_data}        
-        <td><a href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
-        <td><a href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>Click here</a></td>
-        <td><a href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
+        <td><a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
+        <td><a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
       </tr>
       `;
       version_table.innerHTML = html_for_table;
@@ -227,8 +265,12 @@ function load_version_data(base_url) {
       $(document).ready(function() {
         vulnsbytypeandyearchart(chart_Id, data[i].cve_details);
       });
+      check_url("scorecard", version, ossp_name);
+      check_url("sonarqube", version, ossp_name);
+      check_url("codeql", version, ossp_name);
     }
-  
+
+
   })
   
   .catch(function (err) {

@@ -1,0 +1,50 @@
+[
+    {
+        "version": "2.2.1",
+        "release_date": "13-Jun-2020",
+        "criticality_score": "0.40455",
+        "scorecard": "3",
+        "cve_details": [
+            
+                {
+                    "Year": 2023,
+                    "No_of_Vulnerabilities": 1,
+                    "DoS": "",
+                    "Code_Execution": "",
+                    "Overflow": "",
+                    "Memory_Corruption": "",
+                    "Sql_Injection": "",
+                    "XSS": "",
+                    "Directory_Traversal": "",
+                    "Http_Response_Splitting": "",
+                    "Bypass_something": "",
+                    "Gain_Information": "",
+                    "Gain_Privileges": "",
+                    "CSRF": "",
+                    "File_Inclusion": "",
+                    "No_of_exploits": ""
+                  },
+                  {
+                    "Year": "Total",
+                    "No_of_Vulnerabilities": 1,
+                    "DoS": "",
+                    "Code_Execution": "",
+                    "Overflow": "",
+                    "Memory_Corruption": "",
+                    "Sql_Injection": "",
+                    "XSS": "",
+                    "Directory_Traversal": "",
+                    "Http_Response_Splitting": "",
+                    "Bypass_something": "",
+                    "Gain_Information": "",
+                    "Gain_Privileges": "",
+                    "CSRF": "",
+                    "File_Inclusion": "",
+                    "No_of_exploits": ""
+                  }
+            
+        ]
+       
+    }
+    
+]

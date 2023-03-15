@@ -1,0 +1,67 @@
+[
+    {
+        "version": "2.5.1",
+        "release_date": "9-Jun-2022",
+        "criticality_score": "0.43841",
+        "scorecard": "4.6",
+        "cve_details": 
+        [
+            
+            {
+                "Year": 2018,
+                "No_of_Vulnerabilities": 1,
+                "DoS": "",
+                "Code_Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 1,
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": "",
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+            },
+            {
+                 "Year": 2023,
+                "No_of_Vulnerabilities": 4,
+                "DoS": "",
+                "Code_Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 1,
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": 1,
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+           },
+         {
+                "Year": "Total",
+                "No_of_Vulnerabilities": 5,
+                "DoS": "",
+                "Code_Execution": "",
+                "Overflow": "",
+                "Memory_Corruption": "",
+                "Sql_Injection": "",
+                "XSS": 2,
+                "Directory_Traversal": "",
+                "Http_Response_Splitting": "",
+                "Bypass_something": "",
+                "Gain_Information": "",
+                "Gain_Privileges": "",
+                "CSRF": 1,
+                "File_Inclusion": "",
+                "No_of_exploits": ""
+         }
+        ]
+    }
+    
+]
