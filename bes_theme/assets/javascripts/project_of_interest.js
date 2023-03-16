@@ -186,11 +186,18 @@ function pieChartForPoi(listOfPOI, id) {
     pieChart(lableList, dataList, colorList, id, "Languages");
 }
 
-function projectOfInterest(base_url) {
+async function projectOfInterest(base_url) {
     const container_element = document.getElementById("container");
     const main_div_content = document.createElement("div");
     main_div_content.className = "border-div-for-project-of-intrest";
-    const listOfPOI = projectOfInterestObject.items;
+    const poi = await fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/OSSP-Master.json', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        },
+    })
+    const poiData = await poi.json();
+    const listOfPOI = poiData.items;
     totalProject(main_div_content, listOfPOI);
     createDivForPieChart(main_div_content, "pie-chart-poi-css", "projectOfInterest");
     createDivForPieChart(main_div_content, "pie-chart-css", "myChart");
