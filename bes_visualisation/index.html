@@ -421,7 +421,6 @@ color: white;
   <script src="../assets/javascripts/bessearch.foamtree.util.loading.js"></script>
   <script src="../assets/javascripts/bessearch.foamtree.util.relaxationprogress.js"></script>
 
-  <script type="text/javascript" src="../assets/data/OSSP-master.js"></script>
   
    <!-- Include Hammer.js for mobile interactions -->
    <script src="../assets/javascripts/hammer.min.js"></script>
@@ -642,12 +641,18 @@ color: white;
         return `${base_url}/assets/images/sec_logo.png`;
       }
     }
-    (function () {
+    (async function () {
       // Firefox has problems handling SVG images on canvas
       // (https://bugzilla.mozilla.org/show_bug.cgi?id=1017847),
       // so we need to enable a workaround.
       var isFirefox = window.navigator.userAgent.indexOf("Firefox") >= 0;
-
+      const poi = await fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/OSSP-Master.json', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        },
+      })
+      const projectOfInterestObject = await poi.json();
       // Define two deferreds we'll wait for before initializing FoamTree
       var load = $.Deferred();
       $(window).load(function () { load.resolve() });
@@ -1035,8 +1040,6 @@ color: white;
         var foamtreeLoader = BeSSearchFoamTree.loader(foamtree,
           "<div class='font'>Loading and preparing<br />the awesome...</div>");
         foamtreeLoader.started();
-
-        // JSONP.load("../assets/data/OSSP-master.js", "modelDataAvailable", setDataObject);
         setDataObject(projectOfInterestObject);
 
         /**

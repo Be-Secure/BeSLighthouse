@@ -33,6 +33,8 @@ function table_sort()
 function tableForProject(base_url,listOfPOI) {
     const create_div = document.createElement("div");
     create_div.className = "table-for-POI-css";
+    const table_search_input = `<input id="table_search" class="search" type="text" placeholder="Search.." onkeyup='javascript:search_table()'>`
+    create_div.innerHTML = table_search_input;
     const table = document.createElement("table");
     table.setAttribute("id", "projectOfIntreat");
     table.setAttribute("class", "table-css");
@@ -161,6 +163,17 @@ function pieChartForBesTechStack(listOfPOI, id) {
     pieChart(lableList, dataList, colorList, id, 'BeS Tech Stack');
 }
 
+function search_table()
+{
+    var $rows = $('#projectOfIntreat tr');
+    $('#table_search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        $rows.filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1)
+        });
+    });
+}
+
 function pieChartForPoi(listOfPOI, id) {
     const lableList = [];
     const dataList = [];
@@ -186,11 +199,18 @@ function pieChartForPoi(listOfPOI, id) {
     pieChart(lableList, dataList, colorList, id, "Languages");
 }
 
-function projectOfInterest(base_url) {
+async function projectOfInterest(base_url) {
     const container_element = document.getElementById("container");
     const main_div_content = document.createElement("div");
     main_div_content.className = "border-div-for-project-of-intrest";
-    const listOfPOI = projectOfInterestObject.items;
+    const poi = await fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/OSSP-Master.json', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        },
+    })
+    const poiData = await poi.json();
+    const listOfPOI = poiData.items;
     totalProject(main_div_content, listOfPOI);
     createDivForPieChart(main_div_content, "pie-chart-poi-css", "projectOfInterest");
     createDivForPieChart(main_div_content, "pie-chart-css", "myChart");

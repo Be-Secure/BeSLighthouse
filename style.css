@@ -219,6 +219,13 @@ tr:nth-child(even){background-color: #f2f2f2}
     margin: 2%;
 }
 
+.search {
+
+    float: left;
+    margin-bottom: 7px;
+    width: 20%;
+}
+
   
   /* .btn-group button:not(:last-child) {
     border-bottom: none; 
