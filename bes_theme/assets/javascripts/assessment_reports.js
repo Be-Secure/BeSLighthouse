@@ -150,7 +150,6 @@ function fetch_json()
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/license-compliance' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
   }
   else {
-      // Replace the namespace after testing
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
 
   }
