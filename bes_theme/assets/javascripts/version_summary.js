@@ -229,6 +229,7 @@ function load_version_data(base_url) {
         <th>Criticality Score</th>
         <th>Sonarqube</th>
         <th>Codeql</th>
+        <th>Fossology</th>
       </tr>
       <tr>
         <td>${releaseData}</td>
@@ -237,6 +238,7 @@ function load_version_data(base_url) {
         ${criticalityScore_table_td_data}        
         <td><a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
         <td><a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
+        <td><a id="codeql" href='javascript:open_report("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a></td>
       </tr>
       `;
       version_table.innerHTML = html_for_table;
