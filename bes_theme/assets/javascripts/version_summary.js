@@ -141,7 +141,7 @@ function load_version_data(base_url) {
   id = localStorage["id"]
   ossp_name = localStorage["name"];
 
-  fetch('../assets/data/version_details/'+id+'-'+ossp_name+'-Versiondetails.json')
+  fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/version_details/'+id+'-'+ossp_name+'-Versiondetails.json')
   .then(function (response) {
     return response.json();
   })
