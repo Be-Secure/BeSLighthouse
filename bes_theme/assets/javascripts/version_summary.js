@@ -110,7 +110,13 @@ function check_url(id, version, name)
   {
 
     var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/sast/"+name+"-"+version+"-"+id+"-report.json"
-  }else
+  } else if (id == "fossology")
+  {
+
+    var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/license-compliance/"+name+"-"+version+"-"+id+"-report.json"
+
+  }
+  else
   {
     var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/"+id+"/"+name+"-"+version+"-"+id+"-report.json"
 
@@ -229,6 +235,7 @@ function load_version_data(base_url) {
         <th>Criticality Score</th>
         <th>Sonarqube</th>
         <th>Codeql</th>
+        <th>Fossology</th>
       </tr>
       <tr>
         <td>${releaseData}</td>
@@ -237,6 +244,7 @@ function load_version_data(base_url) {
         ${criticalityScore_table_td_data}        
         <td><a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
         <td><a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
+        <td><a id="fossology" href='javascript:open_report("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a></td>
       </tr>
       `;
       version_table.innerHTML = html_for_table;
@@ -268,6 +276,7 @@ function load_version_data(base_url) {
       check_url("scorecard", version, ossp_name);
       check_url("sonarqube", version, ossp_name);
       check_url("codeql", version, ossp_name);
+      check_url("fossology", version, ossp_name);
     }
 
 

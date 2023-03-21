@@ -117,6 +117,22 @@ function print_sonarqube_report(data) {
   document.getElementById("reports").innerHTML = table;
 }
 
+function print_fossology_report(data) 
+{
+  json_data = JSON.stringify(data);
+  // console.log(json_data);
+  json_object = JSON.parse(json_data);
+  var table = "<table id=table>"
+  table += "<tr><th>FileName</th><th>License Concluded</th><th>File Copyright Text</th></tr>"
+  for (let i in json_object) {
+    table += "<tr><td>" + json_object[i].FileName + "</td><td>" + json_object[i].LicenseConcluded + "</td><td>" + json_object[i].FileCopyrightText + "</td></tr>"
+
+  }
+      
+  table += "</table>"
+  document.getElementById("reports").innerHTML = table;
+}
+
 function fetch_json()
 {
   var url;
@@ -127,8 +143,13 @@ function fetch_json()
   console.log("report:"+report);
   if (report == "codeql" || report == "sonarqube") { // The sast reports(codeql, sonarqube, ...) are under sast dir.
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sast' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
-  } 
-    else {
+  }
+
+  else if (report == "fossology")
+  {
+    url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/license-compliance' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
+  }
+  else {
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
 
   }
@@ -161,6 +182,10 @@ function fetch_json()
     } else if (report == "sonarqube"){
       
       print_sonarqube_report(data);
+    
+    } else if (report == "fossology"){
+      
+      print_fossology_report(data);
     }
 
 
