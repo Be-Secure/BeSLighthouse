@@ -111,9 +111,7 @@ function check_url(id, version, name)
 
     var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/sast/"+name+"-"+version+"-"+id+"-report.json"
   }
-  else if(id == "sbom"){
-    var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/sbom/"+name+"-"+version+"-"+id+"-report.json"
-  }
+  
   else
   {
     var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/"+id+"/"+name+"-"+version+"-"+id+"-report.json"

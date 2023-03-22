@@ -122,9 +122,9 @@ function print_sbom_report(data) {
   json_data = JSON.stringify(data);
   json_object = JSON.parse(json_data);
   var table = "<table id=table>"
-  table += "<tr><th>name</th><th>SPDXID</th><th>versionInfo</th><th>supplier</th><th>downloadLocation</th><th>filesAnalyzed</th><th>licenseConcluded</th><th>licenseDeclared</th><th>copyrightText</th></tr>"
+  table += "<tr><th>Package name</th><th>version</th><th>supplier</th><th>downloadLocation</th><th>license</th></tr>"
   for (let i in json_object.packages) {
-   table += "<tr><td>" + json_object.packages[i].name+ "</td><td>" + json_object.packages[i].SPDXID+ "</td><td>" + json_object.packages[i].versionInfo+ "</td><td>" + json_object.packages[i].supplier+ "</td><td>" + json_object.packages[i].downloadLocation+ "</td><td>" + json_object.packages[i].filesAnalyzed+ "</td><td>" + json_object.packages[i].licenseConcluded+ "</td><td>" + json_object.packages[i].licenseDeclared+ "</td><td>" + json_object.packages[i].copyrightText+ "</td></tr>"
+   table += "<tr><td>" + json_object.packages[i].name+ "</td><td>" + json_object.packages[i].versionInfo+ "</td><td>" + json_object.packages[i].supplier+ "</td><td>" + json_object.packages[i].downloadLocation+ "</td><td>" + json_object.packages[i].licenseConcluded+ "</td></tr>"
   }  
   table += "</table>"
   document.getElementById("reports").innerHTML = table;
@@ -140,10 +140,7 @@ function fetch_json()
   if (report == "codeql" || report == "sonarqube") { // The sast reports(codeql, sonarqube, ...) are under sast dir.
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sast' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
   } 
-  else if (report == "sbom") { // sbom dir
-    url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sbom' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
-  }
-    else {
+  else {
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
 
   }
