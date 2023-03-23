@@ -122,7 +122,7 @@ function print_sbom_report(data) {
   json_data = JSON.stringify(data);
   json_object = JSON.parse(json_data);
   var table = "<table id=table>"
-  table += "<tr><th>Package name</th><th>version</th><th>supplier</th><th>downloadLocation</th><th>license</th></tr>"
+  table += "<tr><th>Package name</th><th>Version</th><th>Supplier</th><th>Download Location</th><th>License</th></tr>"
   for (let i in json_object.packages) {
    table += "<tr><td>" + json_object.packages[i].name+ "</td><td>" + json_object.packages[i].versionInfo+ "</td><td>" + json_object.packages[i].supplier+ "</td><td>" + json_object.packages[i].downloadLocation+ "</td><td>" + json_object.packages[i].licenseConcluded+ "</td></tr>"
   }  
