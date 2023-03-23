@@ -117,6 +117,19 @@ function print_sonarqube_report(data) {
   document.getElementById("reports").innerHTML = table;
 }
 
+//print sbom report
+function print_sbom_report(data) {
+  json_data = JSON.stringify(data);
+  json_object = JSON.parse(json_data);
+  var table = "<table id=table>"
+  table += "<tr><th>Package name</th><th>Version</th><th>Supplier</th><th>Download Location</th><th>License</th></tr>"
+  for (let i in json_object.packages) {
+   table += "<tr><td>" + json_object.packages[i].name+ "</td><td>" + json_object.packages[i].versionInfo+ "</td><td>" + json_object.packages[i].supplier+ "</td><td>" + json_object.packages[i].downloadLocation+ "</td><td>" + json_object.packages[i].licenseConcluded+ "</td></tr>"
+  }  
+  table += "</table>"
+  document.getElementById("reports").innerHTML = table;
+}
+
 function print_fossology_report(data) 
 {
   json_data = JSON.stringify(data);
@@ -133,6 +146,7 @@ function print_fossology_report(data)
   document.getElementById("reports").innerHTML = table;
 }
 
+
 function fetch_json()
 {
   var url;
@@ -143,12 +157,14 @@ function fetch_json()
   console.log("report:"+report);
   if (report == "codeql" || report == "sonarqube") { // The sast reports(codeql, sonarqube, ...) are under sast dir.
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sast' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
-  }
+
+  } 
 
   else if (report == "fossology")
   {
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/license-compliance' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
   }
+
   else {
     url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
 
@@ -186,6 +202,10 @@ function fetch_json()
     } else if (report == "fossology"){
       
       print_fossology_report(data);
+    }
+    else if (report == "sbom"){
+      
+      print_sbom_report(data);
     }
 
 
