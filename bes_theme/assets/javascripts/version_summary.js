@@ -113,7 +113,7 @@ function check_url(id, version, name)
 
   }
 
-  } else if (id == "fossology")
+  else if (id == "fossology")
   {
 
     var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/"+name+"/"+version+"/license-compliance/"+name+"-"+version+"-"+id+"-report.json"
