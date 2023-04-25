@@ -156,17 +156,17 @@ function fetch_json()
   console.log(ossp_name);
   console.log("report:"+report);
   if (report == "codeql" || report == "sonarqube") { // The sast reports(codeql, sonarqube, ...) are under sast dir.
-    url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sast' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
+    url = 'https://raw.githubusercontent.com/sand-hya/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/sast' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';  
 
   } 
 
   else if (report == "fossology")
   {
-    url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/license-compliance' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
+    url = 'https://raw.githubusercontent.com/sand-hya/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/license-compliance' + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
   }
 
   else {
-    url = 'https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
+    url = 'https://raw.githubusercontent.com/sand-hya/besecure-assessment-datastore/main/'+ ossp_name + '/' + version + '/' + report + '/' + ossp_name+ '-' + version + '-' + report + '-report.json';
 
   }
   

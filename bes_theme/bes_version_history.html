@@ -110,11 +110,26 @@
   </style>
 </head>
 <body class="body-css">
-  <div class="header-status-bar" id="hadder_page"></div>
+  <div class="header-status-bar" id="hadder_page">
+    <div class="hadder-css" id="hadder-css-page"></div>
+  </div>
   <div id="report-name-project" class="report-name-css"></div>
-  <div id="container" class="container-css"></div>
+  <div id="container" class="container-css">
+    <div class="border-div" id="main-border-div">
+      <div class="version_list" id="version_drop_down">
+        <select id="selectversion"></select>
+      </div>
+      <div class="version_div" id="version_details">
+        <table class="table-css" id="version_table"></table>
+      </div>
+      <div class="graph-style" id="main-div-for-graph-presentation">
+      </div>
+    </div>
   </div>
   <script>
+    const span_for_hadder = document.getElementById("hadder-css-page");
+    span_for_hadder.innerText = "BeSLighthouse";
+
     window.onload = load_version_data(base_url);
     window.onscroll = function() {myFunction()};
 

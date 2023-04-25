@@ -203,7 +203,7 @@ async function projectOfInterest(base_url) {
     const container_element = document.getElementById("container");
     const main_div_content = document.createElement("div");
     main_div_content.className = "border-div-for-project-of-intrest";
-    const poi = await fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/OSSP-Master.json', {
+    const poi = await fetch('https://raw.githubusercontent.com/sand-hya/besecure-osspoi-datastore/besissue/OSSP-Master.json', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
