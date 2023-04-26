@@ -241,29 +241,7 @@ function load_version_data(base_url) {
 
       //creating report table
       const report_table = document.getElementById("version_table");
-      const html_for_table = `
-        <tr>
-          <th>Release Date</th>
-          <th>Version</th>
-          <th>Scorecard</th>
-          <th>Criticality Score</th>
-          <th>Sonarqube</th>
-          <th>Codeql</th>
-          <th>sbom</th>
-          <th>Fossology</th>
-        </tr>
-        <tr>
-          <td>${releaseData}</td>
-          <td>${version}</td>
-          ${scorecard_table_td_data}
-          ${criticalityScore_table_td_data}        
-          <td><a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td>
-          <td><a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td>
-          <td><a id="sbom" href='javascript:open_report("${base_url}","${version}", "sbom", "${ossp_name}")'>Click here</a></td>
-          <td><a id="fossology" href='javascript:open_report("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a></td>
-        </tr>
-        `;
-        report_table.innerHTML = html_for_table;
+
       
       //graph code
       const div_tag_chat_main = document.getElementById("main-div-for-graph-presentation");

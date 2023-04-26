@@ -117,10 +117,31 @@
   <div id="container" class="container-css">
     <div class="border-div" id="main-border-div">
       <div class="version_list" id="version_drop_down">
-        <select id="selectversion"></select>
+        
       </div>
       <div class="version_div" id="version_details">
-        <table class="table-css" id="version_table"></table>
+        <table class="table-css" id="version_table">
+          <tr>
+            <th>Version</th>
+            <th>Release Date</th>
+            <th>Scorecard</th>
+            <th>Criticality Score</th>
+            <th>Sonarqube</th>
+            <th>Codeql</th>
+            <th>sbom</th>
+            <th>Fossology</th>
+          </tr>
+          <tr id="report_display"> 
+            <td id="version_detail"><select id="selectversion"></select></td>
+            <td id="release_detail"></td>
+            <td id="scorecard_detail"></td>
+            <td id="criticality_detail"></td>      
+            <td id="sonarqube_detail"></td>
+            <td id="codeql_detail"></td>
+            <td id="sbom_detail"></td>
+            <td id="fossology_detai"></td>
+          </tr>
+        </table>
       </div>
       <div class="graph-style" id="main-div-for-graph-presentation">
       </div>
