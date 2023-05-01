@@ -195,7 +195,7 @@ function load_version_data(base_url) {
 
         //get i value
         for (let i = 0; i<Object.keys(data).length; i++) {
-          if(data[i].version==text){
+          if(text==data[i].version){
             var val=i;
           }
         }
