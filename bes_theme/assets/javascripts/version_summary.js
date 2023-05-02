@@ -158,7 +158,6 @@ function load_version_data(base_url) {
     const container_element = document.getElementById("container");
     const create_hadder_content = document.getElementById("hadder_page");
     const span_for_hadder = document.getElementById("hadder-css-page");
-    //span_for_hadder.className = "hadder-css";
     span_for_hadder.innerText = "BeSLighthouse"
     create_hadder_content.append(span_for_hadder);
     const report_name = document.getElementById("report-name-project");
@@ -170,41 +169,20 @@ function load_version_data(base_url) {
       
       // Main div
       const main_div_content = document.getElementById("border-div-css");
-      //main_div_content.className = "border-div";
-
       // version table
-      const version_div_content = document.createElement("div");
-      version_div_content.setAttribute("class", "version_div");
-      version_div_content.setAttribute("id", "version_details");
+      const version_div_content = document.getElementById("version_details");
+      const version_table = document.getElementById("version_table");
+      // version table1
+      const version_div_content1 = document.getElementById("version_details1");
       // const version_details_element = document.getElementById("version_details");
-      const version_table = document.createElement("table");
-      version_table.setAttribute("id", "version_table"+i);
-      version_table.setAttribute("class", "table-css1");
+      const version_table1 = document.getElementById("version_table1");
+      const try_div = document.getElementById("border_merge_css");
+
+      i=0;
       const releaseData = data[i].release_date;
       const version = data[i].version;
       const scorecard = data[i].scorecard;
-      const criticalityScore = data[i].criticality_score;
-      
-      // version table1
-      const version_div_content1 = document.createElement("div");
-      version_div_content1.setAttribute("class", "version_div1");
-      version_div_content1.setAttribute("id", "version_details1");
-
-      // const version_details_element = document.getElementById("version_details");
-      const version_table1 = document.createElement("table");
-      version_table1.setAttribute("id", "version_table1"+i);
-      version_table1.setAttribute("class", "table-css");
-
-
-
-      const version_div_content2 = document.createElement("div");
-      version_div_content2.setAttribute("class", "version_div2");
-      version_div_content2.setAttribute("id", "version_details2");
-
-      const version_table2 = document.createElement("table");
-      console.log("version_table2",version_table2);
-      version_table2.setAttribute("id", "version_table2"+i);
-      version_table2.setAttribute("class", "table-css2");
+      const criticalityScore = data[i].criticality_score;  
 
       const scorecardLink = `<a id="scorecard" href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
 
@@ -213,24 +191,24 @@ function load_version_data(base_url) {
         // Color coding scorecard scores
         if (scorecard <= 2.5 ) {
       
-          scorecard_table_td_data1 = `<span style="background-color:green"; >${scorecardLink}</span>`
+          scorecard_table_td_data = `<span style="background-color:green"; >${scorecardLink}</span>`
     
         } else if (scorecard <= 5 ){
          
-          scorecard_table_td_data1 = `<span style="background-color:yellow"; >${scorecardLink}</span>`
+          scorecard_table_td_data = `<span style="background-color:yellow"; >${scorecardLink}</span>`
 
         } else if (scorecard <= 7.5 ){
          
-          scorecard_table_td_data1 = `<span style="background-color:orange"; >${scorecardLink}</span>`
+          scorecard_table_td_data = `<span style="background-color:orange"; >${scorecardLink}</span>`
 
         } else if (scorecard <= 10 ){
        
-          scorecard_table_td_data1 = `<span style="background-color:red"; >${scorecardLink}</span>`
+          scorecard_table_td_data = `<span style="background-color:red"; >${scorecardLink}</span>`
         } 
       } else
       {
        
-        scorecard_table_td_data1=`<span >${scorecardLink}</span>`
+        scorecard_table_td_data=`<span >${scorecardLink}</span>`
 
       }
       
@@ -238,64 +216,21 @@ function load_version_data(base_url) {
       {
         if (criticalityScore < 0.5 ) {
          
-          criticalityScore_table_td_data1 = `<span style="background-color:green; color:white" >${criticalityScore}</span>`
+          criticalityScore_table_td_data = `<span style="background-color:green; color:white" >${criticalityScore}</span>`
           
         } else if (criticalityScore == 0.5 ){
           
-          criticalityScore_table_td_data1 = `<span style="background-color:yellow" >${criticalityScore}</span>`
+          criticalityScore_table_td_data = `<span style="background-color:yellow" >${criticalityScore}</span>`
           
         } else if (criticalityScore > 0.5 ){
  
-          criticalityScore_table_td_data1 = `<span style="background-color:red; color:white" >${criticalityScore}</span>`
+          criticalityScore_table_td_data = `<span style="background-color:red; color:white" >${criticalityScore}</span>`
         
         }
       } else
       {
-        criticalityScore_table_td_data1=`<span >${criticalityScore}</span>`
-      }
-
-      
-      const html_for_table = `
-      <tr>
-        <td class="equal_col">Tracking ID</td>
-        <td class="equal_col">BesTech Stack</td>
-        <td class="equal_col" rowspan="5">Description about the project: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem insum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ip</td>
-      </tr>
-      <tr>
-        <td class="equal_col">Project Name</td>
-        <td class="equal_col">Security Tool Domain</td>
-      </tr>
-      <tr>
-        <td class="equal_col">Version Dropdown</td>
-        <td class="equal_col">Known Vulnerability Count</td>
-      </tr>
-      <tr>
-        <td class="equal_col">Release Date</td>
-        <td class="equal_col" rowspan="4"><button class="export_button">Export report</button></td>
-      </tr>
-      <tr>
-        <td class="equal_col">BeS Environments</td>
-      </tr>
-      `;
-
-      version_table.innerHTML = html_for_table;
-      version_div_content.append(version_table);
-
-
-      
-      const html_for_table1 = `
-        <h2>Assessment Report </h2>
-        <tr><td>Scorecard : ${scorecard_table_td_data1}</td></tr>
-        <tr><td>Criticality Score : ${criticalityScore_table_td_data1}</td></tr>
-        <tr><td>Sonarqube : <a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td></tr>
-        <tr><td>Codeql : <a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td></tr>
-        <td>sbom : <a id="sbom" href='javascript:open_report("${base_url}","${version}", "sbom", "${ossp_name}")'>Click here</a></td>
-        <tr><td>Fossology : <a id="fossology" href='javascript:open_report("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a></td></tr>
-        <tr><td>Fuzz Report : Not available </td></tr>
-        <tr><td>Snyk : Not available </td></tr>
-      `;
-
-     
+        criticalityScore_table_td_data=`<span >${criticalityScore}</span>`
+      }     
       
       // Graph code
       const chart_Id = `bar_chart_vuln_by_type${i}`;
@@ -306,28 +241,11 @@ function load_version_data(base_url) {
       div_tag_for_chat.setAttribute("id", chart_Id);
       div_tag_for_chat.style.height = "400px";
       div_tag_chat_main.append(div_tag_for_chat);
-
-      const try_div = document.createElement("div");
-      try_div.setAttribute("class", "border_merge");
-     
-
-      // console.log(version_table1,"version_table1");
-      version_table1.innerHTML = html_for_table1;
-      version_div_content1.appendChild(version_table1);
-      try_div.appendChild(version_div_content1)
-
     
-
       // Append in div
-      main_div_content.appendChild(version_div_content);
-      // main_div_content.appendChild(version_div_content1);
-      main_div_content.appendChild(try_div);
       main_div_content.appendChild(div_tag_chat_main);
-
-      
       
       // All the above created elements are added into div tag with id version_details. 
-      //container_element.appendChild(main_div_content);
       const bottom_div = document.createElement("div");
       bottom_div.className = "bottom-div";
       container_element.appendChild(bottom_div);
