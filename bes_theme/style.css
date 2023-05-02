@@ -76,7 +76,8 @@
     padding: 10px;
     margin: auto;
     width: 70%;
-    height: 130px;
+    /* height: 130px; */
+    height: 10px;
 }
 
 .span-report-css {
@@ -182,27 +183,128 @@ a {
 }
 
 .table-css {
-    border-collapse: collapse;
+    border-collapse: initial;
     border-spacing: 0;
     width: 100%;
+    /* width: 104%; */
     border: 1px solid rgb(0, 0, 0);
+    margin-top:22px;
+    
+   
 }
+/* .table-css background-color: #6fb3e7;*/
+
+.table-css1 {
+    border: 1px solid rgb(0, 0, 0);
+    background-color: #6fb3e7;
+   
+}
+
+th, td {
+    text-align: left;
+    padding: 500px;
+    padding-inline: 5px;
+}
+
+.equal_col{
+    width: 333px;
+    padding:3px;
+}
+
+.table-css2 {
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: 20px;
+}
+
 th, td {
     text-align: left;
     padding: 9px;
     padding-inline: 5px;
 }
-tr:nth-child(even){background-color: #f2f2f2}
 
-.graph-style {
+#equal_col1{
+    width: 800px;
+    padding:2px;
+}
+
+#equal_col11{
+    width: 200px;
+    padding:2px;
+}
+
+/* .border_merge{
+    border: 1px solid black;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 75%;
+    margin-left: 12%;
+} */
+
+.border_merge {
+    border: 1px solid black;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 80%;
+    margin-left: 8%;
+    height: 400px;
+    }
+
+.outlined {
+    border: 1px solid blue;
+  }
+
+.export_button {
+    background-color: #e3822d;
+    color: #efefef;
+    border: none;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+/* tr:nth-child(even){background-color: #f2f2f2} */
+
+/* .graph-style {
     position: relative;
     width: 50%;
     padding: 10px;
     margin: auto;
     width: 70%;
     height: 427px;
-}
+} */
 
+/* .graph-style {
+    position: relative;
+    width: 50%;
+    padding: 10px;
+    margin-right: auto;
+    width: 60%;
+    height: 427px;
+    margin-top: -225px;
+    } */
+
+    /* .graph-style {
+        width: 50%;
+        padding-right: 10px;
+        margin-left: 130px;
+        width: 60%;
+        height: 427px;
+        margin-top: -385px;
+    } */
+
+    .graph-style {
+        width: 50%;
+        padding-right: 10px;
+        margin-left: 109px;
+        width: 60%;
+        height: 428px;
+        margin-top: -399px;
+        }
+
+    .cve-not-available-css{
+        margin-top: -250px;
+    }
+    
 .btn-group {
     background-color: #fff;
     border: 1px solid black;

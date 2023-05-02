@@ -35,8 +35,25 @@
       }
       #version_details {
         margin: auto;
-        width: 75%;
+       
+        width: 85%;
         padding: 10px;
+        right: 16%;
+      }
+     
+      #version_details1 {
+        
+
+        margin-left: auto;
+        width: 20%;
+        padding-right: 11px;
+        right: 18%;
+      }
+
+      #version_details2 {
+        margin-left: auto;
+        width: 15%;
+        padding-right: 157px;
         right: 16%;
       }
       .graph {
@@ -111,42 +128,16 @@
 </head>
 <body class="body-css">
   <div class="header-status-bar" id="hadder_page">
-    <div class="hadder-css" id="hadder-css-page"></div>
+    <span class="hadder-css" id="hadder-css-page"></span>
   </div>
   <div id="report-name-project" class="report-name-css"></div>
   <div id="container" class="container-css">
-    <div class="border-div" id="main-border-div">
-      <div class="version_div" id="version_details">
-        <table class="table-css" id="version_table">
-          <tr>
-            <th>Version</th>
-            <th>Release Date</th>
-            <th>Scorecard</th>
-            <th>Criticality Score</th>
-            <th>Sonarqube</th>
-            <th>Codeql</th>
-            <th>sbom</th>
-            <th>Fossology</th>
-          </tr>
-          <tr id="report_display"> 
-            <td id="version_detail"><select id="selectversion"></select></td>
-            <td id="release_detail"></td>
-            <td id="scorecard_detail"></td>
-            <td id="criticality_detail"></td>      
-            <td id="sonarqube_detail"></td>
-            <td id="codeql_detail"></td>
-            <td id="sbom_detail"></td>
-            <td id="fossology_detail"></td>
-          </tr>
-        </table>
-      </div>
-      <div class="graph-style" id="main-div-for-graph-presentation"></div>
-    </div>
+    <div id="border-div-css" class="border-div"></div>
+  </div>
+  
+
   </div>
   <script>
-    const span_for_hadder = document.getElementById("hadder-css-page");
-    span_for_hadder.innerText = "BeSLighthouse";
-
     window.onload = load_version_data(base_url);
     window.onscroll = function() {myFunction()};
 
