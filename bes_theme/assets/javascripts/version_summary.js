@@ -142,9 +142,18 @@ function check_url(id, version, name) {
     });
 }
 
-function load_version_data(base_url) {
+async function load_version_data(base_url) {
   id = localStorage["id"]
   ossp_name = localStorage["name"];
+
+  const poi = await fetch('https://raw.githubusercontent.com/sand-hya/besecure-osspoi-datastore/besissue/OSSP-Master.json', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        },
+    })
+  const poiData = await poi.json();
+  const listOfPOI = poiData.items;
 
   fetch('https://raw.githubusercontent.com/sand-hya/besecure-osspoi-datastore/besissue/version_details/' + id + '-' + ossp_name + '-Versiondetails.json')
     .then(function (response) {
@@ -165,107 +174,156 @@ function load_version_data(base_url) {
         temp.appendChild(el);
       }
 
-      const container_element = document.getElementById("container");
-      const create_hadder_content = document.getElementById("hadder_page");
-      const span_for_hadder = document.getElementById("hadder-css-page");
-      span_for_hadder.innerText = "BeSLighthouse"
-      create_hadder_content.append(span_for_hadder);
-      const report_name = document.getElementById("report-name-project");
-      const span_name = `<span class="span-report-css">Project: ${ossp_name}</span>`;
-      report_name.innerHTML = span_name;
+      var e = document.getElementById("selectversion");
+      function onChange() {
+        const container_element = document.getElementById("container");
+        const create_hadder_content = document.getElementById("hadder_page");
+        const span_for_hadder = document.getElementById("hadder-css-page");
+        span_for_hadder.innerText = "BeSLighthouse"
+        create_hadder_content.append(span_for_hadder);
+        const report_name = document.getElementById("report-name-project");
+        const span_name = `<span class="span-report-css">Project: ${ossp_name}</span>`;
+        report_name.innerHTML = span_name;
 
-      // For each version of the project, we are creating different tags on the fly.
+        // For each version of the project, we are creating different tags on the fly.
 
-      // Main div
-      const main_div_content = document.getElementById("border-div-css");
-      // version table
-      const version_div_content = document.getElementById("version_details");
-      const version_table = document.getElementById("version_table");
-      // version table1
-      const version_div_content1 = document.getElementById("version_details1");
-      // const version_details_element = document.getElementById("version_details");
-      const version_table1 = document.getElementById("version_table1");
-      const try_div = document.getElementById("border_merge_css");
+        // Main div
+        const main_div_content = document.getElementById("border-div-css");
 
-      i = 0;
-      const releaseData = data[i].release_date;
-      const version = data[i].version;
-      const scorecard = data[i].scorecard;
-      const criticalityScore = data[i].criticality_score;
+        //get selected version from drop down      
+        var text = e.options[e.selectedIndex].text;
+        console.log(text);
 
-      const scorecardLink = `<a id="scorecard" href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
-
-      if (scorecard != "Not Available") {
-        // Color coding scorecard scores
-        if (scorecard <= 2.5) {
-
-          scorecard_table_td_data = `<span style="background-color:green"; >${scorecardLink}</span>`
-
-        } else if (scorecard <= 5) {
-
-          scorecard_table_td_data = `<span style="background-color:yellow"; >${scorecardLink}</span>`
-
-        } else if (scorecard <= 7.5) {
-
-          scorecard_table_td_data = `<span style="background-color:orange"; >${scorecardLink}</span>`
-
-        } else if (scorecard <= 10) {
-
-          scorecard_table_td_data = `<span style="background-color:red"; >${scorecardLink}</span>`
+        //get i value
+        for (let i = 0; i < Object.keys(data).length; i++) {
+          if (text == data[i].version) {
+            var val = i;
+          }
         }
-      } else {
+        const releaseData = data[val].release_date;
+        const version = data[val].version;
+        const scorecard = data[val].scorecard;
+        const criticalityScore = data[val].criticality_score;
 
-        scorecard_table_td_data = `<span >${scorecardLink}</span>`
+        for (let i = 0; i < Object.keys(listOfPOI).length; i++) {
+          if(listOfPOI[i]["id"] == id){
+            description = listOfPOI[i]["description"];
+            bes_tech_stack = listOfPOI[i]["bes_technology_stack"];
+          }
+        }
 
-      }
+        const scorecardLink = `<a id="scorecard" href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
 
-      if (criticalityScore != "Not Available") {
-        if (criticalityScore < 0.5) {
+        if (scorecard != "Not Available") {
+          // Color coding scorecard scores
+          if (scorecard <= 2.5) {
 
-          criticalityScore_table_td_data = `<span style="background-color:green; color:white" >${criticalityScore}</span>`
+            scorecard_table_td_data = `<span style="background-color:green"; >${scorecardLink}</span>`
 
-        } else if (criticalityScore == 0.5) {
+          } else if (scorecard <= 5) {
 
-          criticalityScore_table_td_data = `<span style="background-color:yellow" >${criticalityScore}</span>`
+            scorecard_table_td_data = `<span style="background-color:yellow"; >${scorecardLink}</span>`
 
-        } else if (criticalityScore > 0.5) {
+          } else if (scorecard <= 7.5) {
 
-          criticalityScore_table_td_data = `<span style="background-color:red; color:white" >${criticalityScore}</span>`
+            scorecard_table_td_data = `<span style="background-color:orange"; >${scorecardLink}</span>`
+
+          } else if (scorecard <= 10) {
+
+            scorecard_table_td_data = `<span style="background-color:red"; >${scorecardLink}</span>`
+          }
+        } else {
+
+          scorecard_table_td_data = `<span >${scorecardLink}</span>`
 
         }
-      } else {
-        criticalityScore_table_td_data = `<span >${criticalityScore}</span>`
+
+        if (criticalityScore != "Not Available") {
+          if (criticalityScore < 0.5) {
+
+            criticalityScore_table_td_data = `<span style="background-color:green; color:white" >${criticalityScore}</span>`
+
+          } else if (criticalityScore == 0.5) {
+
+            criticalityScore_table_td_data = `<span style="background-color:yellow" >${criticalityScore}</span>`
+
+          } else if (criticalityScore > 0.5) {
+
+            criticalityScore_table_td_data = `<span style="background-color:red; color:white" >${criticalityScore}</span>`
+
+          }
+        } else {
+          criticalityScore_table_td_data = `<span >${criticalityScore}</span>`
+        }
+
+        //Populating report table
+        const version_div_content = document.getElementById("version_details1");
+        const version_table = document.createElement("table");
+        const html_for_table1 = `
+        <h3>Assessment Report </h3>
+        <tr><td id="scorecard_value">Scorecard : ${scorecard_table_td_data}</td></tr>
+        <tr><td id="criticality_value">Criticality Score : ${criticalityScore_table_td_data}</td></tr>
+        <tr><td id="sonarqube_value">Sonarqube : <a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td></tr>
+        <tr><td id="codeql_value">Codeql : <a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td></tr>
+        <tr><td id="sbom_value">SBOM : <a id="sbom" href='javascript:open_report("${base_url}","${version}", "sbom", "${ossp_name}")'>Click here</a></td></tr>
+        <tr><td id="fossology_value">Fossology : <a id="fossology" href='javascript:open_value("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a></td></tr>
+        <tr><td id="fuzz_value">Fuzz Report : Not available </td></tr>
+        <tr><td id="synk_value">Snyk : Not available </td></tr>
+        `;
+        version_table.innerHTML = html_for_table1;
+        version_div_content.append(version_table);
+        
+        const id_name = document.getElementById("id_value");
+        const id_value = `Tracking ID : ${id}`;
+        id_name.innerHTML = id_value;
+
+        const release_name = document.getElementById("release_value");
+        const release_value = `Release Date : ${releaseData}`;
+        release_name.innerHTML = release_value;
+
+        const tech_name = document.getElementById("tech_value");
+        const tech_value = `BesTech Stack : ${bes_tech_stack }`;
+        tech_name.innerHTML = tech_value;
+
+        const desc_name = document.getElementById("desc_value");
+        const desc_value = `Description : ${description}`;
+        desc_name.innerHTML = desc_value;
+
+        const project_name = document.getElementById("project_value");
+        const project_value = `Project Name : ${ossp_name}`;
+        project_name.innerHTML = project_value;
+
+        // Graph code
+        const chart_Id = `bar_chart_vuln_by_type`;
+        const div_tag_chat_main = document.createElement("div");
+        div_tag_chat_main.setAttribute("class", "graph-style");
+        div_tag_chat_main.setAttribute("id", "main-div-for-graph-presentation");
+        const div_tag_for_chat = document.createElement("div");
+        div_tag_for_chat.setAttribute("id", chart_Id);
+        div_tag_for_chat.style.height = "400px";
+        div_tag_chat_main.append(div_tag_for_chat);
+
+        // Append in div
+        main_div_content.appendChild(div_tag_chat_main);
+
+        // All the above created elements are added into div tag with id version_details. 
+        const bottom_div = document.createElement("div");
+        bottom_div.className = "bottom-div";
+        container_element.appendChild(bottom_div);
+
+
+        $(document).ready(function () {
+          vulnsbytypeandyearchart(chart_Id, data[val].cve_details);
+        });
+        check_url("scorecard", version, ossp_name);
+        check_url("sonarqube", version, ossp_name);
+        check_url("codeql", version, ossp_name);
+        check_url("sbom", version, ossp_name);
+        check_url("fossology", version, ossp_name);
+
       }
-
-      // Graph code
-      const chart_Id = `bar_chart_vuln_by_type${i}`;
-      const div_tag_chat_main = document.createElement("div");
-      div_tag_chat_main.setAttribute("class", "graph-style");
-      div_tag_chat_main.setAttribute("id", "main-div-for-graph-presentation");
-      const div_tag_for_chat = document.createElement("div");
-      div_tag_for_chat.setAttribute("id", chart_Id);
-      div_tag_for_chat.style.height = "400px";
-      div_tag_chat_main.append(div_tag_for_chat);
-
-      // Append in div
-      main_div_content.appendChild(div_tag_chat_main);
-
-      // All the above created elements are added into div tag with id version_details. 
-      const bottom_div = document.createElement("div");
-      bottom_div.className = "bottom-div";
-      container_element.appendChild(bottom_div);
-
-
-      $(document).ready(function () {
-        vulnsbytypeandyearchart(chart_Id, data[i].cve_details);
-      });
-      check_url("scorecard", version, ossp_name);
-      check_url("sonarqube", version, ossp_name);
-      check_url("codeql", version, ossp_name);
-      check_url("sbom", version, ossp_name);
-      check_url("fossology", version, ossp_name);
-
-
+      e.onchange = onChange;
+      onChange();
     })
 
     .catch(function (err) {
