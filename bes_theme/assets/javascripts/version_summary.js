@@ -212,8 +212,15 @@ async function load_version_data(base_url) {
           }
         }
 
-        for (let i = 0; i < Object.keys(data).length; i++) {
-          
+        if(data[val].cve_details=="Not Available"){
+          vul_count = 0;
+        }
+        else{
+          for (let i = 0; i < Object.keys(data[val].cve_details).length; i++) {
+            if(data[val].cve_details[i].Year=="Total"){
+              vul_count=data[val].cve_details[i].No_of_Vulnerabilities
+            }
+          }
         }
 
         const scorecardLink = `<a id="scorecard" href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
@@ -261,7 +268,6 @@ async function load_version_data(base_url) {
         }
 
         //Populating report table
-        const version_div_content = document.getElementById("version_details");
         const id_name = document.getElementById("id_value");
         const id_value = `Tracking ID : ${id}`;
         id_name.innerHTML = id_value;
@@ -305,6 +311,10 @@ async function load_version_data(base_url) {
         const fossology_name = document.getElementById("fossology_value");
         const fossology_value = `Fossology : <a id="fossology" href='javascript:open_value("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a>`;
         fossology_name.innerHTML = fossology_value;
+
+        const vul_count_name = document.getElementById("vul_count_value");
+        const vul_count_value = `Known Vulnerability Count : ${vul_count}`;
+        vul_count_name.innerHTML = vul_count_value;
 
         // Graph code
         const chart_Id = `bar_chart_vuln_by_type`;
