@@ -145,7 +145,7 @@
             <td class="equal_col">Security Tool Domain</td>
           </tr>
           <tr>
-            <td class="equal_col">Version Dropdown</td>
+            <td class="equal_col">Version : <select id="selectversion"></select></td>
             <td class="equal_col">Known Vulnerability Count</td>
           </tr>
           <tr>
@@ -161,13 +161,13 @@
         <div id="version_details1" class="version_div1">
           <table id="version_table1" class="table-css">
             <h2>Assessment Report </h2>
-            <tr><td>Scorecard : </td></tr>
-            <tr><td>Criticality Score : </td></tr>
-            <tr><td>Sonarqube : </td></tr>
-            <tr><td>Codeql : </td></tr>
-            <td>sbom : </td>
-            <tr><td>Fossology : </td></tr>
-            <tr><td>Fuzz Report : Not available </td></tr>
+            <tr><td id="scorecard_value">Scorecard : </td></tr>
+            <tr><td id="criticality_value">Criticality Score : </td></tr>
+            <tr><td id="sonarqube_value">Sonarqube : </td></tr>
+            <tr><td id="codeql_value">Codeql : </td></tr>
+            <tr><td id="sbom_value">sbom : </td></tr>
+            <tr><td id="fossology_value">Fossology : </td></tr>
+            <tr><td id="fuzz_value">Fuzz Report : Not available </td></tr>
             <tr><td>Snyk : Not available </td></tr>
           </table>
         </div>
