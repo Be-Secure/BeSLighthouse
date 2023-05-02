@@ -212,6 +212,10 @@ async function load_version_data(base_url) {
           }
         }
 
+        for (let i = 0; i < Object.keys(data).length; i++) {
+          
+        }
+
         const scorecardLink = `<a id="scorecard" href='javascript:open_report("${base_url}","${version}", "scorecard", "${ossp_name}")'>${scorecard}</a>`;
 
         if (scorecard != "Not Available") {
@@ -257,22 +261,7 @@ async function load_version_data(base_url) {
         }
 
         //Populating report table
-        const version_div_content = document.getElementById("version_details1");
-        const version_table = document.createElement("table");
-        const html_for_table1 = `
-        <h3>Assessment Report </h3>
-        <tr><td id="scorecard_value">Scorecard : ${scorecard_table_td_data}</td></tr>
-        <tr><td id="criticality_value">Criticality Score : ${criticalityScore_table_td_data}</td></tr>
-        <tr><td id="sonarqube_value">Sonarqube : <a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a></td></tr>
-        <tr><td id="codeql_value">Codeql : <a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a></td></tr>
-        <tr><td id="sbom_value">SBOM : <a id="sbom" href='javascript:open_report("${base_url}","${version}", "sbom", "${ossp_name}")'>Click here</a></td></tr>
-        <tr><td id="fossology_value">Fossology : <a id="fossology" href='javascript:open_value("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a></td></tr>
-        <tr><td id="fuzz_value">Fuzz Report : Not available </td></tr>
-        <tr><td id="synk_value">Snyk : Not available </td></tr>
-        `;
-        version_table.innerHTML = html_for_table1;
-        version_div_content.append(version_table);
-        
+        const version_div_content = document.getElementById("version_details");
         const id_name = document.getElementById("id_value");
         const id_value = `Tracking ID : ${id}`;
         id_name.innerHTML = id_value;
@@ -280,6 +269,10 @@ async function load_version_data(base_url) {
         const release_name = document.getElementById("release_value");
         const release_value = `Release Date : ${releaseData}`;
         release_name.innerHTML = release_value;
+
+        const project_name = document.getElementById("project_value");
+        const project_value = `Project Name : ${ossp_name}`;
+        project_name.innerHTML = project_value;
 
         const tech_name = document.getElementById("tech_value");
         const tech_value = `BesTech Stack : ${bes_tech_stack }`;
@@ -289,9 +282,29 @@ async function load_version_data(base_url) {
         const desc_value = `Description : ${description}`;
         desc_name.innerHTML = desc_value;
 
-        const project_name = document.getElementById("project_value");
-        const project_value = `Project Name : ${ossp_name}`;
-        project_name.innerHTML = project_value;
+        const scorecard_name = document.getElementById("scorecard_value");
+        const scorecard_value = `Scorecard : ${scorecard_table_td_data}`;
+        scorecard_name.innerHTML = scorecard_value;
+
+        const criticality_name = document.getElementById("criticality_value");
+        const criticality_value = `Criticality Score : ${criticalityScore_table_td_data}`;
+        criticality_name.innerHTML = criticality_value;
+
+        const sonarqube_name = document.getElementById("sonarqube_value");
+        const sonarqube_value = `Sonarqube : <a id="sonarqube"; href='javascript:open_report("${base_url}","${version}", "sonarqube", "${ossp_name}")'>Click here</a>`;
+        sonarqube_name.innerHTML = sonarqube_value;
+
+        const codeql_name = document.getElementById("codeql_value");
+        const codeql_value = `Codeql : <a id="codeql" href='javascript:open_report("${base_url}","${version}", "codeql", "${ossp_name}")'>Click here</a>`;
+        codeql_name.innerHTML = codeql_value;
+
+        const sbom_name = document.getElementById("sbom_value");
+        const sbom_value = `SBOM : <a id="sbom" href='javascript:open_report("${base_url}","${version}", "sbom", "${ossp_name}")'>Click here</a>`;
+        sbom_name.innerHTML = sbom_value;
+
+        const fossology_name = document.getElementById("fossology_value");
+        const fossology_value = `Fossology : <a id="fossology" href='javascript:open_value("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a>`;
+        fossology_name.innerHTML = fossology_value;
 
         // Graph code
         const chart_Id = `bar_chart_vuln_by_type`;
