@@ -146,7 +146,7 @@ async function load_version_data(base_url) {
   id = localStorage["id"]
   ossp_name = localStorage["name"];
 
-  const poi = await fetch('https://raw.githubusercontent.com/sand-hya/besecure-osspoi-datastore/besissue/OSSP-Master.json', {
+  const poi = await fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/OSSP-Master.json', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -155,7 +155,7 @@ async function load_version_data(base_url) {
   const poiData = await poi.json();
   const listOfPOI = poiData.items;
 
-  fetch('https://raw.githubusercontent.com/sand-hya/besecure-osspoi-datastore/besissue/version_details/' + id + '-' + ossp_name + '-Versiondetails.json')
+  fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/version_details/' + id + '-' + ossp_name + '-Versiondetails.json')
     .then(function (response) {
       return response.json();
     })
