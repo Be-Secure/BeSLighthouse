@@ -197,7 +197,7 @@ a {
 .table-css1 {
     border: 1px solid rgb(0, 0, 0);
     background-color: #6fb3e7;
-   
+    width: 100%;
 }
 
 th, td {
