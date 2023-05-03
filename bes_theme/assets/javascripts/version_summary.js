@@ -318,22 +318,6 @@ async function load_version_data(base_url) {
 
         // Graph code
         const chart_Id = `bar_chart_vuln_by_type`;
-        const div_tag_chat_main = document.createElement("div");
-        div_tag_chat_main.setAttribute("class", "graph-style");
-        div_tag_chat_main.setAttribute("id", "main-div-for-graph-presentation");
-        const div_tag_for_chat = document.createElement("div");
-        div_tag_for_chat.setAttribute("id", chart_Id);
-        div_tag_for_chat.style.height = "400px";
-        div_tag_chat_main.append(div_tag_for_chat);
-
-        // Append in div
-        main_div_content.appendChild(div_tag_chat_main);
-
-        // All the above created elements are added into div tag with id version_details. 
-        const bottom_div = document.createElement("div");
-        bottom_div.className = "bottom-div";
-        container_element.appendChild(bottom_div);
-
 
         $(document).ready(function () {
           vulnsbytypeandyearchart(chart_Id, data[val].cve_details);
