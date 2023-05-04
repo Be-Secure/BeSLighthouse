@@ -1,13 +1,14 @@
 function vulnsbytypeandyearchart(chart_Id, cve_details) {
+  const changeCssForGraph = document.getElementById(
+    "main-div-for-graph-presentation"
+  );
   if (cve_details === "Not Available") {
     const cve_details = document.getElementById(chart_Id);
-    const changeCssForGraph = document.getElementById(
-      "main-div-for-graph-presentation"
-    );
     changeCssForGraph.className = "graph-style-cve-not-available-css";
     cve_details.innerHTML = `<h3 class="cve-not-available-css">CVE details are not available at the moment</h3>`;
     return;
   }
+  changeCssForGraph.className = 'graph-style';
   let detail_cve = {};
   for (let i = 0; i < cve_details.length; i++) {
     const key = Object.keys(cve_details[i]);
@@ -221,10 +222,8 @@ async function load_version_data(base_url) {
         el.value = opt;
         temp.appendChild(el);
       }
-
       var e = document.getElementById("selectversion");
       function onChange() {
-        const container_element = document.getElementById("container");
         const create_hadder_content = document.getElementById("hadder_page");
         const span_for_hadder = document.getElementById("hadder-css-page");
         span_for_hadder.innerText = "BeSLighthouse";
@@ -233,14 +232,8 @@ async function load_version_data(base_url) {
         const span_name = `<span class="span-report-css">Project: ${ossp_name}</span>`;
         report_name.innerHTML = span_name;
 
-        // For each version of the project, we are creating different tags on the fly.
-
-        // Main div
-        const main_div_content = document.getElementById("border-div-css");
-
         //get selected version from drop down
         var text = e.options[e.selectedIndex].text;
-        console.log(text);
 
         //get i value
         for (let i = 0; i < Object.keys(data).length; i++) {
@@ -248,6 +241,7 @@ async function load_version_data(base_url) {
             var val = i;
           }
         }
+
         const releaseData = data[val].release_date;
         const version = data[val].version;
         const scorecard = data[val].scorecard;
@@ -350,7 +344,7 @@ async function load_version_data(base_url) {
 
         // Graph code
         const chart_Id = `bar_chart_vuln_by_type`;
-        debugger;
+        document.getElementById(chart_Id).innerHTML = ''
         $(document).ready(function () {
           vulnsbytypeandyearchart(chart_Id, data[val].cve_details);
         });
