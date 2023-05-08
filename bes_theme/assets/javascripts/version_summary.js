@@ -295,23 +295,23 @@ async function load_version_data(base_url) {
 
         //Populating report table
         const id_name = document.getElementById("id_value");
-        const id_value = `Tracking ID : ${id}`;
+        const id_value = `<b>BeS Tracking ID</b> : ${id}`;
         id_name.innerHTML = id_value;
 
         const release_name = document.getElementById("release_value");
-        const release_value = `Release Date : ${releaseData}`;
+        const release_value = `<b>Release Date</b> : ${releaseData}`;
         release_name.innerHTML = release_value;
 
         const project_name = document.getElementById("project_value");
-        const project_value = `Project Name : ${ossp_name}`;
+        const project_value = `<b>Project Name</b> : ${ossp_name}`;
         project_name.innerHTML = project_value;
 
         const tech_name = document.getElementById("tech_value");
-        const tech_value = `BesTech Stack : ${bes_tech_stack}`;
+        const tech_value = `<b>BeS Tech Stack</b> : ${bes_tech_stack}`;
         tech_name.innerHTML = tech_value;
 
         const desc_name = document.getElementById("desc_value");
-        const desc_value = `Description : ${description}`;
+        const desc_value = `<b>Description</b> : ${description}`;
         desc_name.innerHTML = desc_value;
 
         const scorecard_name = document.getElementById("scorecard_value");
@@ -339,7 +339,7 @@ async function load_version_data(base_url) {
         fossology_name.innerHTML = fossology_value;
 
         const vul_count_name = document.getElementById("vul_count_value");
-        const vul_count_value = `Known Vulnerability Count : ${vul_count}`;
+        const vul_count_value = `<b>Known Vulnerability Count</b> : ${vul_count}`;
         vul_count_name.innerHTML = vul_count_value;
 
         // Graph code
