@@ -1,29 +1,34 @@
 function vulnsbytypeandyearchart(chart_Id, cve_details) {
-
+  const changeCssForGraph = document.getElementById(
+    "main-div-for-graph-presentation"
+  );
   if (cve_details === "Not Available") {
     const cve_details = document.getElementById(chart_Id);
-    const changeCssForGraph = document.getElementById("main-div-for-graph-presentation");
     changeCssForGraph.className = "graph-style-cve-not-available-css";
-    cve_details.innerHTML = `<h3 class="cve-not-available-css">CVE details are not available at the moment</h3>`
+    cve_details.innerHTML = `<h3 class="cve-not-available-css">CVE details are not available at the moment</h3>`;
     return;
   }
-  let detail_cve = {}
+  changeCssForGraph.className = 'graph-style';
+  let detail_cve = {};
   for (let i = 0; i < cve_details.length; i++) {
     const key = Object.keys(cve_details[i]);
     for (let j = 0; j < key.length; j++) {
-      if (key[j] !== 'Year') {
+      if (key[j] !== "Year") {
         if (!detail_cve[key[j]]) {
           detail_cve[key[j]] = [];
         }
         if (cve_details[i][key[j]] !== null && cve_details[i][key[j]] !== "") {
-          detail_cve[key[j]].push([parseInt(cve_details[i]["Year"]), cve_details[i][key[j]]]);
+          detail_cve[key[j]].push([
+            parseInt(cve_details[i]["Year"]),
+            cve_details[i][key[j]],
+          ]);
         }
       }
     }
   }
   const data = [];
   const vulntypesarray = [];
-  const visible_all_field = []
+  const visible_all_field = [];
   const key = Object.keys(detail_cve);
   for (let i = 0; i < key.length; i++) {
     if (detail_cve[key[i]].length === 0) {
@@ -36,51 +41,66 @@ function vulnsbytypeandyearchart(chart_Id, cve_details) {
   }
   $.jqplot(chart_Id, data, {
     seriesColors: [
-      '#69c', '#333', '#DB045B', '#E04807',
-      '#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE', '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92', '#FF9655', '#24CBE5'
+      "#69c",
+      "#333",
+      "#DB045B",
+      "#E04807",
+      "#4572A7",
+      "#AA4643",
+      "#89A54E",
+      "#80699B",
+      "#3D96AE",
+      "#DB843D",
+      "#92A8CD",
+      "#A47D7C",
+      "#B5CA92",
+      "#FF9655",
+      "#24CBE5",
     ],
     seriesDefaults: {},
     series: visible_all_field,
     title: {
-      text: 'Vulnerabilities by type & year',
-      fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
-      fontSize: '12px',
-      color: '#3E576F'
+      text: "Vulnerabilities by type & year",
+      fontFamily:
+        '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
+      fontSize: "12px",
+      color: "#3E576F",
     },
     axesDefaults: {
       labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-      borderColor: '#4572A7',
+      borderColor: "#4572A7",
     },
     axes: {
       xaxis: {
         label: "Years",
-        color: '#3E576F',
+        color: "#3E576F",
         pad: 0,
         min: 1999,
-        tickInterval: 1
+        tickInterval: 1,
       },
       yaxis: {
         label: "# Of Vulns",
         numberTicks: 5,
         min: 0,
-        color: '#3E576F'
-      }
+        color: "#3E576F",
+      },
     },
     legend: {
       show: true,
-      location: 's',
+      location: "s",
       renderer: $.jqplot.EnhancedLegendRenderer,
-      placement: 'outsideGrid',
+      placement: "outsideGrid",
       labels: vulntypesarray,
       rendererOptions: {
         seriesToggle: true,
-        seriesToggleReplot: { resetAxes: ['yaxis'] },
+        seriesToggleReplot: { resetAxes: ["yaxis"] },
         numberRows: 5,
-        numberColumns: 5
+        numberColumns: 5,
       },
-      border: '1px solid #909090',
-      fontFamily: '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
-      fontSize: '11px'
+      border: "1px solid #909090",
+      fontFamily:
+        '"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif', // default font
+      fontSize: "11px",
     },
     highlighter: {
       show: true,
@@ -89,11 +109,10 @@ function vulnsbytypeandyearchart(chart_Id, cve_details) {
       fadeTooltip: false,
       formatString: "%d : %s",
       bringSeriesToFront: true,
-      lineWidthAdjust: 10
-    }
+      lineWidthAdjust: 10,
+    },
   });
 }
-
 
 function open_report(base_url, version, report, project_name) {
   localStorage["version"] = version;
@@ -103,59 +122,89 @@ function open_report(base_url, version, report, project_name) {
 }
 
 function check_url(id, version, name) {
-
   if (id == "sonarqube" || id == "codeql") {
-
-    var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/" + name + "/" + version + "/sast/" + name + "-" + version + "-" + id + "-report.json"
-
-  }
-
-  else if (id == "fossology") {
-
-    var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/" + name + "/" + version + "/license-compliance/" + name + "-" + version + "-" + id + "-report.json"
-
-  }
-
-  else {
-    var url = "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/" + name + "/" + version + "/" + id + "/" + name + "-" + version + "-" + id + "-report.json"
-
+    var url =
+      "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/" +
+      name +
+      "/" +
+      version +
+      "/sast/" +
+      name +
+      "-" +
+      version +
+      "-" +
+      id +
+      "-report.json";
+  } else if (id == "fossology") {
+    var url =
+      "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/" +
+      name +
+      "/" +
+      version +
+      "/license-compliance/" +
+      name +
+      "-" +
+      version +
+      "-" +
+      id +
+      "-report.json";
+  } else {
+    var url =
+      "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main/" +
+      name +
+      "/" +
+      version +
+      "/" +
+      id +
+      "/" +
+      name +
+      "-" +
+      version +
+      "-" +
+      id +
+      "-report.json";
   }
 
   fetch(url, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Accept': 'application/json',
+      Accept: "application/json",
     },
   })
     .then(function (response) {
       return response.json();
     })
-    .then(function (data) {
-
-
-
-    })
+    .then(function (data) {})
     .catch(function (err) {
-      document.getElementById(id).setAttribute('href', 'javascript:void(0)');
-      document.getElementById(id).innerHTML = "Not Available"
-      document.getElementById(id).classList.add("disabled-link")
+      document.getElementById(id).setAttribute("href", "javascript:void(0)");
+      document.getElementById(id).innerHTML = "Not Available";
+      document.getElementById(id).classList.add("disabled-link");
     });
 }
 
 async function load_version_data(base_url) {
-  id = localStorage["id"]
+  id = localStorage["id"];
   ossp_name = localStorage["name"];
 
-  const poi = await fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/OSSP-Master.json', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-        },
-    })
+  const poi = await fetch(
+    "https://raw.githubusercontent.com/sudhirverma/besecure-osspoi-datastore/main/OSSP-Master.json",
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
   const poiData = await poi.json();
   const listOfPOI = poiData.items;
 
-  fetch('https://raw.githubusercontent.com/Be-Secure/besecure-osspoi-datastore/main/version_details/' + id + '-' + ossp_name + '-Versiondetails.json')
+  fetch(
+    "https://raw.githubusercontent.com/sudhirverma/besecure-osspoi-datastore/main/version_details/" +
+      id +
+      "-" +
+      ossp_name +
+      "-Versiondetails.json"
+  )
     .then(function (response) {
       return response.json();
     })
@@ -173,26 +222,18 @@ async function load_version_data(base_url) {
         el.value = opt;
         temp.appendChild(el);
       }
-
       var e = document.getElementById("selectversion");
       function onChange() {
-        const container_element = document.getElementById("container");
         const create_hadder_content = document.getElementById("hadder_page");
         const span_for_hadder = document.getElementById("hadder-css-page");
-        span_for_hadder.innerText = "BeSLighthouse"
+        span_for_hadder.innerText = "BeSLighthouse";
         create_hadder_content.append(span_for_hadder);
         const report_name = document.getElementById("report-name-project");
         const span_name = `<span class="span-report-css">Project: ${ossp_name}</span>`;
         report_name.innerHTML = span_name;
 
-        // For each version of the project, we are creating different tags on the fly.
-
-        // Main div
-        const main_div_content = document.getElementById("border-div-css");
-
-        //get selected version from drop down      
+        //get selected version from drop down
         var text = e.options[e.selectedIndex].text;
-        console.log(text);
 
         //get i value
         for (let i = 0; i < Object.keys(data).length; i++) {
@@ -200,25 +241,25 @@ async function load_version_data(base_url) {
             var val = i;
           }
         }
+
         const releaseData = data[val].release_date;
         const version = data[val].version;
         const scorecard = data[val].scorecard;
         const criticalityScore = data[val].criticality_score;
 
         for (let i = 0; i < Object.keys(listOfPOI).length; i++) {
-          if(listOfPOI[i]["id"] == id){
+          if (listOfPOI[i]["id"] == id) {
             description = listOfPOI[i]["description"];
             bes_tech_stack = listOfPOI[i]["bes_technology_stack"];
           }
         }
 
-        if(data[val].cve_details=="Not Available"){
+        if (data[val].cve_details == "Not Available") {
           vul_count = 0;
-        }
-        else{
+        } else {
           for (let i = 0; i < Object.keys(data[val].cve_details).length; i++) {
-            if(data[val].cve_details[i].Year=="Total"){
-              vul_count=data[val].cve_details[i].No_of_Vulnerabilities
+            if (data[val].cve_details[i].Year == "Total") {
+              vul_count = data[val].cve_details[i].No_of_Vulnerabilities;
             }
           }
         }
@@ -228,43 +269,28 @@ async function load_version_data(base_url) {
         if (scorecard != "Not Available") {
           // Color coding scorecard scores
           if (scorecard <= 2.5) {
-
-            scorecard_table_td_data = `<span style="background-color:green"; >${scorecardLink}</span>`
-
+            scorecard_table_td_data = `<span style="background-color:green"; >${scorecardLink}</span>`;
           } else if (scorecard <= 5) {
-
-            scorecard_table_td_data = `<span style="background-color:yellow"; >${scorecardLink}</span>`
-
+            scorecard_table_td_data = `<span style="background-color:yellow"; >${scorecardLink}</span>`;
           } else if (scorecard <= 7.5) {
-
-            scorecard_table_td_data = `<span style="background-color:orange"; >${scorecardLink}</span>`
-
+            scorecard_table_td_data = `<span style="background-color:orange"; >${scorecardLink}</span>`;
           } else if (scorecard <= 10) {
-
-            scorecard_table_td_data = `<span style="background-color:red"; >${scorecardLink}</span>`
+            scorecard_table_td_data = `<span style="background-color:red"; >${scorecardLink}</span>`;
           }
         } else {
-
-          scorecard_table_td_data = `<span >${scorecardLink}</span>`
-
+          scorecard_table_td_data = `<span >${scorecardLink}</span>`;
         }
 
         if (criticalityScore != "Not Available") {
           if (criticalityScore < 0.5) {
-
-            criticalityScore_table_td_data = `<span style="background-color:green; color:white" >${criticalityScore}</span>`
-
+            criticalityScore_table_td_data = `<span style="background-color:green; color:white" >${criticalityScore}</span>`;
           } else if (criticalityScore == 0.5) {
-
-            criticalityScore_table_td_data = `<span style="background-color:yellow" >${criticalityScore}</span>`
-
+            criticalityScore_table_td_data = `<span style="background-color:yellow" >${criticalityScore}</span>`;
           } else if (criticalityScore > 0.5) {
-
-            criticalityScore_table_td_data = `<span style="background-color:red; color:white" >${criticalityScore}</span>`
-
+            criticalityScore_table_td_data = `<span style="background-color:red; color:white" >${criticalityScore}</span>`;
           }
         } else {
-          criticalityScore_table_td_data = `<span >${criticalityScore}</span>`
+          criticalityScore_table_td_data = `<span >${criticalityScore}</span>`;
         }
 
         //Populating report table
@@ -281,7 +307,7 @@ async function load_version_data(base_url) {
         project_name.innerHTML = project_value;
 
         const tech_name = document.getElementById("tech_value");
-        const tech_value = `BesTech Stack : ${bes_tech_stack }`;
+        const tech_value = `BesTech Stack : ${bes_tech_stack}`;
         tech_name.innerHTML = tech_value;
 
         const desc_name = document.getElementById("desc_value");
@@ -318,7 +344,7 @@ async function load_version_data(base_url) {
 
         // Graph code
         const chart_Id = `bar_chart_vuln_by_type`;
-
+        document.getElementById(chart_Id).innerHTML = ''
         $(document).ready(function () {
           vulnsbytypeandyearchart(chart_Id, data[val].cve_details);
         });
@@ -327,16 +353,12 @@ async function load_version_data(base_url) {
         check_url("codeql", version, ossp_name);
         check_url("sbom", version, ossp_name);
         check_url("fossology", version, ossp_name);
-
       }
       e.onchange = onChange;
       onChange();
     })
 
     .catch(function (err) {
-
       console.dir(err);
-
     });
-
 }

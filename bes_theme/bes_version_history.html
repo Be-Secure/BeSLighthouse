@@ -1,26 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Version Summary</title>
-  <script>var base_url = '{{ base_url }}';</script>
-  <link href="{{base_url}}/assets/stylesheets/bessearch.foamtree.util.loading.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="{{base_url}}/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Version Summary</title>
+    <script>
+      var base_url = "{{ base_url }}";
+    </script>
+    <link
+      href="{{base_url}}/assets/stylesheets/bessearch.foamtree.util.loading.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{base_url}}/style.css" />
 
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasTextRenderer.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.highlighter.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasTextRenderer.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasAxisLabelRenderer.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.enhancedLegendRenderer.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.highlighter.min.js"
+    ></script>
 
-  <script src="{{base_url}}/assets/javascripts/version_summary.js"></script>
-  <style>
+    <script src="{{base_url}}/assets/javascripts/version_summary.js"></script>
+    <style>
       #container {
         text-align: center;
         padding: 16px;
@@ -33,21 +62,13 @@
       #heading1 {
         padding-bottom: 50px;
       }
-      #version_details {
-        margin: auto;
-       
-        width: 85%;
-        padding: 10px;
-        right: 16%;
-      }
-     
-      #version_details1 {
-        
 
-        margin-left: auto;
-        width: 20%;
-        padding-right: 11px;
-        right: 18%;
+      #version_details1 {
+        position: relative;
+        display: flex;
+        float: right;
+        top: 62px;
+        padding-right: 10px;
       }
 
       #version_details2 {
@@ -57,16 +78,16 @@
         right: 16%;
       }
       .graph {
-        
         margin-top: 100px;
         margin-right: 50px;
-        width: auto; height: auto;
+        width: auto;
+        height: auto;
       }
       #scores {
-        
         display: inline-block;
         text-align: center;
-        width:fit-content; height: fit-content; 
+        width: fit-content;
+        height: fit-content;
       }
       #scores > h4 {
         margin: 0%;
@@ -77,7 +98,8 @@
         margin: auto;
         margin-top: 5px;
       }
-      #scorecard, #criticality {
+      #scorecard,
+      #criticality {
         font-size: 15px;
         display: inline-block;
         text-align: center;
@@ -89,20 +111,25 @@
         border-collapse: collapse;
         width: 100%;
       }
-      .table td, .table th {
+      .table td,
+      .table th {
         border: 1px solid #ddd;
         padding: 8px;
       }
 
-      .table tr:nth-child(even){background-color: #f2f2f2;}
+      .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
 
-      .table tr:hover {background-color: #ddd;}
+      .table tr:hover {
+        background-color: #ddd;
+      }
 
       .table th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color: #04AA6D;
+        background-color: #04aa6d;
         color: white;
       }
       .button {
@@ -110,8 +137,8 @@
         padding: 5px 5px 5px 5px;
         margin: 5px 5px 5px 5px;
       }
-      .jqplot-highlighter-tooltip	{
-        font-size:11px;
+      .jqplot-highlighter-tooltip {
+        font-size: 11px;
         background-color: #eda;
       }
       .sticky {
@@ -124,76 +151,98 @@
         width: 100%;
         top: 56px;
       }
-  </style>
-</head>
-<body class="body-css">
-  <div class="header-status-bar" id="hadder_page">
-    <span class="hadder-css" id="hadder-css-page"></span>
-  </div>
-  <div id="report-name-project" class="report-name-css"></div>
-  <div id="container" class="container-css">
-    <div id="border-div-css" class="border-div">
-      <div id="version_details" class="version_div">
-        <table id="version_table" class="table-css1">
-          <tr>
-            <td class="equal_col" id="id_value"></td>
-            <td class="equal_col" id="tech_value"></td>
-            <td class="equal_col" rowspan="5" id="desc_value"></td>
-          </tr>
-          <tr>
-            <td class="equal_col" id="project_value"></td>
-            <td class="equal_col">Security Tool Domain</td>
-          </tr>
-          <tr>
-            <td class="equal_col">Version : <select id="selectversion"></select></td>
-            <td class="equal_col" id="vul_count_value"></td>
-          </tr>
-          <tr>
-            <td class="equal_col" id="release_value"></td>
-            <td class="equal_col" rowspan="4"><button class="export_button">Export report</button></td>
-          </tr>
-          <tr>
-            <td class="equal_col">BeS Environments</td>
-          </tr>
-        </table>
-      </div>
-      <div id="border_merge_css" class="border_merge">
-        <div id="version_details1" class="version_div1">
-          <table id="version_table1" class="table-css">
-            <h2>Assessment Report </h2>
-            <tr><td id="scorecard_value"></td></tr>
-            <tr><td id="criticality_value"></td></tr>
-            <tr><td id="sonarqube_value"></td></tr>
-            <tr><td id="codeql_value"></td></tr>
-            <tr><td id="sbom_value"></td></tr>
-            <tr><td id="fossology_value"></td></tr>
-            <tr><td id="fuzz_value">Fuzz Report : Not available </td></tr>
-            <tr><td id="synk_value">Snyk : Not available </td></tr>
+    </style>
+  </head>
+  <body class="body-css">
+    <div class="header-status-bar" id="hadder_page">
+      <span class="hadder-css" id="hadder-css-page"></span>
+    </div>
+    <div id="report-name-project" class="report-name-css"></div>
+    <div id="container" class="container-css">
+      <div id="border-div-css" class="border-div">
+        <div id="version_details" class="version_details">
+          <table id="version_table" class="table-css1">
+            <tr>
+              <td class="equal_col" id="id_value"></td>
+              <td class="equal_col" id="tech_value"></td>
+              <td class="equal_col" rowspan="5" id="desc_value"></td>
+            </tr>
+            <tr>
+              <td class="equal_col" id="project_value"></td>
+              <td class="equal_col">Security Tool Domain</td>
+            </tr>
+            <tr>
+              <td class="equal_col">
+                Version :
+                <select id="selectversion"></select>
+              </td>
+              <td class="equal_col" id="vul_count_value"></td>
+            </tr>
+            <tr>
+              <td class="equal_col" id="release_value"></td>
+              <td class="equal_col" rowspan="4">
+                <button class="export_button">Export report</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="equal_col">BeS Environments</td>
+            </tr>
           </table>
         </div>
+        <div id="border_merge_css" class="border_merge">
+          <div id="version_details1" class="version_div1">
+            <table id="version_table1" class="table-css">
+              <h2 style="position: absolute;bottom: 291px;padding-right: 10px;">Assessment Report</h2>
+              <tr>
+                <td id="scorecard_value"></td>
+              </tr>
+              <tr>
+                <td id="criticality_value"></td>
+              </tr>
+              <tr>
+                <td id="sonarqube_value"></td>
+              </tr>
+              <tr>
+                <td id="codeql_value"></td>
+              </tr>
+              <tr>
+                <td id="sbom_value"></td>
+              </tr>
+              <tr>
+                <td id="fossology_value"></td>
+              </tr>
+              <tr>
+                <td id="fuzz_value">Fuzz Report : Not available</td>
+              </tr>
+              <tr>
+                <td id="synk_value">Snyk : Not available</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="graph-style" id="main-div-for-graph-presentation">
+          <div id="bar_chart_vuln_by_type" style="height: 400px"></div>
+        </div>
       </div>
-      <div class="graph-style" id="main-div-for-graph-presentation">
-        <div id="bar_chart_vuln_by_type" style="height: 400px;"></div>
-      </div>
+      <div class="bottom-div"></div>
     </div>
-    <div class="bottom-div"></div>
-  </div>
-  <script>
-    window.onload = load_version_data(base_url);
-    window.onscroll = function() {myFunction()};
+    <script>
+      window.onload = load_version_data(base_url);
+      window.onscroll = function () {
+        myFunction();
+      };
 
-    var header = document.getElementById("hadder_page");
-    var sticky = header.offsetTop;
+      var header = document.getElementById("hadder_page");
+      var sticky = header.offsetTop;
 
-    var report_header = document.getElementById("report-name-project");
+      var report_header = document.getElementById("report-name-project");
 
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-        report_header.classList.add("sticky-report");
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+          report_header.classList.add("sticky-report");
+        }
       }
-    }
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
