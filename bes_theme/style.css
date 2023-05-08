@@ -216,17 +216,18 @@ a {
   min-height: 356px;
 }
 
+.table-css-poi {
+  margin-top: 31px;
+  border: 1px solid rgb(0, 0, 0);
+  border-spacing: 0;
+  min-height: 1px;
+  width: 100%;
+}
+
 .table-css1 {
   border: 1px solid rgb(0, 0, 0);
   background-color: #6fb3e7;
   width: 100%;
-}
-
-th,
-td {
-  text-align: left;
-  padding: 500px;
-  padding-inline: 5px;
 }
 
 .equal_col {
@@ -329,16 +330,8 @@ td {
 }
 
 .search {
-  float: left;
-  margin-bottom: 7px;
+  margin-bottom: -18px;
   width: 20%;
+  display: flex;
 }
 
-/* .btn-group button:not(:last-child) {
-    border-bottom: none; 
-  } */
-
-/* Add a background color on hover */
-/* .btn-group button:hover {
-    background-color: #3e8e41;
-  } */
