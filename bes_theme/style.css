@@ -1,9 +1,9 @@
 .header-status-bar {
   height: 50px;
   padding: 6px 0 0 0;
-  /* width: 1248px; */
+  width: 1248px;
   width: 100%;
-  min-width: 1248px;
+  min-width: 1365px;
   background-color: #4051b5;
   z-index: 1000;
 }
@@ -153,12 +153,19 @@ a {
   top: 42px;
 }
 
-@media screen and (max-width: 1387px) {
+/* @media screen and (max-width: 1376px) {
   .pie-chart-css {
     top: -186px;
     left: 57px;
   }
 }
+
+@media screen and (min-width: 1377px) {
+  .pie-chart-css {
+    top: 42px;
+    left: -1px;
+  }
+} */
 
 .pie-chart-poi-css {
   position: relative;
