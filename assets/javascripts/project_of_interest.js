@@ -37,7 +37,7 @@ function tableForProject(base_url,listOfPOI) {
     create_div.innerHTML = table_search_input;
     const table = document.createElement("table");
     table.setAttribute("id", "projectOfIntreat");
-    table.setAttribute("class", "table-css");
+    table.setAttribute("class", "table-css-poi");
     const tableBody = document.createElement('TBODY');
     const html_for_table = `
       <tr>
