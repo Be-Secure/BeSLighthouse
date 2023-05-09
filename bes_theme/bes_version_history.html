@@ -55,10 +55,11 @@
         padding: 16px;
         position: absolute;
         top: 113px;
-        width: 86%;
-        min-width: 500px;
-        margin-left: 63px;
+        width: 90%;
+        min-width: 1191px;
+        margin-left: 62px;
       }
+
       #heading1 {
         padding-bottom: 50px;
       }
@@ -67,8 +68,10 @@
         position: relative;
         display: flex;
         float: right;
-        top: 62px;
-        padding-right: 10px;
+        top: 14px;
+        padding-right: 13px;
+        min-width: 261px;
+        min-height: 375px;
       }
 
       #version_details2 {
@@ -77,27 +80,32 @@
         padding-right: 157px;
         right: 16%;
       }
+
       .graph {
         margin-top: 100px;
         margin-right: 50px;
         width: auto;
         height: auto;
       }
+
       #scores {
         display: inline-block;
         text-align: center;
         width: fit-content;
         height: fit-content;
       }
+
       #scores > h4 {
         margin: 0%;
         font-size: 30px;
       }
+
       #scores > p {
         font-size: 20px;
         margin: auto;
         margin-top: 5px;
       }
+
       #scorecard,
       #criticality {
         font-size: 15px;
@@ -105,47 +113,24 @@
         text-align: center;
         width: fit-content;
       }
-      .table {
-        table-layout: auto;
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
-      .table td,
-      .table th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
 
-      .table tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      .table tr:hover {
-        background-color: #ddd;
-      }
-
-      .table th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #04aa6d;
-        color: white;
-      }
       .button {
         float: left;
         padding: 5px 5px 5px 5px;
         margin: 5px 5px 5px 5px;
       }
+
       .jqplot-highlighter-tooltip {
         font-size: 11px;
         background-color: #eda;
       }
+
       .sticky {
         position: fixed;
         top: 0;
         width: 100%;
       }
+
       .sticky-report {
         position: fixed;
         width: 100%;
@@ -159,40 +144,39 @@
     </div>
     <div id="report-name-project" class="report-name-css"></div>
     <div id="container" class="container-css">
-      <div id="border-div-css" class="border-div">
+      <div id="border-div-css" class="">
         <div id="version_details" class="version_details">
           <table id="version_table" class="table-css1">
             <tr>
               <td class="equal_col" id="id_value"></td>
               <td class="equal_col" id="tech_value"></td>
-              <td class="equal_col" rowspan="5" id="desc_value"></td>
+              <td class="equal_col" id="desc_value"></td>
             </tr>
             <tr>
               <td class="equal_col" id="project_value"></td>
-              <td class="equal_col" id="release_value"></td>             
+              <td class="equal_col" id="release_value"></td>
             </tr>
             <tr>
               <td class="equal_col">
-                Version :
+                <b>Version</b> :
                 <select id="selectversion"></select>
               </td>
               <td class="equal_col" id="vul_count_value"></td>
             </tr>
             <tr>
-              <!--<td class="equal_col">Security Tool Domain</td>-->
-              <td class="equal_col" rowspan="4">
-                <!--<button class="export_button">Export report</button>-->
-              </td>
+              <td class="equal_col" rowspan="4"></td>
             </tr>
-            <tr>
-              <!--<td class="equal_col">BeS Environments</td>-->
-            </tr>
+            <tr></tr>
           </table>
         </div>
         <div id="border_merge_css" class="border_merge">
           <div id="version_details1" class="version_div1">
             <table id="version_table1" class="table-css">
-              <h2 style="position: absolute;bottom: 291px;padding-right: 10px;">Assessment Report</h2>
+              <h2
+                style="position: absolute; bottom: 348px; padding-right: 10px"
+              >
+                Assessment Report
+              </h2>
               <tr>
                 <td id="scorecard_value"></td>
               </tr>
