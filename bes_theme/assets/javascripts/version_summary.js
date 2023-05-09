@@ -335,7 +335,7 @@ async function load_version_data(base_url) {
         sbom_name.innerHTML = sbom_value;
 
         const fossology_name = document.getElementById("fossology_value");
-        const fossology_value = `Fossology : <a id="fossology" href='javascript:open_value("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a>`;
+        const fossology_value = `Fossology : <a id="fossology" href='javascript:open_report("${base_url}","${version}", "fossology", "${ossp_name}")'>Click here</a>`;
         fossology_name.innerHTML = fossology_value;
 
         const vul_count_name = document.getElementById("vul_count_value");
