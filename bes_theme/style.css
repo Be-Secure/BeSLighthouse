@@ -73,14 +73,14 @@
   z-index: 1000;
 }
 
-@media screen and (max-width: 1388px),
+/* @media screen and (max-width: 1388px),
   (max-width: 1448px),
   (max-width: 1500px),
   (max-width: 1511px) {
   .report-name-css {
     left: 10%;
   }
-}
+} */
 
 .graph-style-cve-not-available-css {
   position: relative;
