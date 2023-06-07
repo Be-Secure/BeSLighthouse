@@ -14,3 +14,17 @@ Discussion: Date: 5/24/2023
 - BeS community
 - BeSLab
 - O31E (lab enterprise)
+
+
+----
+6/7/2023
+----
+
+- Three flavorus of BeSLighthout
+   - BeS Community (deployed on GitHub)
+     - aggregator for Bes community member and bes lab
+   - BeS Lab (deployed as a part of BeSLab based on assiesment)
+     - Just for the user
+   - Enterprise (o31e)
+     - Specific organization
+     - additional plugin (visualization)
