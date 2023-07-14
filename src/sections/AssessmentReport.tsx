@@ -10,7 +10,7 @@ import {
 } from "../data-store/assessmentReport";
 import { Link } from "react-router-dom";
 
-AppOrderTimeline.propTypes = {
+AssessmentReport.propTypes = {
   title: PropTypes.string,
   name: PropTypes.string,
   version: PropTypes.string,
@@ -27,15 +27,16 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
       let data = JSON.parse(response);
       setLinkStatus(data);
     } catch (err) {
-      // ignore
+      setLinkStatus({});
     }
   } catch (error) {
-    // ignore
+    setLinkStatus({});
   }
 };
 
 const CheckLink = ({ version, name, report }: any) => {
   const [linkStatus, setLinkStatus]: any = useState({});
+  debugger;
   useEffect(() => {
     if (version.trim()) {
       let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path[report]}/${name}-${version}-${assessment_report[report]}-report.json`;
@@ -59,10 +60,12 @@ const CheckLink = ({ version, name, report }: any) => {
     );
     // href={`/bes_version_history/${version}/${name}`}
   }
-  if (linkStatusLength !== 0)
+  if (linkStatusLength !== 0) {
+    debugger;
     return (
       <Link to={{ pathname: pathName, state: linkStatus }}>Click here</Link>
     );
+  }
   return (
     <Typography variant="subtitle1" color="inherit">
       Not Available
@@ -70,7 +73,7 @@ const CheckLink = ({ version, name, report }: any) => {
   );
 };
 
-export default function AppOrderTimeline({
+export default function AssessmentReport({
   title,
   name,
   version,

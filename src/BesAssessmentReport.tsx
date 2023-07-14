@@ -10,7 +10,7 @@ import {
   assessment_path,
   assessment_report,
 } from "./data-store/assessmentReport";
-import { verifyLink } from "./sections/AppOrderTimeline";
+import { verifyLink } from "./sections/AssessmentReport";
 import CodeQL from "./report/codeQL/CodeQL";
 import Sonarqube from "./report/sonarqube/Sonarqube";
 import Sbom from "./report/sbom/Sbom";

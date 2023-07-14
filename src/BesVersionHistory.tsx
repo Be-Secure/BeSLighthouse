@@ -17,8 +17,8 @@ import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "./data/poi_data";
 import CveGraph from "./sections/CveGraph";
-import AppOrderTimeline from "./sections/AppOrderTimeline";
 import Page from "./components/Page";
+import AssessmentReport from "./sections/AssessmentReport";
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -100,6 +100,7 @@ function BeSVersionHistory() {
   const handleOptionChange = (event: any) => {
     setSelectedOption(event.target.value);
   };
+  debugger;
   const chartLabelsData: any = [];
   const chartContentData: any = {};
 
@@ -215,7 +216,7 @@ function BeSVersionHistory() {
                       {cveNotFound(chartLabelsData, chartContentData)}
                     </Grid>
                     <Grid item xs={12} md={6} lg={4}>
-                      <AppOrderTimeline
+                      <AssessmentReport
                         title="Assessment Report"
                         name={besName.slice(1)}
                         version={selectedOption}
