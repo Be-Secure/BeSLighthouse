@@ -100,6 +100,7 @@ function BeSVersionHistory() {
   const handleOptionChange = (event: any) => {
     setSelectedOption(event.target.value);
   };
+  debugger;
   const chartLabelsData: any = [];
   const chartContentData: any = {};
 
