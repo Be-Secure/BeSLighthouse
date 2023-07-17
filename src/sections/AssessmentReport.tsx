@@ -51,14 +51,14 @@ const CheckLink = ({ version, name, report }: any) => {
         {linkStatus.criticality_score}
       </Typography>
     );
-  const pathName: string = `/bes_assessment_report/:${name}/:${version}/:${report}`;
+  const pathName: string = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${report}`;
   if (report === "Scorecard" && linkStatusLength !== 0) {
     return (
       <Link to={{ pathname: pathName, state: linkStatus }}>
         {linkStatus.score}
       </Link>
     );
-    // href={`/bes_version_history/${version}/${name}`}
+    // href={`/BeSLighthouse/bes_version_history/${version}/${name}`}
   }
   if (linkStatusLength !== 0) {
     debugger;

@@ -15,22 +15,22 @@ function App() {
     <React.StrictMode>
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/POI" component={ProjectOfInterest} />
-          <Route exact path="/VOI" component={VulnerabilityOfInterest} />
+          <Route exact path="/BeSLighthouse" component={HomePage} />
+          <Route exact path="/BeSLighthouse/POI" component={ProjectOfInterest} />
+          <Route exact path="/BeSLighthouse/VOI" component={VulnerabilityOfInterest} />
           <Route
             exact
-            path="/bes_version_history/:besId/:besName"
+            path="/BeSLighthouse/bes_version_history/:besId/:besName"
             component={BeSVersionHistory}
           />
           <Route
             exact
-            path="/vulnerability_report/:besId"
+            path="/BeSLighthouse/vulnerability_report/:besId"
             component={ShowVulnerabilityDetails}
           />
           <Route
             exact
-            path="/bes_assessment_report/:besName/:besVersion/:besReport"
+            path="/BeSLighthouse/bes_assessment_report/:besName/:besVersion/:besReport"
             component={BesAssessmentReport}
           />
         </Switch>
