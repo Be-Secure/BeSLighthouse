@@ -182,7 +182,7 @@ export default function UserPage() {
                             </Stack>
                           </TableCell>
                           <TableCell align="left">
-                            <a href={`/bes_version_history/:${id}/:${name}`}>
+                            <a href={`/BeSLighthouse/bes_version_history/:${id}/:${name}`}>
                               {name}{" "}
                             </a>
                           </TableCell>
