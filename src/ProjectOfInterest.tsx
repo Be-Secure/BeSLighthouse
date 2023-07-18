@@ -93,7 +93,7 @@ function ProjectOfInterest() {
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
             <AppCurrentVisits
-              title="BeS Tech Stack"
+              title="Be-Secure Technology Stacks"
               chartData={tecStack}
               chartColors={[
                 theme.palette.primary.main,
