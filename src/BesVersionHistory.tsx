@@ -185,7 +185,7 @@ function BeSVersionHistory() {
                         <span style={myStyle}>Version:</span>
                         <Select
                           key={"test"}
-                          style={{ padding: "0px" }}
+                          sx={{ padding: "0px" }}
                           className={classes.select}
                           value={selectedOption}
                           onChange={handleOptionChange}
