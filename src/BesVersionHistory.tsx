@@ -44,6 +44,13 @@ const useStyles: any = makeStyles(() => ({
       {
         padding: "4px",
       },
+    "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+      {
+        padding: "4px",
+      },
+    "& .css-qiwgdb.css-qiwgdb.css-qiwgdb": {
+      padding: "4px",
+    },
   },
 }));
 
@@ -91,7 +98,7 @@ function BeSVersionHistory() {
       besName.slice(1),
       setVersionSummary
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [selectedOption, setSelectedOption] = React.useState("");
   if (!selectedOption && versionSummary[0]?.version) {
@@ -100,7 +107,7 @@ function BeSVersionHistory() {
   const handleOptionChange = (event: any) => {
     setSelectedOption(event.target.value);
   };
-  
+
   const chartLabelsData: any = [];
   const chartContentData: any = {};
 
@@ -185,7 +192,6 @@ function BeSVersionHistory() {
                         <span style={myStyle}>Version:</span>
                         <Select
                           key={"test"}
-                          sx={{ padding: "0px" }}
                           className={classes.select}
                           value={selectedOption}
                           onChange={handleOptionChange}
