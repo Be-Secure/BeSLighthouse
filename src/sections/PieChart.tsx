@@ -12,12 +12,12 @@ import useChart from "../components/chart/useChart";
 
 // ----------------------------------------------------------------------
 
-const CHART_HEIGHT = 372;
+const CHART_HEIGHT = 262;
 const LEGEND_HEIGHT = 72;
 
 const StyledChartWrapper = styled("div")(({ theme }) => ({
   height: CHART_HEIGHT,
-  marginTop: theme.spacing(5),
+  // marginTop: theme.spacing(0),
   "& .apexcharts-canvas svg": { height: CHART_HEIGHT },
   "& .apexcharts-canvas svg,.apexcharts-canvas foreignObject": {
     overflow: "visible",
@@ -77,12 +77,12 @@ export default function AppCurrentVisits({
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      <StyledChartWrapper dir="ltr">
+      <StyledChartWrapper>
         <ReactApexChart
           type="pie"
           series={chartSeries}
           options={chartOptions}
-          height={280}
+          height={200}
         />
       </StyledChartWrapper>
     </Card>

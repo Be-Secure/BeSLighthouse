@@ -36,7 +36,7 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
 
 const CheckLink = ({ version, name, report }: any) => {
   const [linkStatus, setLinkStatus]: any = useState({});
-  debugger;
+  
   useEffect(() => {
     if (version.trim()) {
       let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path[report]}/${name}-${version}-${assessment_report[report]}-report.json`;
@@ -61,7 +61,6 @@ const CheckLink = ({ version, name, report }: any) => {
     // href={`/BeSLighthouse/bes_version_history/${version}/${name}`}
   }
   if (linkStatusLength !== 0) {
-    debugger;
     return (
       <Link to={{ pathname: pathName, state: linkStatus }}>Click here</Link>
     );
