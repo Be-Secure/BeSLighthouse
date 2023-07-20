@@ -25,7 +25,7 @@ function App() {
           />
           <Route
             exact
-            path="/BeSLighthouse/vulnerability_report/:besId"
+            path="/BeSLighthouse/vulnerability_report/:cveId"
             component={ShowVulnerabilityDetails}
           />
           <Route
