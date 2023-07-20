@@ -32,19 +32,19 @@ Discussion: Date: 5/24/2023
 ---
 20/07/2023
 ---
+
 - VOI detail view
- 1. ID to be replace with package.
- 2. More line items to be added map it to applicable BeS env and Playbooks
- 3. Add advisory database which is available.
- 4. details view how this has been discover either advisory database or through our BeS community (BeS lab or patner)
- 5. Add button for creating issue other TODO: trigger a github action to generate the code for env or playbook.
- 6. TODO: Link to export VEX (Vunerability exchange format) or any of cyclone DX or openSSF or SPDX (package format).
- 7. Download Vunerability details as JSON TODO: Format to support (osv.dev from google, VEX and BVF (BeSecure Vunerability Format)).
+  - ID to be replaced with package.
+  - More line items to be added map it to the applicable BeS environment and Playbooks.
+  - Add advisory database which is available.
+  - Details view how this has been discovered either advisory database or through our BeS community (BeS lab or partner)
+  - Add button for creating issue other TODO: trigger a github action to generate the code for env or playbook.
+  - TODO: Link to export VEX (Vulnerability exchange format) or any of cyclone DX or openSSF or SPDX (package format).
+  - Download Vulnerability details as JSON TODO: Format to support (osv.dev from google, VEX and BVF (BeSecure Vulnerability Format)).
 - POI page
-  1. Button for Dashbord in POI page
-  2. Filter to select the project it shoud be select from list inside POI give the cut off to max number of project of interest to support.
-  3. Use the color coding and shape to represent the project like (associated playbook and env for that project).
+  - Button for Dashboard in POI page
+  - Filter to select the project it should be selected from list inside POI give the cut off to max number of projects of interest to support.
+  - Use the color coding and shape to represent the project like (associated playbook and env for that project).
 - Dashbord
-  1. First we need the JSON model use ngo releation ship vizualization for risk pouser or a select set of project from POI.
-  2. Save the vizualiation in json file name of the organization maping of organization (search query).
-  3. 
+  - First we need the JSON model to use ngo relationship visualization for risk pouser or a select set of projects from POI.
+  - Save the visualization in json file name of the organization mapping of organization (search query).
