@@ -25,6 +25,8 @@ jobs:
       
       - name: Deploy web page
         run: npm run deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
   release:
     needs: deploy
