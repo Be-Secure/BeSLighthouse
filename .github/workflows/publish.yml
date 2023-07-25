@@ -23,10 +23,14 @@ jobs:
       - name: install dependency
         run: npm install --force
       
-      - name: Deploy web page
-        run: npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Build
+        run: npm run build
+      
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: build # Replace "dist" with the output directory of your build
         
   release:
     needs: deploy
