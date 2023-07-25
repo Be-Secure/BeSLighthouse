@@ -48,3 +48,14 @@ Discussion: Date: 5/24/2023
 - Dashbord
   - First we need the JSON model to use ngo relationship visualization for risk pouser or a select set of projects from POI.
   - Save the visualization in json file name of the organization mapping of organization (search query).
+
+---
+25/07/2023
+---
+- follow the naming conversion like osv.dev all the id will identify as same name acros all BeSLab.
+- BVF will the format for exchanging the vul format along with bes env and bes playbook details.
+-  VEX and OVF will be used for exchange for known vul..
+-  TODO: To build the vizualization of open-source project of interest and there VOI there shouid be utility to genereated required json that will publish as a view risk pousture report.
+-  The vul we discover during the fuzzing they will publish interal datastore of the lab and they have to go through the process of triag and will have to work with cna before the publish as BVFID.
+-  This datastore will be different from vul-datastore.
+-  TODO: publish the format newly discover the vul like osv.dev or github.
