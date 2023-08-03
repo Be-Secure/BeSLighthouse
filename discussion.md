@@ -67,3 +67,7 @@ Discussion: Date: 5/24/2023
 ---
 
 - Use the existing advisory-database if there is any.
+- TODO: Determind the format to sync-up assessment datastore of different BeS Lab to the public or community.
+- Remove besecure tech stack as the tech stack will be affected project.
+- Include the env to run the exploit for vulnerability and BeSecure-playbook to run the exploit.
+- 
