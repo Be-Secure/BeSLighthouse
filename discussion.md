@@ -61,3 +61,9 @@ Discussion: Date: 5/24/2023
 -  The Vulnerability we discover during the fuzzing they will publish the internal datastore of the lab and they have to go through the process of triage and will have to work with CNA before the publish as BVFID.
 -  This datastore will be different from Vulnerability-datastore.
 -  TODO: publish the format of newly discovered Vulnerabilities like osv.dev or GitHub.
+
+---
+03/08/2023
+---
+
+- Use the existing advisory-database if there is any.
