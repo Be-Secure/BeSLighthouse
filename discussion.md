@@ -70,4 +70,11 @@ Discussion: Date: 5/24/2023
 - TODO: Determind the format to sync-up assessment datastore of different BeS Lab to the public or community.
 - Remove besecure tech stack as the tech stack will be affected project.
 - Include the env to run the exploit for vulnerability and BeSecure-playbook to run the exploit.
-- 
+
+---
+06/09/2023
+---
+
+- Use d3 graph to demonstrate the visualization of Project.
+- Create a org if possible or display the visualization base on CVE or scorecard
+- Use the color code for the Project based on severity.
