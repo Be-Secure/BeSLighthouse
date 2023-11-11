@@ -1,17 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import * as ReactDOMClient from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-const root = document.getElementById("root") as HTMLElement;
+const container: any = document.getElementById("root");
 
-if (root) {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    root
-  );
-} else {
-  throw new Error("Could not find root element to mount to!");
-}
+// Create a root.
+const root = ReactDOMClient.createRoot(container);
+
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);

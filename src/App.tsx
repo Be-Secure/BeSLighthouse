@@ -1,41 +1,34 @@
 import * as React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import HomePage from "./HomePage";
+// react-router components
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
-import "./Tabler.css"
-import ProjectOfInterest from "./ProjectOfInterest";
-import BesAssessmentReport from "./BesAssessmentReport";
-import VulnerabilityOfInterest from "./VulnerabilityOfInterest";
-import ShowVulnerabilityDetails from "./report/vulnerability/ShowVulnerabilityDetails";
-import BeSVersionHistory from "./BesVersionHistory";
+
+// @mui material components
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+import theme from "./assets/theme";
+import Presentation from "./layouts/pages/presentation";
+
 
 function App() {
+  const { pathname } = useLocation();
+
+  // Setting page scroll to 0 when changing the route
+  React.useEffect(() => {
+    document.documentElement.scrollTop = 0;
+    // document.scrollingElement.scrollTop = 0;
+  }, [pathname]);
   return (
-    <React.StrictMode>
-      <Router>
-        <Switch>
-          <Route exact path="/BeSLighthouse" component={HomePage} />
-          <Route exact path="/BeSLighthouse/POI" component={ProjectOfInterest} />
-          <Route exact path="/BeSLighthouse/VOI" component={VulnerabilityOfInterest} />
-          <Route
-            exact
-            path="/BeSLighthouse/bes_version_history/:besId/:besName"
-            component={BeSVersionHistory}
-          />
-          <Route
-            exact
-            path="/BeSLighthouse/vulnerability_report/:cveId"
-            component={ShowVulnerabilityDetails}
-          />
-          <Route
-            exact
-            path="/BeSLighthouse/bes_assessment_report/:besName/:besVersion/:besReport"
-            component={BesAssessmentReport}
-          />
-        </Switch>
-      </Router>
-    </React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Routes>
+        {/* {getRoutes(routes)} */}
+        <Route path="/presentation" element={<Presentation />} />
+        <Route path="*" element={<Navigate to="/presentation" />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 
