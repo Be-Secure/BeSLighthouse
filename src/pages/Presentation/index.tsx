@@ -16,31 +16,23 @@ import Counters from "./sections/Counters";
 import routes from "../../routes";
 
 // Images
-import bgImage from "../../assets/images/bg-presentation.jpg";
-
+import bgImage from "../../favicon.png";
 
 function Presentation() {
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "",
-          color: "info",
-        }}
-        sticky
-      />
+      <DefaultNavbar routes={routes} sticky />
       <MKBox
         minHeight="75vh"
         width="100%"
         sx={{
-          backgroundImage: `url(${bgImage})`,
+          // backgroundImage: `url(${bgImage})`,
+          background: '#000000a3',
           backgroundSize: "cover",
           backgroundPosition: "top",
           display: "grid",
           placeItems: "center",
+          height: "10px",
         }}
       >
         <Container>
@@ -56,7 +48,7 @@ function Presentation() {
                 },
               })}
             >
-              Material Kit 2 React{" "}
+              BeSLighthouse{" "}
             </MKTypography>
             <MKTypography
               variant="body1"
@@ -65,8 +57,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              Free & Open Source Web UI Kit built over ReactJS &amp; MUI. Join over 1.6 million
-              developers around the world.
+              Community Dashboard for security assessment of Open Source Security Tech Stack.
             </MKTypography>
           </Grid>
         </Container>
@@ -77,7 +68,8 @@ function Presentation() {
           mx: { xs: 2, lg: 3 },
           mt: -8,
           mb: 4,
-          backgroundColor: ({ palette: { white }, functions: { rgba } }: any) => rgba(white.main, 0.8),
+          backgroundColor: ({ palette: { white }, functions: { rgba } }: any) =>
+            rgba(white.main, 0.8),
           backdropFilter: "saturate(200%) blur(30px)",
           boxShadow: ({ boxShadows: { xxl } }: any) => xxl,
         }}

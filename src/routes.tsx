@@ -3,20 +3,28 @@ import * as React from "react";
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Icon from "@mui/material/Icon";
+import ProjectOfInterest from "./layouts/pages/projectOfInterest";
+import VulnerabilityOfInterest from "./pages/VulnerabilityOfInterest";
 
 const routes = [
   {
-    name: "Project",
-    icon: <Icon>dashboard</Icon>,
+    name: "Projects",
+    key: "Project-of-Interest",
+    icon: <Icon>library_books</Icon>,
+    route: "/Project-Of-Interest",
+    component: <ProjectOfInterest />,
   },
   {
-    name: "vulnerability",
-    icon: <Icon>dashboard</Icon>,
+    name: "vulnerabilities",
+    key: "Vulnerability-Of-Interest",
+    icon: <Icon fontSize="small">gpp_bad</Icon>,
+    route: "/Vulnerability-Of-Interest",
+    component: <VulnerabilityOfInterest />,
   },
   {
     name: "github",
     icon: <GitHubIcon />,
-    href: "https://www.github.com/creativetimofficial/material-kit-react",
+    href: "https://github.com/Be-Secure/BeSLighthouse",
   },
 ];
 
