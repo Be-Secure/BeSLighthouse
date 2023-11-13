@@ -16,7 +16,7 @@ import Counters from "./sections/Counters";
 import routes from "../../routes";
 
 // Images
-import bgImage from "../../favicon.png";
+import bgImage from "../../assets/images/ms-icon-310x310.png";
 
 function Presentation() {
   return (
@@ -27,7 +27,7 @@ function Presentation() {
         width="100%"
         sx={{
           // backgroundImage: `url(${bgImage})`,
-          background: '#000000a3',
+          background: '#8045cb',
           backgroundSize: "cover",
           backgroundPosition: "top",
           display: "grid",
@@ -36,6 +36,7 @@ function Presentation() {
         }}
       >
         <Container>
+        <img style={{display: 'block', margin: '-5% auto 5% auto', width: '15%'}} src={bgImage} alt="Icon" />
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
             <MKTypography
               variant="h1"

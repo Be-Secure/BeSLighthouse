@@ -16,7 +16,7 @@ function Counters() {
           <Grid item xs={1} md={2.4}>
             <DefaultCounterCard
               count={1}
-              title="Security risk"
+              title="Security Risk"
               description="Understand the security risk of an OSS project before consuming the code."
             />
           </Grid>
