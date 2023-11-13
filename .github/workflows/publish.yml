@@ -28,7 +28,9 @@ jobs:
         run: npm install --force
       
       - name: Run Build
-        run: npm run build
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+          npm run build
       
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
