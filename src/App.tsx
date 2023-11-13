@@ -49,7 +49,7 @@ function App() {
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/BeSLighthouse" />} />
         <Route path="/BeSLighthouse" element={<Presentation />} />
-        <Route path="/Project-Of-Interest/bes_version_history/:besId/:besName" element={<BesVersionHistory />} />
+        <Route path="/BeSLighthouse/Project-Of-Interest/bes_version_history/:besId/:besName" element={<BesVersionHistory />} />
         <Route path="/BeSLighthouse/bes_assessment_report/:besName/:besVersion/:besReport" element={<BesAssessmentReport />} />
         <Route path="/BeSLighthouse/vulnerability_report/:cveId" element={<ShowVulnerabilityDetailsPage />} />
       </Routes>

@@ -11,14 +11,14 @@ const routes = [
     name: "Projects",
     key: "Project-of-Interest",
     icon: <Icon>library_books</Icon>,
-    route: "/Project-Of-Interest",
+    route: "/BeSLighthouse/Project-Of-Interest",
     component: <ProjectOfInterest />,
   },
   {
     name: "vulnerabilities",
     key: "Vulnerability-Of-Interest",
     icon: <Icon fontSize="small">gpp_bad</Icon>,
-    route: "/Vulnerability-Of-Interest",
+    route: "/BeSLighthouse/Vulnerability-Of-Interest",
     component: <VulnerabilityOfInterest />,
   },
   {
