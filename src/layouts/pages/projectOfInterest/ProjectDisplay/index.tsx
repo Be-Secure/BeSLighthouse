@@ -166,7 +166,7 @@ export default function ProjectDisplay() {
                       </TableCell>
                       <TableCell align="left">
                         <a
-                          href={`/Project-Of-Interest/bes_version_history/:${id}/:${name}`}
+                          href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${id}/:${name}`}
                         >
                           {name}{" "}
                         </a>
