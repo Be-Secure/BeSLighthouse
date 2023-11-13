@@ -1,22 +1,14 @@
 {
   "files": {
-    "main.css": "/BeSLighthouse/static/css/main.7655f538.chunk.css",
-    "main.js": "/BeSLighthouse/static/js/main.540c4c6c.chunk.js",
-    "main.js.map": "/BeSLighthouse/static/js/main.540c4c6c.chunk.js.map",
-    "runtime-main.js": "/BeSLighthouse/static/js/runtime-main.3ccf36af.js",
-    "runtime-main.js.map": "/BeSLighthouse/static/js/runtime-main.3ccf36af.js.map",
-    "static/js/2.09d4d7cc.chunk.js": "/BeSLighthouse/static/js/2.09d4d7cc.chunk.js",
-    "static/js/2.09d4d7cc.chunk.js.map": "/BeSLighthouse/static/js/2.09d4d7cc.chunk.js.map",
+    "main.js": "/BeSLighthouse/static/js/main.7a112c6d.chunk.js",
+    "main.js.map": "/BeSLighthouse/static/js/main.7a112c6d.chunk.js.map",
+    "runtime~main.js": "/BeSLighthouse/static/js/runtime~main.579e3372.js",
+    "runtime~main.js.map": "/BeSLighthouse/static/js/runtime~main.579e3372.js.map",
+    "static/js/2.6822c112.chunk.js": "/BeSLighthouse/static/js/2.6822c112.chunk.js",
+    "static/js/2.6822c112.chunk.js.map": "/BeSLighthouse/static/js/2.6822c112.chunk.js.map",
     "index.html": "/BeSLighthouse/index.html",
-    "static/css/main.7655f538.chunk.css.map": "/BeSLighthouse/static/css/main.7655f538.chunk.css.map",
-    "static/js/2.09d4d7cc.chunk.js.LICENSE.txt": "/BeSLighthouse/static/js/2.09d4d7cc.chunk.js.LICENSE.txt",
-    "static/media/favicon.1aa0488b.png": "/BeSLighthouse/static/media/favicon.1aa0488b.png",
-    "static/media/Tabler.css": "/BeSLighthouse/static/media/feather-webfont.b5fc8ffc.svg"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.3ccf36af.js",
-    "static/js/2.09d4d7cc.chunk.js",
-    "static/css/main.7655f538.chunk.css",
-    "static/js/main.540c4c6c.chunk.js"
-  ]
+    "precache-manifest.058a43583077639e712df814766441d8.js": "/BeSLighthouse/precache-manifest.058a43583077639e712df814766441d8.js",
+    "service-worker.js": "/BeSLighthouse/service-worker.js",
+    "static/media/ms-icon-310x310.png": "/BeSLighthouse/static/media/ms-icon-310x310.01bfdd8b.png"
+  }
 }
