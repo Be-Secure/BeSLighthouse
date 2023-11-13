@@ -15,16 +15,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node 16.x
+      - name: Use Node 18.x
         uses: actions/setup-node@v1
         with:
-          node-version: 16.11.0
-      
+          node-version: 18.18.2
+
+      - name: set env
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+
       - name: install dependency
         run: npm install --force
       
       - name: Run Build
-        run: npm run build
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+          npm run build
       
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
@@ -40,7 +46,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
