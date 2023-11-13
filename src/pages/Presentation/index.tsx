@@ -36,7 +36,7 @@ function Presentation() {
         }}
       >
         <Container>
-        <img style={{display: 'block', margin: '-5% auto 5% auto', width: '15%'}} src={bgImage} alt="Icon" />
+        <img style={{display: 'block', margin: '-2% auto 5% auto', width: '9%'}} src={bgImage} alt="Icon" />
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
             <MKTypography
               variant="h1"

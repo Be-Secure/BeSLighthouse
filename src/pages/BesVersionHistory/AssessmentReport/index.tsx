@@ -1,9 +1,7 @@
 import * as React from "react";
 
-// @mui material components
 import Card from "@mui/material/Card";
 
-// Material Dashboard 2 React components
 import { Divider, Grid, Typography } from "@mui/material";
 import { fetchJsonReportOsspoiMaster } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";

@@ -1,8 +1,7 @@
 import * as React from "react";
-// @mui material components
+
 import Card from "@mui/material/Card";
 
-// Material Dashboard 2 React components
 import { StyledChartWrapper } from "../StyledChartWrapper";
 import ReactApexChart from "react-apexcharts";
 import { useTheme } from "@mui/material/styles";

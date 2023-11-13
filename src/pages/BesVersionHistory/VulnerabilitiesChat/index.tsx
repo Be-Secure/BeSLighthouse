@@ -1,11 +1,9 @@
 import * as React from "react";
 
-// @mui material components
 import Card from "@mui/material/Card";
 import MKTypography from "../../../components/MKTypography";
 import CveGraph from "./GraphChart";
 
-// Material Dashboard 2 React components
 
 function cveNotFound(chartLabels: any[], chartContent: any): any {
   if (chartLabels.length === 0) {

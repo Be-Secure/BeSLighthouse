@@ -2,9 +2,6 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
-// Material Dashboard 2 React components
-
-// Material Dashboard 2 React example components
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/poi_data";
 import { MenuItem, Select } from "@mui/material";
