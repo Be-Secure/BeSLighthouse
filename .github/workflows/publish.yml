@@ -19,7 +19,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18.18.2
-      
+
+      - name: set env
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+
       - name: install dependency
         run: npm install --force
       
@@ -40,7 +44,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
