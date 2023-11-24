@@ -1,5 +1,5 @@
 import { osspoiMaster, version_details } from "../dataStore";
-import { fetchJsonReportOsspoiMaster } from "./fatch_json_report";
+import { fetchJsonReport } from "./fatch_json_report";
 
 export class ProjectOfInterestData {
   public poi: any;
@@ -18,14 +18,14 @@ export class ProjectOfInterestData {
   }
 
   async getJsonReportOsspoiMaster(): Promise<any> {
-    return await fetchJsonReportOsspoiMaster(osspoiMaster);
+    return await fetchJsonReport(osspoiMaster);
   }
 
   async getJsonReportVersionSummary(
     besId: String,
     besName: string
   ): Promise<any> {
-    return await fetchJsonReportOsspoiMaster(
+    return await fetchJsonReport(
       version_details + besId + "-" + besName + "-Versiondetails.json"
     );
   }
