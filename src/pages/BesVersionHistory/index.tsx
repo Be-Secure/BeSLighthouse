@@ -35,16 +35,16 @@ const useStyles: any = makeStyles(() => ({
     minWidth: "155px",
     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
       {
-        padding: "4px",
+        padding: "4px"
       },
     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
       {
-        padding: "4px",
+        padding: "4px"
       },
     "& .css-qiwgdb.css-qiwgdb.css-qiwgdb": {
-      padding: "4px",
-    },
-  },
+      padding: "4px"
+    }
+  }
 }));
 
 function BesVersionHistory() {
@@ -84,8 +84,7 @@ function BesVersionHistory() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
-      <MKBox minHeight="12vh" width="100%"></MKBox>
-      <MKBox sx={{mx: { xs: 2, lg: 3 }}}>
+      <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 } }}>
         {data.map((item: any) => {
           if (`:${item.name}` === besName) {
             return (
@@ -235,7 +234,7 @@ function BesVersionHistory() {
                                     name: value,
                                     type: "line",
                                     fill: "solid",
-                                    data: [cve[value]],
+                                    data: [cve[value]]
                                   };
                                 else
                                   chartContentData[value].data.push(cve[value]);

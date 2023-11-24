@@ -9,33 +9,24 @@ import {
   TablePagination,
   TableRow
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const TABLE_HEAD = [
-  { id: "id", label: "ID", alignRight: false },
-  { id: "Package", label: "Packages", alignRight: false },
-  { id: "Summary", label: "Summary", alignRight: false },
-  { id: "Affected Version", label: "Affected Version", alignRight: false },
-  { id: "Fix", label: "Fix", alignRight: false }
+  { id: "type", label: "Type", alignRight: false },
+  { id: "name", label: "Name", alignRight: false },
+  { id: "organization", label: "Organization", alignRight: false },
+  { id: "Created_date", label: "Created date", alignRight: false },
+  { id: "size", label: "Size", alignRight: false },
+  { id: "access", label: "Access", alignRight: false },
+  { id: "license", label: "License", alignRight: false },
+  { id: "dependencies", label: "Dependencies", alignRight: false }
 ];
 
-function packageData(affected: any) {
-  const affectedPackage: any = [];
-  const affectedData: any[] = Object.values(affected);
-  affectedData.forEach((value: any) => {
-    affectedPackage.push(
-      <>
-        <li>{`${value.package.ecosystem}/${value.package.name}`}</li>
-      </>
-    );
-  });
-  return <ul>{affectedPackage}</ul>;
-}
-
-export default function VulnerabilityTable({ data }: any) {
+export default function ModelTable({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const filteredCve = data;
+  const filteredModel = data;
 
   const handleChangePage = (
     event: any,
@@ -69,7 +60,7 @@ export default function VulnerabilityTable({ data }: any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredCve
+            {filteredModel
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any, index: number) => {
                 return (
@@ -79,20 +70,32 @@ export default function VulnerabilityTable({ data }: any) {
                       sx={{ paddingLeft: "2px" }}
                       padding="none"
                     >
-                      <a
-                        href={`/BeSLighthouse/vulnerability_report/:${row.cve_id}`}
+                      {row.type}
+                    </TableCell>
+                    <TableCell align="left">
+                      {/* <a style={{color: '#587f2f', cursor: "pointer"}}
+                        href={`/BeSLighthouse/model_report/:${row.name}`}
+                      > */}
+                      <NavLink
+                        to={{
+                          pathname: `/BeSLighthouse/model_report/:${row.name}`,
+                          search: ""
+                        }}
+                        state={{ selectedMenu: row }}
+                        style={{ color: "#587f2f", cursor: "pointer" }}
                       >
-                        {row.cve_id}
-                      </a>
+                        {row.name}
+                      </NavLink>
+                      {/* </a> */}
                     </TableCell>
+                    <TableCell align="left">{row.organization}</TableCell>
+                    <TableCell align="left">{row.created_date.value}</TableCell>
+                    <TableCell align="left">{row.size}</TableCell>
+                    <TableCell align="left">{row.access}</TableCell>
+                    <TableCell align="left">{row.license.value}</TableCell>
                     <TableCell align="left">
-                      {packageData(row.affected)}
+                      {row.dependencies.join(" | ")}
                     </TableCell>
-                    <TableCell align="left">{row.summary}</TableCell>
-                    <TableCell align="left">
-                      {row.affected[0].ranges[0].events.introduced} ...
-                    </TableCell>
-                    <TableCell align="left">Fix available</TableCell>
                   </TableRow>
                 );
               })}

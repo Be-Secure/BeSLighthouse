@@ -81,12 +81,7 @@ function ProjectOfInterest() {
         routes={routes}
         sticky
       />
-      <MKBox
-        minHeight="12vh"
-        width="100%"
-      >
-      </MKBox>
-      <MKBox sx={{mx: { xs: 2, lg: 3 }}}>
+      <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 }}}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={6}>
             <MKBox mb={3}>

@@ -1,6 +1,6 @@
 import https from "https";
 
-export function fetchJsonReportOsspoiMaster(url: string): Promise<any> {
+export function fetchJsonReport(url: string): Promise<any> {
   return new Promise((resolve, reject) => {
     https
       .get(url, (response: any) => {

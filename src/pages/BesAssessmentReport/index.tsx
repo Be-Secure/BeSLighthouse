@@ -56,8 +56,7 @@ function BesAssessmentReport() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
-      <MKBox minHeight="12vh" width="100%"></MKBox>
-      <MKBox key={"cardkey"} sx={{mx: { xs: 2, lg: 3 }}}>
+      <MKBox pt={14} key={"cardkey"} sx={{mx: { xs: 2, lg: 3 }}}>
         {besReport === "Scorecard" ? (
           <Scorecard
             date={report?.date ?? ""}

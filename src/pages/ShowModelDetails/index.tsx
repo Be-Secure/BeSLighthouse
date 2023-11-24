@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 import { projectOfInterestData } from "../../utils/poi_data";
-import ShowVulnerabilityContent from "./ShowVulnerabilityContent";
+import ShowModelContent from "./ShowModelContent";
 import MKBox from "../../components/MKBox";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
@@ -16,7 +16,7 @@ export const fetchOsspoiMaterData = async () => {
   return osspoi;
 };
 
-function ShowVulnerabilityDetails() {
+function ShowModelDetails() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
@@ -25,7 +25,7 @@ function ShowVulnerabilityDetails() {
           <Grid item xs={12}>
             <Card>
               <MKBox pt={3} px={3}>
-                <ShowVulnerabilityContent />
+                <ShowModelContent />
               </MKBox>
             </Card>
           </Grid>
@@ -35,4 +35,4 @@ function ShowVulnerabilityDetails() {
   );
 }
 
-export default ShowVulnerabilityDetails;
+export default ShowModelDetails;

@@ -13,6 +13,7 @@ import routes from "./routes";
 import BesVersionHistory from "./layouts/pages/besVersionHistory";
 import BesAssessmentReport from "./layouts/pages/besAssessmentReport";
 import ShowVulnerabilityDetailsPage from "./layouts/pages/vulnerabilityDetails";
+import ShowModelDetailsPage from "./layouts/pages/modelDetails";
 
 function App() {
   const { pathname } = useLocation();
@@ -31,11 +32,7 @@ function App() {
 
       if (route.route) {
         return (
-          <Route
-            path={route.route}
-            element={route.component}
-            key={route.key}
-          />
+          <Route path={route.route} element={route.component} key={route.key} />
         );
       }
 
@@ -49,9 +46,22 @@ function App() {
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/BeSLighthouse" />} />
         <Route path="/BeSLighthouse" element={<Presentation />} />
-        <Route path="/BeSLighthouse/Project-Of-Interest/bes_version_history/:besId/:besName" element={<BesVersionHistory />} />
-        <Route path="/BeSLighthouse/bes_assessment_report/:besName/:besVersion/:besReport" element={<BesAssessmentReport />} />
-        <Route path="/BeSLighthouse/vulnerability_report/:cveId" element={<ShowVulnerabilityDetailsPage />} />
+        <Route
+          path="/BeSLighthouse/Project-Of-Interest/bes_version_history/:besId/:besName"
+          element={<BesVersionHistory />}
+        />
+        <Route
+          path="/BeSLighthouse/bes_assessment_report/:besName/:besVersion/:besReport"
+          element={<BesAssessmentReport />}
+        />
+        <Route
+          path="/BeSLighthouse/vulnerability_report/:cveId"
+          element={<ShowVulnerabilityDetailsPage />}
+        />
+        <Route
+          path="/BeSLighthouse/model_report/:modelName"
+          element={<ShowModelDetailsPage />}
+        />
       </Routes>
     </ThemeProvider>
   );

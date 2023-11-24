@@ -457,10 +457,6 @@ function DefaultNavbar({
       {({ TransitionProps }) => (
         <Grow
           {...TransitionProps}
-          //   sx={{
-          //     transformOrigin: "left top",
-          //     background: ({ palette: { white } }) => white.main,
-          //   }}
         >
           <MKBox ml={2.5} mt={-2.5} borderRadius="lg">
             <MKBox shadow="lg" borderRadius="lg" py={1.5} px={1} mt={2}>

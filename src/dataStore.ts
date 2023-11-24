@@ -6,3 +6,5 @@ export const assessment_datastore =
   "https://raw.githubusercontent.com/Be-Secure/besecure-assessment-datastore/main";
 export const vulnerabilityOffInterest =
   "https://raw.githubusercontent.com/Be-Secure/besecure-ossvoi-datastore/main/vulnerability-of-interest.json";
+export const modelOfInterestData =
+  "https://raw.githubusercontent.com/Be-Secure/besecure-osmoi-datastore/main/model_of_interest.json";

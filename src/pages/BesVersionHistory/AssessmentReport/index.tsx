@@ -3,12 +3,15 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 
 import { Divider, Grid, Typography } from "@mui/material";
-import { fetchJsonReportOsspoiMaster } from "../../../utils/fatch_json_report";
+import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
 import { assessment_datastore } from "../../../dataStore";
 import MKBox from "../../../components/MKBox";
 import MKTypography from "../../../components/MKTypography";
-import { assessment_path, assessment_report } from "../../../utils/assessmentReport";
+import {
+  assessment_path,
+  assessment_report
+} from "../../../utils/assessmentReport";
 
 const dividerDiv = (index: number) => {
   if (index !== 0) return <Divider sx={{ my: 1.5 }} />;
@@ -16,7 +19,7 @@ const dividerDiv = (index: number) => {
 
 export const verifyLink = async (link: any, setLinkStatus: any) => {
   try {
-    const response = await fetchJsonReportOsspoiMaster(link);
+    const response = await fetchJsonReport(link);
     try {
       let data = JSON.parse(response);
       setLinkStatus(data);
@@ -30,13 +33,13 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
 
 const CheckLink = ({ version, name, report }: any) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
-  
+
   React.useEffect(() => {
     if (version.trim()) {
       let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path[report]}/${name}-${version}-${assessment_report[report]}-report.json`;
       verifyLink(link, setLinkStatus);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [version]);
   let linkStatusLength: number = Object.values(linkStatus).length;
   if (report === "Criticality Score" && linkStatusLength !== 0)
@@ -46,19 +49,15 @@ const CheckLink = ({ version, name, report }: any) => {
       </Typography>
     );
   const pathName: string = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${report}`;
-  const myObject = { pathname: pathName, state: linkStatus } as { pathname: string; };
+  const myObject = { pathname: pathName, state: linkStatus } as {
+    pathname: string;
+  };
   if (report === "Scorecard" && linkStatusLength !== 0) {
-    return (
-      <Link to={myObject}>
-        {linkStatus.score}
-      </Link>
-    );
+    return <Link to={myObject}>{linkStatus.score}</Link>;
     // href={`/BeSLighthouse/bes_version_history/${version}/${name}`}
   }
   if (linkStatusLength !== 0) {
-    return (
-      <Link to={myObject}>Click here</Link>
-    );
+    return <Link to={myObject}>Click here</Link>;
   }
   return (
     <Typography variant="subtitle1" color="inherit">
@@ -76,7 +75,7 @@ function AssessmentReport({ title, name, version, ...other }: any) {
     "SBOM",
     "Fossology",
     "Fuzz Report",
-    "Snyk",
+    "Snyk"
   ];
   return (
     <Card sx={{ height: "100%" }}>

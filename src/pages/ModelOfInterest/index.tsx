@@ -5,9 +5,9 @@ import Card from "@mui/material/Card";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import MKBox from "../../components/MKBox";
 import routes from "../../routes";
-import VulnerablitiDisplay from "./VulnerablitiDisplay";
+import ModelDisplay from "./ModelDisplay";
 
-function VulnerabilityOfInterest() {
+function ModelOfInterest() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
@@ -16,7 +16,7 @@ function VulnerabilityOfInterest() {
           <Grid item xs={12}>
             <Card>
               <MKBox>
-                <VulnerablitiDisplay />
+                <ModelDisplay />
               </MKBox>
             </Card>
           </Grid>
@@ -26,4 +26,4 @@ function VulnerabilityOfInterest() {
   );
 }
 
-export default VulnerabilityOfInterest;
+export default ModelOfInterest;
