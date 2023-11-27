@@ -73,9 +73,6 @@ export default function ModelTable({ data }: any) {
                       {row.type}
                     </TableCell>
                     <TableCell align="left">
-                      {/* <a style={{color: '#587f2f', cursor: "pointer"}}
-                        href={`/BeSLighthouse/model_report/:${row.name}`}
-                      > */}
                       <NavLink
                         to={{
                           pathname: `/BeSLighthouse/model_report/:${row.name}`,
@@ -93,9 +90,6 @@ export default function ModelTable({ data }: any) {
                     <TableCell align="left">{row.size}</TableCell>
                     <TableCell align="left">{row.access}</TableCell>
                     <TableCell align="left">{row.license.value}</TableCell>
-                    <TableCell align="left">
-                      {row.dependencies.join(" | ")}
-                    </TableCell>
                   </TableRow>
                 );
               })}
