@@ -55,7 +55,6 @@ function AssessmentSummary() {
   const selectedMenu: any = location.state.selectedMenu;
   React.useEffect(() => {
     const link = `${besecureMlAssessmentDataStore}/${selectedMenu.name}/vulnerabilities/${selectedMenu.name}-vulnerabilities-summary-report.json`;
-    debugger;
     verifyLink(link, setLinkStatus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

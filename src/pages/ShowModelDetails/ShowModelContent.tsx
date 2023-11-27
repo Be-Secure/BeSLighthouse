@@ -1,6 +1,7 @@
 import Card from "@mui/material/Card";
 import * as React from "react";
 import { useLocation } from "react-router-dom";
+import MKTypography from "../../components/MKTypography";
 
 function ShowModelContent() {
   const location = useLocation();
@@ -10,7 +11,9 @@ function ShowModelContent() {
     <Card>
       <div>
         <div>
-          <h3>{selectedMenu.name}</h3>
+          <MKTypography style={{padding: '2%'}} variant="h5" fontWeight="medium">
+            {selectedMenu.name}
+          </MKTypography>
           <div style={{ margin: "10px" }}>
             <div>
               Upstream:
