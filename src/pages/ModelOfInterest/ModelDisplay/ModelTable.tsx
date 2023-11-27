@@ -90,6 +90,9 @@ export default function ModelTable({ data }: any) {
                     <TableCell align="left">{row.size}</TableCell>
                     <TableCell align="left">{row.access}</TableCell>
                     <TableCell align="left">{row.license.value}</TableCell>
+                    <TableCell align="left">
+                      {row.dependencies.join(" | ")}
+                    </TableCell>
                   </TableRow>
                 );
               })}
