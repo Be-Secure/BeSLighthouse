@@ -14,6 +14,7 @@ import BesVersionHistory from "./layouts/pages/besVersionHistory";
 import BesAssessmentReport from "./layouts/pages/besAssessmentReport";
 import ShowVulnerabilityDetailsPage from "./layouts/pages/vulnerabilityDetails";
 import ShowModelDetailsPage from "./layouts/pages/modelDetails";
+import ModelVulnerabilitiesDetailedPage from "./layouts/pages/modelVulnerabilitiesDetailed";
 
 function App() {
   const { pathname } = useLocation();
@@ -61,6 +62,10 @@ function App() {
         <Route
           path="/BeSLighthouse/model_report/:modelName"
           element={<ShowModelDetailsPage />}
+        />
+        <Route
+          path="/BeSLighthouse/model_vulnerabilities_detailed/:modelName"
+          element={<ModelVulnerabilitiesDetailedPage />}
         />
       </Routes>
     </ThemeProvider>
