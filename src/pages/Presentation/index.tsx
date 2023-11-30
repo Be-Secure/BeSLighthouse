@@ -3,11 +3,13 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Stack from '@mui/material/Stack';  
 
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
+import Button from "../../components/MKButton";
 
 // Presentation page sections
 import Counters from "./sections/Counters";
@@ -16,7 +18,7 @@ import Counters from "./sections/Counters";
 import routes from "../../routes";
 
 // Images
-import bgImage from "../../assets/images/ms-icon-310x310.png";
+//import bgImage from "../../assets/images/ms-icon-310x310.png";
 
 function Presentation() {
   return (
@@ -27,7 +29,8 @@ function Presentation() {
         width="100%"
         sx={{
           // backgroundImage: `url(${bgImage})`,
-          background: '#8045cb',
+          //background: '#8045cb',
+          background: 'linear-gradient(to bottom, rgb(64,81,181),rgb(168,70,185) )',
           backgroundSize: "cover",
           backgroundPosition: "top",
           display: "grid",
@@ -36,30 +39,38 @@ function Presentation() {
         }}
       >
         <Container>
-        <img style={{display: 'block', margin: '-2% auto 5% auto', width: '9%'}} src={bgImage} alt="Icon" />
-          <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
+          <Grid container item xs={0} lg={7} >
             <MKTypography
-              variant="h1"
+              variant="h3"
               color="white"
               mt={-6}
               mb={1}
-              sx={({ breakpoints, typography: { size } }: any) => ({
-                [breakpoints.down("md")]: {
-                  fontSize: size["3xl"],
-                },
-              })}
+              style={{
+                fontSize:"30px",
+                lineHeight: '1.3'
+              }}
             >
-              BeSLighthouse{" "}
+            Transform next generation application security threat models and security assessment playbooks into global commons{" "}
             </MKTypography>
+       
             <MKTypography
-              variant="body1"
+              variant="body2"
               color="white"
-              textAlign="center"
-              px={{ xs: 6, lg: 12 }}
+              textAlign="left"
+              xs={0}
               mt={1}
+              style={{ marginBottom: '30px', 
+                marginTop: '16px',
+                lineHeight: '1.3'
+              }}
             >
-              Community Dashboard for security assessment of Open Source Security Tech Stack.
+              BeSLighthouse provides an intuitive dashboard with actionable insights into the security posture of open-source projects, machine learning models, training dataset to foster trust and reliability in the open-source ecosystem.
             </MKTypography>
+            <Stack spacing={2} direction="row">  
+            <a href={"/BeSLighthouse/Project-Of-Interest"}>
+              <Button variant="contained"> Try it</Button>
+            </a>
+            </Stack>  
           </Grid>
         </Container>
       </MKBox>
