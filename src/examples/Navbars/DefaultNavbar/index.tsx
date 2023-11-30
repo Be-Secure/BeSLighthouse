@@ -32,7 +32,7 @@ function DefaultNavbar({
   light,
   sticky,
   relative,
-  center,
+  center
 }: any) {
   const [dropdown, setDropdown]: any = useState("");
   const [dropdownEl, setDropdownEl]: any = useState("");
@@ -89,6 +89,7 @@ function DefaultNavbar({
         }}
         onMouseLeave={() => collapse && setDropdown(null)}
         light={light}
+        
       />
     )
   );
@@ -163,7 +164,7 @@ function DefaultNavbar({
                           px={2}
                           sx={({
                             palette: { grey, dark },
-                            borders: { borderRadius },
+                            borders: { borderRadius }
                           }: any) => ({
                             borderRadius: borderRadius.md,
                             cursor: "pointer",
@@ -171,8 +172,8 @@ function DefaultNavbar({
 
                             "&:hover": {
                               backgroundColor: grey[200],
-                              color: dark.main,
-                            },
+                              color: dark.main
+                            }
                           })}
                         >
                           {item.name}
@@ -189,7 +190,7 @@ function DefaultNavbar({
                         top: "50%",
                         left: "-4px",
                         transform: "translateY(-45%)",
-                        height: "90%",
+                        height: "90%"
                       }}
                     />
                   )}
@@ -206,12 +207,12 @@ function DefaultNavbar({
             component: MuiLink,
             href: item.href,
             target: "_blank",
-            rel: "noreferrer",
+            rel: "noreferrer"
           };
 
           const routeComponent = {
             component: Link,
-            to: item.route,
+            to: item.route
           };
 
           return (
@@ -230,7 +231,7 @@ function DefaultNavbar({
               px={2}
               sx={({
                 palette: { grey, dark },
-                borders: { borderRadius },
+                borders: { borderRadius }
               }: any) => ({
                 borderRadius: borderRadius.md,
                 cursor: "pointer",
@@ -241,9 +242,9 @@ function DefaultNavbar({
                   color: dark.main,
 
                   "& *": {
-                    color: dark.main,
-                  },
-                },
+                    color: dark.main
+                  }
+                }
               })}
               onMouseEnter={({ currentTarget }: any) => {
                 if (item.dropdown) {
@@ -280,7 +281,7 @@ function DefaultNavbar({
                   sx={{
                     fontWeight: "normal",
                     verticalAlign: "middle",
-                    mr: -0.5,
+                    mr: -0.5
                   }}
                 >
                   keyboard_arrow_right
@@ -309,9 +310,9 @@ function DefaultNavbar({
           name: "arrow",
           enabled: true,
           options: {
-            element: arrowRef,
-          },
-        },
+            element: arrowRef
+          }
+        }
       ]}
       onMouseEnter={() => setDropdown(dropdownEl)}
       onMouseLeave={() => {
@@ -322,13 +323,7 @@ function DefaultNavbar({
       }}
     >
       {({ TransitionProps }) => (
-        <Grow
-          {...TransitionProps}
-          //   sx={{
-          //     transformOrigin: "left top",
-          //     background: ({ palette: { white } }: any) => white.main,
-          //   }}
-        >
+        <Grow {...TransitionProps}>
           <MKBox borderRadius="lg">
             <MKTypography variant="h1" color="white">
               <Icon ref={setArrowRef} sx={{ mt: -3 }}>
@@ -358,12 +353,12 @@ function DefaultNavbar({
                   component: MuiLink,
                   href: item.href,
                   target: "_blank",
-                  rel: "noreferrer",
+                  rel: "noreferrer"
                 };
 
                 const routeComponent = {
                   component: Link,
-                  to: item.route,
+                  to: item.route
                 };
 
                 return (
@@ -382,7 +377,7 @@ function DefaultNavbar({
                     px={2}
                     sx={({
                       palette: { grey, dark },
-                      borders: { borderRadius },
+                      borders: { borderRadius }
                     }: any) => ({
                       borderRadius: borderRadius.md,
                       cursor: "pointer",
@@ -393,9 +388,9 @@ function DefaultNavbar({
                         color: dark.main,
 
                         "& *": {
-                          color: dark.main,
-                        },
-                      },
+                          color: dark.main
+                        }
+                      }
                     })}
                   >
                     {item.description ? (
@@ -420,7 +415,7 @@ function DefaultNavbar({
                         sx={{
                           fontWeight: "normal",
                           verticalAlign: "middle",
-                          mr: -0.5,
+                          mr: -0.5
                         }}
                       >
                         keyboard_arrow_right
@@ -455,9 +450,7 @@ function DefaultNavbar({
       }}
     >
       {({ TransitionProps }) => (
-        <Grow
-          {...TransitionProps}
-        >
+        <Grow {...TransitionProps}>
           <MKBox ml={2.5} mt={-2.5} borderRadius="lg">
             <MKBox shadow="lg" borderRadius="lg" py={1.5} px={1} mt={2}>
               {renderNestedRoutes}
@@ -469,27 +462,29 @@ function DefaultNavbar({
   );
 
   return (
-    <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
+    <Container
+      maxWidth={false}
+      style={{ padding: 0, minWidth: "100%" }}
+      sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}
+    >
       <MKBox
         py={1}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
-        my={relative ? 0 : 2}
-        mx={relative ? 0 : 3}
-        width={relative ? "100%" : "calc(100% - 48px)"}
+        width="100%"
         borderRadius="xl"
         shadow={transparent ? "none" : "md"}
         color={light ? "white" : "dark"}
         position={relative ? "relative" : "absolute"}
-        left={0}
         zIndex={3}
         sx={({
           palette: { transparent: transparentColor, white },
-          functions: { rgba },
+          functions: { rgba }
         }: any) => ({
+          margin: 0,
           backgroundColor: transparent
             ? transparentColor.main
             : rgba(white.main, 0.8),
-          backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
+          backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`
         })}
       >
         <MKBox
@@ -500,7 +495,7 @@ function DefaultNavbar({
           <MKBox
             component={Link}
             to="/"
-            lineHeight={1}
+            lineHeight={2}
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
@@ -508,6 +503,7 @@ function DefaultNavbar({
               variant="button"
               fontWeight="bold"
               color={light ? "white" : "dark"}
+              style={{ fontSize: "0.975rem" }}
             >
               {brand}
             </MKTypography>
@@ -520,7 +516,7 @@ function DefaultNavbar({
           >
             {renderNavbarItems}
           </MKBox>
-          <MKBox
+          {/* <MKBox
             display={{ xs: "inline-block", lg: "none" }}
             lineHeight={0}
             py={1.5}
@@ -530,9 +526,9 @@ function DefaultNavbar({
             onClick={openMobileNavbar}
           >
             <Icon>{mobileNavbar ? "close" : "menu"}</Icon>
-          </MKBox>
+          </MKBox> */}
         </MKBox>
-        <MKBox
+        {/* <MKBox
           bgColor={transparent ? "white" : "transparent"}
           shadow={transparent ? "lg" : "none"}
           borderRadius="xl"
@@ -541,7 +537,7 @@ function DefaultNavbar({
           {mobileView && (
             <DefaultNavbarMobile routes={routes} open={mobileNavbar} />
           )}
-        </MKBox>
+        </MKBox> */}
       </MKBox>
       {dropdownMenu}
       {nestedDropdownMenu}
@@ -557,7 +553,7 @@ DefaultNavbar.defaultProps = {
   action: false,
   sticky: false,
   relative: false,
-  center: false,
+  center: false
 };
 
 export default DefaultNavbar;

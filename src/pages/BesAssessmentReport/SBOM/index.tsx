@@ -23,7 +23,7 @@ const TABLE_HEAD = [
 
 export default function Sbom({ data }: any) {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filterName, setFilterName] = useState("");
 
@@ -113,7 +113,7 @@ export default function Sbom({ data }: any) {
               margin: "auto",
             },
           }}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[15, 30, 45]}
           component="div"
           count={sonarqubeData.length}
           rowsPerPage={rowsPerPage}

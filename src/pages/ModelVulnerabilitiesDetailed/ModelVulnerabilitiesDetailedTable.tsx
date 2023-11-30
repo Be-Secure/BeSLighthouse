@@ -1,8 +1,7 @@
 import { filter } from "lodash";
 import React, { useState } from "react";
 import { verifyLink } from "../BesVersionHistory/AssessmentReport";
-import { besecureMlAssessmentDataStore, vulnerabilities } from "../../dataStore";
-import { getComparator } from "../../layouts/pages/projectOfInterest/ProjectDisplay";
+import { besecureMlAssessmentDataStore } from "../../dataStore";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import {
@@ -14,47 +13,35 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-function applySortFilter(array: any, comparator: any, query: any) {
-  const stabilizedThis = array.map((el: any, index: any) => [el, index]);
-  stabilizedThis.sort((a: any, b: any) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    let search = query.trim();
-    return filter(array, (_user: any) => {
-      if (_user.name.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-        return true;
-    });
-  }
-  return stabilizedThis.map((el: any) => el[0]);
-}
-
 const TABLE_HEAD = [
-  { id: "filename", label: "Filename", alignRight: false },
   { id: "tool", label: "Tool", alignRight: false },
   { id: "severity", label: "Severity", alignRight: false },
+  { id: "vulnerabilities", label: "Vulnerabilities", alignRight: false },
   { id: "description", label: "Description", alignRight: false },
-  { id: "vulnerabilities", label: "Vulnerabilities", alignRight: false }
+  { id: "filename", label: "Filename", alignRight: false }
 ];
 
 const regex = /^(.*?)(?=#).*Severity:(.*?)- (.*)/;
 
-function createRow(row: any) {
-  const combinedMatch = row["scanning_reports"]["output_log"][0].match(regex);
+function createRow(row: any, combinedMatch: any) {
   return (
     <>
-      <TableCell align="left">{combinedMatch[2]}</TableCell>
-      <TableCell align="left">{combinedMatch[3]}</TableCell>
-      <TableCell align="left">{combinedMatch[1]}</TableCell>
+      <TableCell sx={{ fontSize: "13px" }} align="left">
+        {combinedMatch[2]}
+      </TableCell>
+      <TableCell sx={{ fontSize: "13px" }} align="left">
+        {combinedMatch[3]}
+      </TableCell>
+      <TableCell sx={{ fontSize: "13px" }} align="left">
+        {row.file_name}
+      </TableCell>
     </>
   );
 }
 
 export default function ModelVulnerabilitiesDetailedTable() {
   const [report, setreport]: any = useState([]);
-  
+
   let { modelName }: any = useParams();
   modelName = modelName.slice(1);
   React.useEffect(() => {
@@ -65,7 +52,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
   const modelDetails = Object.values(report);
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
 
   const handleChangePage = (
     event: any,
@@ -90,7 +77,11 @@ export default function ModelVulnerabilitiesDetailedTable() {
               <TableRow>
                 {TABLE_HEAD.map((headCell: any) => (
                   <TableCell
-                    sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}
+                    sx={{
+                      color: "#637381",
+                      backgroundColor: "#F4F6F8",
+                      fontSize: "14px"
+                    }}
                     key={headCell.id}
                     align={headCell.alignRight ? "right" : "left"}
                   >
@@ -103,19 +94,21 @@ export default function ModelVulnerabilitiesDetailedTable() {
               {modelDetails
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any, index: number) => {
+                  const combinedMatch =
+                    row["scanning_reports"]["output_log"][0].match(regex);
                   return (
                     <TableRow hover key={index} tabIndex={-1}>
                       <TableCell
-                        align="center"
-                        sx={{ paddingLeft: "2px" }}
+                        align="left"
+                        sx={{ paddingLeft: "2px", fontSize: "13px" }}
                         padding="none"
                       >
-                        {row.file_name}
+                        {combinedMatch[1]}
                       </TableCell>
-                      <TableCell align="left">
+                      <TableCell align="left" sx={{ fontSize: "13px" }}>
                         {row["scanning_reports"]["tool"]}
                       </TableCell>
-                      {createRow(row)}
+                      {createRow(row, combinedMatch)}
                     </TableRow>
                   );
                 })}
@@ -130,7 +123,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
                 margin: "auto"
               }
             }}
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[15, 30, 45]}
             component="div"
             count={Object.keys(report).length}
             rowsPerPage={rowsPerPage}

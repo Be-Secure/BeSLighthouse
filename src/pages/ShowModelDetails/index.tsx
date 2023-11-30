@@ -11,8 +11,7 @@ function ShowModelDetails() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 } }}>
-        <MKBox>
+      <MKBox pt={12} sx={{ mx: { xs: 2, lg: 3 } }}>
           <Grid container spacing={3} pt={3}>
             <Grid item xs={12} md={6} lg={7}>
               <ShowModelContent />
@@ -21,7 +20,6 @@ function ShowModelDetails() {
               <AssessmentSummary/>
             </Grid>
           </Grid>
-        </MKBox>
       </MKBox>
     </>
   );

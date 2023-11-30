@@ -40,13 +40,13 @@ export default function DisplayModelReport({ data }: any): any {
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
               <Typography variant="subtitle1" color="inherit">
-                Models:
+                Models & Vulnerabilities:
               </Typography>
             </Grid>
             <Grid item>
               <TableContainer>
                 <Table>
-                  <PoiListHead headLabel={TABLE_HEAD} />
+                  <PoiListHead headLabel={TABLE_HEAD} requestFromOtherComponent={true} />
                   <TableBody>
                     <TableRow hover key={"dddd"} tabIndex={-1}>
                       <TableCell component="th" scope="row" padding="none">
