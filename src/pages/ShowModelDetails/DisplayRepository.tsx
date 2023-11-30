@@ -13,36 +13,28 @@ export default function DisplayRepository({ data }: any): any {
     return (
       <>
         {dividerDiv(index)}
-        <Grid container direction="column">
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            <Typography variant="subtitle1" color="inherit">
+              {value}
+            </Typography>
+          </Grid>
           <Grid item>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="subtitle1" color="inherit">
-                  {value}
+                  {value === "Repository URL" ? (
+                    <a
+                      style={{ color: "#587f2f", cursor: "pointer" }}
+                      href={data[value]}
+                      target="_blank"
+                    >
+                      Link
+                    </a>
+                  ) : (
+                    data[value]
+                  )}
                 </Typography>
-              </Grid>
-              <Grid item>
-                <Grid
-                  container
-                  alignItems="center"
-                  justifyContent="space-between"
-                >
-                  <Grid item>
-                    <Typography variant="subtitle1" color="inherit">
-                      {value === "Repository URL" ? (
-                        <a
-                          style={{ color: "#587f2f", cursor: "pointer" }}
-                          href={data[value]}
-                          target="_blank"
-                        >
-                          Link
-                        </a>
-                      ) : (
-                        data[value]
-                      )}
-                    </Typography>
-                  </Grid>
-                </Grid>
               </Grid>
             </Grid>
           </Grid>

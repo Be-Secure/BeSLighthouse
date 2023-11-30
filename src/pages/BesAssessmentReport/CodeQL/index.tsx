@@ -8,24 +8,28 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  TableSortLabel
 } from "@mui/material";
-import { applySortFilter, getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+import {
+  applySortFilter,
+  getComparator
+} from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "descriiption", label: "Description", alignRight: false },
-  { id: "ssl", label: "Security Severity Level", alignRight: false },
+  { id: "ssl", label: "Severity", alignRight: false },
   { id: "environment", label: "Environment", alignRight: false },
   { id: "Message", label: "Message", alignRight: false },
   { id: "Path", label: "Path", alignRight: false },
-  { id: "Start Line", label: "Start Line", alignRight: false },
-  { id: "End Line", label: "End Line", alignRight: false },
+  { id: "Start-Line", label: "Start Line", alignRight: false },
+  { id: "End-Line", label: "End Line", alignRight: false }
 ];
 
 // Fixme: Code refactor
 
 export default function CodeQL({ data }: any) {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filterName, setFilterName] = useState("");
 
@@ -61,7 +65,12 @@ export default function CodeQL({ data }: any) {
                   key={headCell.id}
                   align={headCell.alignRight ? "right" : "left"}
                 >
-                  {headCell.label}
+                  <TableSortLabel
+                    hideSortIcon
+                    style={{ position: "relative", minWidth: (headCell.id === 'Start-Line' || headCell.id === 'End-Line') ? '110px' : '' }}
+                  >
+                    {headCell.label}
+                  </TableSortLabel>
                 </TableCell>
               ))}
             </TableRow>
@@ -105,13 +114,13 @@ export default function CodeQL({ data }: any) {
         <TablePagination
           sx={{
             ".MuiTablePagination-selectLabel": {
-              margin: "auto",
+              margin: "auto"
             },
             ".MuiTablePagination-displayedRows": {
-              margin: "auto",
-            },
+              margin: "auto"
+            }
           }}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[15, 30, 45]}
           component="div"
           count={codeQlData.length}
           rowsPerPage={rowsPerPage}

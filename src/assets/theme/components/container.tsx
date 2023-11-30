@@ -1,7 +1,5 @@
 import breakpoints from "../base/breakpoints";
 
-import pxToRem from "../functions/pxToRem";
-
 const {
   values: { sm, md, lg, xl, xxl },
 } = breakpoints;
@@ -13,8 +11,8 @@ const XL = `@media (min-width: ${xl}px)`;
 const XXL = `@media (min-width: ${xxl}px)`;
 
 const sharedClasses = {
-  paddingRight: `${pxToRem(24)} !important`,
-  paddingLeft: `${pxToRem(24)} !important`,
+  paddingRight: 0,
+  paddingLeft: 0,
   marginRight: "auto !important",
   marginLeft: "auto !important",
   width: "100% !important",

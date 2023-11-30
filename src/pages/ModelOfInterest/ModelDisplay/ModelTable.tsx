@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 
 import {
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow
+  TableRow,
+  TableSortLabel,
+  Typography
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
@@ -24,7 +27,7 @@ const TABLE_HEAD = [
 
 export default function ModelTable({ data }: any) {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
 
   const filteredModel = data;
 
@@ -54,7 +57,15 @@ export default function ModelTable({ data }: any) {
                   key={headCell.id}
                   align={headCell.alignRight ? "right" : "left"}
                 >
-                  {headCell.label}
+                  <TableSortLabel
+                    hideSortIcon
+                    style={{
+                      position: "relative",
+                      minWidth: headCell.id === "type" ? "134px" : ""
+                    }}
+                  >
+                    {headCell.label}
+                  </TableSortLabel>
                 </TableCell>
               ))}
             </TableRow>
@@ -70,7 +81,18 @@ export default function ModelTable({ data }: any) {
                       sx={{ paddingLeft: "2px" }}
                       padding="none"
                     >
-                      {row.type}
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Typography
+                          sx={{
+                            position: "relative",
+                            left: "26px"
+                          }}
+                          variant="subtitle2"
+                          noWrap
+                        >
+                          {row.type}
+                        </Typography>
+                      </Stack>
                     </TableCell>
                     <TableCell align="left">
                       <NavLink
@@ -83,7 +105,6 @@ export default function ModelTable({ data }: any) {
                       >
                         {row.name}
                       </NavLink>
-                      {/* </a> */}
                     </TableCell>
                     <TableCell align="left">{row.organization}</TableCell>
                     <TableCell align="left">{row.created_date.value}</TableCell>
@@ -107,7 +128,7 @@ export default function ModelTable({ data }: any) {
               margin: "auto"
             }
           }}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[15, 30, 45]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}

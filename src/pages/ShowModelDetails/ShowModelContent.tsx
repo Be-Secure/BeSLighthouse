@@ -2,105 +2,120 @@ import Card from "@mui/material/Card";
 import * as React from "react";
 import { useLocation } from "react-router-dom";
 import MKTypography from "../../components/MKTypography";
+import MKBox from "../../components/MKBox";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+
+const SkipContent: any = {
+  analysis: true,
+  training_emissions: true,
+  training_time: true,
+  training_hardware: true,
+  quality_control: true,
+  intended_uses: true,
+  prohibited_uses: true,
+  monitoring: true,
+  feedback: true,
+  type: true
+};
+
+export const dividerDiv = (index: number) => {
+  if (index !== 0)
+    return (
+      <Divider style={{ position: "absolute", width: "91%", margin: "0" }} />
+    );
+};
+
+function tableRowForModel(keyName: any, value: any, index: number) {
+  return (
+    <>
+      {dividerDiv(index)}
+      <tr>
+        <td>
+          <Typography variant="subtitle1" color="inherit">
+            {keyName}
+          </Typography>
+        </td>
+        <td>
+          <Typography variant="subtitle1" color="inherit">
+            {value}
+          </Typography>
+        </td>
+      </tr>
+    </>
+  );
+}
 
 function ShowModelContent() {
   const location = useLocation();
   const selectedMenu = location.state.selectedMenu;
   const key = Object.keys(selectedMenu);
+  let count = 0;
   return (
     <Card>
-      <div>
-        <div>
-          <MKTypography style={{padding: '2%'}} variant="h5" fontWeight="medium">
-            {selectedMenu.name}
-          </MKTypography>
-          <div style={{ margin: "10px" }}>
-            <div>
-              Upstream:
-              <span> {selectedMenu.dependencies.join(" | ")}</span>
-            </div>
-            <div>
-              Downstream:
-              <span></span>
-            </div>
-            <table
-              style={{
-                width: "100%",
-                maxWidth: "100%",
-                marginBottom: "1rem",
-                backgroundColor: "transparent"
-              }}
-            >
-              <tbody>
-                {key.map((keyValue) => {
-                  if (keyValue === "type") return <></>;
-                  if (keyValue === "created_date" || keyValue === "license") {
-                    return (
-                      <tr>
-                        <td style={{ padding: "0.4rem 0.75rem" }}>
-                          <div>{keyValue} </div>
-                        </td>
-                        <td style={{ padding: "0.4rem 0.75rem" }}>
-                          <div>
-                            <p>{selectedMenu[keyValue].value}</p>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  }
-                  if (keyValue === "dependencies") {
-                    return (
-                      <tr>
-                        <td style={{ padding: "0.4rem 0.75rem" }}>
-                          <div>{keyValue} </div>
-                        </td>
-                        <td style={{ padding: "0.4rem 0.75rem" }}>
-                          <div>
-                            <p>{selectedMenu[keyValue].join(" | ")}</p>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  }
-                  if (keyValue === "url") {
-                    return (
-                      <tr>
-                        <td style={{ padding: "0.4rem 0.75rem" }}>
-                          <div>{keyValue} </div>
-                        </td>
-                        <td style={{ padding: "0.4rem 0.75rem" }}>
-                          <div>
-                            <a
-                              href={selectedMenu[keyValue]}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              style={{ color: "#587f2f" }}
-                            >
-                              {selectedMenu[keyValue]}
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  }
-                  return (
+      <MKBox pt={2} px={3}>
+        <MKTypography
+          style={{ textAlign: "center" }}
+          variant="h5"
+          fontWeight="medium"
+        >
+          {selectedMenu.name}
+        </MKTypography>
+      </MKBox>
+      <MKBox p={2}>
+        <table>
+          <tbody>
+            {key.map((keyValue, index) => {
+              if (SkipContent[keyValue]) return <></>;
+              if (keyValue === "created_date" || keyValue === "license") {
+                tableRowForModel(
+                  keyValue,
+                  selectedMenu[keyValue].value,
+                  count++
+                );
+              }
+              if (keyValue === "dependencies") {
+                tableRowForModel(
+                  keyValue,
+                  selectedMenu[keyValue].join(" | "),
+                  count++
+                );
+              }
+              if (keyValue === "url") {
+                return (
+                  <>
+                    {dividerDiv(index)}
                     <tr>
-                      <td style={{ padding: "0.4rem 0.75rem" }}>
-                        <div>{keyValue} </div>
+                      <td>
+                        <Typography variant="subtitle1" color="inherit">
+                          {keyValue}{" "}
+                        </Typography>
                       </td>
-                      <td style={{ padding: "0.4rem 0.75rem" }}>
-                        <div>
-                          <p>{selectedMenu[keyValue]}</p>
-                        </div>
+                      <td>
+                        <Typography variant="subtitle1" color="inherit">
+                          <a
+                            href={selectedMenu[keyValue]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: "#587f2f" }}
+                          >
+                            {selectedMenu[keyValue]}
+                          </a>
+                        </Typography>
                       </td>
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+                  </>
+                );
+              }
+              return tableRowForModel(
+                keyValue,
+                selectedMenu[keyValue],
+                count++
+              );
+            })}
+          </tbody>
+        </table>
+      </MKBox>
     </Card>
   );
 }

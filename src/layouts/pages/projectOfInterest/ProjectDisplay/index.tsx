@@ -60,7 +60,7 @@ export default function ProjectDisplay() {
   const [filterName, setFilterName] = useState("");
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
   let getUSERLIST = [];
   if (projectOfInterestData.getPoiData("Project_of_interest")) {
     getUSERLIST = projectOfInterestData.getPoiData("Project_of_interest");
@@ -218,7 +218,7 @@ export default function ProjectDisplay() {
                 margin: "auto",
               },
             }}
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[15, 30, 45]}
             component="div"
             count={getUSERLIST.length}
             rowsPerPage={rowsPerPage}

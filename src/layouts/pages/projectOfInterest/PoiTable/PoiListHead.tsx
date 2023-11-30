@@ -31,6 +31,7 @@ UserListHead.propTypes = {
   numSelected: PropTypes.number,
   onRequestSort: PropTypes.func,
   onSelectAllClick: PropTypes.func,
+  requestFromOtherComponent: PropTypes.bool
 };
 
 export default function UserListHead({
@@ -38,6 +39,7 @@ export default function UserListHead({
   orderBy,
   headLabel,
   onRequestSort,
+  requestFromOtherComponent,
 }: any) {
   const createSortHandler = (property: any) => (event: any) => {
     onRequestSort(event, property);
@@ -58,6 +60,7 @@ export default function UserListHead({
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
+              style={{position: "relative", minWidth: (requestFromOtherComponent) ? '' : "134px"}}
             >
               {headCell.label}
               {orderBy === headCell.id ? (

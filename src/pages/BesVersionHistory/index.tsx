@@ -94,14 +94,14 @@ function BesVersionHistory() {
                     <Grid item xs={4}>
                       <MKBox key="test" display="flex" py={1} pr={2}>
                         <MKTypography
-                          variant="h5"
+                          variant="h6"
                           fontWeight="bold"
                           textTransform="capitalize"
                         >
                           BeS Tracking ID: &nbsp;
                         </MKTypography>
                         <MKTypography
-                          variant="h5"
+                          variant="h6"
                           fontWeight="regular"
                           color="text"
                         >
@@ -112,14 +112,14 @@ function BesVersionHistory() {
                     <Grid key={"gridkey3"} item xs={4}>
                       <MKBox key="test" display="flex" py={1} pr={2}>
                         <MKTypography
-                          variant="h5"
+                          variant="h6"
                           fontWeight="bold"
                           textTransform="capitalize"
                         >
                           BeS Tech Stack: &nbsp;
                         </MKTypography>
                         <MKTypography
-                          variant="h5"
+                          variant="h6"
                           fontWeight="regular"
                           color="text"
                         >
@@ -135,14 +135,14 @@ function BesVersionHistory() {
                               <Grid key={"gridkey4"} item xs={4}>
                                 <MKBox key="test" display="flex" py={1} pr={2}>
                                   <MKTypography
-                                    variant="h5"
+                                    variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
                                   >
                                     Release Date: &nbsp;
                                   </MKTypography>
                                   <MKTypography
-                                    variant="h5"
+                                    variant="h6"
                                     fontWeight="regular"
                                     color="text"
                                   >
@@ -153,14 +153,14 @@ function BesVersionHistory() {
                               <Grid key={"gridkey5"} item xs={4}>
                                 <MKBox key="test" display="flex" py={1} pr={2}>
                                   <MKTypography
-                                    variant="h5"
+                                    variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
                                   >
                                     Known Vulnerability Count: &nbsp;
                                   </MKTypography>
                                   <MKTypography
-                                    variant="h5"
+                                    variant="h6"
                                     fontWeight="regular"
                                     color="text"
                                   >
@@ -183,14 +183,14 @@ function BesVersionHistory() {
                                     pr={2}
                                   >
                                     <MKTypography
-                                      variant="h5"
+                                      variant="h6"
                                       fontWeight="bold"
                                       textTransform="capitalize"
                                     >
                                       Release Date: &nbsp;
                                     </MKTypography>
                                     <MKTypography
-                                      variant="h5"
+                                      variant="h6"
                                       fontWeight="regular"
                                       color="text"
                                     >
@@ -206,14 +206,14 @@ function BesVersionHistory() {
                                     pr={2}
                                   >
                                     <MKTypography
-                                      variant="h5"
+                                      variant="h6"
                                       fontWeight="bold"
                                       textTransform="capitalize"
                                     >
                                       Known Vulnerability Count: &nbsp;
                                     </MKTypography>
                                     <MKTypography
-                                      variant="h5"
+                                      variant="h6"
                                       fontWeight="regular"
                                       color="text"
                                     >
@@ -248,7 +248,7 @@ function BesVersionHistory() {
                     <Grid key={"gridkey6"} item xs={4}>
                       <MKBox key="test" display="flex" py={1} pr={2}>
                         <MKTypography
-                          variant="h5"
+                          variant="h6"
                           fontWeight="bold"
                           textTransform="capitalize"
                         >
@@ -272,14 +272,14 @@ function BesVersionHistory() {
                   </Grid>
                   <MKBox key="test" display="flex" py={1} pr={2} pl={4}>
                     <MKTypography
-                      variant="h5"
+                      variant="h6"
                       fontWeight="bold"
                       textTransform="capitalize"
                     >
                       Description: &nbsp;
                     </MKTypography>
                     <MKTypography
-                      variant="h5"
+                      variant="h6"
                       fontWeight="regular"
                       color="text"
                     >

@@ -22,7 +22,7 @@ const TABLE_HEAD = [
 
 export default function ScorecardTable({ data }: any) {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filterName, setFilterName] = useState("");
   let scorecardData: any = data?.checks ?? [];
@@ -101,7 +101,7 @@ export default function ScorecardTable({ data }: any) {
               margin: "auto",
             },
           }}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[15, 30, 45]}
           component="div"
           count={scorecardData.length}
           rowsPerPage={rowsPerPage}

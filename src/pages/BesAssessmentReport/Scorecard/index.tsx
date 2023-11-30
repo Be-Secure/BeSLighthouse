@@ -18,13 +18,13 @@ export default function Scorecard({
             <Grid key={"gridkey2"} item xs={4}>
               <MKBox key="test" display="flex" py={1} pr={2}>
                 <MKTypography
-                  variant="h5"
+                  variant="h6"
                   fontWeight="bold"
                   textTransform="capitalize"
                 >
                   Date: &nbsp;
                 </MKTypography>
-                <MKTypography variant="h5" fontWeight="regular" color="text">
+                <MKTypography variant="h6" fontWeight="regular" color="text">
                   {date}
                 </MKTypography>
               </MKBox>
@@ -32,13 +32,13 @@ export default function Scorecard({
             <Grid key={"gridkey3"} item xs={4}>
               <MKBox key="test" display="flex" py={1} pr={2}>
                 <MKTypography
-                  variant="h5"
+                  variant="h6"
                   fontWeight="bold"
                   textTransform="capitalize"
                 >
                   Scorecard Version: &nbsp;
                 </MKTypography>
-                <MKTypography variant="h5" fontWeight="regular" color="text">
+                <MKTypography variant="h6" fontWeight="regular" color="text">
                   {version}
                 </MKTypography>
               </MKBox>
@@ -46,13 +46,13 @@ export default function Scorecard({
             <Grid key={"gridkey3"} item xs={4}>
               <MKBox key="test" display="flex" py={1} pr={2}>
                 <MKTypography
-                  variant="h5"
+                  variant="h6"
                   fontWeight="bold"
                   textTransform="capitalize"
                 >
                   OSSP: &nbsp;
                 </MKTypography>
-                <MKTypography variant="h5" fontWeight="regular" color="text">
+                <MKTypography variant="h6" fontWeight="regular" color="text">
                   {`https://${github}`}
                 </MKTypography>
               </MKBox>
@@ -60,13 +60,13 @@ export default function Scorecard({
             <Grid key={"gridkey3"} item xs={4}>
               <MKBox key="test" display="flex" py={1} pr={2}>
                 <MKTypography
-                  variant="h5"
+                  variant="h6"
                   fontWeight="bold"
                   textTransform="capitalize"
                 >
                   Commit: &nbsp;
                 </MKTypography>
-                <MKTypography variant="h5" fontWeight="regular" color="text">
+                <MKTypography variant="h6" fontWeight="regular" color="text">
                   {commit}
                 </MKTypography>
               </MKBox>
@@ -74,13 +74,13 @@ export default function Scorecard({
             <Grid key={"gridkey3"} item xs={4}>
               <MKBox key="test" display="flex" py={1} pr={2}>
                 <MKTypography
-                  variant="h5"
+                  variant="h6"
                   fontWeight="bold"
                   textTransform="capitalize"
                 >
                   Score: &nbsp;
                 </MKTypography>
-                <MKTypography variant="h5" fontWeight="regular" color="text">
+                <MKTypography variant="h6" fontWeight="regular" color="text">
                   {score}
                 </MKTypography>
               </MKBox>
