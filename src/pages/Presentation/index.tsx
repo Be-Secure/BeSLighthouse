@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Stack from '@mui/material/Stack';  
+import { Link } from 'react-router-dom';
 
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
@@ -67,9 +68,9 @@ function Presentation() {
               BeSLighthouse provides an intuitive dashboard with actionable insights into the security posture of open-source projects, machine learning models, training dataset to foster trust and reliability in the open-source ecosystem.
             </MKTypography>
             <Stack spacing={2} direction="row">  
-            <a href={"/BeSLighthouse/Project-Of-Interest"}>
-              <Button variant="contained"> Try it</Button>
-            </a>
+              <Link to="/BeSLighthouse/Project-Of-Interest">
+                <Button variant="contained"> Try it</Button>
+             </Link>
             </Stack>  
           </Grid>
         </Container>
