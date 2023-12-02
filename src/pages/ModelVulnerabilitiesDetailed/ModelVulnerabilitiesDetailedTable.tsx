@@ -45,7 +45,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
   let { modelName }: any = useParams();
   modelName = modelName.slice(1);
   React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${modelName}/vulnerabilities/${modelName}-vulnerabilities-detailed-report.json`;
+    let link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-detailed-sast-report.json`;
     verifyLink(link, setreport);
   }, []);
 
