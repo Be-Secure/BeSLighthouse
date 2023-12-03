@@ -1,8 +1,7 @@
 import React from "react";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
-// import { Card } from "@mui/material";
-import MKBox from "../../components/MKBox";
+
 import LeftFuzzing from "./sections/LeftFuzzing";
 import DefenseSummary from "./sections/DefenseSummary";
 import { Grid } from "@mui/material";

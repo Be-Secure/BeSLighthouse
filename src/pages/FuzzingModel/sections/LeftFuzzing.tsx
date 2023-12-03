@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Grid from "@mui/material/Grid";
 import MKBox from "../../../components/MKBox";
@@ -12,8 +12,19 @@ import {
   TimelineSeparator,
   timelineItemClasses
 } from "@mui/lab";
+import { useLocation } from "react-router-dom";
+import { besecureMlAssessmentDataStore } from "../../../dataStore";
+import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
+
 
 function LeftFuzzing() {
+  const location = useLocation();
+  const selectedFuzz: any = location.state.selectedFuzz;
+  const [report, setreport]: any = useState({});
+  React.useEffect(() => {
+    let link = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
+    verifyLink(link, setreport);
+  }, []);
   return (
     <Grid container pr={2} width="35%">
       <Timeline
@@ -29,24 +40,27 @@ function LeftFuzzing() {
       >
         <TimelineItem>
           <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
+            <TimelineConnector sx={{ bgcolor: "#f0f2f5" }} />
+            <TimelineDot color="secondary" />
+            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
           </TimelineSeparator>
-          <TimelineContent>
+          <TimelineContent sx={{ py: "12px", px: 2 }}>
             <MKBox mb={1}>
               <HorizontalModelFuzzCard
                 name="Evasion"
                 position={{ color: "info", label: "Model Analysis Inputs" }}
                 description="Modify input data in a way that the AI model's predictions are manipulated."
                 textAllign={"left"}
+                data={report}
               />
             </MKBox>
           </TimelineContent>
         </TimelineItem>
         <TimelineItem>
           <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
+            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
+            <TimelineDot color="secondary" />
+            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
           </TimelineSeparator>
           <TimelineContent>
             <MKBox mb={1}>
@@ -61,8 +75,9 @@ function LeftFuzzing() {
         </TimelineItem>
         <TimelineItem>
           <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
+            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
+            <TimelineDot color="secondary" />
+            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
           </TimelineSeparator>
           <TimelineContent>
             <MKBox mb={1}>
@@ -77,7 +92,9 @@ function LeftFuzzing() {
         </TimelineItem>
         <TimelineItem>
           <TimelineSeparator>
-            <TimelineDot />
+            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
+            <TimelineDot color="secondary" />
+            <TimelineConnector sx={{ bgcolor: "#f0f2f5" }} />
           </TimelineSeparator>
           <TimelineContent>
             <MKBox mb={1}>

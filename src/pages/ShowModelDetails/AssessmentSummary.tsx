@@ -7,7 +7,7 @@ import { fetchJsonReport } from "../../utils/fatch_json_report";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import DisplayRepository, { dividerDiv } from "./DisplayRepository";
 import DisplayModelReport from "./DisplayModelReport";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import MKButton from "../../components/MKButton";
 
 export const verifyLink = async (link: any, setLinkStatus: any) => {
@@ -68,16 +68,23 @@ function AssessmentSummary() {
           {displayModelReport(linkStatus)}
 
           {dividerDiv(1)}
-          <MKButton
-            component={Link}
-            to={"/BeSLighthouse/model_fuzzing/:modelName"}
-            variant={"gradient"}
-            color={"info"}
-            size="Large"
-            sx={{width:"100%"}}
+          <NavLink
+            to={{
+              pathname: `/BeSLighthouse/model_fuzzing/:${selectedMenu.name}`,
+              search: ""
+            }}
+            state={{ selectedFuzz: selectedMenu }}
+            style={{ color: "#587f2f", cursor: "pointer" }}
           >
-            Fuzzing Report
-          </MKButton>
+            <MKButton
+              variant={"gradient"}
+              color={"info"}
+              size="Large"
+              sx={{ width: "100%" }}
+            >
+              Fuzzing Report
+            </MKButton>
+          </NavLink>
         </Grid>
       </MKBox>
     </Card>
