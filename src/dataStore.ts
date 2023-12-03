@@ -9,4 +9,3 @@ export const vulnerabilityOffInterest =
 export const modelOfInterestData =
   "https://raw.githubusercontent.com/Be-Secure/besecure-assets-store/main/models/model-metadata.json";
 export const besecureMlAssessmentDataStore = "https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models";
-export const vulnerabilities = "https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/timeseries-anomaly-detection/vulnerabilities/timeseries-anomaly-detection-vulnerabilities-detailed-report.json";

@@ -14,6 +14,67 @@ import TecStack from "../../examples/Charts/PieChart/TecStacks";
 import Card from "@mui/material/Card";
 import ProjectDisplay from "../../layouts/pages/projectOfInterest/ProjectDisplay";
 
+{
+  /* <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 } }}>
+        <MKBox>
+          <Grid container spacing={3} pt={3}>
+            <Grid item xs={12} md={6} lg={4}>
+              <Card>
+                <SearchPoiList
+                  placeholderName="Search project..."
+                  filterName={filterName}
+                  onFilterName={handleFilterByName}
+                />
+                <FilterList label="Do">
+
+                </FilterList>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={6} lg={8}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6} lg={6}>
+                  <MKBox mb={3}>
+                    <Language
+                      title="Languages"
+                      chartData={data}
+                      chartColors={[
+                        theme.palette.primary.main,
+                        theme.palette.info.main,
+                        theme.palette.warning.main,
+                        theme.palette.error.main
+                      ]}
+                    />
+                  </MKBox>
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                  <MKBox mb={3}>
+                    <TecStack
+                      title="Be-Secure Technology Stacks"
+                      chartColors={[
+                        theme.palette.primary.main,
+                        theme.palette.info.main,
+                        theme.palette.warning.main,
+                        theme.palette.error.main
+                      ]}
+                      chartData={tecStack}
+                    />
+                  </MKBox>
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Card>
+                    <ProjectDisplay />
+                  </Card>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </MKBox>
+      </MKBox> */
+}
+
+
 export const fetchOsspoiMaterData = async () => {
   const osspoi: any = JSON.parse(
     await projectOfInterestData.getJsonReportOsspoiMaster()
@@ -33,7 +94,7 @@ async function countLanguages(
     javascript: true,
     c: true,
     "c++": true,
-    php: true,
+    php: true
   };
   const tecStackForChart: any = [];
   const osspoi = await fetchOsspoiMaterData();
@@ -65,9 +126,7 @@ async function countLanguages(
   setData(cache);
 }
 
-
 function ProjectOfInterest() {
-  
   const [data, setData] = React.useState([]);
   const [tecStack, setTecStack] = React.useState([]);
   React.useEffect(() => {
@@ -105,7 +164,7 @@ function ProjectOfInterest() {
                   theme.palette.primary.main,
                   theme.palette.info.main,
                   theme.palette.warning.main,
-                  theme.palette.error.main,
+                  theme.palette.error.main
                 ]}
                 chartData={tecStack}
               />
@@ -116,7 +175,7 @@ function ProjectOfInterest() {
       <MKBox pt={1} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            <Card sx={{mx: { xs: 2, lg: 3 }}}>
+            <Card sx={{ mx: { xs: 2, lg: 3 } }}>
               <MKBox>
                 <ProjectDisplay />
               </MKBox>
