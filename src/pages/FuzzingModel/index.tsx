@@ -1,6 +1,7 @@
 import React from "react";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
+
 import LeftFuzzing from "./sections/LeftFuzzing";
 import DefenseSummary from "./sections/DefenseSummary";
 import { Grid } from "@mui/material";
