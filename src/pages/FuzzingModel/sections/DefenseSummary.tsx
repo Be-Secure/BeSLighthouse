@@ -79,8 +79,6 @@ function DefenseSummary() {
                   component="p"
                   color="text"
                   textAlign="left"
-                  mt={2}
-                  mb={2}
                 >
                   {reportLength > 0 ? (
                     <>

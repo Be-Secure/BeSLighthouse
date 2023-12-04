@@ -19,7 +19,7 @@ function HorizontalModelFuzzCard({
   data
 }: any) {
   return (
-    <Card sx={{ mt: 2 }} style={{height: (cardSide)? '138px': ''}}>
+    <Card sx={{ mt: 2 }} style={{height: '138px'}}>
       <Grid container>
         {cardSide ? (
           data && Object.values(data).length > 0 ? (
