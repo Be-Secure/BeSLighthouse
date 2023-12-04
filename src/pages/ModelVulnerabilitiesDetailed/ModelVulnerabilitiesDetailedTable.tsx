@@ -27,10 +27,10 @@ function createRow(row: any, combinedMatch: any) {
   return (
     <>
       <TableCell sx={{ fontSize: "13px" }} align="left">
-        {combinedMatch[2]}
+        {combinedMatch.length === 0 ? "Not Available" : combinedMatch[2]}
       </TableCell>
       <TableCell sx={{ fontSize: "13px" }} align="left">
-        {combinedMatch[3]}
+        {combinedMatch.length === 0 ? "Not Available" : combinedMatch[3]}
       </TableCell>
       <TableCell sx={{ fontSize: "13px" }} align="left">
         {row.file_name}
@@ -45,7 +45,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
   let { modelName }: any = useParams();
   modelName = modelName.slice(1);
   React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-detailed-sast-report.json`;
+    let link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-sast-detailed-report.json`;
     verifyLink(link, setreport);
   }, []);
 
@@ -94,19 +94,26 @@ export default function ModelVulnerabilitiesDetailedTable() {
               {modelDetails
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any, index: number) => {
-                  const combinedMatch =
-                    row["scanning_reports"]["output_log"][0].match(regex);
+                  let combinedMatch;
+                  if (row["scanning_reports"]["output_log"][0]) {
+                    combinedMatch =
+                      row["scanning_reports"]["output_log"][0].match(regex);
+                  } else {
+                    combinedMatch = [];
+                  }
                   return (
                     <TableRow hover key={index} tabIndex={-1}>
+                      <TableCell align="left" sx={{ fontSize: "13px" }}>
+                        {row["scanning_reports"]["tool"]}
+                      </TableCell>
                       <TableCell
                         align="left"
                         sx={{ paddingLeft: "2px", fontSize: "13px" }}
                         padding="none"
                       >
-                        {combinedMatch[1]}
-                      </TableCell>
-                      <TableCell align="left" sx={{ fontSize: "13px" }}>
-                        {row["scanning_reports"]["tool"]}
+                        {combinedMatch.length === 0
+                          ? "Not Available"
+                          : combinedMatch[1]}
                       </TableCell>
                       {createRow(row, combinedMatch)}
                     </TableRow>

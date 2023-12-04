@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import MKBox from "../../../components/MKBox";
 import HorizontalModelFuzzCard from "../../../assets/theme/components/card/HorizontalModelFuzzCard";
-import {
-  Timeline,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator,
-  timelineItemClasses
-} from "@mui/lab";
+
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
 import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
