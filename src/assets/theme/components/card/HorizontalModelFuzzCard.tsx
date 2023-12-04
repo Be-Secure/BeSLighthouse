@@ -19,7 +19,7 @@ function HorizontalModelFuzzCard({
   data
 }: any) {
   return (
-    <Card sx={{ mt: 3 }}>
+    <Card sx={{ mt: 2 }} style={{height: (cardSide)? '138px': ''}}>
       <Grid container>
         {cardSide ? (
           data && Object.values(data).length > 0 ? (
@@ -127,7 +127,7 @@ function HorizontalModelFuzzCard({
             </Card>
           </MKBox>
         </Grid>
-        <Grid item xs={12} md={6} lg={6} textAlign="left" display="flex">
+        <Grid item xs={12} md={6} lg={6} textAlign="left" display="flex" >
           {cardSide ? (
             <></>
           ) : data && Object.values(data).length > 0 ? (

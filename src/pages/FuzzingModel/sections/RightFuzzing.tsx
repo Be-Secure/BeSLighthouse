@@ -24,90 +24,45 @@ function RightFuzzing() {
     verifyLink(link, setreport);
   }, []);
   return (
-    <Grid container pr={2} pt={1} width="35%">
-      <Timeline
-        sx={{
-          m: 0,
-          p: 0,
-          [`& .${timelineItemClasses.root}:before`]: {
-            flex: 0,
-            padding: 0
-          }
-        }}
-      >
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "#f0f2f5" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                position={{ color: "info", label: "" }}
-                name="Attack Efficacy Graph"
-                cardSide={true}
-                textAllign="center"
-                data={report}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                position={{ color: "info", label: "" }}
-                name="Attack Efficacy Graph"
-                cardSide={true}
-                textAllign="center"
-                data={report}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                position={{ color: "info", label: "" }}
-                name="Attack Efficacy Graph"
-                cardSide={true}
-                textAllign="center"
-                data={report}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "#f0f2f5" }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                position={{ color: "info", label: "" }}
-                name="Attack Efficacy Graph"
-                cardSide={true}
-                textAllign="center"
-                data={report}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-      </Timeline>
+    <Grid container pr={2} pl={6} width="35%">
+      <Grid item width={"100%"}>
+        <MKBox mb={1} >
+          <HorizontalModelFuzzCard
+            position={{ color: "info", label: "" }}
+            name="Attack Efficacy Graph"
+            cardSide={true}
+            textAllign="center"
+            data={report}
+          />
+        </MKBox>
+        <MKBox mb={1} >
+          <HorizontalModelFuzzCard
+            position={{ color: "info", label: "" }}
+            name="Attack Efficacy Graph"
+            cardSide={true}
+            textAllign="center"
+            data={report}
+          />
+        </MKBox>
+        <MKBox mb={1}  >
+          <HorizontalModelFuzzCard
+            position={{ color: "info", label: "" }}
+            name="Attack Efficacy Graph"
+            cardSide={true}
+            textAllign="center"
+            data={report}
+          />
+        </MKBox>
+        <MKBox mb={1}  >
+          <HorizontalModelFuzzCard
+            position={{ color: "info", label: "" }}
+            name="Attack Efficacy Graph"
+            cardSide={true}
+            textAllign="center"
+            data={report}
+          />
+        </MKBox>
+      </Grid>
     </Grid>
   );
 }

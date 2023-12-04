@@ -8,6 +8,9 @@ import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
 import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
 
+
+import bgImage from "../../../assets/images/neuralimage.png";
+
 function DefenseSummary() {
   const location = useLocation();
   const selectedFuzz: any = location.state.selectedFuzz;
@@ -18,9 +21,9 @@ function DefenseSummary() {
   }, []);
   const reportLength = Object.values(report).length;
   return (
-    <Grid container pr={2} pt={4.5} spacing={4} width="30%">
+    <Grid container pr={2} pt={2} spacing={1} width="30%">
       <Grid item width={"100%"}>
-        <Card>
+        <Card style={{minHeight:'131px'}}>
           <MKBox p={1.3} mt={-1} textAlign="center">
             <MKTypography
               display="inline"
@@ -50,8 +53,11 @@ function DefenseSummary() {
         </Card>
       </Grid>
       <Grid item width={"100%"}>
+        <img style={{display: 'block', width: '50%', margin: 'auto'}} src={bgImage}/>
+      </Grid>
+      <Grid item width={"100%"}>
         <Card>
-          <MKBox p={3} mt={-1} textAlign="center">
+          <MKBox p={2} mt={-1} textAlign="center">
             <MKTypography
               display="inline"
               variant="h5"
@@ -60,7 +66,7 @@ function DefenseSummary() {
             >
               Defense Summary
             </MKTypography>
-            <MKBox mt={1} mb={3}>
+            <MKBox mt={1} mb={1}>
               <Card
                 style={{
                   backgroundColor: "#f0f2f5",
@@ -73,11 +79,9 @@ function DefenseSummary() {
                   component="p"
                   color="text"
                   textAlign="left"
-                  mt={2}
-                  mb={2}
                 >
                   {reportLength > 0 ? (
-                    <MKBox pt={4} pb={4}>
+                    <>
                       <MKTypography
                         color="black"
                         textAlign="left"
@@ -177,7 +181,7 @@ function DefenseSummary() {
                         Number of test samples:{" "}
                         {report["model_Efficacy"]["Number of test samples"]}
                       </MKTypography>
-                    </MKBox>
+                    </>
                   ) : (
                     <MKTypography
                       color="black"
