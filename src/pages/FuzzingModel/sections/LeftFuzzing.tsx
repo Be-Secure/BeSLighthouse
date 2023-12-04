@@ -15,7 +15,7 @@ import {
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
 import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
-
+import ModelAttack from "../AttackType/ModelAttack";
 
 function LeftFuzzing() {
   const location = useLocation();
@@ -27,87 +27,41 @@ function LeftFuzzing() {
   }, []);
   return (
     <Grid container pr={2} width="35%">
-      <Timeline
-        sx={{
-          m: 0,
-          p: 0,
-          [`& .${timelineItemClasses.root}:before`]: {
-            flex: 0,
-            padding: 0
-          }
-        }}
-        position="left"
-      >
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "#f0f2f5" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-          </TimelineSeparator>
-          <TimelineContent sx={{ py: "12px", px: 2 }}>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                name="Evasion"
-                position={{ color: "info", label: "Model Analysis Inputs" }}
-                description="Modify input data in a way that the AI model's predictions are manipulated."
-                textAllign={"left"}
-                data={report}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                name="Inference"
-                position={{ color: "info", label: "Model Analysis Inputs" }}
-                description="Determine whether a specific data point was part of the training dataset."
-                textAllign={"left"}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                name="Extraction"
-                position={{ color: "info", label: "Model Analysis Inputs" }}
-                description="Determine whether a specific data point was part of the training dataset."
-                textAllign={"left"}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector sx={{ bgcolor: "secondary.main" }} />
-            <TimelineDot color="secondary" />
-            <TimelineConnector sx={{ bgcolor: "#f0f2f5" }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                name="Data Poisoning"
-                position={{ color: "info", label: "Model Analysis Inputs" }}
-                description="Determine whether a specific data point was part of the training dataset."
-                textAllign={"left"}
-              />
-            </MKBox>
-          </TimelineContent>
-        </TimelineItem>
-      </Timeline>
+      <MKBox mb={1}>
+        <ModelAttack
+          positionType={{ color: "info", label: "Model Analysis Inputs" }}
+          nameType="Evasion"
+          description="Modify input data in a way that the AI model's predictions are manipulated."
+          textSide="left"
+        />
+      </MKBox>
+      <MKBox mb={1}>
+        <HorizontalModelFuzzCard
+          name="Inference"
+          position={{ color: "info", label: "Model Analysis Inputs" }}
+          description="Determine whether a specific data point was part of the training dataset."
+          textAllign={"left"}
+          data={report}
+        />
+      </MKBox>
+      <MKBox mb={1}>
+        <HorizontalModelFuzzCard
+          name="Extraction"
+          position={{ color: "info", label: "Model Analysis Inputs" }}
+          description="Determine whether a specific data point was part of the training dataset."
+          textAllign={"left"}
+          data={report}
+        />
+      </MKBox>
+      <MKBox mb={1}>
+        <HorizontalModelFuzzCard
+          name="Data Poisoning"
+          position={{ color: "info", label: "Model Analysis Inputs" }}
+          description="Determine whether a specific data point was part of the training dataset."
+          textAllign={"left"}
+          data={report}
+        />
+      </MKBox>
     </Grid>
   );
 }

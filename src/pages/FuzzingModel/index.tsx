@@ -11,7 +11,7 @@ function FuzzingModelPage() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
-      <Grid container spacing={3} pt={14} pl={4}>
+      <Grid container spacing={-10} pt={7} pl={2}>
         <LeftFuzzing />
         <DefenseSummary />
         <RightFuzzing />

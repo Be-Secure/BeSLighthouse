@@ -20,7 +20,6 @@ import MKBox from "../../../components/MKBox";
 
 // React example components
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
-import DefaultNavbarMobile from "./DefaultNavbarMobile";
 
 // React base styles
 import breakpoints from "../../../assets/theme/base/breakpoints";
@@ -500,7 +499,6 @@ function DefaultNavbar({
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
             <MKTypography
-              variant="button"
               fontWeight="bold"
               color={light ? "white" : "dark"}
               style={{ fontSize: "0.975rem" }}

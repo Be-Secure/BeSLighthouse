@@ -82,7 +82,7 @@ function AssessmentSummary() {
               size="Large"
               sx={{ width: "100%" }}
             >
-              Fuzzing Report
+              Model Security
             </MKButton>
           </NavLink>
         </Grid>
