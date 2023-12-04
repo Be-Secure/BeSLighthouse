@@ -66,6 +66,7 @@ function RightFuzzing() {
                 name="Attack Efficacy Graph"
                 cardSide={true}
                 textAllign="center"
+                data={report}
               />
             </MKBox>
           </TimelineContent>
@@ -83,6 +84,7 @@ function RightFuzzing() {
                 name="Attack Efficacy Graph"
                 cardSide={true}
                 textAllign="center"
+                data={report}
               />
             </MKBox>
           </TimelineContent>
@@ -100,6 +102,7 @@ function RightFuzzing() {
                 name="Attack Efficacy Graph"
                 cardSide={true}
                 textAllign="center"
+                data={report}
               />
             </MKBox>
           </TimelineContent>

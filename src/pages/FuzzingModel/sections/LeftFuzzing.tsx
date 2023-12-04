@@ -15,7 +15,7 @@ import {
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
 import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
-
+import ModelAttack from "../AttackType/ModelAttack";
 
 function LeftFuzzing() {
   const location = useLocation();
@@ -46,12 +46,11 @@ function LeftFuzzing() {
           </TimelineSeparator>
           <TimelineContent sx={{ py: "12px", px: 2 }}>
             <MKBox mb={1}>
-              <HorizontalModelFuzzCard
-                name="Evasion"
-                position={{ color: "info", label: "Model Analysis Inputs" }}
+              <ModelAttack
+                positionType={{ color: "info", label: "Model Analysis Inputs" }}
+                nameType="Evasion"
                 description="Modify input data in a way that the AI model's predictions are manipulated."
-                textAllign={"left"}
-                data={report}
+                textSide="left"
               />
             </MKBox>
           </TimelineContent>
@@ -69,6 +68,7 @@ function LeftFuzzing() {
                 position={{ color: "info", label: "Model Analysis Inputs" }}
                 description="Determine whether a specific data point was part of the training dataset."
                 textAllign={"left"}
+                data={report}
               />
             </MKBox>
           </TimelineContent>
@@ -86,6 +86,7 @@ function LeftFuzzing() {
                 position={{ color: "info", label: "Model Analysis Inputs" }}
                 description="Determine whether a specific data point was part of the training dataset."
                 textAllign={"left"}
+                data={report}
               />
             </MKBox>
           </TimelineContent>
@@ -103,6 +104,7 @@ function LeftFuzzing() {
                 position={{ color: "info", label: "Model Analysis Inputs" }}
                 description="Determine whether a specific data point was part of the training dataset."
                 textAllign={"left"}
+                data={report}
               />
             </MKBox>
           </TimelineContent>

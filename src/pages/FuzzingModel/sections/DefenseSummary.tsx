@@ -38,7 +38,10 @@ function DefenseSummary() {
                   width: "100%"
                 }}
               >
-                <MKTypography variant="body2" component="p" color="text">
+                <MKTypography
+                  color="black"
+                  sx={{ fontSize: "12px" }}
+                >
                   {selectedFuzz.description}
                 </MKTypography>
               </Card>
@@ -70,71 +73,111 @@ function DefenseSummary() {
                   component="p"
                   color="text"
                   textAlign="left"
+                  mt={2}
+                  mb={2}
                 >
                   {reportLength > 0 ? (
-                    <>
-                      <p>
+                    <MKBox pt={4} pb={4}>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         Defense Model Validation Accuracy:{" "}
                         {
                           report["report_synopsis"][
                             "Defense Model Validation Accuracy"
                           ]
                         }
-                      </p>
-                      <p>
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         Defense Model Training Accuracy:{" "}
                         {
                           report["report_synopsis"][
                             "Defense Model Training Accuracy"
                           ]
                         }
-                      </p>
-                      <p>Efficacy: {report["report_synopsis"]["Efficacy"]}</p>
-                      <p>
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
+                        Efficacy: {report["report_synopsis"]["Efficacy"]}
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         Defence Model Inference Time in ms:{" "}
                         {
                           report["performance"][
                             "Defence Model Inference Time in ms"
                           ]
                         }
-                      </p>
-                      <p>
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         Threat Detected by Defense Model on Original Data:{" "}
                         {
                           report["performance"][
                             "Threat Detected by Defense Model on Original Data"
                           ]
                         }
-                      </p>
-                      <p>
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         Threat Detected by Defense Model on Attack Data:{" "}
                         {
                           report["performance"][
                             "Threat Detected by Defense Model on Attack Data"
                           ]
                         }
-                      </p>
-                      <p>
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         Accuracy of the Defense Model:{" "}
                         {
                           report["model_Efficacy"][
                             "Accuracy of the Defense Model"
                           ]
                         }
-                      </p>
-                      <p>
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         F1 score of the Defense Model:{" "}
                         {
                           report["model_Efficacy"][
                             "F1 score of the Defense Model"
                           ]
                         }
-                      </p>
-                      <p>
+                      </MKTypography>
+                      <MKTypography
+                        color="black"
+                        textAlign="left"
+                        sx={{ fontSize: "12px" }}
+                      >
                         Number of test samples:{" "}
                         {report["model_Efficacy"]["Number of test samples"]}
-                      </p>
-                    </>
+                      </MKTypography>
+                    </MKBox>
                   ) : (
                     <MKTypography
                       color="black"
