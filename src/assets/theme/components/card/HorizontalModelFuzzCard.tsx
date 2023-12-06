@@ -19,7 +19,7 @@ function HorizontalModelFuzzCard({
   data
 }: any) {
   return (
-    <Card sx={{ mt: 2 }} style={{height: '138px'}}>
+    <Card sx={{ mt: 2 }}>
       <Grid container>
         {cardSide ? (
           data && Object.values(data).length > 0 ? (
@@ -35,7 +35,7 @@ function HorizontalModelFuzzCard({
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 Adversarial Efficacy (max):{" "}
                 {data["overview"]["Adversarial Efficacy (max)"]}
@@ -43,21 +43,21 @@ function HorizontalModelFuzzCard({
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 Alert: {data["overview"]["Alert"]}
               </MKTypography>
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px",  color: "balck"}}
               >
                 Defense recommended: {data["overview"]["Defense recommended"]}
               </MKTypography>
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 Original Model Accuracy:{" "}
                 {data["performance"]["Original Model Accuracy"]}
@@ -65,7 +65,7 @@ function HorizontalModelFuzzCard({
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 Number of test samples:{" "}
                 {data["performance"]["Number of test samples"]}
@@ -105,7 +105,7 @@ function HorizontalModelFuzzCard({
                 width: "100%"
               }}
             >
-              <MKTypography variant="h6" textAlign={textAllign}>
+              <MKTypography variant="h6" textAlign={textAllign} sx={{fontSize: '12px'}}>
                 {name}
                 {description ? (
                   <Icon fontSize="small" title={description}>
@@ -117,7 +117,7 @@ function HorizontalModelFuzzCard({
               </MKTypography>
               <MKTypography
                 variant="h6"
-                sx={{ fontSize: "14px" }}
+                sx={{ fontSize: "11px" }}
                 color={position.color}
                 mb={1}
                 textAlign={textAllign}
@@ -135,35 +135,35 @@ function HorizontalModelFuzzCard({
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 AttackType: {data["AttackType"]}
               </MKTypography>
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 ModelInformation: {data["ModelInformation"]}
               </MKTypography>
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 Time: {data["CreatedTimestamp"]}
               </MKTypography>
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 AttackQueries: {data["AttackQueries"]}
               </MKTypography>
               <MKTypography
                 color="black"
                 textAlign="left"
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "11px" }}
               >
                 VulnerabiltiyThreshold: {data["VulnerabiltiyThreshold"]}
               </MKTypography>

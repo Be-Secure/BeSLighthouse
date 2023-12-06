@@ -7,7 +7,7 @@ import { fetchJsonReport } from "../../utils/fatch_json_report";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import DisplayRepository, { dividerDiv } from "./DisplayRepository";
 import DisplayModelReport from "./DisplayModelReport";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import MKButton from "../../components/MKButton";
 
 export const verifyLink = async (link: any, setLinkStatus: any) => {

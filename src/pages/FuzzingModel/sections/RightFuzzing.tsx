@@ -2,15 +2,6 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import MKBox from "../../../components/MKBox";
 import HorizontalModelFuzzCard from "../../../assets/theme/components/card/HorizontalModelFuzzCard";
-import {
-  Timeline,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator,
-  timelineItemClasses
-} from "@mui/lab";
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
 import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
@@ -24,8 +15,8 @@ function RightFuzzing() {
     verifyLink(link, setreport);
   }, []);
   return (
-    <Grid container pr={2} pl={6} width="35%">
-      <Grid item width={"100%"}>
+    <Grid container width="35%">
+      <Grid item width={"80%"} ml="auto">
         <MKBox mb={1} >
           <HorizontalModelFuzzCard
             position={{ color: "info", label: "" }}

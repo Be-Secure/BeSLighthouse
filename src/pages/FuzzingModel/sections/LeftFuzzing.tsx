@@ -17,8 +17,8 @@ function LeftFuzzing() {
     verifyLink(link, setreport);
   }, []);
   return (
-    <Grid container pr={2} width="35%">
-      <Grid item width={"100%"}>
+    <Grid container width="35%">
+      <Grid item width={"80%"}>
         <MKBox mb={1}>
           <ModelAttack
             positionType={{ color: "info", label: "Model Analysis Inputs" }}
