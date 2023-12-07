@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
@@ -8,6 +8,7 @@ import MKTypography from "../../../components/MKTypography";
 import Icon from "@mui/material/Icon";
 import Divider from "@mui/material/Divider";
 import MKBox from "../../../components/MKBox";
+import LeaderLine from "react-leader-line";
 
 export const dividerDiv = () => {
   return <Divider sx={{ my: 0.5, color: "black" }} />;
@@ -42,20 +43,14 @@ function DataNotAvailable() {
       textAlign="center"
       variant="h6"
       sx={{ margin: "auto" }}
+      p={3.3}
     >
       Not Available
     </MKTypography>
   );
 }
 
-function ModelAttack({ name, description, position }: any) {
-  const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
-  const [report, setreport]: any = useState({});
-  React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
-    verifyLink(link, setreport);
-  }, []);
+function ModelAttack({ name, description, position, keyvalue, report }: any) {
   return (
     <Card
       style={{
@@ -78,7 +73,9 @@ function ModelAttack({ name, description, position }: any) {
       </MKTypography>
       {dividerDiv()}
       {report && Object.values(report).length > 0 ? (
-        <AttackReport data={report} />
+        <div id={keyvalue}>
+          <AttackReport data={report} />
+        </div>
       ) : (
         <DataNotAvailable />
       )}

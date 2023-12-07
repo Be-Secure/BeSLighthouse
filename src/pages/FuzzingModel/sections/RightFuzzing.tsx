@@ -7,33 +7,37 @@ function RightFuzzing() {
   return (
     <Grid container width="34%">
       <Grid item width={"80%"} ml="auto">
-        <MKBox mb={1} >
+        <MKBox mb={1}>
           <AttackVulnerabilityReport
-            position={{ color: "info"}}
+            keyvalue="RightEvasion"
+            position={{ color: "info" }}
             name="Evasion - Vulnerability Report"
             cardSide={true}
             textAllign="center"
           />
         </MKBox>
-        <MKBox mb={1} >
+        <MKBox mb={1}>
           <AttackVulnerabilityReport
-            position={{ color: "info"}}
+            keyvalue="RightInference"
+            position={{ color: "info" }}
             name="Inference - Vulnerability Report"
             cardSide={true}
             textAllign="center"
           />
         </MKBox>
-        <MKBox mb={1}  >
+        <MKBox mb={1}>
           <AttackVulnerabilityReport
-            position={{ color: "info"}}
+            keyvalue="RightExtraction"
+            position={{ color: "info" }}
             name="Extraction - Vulnerability Report"
             cardSide={true}
             textAllign="center"
           />
         </MKBox>
-        <MKBox mb={1}  >
+        <MKBox mb={1}>
           <AttackVulnerabilityReport
-            position={{ color: "info"}}
+            keyvalue="RightDataPoisoning"
+            position={{ color: "info" }}
             name="Data Poisoning - Vulnerability Report"
             cardSide={true}
             textAllign="center"

@@ -51,7 +51,7 @@ function a11yProps(index: number) {
 function DefenseSummary() {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange: any = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   const location = useLocation();
@@ -62,14 +62,21 @@ function DefenseSummary() {
     verifyLink(link, setreport);
   }, []);
   return (
-    <Grid container pr={2} pt={2} spacing={1} width="40%">
-      <Grid item width={"100%"}>
-        <img
-          style={{ display: "block", width: "255px", margin: "auto" }}
-          src={bgImage}
-        />
+    <Grid
+      container
+      pr={2}
+      pt={2}
+      spacing={1}
+      width="40%"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid item>
+        <div id="arrowpass">
+          <img style={{ display: "block", width: "255px" }} src={bgImage} />
+        </div>
       </Grid>
-      <Grid item width={"100%"}>
+      <Grid item width={"80%"}>
         <Card>
           <MKBox textAlign="center">
             <MKTypography
