@@ -26,13 +26,20 @@ export const dividerDiv = (index: number) => {
     );
 };
 
+function underScoreToSentence(underScoreString : String) {
+  const wordsArray = underScoreString.split('_');
+  const capitalizeWords = wordsArray.map((word, index) => word.charAt(0).toUpperCase() + word.slice(1));
+  const sentence = capitalizeWords.join(' ');
+  return sentence;
+};
+
 function tableRowForModel(keyName: any, value: any, index: number) {
   return (
     <>
       {dividerDiv(index)}
       <tr>
         <td>
-          <Typography variant="subtitle1" color="inherit">
+          <Typography variant="subtitle1" pr={2} color="inherit">
             {keyName}
           </Typography>
         </td>
@@ -48,8 +55,8 @@ function tableRowForModel(keyName: any, value: any, index: number) {
 
 function ShowModelContent() {
   const location = useLocation();
-  const selectedMenu = location.state.selectedMenu;
-  const key = Object.keys(selectedMenu);
+  const selectedModel = location.state.selectedMenu;
+  const modelObject = Object.keys(selectedModel);
   let count = 0;
   return (
     <Card>
@@ -59,47 +66,47 @@ function ShowModelContent() {
           variant="h5"
           fontWeight="medium"
         >
-          {selectedMenu.name}
+          {selectedModel.name}
         </MKTypography>
       </MKBox>
       <MKBox p={2}>
         <table>
           <tbody>
-            {key.map((keyValue, index) => {
-              if (SkipContent[keyValue]) return <></>;
-              if (keyValue === "created_date" || keyValue === "license") {
+            {modelObject.map((key, index) => {
+              if (SkipContent[key]) return <></>;
+              if (key === "created_date" || key === "license") {
                 tableRowForModel(
-                  keyValue,
-                  selectedMenu[keyValue].value,
+                  underScoreToSentence(key),
+                  selectedModel[key].value,
                   count++
                 );
               }
-              if (keyValue === "dependencies") {
+              if (key === "dependencies") {
                 tableRowForModel(
-                  keyValue,
-                  selectedMenu[keyValue].join(" | "),
+                  underScoreToSentence(key),
+                  selectedModel[key].join(" | "),
                   count++
                 );
               }
-              if (keyValue === "url") {
+              if (key === "url") {
                 return (
                   <>
                     {dividerDiv(index)}
                     <tr>
                       <td>
                         <Typography variant="subtitle1" color="inherit">
-                          {keyValue}{" "}
+                          {underScoreToSentence(key)}{" "}
                         </Typography>
                       </td>
                       <td>
                         <Typography variant="subtitle1" color="inherit">
                           <a
-                            href={selectedMenu[keyValue]}
+                            href={selectedModel[key]}
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{ color: "#587f2f" }}
                           >
-                            {selectedMenu[keyValue]}
+                            {selectedModel[key]}
                           </a>
                         </Typography>
                       </td>
@@ -108,8 +115,8 @@ function ShowModelContent() {
                 );
               }
               return tableRowForModel(
-                keyValue,
-                selectedMenu[keyValue],
+                underScoreToSentence(key),
+                selectedModel[key],
                 count++
               );
             })}

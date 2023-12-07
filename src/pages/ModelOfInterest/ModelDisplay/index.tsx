@@ -34,7 +34,7 @@ export default function ModelDisplay() {
   }, []);
   const filteredCveReport = applySortFilter(
     report,
-    getComparator("desc", "name"),
+    getComparator("asc", "id"),
     filterName
   );
   

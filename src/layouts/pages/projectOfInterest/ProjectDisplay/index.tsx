@@ -47,10 +47,10 @@ function descendingComparator(
   return 0;
 }
 
-export function getComparator(order: string, orderBy: string) {
-  return order === "desc"
-    ? (a: any, b: any) => descendingComparator(a, b, orderBy)
-    : (a: any, b: any) => -descendingComparator(a, b, orderBy);
+export function getComparator(orderBy: string, field: string) {
+  return orderBy === "desc"
+    ? (a: any, b: any) => descendingComparator(a, b, field)
+    : (a: any, b: any) => -descendingComparator(a, b, field);
 }
 
 export default function ProjectDisplay() {
