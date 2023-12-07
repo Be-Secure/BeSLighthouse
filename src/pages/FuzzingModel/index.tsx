@@ -12,7 +12,7 @@ function FuzzingModelPage() {
   return (
     <div>
       <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={10} pr={2} pl={2}>
+      <MKBox pt={9} pr={2} pl={2}>
         <Card style={{textAlign: "center"}}>bes-image-classification</Card>
       </MKBox>
       <Grid container pl={2}>

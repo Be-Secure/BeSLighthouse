@@ -62,10 +62,10 @@ function DefenseSummary() {
     verifyLink(link, setreport);
   }, []);
   return (
-    <Grid container pr={2} pt={2} spacing={1} width="30%">
+    <Grid container pr={2} pt={2} spacing={1} width="40%">
       <Grid item width={"100%"}>
         <img
-          style={{ display: "block", width: "50%", margin: "auto" }}
+          style={{ display: "block", width: "255px", margin: "auto" }}
           src={bgImage}
         />
       </Grid>
