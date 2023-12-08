@@ -82,7 +82,7 @@ function AssessmentSummary() {
               size="Large"
               sx={{ width: "100%" }}
             >
-              Model Security
+              Attack Graph Emulation
             </MKButton>
           </NavLink>
         </Grid>
