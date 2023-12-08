@@ -12,7 +12,16 @@ import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { verifyLink } from "../BesVersionHistory/AssessmentReport";
 
-function runLineGraph() {
+function runLineGraph(
+  lineRefStartEvasion: any,
+  lineRefStartInference: any,
+  lineRefStartExtraction: any,
+  lineRefStartDataPoisoning: any,
+  lineRefRightEvasion: any,
+  lineRefRightInference: any,
+  lineRefRightExtraction: any,
+  lineRefRightDataPoisoning: any,
+) {
   const lineOptions = {
     startPlug: "disc",
     color: "red",
@@ -22,57 +31,48 @@ function runLineGraph() {
     startPlug: "disc",
     color: "red"
   };
-  const deffencearrow = {
-    startPlug: "disc",
-    color: "green"
-  };
   try {
     //left
-    new LeaderLine(
+    lineRefStartEvasion.current = new LeaderLine(
       document.getElementById("startEvasion"),
       document.getElementById("arrowpass"),
       lineOptions
     );
-    new LeaderLine(
+    lineRefStartInference.current = new LeaderLine(
       document.getElementById("startInference"),
       document.getElementById("arrowpass"),
       lineOptions
     );
-    new LeaderLine(
+    lineRefStartExtraction.current = new LeaderLine(
       document.getElementById("startExtraction"),
       document.getElementById("arrowpass"),
       lineOptions
     );
-    new LeaderLine(
+    lineRefStartDataPoisoning.current = new LeaderLine(
       document.getElementById("startDataPoisoning"),
       document.getElementById("arrowpass"),
       lineOptions
     );
     //Right
-    new LeaderLine(
+    lineRefRightEvasion.current = new LeaderLine(
       document.getElementById("arrowpass"),
       document.getElementById("RightEvasion"),
       arrow
     );
-    new LeaderLine(
+    lineRefRightInference.current = new LeaderLine(
       document.getElementById("arrowpass"),
       document.getElementById("RightInference"),
       arrow
     );
-    new LeaderLine(
+    lineRefRightExtraction.current = new LeaderLine(
       document.getElementById("arrowpass"),
       document.getElementById("RightExtraction"),
       arrow
     );
-    new LeaderLine(
+    lineRefRightDataPoisoning.current = new LeaderLine(
       document.getElementById("arrowpass"),
       document.getElementById("RightDataPoisoning"),
       arrow
-    );
-    new LeaderLine(
-      document.getElementById("arrowpass"),
-      document.getElementById("defensesummaryarrow"),
-      deffencearrow
     );
   } catch (e) {
     // ignore
@@ -80,14 +80,46 @@ function runLineGraph() {
 }
 
 function FuzzingModelPage() {
+  const lineRefStartEvasion: any = React.useRef(null);
+  const lineRefStartInference: any = React.useRef(null);
+  const lineRefStartExtraction: any = React.useRef(null);
+  const lineRefStartDataPoisoning: any = React.useRef(null);
+  const lineRefRightEvasion: any = React.useRef(null);
+  const lineRefRightInference: any = React.useRef(null);
+  const lineRefRightExtraction: any = React.useRef(null);
+  const lineRefRightDataPoisoning: any = React.useRef(null);
   const location = useLocation();
   const selectedFuzz: any = location.state.selectedFuzz;
   const [report, setreport]: any = React.useState({});
   React.useEffect(() => {
     let link = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
     verifyLink(link, setreport).then((data) => {
-      if (data) setTimeout(runLineGraph, 200);
+      if (data)
+        setTimeout(
+          () =>
+            runLineGraph(
+              lineRefStartEvasion,
+              lineRefStartInference,
+              lineRefStartExtraction,
+              lineRefStartDataPoisoning,
+              lineRefRightEvasion,
+              lineRefRightInference,
+              lineRefRightExtraction,
+              lineRefRightDataPoisoning
+            ),
+          200
+        );
     });
+    return () => {
+      lineRefStartEvasion && lineRefStartEvasion.current.remove();
+      lineRefStartInference && lineRefStartInference.current.remove();
+      lineRefStartExtraction && lineRefStartExtraction.current.remove();
+      lineRefStartDataPoisoning && lineRefStartDataPoisoning.current.remove();
+      lineRefRightEvasion && lineRefRightEvasion.current.remove();
+      lineRefRightInference && lineRefRightInference.current.remove();
+      lineRefRightExtraction && lineRefRightExtraction.current.remove();
+      lineRefRightDataPoisoning && lineRefRightDataPoisoning.current.remove();
+    };
   }, []);
   return (
     <div>
