@@ -28,6 +28,7 @@ export default function DisplayRepository({ data }: any): any {
                       style={{ color: "#587f2f", cursor: "pointer" }}
                       href={data[value]}
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Link
                     </a>

@@ -23,11 +23,14 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
     try {
       let data = JSON.parse(response);
       setLinkStatus(data);
+      return true;
     } catch (err) {
       setLinkStatus({});
+      return false;
     }
   } catch (error) {
     setLinkStatus({});
+    return false;
   }
 };
 

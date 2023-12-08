@@ -1,65 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import MKBox from "../../../components/MKBox";
-import HorizontalModelFuzzCard from "../../../assets/theme/components/card/HorizontalModelFuzzCard";
-import {
-  Timeline,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator,
-  timelineItemClasses
-} from "@mui/lab";
-import { useLocation } from "react-router-dom";
-import { besecureMlAssessmentDataStore } from "../../../dataStore";
-import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
+import AttackVulnerabilityReport from "../AttackType/AttackVulnerabilityReport";
 
 function RightFuzzing() {
-  const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
-  const [report, setreport]: any = useState({});
-  React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/VulnerabilityReport.json`;
-    verifyLink(link, setreport);
-  }, []);
   return (
-    <Grid container pr={2} pl={6} width="35%">
-      <Grid item width={"100%"}>
-        <MKBox mb={1} >
-          <HorizontalModelFuzzCard
-            position={{ color: "info", label: "" }}
-            name="Attack Efficacy Graph"
+    <Grid container width="34%">
+      <Grid item width={"80%"} ml="auto">
+        <MKBox mb={1}>
+          <AttackVulnerabilityReport
+            keyvalue="RightEvasion"
+            position={{ color: "info" }}
+            name="Evasion - Vulnerability Report"
             cardSide={true}
             textAllign="center"
-            data={report}
           />
         </MKBox>
-        <MKBox mb={1} >
-          <HorizontalModelFuzzCard
-            position={{ color: "info", label: "" }}
-            name="Attack Efficacy Graph"
+        <MKBox mb={1}>
+          <AttackVulnerabilityReport
+            keyvalue="RightInference"
+            position={{ color: "info" }}
+            name="Inference - Vulnerability Report"
             cardSide={true}
             textAllign="center"
-            data={report}
           />
         </MKBox>
-        <MKBox mb={1}  >
-          <HorizontalModelFuzzCard
-            position={{ color: "info", label: "" }}
-            name="Attack Efficacy Graph"
+        <MKBox mb={1}>
+          <AttackVulnerabilityReport
+            keyvalue="RightExtraction"
+            position={{ color: "info" }}
+            name="Extraction - Vulnerability Report"
             cardSide={true}
             textAllign="center"
-            data={report}
           />
         </MKBox>
-        <MKBox mb={1}  >
-          <HorizontalModelFuzzCard
-            position={{ color: "info", label: "" }}
-            name="Attack Efficacy Graph"
+        <MKBox mb={1}>
+          <AttackVulnerabilityReport
+            keyvalue="RightDataPoisoning"
+            position={{ color: "info" }}
+            name="Data Poisoning - Vulnerability Report"
             cardSide={true}
             textAllign="center"
-            data={report}
           />
         </MKBox>
       </Grid>

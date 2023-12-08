@@ -1,59 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Grid from "@mui/material/Grid";
-import MKBox from "../../../components/MKBox";
-import HorizontalModelFuzzCard from "../../../assets/theme/components/card/HorizontalModelFuzzCard";
-import { useLocation } from "react-router-dom";
-import { besecureMlAssessmentDataStore } from "../../../dataStore";
-import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
 import ModelAttack from "../AttackType/ModelAttack";
 
-function LeftFuzzing() {
-  const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
-  const [report, setreport]: any = useState({});
-  React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
-    verifyLink(link, setreport);
-  }, []);
+function LeftFuzzing({ report }: any) {
   return (
-    <Grid container pr={2} width="35%">
-      <Grid item width={"100%"}>
-        <MKBox mb={1}>
-          <ModelAttack
-            positionType={{ color: "info", label: "Model Analysis Inputs" }}
-            nameType="Evasion"
-            description="Modify input data in a way that the AI model's predictions are manipulated."
-            textSide="left"
-          />
-        </MKBox>
-        <MKBox mb={1}>
-          <HorizontalModelFuzzCard
-            name="Inference"
-            position={{ color: "info", label: "Model Analysis Inputs" }}
-            description="Determine whether a specific data point was part of the training dataset."
-            textAllign={"left"}
-            data={report}
-          />
-        </MKBox>
-        <MKBox mb={1}>
-          <HorizontalModelFuzzCard
-            name="Extraction"
-            position={{ color: "info", label: "Model Analysis Inputs" }}
-            description="Determine whether a specific data point was part of the training dataset."
-            textAllign={"left"}
-            data={report}
-          />
-        </MKBox>
-        <MKBox mb={1}>
-          <HorizontalModelFuzzCard
-            name="Data Poisoning"
-            position={{ color: "info", label: "Model Analysis Inputs" }}
-            description="Determine whether a specific data point was part of the training dataset."
-            textAllign={"left"}
-            data={report}
-          />
-        </MKBox>
+    <Grid container width="26%">
+      <Grid item width={"70%"}>
+        <ModelAttack
+          keyvalue="startEvasion"
+          name="Evasion"
+          position={{ color: "info" }}
+          description="Modify input data in a way that the AI model's predictions are manipulated."
+          report={report}
+        />
+        <ModelAttack
+          keyvalue="startInference"
+          name="Inference"
+          position={{ color: "info" }}
+          description="Determine whether a specific data point was part of the training dataset."
+          report={report}
+        />
+        <ModelAttack
+          keyvalue="startExtraction"
+          name="Extraction"
+          position={{ color: "info" }}
+          description="Determine whether a specific data point was part of the training dataset."
+          report={report}
+        />
+        <ModelAttack
+          keyvalue="startDataPoisoning"
+          name="Data Poisoning"
+          position={{ color: "info" }}
+          description="Determine whether a specific data point was part of the training dataset."
+          report={report}
+        />
       </Grid>
     </Grid>
   );
