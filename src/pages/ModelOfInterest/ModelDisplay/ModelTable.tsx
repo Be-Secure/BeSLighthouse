@@ -15,13 +15,13 @@ import {
 import { NavLink } from "react-router-dom";
 
 const TABLE_HEAD = [
-  { id: "type", label: "Type", alignRight: false },
+  { id: "id", label: "Id", alignRight: false },
   { id: "name", label: "Name", alignRight: false },
+  { id: "type", label: "Type", alignRight: false },
   { id: "organization", label: "Organization", alignRight: false },
-  { id: "Created_date", label: "Created date", alignRight: false },
+  { id: "created_date", label: "Created On", alignRight: false },
   { id: "size", label: "Size", alignRight: false },
   { id: "access", label: "Access", alignRight: false },
-  { id: "license", label: "License", alignRight: false },
   { id: "dependencies", label: "Dependencies", alignRight: false }
 ];
 
@@ -76,29 +76,12 @@ export default function ModelTable({ data }: any) {
               .map((row: any, index: number) => {
                 return (
                   <TableRow hover key={index} tabIndex={-1}>
-                    <TableCell
-                      align="center"
-                      sx={{ paddingLeft: "2px" }}
-                      padding="none"
-                    >
-                      <Stack direction="row" alignItems="center" spacing={2}>
-                        <Typography
-                          sx={{
-                            position: "relative",
-                            left: "26px"
-                          }}
-                          variant="subtitle2"
-                          noWrap
-                        >
-                          {row.type}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
+                    <TableCell align="left">{row.id}</TableCell>
                     <TableCell align="left">
                       <NavLink
                         to={{
                           pathname: `/BeSLighthouse/model_report/:${row.name}`,
-                          search: ""
+                          search: "",
                         }}
                         state={{ selectedMenu: row }}
                         style={{ color: "#587f2f", cursor: "pointer" }}
@@ -106,11 +89,11 @@ export default function ModelTable({ data }: any) {
                         {row.name}
                       </NavLink>
                     </TableCell>
+                    <TableCell align="left">{row.type}</TableCell>
                     <TableCell align="left">{row.organization}</TableCell>
-                    <TableCell align="left">{row.created_date.value}</TableCell>
+                    <TableCell align="left">{row.created_date}</TableCell>
                     <TableCell align="left">{row.size}</TableCell>
                     <TableCell align="left">{row.access}</TableCell>
-                    <TableCell align="left">{row.license.value}</TableCell>
                     <TableCell align="left">
                       {row.dependencies.join(" | ")}
                     </TableCell>

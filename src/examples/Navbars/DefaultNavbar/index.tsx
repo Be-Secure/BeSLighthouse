@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -20,10 +20,7 @@ import MKBox from "../../../components/MKBox";
 
 // React example components
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
-import DefaultNavbarMobile from "./DefaultNavbarMobile";
 
-// React base styles
-import breakpoints from "../../../assets/theme/base/breakpoints";
 
 function DefaultNavbar({
   brand,
@@ -41,35 +38,6 @@ function DefaultNavbar({
   const [nestedDropdownEl, setNestedDropdownEl]: any = useState("");
   const [nestedDropdownName, setNestedDropdownName]: any = useState("");
   const [arrowRef, setArrowRef]: any = useState(null);
-  const [mobileNavbar, setMobileNavbar]: any = useState(false);
-  const [mobileView, setMobileView]: any = useState(false);
-
-  const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
-
-  useEffect(() => {
-    // A function that sets the display state for the DefaultNavbarMobile.
-    function displayMobileNavbar() {
-      if (window.innerWidth < breakpoints.values.lg) {
-        setMobileView(true);
-        setMobileNavbar(false);
-      } else {
-        setMobileView(false);
-        setMobileNavbar(false);
-      }
-    }
-
-    /** 
-     The event listener that's calling the displayMobileNavbar function when 
-     resizing the window.
-    */
-    window.addEventListener("resize", displayMobileNavbar);
-
-    // Call the displayMobileNavbar function to set the state with the initial value.
-    displayMobileNavbar();
-
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", displayMobileNavbar);
-  }, []);
 
   const renderNavbarItems = routes.map(
     ({ name, icon, href, route, collapse }: any) => (
@@ -500,7 +468,6 @@ function DefaultNavbar({
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
             <MKTypography
-              variant="button"
               fontWeight="bold"
               color={light ? "white" : "dark"}
               style={{ fontSize: "0.975rem" }}
@@ -516,28 +483,7 @@ function DefaultNavbar({
           >
             {renderNavbarItems}
           </MKBox>
-          {/* <MKBox
-            display={{ xs: "inline-block", lg: "none" }}
-            lineHeight={0}
-            py={1.5}
-            pl={1.5}
-            color={transparent ? "white" : "inherit"}
-            sx={{ cursor: "pointer" }}
-            onClick={openMobileNavbar}
-          >
-            <Icon>{mobileNavbar ? "close" : "menu"}</Icon>
-          </MKBox> */}
         </MKBox>
-        {/* <MKBox
-          bgColor={transparent ? "white" : "transparent"}
-          shadow={transparent ? "lg" : "none"}
-          borderRadius="xl"
-          px={transparent ? 2 : 0}
-        >
-          {mobileView && (
-            <DefaultNavbarMobile routes={routes} open={mobileNavbar} />
-          )}
-        </MKBox> */}
       </MKBox>
       {dropdownMenu}
       {nestedDropdownMenu}
