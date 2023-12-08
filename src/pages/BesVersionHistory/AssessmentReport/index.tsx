@@ -22,6 +22,7 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
     const response = await fetchJsonReport(link);
     try {
       let data = JSON.parse(response);
+      //console.log(data);
       setLinkStatus(data);
     } catch (err) {
       setLinkStatus({});
@@ -33,99 +34,118 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
 
 const CheckLink = ({ version, name, report }: any) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
+  let reportNameMap = "";
+if(report === "Criticality Score"){
+  reportNameMap = "Criticality Score";
+}else if(report === "Vulnerabilities"){
+  reportNameMap = "Codeql";
+}else if(report === "License Compliance"){
+  reportNameMap = "Fossology";
+}else if(report === "Dependencies"){
+  reportNameMap = "SBOM";
+}else if(report === "ScoreCard"){
+  reportNameMap = "Scorecard";
+}
 
   React.useEffect(() => {
     if (version.trim()) {
-      let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path[report]}/${name}-${version}-${assessment_report[report]}-report.json`;
+      let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
       verifyLink(link, setLinkStatus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [version]);
   let linkStatusLength: number = Object.values(linkStatus).length;
-  if (report === "Criticality Score" && linkStatusLength !== 0)
+  //console.log("reportType="+report+"  LinkStatusLength="+linkStatusLength+"\n")
+  //console.log("criticality Score="+linkStatus.criticality_score + "\n")
+  if (report === "Criticality Score" && linkStatusLength !== 0){
+    //console.log("Criticality Score="+JSON.stringify(linkStatus));
     return (
+      
       <Typography variant="subtitle1" color="inherit">
         {linkStatus.criticality_score}
       </Typography>
     );
-  const pathName: string = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${report}`;
+  }
+  const pathName: string = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
   const myObject = { pathname: pathName, state: linkStatus } as {
     pathname: string;
   };
-  if (report === "Scorecard" && linkStatusLength !== 0) {
+  
+  if (report === "ScoreCard" && linkStatusLength !== 0) {
+    //console.log("Scorecard="+JSON.stringify(linkStatus));
     return <Link to={myObject}>{linkStatus.score}</Link>;
-    // href={`/BeSLighthouse/bes_version_history/${version}/${name}`}
   }
-  if (linkStatusLength !== 0) {
-    return <Link to={myObject}>Click here</Link>;
+  if (report === "Vulnerabilities" && linkStatusLength !== 0) {
+    //console.log("Vulnerability Object="+JSON.stringify(linkStatus));
+    //console.log("Vulnerabilities count="+linkStatus.length);
+    return <Link to={myObject}>{linkStatus.length}</Link>;
   }
+  if (report === "License Compliance" && linkStatusLength !== 0) {
+    //console.log("License="+JSON.stringify(linkStatus));
+    return <Link to={myObject}>{linkStatus.length}</Link>;
+  }
+  if (report === "Dependencies" && linkStatusLength !== 0) {
+    //console.log("Dependencies="+JSON.stringify(linkStatus));
+    return <Link to={myObject}>{linkStatus.packages.length}</Link>;
+  }
+  /*if (linkStatusLength !== 0) {
+    return <Link to={myObject}>{linkStatus.criticality_score}</Link>;
+  }*/
+  
   return (
     <Typography variant="subtitle1" color="inherit">
-      Not Available
+      --
     </Typography>
   );
 };
 
 function AssessmentReport({ title, name, version, ...other }: any) {
   const report: string[] = [
-    "Scorecard",
+    "ScoreCard",
     "Criticality Score",
-    "Sonarqube",
-    "Codeql",
-    "SBOM",
-    "Fossology",
-    "Fuzz Report",
-    "Snyk"
+    "Vulnerabilities",
+    "License Compliance",
+    "Dependencies"
   ];
   return (
-    <Card sx={{ height: "100%" }}>
-      <MKBox pt={3} px={3}>
-        <MKTypography variant="h5" fontWeight="medium">
-          {title}
-        </MKTypography>
-        <MKBox mt={0} mb={2}></MKBox>
-      </MKBox>
-      <MKBox p={2}>
-        <Grid item xs={12}>
-          {report.map((value, index) => {
+    
+    <Card sx={{ height: "100%" }} >
+      <Grid container p={2} justifyContent="center" >
+        
+        {report.map((value, index) => {
             return (
               <>
-                {dividerDiv(index)}
-                <Grid container direction="column">
-                  <Grid item>
-                    <Grid
-                      container
-                      alignItems="center"
-                      justifyContent="space-between"
-                    >
-                      <Grid item>
-                        <Typography variant="subtitle1" color="inherit">
+              <Grid item xs={2.4}>
+              <MKBox p={1.5} borderRadius="lg">
+              
+              <Grid p={1} justifyContent="center" style={{backgroundColor: "#f3f6f4", borderRadius: 10}} >
+                  
+                    <Grid container justifyContent="center" alignItems="center" >
+                      <Grid item justifyContent="center">
+                        <Typography variant="h6" color="black">
                           {value}
                         </Typography>
                       </Grid>
+                    </Grid>
+                    <Grid>
                       <Grid item>
-                        <Grid
-                          container
-                          alignItems="center"
-                          justifyContent="space-between"
-                        >
+                        <Grid container justifyContent="center" alignItems="center">
                           <Grid item>
-                            <CheckLink
-                              version={version}
-                              name={name}
-                              report={value}
-                            />
+                            <CheckLink version={version} name={name} report={value} />
                           </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
+                  
                 </Grid>
+              
+              </MKBox>
+              </Grid>
               </>
             );
           })}
+        
         </Grid>
-      </MKBox>
     </Card>
   );
 }
