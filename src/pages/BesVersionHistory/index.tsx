@@ -10,6 +10,7 @@ import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import VulnerabilitiesChat from "./VulnerabilitiesChat";
 import AssessmentReport from "./AssessmentReport";
+import AssessmentAnalytics from "./AssessmentAnalytics";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 
@@ -90,162 +91,26 @@ function BesVersionHistory() {
             return (
               <>
                 <Card>
-                  <Grid key={"gridkey1"} container spacing={1} pl={4}>
-                    <Grid item xs={4}>
-                      <MKBox key="test" display="flex" py={1} pr={2}>
+                  <Grid key={"gridkey1"} container spacing={1} pl={4} >
+                    <Grid item xs={6} justifyContent="flex-start">
+                      <MKBox key="test" display="flex"  py={1} pr={2}>
                         <MKTypography
                           variant="h6"
                           fontWeight="bold"
                           textTransform="capitalize"
+                          
                         >
-                          BeS Tracking ID: &nbsp;
+                          Project Name: &nbsp;
                         </MKTypography>
                         <MKTypography
                           variant="h6"
                           fontWeight="regular"
                           color="text"
                         >
-                          {item.id}
+                          {item.name}
                         </MKTypography>
                       </MKBox>
-                    </Grid>
-                    <Grid key={"gridkey3"} item xs={4}>
-                      <MKBox key="test" display="flex" py={1} pr={2}>
-                        <MKTypography
-                          variant="h6"
-                          fontWeight="bold"
-                          textTransform="capitalize"
-                        >
-                          BeS Tech Stack: &nbsp;
-                        </MKTypography>
-                        <MKTypography
-                          variant="h6"
-                          fontWeight="regular"
-                          color="text"
-                        >
-                          {item.bes_technology_stack}
-                        </MKTypography>
-                      </MKBox>
-                    </Grid>
-                    {versionSummary.map((option: any) => {
-                      if (option.version === selectedOption) {
-                        if (option["cve_details"] === "Not Available") {
-                          return (
-                            <>
-                              <Grid key={"gridkey4"} item xs={4}>
-                                <MKBox key="test" display="flex" py={1} pr={2}>
-                                  <MKTypography
-                                    variant="h6"
-                                    fontWeight="bold"
-                                    textTransform="capitalize"
-                                  >
-                                    Release Date: &nbsp;
-                                  </MKTypography>
-                                  <MKTypography
-                                    variant="h6"
-                                    fontWeight="regular"
-                                    color="text"
-                                  >
-                                    {option.release_date}
-                                  </MKTypography>
-                                </MKBox>
-                              </Grid>
-                              <Grid key={"gridkey5"} item xs={4}>
-                                <MKBox key="test" display="flex" py={1} pr={2}>
-                                  <MKTypography
-                                    variant="h6"
-                                    fontWeight="bold"
-                                    textTransform="capitalize"
-                                  >
-                                    Known Vulnerability Count: &nbsp;
-                                  </MKTypography>
-                                  <MKTypography
-                                    variant="h6"
-                                    fontWeight="regular"
-                                    color="text"
-                                  >
-                                    {option["cve_details"]}
-                                  </MKTypography>
-                                </MKBox>
-                              </Grid>
-                            </>
-                          );
-                        }
-                        option["cve_details"].forEach((cve: any) => {
-                          if (cve.Year === "Total") {
-                            gridJsx.push(
-                              <>
-                                <Grid key={"gridkey14"} item xs={4}>
-                                  <MKBox
-                                    key="test"
-                                    display="flex"
-                                    py={1}
-                                    pr={2}
-                                  >
-                                    <MKTypography
-                                      variant="h6"
-                                      fontWeight="bold"
-                                      textTransform="capitalize"
-                                    >
-                                      Release Date: &nbsp;
-                                    </MKTypography>
-                                    <MKTypography
-                                      variant="h6"
-                                      fontWeight="regular"
-                                      color="text"
-                                    >
-                                      {option.release_date}
-                                    </MKTypography>
-                                  </MKBox>
-                                </Grid>
-                                <Grid key={"gridkey15"} item xs={4}>
-                                  <MKBox
-                                    key="test"
-                                    display="flex"
-                                    py={1}
-                                    pr={2}
-                                  >
-                                    <MKTypography
-                                      variant="h6"
-                                      fontWeight="bold"
-                                      textTransform="capitalize"
-                                    >
-                                      Known Vulnerability Count: &nbsp;
-                                    </MKTypography>
-                                    <MKTypography
-                                      variant="h6"
-                                      fontWeight="regular"
-                                      color="text"
-                                    >
-                                      {cve.No_of_Vulnerabilities}
-                                    </MKTypography>
-                                  </MKBox>
-                                </Grid>
-                              </>
-                            );
-                          } else {
-                            const cveData = Object.keys(cve);
-                            cveData.forEach((value) => {
-                              if (value === "Year") {
-                                chartLabelsData.push(cve.Year);
-                              } else if (cve[value]) {
-                                if (!chartContentData[value])
-                                  chartContentData[value] = {
-                                    name: value,
-                                    type: "line",
-                                    fill: "solid",
-                                    data: [cve[value]]
-                                  };
-                                else
-                                  chartContentData[value].data.push(cve[value]);
-                              }
-                            });
-                          }
-                        });
-                        return gridJsx;
-                      }
-                    })}
-                    <Grid key={"gridkey6"} item xs={4}>
+                      
                       <MKBox key="test" display="flex" py={1} pr={2}>
                         <MKTypography
                           variant="h6"
@@ -268,6 +133,44 @@ function BesVersionHistory() {
                           ))}
                         </Select>
                       </MKBox>
+                    
+                    </Grid>
+                    <Grid item xs={6} >
+                      <MKBox key="test" display="flex"  justifyContent="center" py={1} pr={2}>
+                        <MKTypography
+                          variant="h6"
+                          fontWeight="bold"
+                          textTransform="capitalize"
+                          
+                        >
+                          BeS Tracking Id: &nbsp;
+                        </MKTypography>
+                        <MKTypography
+                          variant="h6"
+                          fontWeight="regular"
+                          color="text"
+                        >
+                          {item.id}
+                        </MKTypography>
+                      </MKBox>
+                      
+                      <MKBox key="test" display="flex" justifyContent="center" py={1} pr={2}>
+                        <MKTypography
+                          variant="h6"
+                          fontWeight="bold"
+                          textTransform="capitalize"
+                        >
+                          BeS Tech Stack: &nbsp;
+                        </MKTypography>
+
+                        <MKTypography
+                          variant="h6"
+                          fontWeight="regular"
+                          color="text"
+                        >
+                          {item.bes_technology_stack}
+                        </MKTypography>
+                      </MKBox>
                     </Grid>
                   </Grid>
                   <MKBox key="test" display="flex" py={1} pr={2} pl={4}>
@@ -288,18 +191,26 @@ function BesVersionHistory() {
                   </MKBox>
                 </Card>
                 <MKBox>
-                  <Grid container spacing={3} pt={3}>
-                    <Grid item xs={12} md={6} lg={8}>
-                      <VulnerabilitiesChat
-                        chartLabels={chartLabelsData}
-                        chartContent={chartContentData}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6} lg={4}>
+                  <Grid container spacing={3} pt={3} >
+                    <Grid item xs={12} md={12} lg={12} >
                       <AssessmentReport
                         title="Assessment Report"
                         name={besName.slice(1)}
                         version={selectedOption}
+                        
+                      />
+                    </Grid>
+                  </Grid>
+                </MKBox>
+                <MKBox>
+                  <Grid container spacing={3} pt={3} >
+                    <Grid item xs={12} md={12} lg={12} >
+                      <AssessmentAnalytics
+                        title="Assessment Analytics"
+                        name={besName.slice(1)}
+                        version={selectedOption}
+                        versionDetails={versionSummary}
+                        masterData={data}
                       />
                     </Grid>
                   </Grid>
