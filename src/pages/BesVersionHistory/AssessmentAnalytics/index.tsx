@@ -71,7 +71,7 @@ const FetchCritical = ({ riskData }: any) => {
         if(vul !== undefined && (vul.rule.security_severity_level === "critical" ||
            vul.rule.security_severity_level === "high"))
         {
-            console.log("tmp="+JSON.stringify(vul.rule));
+            
             let name: string  = vul.rule.name;
             let url: string  = vul.html_url;
             let des: string  = vul.description;
@@ -92,8 +92,7 @@ const FetchCritical = ({ riskData }: any) => {
 }
 
 const FetchVulHistory = (versionDetails: any, setVulHistory: any) => 
-{ 
-  console.log("gotDetails="+JSON.stringify(versionDetails[0].cve_details)); 
+{  
   const vulHsitoryForChart: any = [];
   if(versionDetails[0].cve_details !== "Not Available"){
     for(let j=0; j< versionDetails[0].cve_details.length; j++){
