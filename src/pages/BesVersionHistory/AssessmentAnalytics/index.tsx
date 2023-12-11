@@ -1,34 +1,18 @@
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 import SeverityLevels from "../../../examples/Charts/PieChart/SeverityLevels";
-import { Divider, Grid, Typography } from "@mui/material";
+import VulHistory from "../../../examples/Charts/BarChart/VulHistory";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
 import { assessment_datastore } from "../../../dataStore";
 import MKBox from "../../../components/MKBox";
-import MKTypography from "../../../components/MKTypography";
 import {
   assessment_path,
   assessment_report
 } from "../../../utils/assessmentReport";
-import CodeQL from "../../BesAssessmentReport/CodeQL";
-import { projectOfInterestData } from "../../../utils/poi_data";
-import internal from "stream";
-
-export const verifyLink = async (link: any, setLinkStatus: any) => {
-  try {
-    const response = await fetchJsonReport(link);
-    try {
-      let data = JSON.parse(response);
-      setLinkStatus(data);
-    } catch (err) {
-      setLinkStatus({});
-    }
-  } catch (error) {
-    setLinkStatus({});
-  }
-};
+import MKTypography from "../../../components/MKTypography";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
@@ -45,102 +29,111 @@ export const getLinkData = async (link: any, setRiskData: any) => {
 };
 
 export const countSeverity = async (vulnerabilityData: any, setSeverity: any) => {
-  if (Object.keys(vulnerabilityData).length !== 0) {
-  let supportedSeverityLevels: any = {
-    low: true,
-    medium: true,
-    high: true,
-    critical: true
-  };
-  //console.log("Vulnerability="+JSON.stringify(vulnerabilityData));
-  let severityCounts: any = {};
-  const severityForChart: any = [];
-  for (let i = 0; i < vulnerabilityData.length; i++) {
-    severityCounts["low"] = 0;
-    severityCounts["high"] = 0;
-    severityCounts["medium"] = 0;
-    severityCounts["critical"] = 0;
+  if (Object.keys(vulnerabilityData).length !== 0) 
+  {
+    let supportedSeverityLevels: string[] = [
+      "low",
+      "medium",
+      "high",
+      "critical"
+    ];
     
-    if (vulnerabilityData[i]["rule"]["security_severity_level"] === "low") {
-      severityCounts["low"]++;
-    }else if(vulnerabilityData[i]["rule"]["security_severity_level"] === "medium"){
-      severityCounts["medium"]++;
-    }else if(vulnerabilityData[i]["rule"]["security_severity_level"] === "high"){
-      severityCounts["high"]++;
-    }else if(vulnerabilityData[i]["rule"]["security_severity_level"] === "critical"){
-      severityCounts["critical"]++;
+    let severityCounts: any = {};
+    const severityForChart: any = [];
+
+    for(let i=0; i<supportedSeverityLevels.length; i++){
+      severityCounts[supportedSeverityLevels[i]]=0;
     }
-  }
-  for (let sevStack of Object.keys(severityCounts)) {
-    severityForChart.push({ label: sevStack, value: severityCounts[sevStack] });
-  }
-  setSeverity(severityForChart);
+
+    for (let i = 0; i < vulnerabilityData.length; i++) {   
+      for (let j=0; j<supportedSeverityLevels.length; j++) {
+        if (vulnerabilityData[i]["rule"]["security_severity_level"] === supportedSeverityLevels[j])
+          severityCounts[supportedSeverityLevels[j]]++;
+      }
+    }
+
+    for (let sevStack of Object.keys(severityCounts)) {
+      severityForChart.push({ label: sevStack, value: severityCounts[sevStack] });
+    }
+    setSeverity(severityForChart);
   }
 }
-const FetchCritical = ({ version, name, report, versionDetails, masterData, riskData }: any) => {
-  //console.log("versionDetails="+JSON.stringify(versionDetails)+"\n");
-  //console.log("masterData="+JSON.stringify(masterData));
-  //console.log("riskData="+JSON.stringify(riskData));
 
-  //let cveData:any = versionDetails.cve_details;
+const FetchCritical = ({ riskData }: any) => {
   let tmp:any = [];
-  //let data:any;
-  //console.log("cveData="+JSON.stringify(riskData));
   for(var i=0; i<= riskData.length; i++){
       tmp.push(riskData[i]);
   }
-  //console.log("tmp="+JSON.stringify(tmp[0].rule));
   return(
     <>
     {
-       tmp.map(function(vul:any, index:number){
-        
+      tmp.map(function(vul:any, index:number){     
         if(vul !== undefined && (vul.rule.security_severity_level === "critical" ||
-           vul.rule.security_severity_level === "high")){
+           vul.rule.security_severity_level === "high"))
+        {
             console.log("tmp="+JSON.stringify(vul.rule));
             let name: string  = vul.rule.name;
             let url: string  = vul.html_url;
             let des: string  = vul.description;
-          return ( <><Typography variant="body2" color="inherit" style={{fontSize:"1rem",}}>
-                       {name} : <Link to={url} style={{fontSize:"0.8rem",}}>{name}</Link>
-                </Typography>
-                </>
-          )
+            return ( 
+              <>
+                <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem",}}>
+                              {name} : <Link to={url} style={{fontSize:"0.8rem",}}>{name}</Link>
+                </MKTypography>    
+              </>
+            )
         }else{
           return(<></>)
         }
-       })
+      })
     }
     </>
   )
 }
 
+const FetchVulHistory = (versionDetails: any, setVulHistory: any) => 
+{ 
+  console.log("gotDetails="+JSON.stringify(versionDetails[0].cve_details)); 
+  const vulHsitoryForChart: any = [];
+  if(versionDetails[0].cve_details !== "Not Available"){
+    for(let j=0; j< versionDetails[0].cve_details.length; j++){
+          if(versionDetails[0].cve_details[j].Year !== "Total" && versionDetails[0].cve_details[j].Year !== null)
+           vulHsitoryForChart.push({label: versionDetails[0].cve_details[j].Year, value: versionDetails[0].cve_details[j].No_of_Vulnerabilities} );
+    }
+    if(vulHsitoryForChart.length !== 0)
+      setVulHistory(vulHsitoryForChart);
+    else
+      return(<></>)
+    return(vulHsitoryForChart)
+  }else{
+    return(<></>)
+  }
+}
+
 const FetchData = ({version, name, report, versionDetails, masterData}: any) => {
   const [riskData, setRiskData]: any = React.useState({});
   const [severityData, setSeverity] = React.useState([]);
+  const [vulHistoryData, setVulHistory] = React.useState([]);
   React.useEffect(() => {
     if (version.trim()) {
       let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path["Codeql"]}/${name}-${version}-${assessment_report["Codeql"]}-report.json`;
       getLinkData(link, setRiskData);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [version]);
-  
   React.useEffect(() => {
-    
     countSeverity(riskData, setSeverity);
   }, [riskData]);
   
-  const theme = useTheme();
-  //console.log("Severity Levels="+JSON.stringify(severityData));
-
+  React.useEffect(() => {
+    FetchVulHistory(versionDetails, setVulHistory);
+  }, [versionDetails]);
+  
+  const theme = useTheme();  
   if(report === "Risk Posture"){
-    //const [data, setData] = React.useState([]);
-    
     return (
       <>
-            <Grid item xs={6} md={6} lg={6}>
-              <MKBox mb={6}>
+        <Grid item xs={6} md={6} lg={6}>
+          <MKBox mb={6}>
                 <SeverityLevels
                   chartColors={[
                     "#FFBB33",
@@ -150,36 +143,44 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
                   ]}
                   chartData={severityData}
                 />
-              </MKBox>
-            </Grid>
+          </MKBox>
+        </Grid>
       </>
     );
    }else if(report === "Critical Issues"){
     return (
     <>
-    <Grid item xs={12} md={12} lg={12}>
-      <MKBox mb={6}>
-        <FetchCritical
-          version={version}
-          name={name}
-          report={report}
-          versionDetails={versionDetails}
-          masterData= {masterData}
-          riskData={riskData}
-        />
+    <Grid item xs={12} md={12} lg={12} style={{height: "100%"}}>
+      <MKBox mb={6} style={{height: "100%"}}>
+        <Card  style={{height: "100%", width: "100%"}}>
+          <MKBox style={{height: "100%"}}>
+              <MKBox pt={1} pb={1} px={1} style={{height: "100%"}}> 
+                 <FetchCritical
+                    riskData={riskData}
+                  />
+              </MKBox>
+          </MKBox>
+        </Card>
       </MKBox>
     </Grid>
     </> 
-    );        
-   }else{
+    );
+   }else if(report === "Vulnerability History"){
     return (
       <>
+          <Grid item xs={12} md={12} lg={12}>
+            <MKBox mb={6}>
+              <VulHistory
+                  vuldata={vulHistoryData}
+              />  
+            </MKBox>
+          </Grid>
       </>
     );
+   }else{
+    return (<></>);
    }
 }
-
-
 
 function AssessmentAnalytics({ title, name, version, versionDetails, masterData, ...other }: any) {
   const report: string[] = [
@@ -191,7 +192,6 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
     
     <Card sx={{ height: "100%" }} >
       <Grid container p={2} justifyContent="space-between" >
-        
         {report.map((value, index) => {
             return (
               <>
@@ -200,12 +200,12 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
               <Grid p={1} style={{backgroundColor: "#f3f6f4", borderRadius: 10, height: "370px"}} justifyContent="center" >
                     <Grid container alignItems="center" justifyContent="center">
                       <Grid item justifyContent="center">
-                        <Typography variant="h6" color="black">
+                        <MKTypography variant="h6" color="black">
                           {value}
-                        </Typography>
+                        </MKTypography>
                       </Grid>
                     </Grid>
-                    <Grid>
+                    <Grid style={{height: "92%"}}>
                             <FetchData version={version} name={name} report={value} versionDetails={versionDetails} masterData={masterData}/>
                     </Grid>
                 </Grid>
@@ -214,10 +214,8 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
               </>
             );
           })}
-        
         </Grid>
     </Card>
   );
 }
-
 export default AssessmentAnalytics;
