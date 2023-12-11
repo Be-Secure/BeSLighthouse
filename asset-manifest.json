@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.10bc5f24.chunk.js",
-    "main.js.map": "/BeSLighthouse/static/js/main.10bc5f24.chunk.js.map",
+    "main.js": "/BeSLighthouse/static/js/main.72d9d5c7.chunk.js",
+    "main.js.map": "/BeSLighthouse/static/js/main.72d9d5c7.chunk.js.map",
     "runtime~main.js": "/BeSLighthouse/static/js/runtime~main.579e3372.js",
     "runtime~main.js.map": "/BeSLighthouse/static/js/runtime~main.579e3372.js.map",
-    "static/js/2.dc2315de.chunk.js": "/BeSLighthouse/static/js/2.dc2315de.chunk.js",
-    "static/js/2.dc2315de.chunk.js.map": "/BeSLighthouse/static/js/2.dc2315de.chunk.js.map",
+    "static/js/2.d87eb8bb.chunk.js": "/BeSLighthouse/static/js/2.d87eb8bb.chunk.js",
+    "static/js/2.d87eb8bb.chunk.js.map": "/BeSLighthouse/static/js/2.d87eb8bb.chunk.js.map",
     "index.html": "/BeSLighthouse/index.html",
-    "precache-manifest.62a7e4cbab45476ccb3029e619eae9f4.js": "/BeSLighthouse/precache-manifest.62a7e4cbab45476ccb3029e619eae9f4.js",
+    "precache-manifest.126e1c849725c00a3aa3840067eeb024.js": "/BeSLighthouse/precache-manifest.126e1c849725c00a3aa3840067eeb024.js",
     "service-worker.js": "/BeSLighthouse/service-worker.js",
     "static/media/neuralimage.png": "/BeSLighthouse/static/media/neuralimage.41e17072.png"
   }
