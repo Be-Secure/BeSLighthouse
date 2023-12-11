@@ -11,28 +11,28 @@ function LeftFuzzing({ report }: any) {
           keyvalue="startEvasion"
           name="Evasion"
           position={{ color: "info" }}
-          description="Modify input data in a way that the AI model's predictions are manipulated."
+          description="Manipulate the input to cause incorrect predictions."
           report={report}
         />
         <ModelAttack
           keyvalue="startInference"
           name="Inference"
           position={{ color: "info" }}
-          description="Determine whether a specific data point was part of the training dataset."
+          description="Adversary determine a specific data point was part of dataset."
           report={report}
         />
         <ModelAttack
           keyvalue="startExtraction"
           name="Extraction"
           position={{ color: "info" }}
-          description="Determine whether a specific data point was part of the training dataset."
+          description="Probe a model's responses to extract information about dataset."
           report={report}
         />
         <ModelAttack
           keyvalue="startDataPoisoning"
           name="Data Poisoning"
           position={{ color: "info" }}
-          description="Determine whether a specific data point was part of the training dataset."
+          description="Inject misleading data into the training dataset."
           report={report}
         />
       </Grid>

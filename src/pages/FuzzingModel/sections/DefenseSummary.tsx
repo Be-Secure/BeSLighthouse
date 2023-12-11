@@ -77,7 +77,7 @@ function DefenseSummary() {
         </div>
       </Grid>
       <Grid item width={"80%"}>
-        <Card>
+        <Card style={{ backgroundColor: "#90ee90" }}>
           <MKBox textAlign="center">
             <MKTypography
               display="inline"
@@ -86,14 +86,15 @@ function DefenseSummary() {
               fontWeight="regular"
               sx={{ fontSize: "14px" }}
             >
-              Defense Summary
+              Defense Model Capability
             </MKTypography>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{ width: "100%" }} >
               <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
                   value={value}
                   onChange={handleChange}
                   aria-label="basic tabs example"
+                  style={{ backgroundColor: "#90ee90" }}
                 >
                   <Tab
                     sx={{ fontSize: "12px" }}
