@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Card from "@mui/material/Card";
-
+import Icon from "@mui/material/Icon";
 import { Divider, Grid, Typography } from "@mui/material";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
@@ -38,32 +38,27 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
 const CheckLink = ({ version, name, report }: any) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
   let reportNameMap = "";
-if(report === "Criticality Score"){
-  reportNameMap = "Criticality Score";
-}else if(report === "Vulnerabilities"){
-  reportNameMap = "Codeql";
-}else if(report === "License Compliance"){
-  reportNameMap = "Fossology";
-}else if(report === "Dependencies"){
-  reportNameMap = "SBOM";
-}else if(report === "ScoreCard"){
-  reportNameMap = "Scorecard";
-}
+  if(report === "Criticality Score"){
+    reportNameMap = "Criticality Score";
+  }else if(report === "Vulnerabilities"){
+    reportNameMap = "Codeql";
+  }else if(report === "License Compliance"){
+    reportNameMap = "Fossology";
+  }else if(report === "Dependencies"){
+    reportNameMap = "SBOM";
+  }else if(report === "ScoreCard"){
+    reportNameMap = "Scorecard";
+  }
 
   React.useEffect(() => {
     if (version.trim()) {
       let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
       verifyLink(link, setLinkStatus);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [version]);
   let linkStatusLength: number = Object.values(linkStatus).length;
-  //console.log("reportType="+report+"  LinkStatusLength="+linkStatusLength+"\n")
-  //console.log("criticality Score="+linkStatus.criticality_score + "\n")
   if (report === "Criticality Score" && linkStatusLength !== 0){
-    //console.log("Criticality Score="+JSON.stringify(linkStatus));
     return (
-      
       <Typography variant="subtitle1" color="inherit">
         {linkStatus.criticality_score}
       </Typography>
@@ -75,25 +70,31 @@ if(report === "Criticality Score"){
   };
   
   if (report === "ScoreCard" && linkStatusLength !== 0) {
-    //console.log("Scorecard="+JSON.stringify(linkStatus));
     return <Link to={myObject}>{linkStatus.score}</Link>;
   }
   if (report === "Vulnerabilities" && linkStatusLength !== 0) {
-    //console.log("Vulnerability Object="+JSON.stringify(linkStatus));
-    //console.log("Vulnerabilities count="+linkStatus.length);
     return <Link to={myObject}>{linkStatus.length}</Link>;
   }
   if (report === "License Compliance" && linkStatusLength !== 0) {
-    //console.log("License="+JSON.stringify(linkStatus));
-    return <Link to={myObject}>{linkStatus.length}</Link>;
+    let uniqueLicenses: any = [];
+    for(let i=0; i<linkStatus.length; i++){
+      let flag =0;
+      for(let j=0; j<uniqueLicenses.length; j++){
+          if(linkStatus[i].LicenseConcluded === uniqueLicenses[j]){
+             flag=1;
+             break;
+          }
+      }
+      if(flag===0){
+        uniqueLicenses.push(linkStatus[i].LicenseConcluded);
+      }
+    }
+    console.log("UniqueLicenses Are="+uniqueLicenses);
+    return <Link to={myObject}>{uniqueLicenses.length}</Link>;
   }
   if (report === "Dependencies" && linkStatusLength !== 0) {
-    //console.log("Dependencies="+JSON.stringify(linkStatus));
     return <Link to={myObject}>{linkStatus.packages.length}</Link>;
   }
-  /*if (linkStatusLength !== 0) {
-    return <Link to={myObject}>{linkStatus.criticality_score}</Link>;
-  }*/
   
   return (
     <Typography variant="subtitle1" color="inherit">
@@ -101,7 +102,45 @@ if(report === "Criticality Score"){
     </Typography>
   );
 };
-
+const GetHeadings = ({ receivedValue }: any) => {
+  //const [fieldInfo, setfieldInfo]: any = React.useState({});
+    if(receivedValue === "License Compliance"){
+       return(<> Unique Licenses
+                  <Icon title="Number of unique licenses used in the OSS" sx={{fontSize: '0.7rem !important'}}>
+                    info
+                  </Icon>
+              </>);
+    }else if(receivedValue === "Dependencies"){
+      return(<> Dependencies(SBOM)
+                <Icon title="Software Bill Of Material" sx={{fontSize: '0.7rem !important'}}>
+                  info
+                </Icon>
+              </>);
+      
+    }else if(receivedValue === "ScoreCard"){
+      return(<> {receivedValue}
+                <Icon title="Overall Security Score of the project" sx={{fontSize: '0.7rem !important'}}>
+                  info
+                </Icon>
+              </>);
+     
+    }else if(receivedValue === "Criticality Score"){
+      return(<> {receivedValue}
+                <Icon title="Score to tell how critical the OSS project" sx={{fontSize: '0.7rem !important'}}>
+                  info
+                </Icon>
+              </>);
+     
+    }else if(receivedValue === "Vulnerabilities"){
+      return(<> {receivedValue}
+              <Icon title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{fontSize: '0.7rem !important'}}>
+                info
+              </Icon>
+              </>);
+    }else{
+      return(receivedValue);
+    }
+}
 function AssessmentReport({ title, name, version, ...other }: any) {
   const report: string[] = [
     "ScoreCard",
@@ -120,14 +159,13 @@ function AssessmentReport({ title, name, version, ...other }: any) {
               <>
               <Grid item xs={2.4}>
               <MKBox p={1.5} borderRadius="lg">
-              
               <Grid p={1} justifyContent="center" style={{backgroundColor: "#f3f6f4", borderRadius: 10}} >
                   
                     <Grid container justifyContent="center" alignItems="center" >
                       <Grid item justifyContent="center">
                         <Typography variant="h6" color="black">
-                          {value}
-                        </Typography>
+                          <GetHeadings receivedValue={value}/> 
+                          </Typography>
                       </Grid>
                     </Grid>
                     <Grid>
@@ -139,9 +177,7 @@ function AssessmentReport({ title, name, version, ...other }: any) {
                         </Grid>
                       </Grid>
                     </Grid>
-                  
                 </Grid>
-              
               </MKBox>
               </Grid>
               </>

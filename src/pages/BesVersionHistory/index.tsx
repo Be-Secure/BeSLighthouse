@@ -8,7 +8,6 @@ import { MenuItem, Select } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
-import VulnerabilitiesChat from "./VulnerabilitiesChat";
 import AssessmentReport from "./AssessmentReport";
 import AssessmentAnalytics from "./AssessmentAnalytics";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
@@ -97,8 +96,7 @@ function BesVersionHistory() {
                         <MKTypography
                           variant="h6"
                           fontWeight="bold"
-                          textTransform="capitalize"
-                          
+                          textTransform="capitalize"        
                         >
                           Project Name: &nbsp;
                         </MKTypography>
@@ -141,7 +139,6 @@ function BesVersionHistory() {
                           variant="h6"
                           fontWeight="bold"
                           textTransform="capitalize"
-                          
                         >
                           BeS Tracking Id: &nbsp;
                         </MKTypography>
@@ -153,7 +150,6 @@ function BesVersionHistory() {
                           {item.id}
                         </MKTypography>
                       </MKBox>
-                      
                       <MKBox key="test" display="flex" justifyContent="center" py={1} pr={2}>
                         <MKTypography
                           variant="h6"
