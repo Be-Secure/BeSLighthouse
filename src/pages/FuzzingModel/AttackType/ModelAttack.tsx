@@ -13,19 +13,19 @@ export const dividerDiv = () => {
 function AttackReport({ data }: any) {
   return (
     <MKBox pl={1}>
-      <MKTypography color="black" textAlign="left" sx={{ fontSize: "10px" }}>
+      <MKTypography color="black" textAlign="left" sx={{ fontSize: "12px" }}>
         AttackType: {data["AttackType"]}
       </MKTypography>
-      <MKTypography color="black" textAlign="left" sx={{ fontSize: "10px" }}>
+      <MKTypography color="black" textAlign="left" sx={{ fontSize: "12px" }}>
         ModelInformation: {data["ModelInformation"]}
       </MKTypography>
-      <MKTypography color="black" textAlign="left" sx={{ fontSize: "10px" }}>
+      <MKTypography color="black" textAlign="left" sx={{ fontSize: "12px" }}>
         Time: {data["CreatedTimestamp"]}
       </MKTypography>
-      <MKTypography color="black" textAlign="left" sx={{ fontSize: "10px" }}>
+      <MKTypography color="black" textAlign="left" sx={{ fontSize: "12px" }}>
         AttackQueries: {data["AttackQueries"]}
       </MKTypography>
-      <MKTypography color="black" textAlign="left" sx={{ fontSize: "10px" }}>
+      <MKTypography color="black" textAlign="left" sx={{ fontSize: "12px" }}>
         VulnerabiltiyThreshold: {data["VulnerabiltiyThreshold"]}
       </MKTypography>
     </MKBox>
