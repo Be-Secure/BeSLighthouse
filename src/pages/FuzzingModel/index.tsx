@@ -60,16 +60,24 @@ function runLineGraph(
         document.getElementById("RightEvasion"),
         arrow
       );
+    }, 2000);
+    setTimeout(() => {
       lineRefRightInference.current = new LeaderLine(
         document.getElementById("arrowpass"),
         document.getElementById("RightInference"),
         arrow
       );
+    }, 3000);
+
+    setTimeout(() => {
       lineRefRightExtraction.current = new LeaderLine(
         document.getElementById("arrowpass"),
         document.getElementById("RightExtraction"),
         arrow
       );
+    }, 4000);
+
+    setTimeout(() => {
       lineRefRightDataPoisoning.current = new LeaderLine(
         document.getElementById("arrowpass"),
         document.getElementById("RightDataPoisoning"),
@@ -128,11 +136,11 @@ function FuzzingModelPage() {
       <DefaultNavbar routes={routes} sticky />
       <MKBox pt={9} pr={2} pl={2}>
         <Grid container spacing={2}>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <p style={{paddingLeft: "15%", color: "red"}}>ATTACKS</p>
           </Grid>
-          <Grid item xs={5}>
-            <p style={{color: "#587f2f"}}>Model: {selectedFuzz.name}</p>
+          <Grid item xs={6}>
+            <p style={{paddingLeft: "2%", color: "#587f2f"}}>Model: {selectedFuzz.name}</p>
           </Grid>
           <Grid item xs={2}>
             <p style={{color: "red"}}>OUTCOMES</p>
