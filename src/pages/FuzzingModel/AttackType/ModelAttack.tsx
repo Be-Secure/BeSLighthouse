@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useLocation } from "react-router-dom";
-import { besecureMlAssessmentDataStore } from "../../../dataStore";
-import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
 import Card from "@mui/material/Card";
 import MKTypography from "../../../components/MKTypography";
 import Icon from "@mui/material/Icon";
 import Divider from "@mui/material/Divider";
 import MKBox from "../../../components/MKBox";
-import LeaderLine from "react-leader-line";
 
 export const dividerDiv = () => {
   return <Divider sx={{ my: 0.5, color: "black" }} />;

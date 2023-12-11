@@ -20,7 +20,7 @@ function runLineGraph(
   lineRefRightEvasion: any,
   lineRefRightInference: any,
   lineRefRightExtraction: any,
-  lineRefRightDataPoisoning: any,
+  lineRefRightDataPoisoning: any
 ) {
   const lineOptions = {
     startPlug: "disc",
@@ -54,26 +54,28 @@ function runLineGraph(
       lineOptions
     );
     //Right
-    lineRefRightEvasion.current = new LeaderLine(
-      document.getElementById("arrowpass"),
-      document.getElementById("RightEvasion"),
-      arrow
-    );
-    lineRefRightInference.current = new LeaderLine(
-      document.getElementById("arrowpass"),
-      document.getElementById("RightInference"),
-      arrow
-    );
-    lineRefRightExtraction.current = new LeaderLine(
-      document.getElementById("arrowpass"),
-      document.getElementById("RightExtraction"),
-      arrow
-    );
-    lineRefRightDataPoisoning.current = new LeaderLine(
-      document.getElementById("arrowpass"),
-      document.getElementById("RightDataPoisoning"),
-      arrow
-    );
+    setTimeout(() => {
+      lineRefRightEvasion.current = new LeaderLine(
+        document.getElementById("arrowpass"),
+        document.getElementById("RightEvasion"),
+        arrow
+      );
+      lineRefRightInference.current = new LeaderLine(
+        document.getElementById("arrowpass"),
+        document.getElementById("RightInference"),
+        arrow
+      );
+      lineRefRightExtraction.current = new LeaderLine(
+        document.getElementById("arrowpass"),
+        document.getElementById("RightExtraction"),
+        arrow
+      );
+      lineRefRightDataPoisoning.current = new LeaderLine(
+        document.getElementById("arrowpass"),
+        document.getElementById("RightDataPoisoning"),
+        arrow
+      );
+    }, 5000);
   } catch (e) {
     // ignore
   }
@@ -125,7 +127,17 @@ function FuzzingModelPage() {
     <div>
       <DefaultNavbar routes={routes} sticky />
       <MKBox pt={9} pr={2} pl={2}>
-        <Card style={{ textAlign: "center" }}>bes-image-classification</Card>
+        <Grid container spacing={2}>
+          <Grid item xs={5}>
+            <p style={{paddingLeft: "15%", color: "red"}}>ATTACKS</p>
+          </Grid>
+          <Grid item xs={5}>
+            <p style={{color: "#587f2f"}}>Model: {selectedFuzz.name}</p>
+          </Grid>
+          <Grid item xs={2}>
+            <p style={{color: "red"}}>OUTCOMES</p>
+          </Grid>
+        </Grid>
       </MKBox>
       <Grid container pl={2}>
         <LeftFuzzing report={report} />
