@@ -5,7 +5,7 @@ import LeaderLine from "react-leader-line";
 
 import LeftFuzzing from "./sections/LeftFuzzing";
 import DefenseSummary from "./sections/DefenseSummary";
-import { Card, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import RightFuzzing from "./sections/RightFuzzing";
 import MKBox from "../../components/MKBox";
 import { useLocation } from "react-router-dom";
@@ -122,14 +122,14 @@ function FuzzingModelPage() {
     });
     return () => {
       try {
-        lineRefStartEvasion && lineRefStartEvasion.current.remove();
-        lineRefStartInference && lineRefStartInference.current.remove();
-        lineRefStartExtraction && lineRefStartExtraction.current.remove();
-        lineRefStartDataPoisoning && lineRefStartDataPoisoning.current.remove();
-        lineRefRightEvasion && lineRefRightEvasion.current.remove();
-        lineRefRightInference && lineRefRightInference.current.remove();
-        lineRefRightExtraction && lineRefRightExtraction.current.remove();
-        lineRefRightDataPoisoning && lineRefRightDataPoisoning.current.remove();
+        lineRefStartEvasion && lineRefStartEvasion?.current.remove();
+        lineRefStartInference && lineRefStartInference?.current.remove();
+        lineRefStartExtraction && lineRefStartExtraction?.current.remove();
+        lineRefStartDataPoisoning && lineRefStartDataPoisoning?.current.remove();
+        lineRefRightEvasion && lineRefRightEvasion?.current.remove();
+        lineRefRightInference && lineRefRightInference?.current.remove();
+        lineRefRightExtraction && lineRefRightExtraction?.current.remove();
+        lineRefRightDataPoisoning && lineRefRightDataPoisoning?.current.remove();
       } catch (e) {
         // ignore
       }

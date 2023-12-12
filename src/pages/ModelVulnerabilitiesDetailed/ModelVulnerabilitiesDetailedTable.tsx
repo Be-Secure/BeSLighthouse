@@ -1,4 +1,3 @@
-import { filter } from "lodash";
 import React, { useState } from "react";
 import { verifyLink } from "../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
