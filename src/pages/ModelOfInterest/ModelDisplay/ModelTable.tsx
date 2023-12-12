@@ -10,7 +10,7 @@ import {
   TablePagination,
   TableRow,
   TableSortLabel,
-  Typography
+  Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
@@ -19,10 +19,9 @@ const TABLE_HEAD = [
   { id: "name", label: "Name", alignRight: false },
   { id: "type", label: "Type", alignRight: false },
   { id: "organization", label: "Organization", alignRight: false },
+  { id: "quality_control", label: "Risk Analysis", alignRight: false },
   { id: "created_date", label: "Created On", alignRight: false },
-  { id: "size", label: "Size", alignRight: false },
-  { id: "access", label: "Access", alignRight: false },
-  { id: "dependencies", label: "Dependencies", alignRight: false }
+  { id: "dependencies", label: "Dependencies", alignRight: false },
 ];
 
 export default function ModelTable({ data }: any) {
@@ -61,7 +60,7 @@ export default function ModelTable({ data }: any) {
                     hideSortIcon
                     style={{
                       position: "relative",
-                      minWidth: headCell.id === "type" ? "134px" : ""
+                      minWidth: headCell.id === "type" ? "134px" : "",
                     }}
                   >
                     {headCell.label}
@@ -91,11 +90,12 @@ export default function ModelTable({ data }: any) {
                     </TableCell>
                     <TableCell align="left">{row.type}</TableCell>
                     <TableCell align="left">{row.organization}</TableCell>
+                    <TableCell align="left" style={{ color: "red" }}>
+                      {row.quality_control.join(" | ")}
+                    </TableCell>
                     <TableCell align="left">{row.created_date}</TableCell>
-                    <TableCell align="left">{row.size}</TableCell>
-                    <TableCell align="left">{row.access}</TableCell>
                     <TableCell align="left">
-                      {row.dependencies.join(" | ")}
+                      {row.dependencies.length === 0 ? "None" : row.dependencies.join(" | ")}
                     </TableCell>
                   </TableRow>
                 );
@@ -105,11 +105,11 @@ export default function ModelTable({ data }: any) {
         <TablePagination
           sx={{
             ".MuiTablePagination-selectLabel": {
-              margin: "auto"
+              margin: "auto",
             },
             ".MuiTablePagination-displayedRows": {
-              margin: "auto"
-            }
+              margin: "auto",
+            },
           }}
           rowsPerPageOptions={[15, 30, 45]}
           component="div"
