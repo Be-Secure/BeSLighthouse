@@ -95,7 +95,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any, index: number) => {
                   let combinedMatch;
-                  if (row["scanning_reports"]["output_log"][0]) {
+                  if (row["scanning_reports"]["output_log"]?.[0]) {
                     combinedMatch =
                       row["scanning_reports"]["output_log"][0].match(regex);
                   } else {
