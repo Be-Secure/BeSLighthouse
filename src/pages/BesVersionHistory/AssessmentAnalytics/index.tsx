@@ -2,6 +2,7 @@ import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 import SeverityLevels from "../../../examples/Charts/PieChart/SeverityLevels";
 import VulHistory from "../../../examples/Charts/BarChart/VulHistory";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
@@ -13,6 +14,8 @@ import {
   assessment_report
 } from "../../../utils/assessmentReport";
 import MKTypography from "../../../components/MKTypography";
+import { StyledChartWrapper } from "../../../examples/Charts/PieChart/StyledChartWrapper";
+import { AlignHorizontalCenter } from "@mui/icons-material";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
@@ -61,34 +64,46 @@ export const countSeverity = async (vulnerabilityData: any, setSeverity: any) =>
 
 const FetchCritical = ({ riskData }: any) => {
   let tmp:any = [];
+  let flag=0;
+  let res:any = {};
   for(var i=0; i<= riskData.length; i++){
       tmp.push(riskData[i]);
   }
-  return(
-    <>
-    {
-      tmp.map(function(vul:any, index:number){     
-        if(vul !== undefined && (vul.rule.security_severity_level === "critical" ||
-           vul.rule.security_severity_level === "high"))
-        {
-            
-            let name: string  = vul.rule.name;
-            let url: string  = vul.html_url;
-            let des: string  = vul.description;
-            return ( 
-              <>
-                <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem",}}>
-                              {name} : <Link to={url} style={{fontSize:"0.8rem",}}>{name}</Link>
-                </MKTypography>    
-              </>
-            )
-        }else{
-          return(<></>)
-        }
-      })
+  if(tmp.length !== 0){
+    res = tmp.map(function(vul:any, index:number){     
+          if(vul !== undefined && (vul.rule.security_severity_level === "critical"))
+          {
+              flag=1;
+              let name: string  = vul.rule.name;
+              let url: string  = vul.html_url;
+              let des: string  = vul.description;
+              return ( 
+                <>
+                  <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
+                                {name} : <Link to={url} style={{fontSize:"0.8rem",}}>{name}</Link>
+                  </MKTypography>    
+                </>
+              )
+          }else{
+            return(<></>)
+          }
+      });
+    if(flag !== 0){      
+       return(<>{res}</>);
+    }else{
+      return(<>
+              <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
+                No Critical Issues Found
+              </MKTypography>
+            </>);
     }
-    </>
-  )
+  }else{
+    return(<>
+      <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
+        No Data Available
+      </MKTypography>
+    </>);
+  }
 }
 
 const FetchVulHistory = (versionDetails: any, setVulHistory: any) => 
@@ -129,6 +144,7 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
   
   const theme = useTheme();  
   if(report === "Risk Posture"){
+    if(severityData.length !== 0){
     return (
       <>
         <Grid item xs={6} md={6} lg={6}>
@@ -146,14 +162,33 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
         </Grid>
       </>
     );
+    }else{
+      return(
+      <Grid item xs={6} md={6} lg={6}>
+          <MKBox mb={6}>
+              <Card  style={{height: "70%", width: "200%"}}>
+                  <MKBox>
+                    <MKBox pt={1} pb={1} px={1} > 
+                    <StyledChartWrapper dir="ltr" >
+                       <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
+                           No Data Available
+                        </MKTypography>
+                    </StyledChartWrapper>  
+                    </MKBox>
+                  </MKBox>
+              </Card>
+          </MKBox>
+      </Grid>
+      );
+    }
    }else if(report === "Critical Issues"){
     return (
     <>
     <Grid item xs={12} md={12} lg={12} style={{height: "100%"}}>
       <MKBox mb={6} style={{height: "100%"}}>
-        <Card  style={{height: "100%", width: "100%"}}>
+        <Card  style={{height: "100%", width: "100%"}} sx={{ overflowY: "scroll"}}>
           <MKBox style={{height: "100%"}}>
-              <MKBox pt={1} pb={1} px={1} style={{height: "100%"}}> 
+              <MKBox pt={1} pb={1} px={1} style={{height: "100%" }}> 
                  <FetchCritical
                     riskData={riskData}
                   />
@@ -181,6 +216,33 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
    }
 }
 
+const GetHeadings = ({ receivedValue }: any) => {
+  //const [fieldInfo, setfieldInfo]: any = React.useState({});
+    if(receivedValue === "Risk Posture"){
+       return(<> Risk Posture
+                  <Icon title="Percentage of low, high, critical issues found" sx={{fontSize: '0.5rem !important'}}>
+                    info
+                  </Icon>
+              </>);
+    }else if(receivedValue === "Critical Issues"){
+      return(<> Critical SAST
+                <Icon title="Software Bill Of Material" sx={{fontSize: '0.5rem !important'}}>
+                  info
+                </Icon>
+              </>);
+      
+    }else if(receivedValue === "Vulnerability History"){
+      return(<> CVE History
+                <Icon title="Overall Security Score of the project" sx={{fontSize: '0.5rem !important'}}>
+                  info
+                </Icon>
+              </>);
+     
+    }else{
+      return(receivedValue);
+    }
+}
+
 function AssessmentAnalytics({ title, name, version, versionDetails, masterData, ...other }: any) {
   const report: string[] = [
     "Risk Posture",
@@ -199,9 +261,9 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
               <Grid p={1} style={{backgroundColor: "#f3f6f4", borderRadius: 10, height: "370px"}} justifyContent="center" >
                     <Grid container alignItems="center" justifyContent="center">
                       <Grid item justifyContent="center">
-                        <MKTypography variant="h6" color="black">
-                          {value}
-                        </MKTypography>
+                        <GetHeadings receivedValue={value}>
+                          
+                        </GetHeadings>
                       </Grid>
                     </Grid>
                     <Grid style={{height: "92%"}}>
