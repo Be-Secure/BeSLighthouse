@@ -7,15 +7,11 @@ import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
 import { assessment_datastore } from "../../../dataStore";
 import MKBox from "../../../components/MKBox";
-import MKTypography from "../../../components/MKTypography";
+
 import {
   assessment_path,
   assessment_report
 } from "../../../utils/assessmentReport";
-
-const dividerDiv = (index: number) => {
-  if (index !== 0) return <Divider sx={{ my: 1.5 }} />;
-};
 
 export const verifyLink = async (link: any, setLinkStatus: any) => {
   try {
@@ -80,7 +76,8 @@ const CheckLink = ({ version, name, report }: any) => {
     for(let i=0; i<linkStatus.length; i++){
       let flag =0;
       for(let j=0; j<uniqueLicenses.length; j++){
-          if(linkStatus[i].LicenseConcluded === uniqueLicenses[j]){
+          if(linkStatus[i].LicenseConcluded === uniqueLicenses[j] ||
+            linkStatus[i].LicenseConcluded === "NOASSERTION"){
              flag=1;
              break;
           }
@@ -132,7 +129,7 @@ const GetHeadings = ({ receivedValue }: any) => {
               </>);
      
     }else if(receivedValue === "Vulnerabilities"){
-      return(<> {receivedValue}
+      return(<> SAST Risks
               <Icon title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{fontSize: '0.7rem !important'}}>
                 info
               </Icon>
