@@ -121,14 +121,18 @@ function FuzzingModelPage() {
         );
     });
     return () => {
-      lineRefStartEvasion && lineRefStartEvasion.current.remove();
-      lineRefStartInference && lineRefStartInference.current.remove();
-      lineRefStartExtraction && lineRefStartExtraction.current.remove();
-      lineRefStartDataPoisoning && lineRefStartDataPoisoning.current.remove();
-      lineRefRightEvasion && lineRefRightEvasion.current.remove();
-      lineRefRightInference && lineRefRightInference.current.remove();
-      lineRefRightExtraction && lineRefRightExtraction.current.remove();
-      lineRefRightDataPoisoning && lineRefRightDataPoisoning.current.remove();
+      try {
+        lineRefStartEvasion && lineRefStartEvasion.current.remove();
+        lineRefStartInference && lineRefStartInference.current.remove();
+        lineRefStartExtraction && lineRefStartExtraction.current.remove();
+        lineRefStartDataPoisoning && lineRefStartDataPoisoning.current.remove();
+        lineRefRightEvasion && lineRefRightEvasion.current.remove();
+        lineRefRightInference && lineRefRightInference.current.remove();
+        lineRefRightExtraction && lineRefRightExtraction.current.remove();
+        lineRefRightDataPoisoning && lineRefRightDataPoisoning.current.remove();
+      } catch (e) {
+        // ignore
+      }
     };
   }, []);
   return (
@@ -137,13 +141,21 @@ function FuzzingModelPage() {
       <MKBox pt={9} pr={2} pl={2}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
-            <p style={{paddingLeft: "15%", color: "red"}}>ATTACKS</p>
+            <p style={{ paddingLeft: "15%", color: "red" }}>ATTACKS</p>
           </Grid>
           <Grid item xs={6}>
-            <p style={{paddingLeft: "2%", color: "#587f2f"}}>Model: {selectedFuzz.name}</p>
+            <p
+              style={{
+                paddingLeft: "8%",
+                paddingRight: "41%",
+                color: "#587f2f"
+              }}
+            >
+              Model: {selectedFuzz.name}
+            </p>
           </Grid>
           <Grid item xs={2}>
-            <p style={{color: "red"}}>OUTCOMES</p>
+            <p style={{ color: "red" }}>OUTCOMES</p>
           </Grid>
         </Grid>
       </MKBox>
