@@ -5,10 +5,14 @@ import MKTypography from "../../components/MKTypography";
 import Grid from "@mui/material/Grid";
 import { fetchJsonReport } from "../../utils/fatch_json_report";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
-import DisplayRepository, { dividerDiv } from "./DisplayRepository";
-import DisplayModelReport from "./DisplayModelReport";
-import { NavLink, useLocation } from "react-router-dom";
-import MKButton from "../../components/MKButton";
+import { useLocation } from "react-router-dom";
+import StaticAnalysisSummary from "./StaticAnalysisSummary";
+import Divider from "@mui/material/Divider";
+import AdversarialAttackSummary from "./AdversarialAttackSummary";
+
+export const dividerDiv = (index: number) => {
+  if (index !== 0) return <Divider sx={{ my: 1.5 }} />;
+};
 
 export const verifyLink = async (link: any, setLinkStatus: any) => {
   try {
@@ -24,25 +28,16 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
   }
 };
 
-function displayRepository(linkStatus: any) {
-  return <DisplayRepository data={linkStatus} />;
-}
-
-function displaymodel(linkStatus: any) {
-  return <DisplayModelReport data={linkStatus} />;
-}
-
 function displayModelReport(linkStatus: any) {
-  const sizeOfSummary = Object.values(linkStatus).length;
-  if (sizeOfSummary !== 0) {
-    return (
-      <>
-        {displayRepository(linkStatus)}
-        {displaymodel(linkStatus)}
-      </>
-    );
-  }
+  return (
+    <>
+      <StaticAnalysisSummary data={linkStatus} />
+      {dividerDiv(1)}
+      <AdversarialAttackSummary />
+    </>
+  );
 }
+
 function AssessmentSummary() {
   const [linkStatus, setLinkStatus]: any = React.useState({});
 
@@ -66,25 +61,6 @@ function AssessmentSummary() {
       <MKBox p={2}>
         <Grid item xs={12}>
           {displayModelReport(linkStatus)}
-
-          {dividerDiv(1)}
-          <NavLink
-            to={{
-              pathname: `/BeSLighthouse/model_fuzzing/:${selectedMenu.name}`,
-              search: ""
-            }}
-            state={{ selectedFuzz: selectedMenu }}
-            style={{ color: "#587f2f", cursor: "pointer" }}
-          >
-            <MKButton
-              variant={"gradient"}
-              color={"info"}
-              size="Large"
-              sx={{ width: "100%" }}
-            >
-              Attack Graph Emulation
-            </MKButton>
-          </NavLink>
         </Grid>
       </MKBox>
     </Card>

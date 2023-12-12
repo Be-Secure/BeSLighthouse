@@ -9,10 +9,14 @@ function RightFuzzing() {
   let [loadingExtraction, setLoadingExtraction] = useState(true);
   let [loadingDataPoisoning, setLoadingDataPoisoning] = useState(true);
   React.useEffect(() => {
-    setTimeout(setLoadingEvasion, 2000);
-    setTimeout(setLoadingInference, 3000);
-    setTimeout(setLoadingExtraction, 4000);
-    setTimeout(setLoadingDataPoisoning, 5000);
+    try {
+      setTimeout(setLoadingEvasion, 2000);
+      setTimeout(setLoadingInference, 3000);
+      setTimeout(setLoadingExtraction, 4000);
+      setTimeout(setLoadingDataPoisoning, 5000);
+    } catch (e) {
+      //ignore
+    }
   }, []);
   return (
     <Grid container width="34%">
