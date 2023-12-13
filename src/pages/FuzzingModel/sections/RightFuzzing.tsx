@@ -2,12 +2,23 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import MKBox from "../../../components/MKBox";
 import AttackVulnerabilityReport from "../AttackType/AttackVulnerabilityReport";
+import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
+import { besecureMlAssessmentDataStore } from "../../../dataStore";
+import { useLocation } from "react-router-dom";
 
 function RightFuzzing() {
+  const location = useLocation();
+  const selectedFuzz: any = location.state.selectedFuzz;
   let [loadingEvasion, setLoadingEvasion] = useState(true);
   let [loadingInference, setLoadingInference] = useState(true);
   let [loadingExtraction, setLoadingExtraction] = useState(true);
   let [loadingDataPoisoning, setLoadingDataPoisoning] = useState(true);
+  
+  const [evasion, evasionSetreport]: any = React.useState({});
+  const [inference, inferenceSetreport]: any = React.useState({});
+  const [extraction, extractionSetreport]: any = React.useState({});
+  const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
+
   React.useEffect(() => {
     try {
       setTimeout(setLoadingEvasion, 2000);
@@ -17,6 +28,14 @@ function RightFuzzing() {
     } catch (e) {
       //ignore
     }
+    let evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/VulnerabilityReport.json`;
+    let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/VulnerabilityReport.json`;
+    let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/VulnerabilityReport.json`;
+    let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
+    verifyLink(evasionLink, evasionSetreport);
+    verifyLink(inferenceLink, inferenceSetreport);
+    verifyLink(extractionLink, extractionSetreport);
+    verifyLink(dataPoisoningLink, dataPoisoningSetreport);
   }, []);
   return (
     <Grid container width="34%">
@@ -29,6 +48,7 @@ function RightFuzzing() {
             cardSide={true}
             textAllign="center"
             attackTimmer={loadingEvasion}
+            report={evasion}
           />
         </MKBox>
         <MKBox mb={1}>
@@ -39,6 +59,7 @@ function RightFuzzing() {
             cardSide={true}
             textAllign="center"
             attackTimmer={loadingInference}
+            report={inference}
           />
         </MKBox>
         <MKBox mb={1}>
@@ -49,6 +70,7 @@ function RightFuzzing() {
             cardSide={true}
             textAllign="center"
             attackTimmer={loadingExtraction}
+            report={extraction}
           />
         </MKBox>
         <MKBox mb={1}>
@@ -59,6 +81,7 @@ function RightFuzzing() {
             cardSide={true}
             textAllign="center"
             attackTimmer={loadingDataPoisoning}
+            report={dataPoisoning}
           />
         </MKBox>
       </Grid>

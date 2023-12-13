@@ -41,7 +41,7 @@ function DataNotAvailable() {
       sx={{ margin: "auto" }}
       p={3.3}
     >
-      Not Available
+      Not Analyzed
     </MKTypography>
   );
 }
