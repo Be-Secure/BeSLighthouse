@@ -38,17 +38,9 @@ function displayModelReport(linkStatus: any) {
   );
 }
 
-function AssessmentSummary() {
-  const [linkStatus, setLinkStatus]: any = React.useState({});
-
-  const location = useLocation();
-  const selectedMenu: any = location.state.selectedMenu;
-  React.useEffect(() => {
-    const link = `${besecureMlAssessmentDataStore}/${selectedMenu.name}/sast/${selectedMenu.name}-sast-summary-report.json`;
-    verifyLink(link, setLinkStatus);
-  }, []);
+function assissmentReport(linkStatus: any) {
   return (
-    <Card sx={{ height: "100%" }}>
+    <>
       <MKBox pt={2} px={3}>
         <MKTypography
           variant="h5"
@@ -63,6 +55,49 @@ function AssessmentSummary() {
           {displayModelReport(linkStatus)}
         </Grid>
       </MKBox>
+    </>
+  );
+}
+
+function AssessmentSummary() {
+  const [linkStatus, setLinkStatus]: any = React.useState({});
+
+  const location = useLocation();
+  const selectedMenu: any = location.state.selectedMenu;
+  React.useEffect(() => {
+    const link = `${besecureMlAssessmentDataStore}/${selectedMenu.name}/sast/${selectedMenu.name}-sast-summary-report.json`;
+    verifyLink(link, setLinkStatus);
+  }, []);
+  return (
+    <Card sx={{ height: "100%" }}>
+      {Object.values(linkStatus).length > 0 ? (
+        assissmentReport(linkStatus)
+      ) : (
+        <>
+          <MKBox pt={2} px={3} sty>
+            <MKTypography
+              variant="h5"
+              fontWeight="medium"
+              style={{ textAlign: "center" }}
+            >
+              Assessment Summary
+            </MKTypography>
+          </MKBox>
+          <MKTypography
+            variant="h5"
+            fontWeight="medium"
+            style={{
+              textAlign: "center",
+              margin: "auto",
+              paddingLeft: "26px",
+              paddingRight: "26px"
+            }}
+          >
+            Please contact Be-Secure community for the risk assessment of this
+            model.
+          </MKTypography>
+        </>
+      )}
     </Card>
   );
 }
