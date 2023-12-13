@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "195c0d215d23f2e5202e657bbdc2a0ca",
+    "revision": "c641d9e25ea7031201ce68dd0aa40d80",
     "url": "/BeSLighthouse/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/BeSLighthouse/static/js/2.7fe38a13.chunk.js"
   },
   {
-    "revision": "78c18da9f8d53e525f72",
-    "url": "/BeSLighthouse/static/js/main.47ca378e.chunk.js"
+    "revision": "d90afc5f748cc04a7d40",
+    "url": "/BeSLighthouse/static/js/main.7b01df08.chunk.js"
   },
   {
     "revision": "83f1203785d15198005f",
