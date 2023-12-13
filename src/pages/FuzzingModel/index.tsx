@@ -172,18 +172,19 @@ function FuzzingModelPage() {
     });
     return () => {
       try {
-        lineRefStartEvasion && lineRefStartEvasion?.current.remove();
-        lineRefStartInference && lineRefStartInference?.current.remove();
-        lineRefStartExtraction && lineRefStartExtraction?.current.remove();
+        lineRefStartEvasion && lineRefStartEvasion?.current?.remove();
+        lineRefStartInference && lineRefStartInference?.current?.remove();
+        lineRefStartExtraction && lineRefStartExtraction?.current?.remove();
         lineRefStartDataPoisoning &&
-          lineRefStartDataPoisoning?.current.remove();
-        lineRefRightEvasion && lineRefRightEvasion?.current.remove();
-        lineRefRightInference && lineRefRightInference?.current.remove();
-        lineRefRightExtraction && lineRefRightExtraction?.current.remove();
+          lineRefStartDataPoisoning?.current?.remove();
+        lineRefRightEvasion && lineRefRightEvasion?.current?.remove();
+        lineRefRightInference && lineRefRightInference?.current?.remove();
+        lineRefRightExtraction && lineRefRightExtraction?.current?.remove();
         lineRefRightDataPoisoning &&
-          lineRefRightDataPoisoning?.current.remove();
+          lineRefRightDataPoisoning?.current?.remove();
       } catch (e) {
         // ignore
+        console.log(e)
       }
     };
   }, []);

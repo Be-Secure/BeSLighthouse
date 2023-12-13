@@ -31,9 +31,9 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
 function displayModelReport(linkStatus: any) {
   return (
     <>
-      <StaticAnalysisSummary data={linkStatus} />
-      {dividerDiv(1)}
       <AdversarialAttackSummary />
+      {dividerDiv(1)}
+      <StaticAnalysisSummary data={linkStatus} />
     </>
   );
 }
@@ -93,8 +93,8 @@ function AssessmentSummary() {
               paddingRight: "26px"
             }}
           >
-            Please contact Be-Secure community for the risk assessment of this
-            model.
+            Please raise a request if you would like to get this model
+            validated.
           </MKTypography>
         </>
       )}

@@ -141,8 +141,8 @@ const AdversarialAttackSummary = () => {
       vulnerability: extraction,
       reportAvability: (() => {
         return (
-          Object.values(evasionDefence).length > 0 ||
-          Object.values(evasion).length > 0
+          Object.values(extractionDefence).length > 0 ||
+          Object.values(extraction).length > 0
         );
       })()
     },
@@ -152,8 +152,8 @@ const AdversarialAttackSummary = () => {
       vulnerability: inference,
       reportAvability: (() => {
         return (
-          Object.values(evasionDefence).length > 0 ||
-          Object.values(evasion).length > 0
+          Object.values(inferenceDefence).length > 0 ||
+          Object.values(inference).length > 0
         );
       })()
     },
@@ -163,8 +163,8 @@ const AdversarialAttackSummary = () => {
       vulnerability: dataPoisoning,
       reportAvability: (() => {
         return (
-          Object.values(evasionDefence).length > 0 ||
-          Object.values(evasion).length > 0
+          Object.values(dataPoisoningDefence).length > 0 ||
+          Object.values(dataPoisoning).length > 0
         );
       })()
     }
