@@ -1,11 +1,9 @@
-import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { dividerDiv } from "./AssessmentSummary";
 
-export const dividerDiv = (index: number) => {
-  if (index !== 0) return <Divider sx={{ my: 1.5 }} />;
-};
+
 
 const repository = ["Repository Type", "Repository URL"];
 export default function DisplayRepository({ data }: any): any {

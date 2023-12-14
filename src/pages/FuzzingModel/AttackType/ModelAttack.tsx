@@ -41,7 +41,7 @@ function DataNotAvailable() {
       sx={{ margin: "auto" }}
       p={3.3}
     >
-      Not Available
+      Not Analyzed
     </MKTypography>
   );
 }
@@ -54,22 +54,24 @@ function ModelAttack({ name, description, position, keyvalue, report }: any) {
         marginTop: "13px"
       }}
     >
-      <MKTypography
-        variant="h6"
-        textAlign="center"
-        sx={{ fontSize: "12px" }}
-        color={position.color}
-        pt={0.4}
-        pb={0.4}
-      >
-        {name}
-        <Icon fontSize="small" title={description}>
-          info
-        </Icon>
-      </MKTypography>
+      <div id={(report && Object.values(report).length > 0 && name === 'Data Poisoning') ? keyvalue : ''}>
+        <MKTypography
+          variant="h6"
+          textAlign="center"
+          sx={{ fontSize: "12px" }}
+          color={position.color}
+          pt={0.4}
+          pb={0.4}
+        >
+          {name}
+          <Icon sx={{ fontSize: "1rem !important" }} title={description}>
+            info
+          </Icon>
+        </MKTypography>
+      </div>
       {dividerDiv()}
       {report && Object.values(report).length > 0 ? (
-        <div id={keyvalue}>
+        <div id={name === 'Data Poisoning' ? '' : keyvalue}>
           <AttackReport data={report} />
         </div>
       ) : (
