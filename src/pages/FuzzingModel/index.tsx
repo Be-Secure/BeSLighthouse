@@ -5,51 +5,28 @@ import LeaderLine from "react-leader-line";
 
 import LeftFuzzing from "./sections/LeftFuzzing";
 import DefenseSummary from "./sections/DefenseSummary";
-import { Card, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import RightFuzzing from "./sections/RightFuzzing";
 import MKBox from "../../components/MKBox";
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { verifyLink } from "../BesVersionHistory/AssessmentReport";
 
-function runLineGraph(
-  lineRefStartEvasion: any,
-  lineRefStartInference: any,
-  lineRefStartExtraction: any,
-  lineRefStartDataPoisoning: any,
-  lineRefRightEvasion: any,
-  lineRefRightInference: any,
-  lineRefRightExtraction: any,
-  lineRefRightDataPoisoning: any
-) {
-  const lineOptions = {
-    startPlug: "disc",
-    color: "red",
-    dash: { animation: true }
-  };
-  const arrow = {
-    startPlug: "disc",
-    color: "red"
-  };
+const lineOptions = {
+  startPlug: "disc",
+  color: "red",
+  dash: { animation: true }
+};
+const arrow = {
+  startPlug: "disc",
+  color: "red"
+};
+
+function evasionLineGraph(lineRefStartEvasion: any, lineRefRightEvasion: any) {
   try {
     //left
     lineRefStartEvasion.current = new LeaderLine(
       document.getElementById("startEvasion"),
-      document.getElementById("arrowpass"),
-      lineOptions
-    );
-    lineRefStartInference.current = new LeaderLine(
-      document.getElementById("startInference"),
-      document.getElementById("arrowpass"),
-      lineOptions
-    );
-    lineRefStartExtraction.current = new LeaderLine(
-      document.getElementById("startExtraction"),
-      document.getElementById("arrowpass"),
-      lineOptions
-    );
-    lineRefStartDataPoisoning.current = new LeaderLine(
-      document.getElementById("startDataPoisoning"),
       document.getElementById("arrowpass"),
       lineOptions
     );
@@ -61,6 +38,23 @@ function runLineGraph(
         arrow
       );
     }, 2000);
+  } catch (e) {
+    // ignore
+  }
+}
+
+function inferenceLineGraph(
+  lineRefStartInference: any,
+  lineRefRightInference: any
+) {
+  try {
+    //left
+    lineRefStartInference.current = new LeaderLine(
+      document.getElementById("startInference"),
+      document.getElementById("arrowpass"),
+      lineOptions
+    );
+    //Right
     setTimeout(() => {
       lineRefRightInference.current = new LeaderLine(
         document.getElementById("arrowpass"),
@@ -68,7 +62,23 @@ function runLineGraph(
         arrow
       );
     }, 3000);
+  } catch (e) {
+    // ignore
+  }
+}
 
+function extractionLineGraph(
+  lineRefStartExtraction: any,
+  lineRefRightExtraction: any
+) {
+  try {
+    //left
+    lineRefStartExtraction.current = new LeaderLine(
+      document.getElementById("startExtraction"),
+      document.getElementById("arrowpass"),
+      lineOptions
+    );
+    //Right
     setTimeout(() => {
       lineRefRightExtraction.current = new LeaderLine(
         document.getElementById("arrowpass"),
@@ -76,7 +86,23 @@ function runLineGraph(
         arrow
       );
     }, 4000);
+  } catch (e) {
+    // ignore
+  }
+}
 
+function dataPoisoningLineGraph(
+  lineRefStartDataPoisoning: any,
+  lineRefRightDataPoisoning: any
+) {
+  try {
+    //left
+    lineRefStartDataPoisoning.current = new LeaderLine(
+      document.getElementById("startDataPoisoning"),
+      document.getElementById("arrowpass"),
+      lineOptions
+    );
+    //Right
     setTimeout(() => {
       lineRefRightDataPoisoning.current = new LeaderLine(
         document.getElementById("arrowpass"),
@@ -100,21 +126,45 @@ function FuzzingModelPage() {
   const lineRefRightDataPoisoning: any = React.useRef(null);
   const location = useLocation();
   const selectedFuzz: any = location.state.selectedFuzz;
-  const [report, setreport]: any = React.useState({});
+  const [evasion, evasionSetreport]: any = React.useState({});
+  const [inference, inferenceSetreport]: any = React.useState({});
+  const [extraction, extractionSetreport]: any = React.useState({});
+  const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
   React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
-    verifyLink(link, setreport).then((data) => {
+    let evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
+    let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/JobMetadata.json`;
+    let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/JobMetadata.json`;
+    let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/JobMetadata.json`;
+    verifyLink(evasionLink, evasionSetreport).then((data) => {
+      if (data)
+        setTimeout(
+          () => evasionLineGraph(lineRefStartEvasion, lineRefRightEvasion),
+          200
+        );
+    });
+    verifyLink(inferenceLink, inferenceSetreport).then((data) => {
       if (data)
         setTimeout(
           () =>
-            runLineGraph(
-              lineRefStartEvasion,
-              lineRefStartInference,
-              lineRefStartExtraction,
+            inferenceLineGraph(lineRefStartInference, lineRefRightInference),
+          200
+        );
+    });
+
+    verifyLink(extractionLink, extractionSetreport).then((data) => {
+      if (data)
+        setTimeout(
+          () =>
+            extractionLineGraph(lineRefStartExtraction, lineRefRightExtraction),
+          200
+        );
+    });
+    verifyLink(dataPoisoningLink, dataPoisoningSetreport).then((data) => {
+      if (data)
+        setTimeout(
+          () =>
+            dataPoisoningLineGraph(
               lineRefStartDataPoisoning,
-              lineRefRightEvasion,
-              lineRefRightInference,
-              lineRefRightExtraction,
               lineRefRightDataPoisoning
             ),
           200
@@ -122,16 +172,19 @@ function FuzzingModelPage() {
     });
     return () => {
       try {
-        lineRefStartEvasion && lineRefStartEvasion.current.remove();
-        lineRefStartInference && lineRefStartInference.current.remove();
-        lineRefStartExtraction && lineRefStartExtraction.current.remove();
-        lineRefStartDataPoisoning && lineRefStartDataPoisoning.current.remove();
-        lineRefRightEvasion && lineRefRightEvasion.current.remove();
-        lineRefRightInference && lineRefRightInference.current.remove();
-        lineRefRightExtraction && lineRefRightExtraction.current.remove();
-        lineRefRightDataPoisoning && lineRefRightDataPoisoning.current.remove();
+        lineRefStartEvasion && lineRefStartEvasion?.current?.remove();
+        lineRefStartInference && lineRefStartInference?.current?.remove();
+        lineRefStartExtraction && lineRefStartExtraction?.current?.remove();
+        lineRefStartDataPoisoning &&
+          lineRefStartDataPoisoning?.current?.remove();
+        lineRefRightEvasion && lineRefRightEvasion?.current?.remove();
+        lineRefRightInference && lineRefRightInference?.current?.remove();
+        lineRefRightExtraction && lineRefRightExtraction?.current?.remove();
+        lineRefRightDataPoisoning &&
+          lineRefRightDataPoisoning?.current?.remove();
       } catch (e) {
         // ignore
+        console.log(e)
       }
     };
   }, []);
@@ -160,7 +213,12 @@ function FuzzingModelPage() {
         </Grid>
       </MKBox>
       <Grid container pl={2}>
-        <LeftFuzzing report={report} />
+        <LeftFuzzing
+          evasion={evasion}
+          inference={inference}
+          extraction={extraction}
+          dataPoisoning={dataPoisoning}
+        />
         <DefenseSummary />
         <RightFuzzing />
       </Grid>

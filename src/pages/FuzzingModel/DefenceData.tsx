@@ -27,7 +27,11 @@ function reportDisplay(loading: any, report: any) {
 export default function DefenceData({ report }: any) {
   let [loading, setLoading] = useState(true);
   React.useEffect(() => {
-    setTimeout(setLoading, 6000);
+    try {
+      setTimeout(setLoading, 6000);
+    } catch(e) {
+      // ignore
+    }
   }, []);
   const reportLength = Object.values(report).length;
   return (

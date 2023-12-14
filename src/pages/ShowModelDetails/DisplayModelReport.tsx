@@ -1,5 +1,4 @@
 import React from "react";
-import { dividerDiv } from "./DisplayRepository";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {
@@ -34,7 +33,6 @@ export default function DisplayModelReport({ data }: any): any {
   const selectedMenu = location.state.selectedMenu;
   return (
     <>
-      {dividerDiv(1)}
       <Grid container direction="column">
         <Grid item>
           <Grid container alignItems="center" justifyContent="space-between">

@@ -1,5 +1,4 @@
 import React from "react";
-import { dividerDiv } from "./DisplayRepository";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {
@@ -11,6 +10,7 @@ import {
 } from "@mui/material";
 import PoiListHead from "../../layouts/pages/projectOfInterest/PoiTable/PoiListHead";
 import { useLocation } from "react-router-dom";
+import { dividerDiv } from "./AssessmentSummary";
 
 // Fixme: Code refactor
 

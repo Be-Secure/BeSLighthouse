@@ -16,7 +16,13 @@ const SkipContent: any = {
   prohibited_uses: true,
   monitoring: true,
   feedback: true,
-  type: true
+  type: true,
+  id: true,
+  bes_tracking_id: true,
+  issue_url: true,
+  model_url: true,
+  data_url: true,
+  label_url: true
 };
 
 export const dividerDiv = (index: number) => {
@@ -26,12 +32,14 @@ export const dividerDiv = (index: number) => {
     );
 };
 
-function underScoreToSentence(underScoreString : String) {
-  const wordsArray = underScoreString.split('_');
-  const capitalizeWords = wordsArray.map((word, index) => word.charAt(0).toUpperCase() + word.slice(1));
-  const sentence = capitalizeWords.join(' ');
+function underScoreToSentence(underScoreString: String) {
+  const wordsArray = underScoreString.split("_");
+  const capitalizeWords = wordsArray.map(
+    (word, index) => word.charAt(0).toUpperCase() + word.slice(1)
+  );
+  const sentence = capitalizeWords.join(" ");
   return sentence;
-};
+}
 
 function tableRowForModel(keyName: any, value: any, index: number) {
   return (
@@ -59,14 +67,14 @@ function ShowModelContent() {
   const modelObject = Object.keys(selectedModel);
   let count = 0;
   return (
-    <Card>
+    <Card style={{height: "100%"}}>
       <MKBox pt={2} px={3}>
         <MKTypography
           style={{ textAlign: "center" }}
           variant="h5"
           fontWeight="medium"
         >
-          {selectedModel.name}
+          Model Card
         </MKTypography>
       </MKBox>
       <MKBox p={2}>

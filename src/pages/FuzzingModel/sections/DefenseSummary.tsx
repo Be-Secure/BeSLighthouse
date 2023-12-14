@@ -56,10 +56,21 @@ function DefenseSummary() {
   };
   const location = useLocation();
   const selectedFuzz: any = location.state.selectedFuzz;
-  const [report, setreport]: any = useState({});
+  
+  const [evasion, evasionSetreport]: any = React.useState({});
+  const [inference, inferenceSetreport]: any = React.useState({});
+  const [extraction, extractionSetreport]: any = React.useState({});
+  const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
+
   React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/DefenceReport.json`;
-    verifyLink(link, setreport);
+    let evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/DefenceReport.json`;
+    let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/DefenceReport.json`;
+    let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/DefenceReport.json`;
+    let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/DefenceReport.json`;
+    verifyLink(evasionLink, evasionSetreport);
+    verifyLink(inferenceLink, inferenceSetreport);
+    verifyLink(extractionLink, extractionSetreport);
+    verifyLink(dataPoisoningLink, dataPoisoningSetreport);
   }, []);
   return (
     <Grid
@@ -119,16 +130,16 @@ function DefenseSummary() {
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
-                <DefenceData report={report} />
+                <DefenceData report={evasion} />
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
-                <DefenceData report={report} />
+                <DefenceData report={inference} />
               </CustomTabPanel>
               <CustomTabPanel value={value} index={2}>
-                <DefenceData report={report} />
+                <DefenceData report={extraction} />
               </CustomTabPanel>
               <CustomTabPanel value={value} index={3}>
-                <DefenceData report={report} />
+                <DefenceData report={dataPoisoning} />
               </CustomTabPanel>
             </Box>
           </MKBox>

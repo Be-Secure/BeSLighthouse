@@ -1,4 +1,3 @@
-import { filter } from "lodash";
 import React, { useState } from "react";
 import { verifyLink } from "../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
@@ -15,11 +14,11 @@ import {
 import { useParams } from "react-router-dom";
 
 const TABLE_HEAD = [
-  { id: "tool", label: "Tool", alignRight: false },
+  { id: "index", label: "##", alignRight: false },
+  { id: "weakness", label: "Weakness", alignRight: false },
   { id: "severity", label: "Severity", alignRight: false },
-  { id: "vulnerabilities", label: "Vulnerabilities", alignRight: false },
   { id: "description", label: "Description", alignRight: false },
-  { id: "filename", label: "Filename", alignRight: false }
+  { id: "filename", label: "Filename", alignRight: false },
 ];
 
 const regex = /^(.*?)(?=#).*Severity:(.*?)- (.*)/;
@@ -96,7 +95,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any, index: number) => {
                   let combinedMatch;
-                  if (row["scanning_reports"]["output_log"][0]) {
+                  if (row["scanning_reports"]["output_log"]?.[0]) {
                     combinedMatch =
                       row["scanning_reports"]["output_log"][0].match(regex);
                   } else {
@@ -105,7 +104,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
                   return (
                     <TableRow hover key={index} tabIndex={-1}>
                       <TableCell align="left" sx={{ fontSize: "13px" }}>
-                        {row["scanning_reports"]["tool"]}
+                        {index+1}
                       </TableCell>
                       <TableCell
                         align="left"
