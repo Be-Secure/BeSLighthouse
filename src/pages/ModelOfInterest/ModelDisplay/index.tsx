@@ -5,6 +5,7 @@ import { getComparator } from "../../../layouts/pages/projectOfInterest/ProjectD
 import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
 import SearchVoiList from "../../VulnerabilityOfInterest/VoiTable/SearchVoiList";
 import ModelTable from "./ModelTable";
+import ThreeWayToggle from "../../../examples/Button/ThreeWayToggle"
 
 function applySortFilter(array: any, comparator: any, query: any) {
   const stabilizedThis = array.map((el: any, index: any) => [el, index]);
@@ -45,6 +46,7 @@ export default function ModelDisplay() {
         filterName={filterName}
         onFilterName={handleFilterByName}
       />
+      <ThreeWayToggle/>
       <ModelTable data={filteredCveReport} />
     </>
   );

@@ -1,0 +1,220 @@
+input[type="radio"] {
+    display: none;
+  }
+  
+  label {
+    color: white;
+    z-index: 10;
+    cursor: pointer;
+  }
+  
+  h4 {
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  .black-font {
+    color: black !important;
+  }
+  
+  .main-container {
+    display: inline-block;
+    vertical-align: middle;
+    width: 250px;
+    height: 50px;
+    border-radius: 100px;
+    background-color: #4d4d4d;
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  .switch {
+    height: 44px;
+    width: 80px;
+    background-color: white;
+    border-radius: 100px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    transition: ease-in;
+  }
+  
+  /*---------------- LEFT ------------------- */
+  .switch.left-to-center {
+    animation-name: leftToCenter;
+    animation-duration: 0.5s;
+  }
+  
+  .switch.left-to-right {
+    animation-name: leftToRight;
+    animation-duration: 0.5s;
+  }
+  
+  .switch.left-position {
+    left: 3px;
+  }
+  
+  .left-label {
+    position: absolute;
+  }
+  
+  #left + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 80px;
+    border-radius: 100px;
+  }
+  
+  #left:checked + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 80px;
+    border-radius: 100px;
+  }
+  
+  @keyframes leftToCenter {
+    from {
+      left: 3px;
+    }
+    to {
+      left: 85px;
+    }
+  }
+  
+  @keyframes leftToRight {
+    from {
+      left: 3px;
+    }
+    to {
+      left: 167px;
+    }
+  }
+  
+  /* -------------------- center ------------------ */
+  .switch.center-to-left {
+    animation-name: centerToLeft;
+    animation-duration: 0.5s;
+  }
+  
+  .switch.center-to-right {
+    animation-name: centerToRight;
+    animation-duration: 0.5s;
+  }
+  
+  .switch.center-position {
+    left: 85px;
+  }
+  
+  .center-label {
+    position: absolute;
+    left: 85px;
+  }
+  
+  #center + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 80px;
+    border-radius: 100px;
+  }
+  
+  #center:checked + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 80px;
+    border-radius: 100px;
+  }
+  
+  @keyframes centerToLeft {
+    from {
+      left: 85px;
+    }
+    to {
+      left: 3px;
+    }
+  }
+  
+  @keyframes centerToRight {
+    from {
+      left: 85px;
+    }
+    to {
+      right: 1px;
+    }
+  }
+  
+  /* ------------------- RIGHT ------------------- */
+  .switch.right-to-left {
+    animation-name: rightToLeft;
+    animation-duration: 0.5s;
+  }
+  
+  .switch.right-to-center {
+    animation-name: rightToCenter;
+    animation-duration: 0.5s;
+  }
+  
+  .switch.right-position {
+    left: 167px;
+  }
+  
+  .right-label {
+    position: absolute;
+    right: 2px;
+  }
+  
+  #right + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 80px;
+    border-radius: 100px;
+  }
+  
+  #right:checked + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 80px;
+    border-radius: 100px;
+  }
+  
+  @keyframes rightToLeft {
+    from {
+      left: 167px;
+    }
+    to {
+      left: 3px;
+    }
+  }
+  
+  @keyframes rightToCenter {
+    from {
+      left: 167px;
+    }
+    to {
+      right: 85px;
+    }
+  }
+
+  .switch {
+    height: 44px;
+    width: 80px;
+    background-color: white;
+    border-radius: 100px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    transition: left 0.3s ease-in-out; /* Added transition property */
+  }
