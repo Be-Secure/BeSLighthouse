@@ -130,16 +130,16 @@ function DefenseSummary() {
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
-                <DefenceData report={evasion} />
+                <DefenceData report={evasion} reportName="evasion" />
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
-                <DefenceData report={inference} />
+                <DefenceData report={inference} reportName="inference" />
               </CustomTabPanel>
               <CustomTabPanel value={value} index={2}>
-                <DefenceData report={extraction} />
+                <DefenceData report={extraction} reportName="extraction" />
               </CustomTabPanel>
               <CustomTabPanel value={value} index={3}>
-                <DefenceData report={dataPoisoning} />
+                <DefenceData report={dataPoisoning} reportName="dataPoisoning"  />
               </CustomTabPanel>
             </Box>
           </MKBox>
