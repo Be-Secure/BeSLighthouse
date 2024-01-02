@@ -35,10 +35,10 @@ function prepPieChartData(
     if (item["quality_control"]) {
       if (item["quality_control"].length === 0) {
         // Handling for empty quality_control
-        if (!riskAnalysisCount["No Quality Control"]) {
-          riskAnalysisCount["No Quality Control"] = 0;
+        if (!riskAnalysisCount["Unanalyzed"]) {
+          riskAnalysisCount["Unanalyzed"] = 0;
         }
-        riskAnalysisCount["No Quality Control"]++;
+        riskAnalysisCount["Unanalyzed"]++;
       } else {
         item["quality_control"].forEach((qc: string) => {
           if (!riskAnalysisCount[qc]) {
@@ -93,39 +93,38 @@ function ModelOfInterest() {
       <DefaultNavbar routes={routes} sticky />
       <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 } }}>
         <Grid container spacing={3}>
-          <Grid item style={{ width: "33.3%"}}>
-            <MKBox mb={3} style={{height: "20%"}}>
-              <Card >
+          <Grid item style={{ width: "33.3%" }}>
+            <MKBox mb={3} style={{ height: "20%" }}>
+              <Card sx={{ height: "470%" }}>
                 {/* <MKBox> */}
-                  {/* <MKBox pt={1} pb={1} px={1}> */}
-                    <MKTypography
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      variant="h5"
-                      textTransform="capitalize"
-                    // style={{fontSize: "30px"}}
+                <MKBox pt={1} pb={1} px={1}>
+                <MKTypography
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  variant="h5"
+                  textTransform="capitalize"
 
-                    >
-                      Model Count
-                    </MKTypography>
-                    <MKTypography
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      variant="h5"
-                      textTransform="capitalize"
-                      style={{ fontSize: "70px" }}
+                >
+                  Model Count
+                </MKTypography>
+                <MKTypography
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  variant="h5"
+                  textTransform="capitalize"
+                  style={{ fontSize: "120px", paddingTop: "12%" }}
 
-                    >
-                      {count}
-                    </MKTypography>
-                  {/* </MKBox> */}
+                >
+                  {count}
+                </MKTypography>
+                </MKBox>
                 {/* </MKBox> */}
               </Card>
             </MKBox>
           </Grid>
-          <Grid item style={{ width: "33.3%"}}>
+          <Grid item style={{ width: "33.3%" }}>
             <MKBox mb={3}>
               {/* Calling Language component for showing model type */}
               <Language
@@ -140,7 +139,7 @@ function ModelOfInterest() {
               />
             </MKBox>
           </Grid>
-          <Grid item style={{ width: "33.3%"}}>
+          <Grid item style={{ width: "33.3%" }}>
             <MKBox mb={3}>
               <Language
                 title="Risk Analysis"
