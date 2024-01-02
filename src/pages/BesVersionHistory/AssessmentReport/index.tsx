@@ -18,15 +18,26 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
     const response = await fetchJsonReport(link);
     try {
       let data = JSON.parse(response);
-      //console.log(data);
-      setLinkStatus(data);
+      if (link.toLocaleLowerCase().endsWith(".pdf")) {
+        setLinkStatus(true);
+      } else {
+        setLinkStatus(data);
+      }
       return true;
     } catch (err) {
-      setLinkStatus({});
+      if (link.toLocaleLowerCase().endsWith(".pdf")) {
+        setLinkStatus(false);
+      } else {
+        setLinkStatus({});
+      }
       return false;
     }
   } catch (error) {
-    setLinkStatus({});
+    if (link.toLocaleLowerCase().endsWith(".pdf")) {
+      setLinkStatus(false);
+    } else {
+      setLinkStatus({});
+    }
     return false;
   }
 };
@@ -34,15 +45,15 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
 const CheckLink = ({ version, name, report }: any) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
   let reportNameMap = "";
-  if(report === "Criticality Score"){
+  if (report === "Criticality Score") {
     reportNameMap = "Criticality Score";
-  }else if(report === "Vulnerabilities"){
+  } else if (report === "Vulnerabilities") {
     reportNameMap = "Codeql";
-  }else if(report === "License Compliance"){
+  } else if (report === "License Compliance") {
     reportNameMap = "Fossology";
-  }else if(report === "Dependencies"){
+  } else if (report === "Dependencies") {
     reportNameMap = "SBOM";
-  }else if(report === "ScoreCard"){
+  } else if (report === "ScoreCard") {
     reportNameMap = "Scorecard";
   }
 
@@ -53,7 +64,7 @@ const CheckLink = ({ version, name, report }: any) => {
     }
   }, [version]);
   let linkStatusLength: number = Object.values(linkStatus).length;
-  if (report === "Criticality Score" && linkStatusLength !== 0){
+  if (report === "Criticality Score" && linkStatusLength !== 0) {
     return (
       <Typography variant="subtitle1" color="inherit">
         {linkStatus.criticality_score}
@@ -64,7 +75,7 @@ const CheckLink = ({ version, name, report }: any) => {
   const myObject = { pathname: pathName, state: linkStatus } as {
     pathname: string;
   };
-  
+
   if (report === "ScoreCard" && linkStatusLength !== 0) {
     return <Link to={myObject}>{linkStatus.score}</Link>;
   }
@@ -73,26 +84,28 @@ const CheckLink = ({ version, name, report }: any) => {
   }
   if (report === "License Compliance" && linkStatusLength !== 0) {
     let uniqueLicenses: any = [];
-    for(let i=0; i<linkStatus.length; i++){
-      let flag =0;
-      for(let j=0; j<uniqueLicenses.length; j++){
-          if(linkStatus[i].LicenseConcluded === uniqueLicenses[j] ||
-            linkStatus[i].LicenseConcluded === "NOASSERTION"){
-             flag=1;
-             break;
-          }
+    for (let i = 0; i < linkStatus.length; i++) {
+      let flag = 0;
+      for (let j = 0; j < uniqueLicenses.length; j++) {
+        if (
+          linkStatus[i].LicenseConcluded === uniqueLicenses[j] ||
+          linkStatus[i].LicenseConcluded === "NOASSERTION"
+        ) {
+          flag = 1;
+          break;
+        }
       }
-      if(flag===0){
+      if (flag === 0) {
         uniqueLicenses.push(linkStatus[i].LicenseConcluded);
       }
     }
-    console.log("UniqueLicenses Are="+uniqueLicenses);
+    console.log("UniqueLicenses Are=" + uniqueLicenses);
     return <Link to={myObject}>{uniqueLicenses.length}</Link>;
   }
   if (report === "Dependencies" && linkStatusLength !== 0) {
     return <Link to={myObject}>{linkStatus.packages.length}</Link>;
   }
-  
+
   return (
     <Typography variant="subtitle1" color="inherit">
       --
@@ -101,43 +114,75 @@ const CheckLink = ({ version, name, report }: any) => {
 };
 const GetHeadings = ({ receivedValue }: any) => {
   //const [fieldInfo, setfieldInfo]: any = React.useState({});
-    if(receivedValue === "License Compliance"){
-       return(<> Unique Licenses
-                  <Icon title="Number of unique licenses used in the OSS" sx={{fontSize: '0.7rem !important'}}>
-                    info
-                  </Icon>
-              </>);
-    }else if(receivedValue === "Dependencies"){
-      return(<> Dependencies(SBOM)
-                <Icon title="Software Bill Of Material" sx={{fontSize: '0.7rem !important'}}>
-                  info
-                </Icon>
-              </>);
-      
-    }else if(receivedValue === "ScoreCard"){
-      return(<> {receivedValue}
-                <Icon title="Overall Security Score of the project" sx={{fontSize: '0.7rem !important'}}>
-                  info
-                </Icon>
-              </>);
-     
-    }else if(receivedValue === "Criticality Score"){
-      return(<> {receivedValue}
-                <Icon title="Score to tell how critical the OSS project" sx={{fontSize: '0.7rem !important'}}>
-                  info
-                </Icon>
-              </>);
-     
-    }else if(receivedValue === "Vulnerabilities"){
-      return(<> SAST Risks
-              <Icon title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{fontSize: '0.7rem !important'}}>
-                info
-              </Icon>
-              </>);
-    }else{
-      return(receivedValue);
-    }
-}
+  if (receivedValue === "License Compliance") {
+    return (
+      <>
+        {" "}
+        Unique Licenses
+        <Icon
+          title="Number of unique licenses used in the OSS"
+          sx={{ fontSize: "0.7rem !important" }}
+        >
+          info
+        </Icon>
+      </>
+    );
+  } else if (receivedValue === "Dependencies") {
+    return (
+      <>
+        {" "}
+        Dependencies(SBOM)
+        <Icon
+          title="Software Bill Of Material"
+          sx={{ fontSize: "0.7rem !important" }}
+        >
+          info
+        </Icon>
+      </>
+    );
+  } else if (receivedValue === "ScoreCard") {
+    return (
+      <>
+        {" "}
+        {receivedValue}
+        <Icon
+          title="Overall Security Score of the project"
+          sx={{ fontSize: "0.7rem !important" }}
+        >
+          info
+        </Icon>
+      </>
+    );
+  } else if (receivedValue === "Criticality Score") {
+    return (
+      <>
+        {" "}
+        {receivedValue}
+        <Icon
+          title="Score to tell how critical the OSS project"
+          sx={{ fontSize: "0.7rem !important" }}
+        >
+          info
+        </Icon>
+      </>
+    );
+  } else if (receivedValue === "Vulnerabilities") {
+    return (
+      <>
+        {" "}
+        SAST Risks
+        <Icon
+          title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube"
+          sx={{ fontSize: "0.7rem !important" }}
+        >
+          info
+        </Icon>
+      </>
+    );
+  } else {
+    return receivedValue;
+  }
+};
 function AssessmentReport({ title, name, version, ...other }: any) {
   const report: string[] = [
     "ScoreCard",
@@ -147,41 +192,49 @@ function AssessmentReport({ title, name, version, ...other }: any) {
     "Dependencies"
   ];
   return (
-    
-    <Card sx={{ height: "100%" }} >
-      <Grid container p={2} justifyContent="center" >
-        
+    <Card sx={{ height: "100%" }}>
+      <Grid container p={2} justifyContent="center">
         {report.map((value, index) => {
-            return (
-              <>
+          return (
+            <>
               <Grid item xs={2.4}>
-              <MKBox p={1.5} borderRadius="lg">
-              <Grid p={1} justifyContent="center" style={{backgroundColor: "#f3f6f4", borderRadius: 10}} >
-                  
-                    <Grid container justifyContent="center" alignItems="center" >
+                <MKBox p={1.5} borderRadius="lg">
+                  <Grid
+                    p={1}
+                    justifyContent="center"
+                    style={{ backgroundColor: "#f3f6f4", borderRadius: 10 }}
+                  >
+                    <Grid container justifyContent="center" alignItems="center">
                       <Grid item justifyContent="center">
                         <Typography variant="h6" color="black">
-                          <GetHeadings receivedValue={value}/> 
-                          </Typography>
+                          <GetHeadings receivedValue={value} />
+                        </Typography>
                       </Grid>
                     </Grid>
                     <Grid>
                       <Grid item>
-                        <Grid container justifyContent="center" alignItems="center">
+                        <Grid
+                          container
+                          justifyContent="center"
+                          alignItems="center"
+                        >
                           <Grid item>
-                            <CheckLink version={version} name={name} report={value} />
+                            <CheckLink
+                              version={version}
+                              name={name}
+                              report={value}
+                            />
                           </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
-                </Grid>
-              </MKBox>
+                  </Grid>
+                </MKBox>
               </Grid>
-              </>
-            );
-          })}
-        
-        </Grid>
+            </>
+          );
+        })}
+      </Grid>
     </Card>
   );
 }
