@@ -20,13 +20,16 @@ import MKBox from "../../../components/MKBox";
 
 // React example components
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
-
+import breakpoints from "../../../assets/theme/base/breakpoints";
+import MKButton from "../../../components/MKButton";
+import DefaultNavbarMobile from "./DefaultNavbarMobile";
 
 function DefaultNavbar({
   brand,
   routes,
   transparent,
   light,
+  action,
   sticky,
   relative,
   center
@@ -38,6 +41,35 @@ function DefaultNavbar({
   const [nestedDropdownEl, setNestedDropdownEl]: any = useState("");
   const [nestedDropdownName, setNestedDropdownName]: any = useState("");
   const [arrowRef, setArrowRef]: any = useState(null);
+  const [mobileNavbar, setMobileNavbar] = useState(false);
+  const [mobileView, setMobileView] = useState(false);
+
+  const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
+
+  React.useEffect(() => {
+    // A function that sets the display state for the DefaultNavbarMobile.
+    function displayMobileNavbar() {
+      if (window.innerWidth < breakpoints.values.lg) {
+        setMobileView(true);
+        setMobileNavbar(false);
+      } else {
+        setMobileView(false);
+        setMobileNavbar(false);
+      }
+    }
+
+    /**
+     The event listener that's calling the displayMobileNavbar function when
+     resizing the window.
+    */
+    window.addEventListener("resize", displayMobileNavbar);
+
+    // Call the displayMobileNavbar function to set the state with the initial value.
+    displayMobileNavbar();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", displayMobileNavbar);
+  }, []);
 
   const renderNavbarItems = routes.map(
     ({ name, icon, href, route, collapse }: any) => (
@@ -57,7 +89,6 @@ function DefaultNavbar({
         }}
         onMouseLeave={() => collapse && setDropdown(null)}
         light={light}
-        
       />
     )
   );
@@ -439,7 +470,7 @@ function DefaultNavbar({
         py={1}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         width="100%"
-        borderRadius="xl"
+        // borderRadius="xl"
         shadow={transparent ? "none" : "md"}
         color={light ? "white" : "dark"}
         position={relative ? "relative" : "absolute"}
@@ -463,7 +494,7 @@ function DefaultNavbar({
           <MKBox
             component={Link}
             to="/"
-            lineHeight={2}
+            lineHeight={2} //test
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
@@ -483,6 +514,61 @@ function DefaultNavbar({
           >
             {renderNavbarItems}
           </MKBox>
+          <MKBox ml={{ xs: "auto", lg: 0 }}>
+            {action &&
+              (action.type === "internal" ? (
+                <MKButton
+                  component={Link}
+                  to={action.route}
+                  variant={
+                    action.color === "white" || action.color === "default"
+                      ? "contained"
+                      : "gradient"
+                  }
+                  color={action.color ? action.color : "info"}
+                  size="small"
+                >
+                  {action.label}
+                </MKButton>
+              ) : (
+                <MKButton
+                  component="a"
+                  href={action.route}
+                  target="_blank"
+                  rel="noreferrer"
+                  variant={
+                    action.color === "white" || action.color === "default"
+                      ? "contained"
+                      : "gradient"
+                  }
+                  color={action.color ? action.color : "info"}
+                  size="small"
+                >
+                  {action.label}
+                </MKButton>
+              ))}
+          </MKBox>
+          <MKBox
+            display={{ xs: "inline-block", lg: "none" }}
+            lineHeight={0}
+            py={1.5}
+            pl={1.5}
+            color={transparent ? "white" : "inherit"}
+            sx={{ cursor: "pointer" }}
+            onClick={openMobileNavbar}
+          >
+            <Icon>{mobileNavbar ? "close" : "menu"}</Icon>
+          </MKBox>
+        </MKBox>
+        <MKBox
+          bgColor={transparent ? "white" : "transparent"}
+          shadow={transparent ? "lg" : "none"}
+          borderRadius="xl"
+          px={transparent ? 2 : 0}
+        >
+          {mobileView && (
+            <DefaultNavbarMobile routes={routes} open={mobileNavbar} />
+          )}
         </MKBox>
       </MKBox>
       {dropdownMenu}
