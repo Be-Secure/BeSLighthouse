@@ -5,7 +5,7 @@ import { getComparator } from "../../../layouts/pages/projectOfInterest/ProjectD
 import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
 import SearchVoiList from "../../VulnerabilityOfInterest/VoiTable/SearchVoiList";
 import ModelTable from "./ModelTable";
-
+import ThreeWayToggleButton from "../../../examples/Button/ThreeWayToggle"
 function applySortFilter(array: any, comparator: any, query: any) {
   const stabilizedThis = array.map((el: any, index: any) => [el, index]);
   stabilizedThis.sort((a: any, b: any) => {
@@ -22,6 +22,9 @@ function applySortFilter(array: any, comparator: any, query: any) {
   return stabilizedThis.map((el: any) => el[0]);
 }
 
+
+
+
 export default function ModelDisplay() {
   const [filterName, setFilterName] = useState("");
   const handleFilterByName = (event: any) => {
@@ -37,15 +40,10 @@ export default function ModelDisplay() {
     getComparator("asc", "id"),
     filterName
   );
-  
   return (
     <>
-      <SearchVoiList
-        placeholderName="Search model by name"
-        filterName={filterName}
-        onFilterName={handleFilterByName}
-      />
-      <ModelTable data={filteredCveReport} />
+
+      <ThreeWayToggleButton filteredCveReport={filteredCveReport} filterName={filterName} handleFilterByName={handleFilterByName}/>
     </>
   );
 }
