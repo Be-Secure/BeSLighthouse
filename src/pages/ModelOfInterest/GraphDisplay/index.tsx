@@ -64,12 +64,15 @@ const GraphDisplay = () => {
         // Remove existing SVG content
         d3.select("#graph-container").selectAll("*").remove();
 
-        // Create a simulation with several forces.
-        const simulation = d3.forceSimulation(nodes)
-          .force("link", d3.forceLink(links).id((d) => (d as Node).name))
-          .force("charge", d3.forceManyBody())
-          .force("center", d3.forceCenter(width / 2, height / 2))
-          .on("tick", ticked);
+        // Specify the bounds for the simulation
+    //const bounds = { x1: 0, y1: 0, x2: width, y2: height };
+
+    // Create a simulation with several forces.
+    const simulation = d3.forceSimulation(nodes)
+      .force("link", d3.forceLink(links).id((d) => (d as Node).name).distance(50))
+      .force("charge", d3.forceManyBody().strength(-20))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .on("tick", ticked);
 
         // Create the SVG container.
         const svg = d3.select("#graph-container")
@@ -110,6 +113,11 @@ const GraphDisplay = () => {
 
         const nodeGroup = svg.append("g");
 
+        const drag = d3.drag<SVGCircleElement, Node>()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended);
+
         const node = nodeGroup
           .selectAll()
           .data(nodes)
@@ -119,6 +127,7 @@ const GraphDisplay = () => {
           .attr("fill", (d) => (d.isDependency ? "#aed6f1" : "#0077cc"))
           .on("click", (event, d) => handleNodeClick(event, d))
           .style("cursor", (d) => (d.model_card ? "pointer" : "default"));
+        //  .call(drag);
 
         const handleNodeClick = (event, d) => {
           if (d.model_card && !event.active) {
@@ -156,22 +165,22 @@ const GraphDisplay = () => {
           return nodeData ? nodeData.model_card : null;
         }
 
-        function dragstarted(event, d) {
-          if (!(event as any).active) simulation.alphaTarget(0.5).restart();
-          (d as Node).fx = (d as Node).x;
-          (d as Node).fy = (d as Node).y;
-        }
-        
-        function dragged(event, d) {
-          (d as Node).fx = (event as any).x;
-          (d as Node).fy = (event as any).y;
-        }
-        
-        function dragended(event, d) {
-          if (!(event as any).active) simulation.alphaTarget(0);
-          (d as Node).fx = null;
-          (d as Node).fy = null;
-        }
+        function dragstarted(event: any, d: Node) {
+            if (!event.active) simulation.alphaTarget(0.5).restart();
+            (d as Node).fx = (d as Node).x;
+            (d as Node).fy = (d as Node).y;
+          }
+      
+          function dragged(event: any, d: Node) {
+            (d as Node).fx = event.x;
+            (d as Node).fy = event.y;
+          }
+      
+          function dragended(event: any, d: Node) {
+            if (!event.active) simulation.alphaTarget(0);
+            (d as Node).fx = null;
+            (d as Node).fy = null;
+          }      
       })
       .catch((error) => {
         console.error("Error fetching data:", error.message);
