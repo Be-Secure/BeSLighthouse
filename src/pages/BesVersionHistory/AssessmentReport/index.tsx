@@ -54,6 +54,9 @@ const CheckLink = ({ version, name, report }: any) => {
   }, [version]);
   let linkStatusLength: number = Object.values(linkStatus).length;
   if (report === "Criticality Score" && linkStatusLength !== 0){
+    for(let i=0; i<linkStatus.length; i++){
+      console.log(linkStatus);
+    }
     return (
       <Typography variant="subtitle1" color="inherit">
         {linkStatus.criticality_score}
@@ -102,34 +105,34 @@ const CheckLink = ({ version, name, report }: any) => {
 const GetHeadings = ({ receivedValue }: any) => {
   //const [fieldInfo, setfieldInfo]: any = React.useState({});
     if(receivedValue === "License Compliance"){
-       return(<> Unique Licenses
-                  <Icon title="Number of unique licenses used in the OSS" sx={{fontSize: '0.7rem !important'}}>
+       return(<> License Compatibiltity
+                  <Icon title="Licensing information of the OSS" sx={{fontSize: '0.7rem !important'}}>
                     info
                   </Icon>
               </>);
     }else if(receivedValue === "Dependencies"){
-      return(<> Dependencies(SBOM)
+      return(<> Dependencies
                 <Icon title="Software Bill Of Material" sx={{fontSize: '0.7rem !important'}}>
                   info
                 </Icon>
               </>);
       
     }else if(receivedValue === "ScoreCard"){
-      return(<> {receivedValue}
+      return(<> OpenSSF Scorecard (0-10)
                 <Icon title="Overall Security Score of the project" sx={{fontSize: '0.7rem !important'}}>
                   info
                 </Icon>
               </>);
      
     }else if(receivedValue === "Criticality Score"){
-      return(<> {receivedValue}
+      return(<> OpenSSF Criticality Score (0-1)
                 <Icon title="Score to tell how critical the OSS project" sx={{fontSize: '0.7rem !important'}}>
                   info
                 </Icon>
               </>);
      
     }else if(receivedValue === "Vulnerabilities"){
-      return(<> SAST Risks
+      return(<> Static Analysis Summary
               <Icon title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{fontSize: '0.7rem !important'}}>
                 info
               </Icon>
@@ -149,18 +152,16 @@ function AssessmentReport({ title, name, version, ...other }: any) {
   return (
     
     <Card sx={{ height: "100%" }} >
-      <Grid container p={2} justifyContent="center" >
-        
+      <Grid container p={0.3} justifyContent="center" >      
         {report.map((value, index) => {
             return (
               <>
               <Grid item xs={2.4}>
-              <MKBox p={1.5} borderRadius="lg">
+              <MKBox p={0.3} borderRadius="lg">
               <Grid p={1} justifyContent="center" style={{backgroundColor: "#f3f6f4", borderRadius: 10}} >
-                  
                     <Grid container justifyContent="center" alignItems="center" >
                       <Grid item justifyContent="center">
-                        <Typography variant="h6" color="black">
+                        <Typography variant="h6" color="black" style={{fontSize: "0.8rem"}}>
                           <GetHeadings receivedValue={value}/> 
                           </Typography>
                       </Grid>

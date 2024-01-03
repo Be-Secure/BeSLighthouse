@@ -225,15 +225,15 @@ const GetHeadings = ({ receivedValue }: any) => {
                   </Icon>
               </>);
     }else if(receivedValue === "Critical Issues"){
-      return(<> Critical SAST
-                <Icon title="Software Bill Of Material" sx={{fontSize: '0.5rem !important'}}>
+      return(<> Top Vulnerabilities
+                <Icon title="Top vulnerabilities found." sx={{fontSize: '0.5rem !important'}}>
                   info
                 </Icon>
               </>);
       
     }else if(receivedValue === "Vulnerability History"){
       return(<> CVE History
-                <Icon title="Overall Security Score of the project" sx={{fontSize: '0.5rem !important'}}>
+                <Icon title="Year wise graph of vulnerabilities found" sx={{fontSize: '0.5rem !important'}}>
                   info
                 </Icon>
               </>);
