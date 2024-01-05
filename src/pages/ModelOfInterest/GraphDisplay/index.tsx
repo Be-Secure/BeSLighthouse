@@ -70,23 +70,17 @@ const GraphDisplay = () => {
       .force("charge", d3.forceManyBody().strength(-250))
       .force("x", d3.forceX())
       .force("y", d3.forceY())
-      //.force("link", d3.forceLink(links))
-      //.force("center", d3.forceCenter())
       .on("tick", ticked);
 
         // Create the SVG container.
         const svg = d3.select("#graph-container")
           .append("svg")
-          //.attr("width", "100%")
-          //.attr("height", "100%")
-          //.attr("viewBox", `0 0 ${width} ${height}`)
           .attr("width", width)
           .attr("height", height)
           .attr("viewBox", [-width / 2, -height / 2, width, height])
           .attr("style", "max-width: 100%; height: auto;")
           .append("g");
-          //.attr("transform", `translate(${margin.left},${margin.top})`);
-
+  
         // Add a line for each link, with arrowheads.
         const link = svg.append("g")
           .attr("stroke", "#555") // Dark link color
@@ -133,7 +127,7 @@ const GraphDisplay = () => {
           .attr("font-size", 12)
           .attr("dx", 14)
           .attr("dy", 4)
-          .attr("fill", d => (d as Node).isDependency ? "#34495e" : "#2c3e50"); // Darker color for dependencies
+          .attr("fill", d => (d as Node).isDependency ? "#34495e" : "#2c3e50");
 
         // Set the position attributes of links and nodes each time the simulation ticks.
         function ticked() {
