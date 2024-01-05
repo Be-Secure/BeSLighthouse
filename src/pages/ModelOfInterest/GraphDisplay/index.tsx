@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 interface Node extends d3.SimulationNodeDatum {
   name: string;
   color: string;
-  model_card: any;
+  model_url: any;
   isDependency: boolean;
 }
 
@@ -41,7 +41,7 @@ const GraphDisplay = () => {
         const nodes: Node[] = Array.from(nodesSet).map((name) => ({
           name,
           color: "#0077cc",
-          model_card: getModelCardLink(name),
+          model_url: getModelUrl(name),
           isDependency: false,
         }));
 
@@ -64,52 +64,38 @@ const GraphDisplay = () => {
         // Remove existing SVG content
         d3.select("#graph-container").selectAll("*").remove();
 
-        // Specify the bounds for the simulation
-    //const bounds = { x1: 0, y1: 0, x2: width, y2: height };
-
     // Create a simulation with several forces.
     const simulation = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id((d) => (d as Node).name).distance(50))
-      .force("charge", d3.forceManyBody().strength(-20))
-      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("link", d3.forceLink(links).id((d) => (d as Node).name))
+      .force("charge", d3.forceManyBody().strength(-250))
+      .force("x", d3.forceX())
+      .force("y", d3.forceY())
+      //.force("link", d3.forceLink(links))
+      //.force("center", d3.forceCenter())
       .on("tick", ticked);
 
         // Create the SVG container.
         const svg = d3.select("#graph-container")
           .append("svg")
-          .attr("width", "100%")
-          .attr("height", "100%")
-          .attr("viewBox", `0 0 ${width} ${height}`)
-          .append("g")
-          .attr("transform", `translate(${margin.left},${margin.top})`);
+          //.attr("width", "100%")
+          //.attr("height", "100%")
+          //.attr("viewBox", `0 0 ${width} ${height}`)
+          .attr("width", width)
+          .attr("height", height)
+          .attr("viewBox", [-width / 2, -height / 2, width, height])
+          .attr("style", "max-width: 100%; height: auto;")
+          .append("g");
+          //.attr("transform", `translate(${margin.left},${margin.top})`);
 
         // Add a line for each link, with arrowheads.
         const link = svg.append("g")
           .attr("stroke", "#555") // Dark link color
-          .attr("stroke-opacity", 0.6)
+          .attr("stroke-opacity", 0.8)
           .selectAll()
           .data(links)
           .enter()
           .append("line")
           .attr("stroke-width", 1);
-
-        // Add arrowhead markers.
-        const arrowhead = svg.append("svg:defs")
-          .selectAll("marker")
-          .data(links)
-          .enter()
-          .append("svg:marker")
-          .attr("id", (d, i) => "arrowhead-" + i)
-          .attr("viewBox", "0 -5 10 10")
-          .attr("refX", 8)
-          .attr("refY", 0)
-          .attr("markerWidth", 6)
-          .attr("markerHeight", 6)
-          .attr("orient", "auto")
-          .append("path")
-          .attr("d", "M0,-5L10,0L0,5");
-
-        link.attr("marker-end", (d, i) => "url(#arrowhead-" + i + ")");
 
         const nodeGroup = svg.append("g");
 
@@ -123,15 +109,17 @@ const GraphDisplay = () => {
           .data(nodes)
           .enter()
           .append("circle")
-          .attr("r", 10)
-          .attr("fill", (d) => (d.isDependency ? "#aed6f1" : "#0077cc"))
+          .attr("stroke", "#fff")
+          .attr("stroke-width", 1.5)
+          .attr("r", 7)
+          .attr("fill", (d) => (d.isDependency ? "#EC5800" : "currentColor"))
           .on("click", (event, d) => handleNodeClick(event, d))
-          .style("cursor", (d) => (d.model_card ? "pointer" : "default"));
-        //  .call(drag);
+          .style("cursor", (d) => (d.model_url ? "pointer" : "default"))
+          .call(drag);
 
         const handleNodeClick = (event, d) => {
-          if (d.model_card && !event.active) {
-            window.open(d.model_card, "_blank");
+          if (d.model_url && !event.active) {
+            window.open(d.model_url, "_blank");
           }
         };
 
@@ -160,9 +148,10 @@ const GraphDisplay = () => {
           nodeName.attr("x", d => (d as Node).x || 0).attr("y", d => (d as Node).y || 0);
         }
 
-        function getModelCardLink(nodeName) {
-          const nodeData = data.find(item => item.name === nodeName);
-          return nodeData ? nodeData.model_card : null;
+        function getModelUrl(nodeName) {
+          const nodeData: boolean = data.find(item => item.name === nodeName);
+          const url: string = "https://be-secure.github.io/BeSLighthouse/model_report/:";
+          return nodeData ? url+nodeName : null;
         }
 
         function dragstarted(event: any, d: Node) {
