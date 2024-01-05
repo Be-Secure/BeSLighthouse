@@ -12,6 +12,7 @@ import AssessmentReport from "./AssessmentReport";
 import AssessmentAnalytics from "./AssessmentAnalytics";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
+import { Divider } from '@mui/material';
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -32,7 +33,7 @@ export const osspoiMasterAndSummary = async (
 
 const useStyles: any = makeStyles(() => ({
   select: {
-    minWidth: "155px",
+    minWidth: "calc(3rem + 0.5vw)",
     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
       {
         padding: "4px"
@@ -46,7 +47,48 @@ const useStyles: any = makeStyles(() => ({
     }
   }
 }));
+const FetchRecomedations = ({itemData, masterData}: any) => {
 
+  return (
+    <>
+    <ul>
+      <li>
+        <MKTypography 
+          variant="body1" 
+          color="inherit" 
+          style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                  marginTop: "calc(-0.4rem + (-0.3vw))",
+                  paddingLeft: "calc(0.1rem + 0.3vw)"
+                }}>
+           recomentaion 1: Fetch the recomendations from master jason as suggested by the POD team.
+         </MKTypography>
+      </li>
+      <li>
+        <MKTypography 
+          variant="body1" 
+          color="inherit" 
+          style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                  marginTop: "calc(-0.4rem + (-0.3vw))",
+                  paddingLeft: "calc(0.1rem + 0.3vw)"
+                }}>
+           recomentaion 2: Fetch the recomendations from master jason as suggested by the POD team.
+         </MKTypography>
+      </li>
+      <li>
+        <MKTypography 
+          variant="body1" 
+          color="inherit" 
+          style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                  marginTop: "calc(-0.4rem + (-0.3vw))",
+                  paddingLeft: "calc(0.1rem + 0.3vw)"
+                }}>
+           recomentaion 3: Fetch the recomendations from master jason as suggested by the POD team.
+         </MKTypography>
+      </li>
+    </ul>
+    </>
+  )
+}
 function BesVersionHistory() {
   const classes = useStyles();
   const { besId, besName }: any = useParams();
@@ -89,14 +131,24 @@ function BesVersionHistory() {
           if (`:${item.name}` === besName) {
             return (
               <>
-                <Card>
-                  <Grid key={"gridkey1"} container spacing={1} pl={4} >
-                    <Grid item xs={3} justifyContent="flex-start">
-                      <MKBox key="test" display="flex"  py={1} pr={2}>
+                <Card style={{marginTop: "-1.5rem"}}>
+                  <Grid key={"gridkey1"} 
+                        container 
+                        spacing={1} 
+                        pl={4} 
+                        style={{height: "3.3rem"}}>
+                    <Grid item 
+                          xs={2} 
+                          justifyContent="flex-start">
+                      <MKBox key="test" 
+                             display="flex"  
+                             py={1} 
+                             pr={2}>
                         <MKTypography
                           variant="h6"
                           fontWeight="bold"
-                          textTransform="capitalize"        
+                          textTransform="capitalize"
+                          style={{fontSize: "calc(0.4rem + 0.5vw)"}}        
                         >
                           Project Name: &nbsp;
                         </MKTypography>
@@ -104,41 +156,61 @@ function BesVersionHistory() {
                           variant="h6"
                           fontWeight="regular"
                           color="text"
+                          style={{fontSize: "calc(0.4rem + 0.5vw)"}}
                         >
                           {item.name}
                         </MKTypography>
                       </MKBox>
                     </Grid>
-                    <Grid item xs={3} justifyContent="flex-start">    
-                      <MKBox key="test" display="flex" py={1} pr={2}>
+                    <Grid item 
+                          xs={2} 
+                          justifyContent="flex-start">    
+                      <MKBox key="test1" 
+                             display="flex" 
+                             py={1} 
+                             pr={2}>
                         <MKTypography
                           variant="h6"
                           fontWeight="bold"
                           textTransform="capitalize"
+                          style={{fontSize: "calc(0.4rem + 0.5vw)"}}
                         >
                           Version: &nbsp;
                         </MKTypography>
 
                         <Select
-                          key={"test"}
+                          key={"test1"}
                           className={classes.select}
                           value={selectedOption}
                           onChange={handleOptionChange}
+                          style={{fontSize: "calc(0.4rem + 0.5vw)", 
+                                  height: '1.2rem', 
+                                  width: "20px"}}
+                          
                         >
-                          {versionSummary.map((option: any, index: any) => (
-                            <MenuItem key={index} value={option.version}>
-                              {option.version}
-                            </MenuItem>
-                          ))}
+                          {
+                            versionSummary.map((option: any, index: any) => (
+                              <MenuItem key={index} value={option.version}>
+                                {option.version} 
+                              </MenuItem>
+                            ))
+                          }
                         </Select>
                       </MKBox>
                     </Grid>
-                    <Grid item xs={6} justifyContent="flex-start">
-                      <MKBox key="test" display="flex" py={1} pr={2} pl={4}>
+                    <Grid item 
+                          xs={8} 
+                          justifyContent="flex-start">
+                      <MKBox key="test2" 
+                             display="flex" 
+                             py={1} 
+                             pr={2} 
+                             pl={4}>
                         <MKTypography
                           variant="h6"
                           fontWeight="bold"
                           textTransform="capitalize"
+                          style={{fontSize: "calc(0.4rem + 0.5vw)"}}
                         >
                           Description: &nbsp;
                         </MKTypography>
@@ -146,19 +218,51 @@ function BesVersionHistory() {
                           variant="h6"
                           fontWeight="regular"
                           color="text"
+                          style={{fontSize: "calc(0.4rem + 0.5vw)"}}
                         >
                           {item.description}
                         </MKTypography>
                       </MKBox>
                     </Grid>
-                  </Grid>
-                    <Grid key={"gridkey2"} container spacing={1} pl={4} >
-                      <Grid item xs={3} justifyContent="flex-start">
-                        <MKBox key="test" display="flex" py={1} pr={2}>
+                  </Grid>  
+                </Card>
+                
+                <Card style={{marginTop: "0.3rem"}}>
+                <Grid key={"gridkey2"} 
+                      container 
+                      spacing={0} 
+                      pl={4} >
+                      <Grid item 
+                            xs={12} 
+                            justifyContent="flex-start">
+                        <MKBox key="test3" 
+                               display="flex" 
+                               py={0} 
+                               pr={2}>
                           <MKTypography
                             variant="h6"
                             fontWeight="bold"
                             textTransform="capitalize"
+                          >
+                            Risk Summary &nbsp;
+                          </MKTypography>
+                        </MKBox>
+                      </Grid>
+                </Grid>
+                <Divider style={{padding: "0px", margin: "0.5rem"}}></Divider>
+                <Grid key={"gridkey2"} 
+                      container spacing={1} 
+                      pl={4} >
+                  <Grid item 
+                        xs={1.5} 
+                        justifyContent="flex-start">
+                    <MKBox key="test3" 
+                           display="flex">
+                      <MKTypography
+                            variant="h6"
+                            fontWeight="bold"
+                            textTransform="capitalize"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
                           >
                             BeS Tracking Id: &nbsp;
                           </MKTypography>
@@ -166,63 +270,151 @@ function BesVersionHistory() {
                             variant="h6"
                             fontWeight="regular"
                             color="text"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
                           >
                             {item.id}
                           </MKTypography>
                         </MKBox>
                       </Grid>
-                      <Grid item xs={3} justifyContent="flex-start">
-                        <MKBox key="test" display="flex" py={1} pr={2}>
+                      <Grid item 
+                            xs={1} 
+                            justifyContent="flex-start">
+                        <MKBox key="test3" 
+                              display="flex">
                           <MKTypography
                             variant="h6"
                             fontWeight="bold"
                             textTransform="capitalize"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
                           >
-                            BeS Tech Stack: &nbsp;
+                            Score: &nbsp;
                           </MKTypography>
-
                           <MKTypography
                             variant="h6"
                             fontWeight="regular"
                             color="text"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                          >
+                            {item.id}
+                          </MKTypography>
+                        </MKBox>
+                      </Grid>
+                      <Grid item 
+                            xs={2} 
+                            justifyContent="flex-start">
+                        <MKBox key="test4" display="flex">
+                          <MKTypography
+                            variant="h6"
+                            fontWeight="bold"
+                            textTransform="capitalize"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                          >
+                            BeS Tech Stack: &nbsp;
+                          </MKTypography>
+                          <MKTypography
+                            variant="h6"
+                            fontWeight="regular"
+                            color="text"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
                           >
                             {item.bes_technology_stack}
                           </MKTypography>
                         </MKBox>
                       </Grid>
+                      <Grid item 
+                            xs={7.5} 
+                            justifyContent="flex-start">
+                        <MKBox key="test3" display="flex" >
+                          <MKTypography
+                            variant="h6"
+                            fontWeight="bold"
+                            textTransform="capitalize"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                          >
+                            BeS Environment: &nbsp;
+                          </MKTypography>
+                          <MKTypography
+                            variant="h6"
+                            fontWeight="regular"
+                            color="text"
+                            style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                          >
+                            {item.id}
+                          </MKTypography>
+                        </MKBox>
+                      </Grid>
                     </Grid>
-                </Card>
-                <MKBox>
-                  <Grid container spacing={3} pt={3} >
-                    <Grid item xs={12} md={12} lg={12}  >
-                      <AssessmentReport
-                        title="Assessment Report"
-                        name={besName.slice(1)}
-                        version={selectedOption}
-                      />
+                    <Grid key={"gridkey3"} 
+                          container 
+                          spacing={1} 
+                          pl={3}>
+                      <Grid item 
+                            xs={12} 
+                            justifyContent="flex-start">
+                        <AssessmentReport
+                          title="Assessment Report"
+                          name={besName.slice(1)}
+                          version={selectedOption}
+                          itemData={item}
+                          masterData={data}
+                        />
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </MKBox>
-                <MKBox>
-                  <Grid container spacing={3} pt={3} >
-                    <Grid item xs={12} md={12} lg={12} >
-                      <AssessmentAnalytics
+                  </Card>
+                <Card style={{marginTop: "0.3rem"}}>
+                <Grid key={"gridkey2"} 
+                      container 
+                      spacing={1} 
+                      pl={4} 
+                      style={{minHeight: "9rem", maxHeight: "9rem"}}>
+                  <Grid item 
+                        xs={12} 
+                        justifyContent="flex-start">
+                    <MKBox key="test3" 
+                           display="flex" 
+                           py={0} 
+                           pr={2}>
+                      <MKTypography
+                            variant="h6"
+                            fontWeight="bold"
+                            textTransform="capitalize"
+                      >
+                            Recomendations &nbsp;
+                      </MKTypography>
+                    </MKBox>
+                    <Divider style={{padding: "0px", margin: "0.5rem"}}></Divider>
+                    <FetchRecomedations
+                           itemData={item}
+                           masterData={data}
+                    />
+                  </Grid>    
+                </Grid>
+              </Card>
+              <MKBox>
+                <Grid container 
+                      spacing={3} 
+                      pt={3} >
+                  <Grid item 
+                        xs={12} 
+                        md={12} 
+                        lg={12} >
+                    <AssessmentAnalytics
                         title="Assessment Analytics"
                         name={besName.slice(1)}
                         version={selectedOption}
                         versionDetails={versionSummary}
                         masterData={data}
-                      />
-                    </Grid>
+                    />
                   </Grid>
-                </MKBox>
-              </>
-            );
-          }
-        })}
-      </MKBox>
-    </>
-  );
+                </Grid>
+              </MKBox>
+            </>
+          );
+        }
+      })}
+    </MKBox>
+  </>
+);
 }
 
 export default BesVersionHistory;

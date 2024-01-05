@@ -7,11 +7,13 @@ import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
 import { assessment_datastore } from "../../../dataStore";
 import MKBox from "../../../components/MKBox";
+import MKTypography from "../../../components/MKTypography";
 
 import {
   assessment_path,
   assessment_report
 } from "../../../utils/assessmentReport";
+import { forEach } from "lodash";
 
 export const verifyLink = async (link: any, setLinkStatus: any) => {
   try {
@@ -42,7 +44,296 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
   }
 };
 
-const CheckLink = ({ version, name, report }: any) => {
+const FetchLowScores = ({ data }: any) => {
+  let lowscorers: any = [];
+  let displayData: any = {};
+  data.checks.forEach ((issue) => {
+    if(issue.hasOwnProperty('score')){
+      if(issue.score <= 5)
+        lowscorers.push(issue);
+    }
+    else 
+    {
+      lowscorers.push(issue);
+    }      
+  });
+  displayData = lowscorers.map(function(iss:any, index:number)
+  {
+    return(<>
+            <li>
+              <MKTypography variant="body1" 
+                            color="inherit" 
+                            style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                    marginTop: "calc(-0.4rem + (-0.2vw))", 
+                                    paddingLeft: "calc(0.1rem + 0.3vw)"}}>
+                 {iss.name} : {iss.reason}
+              </MKTypography>
+            </li>
+          </>
+        )
+  })
+  return(<>
+          <ul>
+            {displayData}
+          </ul>
+        </>
+  )   
+};
+
+const FetchCS = ({ data }: any) => {
+  
+  return(<>
+            <Grid style={{minWidth: "200px"}}>
+              <ul>
+                <li>
+                    <MKTypography variant="body1" 
+                                  color="inherit" 
+                                  style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                          marginTop: "calc(-0.4rem + (-0.3vw))",
+                                          paddingLeft: "calc(0.1rem + 0.3vw)"
+                                        }}>
+                      Age : {data.created_since}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                     No. Of Contributors : {data.contributor_count}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                    Update Frequency : {data.commit_frequency}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                    Organisations : {data.org_count}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                  color="inherit" 
+                                  style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                          marginTop: "calc(-0.4rem + (-0.3vw))",
+                                          paddingLeft: "calc(0.1rem + 0.3vw)"}}>
+                    Issue Fixed : {data.closed_issues_count}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                    Last Updated : {data.updated_since}
+                  </MKTypography>
+                </li>
+              </ul>
+            </Grid>
+          </>
+        );
+};
+
+const FetchSAST = ({ data }: any) => {
+  
+  let critical: number = 0;
+  let high: number = 0;
+  let medium: number = 0;
+  let low: number = 0;
+
+  data.forEach ((vul) => {
+     if(vul.rule.security_severity_level === "critical"){
+       critical++;
+     }else if(vul.rule.security_severity_level === "high"){
+       high++;
+     }else if(vul.rule.security_severity_level === "medium"){
+       medium++;
+     }else if(vul.rule.security_severity_level === "high"){
+       low++;
+     } 
+  });
+  return(<>
+            <Grid style={{minWidth: "200px"}}>
+              <ul >
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                    Critical : {critical}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                    High : {high}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                    Medium : {medium}
+                  </MKTypography>
+                </li>
+                <li>
+                  <MKTypography variant="body1" 
+                                color="inherit" 
+                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                        marginTop: "calc(-0.4rem + (-0.3vw))",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
+                    Low : {low}
+                  </MKTypography>
+                </li> 
+              </ul>
+            </Grid>
+          </>
+        );
+};
+
+const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
+
+  let license_list: string [] = [];
+  let non_lic_files: number = 0;
+
+  uniq_lic.forEach ((ul) => {
+    if(ul.length !== 0)
+      license_list.push(" "+ ul + ",")
+  });
+
+  data.forEach((ld) => {
+    if(ld.LicenseConcluded && (ld.LicenseConcluded === "NOASSERTION" ||
+       ld.LicenseConcluded.length === 0 ))
+       non_lic_files++;
+  });
+  
+  return(<>
+          <Grid style={{minWidth: "200px"}}>
+            <ul >
+              <li>
+                <MKTypography variant="body1" 
+                              color="inherit" 
+                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                    }}>
+                    Project License : {itemData.license.key}
+                  </MKTypography>
+              </li>
+              <li>
+                <MKTypography variant="body1" 
+                              color="inherit" 
+                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                    }}>
+                    License Compatibility Issues: {itemData.license.key}
+                </MKTypography>
+              </li>
+              <li>
+                <MKTypography variant="body1" 
+                              color="inherit" 
+                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                    }}>
+                    Unique Licenses : {license_list}
+                  </MKTypography>
+              </li>
+              <li>
+                <MKTypography variant="body1" 
+                              color="inherit" 
+                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                    }}>
+                  No. of Non License Files : {non_lic_files}
+                </MKTypography>
+              </li>
+          </ul>
+        </Grid>
+      </>
+    );
+};
+
+const FetchSBOM = ({ data, masterData }: any) => {
+  
+  let tracked: string []= [];
+  let dis: any = {};
+ 
+  data.forEach((dp) => {
+    masterData.forEach((tp) => {
+      if(dp.name === tp.name){
+        tracked.push(dp.name);
+      }  
+    });
+  });
+
+  dis = tracked.map(function( td: string, index: number){
+    return(<>
+              <li>
+                <MKTypography variant="body1" 
+                              color="inherit" 
+                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                    }}>
+                  {td}  
+                </MKTypography>   
+              </li>     
+            </>
+          );
+  });
+
+  return(<>
+          <Grid style={{minWidth: "200px"}}>
+            <ul>
+              <li>
+                <MKTypography variant="body1" 
+                              color="inherit" 
+                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                    }}>
+                    Projects Under BeS : 
+                </MKTypography>
+                <ul>
+                    {dis}
+                </ul>
+              </li>
+            </ul>
+          </Grid>
+        </>
+      );
+};
+
+const CheckLink = ({ version, name, report, itemData, masterData }: any) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
   let reportNameMap = "";
   if (report === "Criticality Score") {
@@ -59,36 +350,92 @@ const CheckLink = ({ version, name, report }: any) => {
 
   React.useEffect(() => {
     if (version.trim()) {
-      let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
+      let link: string = "";
+      link= `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
       verifyLink(link, setLinkStatus);
     }
   }, [version]);
+
   let linkStatusLength: number = Object.values(linkStatus).length;
-  if (report === "Criticality Score" && linkStatusLength !== 0){
-    for(let i=0; i<linkStatus.length; i++){
-      console.log(linkStatus);
-    }
+  if (report === "Criticality Score" && linkStatusLength !== 0){ 
     return (
-      <Typography variant="subtitle1" color="inherit">
-        {linkStatus.criticality_score}
-      </Typography>
+      <>
+        <Typography variant="h6" color="inherit" style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+           {linkStatus.criticality_score}
+        </Typography>
+        <Card style={{height: "100px", 
+                      minWidth: "100%",
+                      borderRadius: "3px"
+                    }} 
+                    sx={{ overflowY: "scroll"}}>
+          <MKBox>
+            <FetchCS 
+             data={linkStatus}
+            />
+          </MKBox>
+        </Card>
+      </>
     );
   }
+
   const pathName: string = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
   const myObject = { pathname: pathName, state: linkStatus } as {
     pathname: string;
   };
 
-  if (report === "ScoreCard" && linkStatusLength !== 0) {
-    return <Link to={myObject}>{linkStatus.score}</Link>;
+  if (report === "ScoreCard" && linkStatusLength !== 0) {  
+    return (<>
+              <Typography variant="h6" 
+                          color="inherit" 
+                          style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+                <Link to={myObject} 
+                      style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+                  {linkStatus.score}
+                </Link>
+              </Typography>
+              <Card style={{height: "100px",
+                            borderRadius: "3px"
+                          }} 
+                        sx={{ overflowY: "scroll"}}>
+                <MKBox>
+                  <FetchLowScores 
+                     data={linkStatus}
+                  />
+                </MKBox>
+              </Card>
+            </>
+          );
   }
-  if (report === "Vulnerabilities" && linkStatusLength !== 0) {
-    return <Link to={myObject}>{linkStatus.length}</Link>;
+
+  if (report === "Vulnerabilities" && linkStatusLength !== 0) {    
+    return (<>
+              <Typography variant="h6" 
+                          color="inherit" 
+                          style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+                <Link to={myObject} 
+                      style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+                  {linkStatus.length}
+                </Link>
+              </Typography>
+              <Card style={{height: "100px",
+                            borderRadius: "3px"
+                          }} 
+                          sx={{ overflowY: "scroll"}}>
+                <MKBox>
+                 <FetchSAST 
+                     data={linkStatus}
+                 />
+                </MKBox>
+              </Card>
+            </>
+          );
   }
+
   if (report === "License Compliance" && linkStatusLength !== 0) {
     let uniqueLicenses: any = [];
+    
     for (let i = 0; i < linkStatus.length; i++) {
-      let flag = 0;
+      let flag: number = 0;
       for (let j = 0; j < uniqueLicenses.length; j++) {
         if (
           linkStatus[i].LicenseConcluded === uniqueLicenses[j] ||
@@ -98,36 +445,83 @@ const CheckLink = ({ version, name, report }: any) => {
           break;
         }
       }
-      if (flag === 0) {
+      if (flag === 0 && linkStatus[i].hasOwnProperty('LicenseConcluded') && linkStatus[i].LicenseConcluded.length !== 0) {
         uniqueLicenses.push(linkStatus[i].LicenseConcluded);
       }
     }
-    console.log("UniqueLicenses Are=" + uniqueLicenses);
-    return <Link to={myObject}>{uniqueLicenses.length}</Link>;
-  }
-  if (report === "Dependencies" && linkStatusLength !== 0) {
-    return <Link to={myObject}>{linkStatus.packages.length}</Link>;
+    return( 
+            <>
+              <Typography variant="h6" 
+                          color="inherit" 
+                          style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+                <Link to={myObject}>
+                  {uniqueLicenses.length}
+                </Link>
+              </Typography>
+              <Card style={{height: "100px",
+                            borderRadius: "3px"
+                            }} 
+                            sx={{ overflowY: "scroll"}}>
+                <MKBox>
+                  <FetchLicense 
+                     data={linkStatus}
+                     uniq_lic={uniqueLicenses}
+                     itemData={itemData}
+                  />
+                </MKBox>
+              </Card>
+            </>
+          );
   }
 
+  if (report === "Dependencies" && linkStatusLength !== 0) {
+    return (<>
+             <Typography variant="h6" 
+                         color="inherit" 
+                         style={{fontSize: "calc(0.6rem + 0.5vw)"
+                               }}> 
+                <Link to={myObject}>
+                  {linkStatus.packages.length}
+                </Link> 
+             </Typography>
+             <Card style={{height: "100px",
+                           borderRadius: "3px"
+                          }} 
+                          sx={{ overflowY: "scroll"
+                          }}>
+                <MKBox>
+                  <FetchSBOM 
+                     data={linkStatus.packages}
+                     masterData={masterData}
+                  />
+                </MKBox>
+              </Card>
+            </>
+          )
+  }
+  
   return (
-    <Typography variant="subtitle1" color="inherit">
+    <Typography variant="h6" 
+                color="inherit" 
+                style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
       --
     </Typography>
   );
 };
+
 const GetHeadings = ({ receivedValue }: any) => {
-  //const [fieldInfo, setfieldInfo]: any = React.useState({});
+
     if(receivedValue === "License Compliance"){
        return(<> {" "}
                   License Compatibiltity
-                  <Icon title="Licensing information of the OSS" sx={{fontSize: '0.7rem !important'}}>
+                  <Icon title="Licensing information of the OSS" sx={{fontSize: 'calc(0.3rem + 0.3vw) !important'}}>
                     info
                   </Icon>
               </>);
     }else if(receivedValue === "Dependencies"){
       return(<> {" "}
                 Dependencies
-                <Icon title="Software Bill Of Material" sx={{fontSize: '0.7rem !important'}}>
+                <Icon title="Software Bill Of Material" sx={{fontSize: 'calc(0.3rem + 0.3vw) !important'}}>
                   info
                 </Icon>
               </>);
@@ -135,7 +529,7 @@ const GetHeadings = ({ receivedValue }: any) => {
     }else if(receivedValue === "ScoreCard"){
       return(<> {" "}
                 OpenSSF Scorecard (0-10)
-                <Icon title="Overall Security Score of the project" sx={{fontSize: '0.7rem !important'}}>
+                <Icon title="Overall Security Score of the project" sx={{fontSize: 'calc(0.3rem + 0.3vw) !important'}}>
                   info
                 </Icon>
               </>);
@@ -143,7 +537,7 @@ const GetHeadings = ({ receivedValue }: any) => {
     }else if(receivedValue === "Criticality Score"){
       return(<> {" "}
                 OpenSSF Criticality Score (0-1)
-                <Icon title="Score to tell how critical the OSS project" sx={{fontSize: '0.7rem !important'}}>
+                <Icon title="Score to tell how critical the OSS project" sx={{fontSize: 'calc(0.3rem + 0.3vw) !important'}}>
                   info
                 </Icon>
               </>);
@@ -151,7 +545,7 @@ const GetHeadings = ({ receivedValue }: any) => {
     }else if(receivedValue === "Vulnerabilities"){
       return(<> {" "}
               Static Analysis Summary
-              <Icon title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{fontSize: '0.7rem !important'}}>
+              <Icon title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{fontSize: 'calc(0.3rem + 0.3vw) !important'}}>
                 info
               </Icon>
               </>);
@@ -159,7 +553,7 @@ const GetHeadings = ({ receivedValue }: any) => {
       return(receivedValue);
     }
 }
-function AssessmentReport({ title, name, version, ...other }: any) {
+function AssessmentReport({ title, name, version, itemData, masterData, ...other }: any) {
   const report: string[] = [
     "ScoreCard",
     "Criticality Score",
@@ -168,19 +562,30 @@ function AssessmentReport({ title, name, version, ...other }: any) {
     "Dependencies"
   ];
   return (    
-    <Card sx={{ height: "100%" }} >
-      <Grid container p={0.3} justifyContent="center" >
+    
+      <Grid container 
+            p={0.3} 
+            justifyContent="center" 
+            style={{width: "98%"}}>
         {report.map((value, index) => {
           return (
             <>
-              <Grid item xs={2.4}>
-              <MKBox p={0.3} borderRadius="lg">
-              <Grid p={1} justifyContent="center" style={{backgroundColor: "#f3f6f4", borderRadius: 10}} >
-                    <Grid container justifyContent="center" alignItems="center" >
+              <Grid item 
+                    xs={2.4}>
+                <MKBox p={0.3} 
+                       borderRadius="lg">
+                  <Grid p={1} 
+                        justifyContent="center" 
+                        style={{backgroundColor: "#f3f6f4", borderRadius: "5px", minHeight: "10rem"}} >
+                    <Grid container 
+                          justifyContent="center" 
+                          alignItems="center" >
                       <Grid item justifyContent="center">
-                        <Typography variant="h6" color="black" style={{fontSize: "0.8rem"}}>
+                        <Typography variant="h6" 
+                                    color="black" 
+                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}>
                           <GetHeadings receivedValue={value}/> 
-                          </Typography>
+                        </Typography>
                       </Grid>
                     </Grid>
                     <Grid>
@@ -195,6 +600,8 @@ function AssessmentReport({ title, name, version, ...other }: any) {
                               version={version}
                               name={name}
                               report={value}
+                              itemData={itemData}
+                              masterData={masterData}
                             />
                           </Grid>
                         </Grid>
@@ -205,10 +612,10 @@ function AssessmentReport({ title, name, version, ...other }: any) {
               </Grid>
             </>
           );
-        })}
-      </Grid>
-    </Card>
+        })
+      }
+    </Grid>
   );
-}
+};
 
 export default AssessmentReport;

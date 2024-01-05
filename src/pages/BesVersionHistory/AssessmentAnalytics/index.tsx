@@ -79,8 +79,8 @@ const FetchCritical = ({ riskData }: any) => {
               let des: string  = vul.description;
               return ( 
                 <>
-                  <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
-                                {name} : <Link to={url} style={{fontSize:"0.8rem",}}>{name}</Link>
+                  <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+                                {name} : <Link to={url} style={{fontSize:"calc(0.2rem + 0.4vw)"}}>{name}</Link>
                   </MKTypography>    
                 </>
               )
@@ -92,14 +92,14 @@ const FetchCritical = ({ riskData }: any) => {
        return(<>{res}</>);
     }else{
       return(<>
-              <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
+              <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
                 No Critical Issues Found
               </MKTypography>
             </>);
     }
   }else{
     return(<>
-      <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
+      <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)", }}>
         No Data Available
       </MKTypography>
     </>);
@@ -129,9 +129,10 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
   const [severityData, setSeverity] = React.useState([]);
   const [vulHistoryData, setVulHistory] = React.useState([]);
   React.useEffect(() => {
+    let link: string = "";
     if (version.trim()) {
-      let link: string = `${assessment_datastore}/${name}/${version}/${assessment_path["Codeql"]}/${name}-${version}-${assessment_report["Codeql"]}-report.json`;
-      getLinkData(link, setRiskData);
+        link = `${assessment_datastore}/${name}/${version}/${assessment_path["Codeql"]}/${name}-${version}-${assessment_report["Codeql"]}-report.json`;
+        getLinkData(link, setRiskData);
     }
   }, [version]);
   React.useEffect(() => {
@@ -170,7 +171,7 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
                   <MKBox>
                     <MKBox pt={1} pb={1} px={1} > 
                     <StyledChartWrapper dir="ltr" >
-                       <MKTypography variant="body2" color="inherit" style={{fontSize:"1rem"}}>
+                       <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
                            No Data Available
                         </MKTypography>
                     </StyledChartWrapper>  
@@ -219,21 +220,21 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
 const GetHeadings = ({ receivedValue }: any) => {
   //const [fieldInfo, setfieldInfo]: any = React.useState({});
     if(receivedValue === "Risk Posture"){
-       return(<> Risk Posture
-                  <Icon title="Percentage of low, high, critical issues found" sx={{fontSize: '0.5rem !important'}}>
+       return(<> {" "} Risk Posture
+                  <Icon title="Percentage of low, high, critical issues found" sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
                     info
                   </Icon>
               </>);
     }else if(receivedValue === "Critical Issues"){
-      return(<> Top Vulnerabilities
-                <Icon title="Top vulnerabilities found." sx={{fontSize: '0.5rem !important'}}>
+      return(<> {" "} Top Vulnerabilities
+                <Icon title="Top vulnerabilities found." sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
                   info
                 </Icon>
               </>);
       
     }else if(receivedValue === "Vulnerability History"){
-      return(<> CVE History
-                <Icon title="Year wise graph of vulnerabilities found" sx={{fontSize: '0.5rem !important'}}>
+      return(<> {" "} CVE History
+                <Icon title="Year wise graph of vulnerabilities found" sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
                   info
                 </Icon>
               </>);
@@ -250,27 +251,17 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
     "Vulnerability History"
   ];
   return (
-    
     <Card sx={{ height: "100%" }} >
       <Grid container p={2} justifyContent="space-between" >
         {report.map((value, index) => {
             return (
               <>
-              <Grid alignItems="center" p={1} xs={4} justifyContent="center">
-              <MKBox borderRadius="lg" >
-              <Grid p={1} style={{backgroundColor: "#f3f6f4", borderRadius: 10, height: "370px"}} justifyContent="center" >
-                    <Grid container alignItems="center" justifyContent="center">
-                      <Grid item justifyContent="center">
-                        <GetHeadings receivedValue={value}>
-                          
-                        </GetHeadings>
-                      </Grid>
-                    </Grid>
-                    <Grid style={{height: "92%"}}>
-                            <FetchData version={version} name={name} report={value} versionDetails={versionDetails} masterData={masterData}/>
-                    </Grid>
+              <Grid alignItems="center" p={1} xs={4} justifyContent="center" style={{ borderRadius: 10, height: "370px", fontSize: "calc(0.5rem + 0.5vw)"}} >
+                <GetHeadings receivedValue={value}>
+                </GetHeadings>  
+                <Grid style={{height: "92%"}}>
+                  <FetchData version={version} name={name} report={value} versionDetails={versionDetails} masterData={masterData}/>
                 </Grid>
-              </MKBox>
               </Grid>
               </>
             );
