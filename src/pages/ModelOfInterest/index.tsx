@@ -10,6 +10,7 @@ import MKTypography from "../../components/MKTypography";
 import { useState } from "react";
 import { verifyLink } from "../ShowModelDetails/AssessmentSummary";
 import { modelOfInterestData } from "../../dataStore";
+import { usePrintReport } from "./sample";
 import Language from "../../examples/Charts/PieChart/Languages";
 import theme from "../../assets/theme";
 import { debug } from "console";
@@ -62,41 +63,108 @@ function prepPieChartData(
   setRiskAnalysis(riskAnalysisPieData);
 }
 
+function statsTable(data: any) {
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return <div>No data available</div>; // Return a message if data is empty or not an array
+  }
+
+  const modelCount = data.length;
+  const classicCount = data.filter((item: { type: string }) => item.type === "Classic").length;
+  const llmCount = data.filter((item: { type: string }) => item.type === "LLM").length;
+  
+  // const classicPercentage = ((classicCount / modelCount) * 100 || 0).toFixed(2);
+  // const llmPercentage = ((llmCount / modelCount) * 100 || 0).toFixed(2);
+
+  const sastCount = data.filter((item: any) => Array.isArray(item.quality_control) && item.quality_control.includes("SAST")).length;
+  const fuzzCount = data.filter((item: any) => Array.isArray(item.quality_control) && item.quality_control.includes("Fuzz Test")).length;
+  const emptyAnalysisCount = data.filter((item: any) => Array.isArray(item.quality_control) && item.quality_control.length === 0).length;
+  return (
+    <MKBox pt={2}>
+
+    <table>
+      <tbody>
+        <tr>
+          <Card style={{ float: "left", display: "inline-block", width:"78%", alignItems: "center" }}>
+          <td>Model Count: {modelCount}</td>
+          </Card>
+          <Card style={{ display: "inline-block", paddingLeft: "3%" }}>
+          <td>Type: </td>
+          <td>Classic={classicCount}</td>
+          <td>LLM={llmCount}</td>
+          </Card>
+          <td>Analysis: </td>
+          <td>SAST={sastCount}</td>
+          <td>Fuzz Test={fuzzCount}</td>
+          <td>Unanalyzed={emptyAnalysisCount}</td>
+          {/* <td>30</td>
+          <td>john@example.com</td> */}
+        </tr>
+        {/* Add more rows as needed */}
+      </tbody>
+    </table>
+    </MKBox>
+  );
+}
+
 
 
 function ModelOfInterest() {
-  const [report, setreport]: any = useState([]);
-  const [modelType, setModelType]: any = useState([]);
-  const [riskAnalysis, setRiskAnalysis]: any = useState([]);
+  const [report, setReport]: any = useState();
+  const [modelType, setModelType]: any = useState();
+  const [riskAnalysis, setRiskAnalysis]: any = useState();
+  const data = usePrintReport();
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchedReport = await verifyLink(modelOfInterestData, setreport);
-      } catch (error) {
-        // Handle error
-      }
-    };
+    // console.log("length:"+dataLength);
+    verifyLink(modelOfInterestData, setReport);
 
-    fetchData();
   }, []);
 
-  React.useEffect(() => {
-    if (report.length > 0) {
-      prepPieChartData(setModelType, setRiskAnalysis, [], report);
-    }
-  }, [report, setModelType, setRiskAnalysis]);
+  // React.useEffect(() => {
+  //   if (report.length > 0) {
 
-  const count = report.length;
+  //   }
+  // }, [report, setModelType, setRiskAnalysis]);
+  // console.log("report:"+report);
+  // // debugger
+  // const dataCount = report !== null ? Object.keys(report).length : 0;
+  // console.log("Count:"+dataCount)
+  // debugger
+
 
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 } }}>
-        <Grid container spacing={3}>
+      <MKBox pt={9} sx={{ mx: { xs: 2, lg: 3 } }}>
+        <MKTypography
+          display="flex"
+          // justifyContent="center"
+          alignItems="left"
+          variant="h5"
+        // textTransform="capitalize"
+        >
+          Models of Interest
+        </MKTypography>
+        <MKTypography
+          style={{ paddingTop: "2px" }}
+          display="flex"
+          // justifyContent="center"
+          alignItems="left"
+          variant="h8"
+        // textTransform="capitalize"
+        >
+          Uncovering vulnerabilities and strengthening defenses in AI models
+        </MKTypography>
+        <MKBox>
+
+          {statsTable(report)}
+
+        </MKBox>
+
+        {/* <Grid container spacing={3}>
           <Grid item style={{ width: "33.3%" }}>
             <MKBox mb={3} style={{ height: "20%" }}>
               <Card sx={{ height: "470%" }}>
-                {/* <MKBox> */}
                 <MKBox pt={1} pb={1} px={1}>
                 <MKTypography
                   display="flex"
@@ -120,13 +188,12 @@ function ModelOfInterest() {
                   {count}
                 </MKTypography>
                 </MKBox>
-                {/* </MKBox> */}
               </Card>
             </MKBox>
           </Grid>
           <Grid item style={{ width: "33.3%" }}>
             <MKBox mb={3}>
-              {/* Calling Language component for showing model type */}
+              
               <Language
                 title="Model Type"
                 chartData={modelType}
@@ -153,7 +220,7 @@ function ModelOfInterest() {
               />
             </MKBox>
           </Grid>
-        </Grid>
+        </Grid> */}
       </MKBox>
       <MKBox pt={5} sx={{ mx: { xs: 2, lg: 3 } }}>
         <Grid container spacing={6}>
