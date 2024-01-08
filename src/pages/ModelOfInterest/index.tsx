@@ -10,7 +10,7 @@ import MKTypography from "../../components/MKTypography";
 import { useState } from "react";
 import { verifyLink } from "../ShowModelDetails/AssessmentSummary";
 import { modelOfInterestData } from "../../dataStore";
-import { usePrintReport } from "./sample";
+import networkIcon from "../../assets/images/network.png"
 
 function statsTable(data: any) {
 
@@ -26,21 +26,22 @@ function statsTable(data: any) {
   const fuzzCount = data.filter((item: any) => Array.isArray(item.quality_control) && item.quality_control.includes("Fuzz Test")).length;
   const emptyAnalysisCount = data.filter((item: any) => Array.isArray(item.quality_control) && item.quality_control.length === 0).length;
   return (
-    <MKBox pt={2}>
+    <MKBox >
       <Grid container spacing={2} style={{ textAlign: "center", fontSize: "18px"}}>
-        {/* <tr> */}
         <Grid item style={{ width: "20%" }}>
-          Model Count: {modelCount}
+          <Card style={{ height: "40px", display: "grid", placeItems: "center" }}>
+
+            Models: {modelCount}
+          </Card>
         </Grid>
 
         <Grid item style={{ width: "32%" }}>
-          <Card>
-            Types: Classic = {classicCount} | LLM = {llmCount}
+        <Card style={{ height: "40px", display: "grid", placeItems: "center" }}>
+            Classic Models: {classicCount} | LLMs: {llmCount}
           </Card>
         </Grid>
-        {/* </Card> */}
         <Grid item style={{ width: "48%" }}>
-          <Card>
+        <Card style={{ height: "40px", display: "grid", placeItems: "center" }}>
             Risk Analysis: SAST = {sastCount} | Fuzz Test = {fuzzCount} | Unanalyzed = {emptyAnalysisCount}
           </Card>
         </Grid>
@@ -55,9 +56,7 @@ function ModelOfInterest() {
   const [report, setReport]: any = useState();
   const [modelType, setModelType]: any = useState();
   const [riskAnalysis, setRiskAnalysis]: any = useState();
-  const data = usePrintReport();
   React.useEffect(() => {
-    // console.log("length:"+dataLength);
     verifyLink(modelOfInterestData, setReport);
 
   }, []);
@@ -65,23 +64,33 @@ function ModelOfInterest() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={9} sx={{ mx: { xs: 2, lg: 3 } }}>
+
+      <MKBox pt={11} sx={{ mx: { xs: 2, lg: 3 } }}>
         <MKTypography
           display="flex"
           alignItems="left"
-          variant="h5"
+          variant="h1"
+          color="black"
+          width="fit-content"
         >
           Models of Interest
         </MKTypography>
         <MKTypography
-          style={{ paddingTop: "2px" }}
           display="flex"
           alignItems="left"
-          variant="h8"
+          color="black"
+          paddingTop="2px"
+          fontSize="20px"
+          width="75%"
+          style={{ fontWeight: "lighter" }}
+          // fontWeight="lighter"
         >
-          Uncovering vulnerabilities and strengthening defenses in AI models
+          Gain visibility into vulnerabilities and security gaps within popular open source machine learning models. Empower your strategies for safer, more robust AI implementations. Navigate the Landscape of Open Source AI Risks. Delve into the strengths, weaknesses, and steps to fortify your models against potential threats in the ever-evolving realm of open source machine learning.
         </MKTypography>
-        <MKBox>
+      <img style={{ width: "150px", position: "absolute", right: "92px", top: "95px"}} src={networkIcon} />
+
+
+        <MKBox pt={6}>
 
           {statsTable(report)}
 
