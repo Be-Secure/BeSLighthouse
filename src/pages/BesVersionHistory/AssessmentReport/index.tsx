@@ -92,7 +92,7 @@ const FetchCS = ({ data }: any) => {
                                           marginTop: "calc(-0.4rem + (-0.3vw))",
                                           paddingLeft: "calc(0.1rem + 0.3vw)"
                                         }}>
-                      Age : {data.created_since}
+                      Age : {data.created_since} months
                   </MKTypography>
                 </li>
                 <li>
@@ -286,11 +286,18 @@ const FetchSBOM = ({ data, masterData }: any) => {
   
   let tracked: string []= [];
   let dis: any = {};
- 
+  
   data.forEach((dp) => {
     masterData.forEach((tp) => {
+      let duplicate: boolean  = false;
       if(dp.name === tp.name){
-        tracked.push(dp.name);
+        tracked.forEach((tmptracked) => {
+            if(tmptracked === dp.name)
+            duplicate = true;
+        });
+        
+        if(!duplicate)
+          tracked.push(dp.name);
       }  
     });
   });
