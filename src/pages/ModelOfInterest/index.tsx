@@ -11,57 +11,6 @@ import { useState } from "react";
 import { verifyLink } from "../ShowModelDetails/AssessmentSummary";
 import { modelOfInterestData } from "../../dataStore";
 import { usePrintReport } from "./sample";
-import Language from "../../examples/Charts/PieChart/Languages";
-import theme from "../../assets/theme";
-import { debug } from "console";
-import ThreeWayToggle from "../../examples/Button/ThreeWayToggle"
-function prepPieChartData(
-  setModelType: React.Dispatch<React.SetStateAction<never[]>>,
-  setRiskAnalysis: React.Dispatch<React.SetStateAction<never[]>>,
-  cache: any,
-  data: any
-) {
-  const modelTypePieData: any = [];
-  const modelTypeCount: any = {};
-  const riskAnalysisPieData: any = [];
-  const riskAnalysisCount: any = {};
-
-  data.forEach((item: any) => {
-    if (!modelTypeCount[item["type"]]) {
-      modelTypeCount[item["type"]] = 0;
-    }
-    modelTypeCount[item["type"]]++;
-
-    // Check for the existence of quality_control
-    if (item["quality_control"]) {
-      if (item["quality_control"].length === 0) {
-        // Handling for empty quality_control
-        if (!riskAnalysisCount["Unanalyzed"]) {
-          riskAnalysisCount["Unanalyzed"] = 0;
-        }
-        riskAnalysisCount["Unanalyzed"]++;
-      } else {
-        item["quality_control"].forEach((qc: string) => {
-          if (!riskAnalysisCount[qc]) {
-            riskAnalysisCount[qc] = 0;
-          }
-          riskAnalysisCount[qc]++;
-        });
-      }
-    }
-  });
-
-  for (let model of Object.keys(modelTypeCount)) {
-    modelTypePieData.push({ label: model, value: modelTypeCount[model] });
-  }
-
-  for (let risk of Object.keys(riskAnalysisCount)) {
-    riskAnalysisPieData.push({ label: risk, value: riskAnalysisCount[risk] });
-  }
-
-  setModelType(modelTypePieData);
-  setRiskAnalysis(riskAnalysisPieData);
-}
 
 function statsTable(data: any) {
 
