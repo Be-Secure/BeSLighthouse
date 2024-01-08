@@ -73,9 +73,11 @@ const FetchLowScores = ({ data }: any) => {
         )
   })
   return(<>
-          <ul>
-            {displayData}
-          </ul>
+          <Grid style={{minWidth: "200px"}}>
+            <ul>
+              {displayData}
+            </ul>
+          </Grid>
         </>
   )   
 };
@@ -168,50 +170,53 @@ const FetchSAST = ({ data }: any) => {
        low++;
      } 
   });
+
   return(<>
-            <Grid style={{minWidth: "200px"}}>
-              <ul >
-                <li>
+            <Grid style={{minWidth: "calc(10rem + 5vw)", marginTop:"2.1rem", marginLeft: "3rem"}}>
+              <Grid container>
+                  <Grid xs={6}>
                   <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                style={{fontSize:"calc(0.6rem + 0.5vw)", 
                                         marginTop: "calc(-0.4rem + (-0.3vw))",
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
-                                      }}>
+                                }}>
                     Critical : {critical}
                   </MKTypography>
-                </li>
-                <li>
+                  </Grid>
+                  <Grid xs={6}>
                   <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                style={{fontSize:"calc(0.6rem + 0.5vw)", 
                                         marginTop: "calc(-0.4rem + (-0.3vw))",
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
-                                      }}>
+                                }}>
                     High : {high}
                   </MKTypography>
-                </li>
-                <li>
+                  </Grid>
+                </Grid>
+                <Grid container>
+                  <Grid xs={6}>
                   <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                style={{fontSize:"calc(0.6rem + 0.5vw)", 
                                         marginTop: "calc(-0.4rem + (-0.3vw))",
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
-                                      }}>
+                                }}>
                     Medium : {medium}
                   </MKTypography>
-                </li>
-                <li>
+                  </Grid>
+                  <Grid xs={6}>
                   <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                style={{fontSize:"calc(0.6rem + 0.5vw)", 
                                         marginTop: "calc(-0.4rem + (-0.3vw))",
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                       }}>
                     Low : {low}
                   </MKTypography>
-                </li> 
-              </ul>
+                  </Grid>
+              </Grid>
             </Grid>
           </>
         );
@@ -235,48 +240,38 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   
   return(<>
           <Grid style={{minWidth: "200px"}}>
-            <ul >
-              <li>
+              <Grid container>
+                <Grid xs={12}>
                 <MKTypography variant="body1" 
                               color="inherit" 
                               style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
                     Project License : {itemData.license.key}
                   </MKTypography>
-              </li>
-              <li>
+                </Grid>
+                <Grid xs={12}>
                 <MKTypography variant="body1" 
                               color="inherit" 
                               style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      marginTop: "calc(-0.4rem + (-0.3vw))",
-                                      paddingLeft: "calc(0.1rem + 0.3vw)"
-                                    }}>
-                    License Compatibility Issues: {itemData.license.key}
-                </MKTypography>
-              </li>
-              <li>
-                <MKTypography variant="body1" 
-                              color="inherit" 
-                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      marginTop: "calc(-0.4rem + (-0.3vw))",
-                                      paddingLeft: "calc(0.1rem + 0.3vw)"
-                                    }}>
-                    Unique Licenses : {license_list}
-                  </MKTypography>
-              </li>
-              <li>
-                <MKTypography variant="body1" 
-                              color="inherit" 
-                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
                   No. of Non License Files : {non_lic_files}
                 </MKTypography>
-              </li>
-          </ul>
+                </Grid>
+                <Grid xs={12}>
+                <MKTypography variant="body1" 
+                              color="inherit" 
+                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
+                                      
+                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                    }}>
+                    Unique Licenses : {license_list}
+                </MKTypography>
+                </Grid>
+          </Grid>   
         </Grid>
       </>
     );
@@ -304,37 +299,32 @@ const FetchSBOM = ({ data, masterData }: any) => {
 
   dis = tracked.map(function( td: string, index: number){
     return(<>
-              <li>
+              <Grid xs={12}>
                 <MKTypography variant="body1" 
                               color="inherit" 
-                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                              style={{fontSize:"calc(0.2rem + 0.5vw)",
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
                   {td}  
                 </MKTypography>   
-              </li>     
+              </Grid>     
             </>
           );
   });
 
   return(<>
           <Grid style={{minWidth: "200px"}}>
-            <ul>
-              <li>
                 <MKTypography variant="body1" 
                               color="inherit" 
                               style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      marginTop: "calc(-0.4rem + (-0.3vw))",
+                                      
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
                     Projects Under BeS : 
                 </MKTypography>
-                <ul>
-                    {dis}
-                </ul>
-              </li>
-            </ul>
+                <Grid container>
+                {dis}
+                </Grid>
           </Grid>
         </>
       );
@@ -367,7 +357,11 @@ const CheckLink = ({ version, name, report, itemData, masterData }: any) => {
   if (report === "Criticality Score" && linkStatusLength !== 0){ 
     return (
       <>
-        <Typography variant="h6" color="inherit" style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+        <Typography variant="h6" 
+                    color="inherit" 
+                    style={{fontSize: "calc(0.6rem + 0.5vw)",
+                    justifyContent: "center",
+                    display: "flex"}}>
            {linkStatus.criticality_score}
         </Typography>
         <Card style={{height: "100px", 
@@ -396,11 +390,14 @@ const CheckLink = ({ version, name, report, itemData, masterData }: any) => {
                           color="inherit" 
                           style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
                 <Link to={myObject} 
-                      style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+                      style={{fontSize: "calc(0.6rem + 0.5vw)", 
+                              display: "flex", 
+                              justifyContent: "center"}}>
                   {linkStatus.score}
                 </Link>
               </Typography>
               <Card style={{height: "100px",
+                            minWidth: "100%",
                             borderRadius: "3px"
                           }} 
                         sx={{ overflowY: "scroll"}}>
@@ -420,20 +417,17 @@ const CheckLink = ({ version, name, report, itemData, masterData }: any) => {
                           color="inherit" 
                           style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
                 <Link to={myObject} 
-                      style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
+                      style={{fontSize: "calc(0.6rem + 0.5vw)",
+                              display: "flex", 
+                              justifyContent: "center"}}>
                   {linkStatus.length}
                 </Link>
               </Typography>
-              <Card style={{height: "100px",
-                            borderRadius: "3px"
-                          }} 
-                          sx={{ overflowY: "scroll"}}>
-                <MKBox>
+                <MKBox >
                  <FetchSAST 
                      data={linkStatus}
                  />
                 </MKBox>
-              </Card>
             </>
           );
   }
@@ -461,14 +455,17 @@ const CheckLink = ({ version, name, report, itemData, masterData }: any) => {
               <Typography variant="h6" 
                           color="inherit" 
                           style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
-                <Link to={myObject}>
+                <Link to={myObject} 
+                      style={{ fontSize: "calc(0.6rem + 0.5vw)",
+                      display: "flex", 
+                      justifyContent: "center"}}>
                   {uniqueLicenses.length}
                 </Link>
               </Typography>
               <Card style={{height: "100px",
                             borderRadius: "3px"
                             }} 
-                            sx={{ overflowY: "scroll"}}>
+                            >
                 <MKBox>
                   <FetchLicense 
                      data={linkStatus}
@@ -487,15 +484,17 @@ const CheckLink = ({ version, name, report, itemData, masterData }: any) => {
                          color="inherit" 
                          style={{fontSize: "calc(0.6rem + 0.5vw)"
                                }}> 
-                <Link to={myObject}>
+                <Link to={myObject}
+                      style={{ fontSize: "calc(0.6rem + 0.5vw)",
+                      display: "flex", 
+                      justifyContent: "center"}}>
                   {linkStatus.packages.length}
                 </Link> 
              </Typography>
              <Card style={{height: "100px",
                            borderRadius: "3px"
                           }} 
-                          sx={{ overflowY: "scroll"
-                          }}>
+                          sx={{ overflowY: "scroll"}}>
                 <MKBox>
                   <FetchSBOM 
                      data={linkStatus.packages}
@@ -504,7 +503,7 @@ const CheckLink = ({ version, name, report, itemData, masterData }: any) => {
                 </MKBox>
               </Card>
             </>
-          )
+          );
   }
   
   return (
@@ -573,7 +572,7 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
       <Grid container 
             p={0.3} 
             justifyContent="center" 
-            style={{width: "98%"}}>
+            style={{width: "100%"}}>
         {report.map((value, index) => {
           return (
             <>
@@ -583,7 +582,9 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                        borderRadius="lg">
                   <Grid p={1} 
                         justifyContent="center" 
-                        style={{backgroundColor: "#f3f6f4", borderRadius: "5px", minHeight: "10rem"}} >
+                        style={{backgroundColor: "#f3f6f4", 
+                                borderRadius: "5px", 
+                                minHeight: "10rem"}} >
                     <Grid container 
                           justifyContent="center" 
                           alignItems="center" >
@@ -596,13 +597,14 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                       </Grid>
                     </Grid>
                     <Grid>
-                      <Grid item>
+                      <Grid >
                         <Grid
                           container
                           justifyContent="center"
                           alignItems="center"
+                          style={{display: "block"}}
                         >
-                          <Grid item>
+                          <Grid>
                             <CheckLink
                               version={version}
                               name={name}
