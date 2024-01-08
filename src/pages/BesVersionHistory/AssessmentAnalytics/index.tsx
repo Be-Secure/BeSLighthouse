@@ -257,8 +257,11 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
             return (
               <>
               <Grid alignItems="center" p={1} xs={4} justifyContent="center" style={{ borderRadius: 10, height: "370px", fontSize: "calc(0.5rem + 0.5vw)"}} >
+                <Grid style={{display: "flex", 
+                      justifyContent: "center"}}>
                 <GetHeadings receivedValue={value}>
-                </GetHeadings>  
+                </GetHeadings>
+                </Grid>  
                 <Grid style={{height: "92%"}}>
                   <FetchData version={version} name={name} report={value} versionDetails={versionDetails} masterData={masterData}/>
                 </Grid>

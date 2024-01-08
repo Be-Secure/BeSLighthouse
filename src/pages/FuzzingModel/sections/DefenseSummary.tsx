@@ -6,7 +6,7 @@ import MKTypography from "../../../components/MKTypography";
 import Card from "@mui/material/Card";
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
-import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
+import { fetchJsonData } from "../../BesVersionHistory/AssessmentReport";
 
 import bgImage from "../../../assets/images/neuralimage.png";
 import Box from "@mui/material/Box";
@@ -67,10 +67,10 @@ function DefenseSummary() {
     let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/DefenceReport.json`;
     let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/DefenceReport.json`;
     let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/DefenceReport.json`;
-    verifyLink(evasionLink, evasionSetreport);
-    verifyLink(inferenceLink, inferenceSetreport);
-    verifyLink(extractionLink, extractionSetreport);
-    verifyLink(dataPoisoningLink, dataPoisoningSetreport);
+    fetchJsonData(evasionLink, evasionSetreport);
+    fetchJsonData(inferenceLink, inferenceSetreport);
+    fetchJsonData(extractionLink, extractionSetreport);
+    fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
   }, []);
   return (
     <Grid

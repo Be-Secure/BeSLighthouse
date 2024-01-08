@@ -5,7 +5,7 @@ import {
   assessment_path,
   assessment_report,
 } from "../../utils/assessmentReport";
-import { verifyLink } from "../BesVersionHistory/AssessmentReport";
+import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKBox from "../../components/MKBox";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
@@ -50,7 +50,7 @@ function BesAssessmentReport() {
   const [report, setreport]: any = useState({});
   useEffect(() => {
     const link: string = `${assessment_datastore}/${besName}/${besVersion}/${assessment_path[besReport]}/${besName}-${besVersion}-${assessment_report[besReport]}-report.json`;
-    verifyLink(link, setreport);
+    fetchJsonData(link, setreport);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

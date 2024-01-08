@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import MKBox from "../../../components/MKBox";
 import AttackVulnerabilityReport from "../AttackType/AttackVulnerabilityReport";
-import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
+import { fetchJsonData } from "../../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../../dataStore";
 import { useLocation } from "react-router-dom";
 
@@ -32,10 +32,10 @@ function RightFuzzing() {
     let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/VulnerabilityReport.json`;
     let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/VulnerabilityReport.json`;
     let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
-    verifyLink(evasionLink, evasionSetreport);
-    verifyLink(inferenceLink, inferenceSetreport);
-    verifyLink(extractionLink, extractionSetreport);
-    verifyLink(dataPoisoningLink, dataPoisoningSetreport);
+    fetchJsonData(evasionLink, evasionSetreport);
+    fetchJsonData(inferenceLink, inferenceSetreport);
+    fetchJsonData(extractionLink, extractionSetreport);
+    fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
   }, []);
   return (
     <Grid container width="34%">
