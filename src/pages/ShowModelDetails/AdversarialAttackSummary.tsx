@@ -208,7 +208,22 @@ const AdversarialAttackSummary = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
+      <Typography color="black" 
+        pt={1} 
+        pb={1}
+        style={{ fontSize: "12px", float: "right" }}>
+        Powered by <a
+                  style={{
+                    color: "grey",
+                    cursor: "pointer"
+                  }}
+                  href={`https://www.boschaishield.com/home.html`}
+                  title={"Click to view boschaishield webpage"}
+                  target="_blank"
+                >
+                  Bosch AIShield
+                  </a>
+      </Typography>
       {dividerDiv(1)}
       {attackGraph(selectedMenu, attackMap)}
     </>

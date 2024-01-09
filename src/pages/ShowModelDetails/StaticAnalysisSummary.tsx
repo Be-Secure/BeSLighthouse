@@ -96,6 +96,22 @@ export default function StaticAnalysisSummary({ data }: any): any {
           })}
         </Grid>
       )}
+      <MKTypography 
+        pt={1}
+        style={{ float: "right", fontSize: "12px" }}
+      >
+        Powered by <a
+                  style={{
+                    color: "grey",
+                    cursor: "pointer"
+                  }}
+                  href={`https://github.com/bosch-aisecurity-aishield/watchtower`}
+                  title={"Click to view watchtower repo"}
+                  target="_blank"
+                >
+                  AIShield Watchtower
+                  </a>
+        </MKTypography>
     </>
   );
 }
