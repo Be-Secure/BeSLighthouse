@@ -223,7 +223,8 @@ function FuzzingModelPage() {
         <DefenseSummary />
         <RightFuzzing />
       </Grid>
-      <Grid container style={{ display: "flex", width: "100%", placeContent: "center", alignItems: "center", height: "24px" }}>
+      
+      <Grid container style={{ width: "100%", placeContent: "center", alignItems: "center", height: "24px", position: "fixed", bottom: 0 }}>
       <Grid item>
 
       <MKTypography style={{ fontSize: "12px" }}>
