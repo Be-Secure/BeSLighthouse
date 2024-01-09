@@ -209,7 +209,7 @@ const AdversarialAttackSummary = () => {
         </Table>
       </TableContainer>
       <Typography color="black" 
-        pt={1} 
+        pt={2} 
         pb={1}
         style={{ fontSize: "12px", float: "right" }}>
         Powered by <a
