@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Card from "@mui/material/Card";
+
 import Icon from "@mui/material/Icon";
 import { Divider, Grid, Typography } from "@mui/material";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
@@ -8,15 +8,10 @@ import { Link } from "react-router-dom";
 import { assessment_datastore } from "../../../dataStore";
 import MKBox from "../../../components/MKBox";
 import MKTypography from "../../../components/MKTypography";
-
 import {
   assessment_path,
   assessment_report
 } from "../../../utils/assessmentReport";
-import { forEach } from "lodash";
-import { BOLD_WEIGHT } from "jest-matcher-utils";
-//import SimpleBar from 'simplebar-react';
-//import 'simplebar-react/dist/simplebar.min.css';
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
@@ -52,15 +47,11 @@ export const fetchvulJsonData = async (link: any, vulTool: any, setCQData: any, 
     const response = await fetchJsonReport(link);
     try {
       let data = JSON.parse(response);
-      //console.log("fetcheddata=", data);
       if(vulTool === "codeql"){
          setCQData(data);
-         //console.log("fetchedql=", data);
       }
       else if(vulTool === "sonarqube"){
          setSQData(data);
-         
-         //console.log("fetchedsl=", data);
       }
       else
          return false
@@ -90,15 +81,12 @@ const FetchLowScores = ({ data }: any) => {
   displayData = lowscorers.map(function(iss:any, index:number)
   {
     return(<>
-            
               <MKTypography variant="body1" 
                             color="inherit" 
-                            style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                     
+                            style={{fontSize:"calc(0.2rem + 0.5vw)",
                                     paddingLeft: "calc(0.1rem + 0.3vw)"}}>
                  <b>{iss.name} </b>: {iss.reason}
               </MKTypography>
-            
           </>
         )
   })
@@ -111,7 +99,6 @@ const FetchLowScores = ({ data }: any) => {
 };
 
 const FetchCS = ({ data }: any) => {
-  
   return(<>
             <Grid style={{minWidth: "200px"}}>
                 <Grid>
@@ -180,8 +167,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
   let high: number = 0;
   let medium: number = 0;
   let low: number = 0;
-  //console.log("receiveCQdData=" + cqData);
-  //console.log("receivedSQData" + sqData);
+
   if (JSON.stringify(Object.values(cqData).length) !== "0" && 
       JSON.stringify(Object.values(sqData).length) === "0"){
     cqData.forEach ((vul) => {
@@ -203,7 +189,6 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                   <MKTypography variant="body1" 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                        
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                 }}>
                     Critical : {critical}
@@ -213,7 +198,6 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                   <MKTypography variant="body1" 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                        
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                 }}>
                     High : {high}
@@ -225,7 +209,6 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                   <MKTypography variant="body1" 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                        
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                 }}>
                     Medium : {medium}
@@ -235,7 +218,6 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                   <MKTypography variant="body1" 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                        
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                       }}>
                     Low : {low}
@@ -350,7 +332,6 @@ const FetchSAST = ({ cqData, sqData }: any) => {
       } 
     });
 
-    //console.log("Blocker="+sqblocker + " Critical="+ sqcritical + " Major=" + sqmajor)
     return(<>
           <Grid style={{minWidth: "calc(10rem + 5vw)"}}>
            <Grid container>
@@ -563,8 +544,6 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     reportNameMap = "Scorecard";
   }
   
-  //if(report !== "Vulnerabilities")
-  //{
   React.useEffect(() => {
     if (version.trim()) {
       let link: string = "";
@@ -572,8 +551,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
          fetchJsonData(link, setJsonData);
     }
     }, [version]);
-    //console.log("json data =", jsonData);
-  //}
+  
   React.useEffect(() => {
     if (version.trim()) {
       let link: string = "";
@@ -582,9 +560,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     }
   }, [version]);
   
-  //if(report === "Vulnerabilities")
-  //{
-    React.useEffect(() => {
+  React.useEffect(() => {
       if (version.trim()) {
         let link: string = "";
           link= `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-codeql-report.json`;
@@ -592,13 +568,6 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       }
     }, [version]);
 
-   
-    //sonarqubeData = JSON.stringify(sonarqubeData);
-    //console.log("codeql data =", codeQlData);
-    //console.log("sonarqube data=", sonarqubeData)
-  //}
-
-  
   let jsonDataLength: number = Object.values(jsonData).length;
   if (report === "Criticality Score" && jsonDataLength !== 0){ 
     return (
@@ -629,7 +598,6 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   const myObject = { pathname: pathName, state: jsonData } as {
     pathname: string;
   };
-
   if (report === "ScoreCard" && jsonDataLength !== 0) {  
     return (<>
               <Typography variant="h6" 
@@ -659,7 +627,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
 
   if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
                                        JSON.stringify(Object.values(sonarqubeData).length) === "0")) { 
-    //console.log("codeql issues = " + codeQlData.length)   
+       
     return (<>
               <Typography variant="h6" 
                           color="inherit" 
@@ -678,7 +646,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           );
   }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(sonarqubeData).length) !== "0" && 
                                              JSON.stringify(Object.values(codeQlData).length) === "0")) { 
-    //console.log("sonarqube issues = " + Object.values(sonarqubeData).length)   
+      
     return (<>
               <Typography variant="h6" 
                           color="inherit" 
@@ -697,14 +665,10 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           );
   }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
                                             JSON.stringify(Object.values(sonarqubeData).length) !== "0")){
-    //console.log("codeql issues both = " + JSON.stringify(Object.values(codeQlData).length))
-    //console.log("sonarqube issues both = " + JSON.stringify(Object.values(sonarqubeData).length))
     const codeqldetails: any = Object.values(codeQlData);
     const sonardetails: any = Object.values(sonarqubeData);
     const codeqllength: number = Object.values(codeQlData).length;
     const sonarlength: number = Object.values(sonarqubeData).length;
-    //console.log(codeqldetails.length);
-    //console.log(Object.values(sonardetails));
     return(
       <>
           <Grid container xs={12}>
@@ -755,6 +719,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           break;
         }
       }
+
       if (flag === 0 && jsonData[i].hasOwnProperty('LicenseConcluded') && jsonData[i].LicenseConcluded.length !== 0) {
         uniqueLicenses.push(jsonData[i].LicenseConcluded);
       }

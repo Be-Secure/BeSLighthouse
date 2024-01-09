@@ -236,8 +236,6 @@ function BesVersionHistory() {
                         </MKBox>
                       </Grid>
                     </Grid>
-
-
                     <Grid  
                         container 
                         style={{height: "2.3rem"}}>
