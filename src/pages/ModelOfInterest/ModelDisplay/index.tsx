@@ -2,7 +2,7 @@ import { filter } from "lodash";
 import React, { useState } from "react";
 import { modelOfInterestData } from "../../../dataStore";
 import { getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
-import { verifyLink } from "../../BesVersionHistory/AssessmentReport";
+import { fetchJsonData } from "../../BesVersionHistory/AssessmentReport";
 import SearchVoiList from "../../VulnerabilityOfInterest/VoiTable/SearchVoiList";
 import ModelTable from "./ModelTable";
 import ThreeWayToggleButton from "../../../examples/Button/ThreeWayToggle"
@@ -33,7 +33,7 @@ export default function ModelDisplay() {
 
   const [report, setreport]: any = useState([]);
   React.useEffect(() => {
-    verifyLink(modelOfInterestData, setreport);
+    fetchJsonData(modelOfInterestData, setreport);
   }, []);
   const filteredCveReport = applySortFilter(
     report,

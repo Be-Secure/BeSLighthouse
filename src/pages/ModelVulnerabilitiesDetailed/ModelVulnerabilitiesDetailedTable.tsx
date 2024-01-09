@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { verifyLink } from "../BesVersionHistory/AssessmentReport";
+import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -46,7 +46,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
   modelName = modelName.slice(1);
   React.useEffect(() => {
     let link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-sast-detailed-report.json`;
-    verifyLink(link, setreport);
+    fetchJsonData(link, setreport);
   }, []);
 
   const modelDetails = Object.values(report);

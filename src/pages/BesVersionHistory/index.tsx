@@ -139,7 +139,7 @@ function BesVersionHistory() {
             return (
               <>
               <Card style={{marginTop: "-1.5rem"}}>
-                <Grid key={"gridkey1"} 
+                <Grid  
                         container 
                         spacing={1} 
                         pl={4} 
@@ -147,13 +147,13 @@ function BesVersionHistory() {
                   <Grid item 
                           xs={6} 
                           justifyContent="flex-start">
-                    <Grid key={"gridkey1"} 
+                    <Grid  
                         container 
                         style={{height: "2.3rem"}}>
                       <Grid item 
                           xs={4} 
                           justifyContent="flex-start">
-                        <MKBox key="test" 
+                        <MKBox  
                              display="flex"  
                              py={1} 
                              pr={2}>
@@ -178,7 +178,7 @@ function BesVersionHistory() {
                     <Grid item 
                           xs={4} 
                           justifyContent="flex-start">    
-                      <MKBox key="test1" 
+                      <MKBox  
                              display="flex" 
                              py={1} 
                              pr={2}>
@@ -199,7 +199,6 @@ function BesVersionHistory() {
                           style={{fontSize: "calc(0.4rem + 0.5vw)", 
                                   height: '1.2rem', 
                                   width: "20px"}}
-                          
                         >
                           {
                             versionSummary.map((option: any, index: any) => (
@@ -214,7 +213,7 @@ function BesVersionHistory() {
                     <Grid item 
                             xs={4} 
                             justifyContent="flex-start">
-                        <MKBox key="test3" 
+                        <MKBox k 
                               display="flex"
                               py={1}
                               pr={2}>
@@ -237,15 +236,13 @@ function BesVersionHistory() {
                         </MKBox>
                       </Grid>
                     </Grid>
-
-
-                    <Grid key={"gridkey1"} 
+                    <Grid  
                         container 
                         style={{height: "2.3rem"}}>
                       <Grid item 
                           xs={4} 
                           justifyContent="flex-start">
-                        <MKBox key="test3" 
+                        <MKBox  
                            display="flex">
                       <MKTypography
                             variant="h6"
@@ -268,7 +265,7 @@ function BesVersionHistory() {
                     <Grid item 
                           xs={4} 
                           justifyContent="flex-start">    
-                      <MKBox key="test4" display="flex">
+                      <MKBox  display="flex">
                           <MKTypography
                             variant="h6"
                             fontWeight="bold"
@@ -290,7 +287,7 @@ function BesVersionHistory() {
                     <Grid item 
                             xs={4} 
                             justifyContent="flex-start">
-                        <MKBox key="test3" display="flex" >
+                        <MKBox display="flex" >
                           <MKTypography
                             variant="h6"
                             fontWeight="bold"
@@ -315,7 +312,7 @@ function BesVersionHistory() {
                   <Grid item 
                           xs={6} 
                           justifyContent="flex-start">
-                    <Grid key={"gridkey1"} 
+                    <Grid  
                         container 
                         spacing={1} 
                         pl={4} 
@@ -324,7 +321,7 @@ function BesVersionHistory() {
                     <Grid item 
                           xs={12} 
                           justifyContent="flex-start">
-                      <MKBox key="test2" 
+                      <MKBox  
                              display="flex" 
                              py={1} 
                              pr={2} 
@@ -352,7 +349,7 @@ function BesVersionHistory() {
               </Grid>
             </Card>
             <Card style={{marginTop: "0.3rem"}}>
-                    <Grid key={"gridkey3"} 
+                    <Grid  
                           container 
                           spacing={1} 
                           p={2}>

@@ -4,7 +4,7 @@ import { Card, CircularProgress, Grid } from "@mui/material";
 import MKTypography from "../../components/MKTypography";
 import DefenceReport from "./DefenceReport";
 import MKButton from "../../components/MKButton";
-import { verifyLink } from "../BesVersionHistory/AssessmentReport";
+import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -41,8 +41,8 @@ export default function DefenceData({ report, reportName }: any) {
   let defenceReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/DefenceReport.pdf`;
   let vulnerabilityReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/VulnerabilityReport.pdf`;
   React.useEffect(() => {
-    verifyLink(defenceReportLink, setDefenceReport);
-    verifyLink(vulnerabilityReportLink, setvulnerabilityReport);
+    fetchJsonData(defenceReportLink, setDefenceReport);
+    fetchJsonData(vulnerabilityReportLink, setvulnerabilityReport);
     try {
       setTimeout(setLoading, 6000);
     } catch (e) {

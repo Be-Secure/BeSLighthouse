@@ -10,7 +10,7 @@ import RightFuzzing from "./sections/RightFuzzing";
 import MKBox from "../../components/MKBox";
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
-import { verifyLink } from "../BesVersionHistory/AssessmentReport";
+import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 
 const lineOptions = {
   startPlug: "disc",
@@ -135,14 +135,14 @@ function FuzzingModelPage() {
     let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/JobMetadata.json`;
     let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/JobMetadata.json`;
     let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/JobMetadata.json`;
-    verifyLink(evasionLink, evasionSetreport).then((data) => {
+    fetchJsonData(evasionLink, evasionSetreport).then((data) => {
       if (data)
         setTimeout(
           () => evasionLineGraph(lineRefStartEvasion, lineRefRightEvasion),
           200
         );
     });
-    verifyLink(inferenceLink, inferenceSetreport).then((data) => {
+    fetchJsonData(inferenceLink, inferenceSetreport).then((data) => {
       if (data)
         setTimeout(
           () =>
@@ -151,7 +151,7 @@ function FuzzingModelPage() {
         );
     });
 
-    verifyLink(extractionLink, extractionSetreport).then((data) => {
+    fetchJsonData(extractionLink, extractionSetreport).then((data) => {
       if (data)
         setTimeout(
           () =>
@@ -159,7 +159,7 @@ function FuzzingModelPage() {
           200
         );
     });
-    verifyLink(dataPoisoningLink, dataPoisoningSetreport).then((data) => {
+    fetchJsonData(dataPoisoningLink, dataPoisoningSetreport).then((data) => {
       if (data)
         setTimeout(
           () =>
