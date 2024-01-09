@@ -11,7 +11,8 @@ import MKBox from "../../components/MKBox";
 import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
-
+import MKTypography from "../../components/MKTypography";
+import aishieldLogo from "../../assets/images/aishield_logo.png"
 const lineOptions = {
   startPlug: "disc",
   color: "red",
@@ -221,6 +222,18 @@ function FuzzingModelPage() {
         />
         <DefenseSummary />
         <RightFuzzing />
+      </Grid>
+      <Grid container style={{ display: "flex", width: "100%", placeContent: "center", alignItems: "center", height: "24px" }}>
+      <Grid item>
+
+      <MKTypography style={{ fontSize: "12px" }}>
+      Powered by 
+      </MKTypography>
+      </Grid>
+      <Grid item style={{ paddingLeft: "8px" }}>
+
+      <img style={{ width: "60px", height: "75px", paddingTop: "6px" }} src={aishieldLogo} />
+      </Grid>
       </Grid>
     </div>
   );
