@@ -62,47 +62,85 @@ export const countSeverity = async (vulnerabilityData: any, setSeverity: any) =>
   }
 }
 
-const FetchCritical = ({ riskData }: any) => {
-  let tmp:any = [];
-  let flag=0;
-  let res:any = {};
-  for(var i=0; i<= riskData.length; i++){
-      tmp.push(riskData[i]);
-  }
-  if(tmp.length !== 0){
-    res = tmp.map(function(vul:any, index:number){     
-          if(vul !== undefined && (vul.rule.security_severity_level === "critical"))
-          {
-              flag=1;
-              let name: string  = vul.rule.name;
-              let url: string  = vul.html_url;
-              let des: string  = vul.description;
-              return ( 
-                <>
-                  <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
-                                {name} : <Link to={url} style={{fontSize:"calc(0.2rem + 0.4vw)"}}>{name}</Link>
-                  </MKTypography>    
-                </>
-              )
+const FetchCritical = ({ cqRiskData, sqRiskData }: any) => {
+  
+  let sqres: any = {};
+  let cqres: any = {};
+  let foundCrtical : boolean = false;
+
+  //if(JSON.stringify(Object.values(sqRiskData).length) !== "0"){
+    sqres = Object.values(sqRiskData).map(function(sqrisk: any, index:number){
+      if(index === 5){    
+        let tmpres : any = {}
+        tmpres = sqrisk.map(function(issue:any, innerindex:number){
+          if(issue.severity === "BLOCKER" || issue.severity === "CRITICAL"){
+            foundCrtical = true;
+            let keyval1: string = "sqriskdata" + {innerindex};
+            let keyval2: string = "innersqriskdata" + {innerindex};
+            let keyval3: string = "sq" + {innerindex};
+            return(<>
+              <MKTypography key={keyval1} variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+                               {issue.rule} : 
+                               <MKTypography key={keyval2} variant="body1" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+                                  {issue.message}
+                               </MKTypography>
+              </MKTypography>  
+              </>)
           }else{
             return(<></>)
           }
-      });
-    if(flag !== 0){      
-       return(<>{res}</>);
+        });
+        return(<>{tmpres}</>) 
+      }else{
+        return(<></>)
+      }
+    })
+  //}
+  
+  //if(JSON.stringify(Object.values(cqRiskData).length) !== "0"){
+    cqres =  Object.values(cqRiskData).map(function(vul:any, index:number){
+      if(vul !== undefined && (vul.rule.security_severity_level === "critical"))
+      {
+        foundCrtical = true;
+        return ( 
+          <>
+            <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+                          {vul.rule.name} : <Link to={vul.html_url} style={{fontSize:"calc(0.2rem + 0.4vw)"}}>{vul.rule.name}</Link>
+            </MKTypography>    
+          </>
+        )
+      }else{
+        return(<></>)
+      }
+    })
+  //}
+  
+  if(foundCrtical){
+    if(cqres.length !== 0 && sqres.length !== 0){
+      return(<><Grid>{cqres}{sqres}</Grid></>)
+    }else if(cqres.length !== 0 && sqres.length === 0){
+      return(<><Grid>{cqres}</Grid></>)
+    }else if(cqres.length === 0 && sqres.length !== 0){
+      return(<><Grid>{sqres}</Grid></>)
     }else{
       return(<>
-              <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
-                No Critical Issues Found
-              </MKTypography>
-            </>);
-    }
+         <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)", 
+                                                          justifyContent: "center",
+                                                          display: "flex"
+                                                          }}>
+            No Data Available
+        </MKTypography>
+      </>)
+    }   
   }else{
     return(<>
-      <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)", }}>
-        No Data Available
-      </MKTypography>
-    </>);
+      <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)",
+                                                         justifyContent: "center",
+                                                         display: "flex"
+                                                          }}>
+         No critical issues found
+      </MKTypography>  
+    </>)
   }
 }
 
@@ -125,19 +163,27 @@ const FetchVulHistory = (versionDetails: any, setVulHistory: any) =>
 }
 
 const FetchData = ({version, name, report, versionDetails, masterData}: any) => {
-  const [riskData, setRiskData]: any = React.useState({});
+  const [cqRiskData, setCqRiskData]: any = React.useState({});
+  const [sqRiskData, setSqRiskData]: any = React.useState({});
   const [severityData, setSeverity] = React.useState([]);
   const [vulHistoryData, setVulHistory] = React.useState([]);
   React.useEffect(() => {
     let link: string = "";
     if (version.trim()) {
         link = `${assessment_datastore}/${name}/${version}/${assessment_path["Codeql"]}/${name}-${version}-${assessment_report["Codeql"]}-report.json`;
-        getLinkData(link, setRiskData);
+        getLinkData(link, setCqRiskData);
     }
   }, [version]);
   React.useEffect(() => {
-    countSeverity(riskData, setSeverity);
-  }, [riskData]);
+    let link: string = "";
+    if (version.trim()) {
+        link = `${assessment_datastore}/${name}/${version}/${assessment_path["Sonarqube"]}/${name}-${version}-${assessment_report["Sonarqube"]}-report.json`;
+        getLinkData(link, setSqRiskData);
+    }
+  }, [version]);
+  React.useEffect(() => {
+    countSeverity(cqRiskData, setSeverity);
+  }, [cqRiskData]);
   
   React.useEffect(() => {
     FetchVulHistory(versionDetails, setVulHistory);
@@ -171,7 +217,10 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
                   <MKBox>
                     <MKBox pt={1} pb={1} px={1} > 
                     <StyledChartWrapper dir="ltr" >
-                       <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+                       <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)",
+                                                                          justifyContent: "center",
+                                                                          display: "flex"
+                                                                         }}>
                            No Data Available
                         </MKTypography>
                     </StyledChartWrapper>  
@@ -191,7 +240,8 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
           <MKBox style={{height: "100%"}}>
               <MKBox pt={1} pb={1} px={1} style={{height: "100%" }}> 
                  <FetchCritical
-                    riskData={riskData}
+                    cqRiskData={cqRiskData}
+                    sqRiskData={sqRiskData}
                   />
               </MKBox>
           </MKBox>

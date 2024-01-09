@@ -14,8 +14,9 @@ import {
   assessment_report
 } from "../../../utils/assessmentReport";
 import { forEach } from "lodash";
-import SimpleBar from 'simplebar-react';
-import 'simplebar-react/dist/simplebar.min.css';
+import { BOLD_WEIGHT } from "jest-matcher-utils";
+//import SimpleBar from 'simplebar-react';
+//import 'simplebar-react/dist/simplebar.min.css';
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
@@ -95,7 +96,7 @@ const FetchLowScores = ({ data }: any) => {
                             style={{fontSize:"calc(0.2rem + 0.5vw)", 
                                      
                                     paddingLeft: "calc(0.1rem + 0.3vw)"}}>
-                 {iss.name} : {iss.reason}
+                 <b>{iss.name} </b>: {iss.reason}
               </MKTypography>
             
           </>
@@ -117,59 +118,55 @@ const FetchCS = ({ data }: any) => {
                     <MKTypography variant="body1" 
                                   color="inherit" 
                                   style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                          
+                                          justifyContent: "center",
+                                          display: "flex",
                                           paddingLeft: "calc(0.1rem + 0.3vw)"
                                         }}>
-                      Age : {data.created_since} months
+                      <b>Age </b>: {data.created_since} months
                   </MKTypography>
                 </Grid>
                 <Grid>
                   <MKTypography variant="body1" 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                        
+                                        justifyContent: "center",
+                                        display: "flex",
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                       }}>
-                     No. Of Contributors : {data.contributor_count}
+                    <b> No. Of Contributors </b>: {data.contributor_count}
                   </MKTypography>
                 </Grid>
+                
                 <Grid>
                   <MKTypography variant="body1" 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                        
+                                        justifyContent: "center",
+                                        display: "flex",
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                       }}>
-                    Update Frequency : {data.commit_frequency}
-                  </MKTypography>
-                </Grid>
-                <Grid>
-                  <MKTypography variant="body1" 
-                                color="inherit" 
-                                style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                        
-                                        paddingLeft: "calc(0.1rem + 0.3vw)"
-                                      }}>
-                    Organisations : {data.org_count}
+                   <b> Organisations </b>: {data.org_count}
                   </MKTypography>
                 </Grid>
                 <Grid>
                   <MKTypography variant="body1" 
                                   color="inherit" 
                                   style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                          
+                                          justifyContent: "center",
+                                          display: "flex",
                                           paddingLeft: "calc(0.1rem + 0.3vw)"}}>
-                    Issue Fixed : {data.closed_issues_count}
+                    <b>Issue Fixed </b>: {data.closed_issues_count}
                   </MKTypography>
                 </Grid>
                 <Grid>
                   <MKTypography variant="body1" 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                        
+                                        justifyContent: "center",
+                                        display: "flex",
                                         paddingLeft: "calc(0.1rem + 0.3vw)"
                                       }}>
-                    Last Updated : {data.updated_since}
+                   <b> Last Updated </b>: {data.updated_since}
                   </MKTypography>
                 </Grid>
             </Grid>
@@ -185,7 +182,8 @@ const FetchSAST = ({ cqData, sqData }: any) => {
   let low: number = 0;
   //console.log("receiveCQdData=" + cqData);
   //console.log("receivedSQData" + sqData);
-  if (cqData.length !== 0 && sqData.length === 0){
+  if (JSON.stringify(Object.values(cqData).length) !== "0" && 
+      JSON.stringify(Object.values(sqData).length) === "0"){
     cqData.forEach ((vul) => {
       if(vul.rule.security_severity_level === "critical"){
         critical++;
@@ -247,7 +245,8 @@ const FetchSAST = ({ cqData, sqData }: any) => {
             </Grid>
           </>
         );
-  }else if (cqData.length === 0 && sqData.length !== 0){
+  }else if (JSON.stringify(Object.values(cqData).length) === "0" && 
+            JSON.stringify(Object.values(sqData).length) !== "0"){
     let sqblocker: number = 0;
     let sqcritical: number = 0;
     let sqmajor: number = 0;
@@ -315,12 +314,12 @@ const FetchSAST = ({ cqData, sqData }: any) => {
             </Grid>
           </>
         );
-  } else if (cqData.length !== 0 && sqData.length !== 0){
+  } else if (JSON.stringify(Object.values(cqData).length) !== "0" && 
+             JSON.stringify(Object.values(sqData).length) !== "0"){
     let cqcritical: number = 0;
     let cqhigh: number = 0;
     let cqmedium: number = 0;
     let cqlow: number = 0;
-
 
     let sqblocker: number = 0;
     let sqcritical: number = 0;
@@ -361,29 +360,29 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             Critical : {cqcritical}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                            <b>Critical </b>: {cqcritical}
                          </MKTypography>
                       </Grid>
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             High : {cqhigh}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                             <b>High </b>: {cqhigh}
                          </MKTypography>
                       </Grid>
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             Medium : {cqmedium}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                            <b>Medium </b>: {cqmedium}
                          </MKTypography>
                       </Grid>
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             Low : {cqlow}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                             <b>Low </b>: {cqlow}
                          </MKTypography>
                       </Grid>
                   </Grid>
@@ -395,29 +394,29 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             Blocker : {sqblocker}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                             <b>Critical </b> : {sqblocker}
                          </MKTypography>
                       </Grid>
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             Critical : {sqcritical}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                             <b>High</b> : {sqcritical}
                          </MKTypography>
                       </Grid>
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             Major : {sqmajor}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                             <b>Medium</b> : {sqmajor}
                          </MKTypography>
                       </Grid>
                       <Grid xs={12} style={{justifyContent: "center", display: "flex"}}>
                          <MKTypography variant="body1" 
                                 color="inherit" 
-                                style={{fontSize:"calc(0.3rem + 0.3vw)"}}>
-                             Minor : {sqminor}
+                                style={{fontSize:"calc(0.4rem + 0.3vw)"}}>
+                             <b>Low</b>: {sqminor}
                          </MKTypography>
                       </Grid>
                     </Grid>
@@ -455,30 +454,33 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
                 <MKTypography variant="body1" 
                               color="inherit" 
                               style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      
+                                      justifyContent: "center",
+                                      display: "flex",
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
-                    Project License : {itemData.license.key}
+                    <b>Project License </b>: {itemData.license.key}
                   </MKTypography>
                 </Grid>
                 <Grid xs={12}>
                 <MKTypography variant="body1" 
                               color="inherit" 
                               style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      
+                                      justifyContent: "center",
+                                      display: "flex",
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
-                  No. of Non License Files : {non_lic_files}
+                  <b>No. of Non License Files </b>: {non_lic_files}
                 </MKTypography>
                 </Grid>
                 <Grid xs={12}>
                 <MKTypography variant="body1" 
                               color="inherit" 
                               style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      
+                                      justifyContent: "center",
+                                      display: "flex",
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
-                    Unique Licenses : {license_list}
+                    <b>Unique Licenses </b>: {license_list}
                 </MKTypography>
                 </Grid>
           </Grid>   
@@ -510,10 +512,12 @@ const FetchSBOM = ({ data, masterData }: any) => {
   dis = tracked.map(function( td: string, index: number){
     return(<>
               <Grid xs={12}>
-                <MKTypography variant="body1" 
+                <MKTypography key={index} variant="body1" 
                               color="inherit" 
                               style={{fontSize:"calc(0.2rem + 0.5vw)",
-                                      paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      paddingLeft: "calc(0.1rem + 0.3vw)",
+                                      justifyContent: "center",
+                                      display: "flex",
                                     }}>
                   {td}  
                 </MKTypography>   
@@ -524,13 +528,14 @@ const FetchSBOM = ({ data, masterData }: any) => {
 
   return(<>
           <Grid style={{minWidth: "200px"}}>
-                <MKTypography variant="body1" 
+                <MKTypography key="mainSBOM" variant="body1" 
                               color="inherit" 
-                              style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      
+                              style={{fontSize:"calc(0.3rem + 0.5vw)", 
+                                      justifyContent: "center",
+                                      display: "flex",
                                       paddingLeft: "calc(0.1rem + 0.3vw)"
                                     }}>
-                    Projects Under BeS : 
+                    <b>Projects Under BeS :</b> 
                 </MKTypography>
                 <Grid container>
                 {dis}
@@ -558,8 +563,8 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     reportNameMap = "Scorecard";
   }
   
-  if(report !== "Vulnerabilities")
-  {
+  //if(report !== "Vulnerabilities")
+  //{
   React.useEffect(() => {
     if (version.trim()) {
       let link: string = "";
@@ -568,7 +573,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     }
     }, [version]);
     //console.log("json data =", jsonData);
-  }
+  //}
   React.useEffect(() => {
     if (version.trim()) {
       let link: string = "";
@@ -577,21 +582,21 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     }
   }, [version]);
   
-  if(report === "Vulnerabilities")
-  {
+  //if(report === "Vulnerabilities")
+  //{
     React.useEffect(() => {
       if (version.trim()) {
         let link: string = "";
           link= `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-codeql-report.json`;
           fetchvulJsonData(link, "codeql", setCQData, setSQData);
-    }
+      }
     }, [version]);
 
    
     //sonarqubeData = JSON.stringify(sonarqubeData);
     //console.log("codeql data =", codeQlData);
     //console.log("sonarqube data=", sonarqubeData)
-  }
+  //}
 
   
   let jsonDataLength: number = Object.values(jsonData).length;
@@ -606,10 +611,10 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
            {jsonData.criticality_score}
         </Typography>
         <Grid style={{height: "100px", 
-                      minWidth: "100%",
+                      minWidth: "90%",
                       borderRadius: "3px"
                     }} 
-                    sx={{ overflowY: "scroll"}}>
+                    >
           <MKBox>
             <FetchCS 
              data={jsonData}
@@ -638,7 +643,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
                 </Link>
               </Typography>
               <Grid style={{height: "100px",
-                            minWidth: "100%",
+                            minWidth: "90%",
                             borderRadius: "3px"
                           }} 
                         sx={{ overflowY: "scroll"}}>
@@ -652,18 +657,16 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           );
   }
 
-  if (report === "Vulnerabilities" && (codeQlData.length !== 0 && sonarqubeData.length === 0)) { 
-    console.log("codeql issues = " + codeQlData.length)   
+  if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
+                                       JSON.stringify(Object.values(sonarqubeData).length) === "0")) { 
+    //console.log("codeql issues = " + codeQlData.length)   
     return (<>
               <Typography variant="h6" 
                           color="inherit" 
-                          style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
-                <Link to={myObject} 
-                      style={{fontSize: "calc(0.6rem + 0.5vw)",
-                              display: "flex", 
-                              justifyContent: "center"}}>
+                          style={{fontSize: "calc(0.6rem + 0.5vw)",
+                                  display: "flex", 
+                                  justifyContent: "center"}}>
                   {codeQlData.length}
-                </Link>
               </Typography>
                 <MKBox >
                  <FetchSAST 
@@ -673,18 +676,16 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
                 </MKBox>
             </>
           );
-  }else if (report === "Vulnerabilities" && (typeof(sonarqubeData) !== "undefined" && codeQlData.length === 0 && sonarqubeData.length !== 0)) { 
-    console.log("sonarqube issues = " + Object.values(sonarqubeData).length)   
+  }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(sonarqubeData).length) !== "0" && 
+                                             JSON.stringify(Object.values(codeQlData).length) === "0")) { 
+    //console.log("sonarqube issues = " + Object.values(sonarqubeData).length)   
     return (<>
               <Typography variant="h6" 
                           color="inherit" 
-                          style={{fontSize: "calc(0.6rem + 0.5vw)"}}>
-                <Link to={myObject} 
-                      style={{fontSize: "calc(0.6rem + 0.5vw)",
-                              display: "flex", 
-                              justifyContent: "center"}}>
+                          style={{fontSize: "calc(0.6rem + 0.5vw)",
+                                  display: "flex", 
+                                  justifyContent: "center"}}>
                   {Object.values(sonarqubeData).length}
-                </Link>
               </Typography>
                 <MKBox >
                  <FetchSAST 
@@ -694,43 +695,36 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
                 </MKBox>
             </>
           );
-  }else if (report === "Vulnerabilities" && (codeQlData.length !== 0 && sonarqubeData.length !== 0)){
-    //console.log("codeql issues both = " + Object.values(codeQlData.length).length)
-    //console.log("sonarqube issues both = " + sonarqubeData.length)
+  }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
+                                            JSON.stringify(Object.values(sonarqubeData).length) !== "0")){
+    //console.log("codeql issues both = " + JSON.stringify(Object.values(codeQlData).length))
+    //console.log("sonarqube issues both = " + JSON.stringify(Object.values(sonarqubeData).length))
     const codeqldetails: any = Object.values(codeQlData);
     const sonardetails: any = Object.values(sonarqubeData);
     const codeqllength: number = Object.values(codeQlData).length;
     const sonarlength: number = Object.values(sonarqubeData).length;
-    console.log(codeqldetails.length);
-    console.log(Object.values(sonardetails));
+    //console.log(codeqldetails.length);
+    //console.log(Object.values(sonardetails));
     return(
       <>
           <Grid container xs={12}>
              <Grid xs={6}>
                 <Typography variant="h6" 
-                          color="inherit" 
-                          style={{fontSize: "calc(1rem + 0.5vw)"}}>
-                  <Link to={myObject} 
-                      style={{fontSize: "calc(0.4rem + 0.3vw)",
-                              display: "flex", 
-                              justifyContent: "center"}}>
-                    {codeqllength}
-                  </Link>
+                            color="inherit" 
+                            style={{fontSize: "calc(0.6rem + 0.5vw)",
+                                  justifyContent: "center",
+                                  display: "flex"}}>
+                  {codeqllength}
                 </Typography>
-                
              </Grid>
              <Grid xs={6}>
                 <Typography variant="h6" 
-                          color="inherit" 
-                          style={{fontSize: "calc(1rem + 0.5vw)"}}>
-                  <Link to={myObject} 
-                      style={{fontSize: "calc(0.4rem + 0.3vw)",
-                              display: "flex", 
-                              justifyContent: "center"}}>
+                            color="inherit" 
+                            style={{fontSize: "calc(0.6rem + 0.5vw)", 
+                                  justifyContent: "center",
+                                  display: "flex"}}>
                     {sonardetails[0]}
-                  </Link>
                 </Typography>
-                
              </Grid>
           </Grid>
           <Grid container>
@@ -883,13 +877,13 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
     "License Compliance",
     "Dependencies"
   ];
-  return (    
-    
+
+  return (<>
       <Grid container 
             p={0.3} 
             justifyContent="center" 
             style={{width: "100%"}}>
-        {report.map((value, index) => {
+        {report.map((value) => {
           return (
             <>
               <Grid item 
@@ -940,6 +934,7 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
         })
       }
     </Grid>
+    </>
   );
 };
 
