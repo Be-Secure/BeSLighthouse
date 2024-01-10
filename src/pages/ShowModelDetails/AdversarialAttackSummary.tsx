@@ -8,7 +8,7 @@ import {
   Typography
 } from "@mui/material";
 import React, { useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { dividerDiv, verifyLink } from "./AssessmentSummary";
 import MKButton from "../../components/MKButton";
 
@@ -91,10 +91,12 @@ function attackGraph(selectedMenu: any, attackMap: any) {
   }
 }
 
-const AdversarialAttackSummary = () => {
+const AdversarialAttackSummary = ({model}: any) => {
   const attackName = ["Evasion", "Extraction", "Inference", "Data Poisoning"];
-  const location = useLocation();
-  const selectedMenu = location.state.selectedMenu;
+  const selectedModel = model.length > 0 ? model[0]: {}
+  const selectedMenu = selectedModel;
+  const { modelName }: any = useParams();
+  const name = modelName.slice(1);
   const [evasion, evasionData]: any = React.useState({});
   const [extraction, extractionData]: any = React.useState({});
   const [inference, inferenceData]: any = React.useState({});
@@ -106,14 +108,14 @@ const AdversarialAttackSummary = () => {
   const [evasionDefence, evasionDefenceData]: any = React.useState({});
   const [extractionDefence, extractionDefenceData]: any = React.useState({});
   useEffect(() => {
-    const evasionLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/evasion/VulnerabilityReport.json`;
-    const extractionLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/extraction/VulnerabilityReport.json`;
-    const defenceForEvasion = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/evasion/DefenceReport.json`;
-    const defenceForExtraction = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/extraction/DefenceReport.json`;
-    const inferenceLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/inference/VulnerabilityReport.json`;
-    const defenceForInference = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/inference/DefenceReport.json`;
-    const dataPoisoningLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
-    const defenceForDataPoisoning = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${selectedMenu.name}/fuzz-test/dataPoisoning/DefenceReport.json`;
+    const evasionLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/evasion/VulnerabilityReport.json`;
+    const extractionLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/extraction/VulnerabilityReport.json`;
+    const defenceForEvasion = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/evasion/DefenceReport.json`;
+    const defenceForExtraction = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/extraction/DefenceReport.json`;
+    const inferenceLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/inference/VulnerabilityReport.json`;
+    const defenceForInference = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/inference/DefenceReport.json`;
+    const dataPoisoningLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
+    const defenceForDataPoisoning = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/dataPoisoning/DefenceReport.json`;
     verifyLink(evasionLink, evasionData);
     verifyLink(extractionLink, extractionData);
     verifyLink(defenceForEvasion, evasionDefenceData);
