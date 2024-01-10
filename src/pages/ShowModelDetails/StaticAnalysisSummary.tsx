@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import MKTypography from "../../components/MKTypography";
-import { useLocation } from "react-router-dom";
 
 export const dividerDiv = (index: number) => {
   if (index !== 0) return <Divider sx={{ my: 1.5 }} />;
@@ -12,9 +11,8 @@ export const dividerDiv = (index: number) => {
 
 const card = ["Critical", "High", "Medium", "Low"];
 
-export default function StaticAnalysisSummary({ data }: any): any {
-  const location = useLocation();
-  const selectedMenu = location.state.selectedMenu;
+export default function StaticAnalysisSummary({ data, model }: any): any {
+  const selectedMenu = model.length > 0 ? model[0]: {}
   return (
     <>
       <Grid container alignItems="center" justifyContent="space-between">
