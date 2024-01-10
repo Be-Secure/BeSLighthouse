@@ -13,6 +13,7 @@ import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKTypography from "../../components/MKTypography";
 import aishieldLogo from "../../assets/images/aishield_logo.png"
+
 const lineOptions = {
   startPlug: "disc",
   color: "red",

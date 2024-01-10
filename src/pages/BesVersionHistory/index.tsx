@@ -198,7 +198,7 @@ function BesVersionHistory() {
                           onChange={handleOptionChange}
                           style={{fontSize: "calc(0.4rem + 0.5vw)", 
                                   height: '1.2rem', 
-                                  width: "20px"}}
+                                  }}
                         >
                           {
                             versionSummary.map((option: any, index: any) => (
