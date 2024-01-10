@@ -4,6 +4,8 @@ import routes from "../../routes";
 import MKBox from "../../components/MKBox";
 import { Card, Grid } from "@mui/material";
 import ModelVulnerabilitiesDetailedTable from "./ModelVulnerabilitiesDetailedTable";
+import MKTypography from "../../components/MKTypography";
+import watchtowerLogo from "../../assets/images/AIShield-watchtower-final-logo.png"
 
 
 function ModelVulnerabilitiesDetailed() {
@@ -20,7 +22,32 @@ function ModelVulnerabilitiesDetailed() {
             </Card>
           </Grid>
         </Grid>
+        <Grid pt={47} container style={{ width: "100%", placeContent: "center", alignItems: "center", height: "fit-content" }}>
+      <Grid item>
+
+      <MKTypography style={{ fontSize: "12px" }}>
+      Powered by 
+      </MKTypography>
+      </Grid>
+      <Grid item style={{ paddingLeft: "8px" }}>
+
+      <img style={{ width: "70px", height: "30px" }} src={watchtowerLogo} />
+      </Grid>
+      </Grid>
       </MKBox>
+
+        <Grid pt={47} container style={{ width: "100%", placeContent: "center", alignItems: "center", height: "fit-content", position: "fixed", bottom: 0 }}>
+      <Grid item>
+
+      <MKTypography style={{ fontSize: "12px" }}>
+      Powered by 
+      </MKTypography>
+      </Grid>
+      <Grid item style={{ paddingLeft: "8px" }}>
+
+      <img style={{ width: "70px", height: "30px" }} src={watchtowerLogo} />
+      </Grid>
+      </Grid>
     </>
   );
 }

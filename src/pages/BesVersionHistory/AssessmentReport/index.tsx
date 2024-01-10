@@ -106,7 +106,7 @@ const FetchCS = ({ data }: any) => {
                   style={{minWidth: "200px"}}>
                 <Grid key={`GridCS2`}>
                     <MKTypography variant="body1"
-                                  key={`MKTypoCS1`} 
+                                  key={`MKTypoCS1`}
                                   color="inherit" 
                                   style={{fontSize:"calc(0.2rem + 0.5vw)", 
                                           justifyContent: "center",
@@ -130,7 +130,7 @@ const FetchCS = ({ data }: any) => {
                 </Grid>
                 <Grid key={`GridCS3`}>
                   <MKTypography variant="body1"
-                                key={`MKTypoCS3`} 
+                                key={`MKTypoCS3`}
                                 color="inherit" 
                                 style={{fontSize:"calc(0.2rem + 0.5vw)", 
                                         justifyContent: "center",
@@ -153,7 +153,7 @@ const FetchCS = ({ data }: any) => {
                 </Grid>
                 <Grid key={`GridCS5`}>
                   <MKTypography variant="body1"
-                                key={`MKTypoCS5`} 
+                                key={`MKTypoCS5`}
                                 color="inherit" 
                                 style={{fontSize:"calc(0.2rem + 0.5vw)", 
                                         justifyContent: "center",
@@ -279,7 +279,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                                   color="inherit" 
                                   key={`MKTypoSASTSQ1`}
                                   style={{fontSize:"calc(0.6rem + 0.5vw)",                
-                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                          paddingLeft: "calc(0.1rem + 0.3vw)"
                                 }}>
                       <b key="BOLDSQ1"> Critical : </b> {sqblocker}
                     </MKTypography>
@@ -304,7 +304,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                                   key={`MKTypoSASTSQ3`} 
                                   color="inherit" 
                                   style={{fontSize:"calc(0.6rem + 0.5vw)",         
-                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                          paddingLeft: "calc(0.1rem + 0.3vw)"
                                 }}>
                       <b key="BOLDSQ3">Medium : </b> {sqmajor}
                     </MKTypography>
@@ -315,7 +315,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
                                   key={`MKTypoSASTSQ4`}
                                   color="inherit" 
                                   style={{fontSize:"calc(0.6rem + 0.5vw)",
-                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                          paddingLeft: "calc(0.1rem + 0.3vw)"
                                       }}>
                       <b key="BOLDSQ4">Low : </b>{sqminor}
                     </MKTypography>
@@ -524,10 +524,10 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
                                 key={`MKTypoL2`} 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      justifyContent: "center",
-                                      display: "flex",
-                                      paddingLeft: "calc(0.1rem + 0.3vw)"
-                                    }}>
+                                        justifyContent: "center",
+                                        display: "flex",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
                     <b key="BOLDL3">No. of Non License Files </b>: {non_lic_files}
                   </MKTypography>
                 </Grid>
@@ -537,10 +537,10 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
                                 key={`MKTypoL3`} 
                                 color="inherit" 
                                 style={{fontSize:"calc(0.2rem + 0.5vw)", 
-                                      justifyContent: "center",
-                                      display: "flex",
-                                      paddingLeft: "calc(0.1rem + 0.3vw)"
-                                    }}>
+                                        justifyContent: "center",
+                                        display: "flex",
+                                        paddingLeft: "calc(0.1rem + 0.3vw)"
+                                      }}>
                     <b key="BOLDL4">Unique Licenses </b>: {license_list}
                   </MKTypography>
                 </Grid>
@@ -601,7 +601,7 @@ const FetchSBOM = ({ data, masterData }: any) => {
   return(<>
           <Grid key={`GRIDSBOMMAIN`}
                 style={{minWidth: "200px"}}>
-                <MKTypography key="MKTypoSBOMMain" variant="body1" 
+                <MKTypography key="MKTypoSBOMMain" variant="body1"
                               color="inherit" 
                               style={{fontSize:"calc(0.3rem + 0.5vw)", 
                                       justifyContent: "center",
@@ -674,7 +674,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
            {jsonData.criticality_score}
         </Typography>
         <Grid key={`GridCriticalutyScore`} 
-              style={{height: "100px", 
+              style={{height: "100px",
                       minWidth: "90%",
                       borderRadius: "3px"
                     }} 
@@ -946,7 +946,7 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
             p={0.3} 
             justifyContent="center" 
             style={{width: "100%"}}>
-        {report.map((value, index) => {
+        {report.map((value) => {
           return (
             <>
               <Grid item 
