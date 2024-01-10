@@ -946,7 +946,7 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
             p={0.3} 
             justifyContent="center" 
             style={{width: "100%"}}>
-        {report.map((value) => {
+        {report.map((value, index) => {
           return (
             <>
               <Grid item 
