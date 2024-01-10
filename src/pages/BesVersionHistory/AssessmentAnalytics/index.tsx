@@ -75,15 +75,15 @@ const FetchCritical = ({ cqRiskData, sqRiskData }: any) => {
         tmpres = sqrisk.map(function(issue:any, innerindex:number){
           if(issue.severity === "BLOCKER" || issue.severity === "CRITICAL"){
             foundCrtical = true;
-            let keyval1: string = "sqriskdata" + {innerindex};
-            let keyval2: string = "innersqriskdata" + {innerindex};
-            let keyval3: string = "sq" + {innerindex};
             return(<>
-              <MKTypography key={keyval1} variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+              <MKTypography key={`SQRISKDATATYPO1${index}${innerindex}`} 
+                            variant="h6" 
+                            color="inherit" 
+                            style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
                                {issue.rule} : 
-                               <MKTypography key={keyval2} variant="body1" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
-                                  {issue.message}
-                               </MKTypography>
+                <MKTypography key={`SQRISKDATATYPO2${index}${innerindex}`} variant="body1" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+                  {issue.message}
+                </MKTypography>
               </MKTypography>  
               </>)
           }else{
@@ -104,8 +104,16 @@ const FetchCritical = ({ cqRiskData, sqRiskData }: any) => {
         foundCrtical = true;
         return ( 
           <>
-            <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
-                          {vul.rule.name} : <Link to={vul.html_url} style={{fontSize:"calc(0.2rem + 0.4vw)"}}>{vul.rule.name}</Link>
+            <MKTypography key={`CQRISKDATATYPO1${index}`} 
+                          variant="h6" 
+                          color="inherit" 
+                          style={{fontSize:"calc(0.3rem + 0.5vw)"}}>
+              {vul.rule.name} : 
+              <Link key={`CQRISKDATALINK1${index}`} 
+                    to={vul.html_url} 
+                    style={{fontSize:"calc(0.2rem + 0.4vw)"}}>
+                {vul.rule.name}
+              </Link>
             </MKTypography>    
           </>
         )
@@ -124,20 +132,26 @@ const FetchCritical = ({ cqRiskData, sqRiskData }: any) => {
       return(<><Grid>{sqres}</Grid></>)
     }else{
       return(<>
-         <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)", 
-                                                          justifyContent: "center",
-                                                          display: "flex"
-                                                          }}>
+         <MKTypography  key="CQNODATA"
+                        variant="h6" 
+                        color="inherit" 
+                        style={{fontSize:"calc(0.3rem + 0.5vw)", 
+                                justifyContent: "center",
+                                display: "flex"
+                              }}>
             No Data Available
         </MKTypography>
       </>)
     }   
   }else{
     return(<>
-      <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)",
-                                                         justifyContent: "center",
-                                                         display: "flex"
-                                                          }}>
+      <MKTypography key="NOCRITICALVUL" 
+                    variant="h6" 
+                    color="inherit" 
+                    style={{fontSize:"calc(0.3rem + 0.5vw)",
+                            justifyContent: "center",
+                            display: "flex"
+                          }}>
          No critical issues found
       </MKTypography>  
     </>)
@@ -194,8 +208,13 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
     if(severityData.length !== 0){
     return (
       <>
-        <Grid item xs={6} md={6} lg={6}>
-          <MKBox mb={6}>
+        <Grid key="RISKPOSTUREGRID1"
+              item 
+              xs={6} 
+              md={6} 
+              lg={6}>
+          <MKBox key="RISKPOSTUREMKBOX1"
+                 mb={6}>
                 <SeverityLevels
                   chartColors={[
                     "#FFBB33",
@@ -211,16 +230,28 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
     );
     }else{
       return(
-      <Grid item xs={6} md={6} lg={6}>
-          <MKBox mb={6}>
-              <Card  style={{height: "70%", width: "200%"}}>
-                  <MKBox>
-                    <MKBox pt={1} pb={1} px={1} > 
-                    <StyledChartWrapper dir="ltr" >
-                       <MKTypography variant="h6" color="inherit" style={{fontSize:"calc(0.3rem + 0.5vw)",
-                                                                          justifyContent: "center",
-                                                                          display: "flex"
-                                                                         }}>
+      <Grid key="RISKPOSTUREGRID2"
+            item 
+            xs={6} 
+            md={6} 
+            lg={6}>
+          <MKBox key="RISKPOSTUREMKBOX2"
+                  mb={6}>
+              <Card  key="RISKPOSTURECARD1"
+                     style={{height: "70%", width: "200%"}}>
+                  <MKBox key="RISKPOSTUREMKBOX3">
+                    <MKBox key="RISKPOSTUREMKBOX4"
+                           pt={1} 
+                           pb={1} 
+                           px={1} > 
+                    <StyledChartWrapper key="RISKPOSTURESC1" dir="ltr" >
+                       <MKTypography key="RISKPOSTURETYPO2" 
+                                     variant="h6" 
+                                     color="inherit" 
+                                     style={{fontSize:"calc(0.3rem + 0.5vw)",
+                                             justifyContent: "center",
+                                             display: "flex"
+                                           }}>
                            No Data Available
                         </MKTypography>
                     </StyledChartWrapper>  
@@ -234,11 +265,25 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
    }else if(report === "Critical Issues"){
     return (
     <>
-    <Grid item xs={12} md={12} lg={12} style={{height: "100%"}}>
-      <MKBox mb={6} style={{height: "100%"}}>
-        <Card  style={{height: "100%", width: "100%"}} sx={{ overflowY: "scroll"}}>
-          <MKBox style={{height: "100%"}}>
-              <MKBox pt={1} pb={1} px={1} style={{height: "100%" }}> 
+    <Grid key="CIGRID1"
+          item 
+          xs={12} 
+          md={12} 
+          lg={12} 
+          style={{height: "100%"}}>
+      <MKBox key="CIMKBOX1"
+             mb={6} 
+             style={{height: "100%"}}>
+        <Card key="CICARD1" 
+              style={{height: "100%", width: "100%"}} 
+              sx={{ overflowY: "scroll"}}>
+          <MKBox key="CIMKBOX2" 
+                 style={{height: "100%"}}>
+              <MKBox key="CIMKBOX3"
+                     pt={1} 
+                     pb={1} 
+                     px={1} 
+                     style={{height: "100%" }}> 
                  <FetchCritical
                     cqRiskData={cqRiskData}
                     sqRiskData={sqRiskData}
@@ -253,8 +298,13 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
    }else if(report === "Vulnerability History"){
     return (
       <>
-          <Grid item xs={12} md={12} lg={12}>
-            <MKBox mb={6}>
+          <Grid key="VHGRID1"
+                item 
+                xs={12} 
+                md={12} 
+                lg={12}>
+            <MKBox key="VHMKBOX1"
+                   mb={6}>
               <VulHistory
                   vuldata={vulHistoryData}
               />  
@@ -271,20 +321,20 @@ const GetHeadings = ({ receivedValue }: any) => {
   //const [fieldInfo, setfieldInfo]: any = React.useState({});
     if(receivedValue === "Risk Posture"){
        return(<> {" "} Risk Posture
-                  <Icon title="Percentage of low, high, critical issues found" sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
+                  <Icon key="RISKPICON" title="Percentage of low, high, critical issues found" sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
                     info
                   </Icon>
               </>);
     }else if(receivedValue === "Critical Issues"){
       return(<> {" "} Top Vulnerabilities
-                <Icon title="Top vulnerabilities found." sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
+                <Icon key="CIICON" title="Top vulnerabilities found." sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
                   info
                 </Icon>
               </>);
       
     }else if(receivedValue === "Vulnerability History"){
       return(<> {" "} CVE History
-                <Icon title="Year wise graph of vulnerabilities found" sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
+                <Icon key="VHICON" title="Year wise graph of vulnerabilities found" sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
                   info
                 </Icon>
               </>);
@@ -301,19 +351,37 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
     "Vulnerability History"
   ];
   return (
-    <Card sx={{ height: "100%" }} >
-      <Grid container p={2} justifyContent="space-between" >
+    <Card key="AAMAINCARD" 
+          sx={{ height: "100%" }} >
+      <Grid key="AAMAINGRID"
+            container 
+            p={2} 
+            justifyContent="space-between" >
         {report.map((value, index) => {
             return (
               <>
-              <Grid alignItems="center" p={1} xs={4} justifyContent="center" style={{ borderRadius: 10, height: "370px", fontSize: "calc(0.5rem + 0.5vw)"}} >
-                <Grid style={{display: "flex", 
+              <Grid item
+                    key={`AAMAINMAPGRID1${index}`} 
+                    alignItems="center" 
+                    p={1} 
+                    xs={4} 
+                    justifyContent="center" 
+                    style={{ borderRadius: 10, 
+                             height: "370px", 
+                             fontSize: "calc(0.5rem + 0.5vw)"}} >
+                <Grid key={`AAMAINMAPGRID2${index}`}
+                      style={{display: "flex", 
                       justifyContent: "center"}}>
-                <GetHeadings receivedValue={value}>
-                </GetHeadings>
+                  <GetHeadings receivedValue={value}>
+                  </GetHeadings>
                 </Grid>  
-                <Grid style={{height: "92%"}}>
-                  <FetchData version={version} name={name} report={value} versionDetails={versionDetails} masterData={masterData}/>
+                <Grid key={`AAMAINMAPGRID3${index}`}
+                      style={{height: "92%"}}>
+                  <FetchData version={version} 
+                             name={name} 
+                             report={value} 
+                             versionDetails={versionDetails} 
+                             masterData={masterData}/>
                 </Grid>
               </Grid>
               </>

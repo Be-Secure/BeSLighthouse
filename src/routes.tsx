@@ -31,6 +31,7 @@ const routes = [
   },
   {
     name: "github",
+    key: "github",
     icon: <GitHubIcon />,
     href: "https://github.com/Be-Secure/BeSLighthouse"
   }
