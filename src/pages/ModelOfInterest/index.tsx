@@ -54,8 +54,6 @@ function statsTable(data: any) {
 
 function ModelOfInterest() {
   const [report, setReport]: any = useState();
-  const [modelType, setModelType]: any = useState();
-  const [riskAnalysis, setRiskAnalysis]: any = useState();
   React.useEffect(() => {
     verifyLink(modelOfInterestData, setReport);
 

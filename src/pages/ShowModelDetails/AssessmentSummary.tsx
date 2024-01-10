@@ -5,7 +5,6 @@ import MKTypography from "../../components/MKTypography";
 import Grid from "@mui/material/Grid";
 import { fetchJsonReport } from "../../utils/fatch_json_report";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
-import { useLocation } from "react-router-dom";
 import StaticAnalysisSummary from "./StaticAnalysisSummary";
 import Divider from "@mui/material/Divider";
 import AdversarialAttackSummary from "./AdversarialAttackSummary";
@@ -28,17 +27,17 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
   }
 };
 
-function displayModelReport(linkStatus: any) {
+function displayModelReport(linkStatus: any, selectedModel: any) {
   return (
     <>
-      <AdversarialAttackSummary />
+      <AdversarialAttackSummary model={selectedModel}/>
       {dividerDiv(1)}
-      <StaticAnalysisSummary data={linkStatus} />
+      <StaticAnalysisSummary data={linkStatus} model={selectedModel}/>
     </>
   );
 }
 
-function assissmentReport(linkStatus: any) {
+function assissmentReport(linkStatus: any, selectedModel: any) {
   return (
     <>
       <MKBox pt={2} px={3}>
@@ -52,26 +51,24 @@ function assissmentReport(linkStatus: any) {
       </MKBox>
       <MKBox p={2}>
         <Grid item xs={12}>
-          {displayModelReport(linkStatus)}
+          {displayModelReport(linkStatus, selectedModel)}
         </Grid>
       </MKBox>
     </>
   );
 }
 
-function AssessmentSummary() {
+function AssessmentSummary({selectedName, selectedModel}: any) {
   const [linkStatus, setLinkStatus]: any = React.useState({});
 
-  const location = useLocation();
-  const selectedMenu: any = location.state.selectedMenu;
   React.useEffect(() => {
-    const link = `${besecureMlAssessmentDataStore}/${selectedMenu.name}/sast/${selectedMenu.name}-sast-summary-report.json`;
+    const link = `${besecureMlAssessmentDataStore}/${selectedName}/sast/${selectedName}-sast-summary-report.json`;
     verifyLink(link, setLinkStatus);
   }, []);
   return (
     <Card sx={{ height: "100%" }}>
       {Object.values(linkStatus).length > 0 ? (
-        assissmentReport(linkStatus)
+        assissmentReport(linkStatus, selectedModel)
       ) : (
         <>
           <MKBox pt={2} px={3} sty>

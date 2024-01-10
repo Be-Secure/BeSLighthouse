@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card";
 import * as React from "react";
-import { useLocation } from "react-router-dom";
 import MKTypography from "../../components/MKTypography";
 import MKBox from "../../components/MKBox";
 import Typography from "@mui/material/Typography";
@@ -61,9 +60,8 @@ function tableRowForModel(keyName: any, value: any, index: number) {
   );
 }
 
-function ShowModelContent() {
-  const location = useLocation();
-  const selectedModel = location.state.selectedMenu;
+function ShowModelContent({model}: any) {
+  const selectedModel = model.length > 0 ? model[0]: {}
   const modelObject = Object.keys(selectedModel);
   let count = 0;
   return (

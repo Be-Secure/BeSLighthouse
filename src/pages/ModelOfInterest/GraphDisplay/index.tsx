@@ -113,7 +113,7 @@ const GraphDisplay = () => {
 
         const handleNodeClick = (event, d) => {
           if (d.model_url && !event.active) {
-            window.open(d.model_url, "_blank");
+            window.open(`/BeSLighthouse/model_report/:${d.name}`, "_blank");
           }
         };
 
@@ -144,7 +144,7 @@ const GraphDisplay = () => {
 
         function getModelUrl(nodeName) {
           const nodeData: boolean = data.find(item => item.name === nodeName);
-          const url: string = "https://be-secure.github.io/BeSLighthouse/model_report/:";
+          const url: string = "/BeSLighthouse/model_report";
           return nodeData ? url+nodeName : null;
         }
 
