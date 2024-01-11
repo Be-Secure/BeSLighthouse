@@ -174,9 +174,15 @@ const FetchSAST = ({ cqData, sqData }: any) => {
   let high: number = 0;
   let medium: number = 0;
   let low: number = 0;
+  let sqissueslen: number = 0;
 
+  if(JSON.stringify(Object.values(sqData).length) !== "0"){
+    sqissueslen = sqData.length;
+  }
+ 
   if (JSON.stringify(Object.values(cqData).length) !== "0" && 
-      JSON.stringify(Object.values(sqData).length) === "0"){
+      sqissueslen === 0){
+
     cqData.forEach ((vul) => {
       if(vul.rule.security_severity_level === "critical"){
         critical++;
@@ -252,13 +258,15 @@ const FetchSAST = ({ cqData, sqData }: any) => {
           </>
         );
   }else if (JSON.stringify(Object.values(cqData).length) === "0" && 
-            JSON.stringify(Object.values(sqData).length) !== "0"){
+            sqissueslen !== 0){
     let sqblocker: number = 0;
     let sqcritical: number = 0;
     let sqmajor: number = 0;
     let sqminor: number = 0;
-
-    sqData[5].forEach ((vul) => {
+    let sqissues: any = "0";
+    sqissues = Object.values(sqData)[5]
+             
+    sqData.forEach ((vul) => {
       if(vul.severity === "BLOCKER"){
         sqblocker++;
       }else if(vul.severity === "CRITICAL"){
@@ -332,8 +340,8 @@ const FetchSAST = ({ cqData, sqData }: any) => {
             </Grid>
           </>
         );
-  } else if (JSON.stringify(Object.values(cqData).length) !== "0" && 
-             JSON.stringify(Object.values(sqData).length) !== "0"){
+  }else if (JSON.stringify(Object.values(cqData).length) !== "0" && 
+             sqissueslen !== 0){
     let cqcritical: number = 0;
     let cqhigh: number = 0;
     let cqmedium: number = 0;
@@ -356,7 +364,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
       } 
     });
 
-    sqData[5].forEach ((vul) => {
+    sqData.forEach ((vul) => {
       if(vul.severity === "BLOCKER"){
         sqblocker++;
       }else if(vul.severity === "CRITICAL"){
@@ -492,7 +500,18 @@ const FetchSAST = ({ cqData, sqData }: any) => {
           </>
         );
   }else{
-    return(<></>);
+    return(
+      <>
+        <Typography variant="body1"
+                key={`MKTypoLBlankCQSQ1`} 
+                color="inherit" 
+                style={{fontSize: "calc(0.3rem + 0.5vw)", 
+                display: "flex", 
+                justifyContent: "center"}}>
+                No SAST issues data Available
+        </Typography>
+      </>
+      );
   }
 };
 
@@ -682,7 +701,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           fetchvulJsonData(link, "codeql", setCQData, setSQData);
       }
     }, [version]);
-
+  
   let jsonDataLength: number = Object.values(jsonData).length;
   if (report === "Criticality Score" && jsonDataLength !== 0){ 
     return (
@@ -746,8 +765,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }
 
   if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
-                                       JSON.stringify(Object.values(sonarqubeData).length) === "0")) { 
-       
+                                       JSON.stringify(Object.values(sonarqubeData).length) === "0")) {
     return (<>
               <Typography variant="h6"
                           key="SASCQTMAINHEADING" 
@@ -767,7 +785,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           );
   }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(sonarqubeData).length) !== "0" && 
                                              JSON.stringify(Object.values(codeQlData).length) === "0")) { 
-      
+    let issues: any =Object.values(sonarqubeData)[5];  
     return (<>
               <Typography variant="h6"
                           key="SASSQTMAINHEADING"
@@ -775,12 +793,12 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
                           style={{fontSize: "calc(0.6rem + 0.5vw)",
                                   display: "flex", 
                                   justifyContent: "center"}}>
-                  {Object.values(sonarqubeData).length}
+                  {sonarqubeData.total}
               </Typography>
                 <MKBox key="MKBOXSASTSQMAINBODY">
                  <FetchSAST 
                      cqData={codeQlData}
-                     sqData={sonarqubeData}
+                     sqData={issues}
                  />
                 </MKBox>
             </>
@@ -788,9 +806,9 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
                                             JSON.stringify(Object.values(sonarqubeData).length) !== "0")){
     const codeqldetails: any = Object.values(codeQlData);
-    const sonardetails: any = Object.values(sonarqubeData);
     const codeqllength: number = Object.values(codeQlData).length;
-    const sonarlength: number = Object.values(sonarqubeData).length;
+    let sqissues: any =Object.values(sonarqubeData)[5];
+    
     return(
       <>
           <Grid item
@@ -818,7 +836,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
                             style={{fontSize: "calc(0.6rem + 0.5vw)", 
                                   justifyContent: "center",
                                   display: "flex"}}>
-                    {sonardetails[0]}
+                    {sonarqubeData.total}
                 </Typography>
              </Grid>
           </Grid>
@@ -828,7 +846,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
               <MKBox key="MKBOXSASTCQSQMAIN1">
                  <FetchSAST 
                      cqData={codeqldetails}
-                     sqData={sonardetails}
+                     sqData={sqissues}
                  />
                 </MKBox>
             </Grid>
