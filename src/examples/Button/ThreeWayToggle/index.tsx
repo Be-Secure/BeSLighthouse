@@ -4,9 +4,10 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ModelTable from '../../../pages/ModelOfInterest/ModelDisplay/ModelTable';
 import SearchVoiList from '../../../pages/VulnerabilityOfInterest/VoiTable/SearchVoiList';
 import GraphView from '../../../pages/ModelOfInterest/GraphDisplay';
-import graphIcon from "../../../assets/images/data-flow.png"
-import tableIcon from "../../../assets/images/cells.png"
-import arcIcon from "../../../assets/images/arc.png"
+import graphIcon from "../../../assets/images/data-flow.png";
+import tableIcon from "../../../assets/images/cells.png";
+import arcIcon from "../../../assets/images/arc.png";
+import ArcDiagram from '../../../pages/ModelOfInterest/ArcDiagram';
 
 function switchView(viewValue:any, filteredCveReport: any, filterName: any, handleFilterByName: any) {
   switch (viewValue) {
@@ -27,7 +28,9 @@ function switchView(viewValue:any, filteredCveReport: any, filterName: any, hand
     );
   case "arc":
     // Add the arc component here
-    return (<p style={{ paddingTop: "10%", justifyContent: "center", display: "flex", paddingBottom: "10%"}}>Not Available</p>);
+    return (
+      <ArcDiagram />
+    );
   default:
     return null;
 }
