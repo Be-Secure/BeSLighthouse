@@ -169,7 +169,7 @@ function BesVersionHistory() {
                                       variant="h6"
                                       fontWeight="bold"
                                       textTransform="capitalize"
-                                      style={{fontSize: "calc(0.4rem + 0.5vw)"}}        
+                                      style={{fontSize: "15px"}}        
                                       >
                           Project Name: &nbsp;
                         </MKTypography>
@@ -177,7 +177,7 @@ function BesVersionHistory() {
                                        variant="h6"
                                        fontWeight="regular"
                                        color="text"
-                                       style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                       style={{fontSize: "15px"}}
                                       >
                           {item.name}
                         </MKTypography>
@@ -195,7 +195,7 @@ function BesVersionHistory() {
                                        variant="h6"
                                        fontWeight="bold"
                                        textTransform="capitalize"
-                                       style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                       style={{fontSize: "15px"}}
                                       >
                           Version: &nbsp;
                         </MKTypography>
@@ -204,7 +204,7 @@ function BesVersionHistory() {
                                 className={classes.select}
                                 value={selectedOption}
                                 onChange={handleOptionChange}
-                                style={{fontSize: "calc(0.4rem + 0.5vw)", 
+                                style={{fontSize: "15px", 
                                         height: '1.2rem', 
                                       }}
                                 >
@@ -230,7 +230,7 @@ function BesVersionHistory() {
                                         variant="h6"
                                         fontWeight="bold"
                                         textTransform="capitalize"
-                                        style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                        style={{fontSize: "15px"}}
                                         >
                             Score: &nbsp;
                           </MKTypography>
@@ -238,7 +238,7 @@ function BesVersionHistory() {
                                         variant="h6"
                                         fontWeight="regular"
                                         color="text"
-                                        style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                        style={{fontSize: "15px"}}
                                       >
                             {definedScore}
                           </MKTypography>
@@ -258,7 +258,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             BeS Tracking Id: &nbsp;
                       </MKTypography>
@@ -266,7 +266,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="regular"
                                     color="text"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             {item.id}
                       </MKTypography>
@@ -282,7 +282,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             BeS Tech Stack: &nbsp;
                       </MKTypography>
@@ -290,7 +290,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="regular"
                                     color="text"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             {item.bes_technology_stack}
                       </MKTypography>
@@ -306,7 +306,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             BeS Environment: &nbsp;
                       </MKTypography>
@@ -314,7 +314,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="regular"
                                     color="text"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   > 
                           <Link key={`TOPLINK1${index}`}
                                 to={envpath}>
@@ -347,7 +347,7 @@ function BesVersionHistory() {
                                         variant="h6"
                                         fontWeight="bold"
                                         textTransform="capitalize"
-                                        style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                        style={{fontSize: "15px"}}
                                       >
                           Description: &nbsp;
                         </MKTypography>
@@ -355,7 +355,7 @@ function BesVersionHistory() {
                                       variant="h6"
                                       fontWeight="regular"
                                       color="text"
-                                      style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                      style={{fontSize: "15px"}}
                                     >
                           {item.description}
                         </MKTypography>
