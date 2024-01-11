@@ -38,8 +38,8 @@ function RightFuzzing() {
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
   }, []);
   return (
-    <Grid container width="34%">
-      <Grid item width={"80%"} ml="auto">
+    <Grid container width={"17%"} mr={2}>
+      <Grid item width={"100%"}>
         <MKBox mb={1}>
           <AttackVulnerabilityReport
             keyvalue="RightEvasion"
@@ -50,8 +50,6 @@ function RightFuzzing() {
             attackTimmer={loadingEvasion}
             report={evasion}
           />
-        </MKBox>
-        <MKBox mb={1}>
           <AttackVulnerabilityReport
             keyvalue="RightInference"
             position={{ color: "info" }}
@@ -61,8 +59,7 @@ function RightFuzzing() {
             attackTimmer={loadingInference}
             report={inference}
           />
-        </MKBox>
-        <MKBox mb={1}>
+
           <AttackVulnerabilityReport
             keyvalue="RightExtraction"
             position={{ color: "info" }}
@@ -72,8 +69,7 @@ function RightFuzzing() {
             attackTimmer={loadingExtraction}
             report={extraction}
           />
-        </MKBox>
-        <MKBox mb={1}>
+
           <AttackVulnerabilityReport
             keyvalue="RightDataPoisoning"
             position={{ color: "info" }}
