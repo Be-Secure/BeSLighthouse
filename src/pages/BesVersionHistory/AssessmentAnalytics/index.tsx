@@ -237,7 +237,9 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
                         color="inherit" 
                         style={{fontSize:"calc(0.3rem + 0.5vw)",
                                  margin: "auto",
-                                 height: "120px"
+                                 height: "120px",
+                                 display: "flex",
+                                 alignItems: "center"
                               }}
                               >
               No Data Available
@@ -307,7 +309,9 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
                                        color="inherit" 
                                        style={{fontSize:"calc(0.3rem + 0.5vw)",
                                                 margin: "auto",
-                                                height: "120px"
+                                                height: "120px",
+                                                display: "flex",
+                                                alignItems: "center"
                                              }}
                                              >
                              No Data Available
