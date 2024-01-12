@@ -2,13 +2,12 @@ import * as React from "react";
 
 import Card from "@mui/material/Card";
 
-import { StyledChartWrapper } from "../StyledChartWrapper";
 import ReactApexChart from "react-apexcharts";
 import { useTheme } from "@mui/material/styles";
 import useChart from "../useChart";
 import MKBox from "../../../../components/MKBox";
-import MKTypography from "../../../../components/MKTypography";
 import { fNumber } from "../../../../utils/formatNumber";
+import { Typography } from "@mui/material";
 
 function Language({ title, chartColors, chartData }: any) {
   const theme = useTheme();
@@ -21,44 +20,43 @@ function Language({ title, chartColors, chartData }: any) {
     colors: chartColors,
     labels: chartLabels,
     stroke: { colors: [theme.palette.background.paper] },
-    legend: { floating: true, horizontalAlign: "center" },
+    legend: { position: "right", offsetY: -20 },
     dataLabels: { enabled: true, dropShadow: { enabled: false } },
     tooltip: {
       fillSeriesColor: false,
       y: {
         formatter: (seriesName: any) => fNumber(seriesName),
         title: {
-          formatter: (seriesName: any) => `${seriesName}`,
-        },
-      },
+          formatter: (seriesName: any) => `${seriesName}`
+        }
+      }
     },
     plotOptions: {
-      pie: { donut: { labels: { show: false } } },
-    },
+      pie: { donut: { labels: { show: false } } }
+    }
   });
 
   return (
-    <Card sx={{ height: "100%" }}>
-      <MKBox>
-        <MKBox pt={1} pb={1} px={1}>
-          <MKTypography
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            variant="h5"
-            textTransform="capitalize"
-          >
-            {title}
-          </MKTypography>
-          <StyledChartWrapper dir="ltr">
-            <ReactApexChart
-              type="pie"
-              series={chartSeries}
-              options={chartOptions}
-              height={260}
-            />
-          </StyledChartWrapper>
-        </MKBox>
+    <Card>
+      <MKBox pt={1} pb={1} px={1}>
+        <Typography
+          display="flex"
+          justifyContent="left"
+          alignItems="left"
+          color="black"
+          fontSize="20px"
+          variant="h6"
+          pl={2}
+          textTransform="capitalize"
+        >
+          {title}
+        </Typography>
+        <ReactApexChart
+          type="pie"
+          series={chartSeries}
+          options={chartOptions}
+          height={195}
+        />
       </MKBox>
     </Card>
   );
