@@ -1030,7 +1030,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       color="inherit"
       style={{
         fontSize: "12px", display: "flex",
-        justifyContent: "center", alignItems: "center"
+        justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
       }}>
       Not Available
     </MKTypography>
