@@ -2,11 +2,14 @@ import React from "react";
 
 import Grid from "@mui/material/Grid";
 import ModelAttack from "../AttackType/ModelAttack";
+import MKBox from "../../../components/MKBox";
 
 function LeftFuzzing({ evasion, inference, extraction, dataPoisoning  }: any) {
   return (
-    <Grid container width="26%">
-      <Grid item width={"70%"}>
+    <Grid container width={"20%"}>
+      <Grid item width={"85%"}>
+      <MKBox mb={1}>
+
         <ModelAttack
           keyvalue="startEvasion"
           name="Evasion"
@@ -35,6 +38,7 @@ function LeftFuzzing({ evasion, inference, extraction, dataPoisoning  }: any) {
           description="Inject misleading data into the training dataset."
           report={dataPoisoning}
         />
+        </MKBox>
       </Grid>
     </Grid>
   );

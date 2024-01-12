@@ -201,20 +201,21 @@ function FuzzingModelPage() {
           <Grid item xs={6}>
             <p
               style={{
-                paddingLeft: "8%",
+                paddingLeft: "12%",
                 paddingRight: "41%",
-                color: "#587f2f"
+                color: "#587f2f",
+                textAlign: "center"
               }}
             >
               Model: {selectedFuzz.name}
             </p>
           </Grid>
           <Grid item xs={2}>
-            <p style={{ color: "red" }}>OUTCOMES</p>
+            <p style={{ color: "red", textAlign: "center", paddingRight: "12%" }}>OUTCOMES</p>
           </Grid>
         </Grid>
       </MKBox>
-      <Grid container pl={2}>
+      <Grid container pl={2} style={{ placeContent: "space-between" }}>
         <LeftFuzzing
           evasion={evasion}
           inference={inference}
@@ -224,19 +225,29 @@ function FuzzingModelPage() {
         <DefenseSummary />
         <RightFuzzing />
       </Grid>
-      
-      <Grid container style={{ width: "100%", placeContent: "center", alignItems: "center", height: "24px", position: "fixed", bottom: 0 }}>
-      <Grid item>
 
-      <MKTypography style={{ fontSize: "12px" }}>
-      Powered by 
-      </MKTypography>
-      </Grid>
-      <Grid item style={{ paddingLeft: "8px" }}>
+      <Grid container style={{ width: "100%", placeContent: "center", alignItems: "center", height: "22px", position: "absolute" }}>
+        <Grid item>
 
-      <img style={{ width: "60px", height: "75px", paddingTop: "6px" }} src={aishieldLogo} />
+          <MKTypography style={{ fontSize: "12px" }}>
+            Powered by
+          </MKTypography>
+        </Grid>
+        <Grid item style={{ paddingLeft: "8px" }}>
+          <a
+            style={{
+              color: "grey",
+              cursor: "pointer"
+            }}
+            href={`https://www.boschaishield.com/home.html`}
+            title={"Click to view boschaishield webpage"}
+            target="_blank"
+          >
+            <img style={{ width: "60px", height: "75px", paddingTop: "6px" }} src={aishieldLogo} />
+          </a>
+        </Grid>
       </Grid>
-      </Grid>
+
     </div>
   );
 }

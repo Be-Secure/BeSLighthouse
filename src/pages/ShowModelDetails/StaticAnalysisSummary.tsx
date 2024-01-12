@@ -104,7 +104,7 @@ export default function StaticAnalysisSummary({ data, model }: any): any {
                     cursor: "pointer"
                   }}
                   href={`https://github.com/bosch-aisecurity-aishield/watchtower`}
-                  title={"Click to view watchtower repo"}
+                  title={"Click to go to AIShield Watchtower repo"}
                   target="_blank"
                 >
                   AIShield Watchtower

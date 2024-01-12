@@ -2,14 +2,12 @@ import * as React from "react";
 
 import Card from "@mui/material/Card";
 
-
 import { useTheme } from "@mui/material/styles";
 import ReactApexChart from "react-apexcharts";
 import useChart from "../useChart";
 import { fNumber } from "../../../../utils/formatNumber";
-import { StyledChartWrapper } from "../StyledChartWrapper";
 import MKBox from "../../../../components/MKBox";
-import MKTypography from "../../../../components/MKTypography";
+import { Typography } from "@mui/material";
 
 function TecStack({ title, chartColors, chartData }: any) {
   const theme = useTheme();
@@ -22,42 +20,43 @@ function TecStack({ title, chartColors, chartData }: any) {
     colors: chartColors,
     labels: chartLabels,
     stroke: { colors: [theme.palette.background.paper] },
-    legend: { floating: true, horizontalAlign: "center" },
+    legend: { position: "right", offsetY: -20 },
     dataLabels: { enabled: true, dropShadow: { enabled: false } },
     tooltip: {
       fillSeriesColor: false,
       y: {
         formatter: (seriesName: any) => fNumber(seriesName),
         title: {
-          formatter: (seriesName: any) => `${seriesName}`,
-        },
-      },
+          formatter: (seriesName: any) => `${seriesName}`
+        }
+      }
     },
     plotOptions: {
-      pie: { donut: { labels: { show: false } } },
-    },
+      pie: { donut: { labels: { show: false } } }
+    }
   });
   return (
-    <Card sx={{ height: "100%" }}>
+    <Card>
       <MKBox>
         <MKBox pt={1} pb={1} px={1}>
-          <MKTypography
+          <Typography
             display="flex"
-            justifyContent="center"
-            alignItems="center"
-            variant="h5"
+            justifyContent="left"
+            alignItems="left"
+            color="black"
+            fontSize="20px"
+            variant="h6"
             textTransform="capitalize"
+            pl={2}
           >
             {title}
-          </MKTypography>
-          <StyledChartWrapper dir="ltr">
-            <ReactApexChart
-              type="pie"
-              series={chartSeries}
-              options={chartOptions}
-              height={260}
-            />
-          </StyledChartWrapper>
+          </Typography>
+          <ReactApexChart
+            type="pie"
+            series={chartSeries}
+            options={chartOptions}
+            height={195}
+          />
         </MKBox>
       </MKBox>
     </Card>

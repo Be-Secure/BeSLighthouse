@@ -230,88 +230,95 @@ const FetchData = ({version, name, report, versionDetails, masterData}: any) => 
     );
     }else{
       return(
-      <Grid key="RISKPOSTUREGRID2"
-            item 
-            xs={6} 
-            md={6} 
-            lg={6}>
-          <MKBox key="RISKPOSTUREMKBOX2"
-                  mb={6}>
-              <Card  key="RISKPOSTURECARD1"
-                     style={{height: "70%", width: "200%"}}>
-                  <MKBox key="RISKPOSTUREMKBOX3">
-                    <MKBox key="RISKPOSTUREMKBOX4"
-                           pt={1} 
-                           pb={1} 
-                           px={1} > 
-                    <StyledChartWrapper key="RISKPOSTURESC1" dir="ltr" >
-                       <MKTypography key="RISKPOSTURETYPO2" 
-                                     variant="h6" 
-                                     color="inherit" 
-                                     style={{fontSize:"calc(0.3rem + 0.5vw)",
-                                             justifyContent: "center",
-                                             display: "flex"
-                                           }}>
-                           No Data Available
-                        </MKTypography>
-                    </StyledChartWrapper>  
-                    </MKBox>
-                  </MKBox>
-              </Card>
-          </MKBox>
-      </Grid>
+        <Card  key="RISKPOSTURECARD1"
+        style={{height: "266px"}}>
+          <MKTypography key="RISKPOSTURETYPO2" 
+                        variant="h6" 
+                        color="inherit" 
+                        style={{fontSize:"calc(0.3rem + 0.5vw)",
+                                 margin: "auto",
+                                 height: "120px",
+                                 display: "flex",
+                                 alignItems: "center"
+                              }}
+                              >
+              No Data Available
+           </MKTypography>
+ </Card>
       );
     }
-   }else if(report === "Critical Issues"){
-    return (
-    <>
-    <Grid key="CIGRID1"
-          item 
-          xs={12} 
-          md={12} 
-          lg={12} 
-          style={{height: "100%"}}>
-      <MKBox key="CIMKBOX1"
-             mb={6} 
-             style={{height: "100%"}}>
-        <Card key="CICARD1" 
-              style={{height: "100%", width: "100%"}} 
-              sx={{ overflowY: "scroll"}}>
-          <MKBox key="CIMKBOX2" 
-                 style={{height: "100%"}}>
-              <MKBox key="CIMKBOX3"
-                     pt={1} 
-                     pb={1} 
-                     px={1} 
-                     style={{height: "100%" }}> 
-                 <FetchCritical
-                    cqRiskData={cqRiskData}
-                    sqRiskData={sqRiskData}
-                  />
-              </MKBox>
-          </MKBox>
-        </Card>
-      </MKBox>
-    </Grid>
-    </> 
-    );
-   }else if(report === "Vulnerability History"){
+}
+// else if(report === "Critical Issues"){
+//     return (
+//     <>
+//     <Grid key="CIGRID1"
+//           item 
+//           xs={12} 
+//           md={12} 
+//           lg={12} 
+//           style={{height: "100%"}}>
+//       <MKBox key="CIMKBOX1"
+//              mb={6} 
+//              style={{height: "100%"}}>
+//         <Card key="CICARD1" 
+//               style={{height: "100%", width: "100%"}} 
+//               sx={{ overflowY: "scroll"}}>
+//           <MKBox key="CIMKBOX2" 
+//                  style={{height: "100%"}}>
+//               <MKBox key="CIMKBOX3"
+//                      pt={1} 
+//                      pb={1} 
+//                      px={1} 
+//                      style={{height: "100%" }}> 
+//                  <FetchCritical
+//                     cqRiskData={cqRiskData}
+//                     sqRiskData={sqRiskData}
+//                   />
+//               </MKBox>
+//           </MKBox>
+//         </Card>
+//       </MKBox>
+//     </Grid>
+//     </> 
+//     );
+//    }
+  else if(report === "Vulnerability History"){
+    if(vulHistoryData.length !== 0){
     return (
       <>
           <Grid key="VHGRID1"
                 item 
                 xs={12} 
                 md={12} 
-                lg={12}>
-            <MKBox key="VHMKBOX1"
-                   mb={6}>
+                lg={12}
+                >
               <VulHistory
                   vuldata={vulHistoryData}
               />  
-            </MKBox>
           </Grid>
       </>
     );
+    }else
+    {
+      return(
+
+                <Card  key="RISKPOSTURECARD1"
+                       style={{height: "266px"}}>
+                         <MKTypography key="RISKPOSTURETYPO2" 
+                                       variant="h6" 
+                                       color="inherit" 
+                                       style={{fontSize:"calc(0.3rem + 0.5vw)",
+                                                margin: "auto",
+                                                height: "120px",
+                                                display: "flex",
+                                                alignItems: "center"
+                                             }}
+                                             >
+                             No Data Available
+                          </MKTypography>
+                </Card>
+        );
+    }
    }else{
     return (<></>);
    }
@@ -326,10 +333,11 @@ const GetHeadings = ({ receivedValue }: any) => {
                   </Icon>
               </>);
     }else if(receivedValue === "Critical Issues"){
-      return(<> {" "} Top Vulnerabilities
+      return(<> 
+      {/* {" "} Top Vulnerabilities
                 <Icon key="CIICON" title="Top vulnerabilities found." sx={{fontSize: 'calc(0.3rem + 0.4vw) !important'}}>
                   info
-                </Icon>
+                </Icon> */}
               </>);
       
     }else if(receivedValue === "Vulnerability History"){
@@ -339,16 +347,16 @@ const GetHeadings = ({ receivedValue }: any) => {
                 </Icon>
               </>);
      
-    }else{
+    }else
       return(receivedValue);
-    }
+
 }
 
 function AssessmentAnalytics({ title, name, version, versionDetails, masterData, ...other }: any) {
   const report: string[] = [
     "Risk Posture",
-    "Critical Issues",
-    "Vulnerability History"
+    "Vulnerability History",
+    // "Critical Issues"
   ];
   return (
     <Card key="AAMAINCARD" 
@@ -356,7 +364,9 @@ function AssessmentAnalytics({ title, name, version, versionDetails, masterData,
       <Grid key="AAMAINGRID"
             container 
             p={2} 
-            justifyContent="space-between" >
+            // spacing={1} 
+            justifyContent={"space-evenly"}
+            >
         {report.map((value, index) => {
             return (
               <>
