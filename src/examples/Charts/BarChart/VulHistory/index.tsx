@@ -76,7 +76,7 @@ function VulHistory({vuldata} : any) {
   });
 
   return (
-    <Card  style={{height: "70%", width: "100%"}}>
+    <Card  style={{height: "70%"}}>
       <MKBox>
         <MKBox pt={1} pb={1} px={1}>        
           <StyledChartWrapper dir="ltr">
@@ -84,7 +84,7 @@ function VulHistory({vuldata} : any) {
               type="bar"
               series={chartSeries}
               options={chartOptions}
-              height={250}          
+              height={250}        
             />
           </StyledChartWrapper>
         </MKBox>
