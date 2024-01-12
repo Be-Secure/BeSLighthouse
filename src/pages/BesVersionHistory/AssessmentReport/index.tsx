@@ -83,7 +83,7 @@ const FetchLowScores = ({ data }: any) => {
         key={`MKTypoSC${index}`}
         color="inherit"
         style={{
-          fontSize: "calc(0.2rem + 0.5vw)",
+          fontSize: "12px",
           paddingLeft: "calc(0.1rem + 0.3vw)"
         }}>
         <b key={`BOLDSC${index}`}>{iss.name} </b>: {iss.reason}
@@ -103,14 +103,14 @@ const FetchLowScores = ({ data }: any) => {
 const FetchCS = ({ data }: any) => {
   return (<>
     <Grid key={`GridCS1`}
-      style={{ minWidth: "200px" }}>
+      style={{ minWidth: "200px", textAlign: "left", paddingTop: "5px" }}>
       <Grid key={`GridCS2`}>
         <MKTypography variant="body1"
           key={`MKTypoCS1`}
           color="inherit"
           style={{
-            fontSize: "calc(0.2rem + 0.5vw)",
-            justifyContent: "center",
+            fontSize: "12px",
+            // justifyContent: "center",
             display: "flex",
             paddingLeft: "calc(0.1rem + 0.3vw)"
           }}>
@@ -122,8 +122,8 @@ const FetchCS = ({ data }: any) => {
           key={`MKTypoCS2`}
           color="inherit"
           style={{
-            fontSize: "calc(0.2rem + 0.5vw)",
-            justifyContent: "center",
+            fontSize: "12px",
+            // justifyContent: "center",
             display: "flex",
             paddingLeft: "calc(0.1rem + 0.3vw)"
           }}>
@@ -135,8 +135,8 @@ const FetchCS = ({ data }: any) => {
           key={`MKTypoCS3`}
           color="inherit"
           style={{
-            fontSize: "calc(0.2rem + 0.5vw)",
-            justifyContent: "center",
+            fontSize: "12px",
+            // justifyContent: "center",
             display: "flex",
             paddingLeft: "calc(0.1rem + 0.3vw)"
           }}>
@@ -148,8 +148,8 @@ const FetchCS = ({ data }: any) => {
           key={`MKTypoCS4`}
           color="inherit"
           style={{
-            fontSize: "calc(0.2rem + 0.5vw)",
-            justifyContent: "center",
+            fontSize: "12px",
+            // justifyContent: "center",
             display: "flex",
             paddingLeft: "calc(0.1rem + 0.3vw)"
           }}>
@@ -161,8 +161,8 @@ const FetchCS = ({ data }: any) => {
           key={`MKTypoCS5`}
           color="inherit"
           style={{
-            fontSize: "calc(0.2rem + 0.5vw)",
-            justifyContent: "center",
+            fontSize: "12px",
+            // justifyContent: "center",
             display: "flex",
             paddingLeft: "calc(0.1rem + 0.3vw)"
           }}>
@@ -182,22 +182,15 @@ const FetchSAST = ({ cqData, sqData }: any) => {
   let low: number = 0;
   let sqissueslen: number = 0;
 
-<<<<<<< HEAD
-  if (JSON.stringify(Object.values(cqData).length) !== "0" &&
-    JSON.stringify(Object.values(sqData).length) === "0") {
-    cqData.forEach((vul) => {
-      if (vul.rule.security_severity_level === "critical") {
-=======
-  if(JSON.stringify(Object.values(sqData).length) !== "0"){
+  if (JSON.stringify(Object.values(sqData).length) !== "0") {
     sqissueslen = sqData.length;
   }
- 
-  if (JSON.stringify(Object.values(cqData).length) !== "0" && 
-      sqissueslen === 0){
 
-    cqData.forEach ((vul) => {
-      if(vul.rule.security_severity_level === "critical"){
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
+  if (JSON.stringify(Object.values(cqData).length) !== "0" &&
+    sqissueslen === 0) {
+
+    cqData.forEach((vul) => {
+      if (vul.rule.security_severity_level === "critical") {
         critical++;
       } else if (vul.rule.security_severity_level === "high") {
         high++;
@@ -208,13 +201,14 @@ const FetchSAST = ({ cqData, sqData }: any) => {
       }
     });
 
-<<<<<<< HEAD
     return (<>
       <Grid key={`GRIDSASTCQ1`}
         style={{
           minWidth: "calc(10rem + 5vw)",
           marginTop: "1.1rem",
-          marginLeft: "1.5rem"
+          // marginLeft: "1.5rem",
+          fontSize: "15px",
+          justifyContent: "left"
         }}>
         <Grid container
           key={`GRIDSASTCQ2`}>
@@ -225,8 +219,8 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               key={`MKTYPOSASTCQ1`}
               color="inherit"
               style={{
-                fontSize: "12px",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
+                fontSize: "calc(0.6rem + 0.5vw)",
+                // paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDCQ1">Critical : </b>{critical}
             </MKTypography>
@@ -238,8 +232,8 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               key={`MKTypoSASTCQ2`}
               color="inherit"
               style={{
-                fontSize: "12px",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
+                fontSize: "calc(0.6rem + 0.5vw)",
+                // paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDCQ2">High : </b>{high}
             </MKTypography>
@@ -254,7 +248,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               key={`MKTypoSASTCQ3`}
               color="inherit"
               style={{
-                fontSize: "12px",
+                fontSize: "calc(0.6rem + 0.5vw)",
                 paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDCQ3">Medium : </b>{medium}
@@ -267,7 +261,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               variant="body1"
               color="inherit"
               style={{
-                fontSize: "12px",
+                fontSize: "calc(0.6rem + 0.5vw)",
                 paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDCQ4"> Low : </b> {low}
@@ -278,88 +272,16 @@ const FetchSAST = ({ cqData, sqData }: any) => {
     </>
     );
   } else if (JSON.stringify(Object.values(cqData).length) === "0" &&
-    JSON.stringify(Object.values(sqData).length) !== "0") {
-=======
-    return(<>
-            <Grid key={`GRIDSASTCQ1`}
-                  style={{minWidth: "calc(10rem + 5vw)", 
-                          marginTop:"1.1rem", 
-                          marginLeft: "1.5rem"}}>
-              <Grid container
-                    key={`GRIDSASTCQ2`}>
-                  <Grid item
-                        xs={6}
-                        key={`GRIDSASTCQ3`}>
-                    <MKTypography variant="body1"
-                                key={`MKTYPOSASTCQ1`} 
-                                color="inherit" 
-                                style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                        paddingLeft: "calc(0.1rem + 0.3vw)"
-                                }}>
-                      <b key="BOLDCQ1">Critical : </b>{critical}
-                    </MKTypography>
-                  </Grid>
-                  <Grid item
-                        key={`GRIDSASTCQ4`}
-                        xs={6}>
-                    <MKTypography variant="body1"
-                                  key={`MKTypoSASTCQ2`} 
-                                  color="inherit" 
-                                  style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                          paddingLeft: "calc(0.1rem + 0.3vw)"
-                                  }}>
-                      <b key="BOLDCQ2">High : </b>{high}
-                    </MKTypography>
-                  </Grid>
-                </Grid>
-                <Grid key={`GRIDSASTCQ5`}
-                      container>
-                  <Grid item
-                        key={`GRIDSASTCQ6`}
-                        xs={6}>
-                    <MKTypography variant="body1"
-                                  key={`MKTypoSASTCQ3`} 
-                                  color="inherit" 
-                                  style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                        paddingLeft: "calc(0.1rem + 0.3vw)"
-                                  }}>
-                      <b key="BOLDCQ3">Medium : </b>{medium}
-                    </MKTypography>
-                  </Grid>
-                  <Grid item
-                        key={`GRIDSASTCQ7`}
-                        xs={6}>
-                    <MKTypography key={`MKTypoSASTCQ4`}
-                                  variant="body1" 
-                                  color="inherit" 
-                                  style={{fontSize:"calc(0.6rem + 0.5vw)", 
-                                          paddingLeft: "calc(0.1rem + 0.3vw)"
-                                  }}>
-                      <b key="BOLDCQ4"> Low : </b> {low}
-                    </MKTypography>
-                  </Grid>
-              </Grid>
-            </Grid>
-          </>
-        );
-  }else if (JSON.stringify(Object.values(cqData).length) === "0" && 
-            sqissueslen !== 0){
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
+    sqissueslen !== 0) {
     let sqblocker: number = 0;
     let sqcritical: number = 0;
     let sqmajor: number = 0;
     let sqminor: number = 0;
-<<<<<<< HEAD
-
-    sqData[5].forEach((vul) => {
-      if (vul.severity === "BLOCKER") {
-=======
     let sqissues: any = "0";
     sqissues = Object.values(sqData)[5]
-             
-    sqData.forEach ((vul) => {
-      if(vul.severity === "BLOCKER"){
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
+
+    sqData.forEach((vul) => {
+      if (vul.severity === "BLOCKER") {
         sqblocker++;
       } else if (vul.severity === "CRITICAL") {
         sqcritical++;
@@ -370,7 +292,6 @@ const FetchSAST = ({ cqData, sqData }: any) => {
       }
     });
 
-<<<<<<< HEAD
     return (<>
       <Grid key={`GRIDSASTSQ1`}
         style={{
@@ -387,7 +308,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               color="inherit"
               key={`MKTypoSASTSQ1`}
               style={{
-                fontSize: "12px",
+                fontSize: "calc(0.6rem + 0.5vw)",
                 paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDSQ1"> Critical : </b> {sqblocker}
@@ -400,7 +321,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               key={`MKTypoSASTSQ2`}
               color="inherit"
               style={{
-                fontSize: "12px",
+                fontSize: "calc(0.6rem + 0.5vw)",
                 paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDSQ2"> High : </b> {sqcritical}
@@ -416,7 +337,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               key={`MKTypoSASTSQ3`}
               color="inherit"
               style={{
-                fontSize: "12px",
+                fontSize: "calc(0.6rem + 0.5vw)",
                 paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDSQ3">Medium : </b> {sqmajor}
@@ -429,7 +350,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               key={`MKTypoSASTSQ4`}
               color="inherit"
               style={{
-                fontSize: "12px",
+                fontSize: "calc(0.6rem + 0.5vw)",
                 paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDSQ4">Low : </b>{sqminor}
@@ -440,73 +361,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
     </>
     );
   } else if (JSON.stringify(Object.values(cqData).length) !== "0" &&
-    JSON.stringify(Object.values(sqData).length) !== "0") {
-=======
-    return(<>
-            <Grid key={`GRIDSASTSQ1`}
-                  style={{minWidth: "calc(10rem + 5vw)", 
-                          marginTop:"1.1rem", 
-                          marginLeft: "1.5rem"}}>
-              <Grid key={`GRIDSASTSQ2`}
-                    container>
-                  <Grid item
-                        key={`GRIDSASTSQ3`}
-                        xs={6}>
-                    <MKTypography variant="body1" 
-                                  color="inherit" 
-                                  key={`MKTypoSASTSQ1`}
-                                  style={{fontSize:"calc(0.6rem + 0.5vw)",                
-                                          paddingLeft: "calc(0.1rem + 0.3vw)"
-                                }}>
-                      <b key="BOLDSQ1"> Critical : </b> {sqblocker}
-                    </MKTypography>
-                  </Grid>
-                  <Grid item
-                        key={`GRIDSASTSQ4`}
-                        xs={6}>
-                    <MKTypography variant="body1"
-                                  key={`MKTypoSASTSQ2`} 
-                                  color="inherit" 
-                                  style={{fontSize:"calc(0.6rem + 0.5vw)",       
-                                          paddingLeft: "calc(0.1rem + 0.3vw)"
-                                  }}>
-                     <b key="BOLDSQ2"> High : </b> {sqcritical}
-                    </MKTypography>
-                  </Grid>
-                </Grid>
-                <Grid key={`GRIDSASTSQ5}`}
-                      container>
-                  <Grid item
-                        key={`GRIDSASTSQ6`}
-                        xs={6}>
-                    <MKTypography variant="body1"
-                                  key={`MKTypoSASTSQ3`} 
-                                  color="inherit" 
-                                  style={{fontSize:"calc(0.6rem + 0.5vw)",         
-                                          paddingLeft: "calc(0.1rem + 0.3vw)"
-                                }}>
-                      <b key="BOLDSQ3">Medium : </b> {sqmajor}
-                    </MKTypography>
-                  </Grid>
-                  <Grid item
-                        key={`GRIDSASTSQ7`}
-                        xs={6}>
-                    <MKTypography variant="body1"
-                                  key={`MKTypoSASTSQ4`}
-                                  color="inherit" 
-                                  style={{fontSize:"calc(0.6rem + 0.5vw)",
-                                          paddingLeft: "calc(0.1rem + 0.3vw)"
-                                      }}>
-                      <b key="BOLDSQ4">Low : </b>{sqminor}
-                    </MKTypography>
-                  </Grid>
-              </Grid>
-            </Grid>
-          </>
-        );
-  }else if (JSON.stringify(Object.values(cqData).length) !== "0" && 
-             sqissueslen !== 0){
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
+    sqissueslen !== 0) {
     let cqcritical: number = 0;
     let cqhigh: number = 0;
     let cqmedium: number = 0;
@@ -529,13 +384,8 @@ const FetchSAST = ({ cqData, sqData }: any) => {
       }
     });
 
-<<<<<<< HEAD
-    sqData[5].forEach((vul) => {
+    sqData.forEach((vul) => {
       if (vul.severity === "BLOCKER") {
-=======
-    sqData.forEach ((vul) => {
-      if(vul.severity === "BLOCKER"){
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
         sqblocker++;
       } else if (vul.severity === "CRITICAL") {
         sqcritical++;
@@ -616,7 +466,6 @@ const FetchSAST = ({ cqData, sqData }: any) => {
               </Grid>
             </Grid>
           </Grid>
-<<<<<<< HEAD
           <Grid item
             key={`GRIDSASTCQSQ10`}
             xs={6}>
@@ -687,24 +536,20 @@ const FetchSAST = ({ cqData, sqData }: any) => {
     </>
     );
   } else {
-    return (<></>);
-=======
-          </>
-        );
-  }else{
-    return(
+    return (
       <>
         <Typography variant="body1"
-                key={`MKTypoLBlankCQSQ1`} 
-                color="inherit" 
-                style={{fontSize: "calc(0.3rem + 0.5vw)", 
-                display: "flex", 
-                justifyContent: "center"}}>
-                No SAST issues data Available
+          key={`MKTypoLBlankCQSQ1`}
+          color="inherit"
+          style={{
+            fontSize: "calc(0.3rem + 0.5vw)",
+            display: "flex",
+            justifyContent: "center"
+          }}>
+          No SAST issues data Available
         </Typography>
       </>
-      );
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
+    );
   }
 };
 
@@ -734,7 +579,7 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
       <Grid key={`GRIDL1`}
         style={{ minWidth: "200px" }}>
         <Grid key={`GRIDL2`}
-          container>
+          container style={{ paddingLeft: "5px" }}>
           <Grid item
             key={`GRIDL3`}
             xs={12}>
@@ -742,10 +587,10 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
               key={`MKTypoL1`}
               color="inherit"
               style={{
-                fontSize: "calc(0.2rem + 0.5vw)",
-                justifyContent: "center",
+                fontSize: "12px",
+                justifyContent: "left",
                 display: "flex",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
+                // paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
               <b key="BOLDL2">Project License </b>: {project_lcesnse}
             </MKTypography>
@@ -757,12 +602,12 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
               key={`MKTypoL2`}
               color="inherit"
               style={{
-                fontSize: "calc(0.2rem + 0.5vw)",
-                justifyContent: "center",
+                fontSize: "12px",
+                justifyContent: "left",
                 display: "flex",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
+                // paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
-              <b key="BOLDL3">No. of Non License Files </b>: {non_lic_files}
+              <b key="BOLDL3">Non-License Files </b>: {non_lic_files}
             </MKTypography>
           </Grid>
           <Grid item
@@ -772,12 +617,17 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
               key={`MKTypoL3`}
               color="inherit"
               style={{
-                fontSize: "calc(0.2rem + 0.5vw)",
-                justifyContent: "center",
+                fontSize: "12px",
+                justifyContent: "left",
                 display: "flex",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
+                // paddingLeft: "calc(0.1rem + 0.3vw)"
               }}>
-              <b key="BOLDL4">Unique Licenses </b>: {license_list}
+              <b key="BOLDL4">Unique Licenses</b>:
+            </MKTypography>
+            <MKTypography 
+              fontSize="12px"
+              >
+            {license_list}
             </MKTypography>
           </Grid>
         </Grid>
@@ -789,7 +639,7 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
       key={`MKTypoLBlank`}
       color="inherit"
       style={{
-        fontSize: "12px", display: "flex",
+        fontSize: "calc(0.6rem + 0.5vw)", display: "flex",
         justifyContent: "center"
       }}>
       --
@@ -826,9 +676,9 @@ const FetchSBOM = ({ data, masterData }: any) => {
           key={`MKTypoSBOM${index}`}
           color="inherit"
           style={{
-            fontSize: "calc(0.2rem + 0.5vw)",
+            fontSize: "12px",
             paddingLeft: "calc(0.1rem + 0.3vw)",
-            justifyContent: "center",
+            justifyContent: "left",
             display: "flex",
           }}>
           {td}
@@ -844,12 +694,12 @@ const FetchSBOM = ({ data, masterData }: any) => {
       <MKTypography key="MKTypoSBOMMain" variant="body1"
         color="inherit"
         style={{
-          fontSize: "calc(0.3rem + 0.5vw)",
-          justifyContent: "center",
+          fontSize: "12px",
+          justifyContent: "left",
           display: "flex",
           paddingLeft: "calc(0.1rem + 0.3vw)"
         }}>
-        <b key={`BOLDSBOM1`}>Projects Under BeS :</b>
+        <b key={`BOLDSBOM1`}>Tracked under BeS :</b>
       </MKTypography>
       <Grid key={`GRIDSBOMSUBMAIN`}
         container>
@@ -887,7 +737,6 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }, [version]);
 
   React.useEffect(() => {
-<<<<<<< HEAD
     if (version.trim()) {
       let link: string = "";
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-sonarqube-report.json`;
@@ -903,34 +752,28 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     }
   }, [version]);
 
-=======
-      if (version.trim()) {
-        let link: string = "";
-          link= `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-codeql-report.json`;
-          fetchvulJsonData(link, "codeql", setCQData, setSQData);
-      }
-    }, [version]);
-  
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
   let jsonDataLength: number = Object.values(jsonData).length;
   if (report === "Criticality Score" && jsonDataLength !== 0) {
     return (
       <>
-        <Typography variant="h6"
+      {/* Criticality score value */}
+        <MKTypography variant="h6"
           key={`TypoCriticalityScore`}
           color="inherit"
           style={{
-            fontSize: "12px",
+            fontSize: "15px",
             justifyContent: "center",
             display: "flex"
           }}>
           {jsonData.criticality_score}
-        </Typography>
+          {/* Criticality score data */}
+        </MKTypography>
         <Grid key={`GridCriticalutyScore`}
           style={{
-            height: "100px",
+            height: "150px",
             minWidth: "90%",
-            borderRadius: "3px"
+            borderRadius: "3px",
+            fontSize: "20px",
           }}
         >
           <MKBox>
@@ -949,25 +792,28 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   };
   if (report === "ScoreCard" && jsonDataLength !== 0) {
     return (<>
+    {/* Display scorecard score */}
       <Typography variant="h6"
         key={`TypoSC1`}
         color="inherit"
-        style={{ fontSize: "12px" }}>
+        style={{ fontSize: "15px" }}>
         <Link to={myObject}
           key={`LinkSC1`}
           style={{
-            fontSize: "12px",
+            fontSize: "calc(0.6rem + 0.5vw)",
             display: "flex",
             justifyContent: "center"
           }}>
           {jsonData.score}
         </Link>
       </Typography>
+      {/* Scorecard data */}
       <Grid key={`GridSC1`}
         style={{
-          height: "100px",
+          height: "150px",
           minWidth: "90%",
-          borderRadius: "3px"
+          borderRadius: "3px",
+          fontSize: "15px"
         }}
         sx={{ overflowY: "scroll" }}>
         <MKBox>
@@ -980,20 +826,20 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     );
   }
 
-<<<<<<< HEAD
   if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" &&
     JSON.stringify(Object.values(sonarqubeData).length) === "0")) {
-
     return (<>
+    {/* Codeql score */}
       <Typography variant="h6"
         key="SASCQTMAINHEADING"
         color="inherit"
         style={{
-          fontSize: "12px",
+          fontSize: "13px",
           display: "flex",
           justifyContent: "center"
         }}>
-        {codeQlData.length}
+          {/* <a href=""></a> */}
+        CodeQL: {codeQlData.length}
       </Typography>
       <MKBox key="MKBOXSASTCQMAINBODY">
         <FetchSAST
@@ -1005,99 +851,50 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     );
   } else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(sonarqubeData).length) !== "0" &&
     JSON.stringify(Object.values(codeQlData).length) === "0")) {
-
+    let issues: any = Object.values(sonarqubeData)[5];
     return (<>
       <Typography variant="h6"
         key="SASSQTMAINHEADING"
         color="inherit"
         style={{
-          fontSize: "12px",
+          fontSize: "13px",
           display: "flex",
           justifyContent: "center"
         }}>
-        {Object.values(sonarqubeData).length}
+        Sonarqube: {sonarqubeData.total}
       </Typography>
       <MKBox key="MKBOXSASTSQMAINBODY">
         <FetchSAST
           cqData={codeQlData}
-          sqData={sonarqubeData}
+          sqData={issues}
         />
       </MKBox>
     </>
     );
   } else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" &&
     JSON.stringify(Object.values(sonarqubeData).length) !== "0")) {
-=======
-  if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
-                                       JSON.stringify(Object.values(sonarqubeData).length) === "0")) {
-    return (<>
-              <Typography variant="h6"
-                          key="SASCQTMAINHEADING" 
-                          color="inherit" 
-                          style={{fontSize: "calc(0.6rem + 0.5vw)",
-                                  display: "flex", 
-                                  justifyContent: "center"}}>
-                  {codeQlData.length}
-              </Typography>
-                <MKBox key="MKBOXSASTCQMAINBODY">
-                 <FetchSAST 
-                     cqData={codeQlData}
-                     sqData={sonarqubeData}
-                 />
-                </MKBox>
-            </>
-          );
-  }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(sonarqubeData).length) !== "0" && 
-                                             JSON.stringify(Object.values(codeQlData).length) === "0")) { 
-    let issues: any =Object.values(sonarqubeData)[5];  
-    return (<>
-              <Typography variant="h6"
-                          key="SASSQTMAINHEADING"
-                          color="inherit" 
-                          style={{fontSize: "calc(0.6rem + 0.5vw)",
-                                  display: "flex", 
-                                  justifyContent: "center"}}>
-                  {sonarqubeData.total}
-              </Typography>
-                <MKBox key="MKBOXSASTSQMAINBODY">
-                 <FetchSAST 
-                     cqData={codeQlData}
-                     sqData={issues}
-                 />
-                </MKBox>
-            </>
-          );
-  }else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" && 
-                                            JSON.stringify(Object.values(sonarqubeData).length) !== "0")){
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
     const codeqldetails: any = Object.values(codeQlData);
     const codeqllength: number = Object.values(codeQlData).length;
-<<<<<<< HEAD
-    const sonarlength: number = Object.values(sonarqubeData).length;
+    let sqissues: any = Object.values(sonarqubeData)[5];
+
     return (
-=======
-    let sqissues: any =Object.values(sonarqubeData)[5];
-    
-    return(
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
       <>
         <Grid item
           key="GRIDSASTCQSQMAIN1"
           container
           xs={12}>
           <Grid item
-<<<<<<< HEAD
             key="GRIDSASTCQSQMAIN2"
             xs={6}>
             <Typography variant="h6"
               key="TYPOSASTCQSQMAIN1"
               color="inherit"
               style={{
-                fontSize: "12px",
+                fontSize: "13px",
                 justifyContent: "center",
                 display: "flex"
               }}>
-              {codeqllength}
+              CodeQL: {codeqllength}
             </Typography>
           </Grid>
           <Grid item
@@ -1107,52 +904,12 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
               key="TYPOSASTCQSQMAIN2"
               color="inherit"
               style={{
-                fontSize: "12px",
+                fontSize: "13px",
                 justifyContent: "center",
                 display: "flex"
               }}>
-              {sonardetails[0]}
+             Sonarqube: {sonarqubeData.total}
             </Typography>
-=======
-                key="GRIDSASTCQSQMAIN1"
-                container 
-                xs={12}>
-             <Grid  item
-                    key="GRIDSASTCQSQMAIN2"
-                    xs={6}>
-                <Typography variant="h6"
-                            key="TYPOSASTCQSQMAIN1" 
-                            color="inherit" 
-                            style={{fontSize: "calc(0.6rem + 0.5vw)",
-                                  justifyContent: "center",
-                                  display: "flex"}}>
-                  {codeqllength}
-                </Typography>
-             </Grid>
-             <Grid  item
-                    key="GRIDSASTCQSQMAIN3"
-                    xs={6}>
-                <Typography variant="h6"
-                            key="TYPOSASTCQSQMAIN2" 
-                            color="inherit" 
-                            style={{fontSize: "calc(0.6rem + 0.5vw)", 
-                                  justifyContent: "center",
-                                  display: "flex"}}>
-                    {sonarqubeData.total}
-                </Typography>
-             </Grid>
-          </Grid>
-          <Grid key="GRIDSASTCQSQMAIN4"
-                container>
-            <Grid>
-              <MKBox key="MKBOXSASTCQSQMAIN1">
-                 <FetchSAST 
-                     cqData={codeqldetails}
-                     sqData={sqissues}
-                 />
-                </MKBox>
-            </Grid>
->>>>>>> f6da85f6cdd2e21481860ff3a05ded0e8d15af5a
           </Grid>
         </Grid>
         <Grid key="GRIDSASTCQSQMAIN4"
@@ -1161,7 +918,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
             <MKBox key="MKBOXSASTCQSQMAIN1">
               <FetchSAST
                 cqData={codeqldetails}
-                sqData={sonardetails}
+                sqData={sqissues}
               />
             </MKBox>
           </Grid>
@@ -1194,11 +951,11 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         <Typography variant="h6"
           key="TYPOLICMAIN1"
           color="inherit"
-          style={{ fontSize: "12px" }}>
+          style={{ fontSize: "calc(0.6rem + 0.5vw)" }}>
           <Link to={myObject}
             key="LINKLICMAIN1"
             style={{
-              fontSize: "12px",
+              fontSize: "calc(0.6rem + 0.5vw)",
               display: "flex",
               justifyContent: "center"
             }}>
@@ -1229,12 +986,12 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         key="TYPOSBOMMAIN1"
         color="inherit"
         style={{
-          fontSize: "12px"
+          fontSize: "calc(0.6rem + 0.5vw)"
         }}>
         <Link to={myObject}
           key="LINKSBOMMAIN1"
           style={{
-            fontSize: "12px",
+            fontSize: "calc(0.6rem + 0.5vw)",
             display: "flex",
             justifyContent: "center"
           }}>
@@ -1263,7 +1020,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       key="TYPOSBOMMAINBLANK1"
       color="inherit"
       style={{
-        fontSize: "12px", display: "flex",
+        fontSize: "calc(0.6rem + 0.5vw)", display: "flex",
         justifyContent: "center"
       }}>
       --
@@ -1275,30 +1032,31 @@ const GetHeadings = ({ receivedValue }: any) => {
 
   if (receivedValue === "License Compliance") {
     return (<> {" "}
-      <MKTypography style={{ fontSize: "15px", fontWeight: "bold" }}>
+      <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
 
-      License Compatibiltity
-      <Icon key={`Icon1`} title="Licensing information of the OSS" sx={{ fontSize: '15px !important' }}>
-        info
-      </Icon>
+        License Compatibiltity
+        <Icon key={`Icon1`} title="Licensing information of the OSS" sx={{ fontSize: 'calc(0.3rem + 0.3vw) !important' }}>
+          info
+        </Icon>
       </MKTypography>
     </>);
   } else if (receivedValue === "Dependencies") {
     return (<> {" "}
-      <MKTypography style={{ fontSize: "15px", fontWeight: "bold" }}>
-      
-      Dependencies
-      <Icon key={`Icon2`} title="Software Bill Of Material" sx={{ fontSize: '15px !important' }}>
-        info
-      </Icon>
+      <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
+
+        Dependencies
+        <Icon key={`Icon2`} title="Software Bill Of Material" sx={{ fontSize: 'calc(0.3rem + 0.3vw) !important' }}>
+          info
+        </Icon>
       </MKTypography>
     </>);
 
   } else if (receivedValue === "ScoreCard") {
     return (<> {" "}
-      <MKTypography style={{ fontSize: "15px", fontWeight: "bold" }}>
+      <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
+
         OpenSSF Scorecard (0-10)
-        <Icon key={`Icon3`} title="Overall Security Score of the project" sx={{ fontSize: '15px !important' }}>
+        <Icon key={`Icon3`} title="Overall Security Score of the project" sx={{ fontSize: 'calc(0.3rem + 0.3vw) !important' }}>
           info
         </Icon>
       </MKTypography>
@@ -1306,10 +1064,9 @@ const GetHeadings = ({ receivedValue }: any) => {
 
   } else if (receivedValue === "Criticality Score") {
     return (<> {" "}
-      <MKTypography style={{ fontSize: "15px", fontWeight: "bold" }}>
-
+      <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
         OpenSSF Criticality Score (0-1)
-        <Icon key={`Icon4`} title="Score to tell how critical the OSS project" sx={{ fontSize: '15px !important' }}>
+        <Icon key={`Icon4`} title="Score to tell how critical the OSS project" sx={{ fontSize: 'calc(0.3rem + 0.3vw) !important' }}>
           info
         </Icon>
       </MKTypography>
@@ -1317,12 +1074,11 @@ const GetHeadings = ({ receivedValue }: any) => {
 
   } else if (receivedValue === "Vulnerabilities") {
     return (<> {" "}
-      <MKTypography style={{ fontSize: "15px", fontWeight: "bold" }}>
-
-      Static Analysis Summary
-      <Icon key={`Icon5`} title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{ fontSize: '15px !important' }}>
-        info
-      </Icon>
+      <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
+        Static Analysis Summary
+        <Icon key={`Icon5`} title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube" sx={{ fontSize: 'calc(0.3rem + 0.3vw) !important' }}>
+          info
+        </Icon>
       </MKTypography>
     </>);
   } else {
@@ -1340,42 +1096,46 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
 
   return (<>
     <Grid container key="maingridAssmentreport"
-      p={0.3}
       justifyContent="center"
-      style={{ width: "100%" }}>
+      style={{ width: "100%", placeContent: "space-evenly" }}>
+        {/* Getting the assessment report */}
       {report.map((value, index) => {
         return (
           <>
             <Grid item
+              style={{ height: "250px" }}
               key={`Grid1${index}`}
-              xs={2.4}>
-              <MKBox p={0.3}
+              xs={12} sm={6} md={6} lg={3} xl={2.4}>
+              <MKBox p={2}
                 key={`Mbox1${index}`}
                 borderRadius="lg">
-                <Grid p={1}
+                  {/* Making the grey box */}
+                <Grid
                   key={`Grid2${index}`}
                   justifyContent="center"
                   style={{
                     backgroundColor: "#f3f6f4",
                     borderRadius: "5px",
-                    // minHeight: "10rem"
-                    height:"200px"
+                    height: "220px",
+                    fontSize: "15px"
                   }} >
-                  <Grid container
+                    {/* Assessment heading */}
+                  <Grid container 
                     key={`Grid3${index}`}
                     justifyContent="center"
                     alignItems="center" >
                     <Grid item
                       key={`Grid4${index}`}
                       justifyContent="center">
-                      <Typography variant="h2"
+                      <Typography variant="h6"
                         key={`Typo1${index}`}
                         color="black"
-                        style={{ fontSize: "calc(0.3rem + 0.5vw)", fontColor: "red" }}>
+                        style={{ fontSize: "calc(0.3rem + 0.5vw)" }}>
                         <GetHeadings Key={`Grid10${index}`} receivedValue={value} />
                       </Typography>
                     </Grid>
                   </Grid>
+                  {/* Assessment data display */}
                   <Grid key={`Grid5${index}`}>
                     <Grid key={`Grid6${index}`}>
                       <Grid key={`Grid7${index}`}

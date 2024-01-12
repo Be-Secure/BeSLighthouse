@@ -128,7 +128,7 @@ function BesVersionHistory() {
       <DefaultNavbar routes={routes} />
       <MKBox key="TOPMKBOX"
              pt={11} 
-             sx={{ mx: { xs: 2, 
+             sx={{ mx: { xs: "auto", 
                          lg: 3 } 
                 }}>
         {data.map((item: any, index: number) => {
@@ -144,14 +144,15 @@ function BesVersionHistory() {
               <>
               <Card key={`TOPCARD${index}`} 
                     style={{marginTop: "-1.5rem"}}>
-                <Grid   key={`TOPGRID1${index}`}
+                <Grid   
+                        key={`TOPGRID1${index}`}
                         container 
                         spacing={1} 
                         pl={4} 
                         style={{height: "5rem"}}>
                   <Grid   key={`TOPGRID2${index}`}
                           item 
-                          xs={6} 
+                          xs={12} 
                           justifyContent="flex-start">
                     <Grid  key={`TOPGRID3${index}`}
                            container 
