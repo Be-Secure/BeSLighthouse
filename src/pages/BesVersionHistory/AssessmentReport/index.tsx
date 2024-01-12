@@ -635,15 +635,15 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
     </>
     );
   } else {
-    return (<><Typography variant="h6"
+    return (<><MKTypography variant="h6"
       key={`MKTypoLBlank`}
       color="inherit"
       style={{
-        fontSize: "calc(0.6rem + 0.5vw)", display: "flex",
+        fontSize: "12px", display: "flex",
         justifyContent: "center"
       }}>
-      --
-    </Typography></>)
+      Not Available
+    </MKTypography></>)
   }
 };
 
@@ -836,9 +836,10 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         style={{
           fontSize: "13px",
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
         }}>
           {/* <a href=""></a> */}
+        
         CodeQL: {codeQlData.length}
       </Typography>
       <MKBox key="MKBOXSASTCQMAINBODY">
@@ -892,9 +893,13 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
               style={{
                 fontSize: "13px",
                 justifyContent: "center",
-                display: "flex"
+                display: "flex",
+                paddingBottom: "8px",
+                paddingTop: "4px"
               }}>
+
               CodeQL: {codeqllength}
+              
             </Typography>
           </Grid>
           <Grid item
@@ -906,9 +911,13 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
               style={{
                 fontSize: "13px",
                 justifyContent: "center",
-                display: "flex"
+                display: "flex",
+                paddingBottom: "8px",
+                paddingTop: "4px"
               }}>
+
              Sonarqube: {sonarqubeData.total}
+
             </Typography>
           </Grid>
         </Grid>
@@ -1016,15 +1025,15 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }
 
   return (
-    <Typography variant="h6"
+    <MKTypography variant="h6"
       key="TYPOSBOMMAINBLANK1"
       color="inherit"
       style={{
-        fontSize: "calc(0.6rem + 0.5vw)", display: "flex",
-        justifyContent: "center"
+        fontSize: "12px", display: "flex",
+        justifyContent: "center", alignItems: "center"
       }}>
-      --
-    </Typography>
+      Not Available
+    </MKTypography>
   );
 };
 
@@ -1072,7 +1081,8 @@ const GetHeadings = ({ receivedValue }: any) => {
       </MKTypography>
     </>);
 
-  } else if (receivedValue === "Vulnerabilities") {
+  } 
+  else if (receivedValue === "Vulnerabilities") {
     return (<> {" "}
       <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
         Static Analysis Summary
@@ -1081,7 +1091,8 @@ const GetHeadings = ({ receivedValue }: any) => {
         </Icon>
       </MKTypography>
     </>);
-  } else {
+  } 
+  else {
     return (receivedValue);
   }
 }
@@ -1097,7 +1108,7 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
   return (<>
     <Grid container key="maingridAssmentreport"
       justifyContent="center"
-      style={{ width: "100%", placeContent: "space-evenly" }}>
+      style={{ width: "100%", placeContent: "space-evenly"}}>
         {/* Getting the assessment report */}
       {report.map((value, index) => {
         return (
@@ -1117,7 +1128,8 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                     backgroundColor: "#f3f6f4",
                     borderRadius: "5px",
                     height: "220px",
-                    fontSize: "15px"
+                    fontSize: "15px",
+                    paddingTop: "5px"
                   }} >
                     {/* Assessment heading */}
                   <Grid container 

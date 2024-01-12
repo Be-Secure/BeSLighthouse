@@ -127,7 +127,7 @@ function BesVersionHistory() {
     <>
       <DefaultNavbar routes={routes} />
       <MKBox key="TOPMKBOX"
-             pt={11} 
+             pt={11}
              sx={{ mx: { xs: "auto", 
                          lg: 3 } 
                 }}>
@@ -137,7 +137,7 @@ function BesVersionHistory() {
             if(item.hasOwnProperty('score'))
                definedScore = item.score;
             else
-               definedScore = "--";
+               definedScore = "Not Available";
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${item.name}/0.0.1/`;
             
             return (
@@ -152,7 +152,7 @@ function BesVersionHistory() {
                         style={{height: "5rem"}}>
                   <Grid   key={`TOPGRID2${index}`}
                           item 
-                          xs={12} 
+                          xs={6} 
                           justifyContent="flex-start">
                     <Grid  key={`TOPGRID3${index}`}
                            container 
@@ -233,7 +233,7 @@ function BesVersionHistory() {
                                         textTransform="capitalize"
                                         style={{fontSize: "15px"}}
                                         >
-                            Score: &nbsp;
+                            BeS Score: &nbsp;
                           </MKTypography>
                           <MKTypography key={`TOPTYPO5${index}`}
                                         variant="h6"
@@ -367,7 +367,7 @@ function BesVersionHistory() {
               </Grid>
             </Card>
             <Card key={`TOPCARD2${index}`}
-                  style={{marginTop: "0.3rem"}}>
+                  style={{marginTop: "12px"}}>
                     <Grid key={`TOPGRID14${index}`} 
                           container 
                           spacing={1} 
@@ -387,7 +387,7 @@ function BesVersionHistory() {
                     </Grid>
             </Card>
             <MKBox key={`TOPMKBOX7${index}`}
-                   style={{marginTop: "-0.5rem"}}>
+                   style={{marginTop: "12px"}}>
                 <Grid key={`TOPGRID16${index}`}
                       container 
                       spacing={3} 
