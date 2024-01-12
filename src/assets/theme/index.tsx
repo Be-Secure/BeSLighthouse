@@ -1,4 +1,3 @@
-
 import { createTheme } from "@mui/material/styles";
 // import Fade from "@mui/material/Fade";
 
@@ -77,7 +76,7 @@ export default createTheme({
     hexToRgb,
     linearGradient,
     pxToRem,
-    rgba,
+    rgba
   },
 
   components: {
@@ -85,8 +84,8 @@ export default createTheme({
       styleOverrides: {
         ...globals,
         ...flatpickr,
-        ...container,
-      },
+        ...container
+      }
     },
     MuiList: { ...list },
     MuiListItem: { ...listItem },
@@ -135,6 +134,6 @@ export default createTheme({
     MuiDialogTitle: { ...dialogTitle },
     MuiDialogContent: { ...dialogContent },
     MuiDialogContentText: { ...dialogContentText },
-    MuiDialogActions: { ...dialogActions },
-  },
+    MuiDialogActions: { ...dialogActions }
+  }
 } as any);

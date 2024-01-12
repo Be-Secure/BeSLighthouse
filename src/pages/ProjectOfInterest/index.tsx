@@ -13,67 +13,10 @@ import { projectOfInterestData } from "../../utils/poi_data";
 import TecStack from "../../examples/Charts/PieChart/TecStacks";
 import Card from "@mui/material/Card";
 import ProjectDisplay from "../../layouts/pages/projectOfInterest/ProjectDisplay";
+import MKTypography from "../../components/MKTypography";
+import ProjectCount from "./ProjectCount";
 
-{
-  /* <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 } }}>
-        <MKBox>
-          <Grid container spacing={3} pt={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <Card>
-                <SearchPoiList
-                  placeholderName="Search project..."
-                  filterName={filterName}
-                  onFilterName={handleFilterByName}
-                />
-                <FilterList label="Do">
-
-                </FilterList>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={6} lg={8}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6} lg={6}>
-                  <MKBox mb={3}>
-                    <Language
-                      title="Languages"
-                      chartData={data}
-                      chartColors={[
-                        theme.palette.primary.main,
-                        theme.palette.info.main,
-                        theme.palette.warning.main,
-                        theme.palette.error.main
-                      ]}
-                    />
-                  </MKBox>
-                </Grid>
-                <Grid item xs={12} md={6} lg={6}>
-                  <MKBox mb={3}>
-                    <TecStack
-                      title="Be-Secure Technology Stacks"
-                      chartColors={[
-                        theme.palette.primary.main,
-                        theme.palette.info.main,
-                        theme.palette.warning.main,
-                        theme.palette.error.main
-                      ]}
-                      chartData={tecStack}
-                    />
-                  </MKBox>
-                </Grid>
-              </Grid>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Card>
-                    <ProjectDisplay />
-                  </Card>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </MKBox>
-      </MKBox> */
-}
-
+import ProjectLogo from "../../assets/images/bug.png";
 
 export const fetchOsspoiMaterData = async () => {
   const osspoi: any = JSON.parse(
@@ -86,6 +29,7 @@ export const fetchOsspoiMaterData = async () => {
 async function countLanguages(
   setData: React.Dispatch<React.SetStateAction<never[]>>,
   setTecStack: React.Dispatch<React.SetStateAction<never[]>>,
+  setProject: React.Dispatch<React.SetStateAction<never[]>>,
   cache: any
 ) {
   let supportedLanguages: any = {
@@ -122,6 +66,7 @@ async function countLanguages(
   for (let language of Object.keys(languageCount)) {
     cache.push({ label: language, value: languageCount[language] });
   }
+  setProject(osspoi);
   setTecStack(tecStackForChart);
   setData(cache);
 }
@@ -129,46 +74,80 @@ async function countLanguages(
 function ProjectOfInterest() {
   const [data, setData] = React.useState([]);
   const [tecStack, setTecStack] = React.useState([]);
+  const [project, setProject]: any = React.useState([]);
   React.useEffect(() => {
-    countLanguages(setData, setTecStack, []);
+    countLanguages(setData, setTecStack, setProject, []);
   }, []);
   const theme = useTheme();
-
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        sticky
-      />
-      <MKBox pt={14} sx={{ mx: { xs: 2, lg: 3 }}}>
+      <DefaultNavbar routes={routes} sticky />
+      <MKBox pt={8} sx={{ mx: { xs: 2, lg: 3 } }}>
+        <MKTypography variant="h3" color="black">
+          Projects of Interest
+        </MKTypography>
+        <MKTypography
+          display="flex"
+          alignItems="left"
+          color="black"
+          paddingTop="2px"
+          fontSize="18px"
+          width="100%"
+          style={{ fontWeight: "lighter" }}
+          // fontWeight="lighter"
+        >
+          Empower your development teams with unparalleled insights into your
+          open source software supply chain. BeSecure assesses their risk
+          posture, ensuring your codebase remains secure and compliant. Stay
+          ahead in the fast-paced world of software development with our
+          comprehensive solution, safeguarding your projects from potential
+          vulnerabilities.
+        </MKTypography>
+      </MKBox>
+      <MKBox pt={1} sx={{ mx: { xs: 2, lg: 3 } }}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={6}>
-            <MKBox mb={3}>
-              <Language
-                title="Languages"
-                chartData={data}
-                chartColors={[
-                  theme.palette.primary.main,
-                  theme.palette.info.main,
-                  theme.palette.warning.main,
-                  theme.palette.error.main,
-                ]}
-              />
-            </MKBox>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+            <ProjectCount
+              title="projects tracked"
+              total={project?.items?.length}
+              color="success"
+              icon={
+                <img
+                  style={{ width: "140px", top: "58px", position: "absolute" }}
+                  alt="icon"
+                  src={ProjectLogo}
+                />
+              }
+              sx={{ width: "100%", height: "244px" }}
+            />
           </Grid>
-          <Grid item xs={12} md={6} lg={6}>
-            <MKBox mb={3}>
-              <TecStack
-                title="Be-Secure Technology Stacks"
-                chartColors={[
-                  theme.palette.primary.main,
-                  theme.palette.info.main,
-                  theme.palette.warning.main,
-                  theme.palette.error.main
-                ]}
-                chartData={tecStack}
-              />
-            </MKBox>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+            <Language
+              title="Languages"
+              chartData={data}
+              chartColors={[
+                theme.palette.primary.main,
+                theme.palette.info.main,
+                theme.palette.warning.main,
+                theme.palette.error.main,
+                theme.palette.success.main,
+                theme.palette.secondary.main
+              ]}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+            <TecStack
+              title="Be-Secure Technology Stacks"
+              chartColors={[
+                theme.palette.primary.main,
+                theme.palette.info.main,
+                theme.palette.warning.main,
+                theme.palette.error.main,
+                theme.palette.success.main,
+                theme.palette.secondary.main
+              ]}
+              chartData={tecStack}
+            />
           </Grid>
         </Grid>
       </MKBox>
