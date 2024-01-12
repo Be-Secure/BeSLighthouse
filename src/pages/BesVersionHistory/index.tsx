@@ -127,8 +127,8 @@ function BesVersionHistory() {
     <>
       <DefaultNavbar routes={routes} />
       <MKBox key="TOPMKBOX"
-             pt={11} 
-             sx={{ mx: { xs: 2, 
+             pt={11}
+             sx={{ mx: { xs: "auto", 
                          lg: 3 } 
                 }}>
         {data.map((item: any, index: number) => {
@@ -137,14 +137,15 @@ function BesVersionHistory() {
             if(item.hasOwnProperty('score'))
                definedScore = item.score;
             else
-               definedScore = "--";
+               definedScore = "Not Available";
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${item.name}/0.0.1/`;
             
             return (
               <>
               <Card key={`TOPCARD${index}`} 
                     style={{marginTop: "-1.5rem"}}>
-                <Grid   key={`TOPGRID1${index}`}
+                <Grid   
+                        key={`TOPGRID1${index}`}
                         container 
                         spacing={1} 
                         pl={4} 
@@ -169,7 +170,7 @@ function BesVersionHistory() {
                                       variant="h6"
                                       fontWeight="bold"
                                       textTransform="capitalize"
-                                      style={{fontSize: "calc(0.4rem + 0.5vw)"}}        
+                                      style={{fontSize: "15px"}}        
                                       >
                           Project Name: &nbsp;
                         </MKTypography>
@@ -177,7 +178,7 @@ function BesVersionHistory() {
                                        variant="h6"
                                        fontWeight="regular"
                                        color="text"
-                                       style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                       style={{fontSize: "15px"}}
                                       >
                           {item.name}
                         </MKTypography>
@@ -195,7 +196,7 @@ function BesVersionHistory() {
                                        variant="h6"
                                        fontWeight="bold"
                                        textTransform="capitalize"
-                                       style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                       style={{fontSize: "15px"}}
                                       >
                           Version: &nbsp;
                         </MKTypography>
@@ -204,7 +205,7 @@ function BesVersionHistory() {
                                 className={classes.select}
                                 value={selectedOption}
                                 onChange={handleOptionChange}
-                                style={{fontSize: "calc(0.4rem + 0.5vw)", 
+                                style={{fontSize: "15px", 
                                         height: '1.2rem', 
                                       }}
                                 >
@@ -230,15 +231,15 @@ function BesVersionHistory() {
                                         variant="h6"
                                         fontWeight="bold"
                                         textTransform="capitalize"
-                                        style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                        style={{fontSize: "15px"}}
                                         >
-                            Score: &nbsp;
+                            BeS Score: &nbsp;
                           </MKTypography>
                           <MKTypography key={`TOPTYPO5${index}`}
                                         variant="h6"
                                         fontWeight="regular"
                                         color="text"
-                                        style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                        style={{fontSize: "15px"}}
                                       >
                             {definedScore}
                           </MKTypography>
@@ -258,7 +259,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             BeS Tracking Id: &nbsp;
                       </MKTypography>
@@ -266,7 +267,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="regular"
                                     color="text"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             {item.id}
                       </MKTypography>
@@ -282,7 +283,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             BeS Tech Stack: &nbsp;
                       </MKTypography>
@@ -290,7 +291,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="regular"
                                     color="text"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             {item.bes_technology_stack}
                       </MKTypography>
@@ -306,7 +307,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="bold"
                                     textTransform="capitalize"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   >
                             BeS Environment: &nbsp;
                       </MKTypography>
@@ -314,7 +315,7 @@ function BesVersionHistory() {
                                     variant="h6"
                                     fontWeight="regular"
                                     color="text"
-                                    style={{fontSize: "calc(0.3rem + 0.5vw)"}}
+                                    style={{fontSize: "15px"}}
                                   > 
                           <Link key={`TOPLINK1${index}`}
                                 to={envpath}>
@@ -347,7 +348,7 @@ function BesVersionHistory() {
                                         variant="h6"
                                         fontWeight="bold"
                                         textTransform="capitalize"
-                                        style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                        style={{fontSize: "15px"}}
                                       >
                           Description: &nbsp;
                         </MKTypography>
@@ -355,7 +356,7 @@ function BesVersionHistory() {
                                       variant="h6"
                                       fontWeight="regular"
                                       color="text"
-                                      style={{fontSize: "calc(0.4rem + 0.5vw)"}}
+                                      style={{fontSize: "15px"}}
                                     >
                           {item.description}
                         </MKTypography>
@@ -366,7 +367,7 @@ function BesVersionHistory() {
               </Grid>
             </Card>
             <Card key={`TOPCARD2${index}`}
-                  style={{marginTop: "0.3rem"}}>
+                  style={{marginTop: "12px"}}>
                     <Grid key={`TOPGRID14${index}`} 
                           container 
                           spacing={1} 
@@ -386,7 +387,7 @@ function BesVersionHistory() {
                     </Grid>
             </Card>
             <MKBox key={`TOPMKBOX7${index}`}
-                   style={{marginTop: "-0.5rem"}}>
+                   style={{marginTop: "12px"}}>
                 <Grid key={`TOPGRID16${index}`}
                       container 
                       spacing={3} 
