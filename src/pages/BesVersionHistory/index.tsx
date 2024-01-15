@@ -274,7 +274,7 @@ function BesVersionHistory() {
                     </Grid>
                     {/* The below code moves the description to the next line if the character count exceeds 100 */}
                     {/* It also checks if the 'description' of a repo is available, if not, displays 'Not Available'  */}
-                    { item.description ? item.description.length < 100 ? <Grid item xs={6} style={{ display: "flex", paddingTop: "12px" }}>
+                    { item.description ? item.description.length < 100 ? <Grid item xs={6} style={{ display: "flex", paddingTop: "12px", paddingBottom: "7px" }}>
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -291,7 +291,7 @@ function BesVersionHistory() {
                         >
                         {item.description}
                       </MKTypography>
-                    </Grid> : <></> :<Grid item xs={6} style={{ display: "flex", paddingTop: "12px" }}>
+                    </Grid> : <></> :<Grid item xs={6} style={{ display: "flex", paddingTop: "12px", paddingBottom: "7px" }}>
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
