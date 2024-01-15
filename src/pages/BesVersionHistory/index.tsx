@@ -272,7 +272,7 @@ function BesVersionHistory() {
                               </Link>
                       </MKTypography>
                     </Grid>
-                    <Grid item xs={6} md={3} style={{ display: "flex", paddingTop: "12px" }}>
+                    { item.description ? item.description.length < 50 ? <Grid item xs={6} style={{ display: "flex", paddingTop: "12px" }}>
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -285,11 +285,47 @@ function BesVersionHistory() {
                         variant="h6"
                         fontWeight="regular"
                         color="text"
-                        style={{ fontSize: "15px" }}>
+                        style={{ fontSize: "15px" }}
+                        >
                         {item.description}
                       </MKTypography>
-                    </Grid>
+                    </Grid> : <></> :<Grid item xs={6} style={{ display: "flex", paddingTop: "12px" }}>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        style={{ fontSize: "15px" }}
+                      >
+                        Description: &nbsp;
+                      </MKTypography>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{ fontSize: "15px" }}
+                        >
+                        Not Available
+                      </MKTypography>
+                    </Grid> }
                   </Grid>
+                  { item.description?.length > 50 ? <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        style={{ fontSize: "15px", paddingLeft: "30px", display: "flex", paddingTop: "12px", paddingBottom: "8px" }}
+                      >
+                        Description: <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{ fontSize: "15px", paddingLeft: "8px" }}
+                        >
+                        {item.description}
+                      </MKTypography>
+
+                      </MKTypography> : <></>  }
+
+
                 </Card>
                 <Card key={`TOPCARD2${index}`}
                   style={{ marginTop: "12px" }}>
