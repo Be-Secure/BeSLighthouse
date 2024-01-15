@@ -957,7 +957,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     }
     return (
       <>
-        <Typography variant="h6"
+        <MKTypography variant="h6"
           key="TYPOLICMAIN1"
           color="inherit"
           style={{ fontSize: "calc(0.6rem + 0.5vw)" }}>
@@ -966,15 +966,16 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
             style={{
               fontSize: "calc(0.6rem + 0.5vw)",
               display: "flex",
-              justifyContent: "center"
+              justifyContent: "center",
             }}>
             {uniqueLicenses.length}
           </Link>
-        </Typography>
+        </MKTypography>
         <Grid key="GRIDLICMAIN1"
           style={{
-            height: "100px",
-            borderRadius: "3px"
+            height: "150px",
+            borderRadius: "3px",
+            overflowY: "scroll"
           }}
         >
           <MKBox>
