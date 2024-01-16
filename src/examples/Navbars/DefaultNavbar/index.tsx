@@ -496,12 +496,12 @@ function DefaultNavbar({
             to="/"
             lineHeight={2} //test
             py={transparent ? 1.5 : 0.75}
-            pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
+            pl={relative || transparent ? 0 : { xs: 6, lg: 1 }}
           >
             <MKTypography
               fontWeight="bold"
               color={light ? "white" : "dark"}
-              style={{ fontSize: "0.975rem" }}
+              style={{ display: "flex", fontSize: "0.975rem" }}
             >
               {brand}
             </MKTypography>
@@ -554,7 +554,7 @@ function DefaultNavbar({
             py={1.5}
             pl={1.5}
             color={transparent ? "white" : "inherit"}
-            sx={{ cursor: "pointer" }}
+            sx={{ cursor: "pointer", position: "absolute" }}
             onClick={openMobileNavbar}
           >
             <Icon>{mobileNavbar ? "close" : "menu"}</Icon>

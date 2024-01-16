@@ -25,25 +25,24 @@ export default function ProjectCount({
       component={Stack}
       spacing={3}
       direction="row"
+      pl={1}
       sx={{
-        px: 3,
-        py: 5,
         borderRadius: 2,
         ...sx
       }}
       {...other}
     >
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={5} sm={5}>
           {icon && <Box>{icon}</Box>}
         </Grid>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={5} sm={7}>
           <Typography
             style={{
               color: "black",
-              fontSize: "80px"
-              // position: "relative",
-              // top: "-19px"
+              fontSize: "80px",
+              position: 'absolute',
+              top: '45px'
             }}
             variant="h1"
           >
@@ -54,9 +53,8 @@ export default function ProjectCount({
             sx={{
               color: "black",
               fontSize: "20px",
-              position: "relative",
-              top: "-15px"
-              // left: "-60px"
+              position: 'absolute',
+              top: '130px'
             }}
           >
             {title}
