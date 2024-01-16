@@ -12,6 +12,7 @@ import {
   assessment_path,
   assessment_report
 } from "../../../utils/assessmentReport";
+import FetchSAST from "./FetchSastReport";
 
 import SastToggleButton from "./SastToggleButton"
 
@@ -176,386 +177,386 @@ const FetchCS = ({ data }: any) => {
   );
 };
 
-const FetchSAST = ({ cqData, sqData }: any) => {
+// const FetchSAST = ({ cqData, sqData }: any) => {
 
-  let critical: number = 0;
-  let high: number = 0;
-  let medium: number = 0;
-  let low: number = 0;
-  let sqissueslen: number = 0;
+//   let critical: number = 0;
+//   let high: number = 0;
+//   let medium: number = 0;
+//   let low: number = 0;
+//   let sqissueslen: number = 0;
 
-  if (JSON.stringify(Object.values(sqData).length) !== "0") {
-    sqissueslen = sqData.length;
-  }
+//   if (JSON.stringify(Object.values(sqData).length) !== "0") {
+//     sqissueslen = sqData.length;
+//   }
 
-  if (JSON.stringify(Object.values(cqData).length) !== "0" &&
-    sqissueslen === 0) {
+//   if (JSON.stringify(Object.values(cqData).length) !== "0" &&
+//     sqissueslen === 0) {
 
-    cqData.forEach((vul) => {
-      if (vul.rule.security_severity_level === "critical") {
-        critical++;
-      } else if (vul.rule.security_severity_level === "high") {
-        high++;
-      } else if (vul.rule.security_severity_level === "medium") {
-        medium++;
-      } else if (vul.rule.security_severity_level === "high") {
-        low++;
-      }
-    });
+//     cqData.forEach((vul) => {
+//       if (vul.rule.security_severity_level === "critical") {
+//         critical++;
+//       } else if (vul.rule.security_severity_level === "high") {
+//         high++;
+//       } else if (vul.rule.security_severity_level === "medium") {
+//         medium++;
+//       } else if (vul.rule.security_severity_level === "high") {
+//         low++;
+//       }
+//     });
 
-    return (<>
-      <Grid key={`GRIDSASTCQ1`}
-        style={{
-          minWidth: "calc(10rem + 5vw)",
-          marginTop: "1.1rem",
-          // marginLeft: "1.5rem",
-          fontSize: "15px",
-          justifyContent: "left"
-        }}>
-        <Grid container
-          key={`GRIDSASTCQ2`}>
-          <Grid item
-            xs={6}
-            key={`GRIDSASTCQ3`}
-            style={{ 
-              fontSize: "13px"
-             }}
-            >
-            <MKTypography variant="body1"
-              key={`MKTYPOSASTCQ1`}
-              color="inherit"
-              style={{ fontSize: "15px" }}
-              >
-              <b key="BOLDCQ1">Critical : </b>{critical}
-            </MKTypography>
-          </Grid>
-          <Grid item
-            key={`GRIDSASTCQ4`}
-            xs={6}>
-            <MKTypography variant="body1"
-              key={`MKTypoSASTCQ2`}
-              color="inherit"
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                // paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
-              <b key="BOLDCQ2">High : </b>{high}
-            </MKTypography>
-          </Grid>
-        </Grid>
-        <Grid key={`GRIDSASTCQ5`}
-          container>
-          <Grid item
-            key={`GRIDSASTCQ6`}
-            xs={6}>
-            <MKTypography variant="body1"
-              key={`MKTypoSASTCQ3`}
-              color="inherit"
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
-              <b key="BOLDCQ3">Medium : </b>{medium}
-            </MKTypography>
-          </Grid>
-          <Grid item
-            key={`GRIDSASTCQ7`}
-            xs={6}>
-            <MKTypography key={`MKTypoSASTCQ4`}
-              variant="body1"
-              color="inherit"
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
-              <b key="BOLDCQ4"> Low : </b> {low}
-            </MKTypography>
-          </Grid>
-        </Grid>
-        </Grid>
-    </>
-    );
-  } else if (JSON.stringify(Object.values(cqData).length) === "0" &&
-    sqissueslen !== 0) {
-    let sqblocker: number = 0;
-    let sqcritical: number = 0;
-    let sqmajor: number = 0;
-    let sqminor: number = 0;
-    let sqissues: any = "0";
-    sqissues = Object.values(sqData)[5]
+//     return (<>
+//       <Grid key={`GRIDSASTCQ1`}
+//         style={{
+//           minWidth: "calc(10rem + 5vw)",
+//           marginTop: "1.1rem",
+//           // marginLeft: "1.5rem",
+//           fontSize: "15px",
+//           justifyContent: "left"
+//         }}>
+//         <Grid container
+//           key={`GRIDSASTCQ2`}>
+//           <Grid item
+//             xs={6}
+//             key={`GRIDSASTCQ3`}
+//             style={{ 
+//               fontSize: "13px"
+//              }}
+//             >
+//             <MKTypography variant="body1"
+//               key={`MKTYPOSASTCQ1`}
+//               color="inherit"
+//               style={{ fontSize: "15px" }}
+//               >
+//               <b key="BOLDCQ1">Critical : </b>{critical}
+//             </MKTypography>
+//           </Grid>
+//           <Grid item
+//             key={`GRIDSASTCQ4`}
+//             xs={6}>
+//             <MKTypography variant="body1"
+//               key={`MKTypoSASTCQ2`}
+//               color="inherit"
+//               style={{
+//                 fontSize: "calc(0.6rem + 0.5vw)",
+//                 // paddingLeft: "calc(0.1rem + 0.3vw)"
+//               }}>
+//               <b key="BOLDCQ2">High : </b>{high}
+//             </MKTypography>
+//           </Grid>
+//         </Grid>
+//         <Grid key={`GRIDSASTCQ5`}
+//           container>
+//           <Grid item
+//             key={`GRIDSASTCQ6`}
+//             xs={6}>
+//             <MKTypography variant="body1"
+//               key={`MKTypoSASTCQ3`}
+//               color="inherit"
+//               style={{
+//                 fontSize: "calc(0.6rem + 0.5vw)",
+//                 paddingLeft: "calc(0.1rem + 0.3vw)"
+//               }}>
+//               <b key="BOLDCQ3">Medium : </b>{medium}
+//             </MKTypography>
+//           </Grid>
+//           <Grid item
+//             key={`GRIDSASTCQ7`}
+//             xs={6}>
+//             <MKTypography key={`MKTypoSASTCQ4`}
+//               variant="body1"
+//               color="inherit"
+//               style={{
+//                 fontSize: "calc(0.6rem + 0.5vw)",
+//                 paddingLeft: "calc(0.1rem + 0.3vw)"
+//               }}>
+//               <b key="BOLDCQ4"> Low : </b> {low}
+//             </MKTypography>
+//           </Grid>
+//         </Grid>
+//         </Grid>
+//     </>
+//     );
+//   } else if (JSON.stringify(Object.values(cqData).length) === "0" &&
+//     sqissueslen !== 0) {
+//     let sqblocker: number = 0;
+//     let sqcritical: number = 0;
+//     let sqmajor: number = 0;
+//     let sqminor: number = 0;
+//     let sqissues: any = "0";
+//     sqissues = Object.values(sqData)[5]
 
-    sqData.forEach((vul) => {
-      if (vul.severity === "BLOCKER") {
-        sqblocker++;
-      } else if (vul.severity === "CRITICAL") {
-        sqcritical++;
-      } else if (vul.severity === "MAJOR") {
-        sqmajor++;
-      } else if (vul.severity === "MINOR") {
-        sqminor++;
-      }
-    });
+//     sqData.forEach((vul) => {
+//       if (vul.severity === "BLOCKER") {
+//         sqblocker++;
+//       } else if (vul.severity === "CRITICAL") {
+//         sqcritical++;
+//       } else if (vul.severity === "MAJOR") {
+//         sqmajor++;
+//       } else if (vul.severity === "MINOR") {
+//         sqminor++;
+//       }
+//     });
 
-    return (<>
-      <Grid key={`GRIDSASTSQ1`}
-        style={{
-          minWidth: "calc(10rem + 5vw)",
-          marginTop: "1.1rem",
-          marginLeft: "1.5rem"
-        }}>
-        <Grid key={`GRIDSASTSQ2`}
-          container>
-          <Grid item
-            key={`GRIDSASTSQ3`}
-            xs={6}>
-            <MKTypography variant="body1"
-              color="inherit"
-              key={`MKTypoSASTSQ1`}
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
-              <b key="BOLDSQ1"> Critical : </b> {sqblocker}
-            </MKTypography>
-          </Grid>
-          <Grid item
-            key={`GRIDSASTSQ4`}
-            xs={6}>
-            <MKTypography variant="body1"
-              key={`MKTypoSASTSQ2`}
-              color="inherit"
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
-              <b key="BOLDSQ2"> High : </b> {sqcritical}
-            </MKTypography>
-          </Grid>
-        </Grid>
-        <Grid key={`GRIDSASTSQ5}`}
-          container>
-          <Grid item
-            key={`GRIDSASTSQ6`}
-            xs={6}>
-            <MKTypography variant="body1"
-              key={`MKTypoSASTSQ3`}
-              color="inherit"
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
-              <b key="BOLDSQ3">Medium : </b> {sqmajor}
-            </MKTypography>
-          </Grid>
-          <Grid item
-            key={`GRIDSASTSQ7`}
-            xs={6}>
-            <MKTypography variant="body1"
-              key={`MKTypoSASTSQ4`}
-              color="inherit"
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
-              <b key="BOLDSQ4">Low : </b>{sqminor}
-            </MKTypography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </>
-    );
-  } else if (JSON.stringify(Object.values(cqData).length) !== "0" &&
-    sqissueslen !== 0) {
-    let cqcritical: number = 0;
-    let cqhigh: number = 0;
-    let cqmedium: number = 0;
-    let cqlow: number = 0;
+//     return (<>
+//       <Grid key={`GRIDSASTSQ1`}
+//         style={{
+//           minWidth: "calc(10rem + 5vw)",
+//           marginTop: "1.1rem",
+//           marginLeft: "1.5rem"
+//         }}>
+//         <Grid key={`GRIDSASTSQ2`}
+//           container>
+//           <Grid item
+//             key={`GRIDSASTSQ3`}
+//             xs={6}>
+//             <MKTypography variant="body1"
+//               color="inherit"
+//               key={`MKTypoSASTSQ1`}
+//               style={{
+//                 fontSize: "calc(0.6rem + 0.5vw)",
+//                 paddingLeft: "calc(0.1rem + 0.3vw)"
+//               }}>
+//               <b key="BOLDSQ1"> Critical : </b> {sqblocker}
+//             </MKTypography>
+//           </Grid>
+//           <Grid item
+//             key={`GRIDSASTSQ4`}
+//             xs={6}>
+//             <MKTypography variant="body1"
+//               key={`MKTypoSASTSQ2`}
+//               color="inherit"
+//               style={{
+//                 fontSize: "calc(0.6rem + 0.5vw)",
+//                 paddingLeft: "calc(0.1rem + 0.3vw)"
+//               }}>
+//               <b key="BOLDSQ2"> High : </b> {sqcritical}
+//             </MKTypography>
+//           </Grid>
+//         </Grid>
+//         <Grid key={`GRIDSASTSQ5}`}
+//           container>
+//           <Grid item
+//             key={`GRIDSASTSQ6`}
+//             xs={6}>
+//             <MKTypography variant="body1"
+//               key={`MKTypoSASTSQ3`}
+//               color="inherit"
+//               style={{
+//                 fontSize: "calc(0.6rem + 0.5vw)",
+//                 paddingLeft: "calc(0.1rem + 0.3vw)"
+//               }}>
+//               <b key="BOLDSQ3">Medium : </b> {sqmajor}
+//             </MKTypography>
+//           </Grid>
+//           <Grid item
+//             key={`GRIDSASTSQ7`}
+//             xs={6}>
+//             <MKTypography variant="body1"
+//               key={`MKTypoSASTSQ4`}
+//               color="inherit"
+//               style={{
+//                 fontSize: "calc(0.6rem + 0.5vw)",
+//                 paddingLeft: "calc(0.1rem + 0.3vw)"
+//               }}>
+//               <b key="BOLDSQ4">Low : </b>{sqminor}
+//             </MKTypography>
+//           </Grid>
+//         </Grid>
+//       </Grid>
+//     </>
+//     );
+//   } else if (JSON.stringify(Object.values(cqData).length) !== "0" &&
+//     sqissueslen !== 0) {
+//     let cqcritical: number = 0;
+//     let cqhigh: number = 0;
+//     let cqmedium: number = 0;
+//     let cqlow: number = 0;
 
-    let sqblocker: number = 0;
-    let sqcritical: number = 0;
-    let sqmajor: number = 0;
-    let sqminor: number = 0;
+//     let sqblocker: number = 0;
+//     let sqcritical: number = 0;
+//     let sqmajor: number = 0;
+//     let sqminor: number = 0;
 
-    cqData.forEach((vul) => {
-      if (vul.rule.security_severity_level === "critical") {
-        cqcritical++;
-      } else if (vul.rule.security_severity_level === "high") {
-        cqhigh++;
-      } else if (vul.rule.security_severity_level === "medium") {
-        cqmedium++;
-      } else if (vul.rule.security_severity_level === "low") {
-        cqlow++;
-      }
-    });
+//     cqData.forEach((vul) => {
+//       if (vul.rule.security_severity_level === "critical") {
+//         cqcritical++;
+//       } else if (vul.rule.security_severity_level === "high") {
+//         cqhigh++;
+//       } else if (vul.rule.security_severity_level === "medium") {
+//         cqmedium++;
+//       } else if (vul.rule.security_severity_level === "low") {
+//         cqlow++;
+//       }
+//     });
 
-    sqData.forEach((vul) => {
-      if (vul.severity === "BLOCKER") {
-        sqblocker++;
-      } else if (vul.severity === "CRITICAL") {
-        sqcritical++;
-      } else if (vul.severity === "MAJOR") {
-        sqmajor++;
-      } else if (vul.severity === "MINOR") {
-        sqminor++;
-      }
-    });
+//     sqData.forEach((vul) => {
+//       if (vul.severity === "BLOCKER") {
+//         sqblocker++;
+//       } else if (vul.severity === "CRITICAL") {
+//         sqcritical++;
+//       } else if (vul.severity === "MAJOR") {
+//         sqmajor++;
+//       } else if (vul.severity === "MINOR") {
+//         sqminor++;
+//       }
+//     });
 
-    return (<>
-      <Grid key={`GRIDSASTCQSQ1`}
-        style={{ minWidth: "calc(10rem + 5vw)" }}>
-        <Grid key={`GRIDSASTCQSQ2`}
-          container>
-          <Grid item
-            key={`GRIDSASTCQSQ3`}
-            xs={6}>
-            <Grid key={`GRIDSASTCQSQ4`}>
-              <Grid key={`GRIDSASTCQSQ5`}
-                container >
-                <Grid item
-                  key={`GRIDSASTCQSQ6`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASTCQSQ1`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ1">Critical </b>: {cqcritical}
-                  </MKTypography>
-                </Grid>
-                <Grid item
-                  key={`GRIDSASTCQSQ7`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASTCQSQ2`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ2">High </b>: {cqhigh}
-                  </MKTypography>
-                </Grid>
-                <Grid item
-                  key={`GRIDSASTCQSQ8`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASTCQSQ3`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ3">Medium </b>: {cqmedium}
-                  </MKTypography>
-                </Grid>
-                <Grid item
-                  key={`GRIDSASTCQSQ9`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASTCQSQ4`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ4">Low </b>: {cqlow}
-                  </MKTypography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item
-            key={`GRIDSASTCQSQ10`}
-            xs={6}>
-            <Grid key={`GRIDSASTCQSQ11`}>
-              <Grid key={`GRIDSASTCQSQ12`}
-                container>
-                <Grid item
-                  key={`GRIDSASTCQSQ13`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASTCQSQ5`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ5">Critical </b> : {sqblocker}
-                  </MKTypography>
-                </Grid>
-                <Grid item
-                  key={`GRIDSASTCQSQ14`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASRCQSQ6`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ6">High</b> : {sqcritical}
-                  </MKTypography>
-                </Grid>
-                <Grid item
-                  key={`GRIDSASTCQSQ15`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASTCQSQ7`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ7">Medium</b> : {sqmajor}
-                  </MKTypography>
-                </Grid>
-                <Grid item
-                  key={`GRIDSASTCQSQ16`}
-                  xs={12}
-                  style={{
-                    justifyContent: "center",
-                    display: "flex"
-                  }}>
-                  <MKTypography variant="body1"
-                    key={`MKTypoSASTCQSQ8`}
-                    color="inherit"
-                    style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
-                    <b key="BOLDCQSQ8">Low</b>: {sqminor}
-                  </MKTypography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </>
-    );
-  } else {
-    return (
-      <>
-        <Typography variant="body1"
-          key={`MKTypoLBlankCQSQ1`}
-          color="inherit"
-          style={{
-            fontSize: "calc(0.3rem + 0.5vw)",
-            display: "flex",
-            justifyContent: "center"
-          }}>
-          No SAST issues data Available
-        </Typography>
-      </>
-    );
-  }
-};
+//     return (<>
+//       <Grid key={`GRIDSASTCQSQ1`}
+//         style={{ minWidth: "calc(10rem + 5vw)" }}>
+//         <Grid key={`GRIDSASTCQSQ2`}
+//           container>
+//           <Grid item
+//             key={`GRIDSASTCQSQ3`}
+//             xs={6}>
+//             <Grid key={`GRIDSASTCQSQ4`}>
+//               <Grid key={`GRIDSASTCQSQ5`}
+//                 container >
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ6`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASTCQSQ1`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ1">Critical </b>: {cqcritical}
+//                   </MKTypography>
+//                 </Grid>
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ7`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASTCQSQ2`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ2">High </b>: {cqhigh}
+//                   </MKTypography>
+//                 </Grid>
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ8`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASTCQSQ3`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ3">Medium </b>: {cqmedium}
+//                   </MKTypography>
+//                 </Grid>
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ9`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASTCQSQ4`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ4">Low </b>: {cqlow}
+//                   </MKTypography>
+//                 </Grid>
+//               </Grid>
+//             </Grid>
+//           </Grid>
+//           <Grid item
+//             key={`GRIDSASTCQSQ10`}
+//             xs={6}>
+//             <Grid key={`GRIDSASTCQSQ11`}>
+//               <Grid key={`GRIDSASTCQSQ12`}
+//                 container>
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ13`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASTCQSQ5`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ5">Critical </b> : {sqblocker}
+//                   </MKTypography>
+//                 </Grid>
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ14`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASRCQSQ6`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ6">High</b> : {sqcritical}
+//                   </MKTypography>
+//                 </Grid>
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ15`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASTCQSQ7`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ7">Medium</b> : {sqmajor}
+//                   </MKTypography>
+//                 </Grid>
+//                 <Grid item
+//                   key={`GRIDSASTCQSQ16`}
+//                   xs={12}
+//                   style={{
+//                     justifyContent: "center",
+//                     display: "flex"
+//                   }}>
+//                   <MKTypography variant="body1"
+//                     key={`MKTypoSASTCQSQ8`}
+//                     color="inherit"
+//                     style={{ fontSize: "calc(0.4rem + 0.3vw)" }}>
+//                     <b key="BOLDCQSQ8">Low</b>: {sqminor}
+//                   </MKTypography>
+//                 </Grid>
+//               </Grid>
+//             </Grid>
+//           </Grid>
+//         </Grid>
+//       </Grid>
+//     </>
+//     );
+//   } else {
+//     return (
+//       <>
+//         <Typography variant="body1"
+//           key={`MKTypoLBlankCQSQ1`}
+//           color="inherit"
+//           style={{
+//             fontSize: "calc(0.3rem + 0.5vw)",
+//             display: "flex",
+//             justifyContent: "center"
+//           }}>
+//           No SAST issues data Available
+//         </Typography>
+//       </>
+//     );
+//   }
+// };
 
 const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 
@@ -716,7 +717,7 @@ const FetchSBOM = ({ data, masterData }: any) => {
 
 const GetAssessmentData = ({ version, name, report, itemData, masterData }: any) => {
   const [jsonData, setJsonData]: any = React.useState({});
-  const [codeQlData, setCQData]: any = React.useState({});
+  const [codeQlData, setCQData]: any = React.useState([]);
   const [sonarqubeData, setSQData]: any = React.useState({});
   let reportNameMap = "";
   let reportNameMapCodeql = "";
@@ -727,7 +728,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     reportNameMap = "Criticality Score";
   } else if (report === "Vulnerabilities") {
     reportNameMapCodeql = "Codeql";
-    reportNameMapSonar = "Sonarqube"
+    reportNameMapSonar = "Sonarqube";
   } else if (report === "License Compliance") {
     reportNameMap = "Fossology";
   } else if (report === "Dependencies") {
@@ -853,8 +854,8 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     );
   }
 
-  if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" &&
-    JSON.stringify(Object.values(sonarqubeData).length) === "0")) {
+  if (report === "Vulnerabilities" && (Object.values(codeQlData).length !== 0 &&
+    Object.values(sonarqubeData).length === 0)) {
     return (<>
       {/* Codeql score */}
 
@@ -885,8 +886,8 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </MKBox>
     </>
     );
-  } else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(sonarqubeData).length) !== "0" &&
-    JSON.stringify(Object.values(codeQlData).length) === "0")) {
+  } else if (report === "Vulnerabilities" && (Object.values(sonarqubeData).length !== 0 &&
+    Object.values(codeQlData).length === 0)) {
     let issues: any = Object.values(sonarqubeData)[5];
     return (<>
       <Typography variant="h6"
@@ -917,14 +918,14 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     );
   } else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" &&
     JSON.stringify(Object.values(sonarqubeData).length) !== "0")) {
-    const codeqldetails: any = Object.values(codeQlData);
-    const codeqllength: number = Object.values(codeQlData).length;
-    let sqissues: any = Object.values(sonarqubeData)[5];
+    // const codeqldetails: any = Object.values(codeQlData);
+    // const codeqllength: number = Object.values(codeQlData).length;
+    // let sqissues: any = Object.values(sonarqubeData)[5];
 
     return (
       <>
-      {/* <SastToggleButton myObjectCodeql={myObjectCodeql} myObjectSonar={myObjectSonar} codeQlData={codeQlData} sonarqubeData={sonarqubeData}/> */}
-        <Grid item
+      <SastToggleButton myObjectCodeql={myObjectCodeql} myObjectSonar={myObjectSonar} codeQlData={codeQlData} sonarqubeData={sonarqubeData}/>
+        {/* <Grid item
           key="GRIDSASTCQSQMAIN1"
           container
           xs={12}>
@@ -985,7 +986,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
                 sqData={sqissues}
               />
             </MKBox>
-        </Grid>
+        </Grid> */}
       </>
     );
   }

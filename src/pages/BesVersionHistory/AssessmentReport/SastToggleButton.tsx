@@ -4,7 +4,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import MKBox from '../../../components/MKBox';
-import FetchSAST from "./index"
+import FetchSAST from "./FetchSastReport"
 function switchSast(newSast, myObjectCodeql, myObjectSonar, codeQlData, sonarqubeData) {
   switch (newSast) {
     case "codeql":
@@ -18,7 +18,6 @@ function switchSast(newSast, myObjectCodeql, myObjectSonar, codeQlData, sonarqub
             display: "flex",
             justifyContent: "center",
           }}>
-          {/* <a href=""></a> */}
           <Link to={myObjectCodeql}
             key={`LinkSC1`}
             style={{
@@ -34,7 +33,7 @@ function switchSast(newSast, myObjectCodeql, myObjectSonar, codeQlData, sonarqub
             cqData={codeQlData}
             // sqData={sonarqubeData}
           />
-        </MKBox>
+                  </MKBox>
       </>
       );
     case "sonarqube":
@@ -60,7 +59,7 @@ function switchSast(newSast, myObjectCodeql, myObjectSonar, codeQlData, sonarqub
         </Typography>
         <MKBox key="MKBOXSASTSQMAINBODY">
           <FetchSAST
-            // cqData={codeQlData}
+            cqData={codeQlData}
             sqData={issues}
           />
         </MKBox>
@@ -72,7 +71,7 @@ function switchSast(newSast, myObjectCodeql, myObjectSonar, codeQlData, sonarqub
 }
 
 export default function SastToggleButton({ myObjectCodeql, myObjectSonar, codeQlData, sonarqubeData }) {
-  const [sastReport, setSastReport] = React.useState('codeql');
+  const [sastReport, setSastReport] : any = React.useState('codeql');
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -83,19 +82,19 @@ export default function SastToggleButton({ myObjectCodeql, myObjectSonar, codeQl
 
   return (
     <>
+      {switchSast(sastReport, myObjectCodeql, myObjectSonar, codeQlData, sonarqubeData)}
       <ToggleButtonGroup
         color="standard"
         value={sastReport}
         exclusive
         onChange={handleChange}
         aria-label="Platform"
-        size='small'
-        style={{ justifyContent: "center", bottom: 0 }}
+        size='medium'
+        style={{ display: "flex", position: "relative", bottom: "-50px", left: "22%" }}
       >
-        <ToggleButton value="codeql">CodeQL</ToggleButton>
-        <ToggleButton value="sonarqube">Sonarqube</ToggleButton>
+        <ToggleButton disabled={ sastReport === "codeql" } value="codeql">CodeQL</ToggleButton>
+        <ToggleButton disabled={ sastReport === "sonarqube" } value="sonarqube">Sonarqube</ToggleButton>
       </ToggleButtonGroup>
-      {switchSast(sastReport, myObjectCodeql, myObjectSonar, codeQlData, sonarqubeData)}
     </>
   );
 }
