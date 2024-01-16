@@ -1,13 +1,11 @@
-// GraphDisplay.tsx
 import React, { useEffect } from "react";
 import * as d3 from "d3";
-import { Link } from 'react-router-dom';
 
 // Define the Node interface
 interface Node extends d3.SimulationNodeDatum {
   name: string;
   color: string;
-  model_url: any;
+  clickable: boolean;
   isDependency: boolean;
 }
 
@@ -38,10 +36,15 @@ const GraphDisplay = () => {
           item.dependencies.forEach((dep) => nodesSet.add(dep as string));
         });
 
+        const isClickable = (nodeName) => {
+          const res: boolean = data.find(item => item.name === nodeName);
+          return res;
+        };
+
         const nodes: Node[] = Array.from(nodesSet).map((name) => ({
           name,
           color: "#0077cc",
-          model_url: getModelUrl(name),
+          clickable: isClickable(name),
           isDependency: false,
         }));
 
@@ -83,7 +86,7 @@ const GraphDisplay = () => {
   
         // Add a line for each link, with arrowheads.
         const link = svg.append("g")
-          .attr("stroke", "#555") // Dark link color
+          .attr("stroke", "#555")
           .attr("stroke-opacity", 0.8)
           .selectAll()
           .data(links)
@@ -108,27 +111,31 @@ const GraphDisplay = () => {
           .attr("r", 7)
           .attr("fill", (d) => (d.isDependency ? "#EC5800" : "currentColor"))
           .on("click", (event, d) => handleNodeClick(event, d))
-          .style("cursor", (d) => (d.model_url ? "pointer" : "default"))
+          .style("cursor", (d) => (d.clickable ? "pointer" : "default"))
           .call(drag);
 
         const handleNodeClick = (event, d) => {
-          if (d.model_url && !event.active) {
+          if (d.clickable && !event.active) {
             window.open(`/BeSLighthouse/model_report/:${d.name}`, "_blank");
           }
         };
 
-
         // Add names to the nodes
-        const nodeName = nodeGroup.selectAll()
+        const nodeNameGroup = nodeGroup.selectAll()
           .data(nodes)
           .enter()
-          .append("text")
+          .append("g")
+          .style("cursor", (d) => (d.clickable ? "pointer" : "default"))
+          .on("click", (event, d) => handleNodeClick(event, d)); // Attach click event to the group
+
+        const nodeName = nodeNameGroup.append("text")
           .text(d => (d as Node).name)
           .attr("font-size", 12)
           .attr("dx", 14)
           .attr("dy", 4)
           .attr("fill", d => (d as Node).isDependency ? "#34495e" : "#2c3e50");
 
+        
         // Set the position attributes of links and nodes each time the simulation ticks.
         function ticked() {
           link
@@ -138,14 +145,7 @@ const GraphDisplay = () => {
             .attr("y2", d => (d.target as any).y || 0);
 
           node.attr("cx", d => (d as Node).x || 0).attr("cy", d => (d as Node).y || 0);
-
           nodeName.attr("x", d => (d as Node).x || 0).attr("y", d => (d as Node).y || 0);
-        }
-
-        function getModelUrl(nodeName) {
-          const nodeData: boolean = data.find(item => item.name === nodeName);
-          const url: string = "/BeSLighthouse/model_report";
-          return nodeData ? url+nodeName : null;
         }
 
         function dragstarted(event: any, d: Node) {
@@ -171,9 +171,22 @@ const GraphDisplay = () => {
   }, []); // Empty dependency array ensures the effect runs once after the initial render
 
   return (
-    <div id="graph-container">
-      {/* You can add any additional React components or elements here */}
+    <div>
+    <div id="indicator" style={{ position: "absolute", top: "0", right: "0", margin: "20px", marginTop: "60px" }}>
+      <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "2px", marginTop: "17px" }}>
+        <div className="circle model" style={{ backgroundColor: "currentColor", width: "12px", height: "12px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
+        <p style={{ fontSize: "13px" }}>Model</p>
+      </div>
+
+      <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "5px", marginTop: "2px" }}>
+        <div className="circle dependency" style={{ backgroundColor: "#EC5800", width: "12px", height: "12px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
+        <p style={{ fontSize: "13px" }}>Dependency</p>
+      </div>
     </div>
+    <div id="graph-container" style={{ position: "relative" }}>
+      {/* Your graph content goes here */}
+    </div>
+  </div>
   );
 };
 
