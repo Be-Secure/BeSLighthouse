@@ -334,18 +334,19 @@ function BesVersionHistory() {
                   <Grid key={`TOPGRID14${index}`}
                     container
                     spacing={1}
-                    p={2}>
+                    p={1}>
                     <Grid key={`TOPGRID15${index}`}
                       item
                       xs={12}
                       justifyContent="flex-start">
+
                       <AssessmentReport
                         title="Assessment Report"
                         name={besName.slice(1)}
                         version={selectedOption}
                         itemData={item}
                         masterData={data}
-                      />
+                        />
                     </Grid>
                   </Grid>
                 </Card>

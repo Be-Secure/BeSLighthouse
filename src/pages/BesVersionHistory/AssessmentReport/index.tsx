@@ -13,6 +13,8 @@ import {
   assessment_report
 } from "../../../utils/assessmentReport";
 
+import SastToggleButton from "./SastToggleButton"
+
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
     const response = await fetchJsonReport(link);
@@ -214,14 +216,16 @@ const FetchSAST = ({ cqData, sqData }: any) => {
           key={`GRIDSASTCQ2`}>
           <Grid item
             xs={6}
-            key={`GRIDSASTCQ3`}>
+            key={`GRIDSASTCQ3`}
+            style={{ 
+              fontSize: "13px"
+             }}
+            >
             <MKTypography variant="body1"
               key={`MKTYPOSASTCQ1`}
               color="inherit"
-              style={{
-                fontSize: "calc(0.6rem + 0.5vw)",
-                // paddingLeft: "calc(0.1rem + 0.3vw)"
-              }}>
+              style={{ fontSize: "15px" }}
+              >
               <b key="BOLDCQ1">Critical : </b>{critical}
             </MKTypography>
           </Grid>
@@ -268,7 +272,7 @@ const FetchSAST = ({ cqData, sqData }: any) => {
             </MKTypography>
           </Grid>
         </Grid>
-      </Grid>
+        </Grid>
     </>
     );
   } else if (JSON.stringify(Object.values(cqData).length) === "0" &&
@@ -624,10 +628,10 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
               }}>
               <b key="BOLDL4">Unique Licenses</b>:
             </MKTypography>
-            <MKTypography 
+            <MKTypography
               fontSize="12px"
-              >
-            {license_list}
+            >
+              {license_list}
             </MKTypography>
           </Grid>
         </Grid>
@@ -715,11 +719,15 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   const [codeQlData, setCQData]: any = React.useState({});
   const [sonarqubeData, setSQData]: any = React.useState({});
   let reportNameMap = "";
+  let reportNameMapCodeql = "";
+  let reportNameMapSonar = "";
+
 
   if (report === "Criticality Score") {
     reportNameMap = "Criticality Score";
   } else if (report === "Vulnerabilities") {
-    reportNameMap = "Codeql";
+    reportNameMapCodeql = "Codeql";
+    reportNameMapSonar = "Sonarqube"
   } else if (report === "License Compliance") {
     reportNameMap = "Fossology";
   } else if (report === "Dependencies") {
@@ -729,7 +737,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }
 
   React.useEffect(() => {
-    if (version.trim()) {
+    if (version?.trim()) {
       let link: string = "";
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
       fetchJsonData(link, setJsonData);
@@ -737,17 +745,17 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }, [version]);
 
   React.useEffect(() => {
-    if (version.trim()) {
+    if (version?.trim()) {
       let link: string = "";
-      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-sonarqube-report.json`;
+      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
       fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
     }
   }, [version]);
 
   React.useEffect(() => {
-    if (version.trim()) {
+    if (version?.trim()) {
       let link: string = "";
-      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-codeql-report.json`;
+      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
       fetchvulJsonData(link, "codeql", setCQData, setSQData);
     }
   }, [version]);
@@ -756,7 +764,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   if (report === "Criticality Score" && jsonDataLength !== 0) {
     return (
       <>
-      {/* Criticality score value */}
+        {/* Criticality score value */}
         <MKTypography variant="h6"
           key={`TypoCriticalityScore`}
           color="inherit"
@@ -786,13 +794,32 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     );
   }
 
-  const pathName: string = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
-  const myObject = { pathname: pathName, state: jsonData } as {
-    pathname: string;
-  };
+  let pathNameCodeql: string;
+  let pathNameSonar: string;
+  let pathName: string;
+  let myObjectCodeql;
+  let myObjectSonar;
+  let myObject;
+
+  if (report === "Vulnerabilities") {
+    pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
+    pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
+    myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
+      pathname: string;
+    };
+    myObjectSonar = { pathname: pathNameSonar, state: jsonData } as {
+      pathname: string;
+    };
+  } else {
+
+    pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
+    myObject = { pathname: pathName, state: jsonData } as {
+      pathname: string;
+    };
+  }
   if (report === "ScoreCard" && jsonDataLength !== 0) {
     return (<>
-    {/* Display scorecard score */}
+      {/* Display scorecard score */}
       <Typography variant="h6"
         key={`TypoSC1`}
         color="inherit"
@@ -829,7 +856,8 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" &&
     JSON.stringify(Object.values(sonarqubeData).length) === "0")) {
     return (<>
-    {/* Codeql score */}
+      {/* Codeql score */}
+
       <Typography variant="h6"
         key="SASCQTMAINHEADING"
         color="inherit"
@@ -838,9 +866,16 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           display: "flex",
           justifyContent: "center",
         }}>
-          {/* <a href=""></a> */}
-        
-        CodeQL: {codeQlData.length}
+        {/* <a href=""></a> */}
+        <Link to={myObjectCodeql}
+          key={`LinkSC1`}
+          style={{
+            fontSize: "13px",
+            display: "flex",
+            justifyContent: "center"
+          }}>
+          CodeQL: {codeQlData.length}
+        </Link>
       </Typography>
       <MKBox key="MKBOXSASTCQMAINBODY">
         <FetchSAST
@@ -862,7 +897,15 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           display: "flex",
           justifyContent: "center"
         }}>
-        Sonarqube: {sonarqubeData.total}
+        <Link to={myObjectSonar}
+          key={`LinkSC1`}
+          style={{
+            fontSize: "13px",
+            display: "flex",
+            justifyContent: "center"
+          }}>
+          Sonarqube: {sonarqubeData.total}
+        </Link>
       </Typography>
       <MKBox key="MKBOXSASTSQMAINBODY">
         <FetchSAST
@@ -880,26 +923,30 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
 
     return (
       <>
+      {/* <SastToggleButton myObjectCodeql={myObjectCodeql} myObjectSonar={myObjectSonar} codeQlData={codeQlData} sonarqubeData={sonarqubeData}/> */}
         <Grid item
           key="GRIDSASTCQSQMAIN1"
           container
           xs={12}>
           <Grid item
             key="GRIDSASTCQSQMAIN2"
-            xs={6}>
+            xs={6} style={{ display: "flex" }}>
             <Typography variant="h6"
               key="TYPOSASTCQSQMAIN1"
               color="inherit"
               style={{
                 fontSize: "13px",
-                justifyContent: "center",
+                justifyContent: "left",
                 display: "flex",
                 paddingBottom: "8px",
-                paddingTop: "4px"
+                paddingTop: "4px",
+                paddingLeft: "8px"
               }}>
+              <Link to={myObjectCodeql}
+                key={`LinkSC1`}>
+                CodeQL: {codeqllength}
+              </Link>
 
-              CodeQL: {codeqllength}
-              
             </Typography>
           </Grid>
           <Grid item
@@ -915,22 +962,29 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
                 paddingBottom: "8px",
                 paddingTop: "4px"
               }}>
+              <Link to={myObjectSonar}
+                key={`LinkSC1`}
+                style={{
+                  fontSize: "13.5px",
+                  display: "flex",
+                  justifyContent: "right",
+                  paddingRight: "5px"
 
-             Sonarqube: {sonarqubeData.total}
+                }}>
+                Sonarqube: {sonarqubeData.total}
+              </Link>
 
             </Typography>
           </Grid>
         </Grid>
         <Grid key="GRIDSASTCQSQMAIN4"
           container>
-          <Grid>
             <MKBox key="MKBOXSASTCQSQMAIN1">
               <FetchSAST
                 cqData={codeqldetails}
                 sqData={sqissues}
               />
             </MKBox>
-          </Grid>
         </Grid>
       </>
     );
@@ -1082,7 +1136,7 @@ const GetHeadings = ({ receivedValue }: any) => {
       </MKTypography>
     </>);
 
-  } 
+  }
   else if (receivedValue === "Vulnerabilities") {
     return (<> {" "}
       <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
@@ -1092,7 +1146,7 @@ const GetHeadings = ({ receivedValue }: any) => {
         </Icon>
       </MKTypography>
     </>);
-  } 
+  }
   else {
     return (receivedValue);
   }
@@ -1109,8 +1163,8 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
   return (<>
     <Grid container key="maingridAssmentreport"
       justifyContent="center"
-      style={{ width: "100%", placeContent: "space-evenly"}}>
-        {/* Getting the assessment report */}
+      style={{ width: "100%", placeContent: "space-evenly" }}>
+      {/* Getting the assessment report */}
       {report.map((value, index) => {
         return (
           <>
@@ -1121,7 +1175,7 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
               <MKBox p={2}
                 key={`Mbox1${index}`}
                 borderRadius="lg">
-                  {/* Making the grey box */}
+                {/* Making the grey box */}
                 <Grid
                   key={`Grid2${index}`}
                   justifyContent="center"
@@ -1132,8 +1186,8 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                     fontSize: "15px",
                     paddingTop: "5px"
                   }} >
-                    {/* Assessment heading */}
-                  <Grid container 
+                  {/* Assessment heading */}
+                  <Grid container
                     key={`Grid3${index}`}
                     justifyContent="center"
                     alignItems="center" >
