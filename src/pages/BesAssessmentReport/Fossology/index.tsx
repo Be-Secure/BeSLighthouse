@@ -7,9 +7,12 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow,
+  TableRow
 } from "@mui/material";
-import { applySortFilter, getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+import {
+  applySortFilter,
+  getComparator
+} from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "FileName", label: "FileName", alignRight: false },
@@ -17,8 +20,8 @@ const TABLE_HEAD = [
   {
     id: "File Copyright Test",
     label: "File Copyright Test",
-    alignRight: false,
-  },
+    alignRight: false
+  }
 ];
 
 // Fixme: Code refactor
@@ -99,11 +102,11 @@ export default function Fossology({ data }: any) {
         <TablePagination
           sx={{
             ".MuiTablePagination-selectLabel": {
-              margin: "auto",
+              margin: "auto"
             },
             ".MuiTablePagination-displayedRows": {
-              margin: "auto",
-            },
+              margin: "auto"
+            }
           }}
           rowsPerPageOptions={[15, 30, 45]}
           component="div"

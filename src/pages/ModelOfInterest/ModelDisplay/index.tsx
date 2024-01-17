@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { modelOfInterestData } from "../../../dataStore";
 import { getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
 import { fetchJsonData } from "../../BesVersionHistory/AssessmentReport";
-import SearchVoiList from "../../VulnerabilityOfInterest/VoiTable/SearchVoiList";
-import ModelTable from "./ModelTable";
-import ThreeWayToggleButton from "../../../examples/Button/ThreeWayToggle"
+import ThreeWayToggleButton from "../../../examples/Button/ThreeWayToggle";
+
 function applySortFilter(array: any, comparator: any, query: any) {
   const stabilizedThis = array.map((el: any, index: any) => [el, index]);
   stabilizedThis.sort((a: any, b: any) => {
@@ -16,14 +15,12 @@ function applySortFilter(array: any, comparator: any, query: any) {
   if (query) {
     let search = query.trim();
     return filter(array, (_user: any) => {
-      if (_user.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) return true;
+      if (_user.name.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+        return true;
     });
   }
   return stabilizedThis.map((el: any) => el[0]);
 }
-
-
-
 
 export default function ModelDisplay() {
   const [filterName, setFilterName] = useState("");
@@ -41,9 +38,10 @@ export default function ModelDisplay() {
     filterName
   );
   return (
-    <>
-
-      <ThreeWayToggleButton filteredCveReport={filteredCveReport} filterName={filterName} handleFilterByName={handleFilterByName}/>
-    </>
+    <ThreeWayToggleButton
+      filteredCveReport={filteredCveReport}
+      filterName={filterName}
+      handleFilterByName={handleFilterByName}
+    />
   );
 }
