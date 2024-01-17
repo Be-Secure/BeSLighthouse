@@ -183,7 +183,7 @@ const GraphDisplay = () => {
         <p style={{ fontSize: "13px" }}>Dependency</p>
       </div>
     </div>
-    <div id="graph-container" style={{ position: "relative" }}>
+    <div id="graph-container">
       {/* Your graph content goes here */}
     </div>
   </div>
