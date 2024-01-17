@@ -67,7 +67,14 @@ export default function CodeQL({ data }: any) {
                 >
                   <TableSortLabel
                     hideSortIcon
-                    style={{ position: "relative", minWidth: (headCell.id === 'Start-Line' || headCell.id === 'End-Line') ? '110px' : '' }}
+                    style={{
+                      position: "relative",
+                      minWidth:
+                        headCell.id === "Start-Line" ||
+                        headCell.id === "End-Line"
+                          ? "110px"
+                          : ""
+                    }}
                   >
                     {headCell.label}
                   </TableSortLabel>

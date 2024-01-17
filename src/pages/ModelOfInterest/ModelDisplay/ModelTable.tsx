@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import {
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -9,8 +8,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  TableSortLabel,
-  Typography,
+  TableSortLabel
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
@@ -21,7 +19,7 @@ const TABLE_HEAD = [
   { id: "organization", label: "Organization", alignRight: false },
   { id: "quality_control", label: "Risk Analysis", alignRight: false },
   { id: "created_date", label: "Created On", alignRight: false },
-  { id: "dependencies", label: "Dependencies", alignRight: false },
+  { id: "dependencies", label: "Dependencies", alignRight: false }
 ];
 
 export default function ModelTable({ data }: any) {
@@ -45,81 +43,81 @@ export default function ModelTable({ data }: any) {
   };
 
   return (
-    <>
-      <TableContainer sx={{ minWidth: 800, color: "red" }}>
-        <Table>
-          <TableHead sx={{ display: "contents" }}>
-            <TableRow>
-              {TABLE_HEAD.map((headCell: any) => (
-                <TableCell
-                  sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}
-                  key={headCell.id}
-                  align={headCell.alignRight ? "right" : "left"}
+    <TableContainer>
+      <Table>
+        <TableHead sx={{ display: "contents" }}>
+          <TableRow>
+            {TABLE_HEAD.map((headCell: any) => (
+              <TableCell
+                sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}
+                key={headCell.id}
+                align={headCell.alignRight ? "right" : "left"}
+              >
+                <TableSortLabel
+                  hideSortIcon
+                  style={{
+                    position: "relative",
+                    minWidth: headCell.id === "type" ? "134px" : ""
+                  }}
                 >
-                  <TableSortLabel
-                    hideSortIcon
-                    style={{
-                      position: "relative",
-                      minWidth: headCell.id === "type" ? "134px" : "",
-                    }}
-                  >
-                    {headCell.label}
-                  </TableSortLabel>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredModel
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row: any, index: number) => {
-                return (
-                  <TableRow hover key={index} tabIndex={-1}>
-                    <TableCell align="left">{row.id}</TableCell>
-                    <TableCell align="left">
-                      <NavLink
-                        to={{
-                          pathname: `/BeSLighthouse/model_report/:${row.name}`,
-                          search: "",
-                        }}
-                        state={{ selectedMenu: row }}
-                        style={{ color: "#587f2f", cursor: "pointer" }}
-                      >
-                        {row.name}
-                      </NavLink>
-                    </TableCell>
-                    <TableCell align="left">{row.type}</TableCell>
-                    <TableCell align="left">{row.organization}</TableCell>
-                    <TableCell align="left" style={{ color: "red" }}>
-                      {row.quality_control.join(" | ")}
-                    </TableCell>
-                    <TableCell align="left">{row.created_date}</TableCell>
-                    <TableCell align="left">
-                      {row.dependencies.length === 0 ? "None" : row.dependencies.join(" | ")}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-        <TablePagination
-          sx={{
-            ".MuiTablePagination-selectLabel": {
-              margin: "auto",
-            },
-            ".MuiTablePagination-displayedRows": {
-              margin: "auto",
-            },
-          }}
-          rowsPerPageOptions={[15, 30, 45]}
-          component="div"
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </TableContainer>
-    </>
+                  {headCell.label}
+                </TableSortLabel>
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {filteredModel
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((row: any, index: number) => {
+              return (
+                <TableRow hover key={index} tabIndex={-1}>
+                  <TableCell align="left">{row.id}</TableCell>
+                  <TableCell align="left">
+                    <NavLink
+                      to={{
+                        pathname: `/BeSLighthouse/model_report/:${row.name}`,
+                        search: ""
+                      }}
+                      state={{ selectedMenu: row }}
+                      style={{ color: "#587f2f", cursor: "pointer" }}
+                    >
+                      {row.name}
+                    </NavLink>
+                  </TableCell>
+                  <TableCell align="left">{row.type}</TableCell>
+                  <TableCell align="left">{row.organization}</TableCell>
+                  <TableCell align="left" style={{ color: "red" }}>
+                    {row.quality_control.join(" | ")}
+                  </TableCell>
+                  <TableCell align="left">{row.created_date}</TableCell>
+                  <TableCell align="left">
+                    {row.dependencies.length === 0
+                      ? "None"
+                      : row.dependencies.join(" | ")}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+        </TableBody>
+      </Table>
+      <TablePagination
+        sx={{
+          ".MuiTablePagination-selectLabel": {
+            margin: "auto"
+          },
+          ".MuiTablePagination-displayedRows": {
+            margin: "auto"
+          }
+        }}
+        rowsPerPageOptions={[15, 30, 45]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </TableContainer>
   );
 }

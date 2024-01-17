@@ -7,15 +7,18 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow,
+  TableRow
 } from "@mui/material";
-import { applySortFilter, getComparator } from "../../../../layouts/pages/projectOfInterest/ProjectDisplay";
+import {
+  applySortFilter,
+  getComparator
+} from "../../../../layouts/pages/projectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "name", label: "Name", alignRight: false },
   { id: "score", label: "Score", alignRight: false },
   { id: "reason", label: "Reason", alignRight: false },
-  { id: "details", label: "Details", alignRight: false },
+  { id: "details", label: "Details", alignRight: false }
 ];
 
 // Fixme: Code refactor
@@ -95,11 +98,11 @@ export default function ScorecardTable({ data }: any) {
         <TablePagination
           sx={{
             ".MuiTablePagination-selectLabel": {
-              margin: "auto",
+              margin: "auto"
             },
             ".MuiTablePagination-displayedRows": {
-              margin: "auto",
-            },
+              margin: "auto"
+            }
           }}
           rowsPerPageOptions={[15, 30, 45]}
           component="div"

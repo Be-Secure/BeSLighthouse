@@ -7,16 +7,19 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow,
+  TableRow
 } from "@mui/material";
-import { applySortFilter, getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+import {
+  applySortFilter,
+  getComparator
+} from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "Package Name", label: "Package Name", alignRight: false },
   { id: "Version", label: "Version", alignRight: false },
   { id: "Supplier", label: "Supplier", alignRight: false },
   { id: "Download Location", label: "Download Location", alignRight: false },
-  { id: "License", label: "License", alignRight: false },
+  { id: "License", label: "License", alignRight: false }
 ];
 
 // Fixme: Code refactor
@@ -83,7 +86,7 @@ export default function Sbom({ data }: any) {
                     versionInfo,
                     supplier,
                     downloadLocation,
-                    licenseDeclared,
+                    licenseDeclared
                   } = row;
                   return (
                     <TableRow hover key={index} tabIndex={-1}>
@@ -107,11 +110,11 @@ export default function Sbom({ data }: any) {
         <TablePagination
           sx={{
             ".MuiTablePagination-selectLabel": {
-              margin: "auto",
+              margin: "auto"
             },
             ".MuiTablePagination-displayedRows": {
-              margin: "auto",
-            },
+              margin: "auto"
+            }
           }}
           rowsPerPageOptions={[15, 30, 45]}
           component="div"

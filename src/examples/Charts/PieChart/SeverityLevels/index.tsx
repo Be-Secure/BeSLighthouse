@@ -30,19 +30,19 @@ function SeverityLevels({ chartColors, chartData }: any) {
       y: {
         formatter: (seriesName: any) => fNumber(seriesName),
         title: {
-          formatter: (seriesName: any) => `${seriesName}`,
-        },
-      },
+          formatter: (seriesName: any) => `${seriesName}`
+        }
+      }
     },
     plotOptions: {
-      pie: { donut: { labels: { show: false } } },
-    },
+      pie: { donut: { labels: { show: false } } }
+    }
   });
 
   return (
-    <Card  style={{height: "70%", width: "200%"}}>
+    <Card style={{ height: "70%", width: "200%" }}>
       <MKBox>
-        <MKBox pt={1} pb={1} px={1}>        
+        <MKBox pt={1} pb={1} px={1}>
           <StyledChartWrapper dir="ltr">
             <ReactApexChart
               type="pie"

@@ -41,8 +41,8 @@ export default function ProjectCount({
             style={{
               color: "black",
               fontSize: "80px",
-              position: 'absolute',
-              top: '45px'
+              position: "absolute",
+              top: "45px"
             }}
             variant="h1"
           >
@@ -53,8 +53,8 @@ export default function ProjectCount({
             sx={{
               color: "black",
               fontSize: "20px",
-              position: 'absolute',
-              top: '130px'
+              position: "absolute",
+              top: "130px"
             }}
           >
             {title}
