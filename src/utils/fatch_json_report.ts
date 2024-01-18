@@ -58,7 +58,6 @@ export function getEnvPathStatus(besName: string): Promise<boolean> {
           .on("error",(error:any) => {
             reject(false);
           });
-        reject(false);
       });
   });
 }
