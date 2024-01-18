@@ -1,4 +1,7 @@
+import { debug } from "console";
 import https from "https";
+import { reject } from "lodash";
+import { resolve } from "path";
 
 export function fetchJsonReport(url: string): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -23,6 +26,24 @@ export function fetchJsonReport(url: string): Promise<any> {
       })
       .on("error", (error: any) => {
         reject(error);
+      });
+  });
+}
+
+export function getEnvPathStatus(besName: string): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    const bturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${besName}/0.0.1/besman-${besName}-BT-env.sh`;
+    https
+      .get(bturl, (response: any) => {
+        let code = response.statusCode;
+        if (code === 200){
+          resolve(true);
+        } else {
+          reject(false);
+        }
+      })
+      .on("error", (error: any) => {
+        reject(false);
       });
   });
 }

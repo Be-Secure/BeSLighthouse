@@ -13,6 +13,8 @@ import AssessmentAnalytics from "./AssessmentAnalytics";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import { Divider } from '@mui/material';
+import { getEnvPathStatus } from "../../utils/fatch_json_report";
+import { Tune } from "@mui/icons-material";
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -30,6 +32,11 @@ export const osspoiMasterAndSummary = async (
   setData(osspoi.items);
   setVersionSummary(summary);
 };
+
+export const getResponse = async (name : string) => {
+  const res = await getEnvPathStatus(name);
+  return res;
+}
 
 const useStyles: any = makeStyles(() => ({
   select: {
@@ -107,6 +114,19 @@ function BesVersionHistory() {
     );
   }, []);
 
+  const [isenvpath, setisenvpath] : any = React.useState();
+  React.useEffect(() => {
+    const response : any = getResponse(besName.slice(1));
+    response.then(
+      (resolvedValue) => {
+        setisenvpath(resolvedValue);
+      },
+      (rejectionReason) => {
+        setisenvpath(rejectionReason);
+      }
+    );
+  });
+
   const [selectedOption, setSelectedOption] = React.useState("");
 
   try {
@@ -145,7 +165,7 @@ function BesVersionHistory() {
             else
               definedScore = "Not Available";
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${item.name}/`;
-
+    
             return (
               <>
                 <Card key={`TOPCARD${index}`}
@@ -266,10 +286,13 @@ function BesVersionHistory() {
                         fontWeight="regular"
                         color="text"
                         style={{ fontSize: "15px" }}>
-                        <Link key={`TOPLINK1${index}`}
-                                to={envpath}>
-                                {item.name}
-                              </Link>
+                        {isenvpath ? (
+                        <Link key={`TOPLINK1${index}`} to={envpath}>
+                        {item.name}
+                        </Link>
+                        ) : (
+                        "Not Available"
+                        )}
                       </MKTypography>
                     </Grid>
                     {/* The below code moves the description to the next line if the character count exceeds 100 */}
@@ -382,3 +405,7 @@ function BesVersionHistory() {
 }
 
 export default BesVersionHistory;
+
+function setisenvpath(getEnvPathStatus: (url: string) => Promise<boolean>) {
+  throw new Error("Function not implemented.");
+}
