@@ -164,7 +164,12 @@ function BesVersionHistory() {
               definedScore = item.score;
             else
               definedScore = "Not Available";
-            const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${item.name}/`;
+
+            const name = item.name.split('-');
+            const camelCaseString = name.map((part, index) => {
+              return index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1);
+            }).join('');
+            const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${camelCaseString}/`;
     
             return (
               <>
