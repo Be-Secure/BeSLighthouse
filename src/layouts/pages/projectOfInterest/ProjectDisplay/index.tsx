@@ -64,6 +64,7 @@ export default function ProjectDisplay() {
   let getUSERLIST = [];
   if (projectOfInterestData.getPoiData("Project_of_interest")) {
     getUSERLIST = projectOfInterestData.getPoiData("Project_of_interest");
+    console.log("getuserlist : ", getUSERLIST);
   }
   const handleFilterByName: any = (event: any) => {
     setPage(0);
@@ -140,7 +141,7 @@ export default function ProjectDisplay() {
                     html_url,
                   } = row;
                   let licenseName;
-                  if (license) {
+                  if (license && !(license.name === "") && !(license === "null")) {
                     licenseName = license.name;
                   } else {
                     licenseName = "Not Available";
