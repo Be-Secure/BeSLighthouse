@@ -140,7 +140,7 @@ export default function ProjectDisplay() {
                     html_url,
                   } = row;
                   let licenseName;
-                  if (license) {
+                  if (license && !(license.name === "") && !(license === "null")) {
                     licenseName = license.name;
                   } else {
                     licenseName = "Not Available";
