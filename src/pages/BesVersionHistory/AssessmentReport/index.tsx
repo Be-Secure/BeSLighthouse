@@ -574,7 +574,6 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
       ld.LicenseConcluded.length === 0))
       non_lic_files++;
   });
-  //console.log("item data=" + JSON.stringify(itemData));
   if (itemData.license && itemData.license.key) {
     project_lcesnse = itemData.license.key;
   }
@@ -652,12 +651,13 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   }
 };
 
-const FetchSBOM = ({ data, masterData }: any) => {
-
+const FetchSBOM = ({data, masterData, name}: any) => {
   let tracked: string[] = [];
   let dis: any = {};
-
   data.forEach((dp) => {
+    if(dp.name === name){
+      return;
+    }
     masterData.forEach((tp) => {
       let duplicate: boolean = false;
       if (dp.name === tp.name) {
@@ -722,7 +722,6 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   let reportNameMap = "";
   let reportNameMapCodeql = "";
   let reportNameMapSonar = "";
-
 
   if (report === "Criticality Score") {
     reportNameMap = "Criticality Score";
@@ -1060,7 +1059,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
             display: "flex",
             justifyContent: "center"
           }}>
-          {jsonData.packages.length}
+          {(jsonData.packages.length)-1}
         </Link>
       </Typography>
       <Grid key="GRIDSBOMMAIN1"
@@ -1073,6 +1072,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
           <FetchSBOM
             data={jsonData.packages}
             masterData={masterData}
+            name={name}
           />
         </MKBox>
       </Grid>
