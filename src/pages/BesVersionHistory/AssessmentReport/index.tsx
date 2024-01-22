@@ -671,7 +671,6 @@ const FetchSBOM = ({data, masterData, name}: any) => {
       }
     });
   });
-  //console.log("tra: ",tracked);
   dis = tracked.map(function (td: string, index: number) {
     return (<>
       <Grid item
@@ -695,7 +694,8 @@ const FetchSBOM = ({data, masterData, name}: any) => {
   return (<>
     <Grid key={`GRIDSBOMMAIN`}
       style={{ minWidth: "200px" }}>
-      <MKTypography key="MKTypoSBOMMain" variant="body1"
+      {tracked.length !== 0 ? (
+        <MKTypography key="MKTypoSBOMMain" variant="body1"
         color="inherit"
         style={{
           fontSize: "12px",
@@ -703,13 +703,19 @@ const FetchSBOM = ({data, masterData, name}: any) => {
           display: "flex",
           paddingLeft: "calc(0.1rem + 0.3vw)"
         }}>
-        {tracked.length !== 0 ? (
-          <b key={`BOLDSBOM1`}>Tracked under BeS :</b>
-        ) : (
-        <b key={`BOLDSBOM1`}>No dependencies tracked under BeS</b>
-        )}
+          <b key={`BOLDSBOM1`}>Tracked under BeS :</b>  
+        </MKTypography>
+      ) : (
+        <MKTypography key="MKTypoSBOMMain" variant="body1"
+        color="inherit"
         
-      </MKTypography>
+        style={{
+        fontSize: "12px", display: "flex",
+        justifyContent: "center", alignItems: "center", position: "relative", top: "55px"
+        }}>
+          <b key={`BOLDSBOM1`}>No dependencies tracked under BeS</b>
+        </MKTypography>
+      )}
       <Grid key={`GRIDSBOMSUBMAIN`}
         container>
         {dis}
@@ -1047,43 +1053,48 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </>
     );
   }
-
-  if (report === "Dependencies" && jsonDataLength !== 0 && !(jsonData.packages.length === 1 && jsonData.packages[0].name === name)) {
-    return (<>
-      <Typography variant="h6"
-        key="TYPOSBOMMAIN1"
-        color="inherit"
-        style={{
-          fontSize: "calc(0.6rem + 0.5vw)"
-        }}>
-        <Link to={myObject}
-          key="LINKSBOMMAIN1"
+  let flag = false;
+  if (report === "Dependencies" && jsonDataLength !== 0) {
+    if (!(jsonData.packages.length === 1 && jsonData.packages[0].name === name)){
+      return (<>
+        <Typography variant="h6"
+          key="TYPOSBOMMAIN1"
+          color="inherit"
           style={{
-            fontSize: "calc(0.6rem + 0.5vw)",
-            display: "flex",
-            justifyContent: "center"
+            fontSize: "calc(0.6rem + 0.5vw)"
           }}>
-          {(jsonData.packages.length)-1}
-        </Link>
-      </Typography>
-      <Grid key="GRIDSBOMMAIN1"
-        style={{
-          height: "100px",
-          borderRadius: "3px"
-        }}
-        sx={{ overflowY: "scroll" }}>
-        <MKBox key="MKBOXSBOMMAIN1">
-          <FetchSBOM
-            data={jsonData.packages}
-            masterData={masterData}
-            name={name}
-          />
-        </MKBox>
-      </Grid>
-    </>
-    );
+          <Link to={myObject}
+            key="LINKSBOMMAIN1"
+            style={{
+              fontSize: "calc(0.6rem + 0.5vw)",
+              display: "flex",
+              justifyContent: "center"
+            }}>
+            {(jsonData.packages.length)-1}
+          </Link>
+        </Typography>
+        <Grid key="GRIDSBOMMAIN1"
+          style={{
+            height: "100px",
+            borderRadius: "3px"
+          }}
+          sx={{ overflowY: "scroll" }}>
+          <MKBox key="MKBOXSBOMMAIN1">
+            <FetchSBOM
+              data={jsonData.packages}
+              masterData={masterData}
+              name={name}
+            />
+          </MKBox>
+        </Grid>
+      </>
+      );
+    } else {
+      flag = true;
+    }
+    
   }
-
+ 
   return (
     <MKTypography variant="h6"
       key="TYPOSBOMMAINBLANK1"
@@ -1092,7 +1103,11 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         fontSize: "12px", display: "flex",
         justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
       }}>
-      Not Available
+        {flag ? (
+          "No dependent packages are available"
+        ) : (
+        "Not Available"
+        )}
     </MKTypography>
   );
 };
