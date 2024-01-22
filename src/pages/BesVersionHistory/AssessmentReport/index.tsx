@@ -655,14 +655,14 @@ const FetchSBOM = ({data, masterData, name}: any) => {
   let tracked: string[] = [];
   let dis: any = {};
   data.forEach((dp) => {
-    if(dp.name === name){
+    if(dp.name.toLowerCase() === name.toLowerCase()){
       return;
     }
     masterData.forEach((tp) => {
       let duplicate: boolean = false;
-      if (dp.name === tp.name) {
+      if (dp.name.toLowerCase() === tp.name.toLowerCase()) {
         tracked.forEach((tmptracked) => {
-          if (tmptracked === dp.name)
+          if (tmptracked.toLowerCase() === dp.name.toLowerCase())
             duplicate = true;
         });
 
@@ -1055,7 +1055,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }
   let flag = false;
   if (report === "Dependencies" && jsonDataLength !== 0) {
-    if (!(jsonData.packages.length === 1 && jsonData.packages[0].name === name)){
+    if (!(jsonData.packages.length === 1 && jsonData.packages[0].name.toLowerCase() === name.toLowerCase())){
       return (<>
         <Typography variant="h6"
           key="TYPOSBOMMAIN1"
