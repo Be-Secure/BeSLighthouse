@@ -24,7 +24,7 @@ export const spanStyle: any = {
   paddingRight: "13px",
 };
 
-function displayReport(besReport: any, report: any): any {
+function displayReport(BeSName: string, besReport: any, report: any): any {
   if (besReport === "Scorecard") {
     return <ScorecardTable data={report} />;
   }
@@ -38,7 +38,7 @@ function displayReport(besReport: any, report: any): any {
     return <Fossology data={report} />;
   }
   if (besReport === "SBOM") {
-    return <Sbom data={report} />;
+    return <Sbom data={report}/>;
   }
 }
 
@@ -73,7 +73,7 @@ function BesAssessmentReport() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card sx={{mx: { xs: 2, lg: 3 }}}>
-              <MKBox >{displayReport(besReport, report)}</MKBox>
+              <MKBox >{displayReport(besName, besReport, report)}</MKBox>
             </Card>
           </Grid>
         </Grid>

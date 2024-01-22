@@ -671,7 +671,7 @@ const FetchSBOM = ({data, masterData, name}: any) => {
       }
     });
   });
-
+  //console.log("tra: ",tracked);
   dis = tracked.map(function (td: string, index: number) {
     return (<>
       <Grid item
@@ -692,7 +692,6 @@ const FetchSBOM = ({data, masterData, name}: any) => {
     </>
     );
   });
-
   return (<>
     <Grid key={`GRIDSBOMMAIN`}
       style={{ minWidth: "200px" }}>
@@ -704,7 +703,12 @@ const FetchSBOM = ({data, masterData, name}: any) => {
           display: "flex",
           paddingLeft: "calc(0.1rem + 0.3vw)"
         }}>
-        <b key={`BOLDSBOM1`}>Tracked under BeS :</b>
+        {tracked.length !== 0 ? (
+          <b key={`BOLDSBOM1`}>Tracked under BeS :</b>
+        ) : (
+        <b key={`BOLDSBOM1`}>No dependencies are tracked under BeS</b>
+        )}
+        
       </MKTypography>
       <Grid key={`GRIDSBOMSUBMAIN`}
         container>
@@ -1045,7 +1049,6 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }
 
   if (report === "Dependencies" && jsonDataLength !== 0 && !(jsonData.packages.length === 1 && jsonData.packages[0].name === name)) {
-    console.log("data: ",jsonData);
     return (<>
       <Typography variant="h6"
         key="TYPOSBOMMAIN1"
