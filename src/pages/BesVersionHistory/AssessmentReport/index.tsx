@@ -1044,7 +1044,8 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     );
   }
 
-  if (report === "Dependencies" && jsonDataLength !== 0) {
+  if (report === "Dependencies" && jsonDataLength !== 0 && !(jsonData.packages.length === 1 && jsonData.packages[0].name === name)) {
+    console.log("data: ",jsonData);
     return (<>
       <Typography variant="h6"
         key="TYPOSBOMMAIN1"
