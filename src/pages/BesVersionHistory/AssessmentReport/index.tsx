@@ -706,7 +706,7 @@ const FetchSBOM = ({data, masterData, name}: any) => {
         {tracked.length !== 0 ? (
           <b key={`BOLDSBOM1`}>Tracked under BeS :</b>
         ) : (
-        <b key={`BOLDSBOM1`}>No dependencies are tracked under BeS</b>
+        <b key={`BOLDSBOM1`}>No dependencies tracked under BeS</b>
         )}
         
       </MKTypography>
