@@ -1106,7 +1106,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         {flag ? (
           "No dependent packages are available"
         ) : (
-        "Not Available"
+        "Assessment report not available"
         )}
     </MKTypography>
   );
