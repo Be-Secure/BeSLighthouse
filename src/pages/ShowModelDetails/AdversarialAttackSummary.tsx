@@ -219,7 +219,7 @@ const AdversarialAttackSummary = ({model}: any) => {
                     color: "grey",
                     cursor: "pointer"
                   }}
-                  href={`https://www.boschaishield.com/home.html`}
+                  href={`https://www.boschaishield.com/`}
                   title={"Click to view boschaishield webpage"}
                   target="_blank"
                 >
