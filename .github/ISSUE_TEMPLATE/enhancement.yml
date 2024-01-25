@@ -15,7 +15,6 @@ body:
         - label: I've read the [contribution guidelines](https://be-secure.github.io/Be-Secure/contribute.html) and wholeheartedly agree 
           required: true
   - type: textarea
-    id: description
     attributes:
       label: Description
       description: A clear and concise description of what the enhancement is.
