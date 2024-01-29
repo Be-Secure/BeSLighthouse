@@ -16,6 +16,7 @@ import ShowVulnerabilityDetailsPage from "./layouts/pages/vulnerabilityDetails";
 import ShowModelDetailsPage from "./layouts/pages/modelDetails";
 import ModelVulnerabilitiesDetailedPage from "./layouts/pages/modelVulnerabilitiesDetailed";
 import FuzzingModelPage from "./pages/FuzzingModel";
+import ScrollableTabsButtonVisible from "./pages/ProjectOfInterest/FilterPoi";
 
 function App() {
   const { pathname } = useLocation();

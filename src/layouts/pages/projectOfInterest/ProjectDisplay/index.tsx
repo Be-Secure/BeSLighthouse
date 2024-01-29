@@ -1,19 +1,39 @@
 import * as React from "react";
 
-import { Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, Typography } from "@mui/material";
+import {
+  Button,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow,
+  Typography
+} from "@mui/material";
 import { useState } from "react";
 
 import { filter } from "lodash";
 import { projectOfInterestData } from "../../../../utils/poi_data";
 import SearchPoiList from "../PoiTable/SearchPoiList";
 import PoiListHead from "../PoiTable/PoiListHead";
+import {
+  Industry,
+  OpenSourceProjectType,
+  SecurityDomain,
+  TechnologyDomain,
+  TechnologyDomainComposition,
+  filterCheck,
+  tecStack
+} from "../../../../pages/ProjectOfInterest/filter/references";
 
 const TABLE_HEAD = [
   { id: "id", label: "BeS Id", alignRight: false },
   { id: "name", label: "Name", alignRight: false },
   { id: "description", label: "Description", alignRight: false },
   { id: "BeSTechStack", label: "BeS Tech Stack", alignRight: false },
-  { id: "License", label: "License", alignRight: false },
+  { id: "License", label: "License", alignRight: false }
 ];
 
 export function applySortFilter(array: any, comparator: any, query: any) {
@@ -53,17 +73,67 @@ export function getComparator(orderBy: string, field: string) {
     : (a: any, b: any) => -descendingComparator(a, b, field);
 }
 
-export default function ProjectDisplay() {
+function filterDataBasedOnUserSelecrtion(
+  filterData: any[],
+  getUSERLIST: any[]
+): any {
+  // const sudhir = getUSERLIST.filter((data) => {
+  //   const foundData = {};
+  //   return data.tags.filter((tag) => {
+  //     if (filterData[tag] && !foundData[tag]) {
+  //       foundData[tag] = true;
+  //     }
+  //     if (
+  //       Object.values(foundData).length === Object.values(filterData).length
+  //     ) {
+  //       return data;
+  //     }
+  //   });
+  // });
+  // debugger;
+  // return sudhir;
+  const filteredArray = getUSERLIST.filter(item => filterData.every((tag) => item.tags.includes(tag)))
+  debugger;
+  return filteredArray
+}
+
+export default function ProjectDisplay({ selectedFilter }: any) {
   const [page, setPage] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selected, setSelected] = useState([]);
   const [filterName, setFilterName] = useState("");
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("id");
   const [rowsPerPage, setRowsPerPage] = useState(15);
-  let getUSERLIST = [];
+
+  let getUSERLIST: any = [];
   if (projectOfInterestData.getPoiData("Project_of_interest")) {
     getUSERLIST = projectOfInterestData.getPoiData("Project_of_interest");
+  }
+  let filterData: any = [];
+  debugger;
+  if (
+    selectedFilter?.BeSTecStack &&
+    !filterCheck[selectedFilter?.BeSTecStack]
+  ) {
+    filterData.push(tecStack[selectedFilter?.BeSTecStack]);
+  }
+  if (selectedFilter?.COM && !filterCheck[selectedFilter?.COM]) {
+    filterData.push(OpenSourceProjectType[selectedFilter?.COM]);
+  }
+  if (selectedFilter?.IND && !filterCheck[selectedFilter?.IND]) {
+    filterData.push(Industry[selectedFilter?.IND]);
+  }
+  if (selectedFilter?.SD && !filterCheck[selectedFilter?.SD]) {
+    filterData.push(SecurityDomain[selectedFilter?.SD]);
+  }
+  if (selectedFilter?.TDC && !filterCheck[selectedFilter?.TDC]) {
+    filterData.push(TechnologyDomainComposition[selectedFilter?.TDC]);
+  }
+  if (selectedFilter?.TDU && !filterCheck[selectedFilter?.TDU]) {
+    filterData.push(TechnologyDomain[selectedFilter?.TDU]);
+  }
+  debugger;
+  if (Object.values(filterData).length !== 0) {
+    getUSERLIST = filterDataBasedOnUserSelecrtion(filterData, getUSERLIST);
   }
   const handleFilterByName: any = (event: any) => {
     setPage(0);
@@ -84,6 +154,7 @@ export default function ProjectDisplay() {
     getComparator(order, orderBy),
     filterName
   );
+
   const isNotFound = !filteredUsers.length && !!filterName;
 
   const handleChangePage = (
@@ -116,7 +187,6 @@ export default function ProjectDisplay() {
             orderBy={orderBy}
             headLabel={TABLE_HEAD}
             rowCount={getUSERLIST.length}
-            numSelected={selected.length}
             onRequestSort={handleRequestSort}
           />
           <TableBody>
@@ -137,10 +207,14 @@ export default function ProjectDisplay() {
                     description,
                     bes_technology_stack,
                     license,
-                    html_url,
+                    html_url
                   } = row;
                   let licenseName;
-                  if (license && !(license.name === "") && !(license === "null")) {
+                  if (
+                    license &&
+                    !(license.name === "") &&
+                    !(license === "null")
+                  ) {
                     licenseName = license.name;
                   } else {
                     licenseName = "Not Available";
@@ -152,7 +226,7 @@ export default function ProjectDisplay() {
                           <Typography
                             sx={{
                               position: "relative",
-                              left: "16px",
+                              left: "16px"
                             }}
                             variant="subtitle2"
                             noWrap
@@ -191,7 +265,7 @@ export default function ProjectDisplay() {
                   <Paper
                     sx={{
                       textAlign: "center",
-                      boxShadow: "none",
+                      boxShadow: "none"
                     }}
                   >
                     <Typography variant="h6" paragraph>
@@ -210,22 +284,22 @@ export default function ProjectDisplay() {
           )}
         </Table>
         <TablePagination
-            sx={{
-              ".MuiTablePagination-selectLabel": {
-                margin: "auto",
-              },
-              ".MuiTablePagination-displayedRows": {
-                margin: "auto",
-              },
-            }}
-            rowsPerPageOptions={[15, 30, 45]}
-            component="div"
-            count={getUSERLIST.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          sx={{
+            ".MuiTablePagination-selectLabel": {
+              margin: "auto"
+            },
+            ".MuiTablePagination-displayedRows": {
+              margin: "auto"
+            }
+          }}
+          rowsPerPageOptions={[15, 30, 45]}
+          component="div"
+          count={getUSERLIST.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
     </>
   );

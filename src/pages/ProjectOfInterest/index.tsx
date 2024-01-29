@@ -17,6 +17,7 @@ import MKTypography from "../../components/MKTypography";
 import ProjectCount from "./ProjectCount";
 
 import ProjectLogo from "../../assets/images/bug.png";
+import ScrollableTabsButtonVisible from "./FilterPoi";
 
 export const fetchOsspoiMaterData = async () => {
   const osspoi: any = JSON.parse(
@@ -79,6 +80,14 @@ function ProjectOfInterest() {
     countLanguages(setData, setTecStack, setProject, []);
   }, []);
   const theme = useTheme();
+  const [filterData, setFilterData]: any = React.useState({
+    BeSTecStack: "",
+    SD: "",
+    TDU: "",
+    IND: "",
+    TDC: "",
+    COM: ""
+  });
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
@@ -151,12 +160,16 @@ function ProjectOfInterest() {
           </Grid>
         </Grid>
       </MKBox>
+      <ScrollableTabsButtonVisible
+        filter={filterData}
+        setFilter={setFilterData}
+      />
       <MKBox pt={1} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card sx={{ mx: { xs: 2, lg: 3 } }}>
               <MKBox>
-                <ProjectDisplay />
+                <ProjectDisplay selectedFilter={filterData}/>
               </MKBox>
             </Card>
           </Grid>

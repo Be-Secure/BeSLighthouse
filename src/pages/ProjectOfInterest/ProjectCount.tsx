@@ -8,8 +8,6 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { fShortenNumber } from "../../utils/formatNumber";
 
-// import { fShortenNumber } from 'src/utils/format-number';
-
 // ----------------------------------------------------------------------
 
 export default function ProjectCount({
