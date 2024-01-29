@@ -8,7 +8,7 @@ BeSLighthouse is a [React](https://react.dev/) based web interface project that 
 To try out BeSLighthouse on your own machine, clone the latest release tag and set up the datastore.
 
 #### Prerequisites
-- Install NodeJS
+- Install NodeJS v16.0 or higher
 
 #### Set up datastore
 The current version of BeSLighthouse assumes that the lab assets details are stored in a Git repository structure. The [datastore.ts](https://github.com/Be-Secure/BeSLighthouse/blob/main/src/dataStore.ts) file should be edited to point to your lab's datastore repository. The path urls you see now in the file points to the BeSecure community lab datastore. You can create a Git repository structure in your GitHub or GitLab namespace as given below. Then update the path variables in datastore.ts file.
