@@ -1,5 +1,5 @@
 ## BeSLighthouse
-Pronounced as "B-e-S Lighthouse", is a dashboard project for visulaizing the security assessment and risk posture of open source projects and ML models tracked by a BeS lab deployment. BeSecure community hosts an instance of [BeSLighthouse here.](https://be-secure.github.io/BeSLighthouse/)
+Pronounced as "B-e-S Lighthouse", is a dashboard project for visulaizing the security assessment and risk posture of open source projects and ML models tracked by a BeS lab deployment. BeSecure community hosts an instance of BeSLighthouse [here](https://be-secure.github.io/BeSLighthouse/).
 
 ## Getting Started
 BeSLighthouse is a [React](https://react.dev/) based web interface project that expects a BeS lab ecosystem datastore to pull the data and visualize it. The BeSecure community datastore is maintained in GitHub.com under Be-Secure namespace. 
@@ -11,7 +11,7 @@ To try out BeSLighthouse on your own machine, clone the latest release tag and s
 - Install NodeJS
 
 #### Set up datastore
-The current version of BeSLighthouse assumes that the lab assets details are stored in a Git repository structure. The [datastore.ts](https://github.com/Be-Secure/BeSLighthouse/blob/main/src/dataStore.ts) file should be edited to point to your lab's datastore repository. The path urls you see now in the file points to the BeSecure community lab datastore. You can create a Git repository structure in your GitHub or GitLab namespace as given below. The updated the path variables in datastore.ts file.
+The current version of BeSLighthouse assumes that the lab assets details are stored in a Git repository structure. The [datastore.ts](https://github.com/Be-Secure/BeSLighthouse/blob/main/src/dataStore.ts) file should be edited to point to your lab's datastore repository. The path urls you see now in the file points to the BeSecure community lab datastore. You can create a Git repository structure in your GitHub or GitLab namespace as given below. Then update the path variables in datastore.ts file.
 
     - Be-Secure
         - besecure-assets-store
@@ -60,11 +60,11 @@ Publicly availbable training dataset that are of interest to the BeS lab is list
 ## Report Issue
 BeSLighthouse uses GitHub's integrated issue tracking system to record bugs and feature requests. If you want to raise an issue, please follow the recommendations below:
 
-* Before you log a bug, please search the {github}/issues[issue tracker] to see if someone has already reported the problem.
-* If the issue doesn't already exist, {github}/issues/new[create a new issue].
+* Before you log a bug, please search the [issue tracker](https://github.com/Be-Secure/BeSLighthouse/issues) to see if someone has already reported the problem.
+* If the issue doesn't already exist, [create a new issue](https://github.com/Be-Secure/BeSLighthouse/issues/new/choose).
 * Please provide as much information as possible with the issue report.
 We like to know the BeSLighthouse version you're using.
 * If possible, try to attach the screenshot of the issue.
 
 ## License
-BeSLighthouse is an Open Source software released under the https://www.apache.org/licenses/LICENSE-2.0.html[Apache 2.0 license].
+BeSLighthouse is an Open Source software released under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.html).
