@@ -6,8 +6,15 @@ import Icon from "@mui/material/Icon";
 import ModelOfInterestPage from "./layouts/pages/modelOfInterest";
 import VulnerabilityOfInterestPage from "./layouts/pages/vulnerabilityOfInterest";
 import ProjectOfInterestPage from "./layouts/pages/projectOfInterest";
+import HomeIcon from '@mui/icons-material/Home';
 
 const routes = [
+  {
+    name: "Be-Secure",
+    key: "github",
+    icon: <HomeIcon fontSize="medium"/>,
+    href: "https://be-secure.github.io/Be-Secure/"
+  },
   {
     name: "Projects Of Interest",
     key: "Project-of-Interest",
