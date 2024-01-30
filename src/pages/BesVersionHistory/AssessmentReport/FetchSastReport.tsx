@@ -8,7 +8,6 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
   let medium: number = 0;
   let low: number = 0;
   let sqissueslen: number = 0;
-  // debugger
   if (sqData && Object.values(sqData).length !== 0) {
     sqissueslen = sqData.length;
   }

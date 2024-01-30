@@ -77,23 +77,7 @@ function filterDataBasedOnUserSelecrtion(
   filterData: any[],
   getUSERLIST: any[]
 ): any {
-  // const sudhir = getUSERLIST.filter((data) => {
-  //   const foundData = {};
-  //   return data.tags.filter((tag) => {
-  //     if (filterData[tag] && !foundData[tag]) {
-  //       foundData[tag] = true;
-  //     }
-  //     if (
-  //       Object.values(foundData).length === Object.values(filterData).length
-  //     ) {
-  //       return data;
-  //     }
-  //   });
-  // });
-  // debugger;
-  // return sudhir;
   const filteredArray = getUSERLIST.filter(item => filterData.every((tag) => item.tags.includes(tag)))
-  debugger;
   return filteredArray
 }
 
@@ -109,7 +93,6 @@ export default function ProjectDisplay({ selectedFilter }: any) {
     getUSERLIST = projectOfInterestData.getPoiData("Project_of_interest");
   }
   let filterData: any = [];
-  debugger;
   if (
     selectedFilter?.BeSTecStack &&
     !filterCheck[selectedFilter?.BeSTecStack]
@@ -131,7 +114,6 @@ export default function ProjectDisplay({ selectedFilter }: any) {
   if (selectedFilter?.TDU && !filterCheck[selectedFilter?.TDU]) {
     filterData.push(TechnologyDomain[selectedFilter?.TDU]);
   }
-  debugger;
   if (Object.values(filterData).length !== 0) {
     getUSERLIST = filterDataBasedOnUserSelecrtion(filterData, getUSERLIST);
   }
