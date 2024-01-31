@@ -655,6 +655,9 @@ const FetchSBOM = ({data, masterData, name}: any) => {
   let tracked: string[] = [];
   let dis: any = {};
   data.forEach((dp) => {
+    if(! dp.name){
+      return;
+    }
     if(dp.name.toLowerCase() === name.toLowerCase()){
       return;
     }
