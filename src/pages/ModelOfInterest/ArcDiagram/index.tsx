@@ -17,16 +17,15 @@ const ArcDiagram: React.FC = () => {
         // set the dimensions and margins of the graph
         const margin = { top: 20, right: 20, bottom: 20, left: 20 };
         const width = window.innerWidth - margin.left - margin.right;
-        const height = window.innerHeight - margin.top - margin.bottom;
+        const height = window.innerHeight - margin.top - margin.bottom - 400;
 
         // append the svg object to the body of the page
         const svg = d3.select("#my_dataviz")
           .append("svg")
-          .attr("viewBox", [0, 0, width, height + 150])
+          .attr("viewBox", [0, height/2, width, height + 150])
           .attr("width", width)
           .attr("height", height)
-          .append("g")
-          .attr("transform", `translate(${margin.left},${margin.top})`);
+          .append("g");
 
         // Your JSON data
         const jsonData = data;
@@ -92,7 +91,7 @@ const ArcDiagram: React.FC = () => {
           .join("circle")
           .attr("cx", (d: { name: string, x: number | undefined }) => d.x !== undefined ? d.x : 0)  // Explicitly provide type information
           .attr("cy", height - 30)
-          .attr("r", 7)
+          .attr("r", 8)
           .style("fill", d => color(d.name) as string)
           .attr("stroke", "white")
           .on('click', (event, d) => {
@@ -116,7 +115,8 @@ const ArcDiagram: React.FC = () => {
         .text(d => d.name)
         .style("text-anchor", "end")
         .attr("transform", d => `translate(${d.x},${height - 15}) rotate(-45)`)
-        .style("font-size", 12)
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 16)
         .on('mouseover', function (event, d) {
           // Highlight the nodes: every node is green except for him
           nodeSelection.style('opacity', node => node.group === d.group ? 0.2 : 0.1);
@@ -152,7 +152,7 @@ const ArcDiagram: React.FC = () => {
             .style('stroke', d => color(spacedNodes.find(node => node.name === d.source)?.name || "") as string)
             .style('stroke-opacity', 1)
             .style('stroke-width', 1);
-          labelSelection.style("font-size", 12);
+          labelSelection.style("font-size", 16);
           nodeSelection.style('opacity', 1);
           d3.select(this).attr("cursor", "default");
         })
@@ -193,7 +193,7 @@ const ArcDiagram: React.FC = () => {
             .style('stroke', d => color(spacedNodes.find(node => node.name === d.source)?.name || "") as string)
             .style('stroke-opacity', 1)
             .style('stroke-width', 1);
-          labelSelection.style("font-size", 12);
+          labelSelection.style("font-size", 16);
         });
       })
       .catch(error => {
