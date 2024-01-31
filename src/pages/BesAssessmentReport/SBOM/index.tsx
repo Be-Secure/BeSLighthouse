@@ -29,10 +29,10 @@ export default function Sbom({ data }: any) {
   const [rowsPerPage, setRowsPerPage] = useState(15);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filterName, setFilterName] = useState("");
-
   let sonarqubeData: any;
   if (data?.packages) sonarqubeData = data?.packages;
   else sonarqubeData = [];
+  
   const filteredUsers = applySortFilter(
     sonarqubeData,
     getComparator("desc", "name"),

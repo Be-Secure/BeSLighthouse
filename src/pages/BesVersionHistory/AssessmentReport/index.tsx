@@ -574,7 +574,6 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
       ld.LicenseConcluded.length === 0))
       non_lic_files++;
   });
-  //console.log("item data=" + JSON.stringify(itemData));
   if (itemData.license && itemData.license.key) {
     project_lcesnse = itemData.license.key;
   }
@@ -652,17 +651,21 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   }
 };
 
-const FetchSBOM = ({ data, masterData }: any) => {
-
+const FetchSBOM = ({data, masterData, name}: any) => {
   let tracked: string[] = [];
   let dis: any = {};
-
   data.forEach((dp) => {
+    if(! dp.name){
+      return;
+    }
+    if(dp.name.toLowerCase() === name.toLowerCase()){
+      return;
+    }
     masterData.forEach((tp) => {
       let duplicate: boolean = false;
-      if (dp.name === tp.name) {
+      if (dp.name.toLowerCase() === tp.name.toLowerCase()) {
         tracked.forEach((tmptracked) => {
-          if (tmptracked === dp.name)
+          if (tmptracked.toLowerCase() === dp.name.toLowerCase())
             duplicate = true;
         });
 
@@ -671,7 +674,6 @@ const FetchSBOM = ({ data, masterData }: any) => {
       }
     });
   });
-
   dis = tracked.map(function (td: string, index: number) {
     return (<>
       <Grid item
@@ -692,11 +694,11 @@ const FetchSBOM = ({ data, masterData }: any) => {
     </>
     );
   });
-
   return (<>
     <Grid key={`GRIDSBOMMAIN`}
       style={{ minWidth: "200px" }}>
-      <MKTypography key="MKTypoSBOMMain" variant="body1"
+      {tracked.length !== 0 ? (
+        <MKTypography key="MKTypoSBOMMain" variant="body1"
         color="inherit"
         style={{
           fontSize: "12px",
@@ -704,8 +706,19 @@ const FetchSBOM = ({ data, masterData }: any) => {
           display: "flex",
           paddingLeft: "calc(0.1rem + 0.3vw)"
         }}>
-        <b key={`BOLDSBOM1`}>Tracked under BeS :</b>
-      </MKTypography>
+          <b key={`BOLDSBOM1`}>Tracked under BeS :</b>  
+        </MKTypography>
+      ) : (
+        <MKTypography key="MKTypoSBOMMain" variant="body1"
+        color="inherit"
+        
+        style={{
+        fontSize: "12px", display: "flex",
+        justifyContent: "center", alignItems: "center", position: "relative", top: "55px"
+        }}>
+          <b key={`BOLDSBOM1`}>No dependencies tracked under BeS</b>
+        </MKTypography>
+      )}
       <Grid key={`GRIDSBOMSUBMAIN`}
         container>
         {dis}
@@ -722,7 +735,6 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   let reportNameMap = "";
   let reportNameMapCodeql = "";
   let reportNameMapSonar = "";
-
 
   if (report === "Criticality Score") {
     reportNameMap = "Criticality Score";
@@ -1044,42 +1056,48 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </>
     );
   }
-
+  let flag = false;
   if (report === "Dependencies" && jsonDataLength !== 0) {
-    return (<>
-      <Typography variant="h6"
-        key="TYPOSBOMMAIN1"
-        color="inherit"
-        style={{
-          fontSize: "calc(0.6rem + 0.5vw)"
-        }}>
-        <Link to={myObject}
-          key="LINKSBOMMAIN1"
+    if (!(jsonData.packages.length === 1 && jsonData.packages[0].name.toLowerCase() === name.toLowerCase())){
+      return (<>
+        <Typography variant="h6"
+          key="TYPOSBOMMAIN1"
+          color="inherit"
           style={{
-            fontSize: "calc(0.6rem + 0.5vw)",
-            display: "flex",
-            justifyContent: "center"
+            fontSize: "calc(0.6rem + 0.5vw)"
           }}>
-          {jsonData.packages.length}
-        </Link>
-      </Typography>
-      <Grid key="GRIDSBOMMAIN1"
-        style={{
-          height: "100px",
-          borderRadius: "3px"
-        }}
-        sx={{ overflowY: "scroll" }}>
-        <MKBox key="MKBOXSBOMMAIN1">
-          <FetchSBOM
-            data={jsonData.packages}
-            masterData={masterData}
-          />
-        </MKBox>
-      </Grid>
-    </>
-    );
+          <Link to={myObject}
+            key="LINKSBOMMAIN1"
+            style={{
+              fontSize: "calc(0.6rem + 0.5vw)",
+              display: "flex",
+              justifyContent: "center"
+            }}>
+            {(jsonData.packages.length)-1}
+          </Link>
+        </Typography>
+        <Grid key="GRIDSBOMMAIN1"
+          style={{
+            height: "100px",
+            borderRadius: "3px"
+          }}
+          sx={{ overflowY: "scroll" }}>
+          <MKBox key="MKBOXSBOMMAIN1">
+            <FetchSBOM
+              data={jsonData.packages}
+              masterData={masterData}
+              name={name}
+            />
+          </MKBox>
+        </Grid>
+      </>
+      );
+    } else {
+      flag = true;
+    }
+    
   }
-
+ 
   return (
     <MKTypography variant="h6"
       key="TYPOSBOMMAINBLANK1"
@@ -1088,7 +1106,11 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         fontSize: "12px", display: "flex",
         justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
       }}>
-      Not Available
+        {flag ? (
+          "No dependent packages are available"
+        ) : (
+        "Assessment report not available"
+        )}
     </MKTypography>
   );
 };
