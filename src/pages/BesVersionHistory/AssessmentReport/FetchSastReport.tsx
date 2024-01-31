@@ -24,7 +24,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
                 high++;
             } else if (vul.rule.security_severity_level === "medium") {
                 medium++;
-            } else if (vul.rule.security_severity_level === "high") {
+            } else if (vul.rule.security_severity_level === "low") {
                 low++;
             }
         });
@@ -183,18 +183,21 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         let sqcritical: number = 0;
         let sqmajor: number = 0;
         let sqminor: number = 0;
-
-        cqData?.forEach((vul) => {
-            if (vul.rule.security_severity_level === "critical") {
-                cqcritical++;
-            } else if (vul.rule.security_severity_level === "high") {
-                cqhigh++;
-            } else if (vul.rule.security_severity_level === "medium") {
-                cqmedium++;
-            } else if (vul.rule.security_severity_level === "low") {
-                cqlow++;
-            }
-        });
+        
+        if (Array.isArray(cqData)) {
+            
+            cqData?.forEach((vul) => {
+                if (vul.rule.security_severity_level === "critical") {
+                    cqcritical++;
+                } else if (vul.rule.security_severity_level === "high") {
+                    cqhigh++;
+                } else if (vul.rule.security_severity_level === "medium") {
+                    cqmedium++;
+                } else if (vul.rule.security_severity_level === "low") {
+                    cqlow++;
+                }
+            });
+        }
         if (Array.isArray(sqData)) {
             sqData?.forEach((vul) => {
                 if (vul.severity === "BLOCKER") {
