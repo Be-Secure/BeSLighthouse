@@ -20,7 +20,7 @@ const ArcDiagram: React.FC = () => {
         const height = window.innerHeight - margin.top - margin.bottom - 400;
 
         // append the svg object to the body of the page
-        const svg = d3.select("#my_dataviz")
+        const svg = d3.select("#Arc_diagram")
           .append("svg")
           .attr("viewBox", [0, height/2, width, height + 150])
           .attr("width", width)
@@ -202,7 +202,7 @@ const ArcDiagram: React.FC = () => {
   }, []); // Empty dependency array ensures useEffect runs once on component mount
 
   return (
-    <div id="my_dataviz"></div>
+    <div id="Arc_diagram"></div>
   );
 }
 
