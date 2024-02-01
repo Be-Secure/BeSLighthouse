@@ -675,10 +675,10 @@ const FetchSBOM = ({data, masterData, name}: any) => {
     });
   });
     dis = tracked.map(function (td: string, index: number) {
-    var dataObject = masterData.find(function(item){
+    const dataObject = masterData.find(function(item){
       return item.name == td
     })
-    var trackingID = dataObject.id
+    const trackingID = dataObject.id
     return (<>
       <Grid item
         key={`GRIDSBOM${index}`}
