@@ -73,12 +73,34 @@ export function getComparator(orderBy: string, field: string) {
     : (a: any, b: any) => -descendingComparator(a, b, field);
 }
 
-function filterDataBasedOnUserSelecrtion(
+function filterDataBasedOnUserSelecrtionOnTag(
   filterData: any[],
   getUSERLIST: any[]
 ): any {
-  const filteredArray = getUSERLIST.filter(item => filterData.every((tag) => item.tags.includes(tag)))
-  return filteredArray
+  const filteredArray = getUSERLIST.filter((item) =>
+    filterData.every((tag) => item.tags.includes(tag))
+  );
+  return filteredArray;
+}
+
+function filterDataBasedOnUserSelecrtionOnLanguage(
+  languageName: string,
+  getUSERLIST: any[]
+): any {
+  const filteredArray = getUSERLIST.filter((item) =>
+    item.language[languageName]
+  );
+  return filteredArray;
+}
+
+function filterDataBasedOnUserSelecrtionOnTechStack(
+  techStack: string,
+  getUSERLIST: any[]
+): any {
+  const filteredArray = getUSERLIST.filter((item) =>
+    item.bes_technology_stack.includes(techStack)
+  );
+  return filteredArray;
 }
 
 export default function ProjectDisplay({ selectedFilter }: any) {
@@ -97,7 +119,10 @@ export default function ProjectDisplay({ selectedFilter }: any) {
     selectedFilter?.BeSTecStack &&
     !filterCheck[selectedFilter?.BeSTecStack]
   ) {
-    filterData.push(tecStack[selectedFilter?.BeSTecStack]);
+    getUSERLIST = filterDataBasedOnUserSelecrtionOnTechStack(
+      tecStack[selectedFilter?.BeSTecStack],
+      getUSERLIST
+    );
   }
   if (selectedFilter?.COM && !filterCheck[selectedFilter?.COM]) {
     filterData.push(OpenSourceProjectType[selectedFilter?.COM]);
@@ -114,8 +139,14 @@ export default function ProjectDisplay({ selectedFilter }: any) {
   if (selectedFilter?.TDU && !filterCheck[selectedFilter?.TDU]) {
     filterData.push(TechnologyDomain[selectedFilter?.TDU]);
   }
+  if (selectedFilter?.Languages && !filterCheck[selectedFilter?.Languages]) {
+    getUSERLIST = filterDataBasedOnUserSelecrtionOnLanguage(
+      selectedFilter?.Languages,
+      getUSERLIST
+    );
+  }
   if (Object.values(filterData).length !== 0) {
-    getUSERLIST = filterDataBasedOnUserSelecrtion(filterData, getUSERLIST);
+    getUSERLIST = filterDataBasedOnUserSelecrtionOnTag(filterData, getUSERLIST);
   }
   const handleFilterByName: any = (event: any) => {
     setPage(0);

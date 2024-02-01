@@ -10,6 +10,7 @@ import { TechnologyDomainComposition } from "./filter/TechnologyDomainCompositio
 import { OpenSourceProjectType } from "./filter/OpenSourceProjectType";
 import { Grid } from "@mui/material";
 import MKButton from "../../components/MKButton";
+import { Languages } from "./filter/Languages";
 
 export default function ScrollableTabsButtonVisible({
   filter,
@@ -107,6 +108,18 @@ export default function ScrollableTabsButtonVisible({
           }}
           label={
             <OpenSourceProjectType filter={filter} setFilter={setFilter} />
+          }
+        />
+        <Tab
+          style={{
+            margin: "0",
+            padding: "0",
+            backgroundColor: "#f8f9fa",
+            borderRadius: "1",
+            paddingRight: "12px"
+          }}
+          label={
+            <Languages filter={filter} setFilter={setFilter} />
           }
         />
       </Tabs>

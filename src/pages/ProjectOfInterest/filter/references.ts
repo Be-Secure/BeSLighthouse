@@ -4,7 +4,8 @@ export const filterCheck = {
   "Industry (IND)": true,
   "Security Domain (SD)": true,
   "Technology Domain Composition (TD-C)": true,
-  "Technology Domain (Usage) (TD-U)": true
+  "Technology Domain (Usage) (TD-U)": true,
+  "Languages": true
 };
 
 export const tecStack = {

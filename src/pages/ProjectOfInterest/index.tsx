@@ -86,7 +86,8 @@ function ProjectOfInterest() {
     TDU: "",
     IND: "",
     TDC: "",
-    COM: ""
+    COM: "",
+    Languages: ""
   });
   return (
     <>
