@@ -667,14 +667,18 @@ const FetchSBOM = ({data, masterData, name}: any) => {
         tracked.forEach((tmptracked) => {
           if (tmptracked.toLowerCase() === dp.name.toLowerCase())
             duplicate = true;
-        });
+          });
 
         if (!duplicate)
           tracked.push(dp.name);
       }
     });
   });
-  dis = tracked.map(function (td: string, index: number) {
+    dis = tracked.map(function (td: string, index: number) {
+    var dataObject = masterData.find(function(item){
+      return item.name == td
+    })
+    var trackingID = dataObject.id
     return (<>
       <Grid item
         key={`GRIDSBOM${index}`}
@@ -688,13 +692,15 @@ const FetchSBOM = ({data, masterData, name}: any) => {
             justifyContent: "left",
             display: "flex",
           }}>
-          {td}
+            {/* Using link the data was not getting loaded. Fix it later */}
+            {/* <Link to={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${trackingID}/:${td}`}>{td}</Link> */}
+            <a href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${trackingID}/:${td}`}>{td}</a>
         </MKTypography>
       </Grid>
     </>
     );
   });
-  return (<>
+    return (<>
     <Grid key={`GRIDSBOMMAIN`}
       style={{ minWidth: "200px" }}>
       {tracked.length !== 0 ? (
@@ -706,7 +712,7 @@ const FetchSBOM = ({data, masterData, name}: any) => {
           display: "flex",
           paddingLeft: "calc(0.1rem + 0.3vw)"
         }}>
-          <b key={`BOLDSBOM1`}>Tracked under BeS :</b>  
+          <b key={`BOLDSBOM1`}>Tracked under BeS :</b> 
         </MKTypography>
       ) : (
         <MKTypography key="MKTypoSBOMMain" variant="body1"
