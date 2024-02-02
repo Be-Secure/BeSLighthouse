@@ -847,20 +847,30 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
     };
   }
   if (report === "ScoreCard" && jsonDataLength !== 0) {
+    let color_code = "";
+    let risk_level = "";
+    if (jsonData.score >= 0 && jsonData.score <= 2){
+      color_code = "#008000";
+      risk_level = "Low risk";
+    } else if (jsonData.score > 2 && jsonData.score <= 5) {
+      color_code = "#FFC300";
+      risk_level = "Medium risk";
+    } else if (jsonData.score > 5 && jsonData.score <= 7.5) {
+      color_code="#FF5733";
+      risk_level = "High risk";
+    } else if (jsonData.score > 7.5 && jsonData.score <= 10) {
+      color_code = "#C70039";
+      risk_level = "Critical risk";
+    }
     return (<>
       {/* Display scorecard score */}
       <Typography variant="h6"
         key={`TypoSC1`}
         color="inherit"
-        style={{ fontSize: "15px" }}>
-        <Link to={myObject}
-          key={`LinkSC1`}
-          style={{
-            fontSize: "calc(0.6rem + 0.5vw)",
-            display: "flex",
-            justifyContent: "center"
-          }}>
-          {jsonData.score}
+        style={{ fontSize: "15px", marginLeft: "20px" }}>
+        <Link to={myObject} key={`LinkSC1`} style={{ fontSize: "calc(0.6rem + 0.5vw)", display: "flex", justifyContent: "center" }}>
+            <span style={{ color: color_code }}>{jsonData.score}</span>
+            <span style={{ fontSize: "11px", color: "black" }}>&nbsp;({risk_level})</span>
         </Link>
       </Typography>
       {/* Scorecard data */}
