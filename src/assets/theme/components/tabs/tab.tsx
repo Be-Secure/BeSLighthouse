@@ -17,7 +17,7 @@ export default {
       flex: "1 1 auto",
       textAlign: "center",
       maxWidth: "unset !important",
-      minWidth: "unset !important",
+      minWidth: "120px",
       minHeight: "unset !important",
       fontSize: size.md,
       fontWeight: fontWeightRegular,
@@ -30,21 +30,21 @@ export default {
 
       "& .material-icons, .material-icons-round": {
         marginBottom: "0 !important",
-        marginRight: pxToRem(6),
+        marginRight: pxToRem(6)
       },
 
       "& svg": {
         marginBottom: "0 !important",
-        marginRight: pxToRem(6),
+        marginRight: pxToRem(6)
       },
 
       "& i.MuiTab-iconWrapper": {
-        marginBottom: 0,
-      },
+        marginBottom: 0
+      }
     },
 
     labelIcon: {
-      paddingTop: pxToRem(4),
-    },
-  },
+      paddingTop: pxToRem(4)
+    }
+  }
 } as any;

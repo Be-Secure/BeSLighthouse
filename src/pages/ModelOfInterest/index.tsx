@@ -78,7 +78,6 @@ function ModelOfInterest() {
     prepPieChartData(setModelType, setRiskAnalysis, setReport);
   }, []);
 
-  const count = report?.length;
   return (
     <>
       <DefaultNavbar routes={routes} sticky />

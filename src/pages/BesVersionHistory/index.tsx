@@ -12,7 +12,7 @@ import AssessmentReport from "./AssessmentReport";
 import AssessmentAnalytics from "./AssessmentAnalytics";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
-import { Divider } from '@mui/material';
+import { Divider } from "@mui/material";
 import { getEnvPathStatus } from "../../utils/fatch_json_report";
 import { Tune } from "@mui/icons-material";
 
@@ -33,29 +33,28 @@ export const osspoiMasterAndSummary = async (
   setVersionSummary(summary);
 };
 
-export const getResponse = async (name : string) => {
+export const getResponse = async (name: string) => {
   const res = await getEnvPathStatus(name);
   return res;
-}
+};
 
 const useStyles: any = makeStyles(() => ({
   select: {
     minWidth: "calc(3rem + 0.5vw)",
     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
-    {
-      padding: "4px"
-    },
+      {
+        padding: "4px"
+      },
     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-    {
-      padding: "4px"
-    },
+      {
+        padding: "4px"
+      },
     "& .css-qiwgdb.css-qiwgdb.css-qiwgdb": {
       padding: "4px"
     }
   }
 }));
 const FetchRecomedations = ({ itemData, masterData }: any) => {
-
   return (
     <>
       <ul>
@@ -67,8 +66,10 @@ const FetchRecomedations = ({ itemData, masterData }: any) => {
               fontSize: "calc(0.2rem + 0.5vw)",
               marginTop: "calc(-0.4rem + (-0.3vw))",
               paddingLeft: "calc(0.1rem + 0.3vw)"
-            }}>
-            recomentaion 1: Fetch the recomendations from master jason as suggested by the POD team.
+            }}
+          >
+            recomentaion 1: Fetch the recomendations from master jason as
+            suggested by the POD team.
           </MKTypography>
         </li>
         <li>
@@ -79,8 +80,10 @@ const FetchRecomedations = ({ itemData, masterData }: any) => {
               fontSize: "calc(0.2rem + 0.5vw)",
               marginTop: "calc(-0.4rem + (-0.3vw))",
               paddingLeft: "calc(0.1rem + 0.3vw)"
-            }}>
-            recomentaion 2: Fetch the recomendations from master jason as suggested by the POD team.
+            }}
+          >
+            recomentaion 2: Fetch the recomendations from master jason as
+            suggested by the POD team.
           </MKTypography>
         </li>
         <li>
@@ -91,14 +94,16 @@ const FetchRecomedations = ({ itemData, masterData }: any) => {
               fontSize: "calc(0.2rem + 0.5vw)",
               marginTop: "calc(-0.4rem + (-0.3vw))",
               paddingLeft: "calc(0.1rem + 0.3vw)"
-            }}>
-            recomentaion 3: Fetch the recomendations from master jason as suggested by the POD team.
+            }}
+          >
+            recomentaion 3: Fetch the recomendations from master jason as
+            suggested by the POD team.
           </MKTypography>
         </li>
       </ul>
     </>
-  )
-}
+  );
+};
 function BesVersionHistory() {
   const classes = useStyles();
   const { besId, besName }: any = useParams();
@@ -114,9 +119,9 @@ function BesVersionHistory() {
     );
   }, []);
 
-  const [isenvpath, setisenvpath] : any = React.useState();
+  const [isenvpath, setisenvpath]: any = React.useState();
   React.useEffect(() => {
-    const response : any = getResponse(besName.slice(1));
+    const response: any = getResponse(besName.slice(1));
     response.then(
       (resolvedValue) => {
         setisenvpath(resolvedValue);
@@ -149,39 +154,42 @@ function BesVersionHistory() {
   return (
     <>
       <DefaultNavbar routes={routes} />
-      <MKBox key="TOPMKBOX"
+      <MKBox
+        key="TOPMKBOX"
         pt={12}
         sx={{
           mx: {
             xs: "auto",
             lg: 3
           }
-        }}>
+        }}
+      >
         {data.map((item: any, index: number) => {
           if (`:${item.name}` === besName) {
             let definedScore: string = "0";
-            if (item.hasOwnProperty('score'))
-              definedScore = item.score;
-            else
-              definedScore = "Not Available";
+            if (item.hasOwnProperty("score")) definedScore = item.score;
+            else definedScore = "Not Available";
 
-            const name = item.name.split('-');
-            const camelCaseString = name.map((part, index) => {
-              return index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1);
-            }).join('');
+            const name = item.name.split("-");
+            const camelCaseString = name
+              .map((part, index) => {
+                return index === 0
+                  ? part
+                  : part.charAt(0).toUpperCase() + part.slice(1);
+              })
+              .join("");
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${camelCaseString}/`;
-    
+
             return (
               <>
-                <Card key={`TOPCARD${index}`}
-                  style={{ marginTop: "-1.5rem" }}>
-                  <Grid
-                    key={`TOPGRID1${index}`}
-                    container
-                    spacing={1}
-                    pl={4}
-                  >
-                    <Grid item xs={6} md={3} style={{ display: "flex", paddingTop: "12px" }}>
+                <Card key={`TOPCARD${index}`} style={{ marginTop: "-1.5rem" }}>
+                  <Grid key={`TOPGRID1${index}`} container spacing={1} pl={4}>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px" }}
+                    >
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -194,11 +202,17 @@ function BesVersionHistory() {
                         variant="h6"
                         fontWeight="regular"
                         color="text"
-                        style={{ fontSize: "15px" }}>
+                        style={{ fontSize: "15px" }}
+                      >
                         {item.name}
                       </MKTypography>
                     </Grid>
-                    <Grid item xs={6} md={3} style={{ display: "flex", paddingTop: "12px" }}>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px" }}
+                    >
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -207,26 +221,32 @@ function BesVersionHistory() {
                       >
                         Version: &nbsp;
                       </MKTypography>
-                      <Select key={`TOPSELECT1${index}`}
+                      <Select
+                        key={`TOPSELECT1${index}`}
                         className={classes.select}
                         value={selectedOption}
                         onChange={handleOptionChange}
                         style={{
                           fontSize: "15px",
-                          height: 'fit-content'
+                          height: "fit-content"
                         }}
-
                       >
-                        {
-                          versionSummary.map((option: any, index1: any) => (
-                            <MenuItem key={`TOPMENUITEM${index}${index1}`} value={option.version}>
-                              {option.version}
-                            </MenuItem>
-                          ))
-                        }
+                        {versionSummary.map((option: any, index1: any) => (
+                          <MenuItem
+                            key={`TOPMENUITEM${index}${index1}`}
+                            value={option.version}
+                          >
+                            {option.version}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </Grid>
-                    <Grid item xs={6} md={3} style={{ display: "flex", paddingTop: "12px" }}>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px" }}
+                    >
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -239,11 +259,17 @@ function BesVersionHistory() {
                         variant="h6"
                         fontWeight="regular"
                         color="text"
-                        style={{ fontSize: "15px" }}>
+                        style={{ fontSize: "15px" }}
+                      >
                         {definedScore}
                       </MKTypography>
                     </Grid>
-                    <Grid item xs={6} md={3} style={{ display: "flex", paddingTop: "12px" }}>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px" }}
+                    >
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -256,11 +282,17 @@ function BesVersionHistory() {
                         variant="h6"
                         fontWeight="regular"
                         color="text"
-                        style={{ fontSize: "15px" }}>
+                        style={{ fontSize: "15px" }}
+                      >
                         {item.bes_technology_stack}
                       </MKTypography>
                     </Grid>
-                    <Grid item xs={6} md={3} style={{ display: "flex", paddingTop: "12px" }}>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px" }}
+                    >
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -273,11 +305,17 @@ function BesVersionHistory() {
                         variant="h6"
                         fontWeight="regular"
                         color="text"
-                        style={{ fontSize: "15px" }}>
+                        style={{ fontSize: "15px" }}
+                      >
                         {item.id}
                       </MKTypography>
                     </Grid>
-                    <Grid item xs={6} md={3} style={{ display: "flex", paddingTop: "12px" }}>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px" }}
+                    >
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
@@ -290,106 +328,134 @@ function BesVersionHistory() {
                         variant="h6"
                         fontWeight="regular"
                         color="text"
-                        style={{ fontSize: "15px" }}>
+                        style={{ fontSize: "15px" }}
+                      >
                         {isenvpath ? (
-                        <Link key={`TOPLINK1${index}`} to={envpath}>
-                        {item.name}
-                        </Link>
+                          <Link key={`TOPLINK1${index}`} to={envpath}>
+                            {item.name}
+                          </Link>
                         ) : (
-                        "Not Available"
+                          "Not Available"
                         )}
                       </MKTypography>
                     </Grid>
                     {/* The below code moves the description to the next line if the character count exceeds 100 */}
                     {/* It also checks if the 'description' of a repo is available, if not, displays 'Not Available'  */}
-                    { item.description ? item.description.length < 100 ? <Grid item xs={6} style={{ display: "flex", paddingTop: "12px", paddingBottom: "7px" }}>
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="bold"
-                        textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
-                      >
-                        Description: &nbsp;
-                      </MKTypography>
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="regular"
-                        color="text"
-                        style={{ fontSize: "15px" }}
+                    {item.description ? (
+                      item.description.length < 100 ? (
+                        <Grid
+                          item
+                          xs={6}
+                          style={{
+                            display: "flex",
+                            paddingTop: "12px",
+                            paddingBottom: "7px"
+                          }}
                         >
-                        {item.description}
-                      </MKTypography>
-                    </Grid> : <></> :<Grid item xs={6} style={{ display: "flex", paddingTop: "12px", paddingBottom: "7px" }}>
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="bold"
-                        textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
+                          <MKTypography
+                            variant="h6"
+                            fontWeight="bold"
+                            textTransform="capitalize"
+                            style={{ fontSize: "15px" }}
+                          >
+                            Description: &nbsp;
+                          </MKTypography>
+                          <MKTypography
+                            variant="h6"
+                            fontWeight="regular"
+                            color="text"
+                            style={{ fontSize: "15px" }}
+                          >
+                            {item.description}
+                          </MKTypography>
+                        </Grid>
+                      ) : (
+                        <></>
+                      )
+                    ) : (
+                      <Grid
+                        item
+                        xs={6}
+                        style={{
+                          display: "flex",
+                          paddingTop: "12px",
+                          paddingBottom: "7px"
+                        }}
                       >
-                        Description: &nbsp;
-                      </MKTypography>
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="regular"
-                        color="text"
-                        style={{ fontSize: "15px" }}
+                        <MKTypography
+                          variant="h6"
+                          fontWeight="bold"
+                          textTransform="capitalize"
+                          style={{ fontSize: "15px" }}
                         >
-                        Not Available
-                      </MKTypography>
-                    </Grid> }
+                          Description: &nbsp;
+                        </MKTypography>
+                        <MKTypography
+                          variant="h6"
+                          fontWeight="regular"
+                          color="text"
+                          style={{ fontSize: "15px" }}
+                        >
+                          Not Available
+                        </MKTypography>
+                      </Grid>
+                    )}
                   </Grid>
-                  { item.description?.length > 100 ? <MKTypography
-                        variant="h6"
-                        fontWeight="bold"
-                        textTransform="capitalize"
-                        style={{ fontSize: "15px", paddingLeft: "30px", display: "flex", paddingTop: "12px", paddingBottom: "8px" }}
-                      >
-                        Description: <MKTypography
+                  {item.description?.length > 100 ? (
+                    <MKTypography
+                      variant="h6"
+                      fontWeight="bold"
+                      textTransform="capitalize"
+                      style={{
+                        fontSize: "15px",
+                        paddingLeft: "30px",
+                        display: "flex",
+                        paddingTop: "12px",
+                        paddingBottom: "8px"
+                      }}
+                    >
+                      Description:{" "}
+                      <MKTypography
                         variant="h6"
                         fontWeight="regular"
                         color="text"
                         style={{ fontSize: "15px", paddingLeft: "8px" }}
-                        >
+                      >
                         {item.description}
                       </MKTypography>
-
-                      </MKTypography> : <></>  }
-
-
+                    </MKTypography>
+                  ) : (
+                    <></>
+                  )}
                 </Card>
-                <Card key={`TOPCARD2${index}`}
-                  style={{ marginTop: "12px" }}>
-                  <Grid key={`TOPGRID14${index}`}
-                    container
-                    spacing={1}
-                    p={1}>
-                    <Grid key={`TOPGRID15${index}`}
+                <Card key={`TOPCARD2${index}`} style={{ marginTop: "12px" }}>
+                  <Grid key={`TOPGRID14${index}`} container spacing={1} p={1}>
+                    <Grid
+                      key={`TOPGRID15${index}`}
                       item
                       xs={12}
-                      justifyContent="flex-start">
-
+                      justifyContent="flex-start"
+                    >
                       <AssessmentReport
                         title="Assessment Report"
                         name={besName.slice(1)}
                         version={selectedOption}
                         itemData={item}
                         masterData={data}
-                        />
+                      />
                     </Grid>
                   </Grid>
                 </Card>
-                <MKBox key={`TOPMKBOX7${index}`}
-                  style={{ marginTop: "12px" }}>
-                  <Grid key={`TOPGRID16${index}`}
-                    container
-                    spacing={3}
-                    pt={3} >
-                    <Grid key={`TOPGRID17${index}`}
+                <MKBox key={`TOPMKBOX7${index}`} style={{ marginTop: "12px" }}>
+                  <Grid key={`TOPGRID16${index}`} container spacing={3} pt={3}>
+                    <Grid
+                      key={`TOPGRID17${index}`}
                       item
                       xs={12}
                       md={12}
                       lg={12}
-                      style={{ paddingTop: "5px" }} >
+                      style={{ paddingTop: "5px" }}
+                    >
                       <AssessmentAnalytics
                         title="Assessment Analytics"
                         name={besName.slice(1)}

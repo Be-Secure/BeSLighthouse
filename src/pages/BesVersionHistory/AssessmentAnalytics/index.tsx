@@ -14,8 +14,6 @@ import {
   assessment_report
 } from "../../../utils/assessmentReport";
 import MKTypography from "../../../components/MKTypography";
-import { StyledChartWrapper } from "../../../examples/Charts/PieChart/StyledChartWrapper";
-import { AlignHorizontalCenter } from "@mui/icons-material";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
