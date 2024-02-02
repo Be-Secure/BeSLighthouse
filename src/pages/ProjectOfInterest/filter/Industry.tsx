@@ -53,7 +53,7 @@ export function Industry({ filter, setFilter }: any) {
         backgroundColor:
           !personName?.[0] || personName?.[0] === "Industry (IND)"
             ? "white"
-            : "rgb(232, 234, 237)"
+            : "lightgreen"
       }}
     >
       <FormControl sx={{ width: "100%" }}>
@@ -69,10 +69,10 @@ export function Industry({ filter, setFilter }: any) {
             }
             return selected.join(", ");
           }}
-          style={{ height: "27px" }}
+          style={{ height: "35px" }}
         >
           <MenuItem value="Industry (IND)">
-            <>Any</>
+            <>All</>
           </MenuItem>
           {names.map((name) => (
             <MenuItem

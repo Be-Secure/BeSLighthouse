@@ -34,13 +34,12 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
       typeof value === "string" ? value.split(",") : value
     );
   };
-
   if (personName?.[0] !== filter.BeSTecStack) {
     filter.BeSTecStack = personName?.[0];
     setFilter({ ...filter });
   }
   return (
-    <div style={{ width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "rgb(232, 234, 237)"  }}>
+    <div style={{ width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "lightgreen"  }}>
       <FormControl sx={{ width: "100%" }}>
         <Select
           multiple={false}
@@ -54,10 +53,10 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
             }
             return selected.join(", ");
           }}
-          style={{ height: "27px" }}
+          style={{ height: "35px" }}
         >
           <MenuItem value="Be-Secure Technology Stacks">
-            <>Any</>
+            <>All</>
           </MenuItem>
           {names.map((name) => (
             <MenuItem

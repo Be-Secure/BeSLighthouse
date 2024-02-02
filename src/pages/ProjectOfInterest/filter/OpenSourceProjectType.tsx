@@ -45,7 +45,7 @@ export function OpenSourceProjectType({ filter, setFilter }: any) {
           !personName?.[0] ||
           personName?.[0] === "Open Source Project Type (COM)"
             ? "white"
-            : "rgb(232, 234, 237)"
+            : "lightgreen"
       }}
     >
       <FormControl sx={{ width: "100%" }}>
@@ -61,10 +61,10 @@ export function OpenSourceProjectType({ filter, setFilter }: any) {
             }
             return selected.join(", ");
           }}
-          style={{ height: "27px" }}
+          style={{ height: "35px" }}
         >
           <MenuItem value="Open Source Project Type (COM)">
-            <>Any</>
+            <>All</>
           </MenuItem>
           {names.map((name) => (
             <MenuItem

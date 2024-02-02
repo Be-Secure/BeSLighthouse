@@ -52,7 +52,7 @@ export function TechnologyDomain({ filter, setFilter }: any) {
           !personName?.[0] ||
           personName?.[0] === "Technology Domain (Usage) (TD-U)"
             ? "white"
-            : "rgb(232, 234, 237)"
+            : "lightgreen"
       }}
     >
       <FormControl sx={{ width: "100%" }}>
@@ -68,10 +68,10 @@ export function TechnologyDomain({ filter, setFilter }: any) {
             }
             return selected.join(", ");
           }}
-          style={{ height: "27px" }}
+          style={{ height: "35px" }}
         >
           <MenuItem value="Technology Domain (Usage) (TD-U)">
-            <>Any</>
+            <>All</>
           </MenuItem>
           {names.map((name) => (
             <MenuItem

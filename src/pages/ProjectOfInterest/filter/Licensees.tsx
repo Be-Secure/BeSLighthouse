@@ -47,7 +47,7 @@ export function Licensees({ filter, setFilter }: any) {
         backgroundColor:
           !personName?.[0] || personName?.[0] === "License"
             ? "white"
-            : "rgb(232, 234, 237)"
+            : "lightgreen"
       }}
     >
       <FormControl sx={{ width: "100%" }}>
@@ -63,10 +63,10 @@ export function Licensees({ filter, setFilter }: any) {
             }
             return selected.join(", ");
           }}
-          style={{ height: "27px" }}
+          style={{ height: "35px" }}
         >
           <MenuItem value="License">
-            <>Any</>
+            <>All</>
           </MenuItem>
           {names.map((name) => (
             <MenuItem
