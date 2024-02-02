@@ -68,6 +68,10 @@ export const countSeverity = async (
     }
     setSeverity(severityForChart);
   }
+  else
+  {
+    setSeverity([]);
+  }
 };
 
 const FetchCritical = ({ cqRiskData, sqRiskData }: any) => {
