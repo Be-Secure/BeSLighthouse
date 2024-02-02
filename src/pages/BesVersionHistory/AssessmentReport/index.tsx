@@ -573,7 +573,7 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   let license_list: string[] = [];
   let non_lic_files: number = 0;
   let project_lcesnse: string = "Not Found";
-
+  
   uniq_lic.forEach((ul) => {
     if (ul.length !== 0)
       license_list.push(" " + ul + ",")
@@ -1018,24 +1018,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </>
     );
   }
-  // If SAST report is not available
-  else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) == "0" &&
-    JSON.stringify(Object.values(sonarqubeData).length) == "0")) {
-      return(
-        <>
-          <MKTypography
-          variant="h6"
-          fontWeight="bold"
-          style={{
-            fontSize: "12px", display: "flex",
-            justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
-          }}>
-            Assessment report not available
-          </MKTypography>
-        </>
-      )
-    }
-
+  
   if (report === "License Compliance" && jsonDataLength !== 0) {
     let uniqueLicenses: any = [];
 
