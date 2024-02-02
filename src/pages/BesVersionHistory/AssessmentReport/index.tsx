@@ -688,7 +688,7 @@ const FetchSBOM = ({data, masterData, name}: any) => {
     const dataObject = masterData.find(function(item){
       return item.name == td
     })
-    const trackingID = dataObject.id
+    const trackingID = dataObject?.id
     return (<>
       <Grid item
         key={`GRIDSBOM${index}`}
