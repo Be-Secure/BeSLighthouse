@@ -97,22 +97,38 @@ export default function SastToggleButton({
 
   return (
     <>
-
-      {switchSast(sastReport, myObjectCodeql, myObjectSonar, codeQlData, sonarqubeData)}
-      <MKBox style={{ display: "flex", placeContent: "center", height: "100%", position: "relative", top: "45px" }}>
-
-      <ToggleButtonGroup
-        color="standard"
-        value={sastReport}
-        exclusive
-        onChange={handleChange}
-        aria-label="Platform"
-        size='medium'
-        // style={{ display: "flex", position: "relative", top: "45px", left: "18%" }}
+      {switchSast(
+        sastReport,
+        myObjectCodeql,
+        myObjectSonar,
+        codeQlData,
+        sonarqubeData
+      )}
+      <MKBox
+        style={{
+          display: "flex",
+          placeContent: "center",
+          height: "100%",
+          position: "relative",
+          top: "45px"
+        }}
+      >
+        <ToggleButtonGroup
+          color="standard"
+          value={sastReport}
+          exclusive
+          onChange={handleChange}
+          aria-label="Platform"
+          size="medium"
+          // style={{ display: "flex", position: "relative", top: "45px", left: "18%" }}
         >
-        <ToggleButton disabled={ sastReport === "codeql" } value="codeql">CodeQL</ToggleButton>
-        <ToggleButton disabled={ sastReport === "sonarqube" } value="sonarqube">Sonarqube</ToggleButton>
-      </ToggleButtonGroup>
+          <ToggleButton disabled={sastReport === "codeql"} value="codeql">
+            CodeQL
+          </ToggleButton>
+          <ToggleButton disabled={sastReport === "sonarqube"} value="sonarqube">
+            Sonarqube
+          </ToggleButton>
+        </ToggleButtonGroup>
       </MKBox>
     </>
   );

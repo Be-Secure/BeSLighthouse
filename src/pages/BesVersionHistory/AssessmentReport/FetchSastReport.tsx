@@ -8,6 +8,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
   let medium: number = 0;
   let low: number = 0;
   let sqissueslen: number = 0;
+  // debugger
   if (sqData && Object.values(sqData).length !== 0) {
     sqissueslen = sqData.length;
   }
@@ -20,7 +21,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         high++;
       } else if (vul.rule.security_severity_level === "medium") {
         medium++;
-      } else if (vul.rule.security_severity_level === "high") {
+      } else if (vul.rule.security_severity_level === "low") {
         low++;
       }
     });
@@ -198,17 +199,19 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     let sqmajor: number = 0;
     let sqminor: number = 0;
 
-    cqData?.forEach((vul) => {
-      if (vul.rule.security_severity_level === "critical") {
-        cqcritical++;
-      } else if (vul.rule.security_severity_level === "high") {
-        cqhigh++;
-      } else if (vul.rule.security_severity_level === "medium") {
-        cqmedium++;
-      } else if (vul.rule.security_severity_level === "low") {
-        cqlow++;
-      }
-    });
+    if (Array.isArray(cqData)) {
+      cqData?.forEach((vul) => {
+        if (vul.rule.security_severity_level === "critical") {
+          cqcritical++;
+        } else if (vul.rule.security_severity_level === "high") {
+          cqhigh++;
+        } else if (vul.rule.security_severity_level === "medium") {
+          cqmedium++;
+        } else if (vul.rule.security_severity_level === "low") {
+          cqlow++;
+        }
+      });
+    }
     if (Array.isArray(sqData)) {
       sqData?.forEach((vul) => {
         if (vul.severity === "BLOCKER") {
