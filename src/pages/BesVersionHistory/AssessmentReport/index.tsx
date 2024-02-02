@@ -59,11 +59,21 @@ export const fetchvulJsonData = async (link: any, vulTool: any, setCQData: any, 
       else
         return false
     } catch (err) {
-
+      if (vulTool === "codeql") {
+        setCQData([]);
+      }
+      else if (vulTool === "sonarqube") {
+        setSQData({});
+      }
       return false;
     }
   } catch (error) {
-
+    if (vulTool === "codeql") {
+      setCQData([]);
+    }
+    else if (vulTool === "sonarqube") {
+      setSQData({});
+    }
     return false;
   }
 };
@@ -764,7 +774,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }, [version]);
 
   React.useEffect(() => {
-    if (version?.trim()) {
+        if (version?.trim()) {
       let link: string = "";
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
       fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
@@ -772,7 +782,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }, [version]);
 
   React.useEffect(() => {
-    if (version?.trim()) {
+        if (version?.trim()) {
       let link: string = "";
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
       fetchvulJsonData(link, "codeql", setCQData, setSQData);
@@ -821,7 +831,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   let myObject;
 
   if (report === "Vulnerabilities") {
-    pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
+        pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
     pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
     myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
       pathname: string;
@@ -934,8 +944,8 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </MKBox>
     </>
     );
-  } else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) !== "0" &&
-    JSON.stringify(Object.values(sonarqubeData).length) !== "0")) {
+  } else if (report === "Vulnerabilities" && Object.values(codeQlData).length !== 0 &&
+    Object.values(sonarqubeData).length !== 0) {
     // const codeqldetails: any = Object.values(codeQlData);
     // const codeqllength: number = Object.values(codeQlData).length;
     // let sqissues: any = Object.values(sonarqubeData)[5];
@@ -1008,6 +1018,23 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </>
     );
   }
+  // If SAST report is not available
+  else if (report === "Vulnerabilities" && (JSON.stringify(Object.values(codeQlData).length) == "0" &&
+    JSON.stringify(Object.values(sonarqubeData).length) == "0")) {
+      return(
+        <>
+          <MKTypography
+          variant="h6"
+          fontWeight="bold"
+          style={{
+            fontSize: "12px", display: "flex",
+            justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
+          }}>
+            Assessment report not available
+          </MKTypography>
+        </>
+      )
+    }
 
   if (report === "License Compliance" && jsonDataLength !== 0) {
     let uniqueLicenses: any = [];
