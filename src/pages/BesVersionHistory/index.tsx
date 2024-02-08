@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/poi_data";
-import { MenuItem, Select } from "@mui/material";
+import { Icon, IconButton, MenuItem, Select } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
@@ -15,6 +15,7 @@ import routes from "../../routes";
 import { Divider } from "@mui/material";
 import { getEnvPathStatus } from "../../utils/fatch_json_report";
 import { Tune } from "@mui/icons-material";
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -104,6 +105,8 @@ const FetchRecomedations = ({ itemData, masterData }: any) => {
     </>
   );
 };
+
+
 function BesVersionHistory() {
   const classes = useStyles();
   const { besId, besName }: any = useParams();
@@ -169,7 +172,14 @@ function BesVersionHistory() {
             let definedScore: string = "0";
             if (item.hasOwnProperty("score")) definedScore = item.score;
             else definedScore = "Not Available";
-
+            // Adding a Map
+            const techStackMap = {
+              A: "Application",
+              "L&F": "Language and Framwork",
+              DO: "DevOps and Infrastructure",
+              DA: "Distributed and Decentralised Applications",
+              S: "Security tools"
+            }
             const name = item.name.split("-");
             const camelCaseString = name
               .map((part, index) => {
@@ -180,6 +190,7 @@ function BesVersionHistory() {
               .join("");
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${camelCaseString}/`;
             const languages = Object.keys(item.language) // To get the list of languages
+            // debugger
             return (
               <>
                 <Card key={`TOPCARD${index}`} style={{ marginTop: "-1.5rem" }}>
@@ -284,7 +295,10 @@ function BesVersionHistory() {
                         color="text"
                         style={{ fontSize: "15px" }}
                       >
-                        {item.bes_technology_stack}
+                        {/* Checks if item.bes_technology_stack exists in techStackMap Object, if yes it prints from the mapping, if not it prints the default value*/}
+                        {/* We do this to write the full forms of BeS Tech Stacks */}
+                        {techStackMap[item.bes_technology_stack] ? techStackMap[item.bes_technology_stack] : item.bes_technology_stack}
+
                       </MKTypography>
                     </Grid>
                     <Grid
@@ -337,6 +351,46 @@ function BesVersionHistory() {
                         ) : (
                           "Not Available"
                         )}
+                      </MKTypography>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px" }}
+                    >
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        title="Open Source Assurance Provider"
+                        style={{ fontSize: "15px" }}
+                      >
+                        OSAP: &nbsp;
+                      </MKTypography>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{ fontSize: "15px" }}
+                      >
+                        {item.owner["login"]}
+                      </MKTypography>
+                      <MKTypography
+                        fontWeight="regular"
+                        color="text"
+                        style={{
+                          position: "relative",
+                          // paddingLeft: "3px",
+                          right: "6px",
+                          bottom: "10px"
+                        }}>
+                        {item.owner["type"] === "Organization" && (<IconButton aria-label="add" title="Organization">
+                          <ApartmentIcon />
+                        </IconButton> )
+                        }
+                        {/* {findOSAP(item)} */}
+                        {/* <Icon component={ApartmentIcon} style={{ fontSize: "large" }} title="Organization" /> */}
                       </MKTypography>
                     </Grid>
                     {/* The below code moves the description to the next line if the character count exceeds 100 */}
@@ -471,7 +525,9 @@ function BesVersionHistory() {
                           fontSize: "15px",
                           display: "flex",
                           textAlign: "justify",
-                          placeContent: "center"
+                          placeContent: "center",
+                          paddingLeft: "5%",
+                          paddingRight: "5%"
                         }}
                       >
                         {item.description}
@@ -510,13 +566,15 @@ function BesVersionHistory() {
                           fontSize: "15px",
                           display: "flex",
                           textAlign: "justify",
-                          placeContent: "center"
+                          placeContent: "center",
+                          paddingLeft: "5%",
+                          paddingRight: "5%"
                         }}
                       >
                         {languages.map((language) => (
                           // <li key={key}>{key}</li>
-                          language+"; "
-                        ))}
+                          language
+                        )).join("; ")}
                       </MKTypography>
                     </Card>
                     <Card
@@ -545,11 +603,16 @@ function BesVersionHistory() {
                           fontSize: "15px",
                           display: "flex",
                           textAlign: "justify",
-                          placeContent: "center"
+                          placeContent: "center",
+                          paddingLeft: "5%",
+                          paddingRight: "5%"
                         }}
                       >
-                        {/* {item.description} */}
-                        IND-ALL; COM-C; TD-U-W
+                        {/* Parsing through the json arrays to get each tag. Also helps to add ; in between */}
+                        {item.tags.map((tag) => (
+                          tag
+                          // Add a semicolon after each tag except for the last one
+                        )).join('; ')}
                       </MKTypography>
                     </Card>
                   </Grid>
