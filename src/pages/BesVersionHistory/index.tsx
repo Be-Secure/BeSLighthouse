@@ -42,13 +42,13 @@ const useStyles: any = makeStyles(() => ({
   select: {
     minWidth: "calc(3rem + 0.5vw)",
     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
-      {
-        padding: "4px"
-      },
+    {
+      padding: "4px"
+    },
     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-      {
-        padding: "4px"
-      },
+    {
+      padding: "4px"
+    },
     "& .css-qiwgdb.css-qiwgdb.css-qiwgdb": {
       padding: "4px"
     }
@@ -179,7 +179,7 @@ function BesVersionHistory() {
               })
               .join("");
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${camelCaseString}/`;
-
+            const languages = Object.keys(item.language) // To get the list of languages
             return (
               <>
                 <Card key={`TOPCARD${index}`} style={{ marginTop: "-1.5rem" }}>
@@ -341,7 +341,7 @@ function BesVersionHistory() {
                     </Grid>
                     {/* The below code moves the description to the next line if the character count exceeds 100 */}
                     {/* It also checks if the 'description' of a repo is available, if not, displays 'Not Available'  */}
-                    {item.description ? (
+                    {/* {item.description ? (
                       item.description.length < 100 ? (
                         <Grid
                           item
@@ -399,9 +399,9 @@ function BesVersionHistory() {
                           Not Available
                         </MKTypography>
                       </Grid>
-                    )}
+                    )} */}
                   </Grid>
-                  {item.description?.length > 100 ? (
+                  {/* {item.description?.length > 100 ? (
                     <MKTypography
                       variant="h6"
                       fontWeight="bold"
@@ -426,8 +426,134 @@ function BesVersionHistory() {
                     </MKTypography>
                   ) : (
                     <></>
-                  )}
+                  )} */}
                 </Card>
+                {/* For project description, languages and tags */}
+                <Grid container spacing={3}
+                  style={{
+                    paddingTop: "30px",
+                    placeContent: "space-between",
+                    display: "flex"
+                  }}
+                >
+                  <Grid item xs={12} md={6}
+                    style={{
+                      display: "flex",
+                      paddingTop: "12px",
+                      paddingBottom: "7px"
+                    }}
+                  >
+                    <Card
+                      style={{
+                        // height: "fit-content",
+                        width: "100%",
+                        paddingBottom: "8px",
+                        paddingTop: "5px"
+                      }}
+                    >
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          placeContent: "center",
+                        }}
+                      >
+                        Project Description
+                      </MKTypography>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          textAlign: "justify",
+                          placeContent: "center"
+                        }}
+                      >
+                        {item.description}
+                      </MKTypography>
+                    </Card>
+                  </Grid>
+                  {/* The below grid item contains two cards - to align the vertically. */}
+                  <Grid item xs={12} md={6}
+                    style={{
+                      paddingTop: "12px",
+                      paddingBottom: "7px"
+                    }}>
+                    <Card
+                      style={{
+                        height: "fit-content",
+                        paddingBottom: "8px",
+                        paddingTop: "5px"
+                      }}>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          placeContent: "center"
+                        }}
+                      >
+                        Languages
+                      </MKTypography>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          textAlign: "justify",
+                          placeContent: "center"
+                        }}
+                      >
+                        {languages.map((language) => (
+                          // <li key={key}>{key}</li>
+                          language+"; "
+                        ))}
+                      </MKTypography>
+                    </Card>
+                    <Card
+                      style={{
+                        marginTop: "12px",
+                        paddingBottom: "8px",
+                        paddingTop: "5px"
+                      }}>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          placeContent: "center"
+                        }}
+                      >
+                        Tags
+                      </MKTypography>
+                      <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          textAlign: "justify",
+                          placeContent: "center"
+                        }}
+                      >
+                        {/* {item.description} */}
+                        IND-ALL; COM-C; TD-U-W
+                      </MKTypography>
+                    </Card>
+                  </Grid>
+                </Grid>
                 <Card key={`TOPCARD2${index}`} style={{ marginTop: "12px" }}>
                   <Grid key={`TOPGRID14${index}`} container spacing={1} p={1}>
                     <Grid
