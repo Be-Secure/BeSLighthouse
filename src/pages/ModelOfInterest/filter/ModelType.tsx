@@ -6,11 +6,8 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Theme, useTheme } from "@mui/material/styles";
 
 const names = [
-  "DevOPS and Infrastructure Tool (DO)",
-  "Language & Framework (L&F)",
-  "Application (A)",
-  "Distributed & Decentralized Application (DA)",
-  "Open Source Security Tool (S)"
+  "Classic",
+  "LLM"
 ];
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
@@ -22,7 +19,7 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
   };
 }
 
-export function BeSTechnologyStack({ filter, setFilter }: any) {
+export function ModelType({ filter, setFilter }: any) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
   const handleChange1 = (event: SelectChangeEvent<typeof personName>) => {
@@ -34,12 +31,12 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
       typeof value === "string" ? value.split(",") : value
     );
   };
-  if (personName?.[0] !== filter.BeSTecStack) {
-    filter.BeSTecStack = personName?.[0];
+  if (personName?.[0] !== filter.ModelType) {
+    filter.ModelType = personName?.[0];
     setFilter({ ...filter });
   }
   return (
-    <div style={{ width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "lightgreen"  }}>
+    <div style={{ width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Model Type') ? "white" : "lightgreen"  }}>
       <FormControl sx={{ width: "100%" }}>
         <Select
           multiple={false}
@@ -49,13 +46,13 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <>Be-Secure Technology Stacks</>;
+              return <>Model Type</>;
             }
             return selected.join(", ");
           }}
           style={{ height: "35px" }}
         >
-          <MenuItem value="Be-Secure Technology Stacks">
+          <MenuItem value="Model Type">
             <>All</>
           </MenuItem>
           {names.map((name) => (

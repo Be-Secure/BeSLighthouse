@@ -4,13 +4,12 @@ import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Theme, useTheme } from "@mui/material/styles";
+// import { selectedFilterData } from "./mapFilterData";
 
 const names = [
-  "DevOPS and Infrastructure Tool (DO)",
-  "Language & Framework (L&F)",
-  "Application (A)",
-  "Distributed & Decentralized Application (DA)",
-  "Open Source Security Tool (S)"
+  "SAST",
+  "Fuzz Test",
+  "Unanalyzed"
 ];
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
@@ -22,7 +21,7 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
   };
 }
 
-export function BeSTechnologyStack({ filter, setFilter }: any) {
+export function SecurityDomain({ filter, setFilter }: any) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
   const handleChange1 = (event: SelectChangeEvent<typeof personName>) => {
@@ -34,12 +33,20 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
       typeof value === "string" ? value.split(",") : value
     );
   };
-  if (personName?.[0] !== filter.BeSTecStack) {
-    filter.BeSTecStack = personName?.[0];
+  if (personName?.[0] !== filter.RiskAnalysis) {
+    filter.RiskAnalysis = personName?.[0];
     setFilter({ ...filter });
   }
   return (
-    <div style={{ width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "lightgreen"  }}>
+    <div
+      style={{
+        width: "100%",
+        backgroundColor:
+          !personName?.[0] || personName?.[0] === "Risk Analysis"
+            ? "white"
+            : "lightgreen"
+      }}
+    >
       <FormControl sx={{ width: "100%" }}>
         <Select
           multiple={false}
@@ -49,13 +56,13 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <>Be-Secure Technology Stacks</>;
+              return <>Risk Analysis</>;
             }
             return selected.join(", ");
           }}
           style={{ height: "35px" }}
         >
-          <MenuItem value="Be-Secure Technology Stacks">
+          <MenuItem value="Risk Analysis">
             <>All</>
           </MenuItem>
           {names.map((name) => (
