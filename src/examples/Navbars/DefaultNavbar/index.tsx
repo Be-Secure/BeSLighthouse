@@ -552,7 +552,7 @@ function DefaultNavbar({
             display={{ xs: "inline-block", lg: "none" }}
             lineHeight={0}
             py={1.5}
-            pl={1.5}
+            pl={0}
             color={transparent ? "white" : "inherit"}
             sx={{ cursor: "pointer", position: "absolute" }}
             onClick={openMobileNavbar}
