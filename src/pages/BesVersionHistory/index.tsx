@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/poi_data";
-import { Icon, IconButton, MenuItem, Select } from "@mui/material";
+import { Icon, IconButton, MenuItem, Select, Tooltip, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
@@ -16,6 +16,12 @@ import { Divider } from "@mui/material";
 import { getEnvPathStatus } from "../../utils/fatch_json_report";
 import { Tune } from "@mui/icons-material";
 import ApartmentIcon from '@mui/icons-material/Apartment';
+import DownloadIcon from '@mui/icons-material/Download';
+import Button from '@mui/material/Button';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -106,6 +112,86 @@ const FetchRecomedations = ({ itemData, masterData }: any) => {
   );
 };
 
+// Style for Modal
+const modalstyle = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "60%",
+  height: "60%",
+  bgcolor: 'background.paper',
+  // border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+// Function to handle modal component
+export const ModalForEnvsAndPlaybook = (): any => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+    <div>
+      <Button onClick={handleOpen} disabled variant="contained" size="small" title="Show compatible envs and playbooks" style={{ fontSize: "15px", color: "black", backgroundColor: "#d7d7d7", textTransform: "capitalize", fontWeight: "regular" }}>
+        BeS Envs and Playbooks
+      </Button>
+      {/* <Button onClick={handleOpen}>BeS Envs and Playbooks</Button> */}
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={modalstyle}>
+            <Grid container
+              style={{
+                display: "flex",
+                justifyContent: "space-around"
+              }}
+            >
+              <Grid item>
+                <MKTypography
+                  variant="h6"
+                  fontWeight="bold"
+                  textTransform="capitalize"
+                  style={{ fontSize: "15px" }}
+                >
+                  {/* <Card style={{ borderRadius: "0" }}> */}
+                    BeS Environments
+                  {/* </Card> */}
+                </MKTypography>
+              </Grid>
+              <Grid item>
+
+                <MKTypography
+                  variant="h6"
+                  fontWeight="bold"
+                  textTransform="capitalize"
+                  style={{ 
+                    fontSize: "15px",
+                    margin: "auto"
+                  }}
+                >
+                    BeS Playbooks
+                </MKTypography>
+              </Grid>
+            </Grid>
+          </Box>
+        </Fade>
+      </Modal>
+    </div>
+  );
+}
 
 function BesVersionHistory() {
   const classes = useStyles();
@@ -175,10 +261,10 @@ function BesVersionHistory() {
             // Adding a Map
             const techStackMap = {
               A: "Application",
-              "L&F": "Language and Framwork",
+              "L&F": "Language and Framework",
               DO: "DevOps and Infrastructure",
               DA: "Distributed and Decentralised Applications",
-              S: "Security tools"
+              S: "Open Source Security tools"
             }
             const name = item.name.split("-");
             const camelCaseString = name
@@ -190,6 +276,7 @@ function BesVersionHistory() {
               .join("");
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${camelCaseString}/`;
             const languages = Object.keys(item.language) // To get the list of languages
+            // console.log(item.owner)
             // debugger
             return (
               <>
@@ -324,7 +411,7 @@ function BesVersionHistory() {
                         {item.id}
                       </MKTypography>
                     </Grid>
-                    <Grid
+                    {/* <Grid
                       item
                       xs={6}
                       md={3}
@@ -352,7 +439,9 @@ function BesVersionHistory() {
                           "Not Available"
                         )}
                       </MKTypography>
-                    </Grid>
+                    </Grid> */}
+
+                    {/* For Open Source Assurance Provider */}
                     <Grid
                       item
                       xs={6}
@@ -376,22 +465,81 @@ function BesVersionHistory() {
                       >
                         {item.owner["login"]}
                       </MKTypography>
+                      {/* The osap icon is given inside MKTypography for handling its css */}
                       <MKTypography
                         fontWeight="regular"
                         color="text"
                         style={{
                           position: "relative",
                           // paddingLeft: "3px",
-                          right: "6px",
-                          bottom: "10px"
+                          bottom: "3px"
                         }}>
-                        {item.owner["type"] === "Organization" && (<IconButton aria-label="add" title="Organization">
+                        {/* {item.owner["type"] === "Organization" && (<IconButton aria-label="add" title="Organization">
+                        </IconButton> ) */}
+                        {/* Tooltip is used to provide the title for the icon */}
+                        <Tooltip title="Organization">
+
                           <ApartmentIcon />
-                        </IconButton> )
-                        }
+                        </Tooltip>
+
                         {/* {findOSAP(item)} */}
                         {/* <Icon component={ApartmentIcon} style={{ fontSize: "large" }} title="Organization" /> */}
                       </MKTypography>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px", position: "relative", bottom: "7px" }}
+                    >
+                      {/* <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        style={{ fontSize: "15px" }}
+                      > */}
+                      <Button variant="contained" disabled size="small" title="Download Assessment Summary Report" endIcon={<DownloadIcon style={{ color: "black" }} />} style={{ fontSize: "15px", color: "black", backgroundColor: "#d7d7d7", width: "55%" }}>
+                        OSAR
+                      </Button>
+                      {/* <Button variant="contained" startIcon={<DownloadIcon />}>OSAR</Button> */}
+
+                      {/* </MKTypography> */}
+                      {/* <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{ fontSize: "15px" }}
+                      >
+                        {item.id}
+                      </MKTypography> */}
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      md={3}
+                      style={{ display: "flex", paddingTop: "12px", position: "relative", bottom: "7px" }}
+                    >
+                      {/* <MKTypography
+                        variant="h6"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        style={{ fontSize: "15px" }}
+                      > */}
+                      {/* <Button variant="contained" size="small" title="Show compatible envs and playbooks" style={{ fontSize: "15px", color: "black", backgroundColor: "#d7d7d7" }}>
+                        BeS Envs & Playbooks
+                      </Button> */}
+                      <ModalForEnvsAndPlaybook />
+                      {/* <Button variant="contained" startIcon={<DownloadIcon />}>OSAR</Button> */}
+
+                      {/* </MKTypography> */}
+                      {/* <MKTypography
+                        variant="h6"
+                        fontWeight="regular"
+                        color="text"
+                        style={{ fontSize: "15px" }}
+                      >
+                        {item.id}
+                      </MKTypography> */}
                     </Grid>
                     {/* The below code moves the description to the next line if the character count exceeds 100 */}
                     {/* It also checks if the 'description' of a repo is available, if not, displays 'Not Available'  */}
