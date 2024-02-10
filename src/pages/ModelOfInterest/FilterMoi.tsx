@@ -1,9 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
-import { TabForPoi } from "./TabForPoi";
+import { TabForMoi } from "./TabForMoi";
 
-export default function ScrollableTabsButtonVisible({
+export default function ScrollableTabsButtonVisibleML({
   filter,
   setFilter
 }: any) {
@@ -34,7 +34,7 @@ export default function ScrollableTabsButtonVisible({
         }}
         style={{ backgroundColor: "white" }}
       >
-        <TabForPoi filter={filter} setFilter={setFilter} />
+        <TabForMoi filter={filter} setFilter={setFilter} />
       </Tabs>
     </Box>
   );

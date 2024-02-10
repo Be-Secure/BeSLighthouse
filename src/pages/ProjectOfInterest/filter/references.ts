@@ -12,7 +12,7 @@ export const tecStack = {
   "DevOPS and Infrastructure Tool (DO)": "DO",
   "Language & Framework (L&F)": "L&F",
   "Application (A)": "A",
-  "Distributed Application (DA)": "DA",
+  "Distributed & Decentralized Application (DA)": "DA",
   "Open Source Security Tool (S)": "S"
 };
 

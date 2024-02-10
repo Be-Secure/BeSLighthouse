@@ -14,6 +14,7 @@ import ProjectCount from "../ProjectOfInterest/ProjectCount";
 import Language from "../../examples/Charts/PieChart/Languages";
 import theme from "../../assets/theme";
 import { fetchJsonReport } from "../../utils/fatch_json_report";
+import ScrollableTabsButtonVisibleML from "./FilterMoi";
 
 const fetchModelData = async () => {
   const moidata: any = JSON.parse(await fetchJsonReport(modelOfInterestData));
@@ -74,10 +75,14 @@ function ModelOfInterest() {
   const [modelType, setModelType]: any = useState([]);
   const [riskAnalysis, setRiskAnalysis]: any = useState([]);
 
+  const [filterData, setFilterData]: any = React.useState({
+    ModelType: "",
+    RiskAnalysis: ""
+  });
+
   React.useEffect(() => {
     prepPieChartData(setModelType, setRiskAnalysis, setReport);
   }, []);
-
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
@@ -151,12 +156,16 @@ function ModelOfInterest() {
           </Grid>
         </Grid>
       </MKBox>
+      <ScrollableTabsButtonVisibleML
+        filter={filterData}
+        setFilter={setFilterData}
+      />
       <MKBox pt={2} sx={{ mx: { xs: 2, lg: 3 } }}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
               <MKBox>
-                <ModelDisplay />
+                <ModelDisplay selectedFilter={filterData}/>
               </MKBox>
             </Card>
           </Grid>

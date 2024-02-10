@@ -21,7 +21,7 @@ export default {
     flexContainer: {
       height: "100%",
       position: "relative",
-      zIndex: 10,
+      zIndex: 1,
     },
 
     fixed: {

@@ -148,6 +148,7 @@ export default function ProjectDisplay({ selectedFilter }: any) {
   if (Object.values(filterData).length !== 0) {
     getUSERLIST = filterDataBasedOnUserSelecrtionOnTag(filterData, getUSERLIST);
   }
+
   const handleFilterByName: any = (event: any) => {
     setPage(0);
     setFilterName(event.target.value);
