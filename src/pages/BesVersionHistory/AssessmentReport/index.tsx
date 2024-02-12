@@ -1209,22 +1209,21 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
     "Dependencies"
   ];
 
-  return (<>
-    <Grid container key="maingridAssmentreport"
-      justifyContent="center"
-      style={{ width: "100%", placeContent: "space-evenly" }}>
+  return (
+  <>
+
       {/* Getting the assessment report */}
       {report.map((value, index) => {
         return (
           <>
-            <Grid item
+            
+            {/* <Grid item
               style={{ height: "250px" }}
               key={`Grid1${index}`}
               xs={12} sm={6} md={6} lg={3} xl={2.4}>
               <MKBox p={2}
                 key={`Mbox1${index}`}
                 borderRadius="lg">
-                {/* Making the grey box */}
                 <Grid
                   key={`Grid2${index}`}
                   justifyContent="center"
@@ -1235,7 +1234,6 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                     fontSize: "15px",
                     paddingTop: "5px"
                   }} >
-                  {/* Assessment heading */}
                   <Grid container
                     key={`Grid3${index}`}
                     justifyContent="center"
@@ -1251,7 +1249,6 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                       </Typography>
                     </Grid>
                   </Grid>
-                  {/* Assessment data display */}
                   <Grid key={`Grid5${index}`}>
                     <Grid key={`Grid6${index}`}>
                       <Grid key={`Grid7${index}`}
@@ -1275,12 +1272,11 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                   </Grid>
                 </Grid>
               </MKBox>
-            </Grid>
+            </Grid> */}
           </>
         );
       })
       }
-    </Grid>
   </>
   );
 };

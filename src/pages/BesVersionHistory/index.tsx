@@ -22,7 +22,9 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-
+import ProjectDisplay from "../../layouts/pages/projectOfInterest/ProjectDisplay";
+import { MouseEvent } from 'react';
+import {projectTags} from "./tags"
 export const osspoiMasterAndSummary = async (
   setData: any,
   besId: string,
@@ -113,7 +115,7 @@ const FetchRecomedations = ({ itemData, masterData }: any) => {
 };
 
 // Style for Modal
-const modalstyle = {
+const envPlaybookModalStyle = {
   position: 'absolute' as 'absolute',
   top: '50%',
   left: '50%',
@@ -134,7 +136,16 @@ export const ModalForEnvsAndPlaybook = (): any => {
 
   return (
     <div>
-      <Button onClick={handleOpen} disabled variant="contained" size="small" title="Show compatible envs and playbooks" style={{ fontSize: "15px", color: "black", backgroundColor: "#d7d7d7", textTransform: "capitalize", fontWeight: "regular" }}>
+      <Button 
+        onClick={handleOpen} 
+        size="small" 
+        title="Show compatible envs and playbooks" 
+        style={{                       
+          fontSize: "15px", 
+          color: "black", 
+          right: "16px",
+          textTransform: "capitalize"
+        }}>
         BeS Envs and Playbooks
       </Button>
       {/* <Button onClick={handleOpen}>BeS Envs and Playbooks</Button> */}
@@ -152,7 +163,7 @@ export const ModalForEnvsAndPlaybook = (): any => {
         }}
       >
         <Fade in={open}>
-          <Box sx={modalstyle}>
+          <Box sx={envPlaybookModalStyle}>
             <Grid container
               style={{
                 display: "flex",
@@ -167,7 +178,7 @@ export const ModalForEnvsAndPlaybook = (): any => {
                   style={{ fontSize: "15px" }}
                 >
                   {/* <Card style={{ borderRadius: "0" }}> */}
-                    BeS Environments
+                  BeS Environments
                   {/* </Card> */}
                 </MKTypography>
               </Grid>
@@ -177,20 +188,42 @@ export const ModalForEnvsAndPlaybook = (): any => {
                   variant="h6"
                   fontWeight="bold"
                   textTransform="capitalize"
-                  style={{ 
+                  style={{
                     fontSize: "15px",
                     margin: "auto"
                   }}
                 >
-                    BeS Playbooks
+                  BeS Playbooks
                 </MKTypography>
               </Grid>
+            <MKTypography
+            style={{
+              position: "fixed",
+              bottom: 0,
+              fontSize: "12px"
+            }}>
+              Compatible BeS environments and BeS playbooks
+            </MKTypography>
             </Grid>
           </Box>
         </Fade>
       </Modal>
     </div>
   );
+}
+
+// function selectFilter(type: any, event: MouseEvent<HTMLAnchorElement>) {
+//   console.log("called")
+//   ProjectDisplay({type})
+//   debugger
+//   event.preventDefault();
+// }
+
+// This function is returns the full form of the project tags
+function getProjectTags(value: any)
+{
+    // projectTags is the Object name
+    return Object.keys(projectTags).filter(key => projectTags[key] === value);
 }
 
 function BesVersionHistory() {
@@ -262,9 +295,9 @@ function BesVersionHistory() {
             const techStackMap = {
               A: "Application",
               "L&F": "Language and Framework",
-              DO: "DevOps and Infrastructure",
-              DA: "Distributed and Decentralised Applications",
-              S: "Open Source Security tools"
+              DO: "DevOps and Infrastructure Tool",
+              DA: "Distributed and Decentralized Application",
+              S: "Open Source Security tool"
             }
             const name = item.name.split("-");
             const camelCaseString = name
@@ -280,7 +313,7 @@ function BesVersionHistory() {
             // debugger
             return (
               <>
-                <Card key={`TOPCARD${index}`} style={{ marginTop: "-1.5rem" }}>
+                <Card key={`TOPCARD${index}`} style={{ marginTop: "-1.5rem", paddingTop: "6px" }}>
                   <Grid key={`TOPGRID1${index}`} container spacing={1} pl={4}>
                     <Grid
                       item
@@ -498,7 +531,20 @@ function BesVersionHistory() {
                         textTransform="capitalize"
                         style={{ fontSize: "15px" }}
                       > */}
-                      <Button variant="contained" disabled size="small" title="Download Assessment Summary Report" endIcon={<DownloadIcon style={{ color: "black" }} />} style={{ fontSize: "15px", color: "black", backgroundColor: "#d7d7d7", width: "55%" }}>
+                      <Button 
+                        size="small" 
+                        title="Download Assessment Summary Report" 
+                        endIcon={
+                          <DownloadIcon 
+                            style={{ 
+                              color: "black" 
+                            }} 
+                          />} 
+                        style={{ 
+                          fontSize: "15px", 
+                          color: "black", 
+                          right: "16px" 
+                        }}>
                         OSAR
                       </Button>
                       {/* <Button variant="contained" startIcon={<DownloadIcon />}>OSAR</Button> */}
@@ -673,9 +719,11 @@ function BesVersionHistory() {
                           fontSize: "15px",
                           display: "flex",
                           textAlign: "justify",
-                          placeContent: "center",
                           paddingLeft: "5%",
-                          paddingRight: "5%"
+                          paddingRight: "5%",
+                          paddingTop: "15px",
+                          placeContent: "center"
+
                         }}
                       >
                         {item.description}
@@ -722,6 +770,7 @@ function BesVersionHistory() {
                         {languages.map((language) => (
                           // <li key={key}>{key}</li>
                           language
+                          // <a href="#" onClick={(event) => selectFilter(language, event)}>{language}</a>
                         )).join("; ")}
                       </MKTypography>
                     </Card>
@@ -748,7 +797,9 @@ function BesVersionHistory() {
                         fontWeight="regular"
                         color="text"
                         style={{
+                          fontFamily: "Arial",
                           fontSize: "15px",
+                          color: "#333",
                           display: "flex",
                           textAlign: "justify",
                           placeContent: "center",
@@ -758,21 +809,16 @@ function BesVersionHistory() {
                       >
                         {/* Parsing through the json arrays to get each tag. Also helps to add ; in between */}
                         {item.tags.map((tag) => (
-                          tag
+                          getProjectTags(tag)
+                          // tag
                           // Add a semicolon after each tag except for the last one
                         )).join('; ')}
                       </MKTypography>
                     </Card>
                   </Grid>
                 </Grid>
-                <Card key={`TOPCARD2${index}`} style={{ marginTop: "12px" }}>
                   <Grid key={`TOPGRID14${index}`} container spacing={1} p={1}>
-                    <Grid
-                      key={`TOPGRID15${index}`}
-                      item
-                      xs={12}
-                      justifyContent="flex-start"
-                    >
+
                       <AssessmentReport
                         title="Assessment Report"
                         name={besName.slice(1)}
@@ -780,9 +826,7 @@ function BesVersionHistory() {
                         itemData={item}
                         masterData={data}
                       />
-                    </Grid>
                   </Grid>
-                </Card>
                 <MKBox key={`TOPMKBOX7${index}`} style={{ marginTop: "12px" }}>
                   <Grid key={`TOPGRID16${index}`} container spacing={3} pt={3}>
                     <Grid
