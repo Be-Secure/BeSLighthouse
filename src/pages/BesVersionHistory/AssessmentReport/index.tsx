@@ -722,7 +722,7 @@ const FetchSBOM = ({data, masterData, name}: any) => {
           display: "flex",
           paddingLeft: "calc(0.1rem + 0.3vw)"
         }}>
-          <b key={`BOLDSBOM1`}>Tracked under BeS :</b> 
+          <b key={`BOLDSBOM1`}>Tracked in the lab:</b> 
         </MKTypography>
       ) : (
         <MKTypography key="MKTypoSBOMMain" variant="body1"
@@ -730,9 +730,10 @@ const FetchSBOM = ({data, masterData, name}: any) => {
         
         style={{
         fontSize: "12px", display: "flex",
-        justifyContent: "center", alignItems: "center", position: "relative", top: "55px"
+        justifyContent: "center", position: "relative", top: "40px",
+        paddingLeft: "calc(0.1rem + 0.5vw)"
         }}>
-          <b key={`BOLDSBOM1`}>No dependencies tracked under BeS</b>
+          <b key={`BOLDSBOM1`}>None of the dependencies detected are currently tracked in this lab</b>
         </MKTypography>
       )}
       <Grid key={`GRIDSBOMSUBMAIN`}
@@ -1082,7 +1083,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </>
     );
   }
-  let flag = false;
+ 
   if (report === "Dependencies" && jsonDataLength !== 0) {
     if (!(jsonData.packages.length === 1 && jsonData.packages[0].name.toLowerCase() === name.toLowerCase())){
       return (<>
@@ -1119,7 +1120,34 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
       </>
       );
     } else {
-      flag = true;
+      return (<>
+        <Typography variant="h6"
+          key="TYPOSBOMMAIN1"
+          color="inherit"
+          style={{
+            fontSize: "calc(0.6rem + 0.5vw)"
+          }}>
+          <Link to={""}
+            key="LINKSBOMMAIN1"
+            style={{
+              fontSize: "calc(0.6rem + 0.5vw)",
+              display: "flex",
+              justifyContent: "center"
+            }}>
+            {(jsonData.packages.length)-1}
+          </Link>
+        </Typography>
+        <MKTypography variant="h6"
+          key="TYPOSBOMMAINBLANK1"
+          color="inherit"
+          style={{
+            fontSize: "12px", display: "flex",
+            justifyContent: "center", alignItems: "center", position: "relative", top: "40px"
+          }}>
+            No dependent packages are identified
+        </MKTypography>
+      </>
+      );  
     }
     
   }
@@ -1132,11 +1160,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         fontSize: "12px", display: "flex",
         justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
       }}>
-        {flag ? (
-          "No dependent packages are available"
-        ) : (
-        "Assessment report not available"
-        )}
+        Assessment report not available
     </MKTypography>
   );
 };
