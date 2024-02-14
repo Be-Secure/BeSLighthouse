@@ -16,7 +16,7 @@ import FetchSAST from "./FetchSastReport";
 
 import SastToggleButton from "./SastToggleButton"
 import { useState } from "react";
-
+import vulnerabilityIcon from "../../../assets/images/security.png"
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
@@ -746,7 +746,7 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
   );
 };
 
-function GetAssessmentData ( version, name, report, itemData, masterData ) {
+function GetAssessmentData(version, name, report, itemData, masterData) {
   const [jsonData, setJsonData]: any = React.useState({});
   const [codeQlData, setCQData]: any = React.useState([]);
   const [sonarqubeData, setSQData]: any = React.useState({});
@@ -807,9 +807,9 @@ function GetAssessmentData ( version, name, report, itemData, masterData ) {
     } else if (jsonData.criticality_score >= 0.6 && jsonData.criticality_score <= 1) {
       color_code = "#FF5733";
       risk_level = "High risk";
-    } 
-    return data_array = [jsonData.criticality_score,<FetchCS data={jsonData}/>,color_code]
-    
+    }
+    return data_array = [jsonData.criticality_score.toFixed(2), <FetchCS data={jsonData} />, color_code,vulnerabilityIcon]
+
     return (
       <>
         {/* Criticality score value */}
@@ -821,8 +821,8 @@ function GetAssessmentData ( version, name, report, itemData, masterData ) {
             justifyContent: "center",
             display: "flex"
           }}> */}
-          {/* {jsonData.criticality_score} */}
-          {/* Criticality score data */}
+        {/* {jsonData.criticality_score} */}
+        {/* Criticality score data */}
         {/* </MKTypography> */}
         {/* <Grid key={`GridCriticalutyScore`}
           style={{
@@ -832,11 +832,11 @@ function GetAssessmentData ( version, name, report, itemData, masterData ) {
             fontSize: "20px",
           }}
         > */}
-          {/* <MKBox> */}
-            {/* <FetchCS
+        {/* <MKBox> */}
+        {/* <FetchCS
               data={jsonData}
             /> */}
-          {/* </MKBox> */}
+        {/* </MKBox> */}
         {/* </Grid> */}
       </>
     );
@@ -849,22 +849,22 @@ function GetAssessmentData ( version, name, report, itemData, masterData ) {
   let myObjectSonar;
   let myObject;
 
-//   if (report === "Vulnerabilities") {
-//     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
-//     pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
-//     myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
-//       pathname: string;
-//     };
-//     myObjectSonar = { pathname: pathNameSonar, state: jsonData } as {
-//       pathname: string;
-//     };
-//   } else {
+  //   if (report === "Vulnerabilities") {
+  //     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
+  //     pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
+  //     myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
+  //       pathname: string;
+  //     };
+  //     myObjectSonar = { pathname: pathNameSonar, state: jsonData } as {
+  //       pathname: string;
+  //     };
+  //   } else {
 
-//     pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
-//     myObject = { pathname: pathName, state: jsonData } as {
-//       pathname: string;
-//     };
-//   }
+  //     pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
+  //     myObject = { pathname: pathName, state: jsonData } as {
+  //       pathname: string;
+  //     };
+  //   }
   if (report === "ScoreCard" && jsonDataLength !== 0) {
     let color_code = "";
     let risk_level = "";
@@ -881,7 +881,7 @@ function GetAssessmentData ( version, name, report, itemData, masterData ) {
       color_code = "#C70039";
       risk_level = "Critical risk";
     }
-    return data_array = [jsonData.score,<FetchLowScores data={jsonData}/>,color_code]
+    return data_array = [jsonData.score, <FetchLowScores data={jsonData} />, color_code,vulnerabilityIcon]
     // <>
     //   {/* Display scorecard score */}
     //   <Typography variant="h6"
@@ -911,142 +911,142 @@ function GetAssessmentData ( version, name, report, itemData, masterData ) {
     // </>
   }
 
-//   if (report === "Vulnerabilities" && (Object.values(codeQlData).length !== 0 &&
-//     Object.values(sonarqubeData).length === 0)) {
-//     return (<>
-//       {/* Codeql score */}
+  //   if (report === "Vulnerabilities" && (Object.values(codeQlData).length !== 0 &&
+  //     Object.values(sonarqubeData).length === 0)) {
+  //     return (<>
+  //       {/* Codeql score */}
 
-//       <Typography variant="h6"
-//         key="SASCQTMAINHEADING"
-//         color="inherit"
-//         style={{
-//           fontSize: "13px",
-//           display: "flex",
-//           justifyContent: "center",
-//         }}>
-//         {/* <a href=""></a> */}
-//         <Link to={myObjectCodeql}
-//           key={`LinkSC1`}
-//           style={{
-//             fontSize: "13px",
-//             display: "flex",
-//             justifyContent: "center"
-//           }}>
-//           CodeQL: {codeQlData.length}
-//         </Link>
-//       </Typography>
-//       <MKBox key="MKBOXSASTCQMAINBODY">
-//         <FetchSAST
-//           cqData={codeQlData}
-//           sqData={sonarqubeData}
-//         />
-//       </MKBox>
-//     </>
-//     );
-//   } else if (report === "Vulnerabilities" && (Object.values(sonarqubeData).length !== 0 &&
-//     Object.values(codeQlData).length === 0)) {
-//     let issues: any = Object.values(sonarqubeData)[5];
-//     return (<>
-//       <Typography variant="h6"
-//         key="SASSQTMAINHEADING"
-//         color="inherit"
-//         style={{
-//           fontSize: "13px",
-//           display: "flex",
-//           justifyContent: "center"
-//         }}>
-//         <Link to={myObjectSonar}
-//           key={`LinkSC1`}
-//           style={{
-//             fontSize: "13px",
-//             display: "flex",
-//             justifyContent: "center"
-//           }}>
-//           Sonarqube: {sonarqubeData.total}
-//         </Link>
-//       </Typography>
-//       <MKBox key="MKBOXSASTSQMAINBODY">
-//         <FetchSAST
-//           cqData={codeQlData}
-//           sqData={issues}
-//         />
-//       </MKBox>
-//     </>
-//     );
-//   } else if (report === "Vulnerabilities" && Object.values(codeQlData).length !== 0 &&
-//     Object.values(sonarqubeData).length !== 0) {
-//     // const codeqldetails: any = Object.values(codeQlData);
-//     // const codeqllength: number = Object.values(codeQlData).length;
-//     // let sqissues: any = Object.values(sonarqubeData)[5];
+  //       <Typography variant="h6"
+  //         key="SASCQTMAINHEADING"
+  //         color="inherit"
+  //         style={{
+  //           fontSize: "13px",
+  //           display: "flex",
+  //           justifyContent: "center",
+  //         }}>
+  //         {/* <a href=""></a> */}
+  //         <Link to={myObjectCodeql}
+  //           key={`LinkSC1`}
+  //           style={{
+  //             fontSize: "13px",
+  //             display: "flex",
+  //             justifyContent: "center"
+  //           }}>
+  //           CodeQL: {codeQlData.length}
+  //         </Link>
+  //       </Typography>
+  //       <MKBox key="MKBOXSASTCQMAINBODY">
+  //         <FetchSAST
+  //           cqData={codeQlData}
+  //           sqData={sonarqubeData}
+  //         />
+  //       </MKBox>
+  //     </>
+  //     );
+  //   } else if (report === "Vulnerabilities" && (Object.values(sonarqubeData).length !== 0 &&
+  //     Object.values(codeQlData).length === 0)) {
+  //     let issues: any = Object.values(sonarqubeData)[5];
+  //     return (<>
+  //       <Typography variant="h6"
+  //         key="SASSQTMAINHEADING"
+  //         color="inherit"
+  //         style={{
+  //           fontSize: "13px",
+  //           display: "flex",
+  //           justifyContent: "center"
+  //         }}>
+  //         <Link to={myObjectSonar}
+  //           key={`LinkSC1`}
+  //           style={{
+  //             fontSize: "13px",
+  //             display: "flex",
+  //             justifyContent: "center"
+  //           }}>
+  //           Sonarqube: {sonarqubeData.total}
+  //         </Link>
+  //       </Typography>
+  //       <MKBox key="MKBOXSASTSQMAINBODY">
+  //         <FetchSAST
+  //           cqData={codeQlData}
+  //           sqData={issues}
+  //         />
+  //       </MKBox>
+  //     </>
+  //     );
+  //   } else if (report === "Vulnerabilities" && Object.values(codeQlData).length !== 0 &&
+  //     Object.values(sonarqubeData).length !== 0) {
+  //     // const codeqldetails: any = Object.values(codeQlData);
+  //     // const codeqllength: number = Object.values(codeQlData).length;
+  //     // let sqissues: any = Object.values(sonarqubeData)[5];
 
-//     return (
-//       <>
-//         <SastToggleButton myObjectCodeql={myObjectCodeql} myObjectSonar={myObjectSonar} codeQlData={codeQlData} sonarqubeData={sonarqubeData} />
-//         {/* <Grid item
-//           key="GRIDSASTCQSQMAIN1"
-//           container
-//           xs={12}>
-//           <Grid item
-//             key="GRIDSASTCQSQMAIN2"
-//             xs={6} style={{ display: "flex" }}>
-//             <Typography variant="h6"
-//               key="TYPOSASTCQSQMAIN1"
-//               color="inherit"
-//               style={{
-//                 fontSize: "13px",
-//                 justifyContent: "left",
-//                 display: "flex",
-//                 paddingBottom: "8px",
-//                 paddingTop: "4px",
-//                 paddingLeft: "8px"
-//               }}>
-//               <Link to={myObjectCodeql}
-//                 key={`LinkSC1`}>
-//                 CodeQL: {codeqllength}
-//               </Link>
+  //     return (
+  //       <>
+  //         <SastToggleButton myObjectCodeql={myObjectCodeql} myObjectSonar={myObjectSonar} codeQlData={codeQlData} sonarqubeData={sonarqubeData} />
+  //         {/* <Grid item
+  //           key="GRIDSASTCQSQMAIN1"
+  //           container
+  //           xs={12}>
+  //           <Grid item
+  //             key="GRIDSASTCQSQMAIN2"
+  //             xs={6} style={{ display: "flex" }}>
+  //             <Typography variant="h6"
+  //               key="TYPOSASTCQSQMAIN1"
+  //               color="inherit"
+  //               style={{
+  //                 fontSize: "13px",
+  //                 justifyContent: "left",
+  //                 display: "flex",
+  //                 paddingBottom: "8px",
+  //                 paddingTop: "4px",
+  //                 paddingLeft: "8px"
+  //               }}>
+  //               <Link to={myObjectCodeql}
+  //                 key={`LinkSC1`}>
+  //                 CodeQL: {codeqllength}
+  //               </Link>
 
-//             </Typography>
-//           </Grid>
-//           <Grid item
-//             key="GRIDSASTCQSQMAIN3"
-//             xs={6}>
-//             <Typography variant="h6"
-//               key="TYPOSASTCQSQMAIN2"
-//               color="inherit"
-//               style={{
-//                 fontSize: "13px",
-//                 justifyContent: "center",
-//                 display: "flex",
-//                 paddingBottom: "8px",
-//                 paddingTop: "4px"
-//               }}>
-//               <Link to={myObjectSonar}
-//                 key={`LinkSC1`}
-//                 style={{
-//                   fontSize: "13.5px",
-//                   display: "flex",
-//                   justifyContent: "right",
-//                   paddingRight: "5px"
+  //             </Typography>
+  //           </Grid>
+  //           <Grid item
+  //             key="GRIDSASTCQSQMAIN3"
+  //             xs={6}>
+  //             <Typography variant="h6"
+  //               key="TYPOSASTCQSQMAIN2"
+  //               color="inherit"
+  //               style={{
+  //                 fontSize: "13px",
+  //                 justifyContent: "center",
+  //                 display: "flex",
+  //                 paddingBottom: "8px",
+  //                 paddingTop: "4px"
+  //               }}>
+  //               <Link to={myObjectSonar}
+  //                 key={`LinkSC1`}
+  //                 style={{
+  //                   fontSize: "13.5px",
+  //                   display: "flex",
+  //                   justifyContent: "right",
+  //                   paddingRight: "5px"
 
-//                 }}>
-//                 Sonarqube: {sonarqubeData.total}
-//               </Link>
+  //                 }}>
+  //                 Sonarqube: {sonarqubeData.total}
+  //               </Link>
 
-//             </Typography>
-//           </Grid>
-//         </Grid>
-//         <Grid key="GRIDSASTCQSQMAIN4"
-//           container>
-//             <MKBox key="MKBOXSASTCQSQMAIN1">
-//               <FetchSAST
-//                 cqData={codeqldetails}
-//                 sqData={sqissues}
-//               />
-//             </MKBox>
-//         </Grid> */}
-//       </>
-//     );
-//   }
+  //             </Typography>
+  //           </Grid>
+  //         </Grid>
+  //         <Grid key="GRIDSASTCQSQMAIN4"
+  //           container>
+  //             <MKBox key="MKBOXSASTCQSQMAIN1">
+  //               <FetchSAST
+  //                 cqData={codeqldetails}
+  //                 sqData={sqissues}
+  //               />
+  //             </MKBox>
+  //         </Grid> */}
+  //       </>
+  //     );
+  //   }
 
   if (report === "License Compliance" && jsonDataLength !== 0) {
     let uniqueLicenses: any = [];
@@ -1067,98 +1067,98 @@ function GetAssessmentData ( version, name, report, itemData, masterData ) {
         uniqueLicenses.push(jsonData[i].LicenseConcluded);
       }
     }
-    return data_array=[uniqueLicenses.length,<FetchLicense data={jsonData} uniq_lic={uniqueLicenses} itemData={itemData}/>]
-      // <>
-      //   <MKTypography variant="h6"
-      //     key="TYPOLICMAIN1"
-      //     color="inherit"
-      //     style={{ fontSize: "calc(0.6rem + 0.5vw)" }}>
-      //     <Link to={myObject}
-      //       key="LINKLICMAIN1"
-      //       style={{
-      //         fontSize: "calc(0.6rem + 0.5vw)",
-      //         display: "flex",
-      //         justifyContent: "center",
-      //       }}>
-      //       {uniqueLicenses.length}
-      //     </Link>
-      //   </MKTypography>
-      //   <Grid key="GRIDLICMAIN1"
-      //     style={{
-      //       height: "150px",
-      //       borderRadius: "3px",
-      //       overflowY: "scroll"
-      //     }}
-      //   >
-      //     <MKBox>
-      //       <FetchLicense
-      //         data={jsonData}
-      //         uniq_lic={uniqueLicenses}
-      //         itemData={itemData}
-      //       />
-      //     </MKBox>
-      //   </Grid>
-      // </>
+    return data_array = [uniqueLicenses.length, <FetchLicense data={jsonData} uniq_lic={uniqueLicenses} itemData={itemData} />,"",vulnerabilityIcon]
+    // <>
+    //   <MKTypography variant="h6"
+    //     key="TYPOLICMAIN1"
+    //     color="inherit"
+    //     style={{ fontSize: "calc(0.6rem + 0.5vw)" }}>
+    //     <Link to={myObject}
+    //       key="LINKLICMAIN1"
+    //       style={{
+    //         fontSize: "calc(0.6rem + 0.5vw)",
+    //         display: "flex",
+    //         justifyContent: "center",
+    //       }}>
+    //       {uniqueLicenses.length}
+    //     </Link>
+    //   </MKTypography>
+    //   <Grid key="GRIDLICMAIN1"
+    //     style={{
+    //       height: "150px",
+    //       borderRadius: "3px",
+    //       overflowY: "scroll"
+    //     }}
+    //   >
+    //     <MKBox>
+    //       <FetchLicense
+    //         data={jsonData}
+    //         uniq_lic={uniqueLicenses}
+    //         itemData={itemData}
+    //       />
+    //     </MKBox>
+    //   </Grid>
+    // </>
   }
   let flag = false;
   if (report === "Dependencies" && jsonDataLength !== 0) {
     if (!(jsonData.packages.length === 1 && jsonData.packages[0].name.toLowerCase() === name.toLowerCase())) {
-      return data_array = [(jsonData.packages.length) - 1,<FetchSBOM data={jsonData.packages} masterData={masterData} name={name}/>]
+      return data_array = [(jsonData.packages.length) - 1, <FetchSBOM data={jsonData.packages} masterData={masterData} name={name}/>,"",vulnerabilityIcon]
     }
-//         <Typography variant="h6"
-//           key="TYPOSBOMMAIN1"
-//           color="inherit"
-//           style={{
-//             fontSize: "calc(0.6rem + 0.5vw)"
-//           }}>
-//           <Link to={myObject}
-//             key="LINKSBOMMAIN1"
-//             style={{
-//               fontSize: "calc(0.6rem + 0.5vw)",
-//               display: "flex",
-//               justifyContent: "center"
-//             }}>
-//             {(jsonData.packages.length) - 1}
-//           </Link>
-//         </Typography>
-//         <Grid key="GRIDSBOMMAIN1"
-//           style={{
-//             height: "100px",
-//             borderRadius: "3px"
-//           }}
-//           sx={{ overflowY: "scroll" }}>
-//           <MKBox key="MKBOXSBOMMAIN1">
-//             <FetchSBOM
-//               data={jsonData.packages}
-//               masterData={masterData}
-//               name={name}
-//             />
-//           </MKBox>
-//         </Grid>
-//       </>
-//       );
-//     } 
-// else {
-//       flag = true;
-//     }
+    //         <Typography variant="h6"
+    //           key="TYPOSBOMMAIN1"
+    //           color="inherit"
+    //           style={{
+    //             fontSize: "calc(0.6rem + 0.5vw)"
+    //           }}>
+    //           <Link to={myObject}
+    //             key="LINKSBOMMAIN1"
+    //             style={{
+    //               fontSize: "calc(0.6rem + 0.5vw)",
+    //               display: "flex",
+    //               justifyContent: "center"
+    //             }}>
+    //             {(jsonData.packages.length) - 1}
+    //           </Link>
+    //         </Typography>
+    //         <Grid key="GRIDSBOMMAIN1"
+    //           style={{
+    //             height: "100px",
+    //             borderRadius: "3px"
+    //           }}
+    //           sx={{ overflowY: "scroll" }}>
+    //           <MKBox key="MKBOXSBOMMAIN1">
+    //             <FetchSBOM
+    //               data={jsonData.packages}
+    //               masterData={masterData}
+    //               name={name}
+    //             />
+    //           </MKBox>
+    //         </Grid>
+    //       </>
+    //       );
+    //     } 
+    // else {
+    //       flag = true;
+    //     }
 
 
-//   return (
-//     <MKTypography variant="h6"
-//       key="TYPOSBOMMAINBLANK1"
-//       color="inherit"
-//       style={{
-//         fontSize: "12px", display: "flex",
-//         justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
-//       }}>
-//       {flag ? (
-//         "No dependent packages are available"
-//       ) : (
-//         "Assessment report not available"
-//       )}
-//     </MKTypography>
-//   );
-}
+    //   return (
+    //     <MKTypography variant="h6"
+    //       key="TYPOSBOMMAINBLANK1"
+    //       color="inherit"
+    //       style={{
+    //         fontSize: "12px", display: "flex",
+    //         justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
+    //       }}>
+    //       {flag ? (
+    //         "No dependent packages are available"
+    //       ) : (
+    //         "Assessment report not available"
+    //       )}
+    //     </MKTypography>
+    //   );
+  }
 }
 
 const GetHeadings = ({ receivedValue }: any) => {
@@ -1221,31 +1221,29 @@ const GetHeadings = ({ receivedValue }: any) => {
   }
 }
 
-function printText(item){
+function printText(item) {
   if (item == "Vulnerabilities" || item == "Dependencies") {
     return (
 
-      item+" found"
-  );
+      item + " found"
+    );
   }
-  else if(item == "License Compliance"){
-    return("unique licenses found")
+  else if (item == "License Compliance") {
+    return ("unique licenses found")
   }
-  else if(item == "ScoreCard" || item == "Criticality Score")
-  {
-    return ("on OpenSSF "+item)
+  else if (item == "ScoreCard" || item == "Criticality Score") {
+    return ("on OpenSSF " + item)
   }
-  else
-  {
+  else {
     return (
 
-        "on "+item 
+      "on " + item
     )
   }
 }
 
 
-const ReportModal = ({ version, name, item, itemData, masterData}: any) => {
+const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -1255,13 +1253,13 @@ const ReportModal = ({ version, name, item, itemData, masterData}: any) => {
   const handleClose = () => {
     setOpen(false);
   };
-  let data 
+  let data
   data = GetAssessmentData(version, name, item, itemData, masterData)
-  let color : any
+  let color: any
   if (data && data.length == 3) {
     color = data[2]
   }
-  else{
+  else {
     color = ""
   }
   return (
@@ -1277,32 +1275,33 @@ const ReportModal = ({ version, name, item, itemData, masterData}: any) => {
         }
       }} style={{
         backgroundColor: "white",
-        display: "block"
+        display: "block",
+        textAlign: "left"
       }}>
         {color ? <MKTypography style={{
           fontSize: "30px",
           color: color,
           fontWeight: "bold"
         }}>
-          {data ? data[0]: 0}
-        </MKTypography>:
-        <MKTypography style={{
-          fontSize: "30px",
-          fontWeight: "bold",
-          color: "black",
-        }}>
-          {data ? data[0]: 0}
-        </MKTypography>}
-        <MKTypography 
-        textTransform = "capitalize"
-        style={{
-          fontSize: "12px"
-      }}>
-        {printText(item)}
-    </MKTypography>
+          {data ? data[0] : 0}
+        </MKTypography> :
+          <MKTypography style={{
+            fontSize: "30px",
+            fontWeight: "bold",
+            color: "black",
+          }}>
+            {data ? data[0] : 0}
+          </MKTypography>}
+        <MKTypography
+          textTransform="capitalize"
+          style={{
+            fontSize: "12px"
+          }}>
+          {printText(item)}
+        </MKTypography>
       </Button>
-      <Modal 
-        open={open} 
+      <Modal
+        open={open}
         onClose={handleClose}
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -1313,7 +1312,7 @@ const ReportModal = ({ version, name, item, itemData, masterData}: any) => {
             timeout: 500,
           },
         }}
-        >
+      >
         <Fade in={open}>
           <Box style={{
             position: "absolute",
@@ -1327,7 +1326,7 @@ const ReportModal = ({ version, name, item, itemData, masterData}: any) => {
             backgroundColor: "white"
           }}>
 
-            {data ? data[1]: "Not found"}
+            {data ? data[1] : "Not found"}
           </Box>
         </Fade>
 
@@ -1359,7 +1358,7 @@ function AssessmentReport({ title, name, version, itemData, masterData, ...other
                             itemData={itemData}
                             masterData={masterData}
                           /> */}
-          <ReportModal key={item} version={version} name={name} item={item} itemData={itemData} masterData={masterData}  />
+          <ReportModal key={item} version={version} name={name} item={item} itemData={itemData} masterData={masterData} />
         </Grid>
       ))}
       {/* Getting the assessment report */}

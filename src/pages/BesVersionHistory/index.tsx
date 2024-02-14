@@ -144,8 +144,10 @@ export const ModalForEnvsAndPlaybook = (): any => {
           fontSize: "15px", 
           color: "black", 
           right: "16px",
-          textTransform: "capitalize"
-        }}>
+          textTransform: "capitalize",
+          fontWeight: "normal",
+        }}
+>
         BeS Envs and Playbooks
       </Button>
       {/* <Button onClick={handleOpen}>BeS Envs and Playbooks</Button> */}
@@ -323,16 +325,15 @@ function BesVersionHistory() {
                     >
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
+                        color="text"
+                        style={{ fontSize: "15px", fontWeight: "normal" }}
                       >
                         Project Name: &nbsp;
                       </MKTypography>
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{ fontSize: "15px" }}
                       >
                         {item.name}
@@ -346,9 +347,9 @@ function BesVersionHistory() {
                     >
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
+                        color="text"
+                        style={{ fontSize: "15px", fontWeight: "normal" }}
                       >
                         Version: &nbsp;
                       </MKTypography>
@@ -380,16 +381,15 @@ function BesVersionHistory() {
                     >
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
+                        color="text"
+                        style={{ fontSize: "15px", fontWeight: "normal" }}
                       >
                         BeS Score: &nbsp;
                       </MKTypography>
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{ fontSize: "15px" }}
                       >
                         {definedScore}
@@ -403,16 +403,15 @@ function BesVersionHistory() {
                     >
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
+                        color="text"
+                        style={{ fontSize: "15px", fontWeight: "normal" }}
                       >
                         BeS Tech Stack: &nbsp;
                       </MKTypography>
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{ fontSize: "15px" }}
                       >
                         {/* Checks if item.bes_technology_stack exists in techStackMap Object, if yes it prints from the mapping, if not it prints the default value*/}
@@ -429,16 +428,15 @@ function BesVersionHistory() {
                     >
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
+                        color="text"
+                        style={{ fontSize: "15px", fontWeight: "normal" }}
                       >
                         BeS Tracking Id: &nbsp;
                       </MKTypography>
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{ fontSize: "15px" }}
                       >
                         {item.id}
@@ -483,17 +481,16 @@ function BesVersionHistory() {
                     >
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
-                        title="Open Source Assurance Provider"
-                        style={{ fontSize: "15px" }}
+                        color="text"
+                        title="Open source Assurance Provider"
+                        style={{ fontSize: "15px", fontWeight: "normal" }}
                       >
                         OSAP: &nbsp;
                       </MKTypography>
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{ fontSize: "15px" }}
                       >
                         {item.owner["login"]}
@@ -543,7 +540,8 @@ function BesVersionHistory() {
                         style={{ 
                           fontSize: "15px", 
                           color: "black", 
-                          right: "16px" 
+                          right: "16px",
+                          fontWeight: "normal"
                         }}>
                         OSAR
                       </Button>
@@ -757,7 +755,6 @@ function BesVersionHistory() {
                       }}>
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
                         style={{
                           fontSize: "15px",
@@ -795,7 +792,6 @@ function BesVersionHistory() {
                       }}>
                       <MKTypography
                         variant="h6"
-                        fontWeight="bold"
                         textTransform="capitalize"
                         style={{
                           fontSize: "15px",
