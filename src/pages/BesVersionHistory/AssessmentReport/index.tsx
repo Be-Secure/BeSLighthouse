@@ -2,7 +2,7 @@ import * as React from "react";
 
 
 import Icon from "@mui/material/Icon";
-import { Divider, Grid, Typography } from "@mui/material";
+import { Backdrop, Box, Button, Divider, Fade, Grid, Modal, Typography } from "@mui/material";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
 import { assessment_datastore } from "../../../dataStore";
@@ -15,6 +15,8 @@ import {
 import FetchSAST from "./FetchSastReport";
 
 import SastToggleButton from "./SastToggleButton"
+import { useState } from "react";
+
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
@@ -573,7 +575,7 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   let license_list: string[] = [];
   let non_lic_files: number = 0;
   let project_lcesnse: string = "Not Found";
-  
+
   uniq_lic.forEach((ul) => {
     if (ul.length !== 0)
       license_list.push(" " + ul + ",")
@@ -661,14 +663,14 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   }
 };
 
-const FetchSBOM = ({data, masterData, name}: any) => {
+const FetchSBOM = ({ data, masterData, name }: any) => {
   let tracked: string[] = [];
   let dis: any = {};
   data.forEach((dp) => {
-    if(! dp.name){
+    if (!dp.name) {
       return;
     }
-    if(dp.name.toLowerCase() === name.toLowerCase()){
+    if (dp.name.toLowerCase() === name.toLowerCase()) {
       return;
     }
     masterData.forEach((tp) => {
@@ -677,15 +679,15 @@ const FetchSBOM = ({data, masterData, name}: any) => {
         tracked.forEach((tmptracked) => {
           if (tmptracked.toLowerCase() === dp.name.toLowerCase())
             duplicate = true;
-          });
+        });
 
         if (!duplicate)
           tracked.push(dp.name);
       }
     });
   });
-    dis = tracked.map(function (td: string, index: number) {
-    const dataObject = masterData.find(function(item){
+  dis = tracked.map(function (td: string, index: number) {
+    const dataObject = masterData.find(function (item) {
       return item.name == td
     })
     const trackingID = dataObject?.id
@@ -702,36 +704,36 @@ const FetchSBOM = ({data, masterData, name}: any) => {
             justifyContent: "left",
             display: "flex",
           }}>
-            {/* Using link the data was not getting loaded. Fix it later */}
-            {/* <Link to={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${trackingID}/:${td}`}>{td}</Link> */}
-            <a href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${trackingID}/:${td}`}>{td}</a>
+          {/* Using link the data was not getting loaded. Fix it later */}
+          {/* <Link to={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${trackingID}/:${td}`}>{td}</Link> */}
+          <a href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${trackingID}/:${td}`}>{td}</a>
         </MKTypography>
       </Grid>
     </>
     );
   });
-    return (<>
+  return (<>
     <Grid key={`GRIDSBOMMAIN`}
       style={{ minWidth: "200px" }}>
       {tracked.length !== 0 ? (
         <MKTypography key="MKTypoSBOMMain" variant="body1"
-        color="inherit"
-        style={{
-          fontSize: "12px",
-          justifyContent: "left",
-          display: "flex",
-          paddingLeft: "calc(0.1rem + 0.3vw)"
-        }}>
-          <b key={`BOLDSBOM1`}>Tracked under BeS :</b> 
+          color="inherit"
+          style={{
+            fontSize: "12px",
+            justifyContent: "left",
+            display: "flex",
+            paddingLeft: "calc(0.1rem + 0.3vw)"
+          }}>
+          <b key={`BOLDSBOM1`}>Tracked under BeS :</b>
         </MKTypography>
       ) : (
         <MKTypography key="MKTypoSBOMMain" variant="body1"
-        color="inherit"
-        
-        style={{
-        fontSize: "12px", display: "flex",
-        justifyContent: "center", alignItems: "center", position: "relative", top: "55px"
-        }}>
+          color="inherit"
+
+          style={{
+            fontSize: "12px", display: "flex",
+            justifyContent: "center", alignItems: "center", position: "relative", top: "55px"
+          }}>
           <b key={`BOLDSBOM1`}>No dependencies tracked under BeS</b>
         </MKTypography>
       )}
@@ -744,10 +746,12 @@ const FetchSBOM = ({data, masterData, name}: any) => {
   );
 };
 
-const GetAssessmentData = ({ version, name, report, itemData, masterData }: any) => {
+function GetAssessmentData ( version, name, report, itemData, masterData ) {
   const [jsonData, setJsonData]: any = React.useState({});
   const [codeQlData, setCQData]: any = React.useState([]);
   const [sonarqubeData, setSQData]: any = React.useState({});
+
+
   let reportNameMap = "";
   let reportNameMapCodeql = "";
   let reportNameMapSonar = "";
@@ -774,7 +778,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }, [version]);
 
   React.useEffect(() => {
-        if (version?.trim()) {
+    if (version?.trim()) {
       let link: string = "";
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
       fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
@@ -782,7 +786,7 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }, [version]);
 
   React.useEffect(() => {
-        if (version?.trim()) {
+    if (version?.trim()) {
       let link: string = "";
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
       fetchvulJsonData(link, "codeql", setCQData, setSQData);
@@ -790,35 +794,50 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   }, [version]);
 
   let jsonDataLength: number = Object.values(jsonData).length;
+  let data_array: any[]
   if (report === "Criticality Score" && jsonDataLength !== 0) {
+    let color_code = "";
+    let risk_level = "";
+    if (jsonData.criticality_score >= 0.1 && jsonData.criticality_score < 0.4) {
+      color_code = "#008000";
+      risk_level = "Low risk";
+    } else if (jsonData.criticality_score >= 0.4 && jsonData.criticality_score < 0.6) {
+      color_code = "#FFC300";
+      risk_level = "Medium risk";
+    } else if (jsonData.criticality_score >= 0.6 && jsonData.criticality_score <= 1) {
+      color_code = "#FF5733";
+      risk_level = "High risk";
+    } 
+    return data_array = [jsonData.criticality_score,<FetchCS data={jsonData}/>,color_code]
+    
     return (
       <>
         {/* Criticality score value */}
-        <MKTypography variant="h6"
+        {/* <MKTypography variant="h6"
           key={`TypoCriticalityScore`}
           color="inherit"
           style={{
             fontSize: "15px",
             justifyContent: "center",
             display: "flex"
-          }}>
-          {jsonData.criticality_score}
+          }}> */}
+          {/* {jsonData.criticality_score} */}
           {/* Criticality score data */}
-        </MKTypography>
-        <Grid key={`GridCriticalutyScore`}
+        {/* </MKTypography> */}
+        {/* <Grid key={`GridCriticalutyScore`}
           style={{
             height: "150px",
             minWidth: "90%",
             borderRadius: "3px",
             fontSize: "20px",
           }}
-        >
-          <MKBox>
-            <FetchCS
+        > */}
+          {/* <MKBox> */}
+            {/* <FetchCS
               data={jsonData}
-            />
-          </MKBox>
-        </Grid>
+            /> */}
+          {/* </MKBox> */}
+        {/* </Grid> */}
       </>
     );
   }
@@ -830,205 +849,205 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
   let myObjectSonar;
   let myObject;
 
-  if (report === "Vulnerabilities") {
-        pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
-    pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
-    myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
-      pathname: string;
-    };
-    myObjectSonar = { pathname: pathNameSonar, state: jsonData } as {
-      pathname: string;
-    };
-  } else {
+//   if (report === "Vulnerabilities") {
+//     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
+//     pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
+//     myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
+//       pathname: string;
+//     };
+//     myObjectSonar = { pathname: pathNameSonar, state: jsonData } as {
+//       pathname: string;
+//     };
+//   } else {
 
-    pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
-    myObject = { pathname: pathName, state: jsonData } as {
-      pathname: string;
-    };
-  }
+//     pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
+//     myObject = { pathname: pathName, state: jsonData } as {
+//       pathname: string;
+//     };
+//   }
   if (report === "ScoreCard" && jsonDataLength !== 0) {
     let color_code = "";
     let risk_level = "";
-    if (jsonData.score >= 0 && jsonData.score <= 2){
+    if (jsonData.score >= 0 && jsonData.score <= 2) {
       color_code = "#008000";
       risk_level = "Low risk";
     } else if (jsonData.score > 2 && jsonData.score <= 5) {
       color_code = "#FFC300";
       risk_level = "Medium risk";
     } else if (jsonData.score > 5 && jsonData.score <= 7.5) {
-      color_code="#FF5733";
+      color_code = "#FF5733";
       risk_level = "High risk";
     } else if (jsonData.score > 7.5 && jsonData.score <= 10) {
       color_code = "#C70039";
       risk_level = "Critical risk";
     }
-    return (<>
-      {/* Display scorecard score */}
-      <Typography variant="h6"
-        key={`TypoSC1`}
-        color="inherit"
-        style={{ fontSize: "15px", marginLeft: "20px" }}>
-        <Link to={myObject} key={`LinkSC1`} style={{ fontSize: "calc(0.6rem + 0.5vw)", display: "flex", justifyContent: "center" }}>
-            <span style={{ color: color_code }}>{jsonData.score}</span>
-            <span style={{ fontSize: "11px", color: "black" }}>&nbsp;({risk_level})</span>
-        </Link>
-      </Typography>
-      {/* Scorecard data */}
-      <Grid key={`GridSC1`}
-        style={{
-          height: "150px",
-          minWidth: "90%",
-          borderRadius: "3px",
-          fontSize: "15px"
-        }}
-        sx={{ overflowY: "scroll" }}>
-        <MKBox>
-          <FetchLowScores
-            data={jsonData}
-          />
-        </MKBox>
-      </Grid>
-    </>
-    );
+    return data_array = [jsonData.score,<FetchLowScores data={jsonData}/>,color_code]
+    // <>
+    //   {/* Display scorecard score */}
+    //   <Typography variant="h6"
+    //     key={`TypoSC1`}
+    //     color="inherit"
+    //     style={{ fontSize: "15px", marginLeft: "20px" }}>
+    //     <Link to={myObject} key={`LinkSC1`} style={{ fontSize: "calc(0.6rem + 0.5vw)", display: "flex", justifyContent: "center" }}>
+    //       <span style={{ color: color_code }}>{jsonData.score}</span>
+    //       <span style={{ fontSize: "11px", color: "black" }}>&nbsp;({risk_level})</span>
+    //     </Link>
+    //   </Typography>
+    //   {/* Scorecard data */}
+    //   <Grid key={`GridSC1`}
+    //     style={{
+    //       height: "150px",
+    //       minWidth: "90%",
+    //       borderRadius: "3px",
+    //       fontSize: "15px"
+    //     }}
+    //     sx={{ overflowY: "scroll" }}>
+    //     <MKBox>
+    //       <FetchLowScores
+    //         data={jsonData}
+    //       />
+    //     </MKBox>
+    //   </Grid>
+    // </>
   }
 
-  if (report === "Vulnerabilities" && (Object.values(codeQlData).length !== 0 &&
-    Object.values(sonarqubeData).length === 0)) {
-    return (<>
-      {/* Codeql score */}
+//   if (report === "Vulnerabilities" && (Object.values(codeQlData).length !== 0 &&
+//     Object.values(sonarqubeData).length === 0)) {
+//     return (<>
+//       {/* Codeql score */}
 
-      <Typography variant="h6"
-        key="SASCQTMAINHEADING"
-        color="inherit"
-        style={{
-          fontSize: "13px",
-          display: "flex",
-          justifyContent: "center",
-        }}>
-        {/* <a href=""></a> */}
-        <Link to={myObjectCodeql}
-          key={`LinkSC1`}
-          style={{
-            fontSize: "13px",
-            display: "flex",
-            justifyContent: "center"
-          }}>
-          CodeQL: {codeQlData.length}
-        </Link>
-      </Typography>
-      <MKBox key="MKBOXSASTCQMAINBODY">
-        <FetchSAST
-          cqData={codeQlData}
-          sqData={sonarqubeData}
-        />
-      </MKBox>
-    </>
-    );
-  } else if (report === "Vulnerabilities" && (Object.values(sonarqubeData).length !== 0 &&
-    Object.values(codeQlData).length === 0)) {
-    let issues: any = Object.values(sonarqubeData)[5];
-    return (<>
-      <Typography variant="h6"
-        key="SASSQTMAINHEADING"
-        color="inherit"
-        style={{
-          fontSize: "13px",
-          display: "flex",
-          justifyContent: "center"
-        }}>
-        <Link to={myObjectSonar}
-          key={`LinkSC1`}
-          style={{
-            fontSize: "13px",
-            display: "flex",
-            justifyContent: "center"
-          }}>
-          Sonarqube: {sonarqubeData.total}
-        </Link>
-      </Typography>
-      <MKBox key="MKBOXSASTSQMAINBODY">
-        <FetchSAST
-          cqData={codeQlData}
-          sqData={issues}
-        />
-      </MKBox>
-    </>
-    );
-  } else if (report === "Vulnerabilities" && Object.values(codeQlData).length !== 0 &&
-    Object.values(sonarqubeData).length !== 0) {
-    // const codeqldetails: any = Object.values(codeQlData);
-    // const codeqllength: number = Object.values(codeQlData).length;
-    // let sqissues: any = Object.values(sonarqubeData)[5];
+//       <Typography variant="h6"
+//         key="SASCQTMAINHEADING"
+//         color="inherit"
+//         style={{
+//           fontSize: "13px",
+//           display: "flex",
+//           justifyContent: "center",
+//         }}>
+//         {/* <a href=""></a> */}
+//         <Link to={myObjectCodeql}
+//           key={`LinkSC1`}
+//           style={{
+//             fontSize: "13px",
+//             display: "flex",
+//             justifyContent: "center"
+//           }}>
+//           CodeQL: {codeQlData.length}
+//         </Link>
+//       </Typography>
+//       <MKBox key="MKBOXSASTCQMAINBODY">
+//         <FetchSAST
+//           cqData={codeQlData}
+//           sqData={sonarqubeData}
+//         />
+//       </MKBox>
+//     </>
+//     );
+//   } else if (report === "Vulnerabilities" && (Object.values(sonarqubeData).length !== 0 &&
+//     Object.values(codeQlData).length === 0)) {
+//     let issues: any = Object.values(sonarqubeData)[5];
+//     return (<>
+//       <Typography variant="h6"
+//         key="SASSQTMAINHEADING"
+//         color="inherit"
+//         style={{
+//           fontSize: "13px",
+//           display: "flex",
+//           justifyContent: "center"
+//         }}>
+//         <Link to={myObjectSonar}
+//           key={`LinkSC1`}
+//           style={{
+//             fontSize: "13px",
+//             display: "flex",
+//             justifyContent: "center"
+//           }}>
+//           Sonarqube: {sonarqubeData.total}
+//         </Link>
+//       </Typography>
+//       <MKBox key="MKBOXSASTSQMAINBODY">
+//         <FetchSAST
+//           cqData={codeQlData}
+//           sqData={issues}
+//         />
+//       </MKBox>
+//     </>
+//     );
+//   } else if (report === "Vulnerabilities" && Object.values(codeQlData).length !== 0 &&
+//     Object.values(sonarqubeData).length !== 0) {
+//     // const codeqldetails: any = Object.values(codeQlData);
+//     // const codeqllength: number = Object.values(codeQlData).length;
+//     // let sqissues: any = Object.values(sonarqubeData)[5];
 
-    return (
-      <>
-      <SastToggleButton myObjectCodeql={myObjectCodeql} myObjectSonar={myObjectSonar} codeQlData={codeQlData} sonarqubeData={sonarqubeData}/>
-        {/* <Grid item
-          key="GRIDSASTCQSQMAIN1"
-          container
-          xs={12}>
-          <Grid item
-            key="GRIDSASTCQSQMAIN2"
-            xs={6} style={{ display: "flex" }}>
-            <Typography variant="h6"
-              key="TYPOSASTCQSQMAIN1"
-              color="inherit"
-              style={{
-                fontSize: "13px",
-                justifyContent: "left",
-                display: "flex",
-                paddingBottom: "8px",
-                paddingTop: "4px",
-                paddingLeft: "8px"
-              }}>
-              <Link to={myObjectCodeql}
-                key={`LinkSC1`}>
-                CodeQL: {codeqllength}
-              </Link>
+//     return (
+//       <>
+//         <SastToggleButton myObjectCodeql={myObjectCodeql} myObjectSonar={myObjectSonar} codeQlData={codeQlData} sonarqubeData={sonarqubeData} />
+//         {/* <Grid item
+//           key="GRIDSASTCQSQMAIN1"
+//           container
+//           xs={12}>
+//           <Grid item
+//             key="GRIDSASTCQSQMAIN2"
+//             xs={6} style={{ display: "flex" }}>
+//             <Typography variant="h6"
+//               key="TYPOSASTCQSQMAIN1"
+//               color="inherit"
+//               style={{
+//                 fontSize: "13px",
+//                 justifyContent: "left",
+//                 display: "flex",
+//                 paddingBottom: "8px",
+//                 paddingTop: "4px",
+//                 paddingLeft: "8px"
+//               }}>
+//               <Link to={myObjectCodeql}
+//                 key={`LinkSC1`}>
+//                 CodeQL: {codeqllength}
+//               </Link>
 
-            </Typography>
-          </Grid>
-          <Grid item
-            key="GRIDSASTCQSQMAIN3"
-            xs={6}>
-            <Typography variant="h6"
-              key="TYPOSASTCQSQMAIN2"
-              color="inherit"
-              style={{
-                fontSize: "13px",
-                justifyContent: "center",
-                display: "flex",
-                paddingBottom: "8px",
-                paddingTop: "4px"
-              }}>
-              <Link to={myObjectSonar}
-                key={`LinkSC1`}
-                style={{
-                  fontSize: "13.5px",
-                  display: "flex",
-                  justifyContent: "right",
-                  paddingRight: "5px"
+//             </Typography>
+//           </Grid>
+//           <Grid item
+//             key="GRIDSASTCQSQMAIN3"
+//             xs={6}>
+//             <Typography variant="h6"
+//               key="TYPOSASTCQSQMAIN2"
+//               color="inherit"
+//               style={{
+//                 fontSize: "13px",
+//                 justifyContent: "center",
+//                 display: "flex",
+//                 paddingBottom: "8px",
+//                 paddingTop: "4px"
+//               }}>
+//               <Link to={myObjectSonar}
+//                 key={`LinkSC1`}
+//                 style={{
+//                   fontSize: "13.5px",
+//                   display: "flex",
+//                   justifyContent: "right",
+//                   paddingRight: "5px"
 
-                }}>
-                Sonarqube: {sonarqubeData.total}
-              </Link>
+//                 }}>
+//                 Sonarqube: {sonarqubeData.total}
+//               </Link>
 
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid key="GRIDSASTCQSQMAIN4"
-          container>
-            <MKBox key="MKBOXSASTCQSQMAIN1">
-              <FetchSAST
-                cqData={codeqldetails}
-                sqData={sqissues}
-              />
-            </MKBox>
-        </Grid> */}
-      </>
-    );
-  }
-  
+//             </Typography>
+//           </Grid>
+//         </Grid>
+//         <Grid key="GRIDSASTCQSQMAIN4"
+//           container>
+//             <MKBox key="MKBOXSASTCQSQMAIN1">
+//               <FetchSAST
+//                 cqData={codeqldetails}
+//                 sqData={sqissues}
+//               />
+//             </MKBox>
+//         </Grid> */}
+//       </>
+//     );
+//   }
+
   if (report === "License Compliance" && jsonDataLength !== 0) {
     let uniqueLicenses: any = [];
 
@@ -1048,98 +1067,99 @@ const GetAssessmentData = ({ version, name, report, itemData, masterData }: any)
         uniqueLicenses.push(jsonData[i].LicenseConcluded);
       }
     }
-    return (
-      <>
-        <MKTypography variant="h6"
-          key="TYPOLICMAIN1"
-          color="inherit"
-          style={{ fontSize: "calc(0.6rem + 0.5vw)" }}>
-          <Link to={myObject}
-            key="LINKLICMAIN1"
-            style={{
-              fontSize: "calc(0.6rem + 0.5vw)",
-              display: "flex",
-              justifyContent: "center",
-            }}>
-            {uniqueLicenses.length}
-          </Link>
-        </MKTypography>
-        <Grid key="GRIDLICMAIN1"
-          style={{
-            height: "150px",
-            borderRadius: "3px",
-            overflowY: "scroll"
-          }}
-        >
-          <MKBox>
-            <FetchLicense
-              data={jsonData}
-              uniq_lic={uniqueLicenses}
-              itemData={itemData}
-            />
-          </MKBox>
-        </Grid>
-      </>
-    );
+    return data_array=[uniqueLicenses.length,<FetchLicense data={jsonData} uniq_lic={uniqueLicenses} itemData={itemData}/>]
+      // <>
+      //   <MKTypography variant="h6"
+      //     key="TYPOLICMAIN1"
+      //     color="inherit"
+      //     style={{ fontSize: "calc(0.6rem + 0.5vw)" }}>
+      //     <Link to={myObject}
+      //       key="LINKLICMAIN1"
+      //       style={{
+      //         fontSize: "calc(0.6rem + 0.5vw)",
+      //         display: "flex",
+      //         justifyContent: "center",
+      //       }}>
+      //       {uniqueLicenses.length}
+      //     </Link>
+      //   </MKTypography>
+      //   <Grid key="GRIDLICMAIN1"
+      //     style={{
+      //       height: "150px",
+      //       borderRadius: "3px",
+      //       overflowY: "scroll"
+      //     }}
+      //   >
+      //     <MKBox>
+      //       <FetchLicense
+      //         data={jsonData}
+      //         uniq_lic={uniqueLicenses}
+      //         itemData={itemData}
+      //       />
+      //     </MKBox>
+      //   </Grid>
+      // </>
   }
   let flag = false;
   if (report === "Dependencies" && jsonDataLength !== 0) {
-    if (!(jsonData.packages.length === 1 && jsonData.packages[0].name.toLowerCase() === name.toLowerCase())){
-      return (<>
-        <Typography variant="h6"
-          key="TYPOSBOMMAIN1"
-          color="inherit"
-          style={{
-            fontSize: "calc(0.6rem + 0.5vw)"
-          }}>
-          <Link to={myObject}
-            key="LINKSBOMMAIN1"
-            style={{
-              fontSize: "calc(0.6rem + 0.5vw)",
-              display: "flex",
-              justifyContent: "center"
-            }}>
-            {(jsonData.packages.length)-1}
-          </Link>
-        </Typography>
-        <Grid key="GRIDSBOMMAIN1"
-          style={{
-            height: "100px",
-            borderRadius: "3px"
-          }}
-          sx={{ overflowY: "scroll" }}>
-          <MKBox key="MKBOXSBOMMAIN1">
-            <FetchSBOM
-              data={jsonData.packages}
-              masterData={masterData}
-              name={name}
-            />
-          </MKBox>
-        </Grid>
-      </>
-      );
-    } else {
-      flag = true;
+    if (!(jsonData.packages.length === 1 && jsonData.packages[0].name.toLowerCase() === name.toLowerCase())) {
+      return data_array = [(jsonData.packages.length) - 1,<FetchSBOM data={jsonData.packages} masterData={masterData} name={name}/>]
     }
-    
-  }
- 
-  return (
-    <MKTypography variant="h6"
-      key="TYPOSBOMMAINBLANK1"
-      color="inherit"
-      style={{
-        fontSize: "12px", display: "flex",
-        justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
-      }}>
-        {flag ? (
-          "No dependent packages are available"
-        ) : (
-        "Assessment report not available"
-        )}
-    </MKTypography>
-  );
-};
+//         <Typography variant="h6"
+//           key="TYPOSBOMMAIN1"
+//           color="inherit"
+//           style={{
+//             fontSize: "calc(0.6rem + 0.5vw)"
+//           }}>
+//           <Link to={myObject}
+//             key="LINKSBOMMAIN1"
+//             style={{
+//               fontSize: "calc(0.6rem + 0.5vw)",
+//               display: "flex",
+//               justifyContent: "center"
+//             }}>
+//             {(jsonData.packages.length) - 1}
+//           </Link>
+//         </Typography>
+//         <Grid key="GRIDSBOMMAIN1"
+//           style={{
+//             height: "100px",
+//             borderRadius: "3px"
+//           }}
+//           sx={{ overflowY: "scroll" }}>
+//           <MKBox key="MKBOXSBOMMAIN1">
+//             <FetchSBOM
+//               data={jsonData.packages}
+//               masterData={masterData}
+//               name={name}
+//             />
+//           </MKBox>
+//         </Grid>
+//       </>
+//       );
+//     } 
+// else {
+//       flag = true;
+//     }
+
+
+//   return (
+//     <MKTypography variant="h6"
+//       key="TYPOSBOMMAINBLANK1"
+//       color="inherit"
+//       style={{
+//         fontSize: "12px", display: "flex",
+//         justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
+//       }}>
+//       {flag ? (
+//         "No dependent packages are available"
+//       ) : (
+//         "Assessment report not available"
+//       )}
+//     </MKTypography>
+//   );
+}
+}
 
 const GetHeadings = ({ receivedValue }: any) => {
 
@@ -1200,84 +1220,214 @@ const GetHeadings = ({ receivedValue }: any) => {
     return (receivedValue);
   }
 }
+
+function printText(item){
+  if (item == "Vulnerabilities" || item == "Dependencies") {
+    return (
+
+      item+" found"
+  );
+  }
+  else if(item == "License Compliance"){
+    return("unique licenses found")
+  }
+  else if(item == "ScoreCard" || item == "Criticality Score")
+  {
+    return ("on OpenSSF "+item)
+  }
+  else
+  {
+    return (
+
+        "on "+item 
+    )
+  }
+}
+
+
+const ReportModal = ({ version, name, item, itemData, masterData}: any) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  let data 
+  data = GetAssessmentData(version, name, item, itemData, masterData)
+  let color : any
+  if (data && data.length == 3) {
+    color = data[2]
+  }
+  else{
+    color = ""
+  }
+  return (
+    <>
+      <Button variant="contained" onClick={handleOpen} sx={{
+        height: "100px",
+        width: "200px",
+        ':hover': {
+          boxShadow: "0 15px 20px rgba(0,0,0,0.1)", // Adjust the shadow level (0 to 24)
+          transition: "box-shadow 0.5s ease-in-out",
+          border: "1px solid #5c4f4f",
+          color: "blueviolet"
+        }
+      }} style={{
+        backgroundColor: "white",
+        display: "block"
+      }}>
+        {color ? <MKTypography style={{
+          fontSize: "30px",
+          color: color,
+          fontWeight: "bold"
+        }}>
+          {data ? data[0]: 0}
+        </MKTypography>:
+        <MKTypography style={{
+          fontSize: "30px",
+          fontWeight: "bold",
+          color: "black",
+        }}>
+          {data ? data[0]: 0}
+        </MKTypography>}
+        <MKTypography 
+        textTransform = "capitalize"
+        style={{
+          fontSize: "12px"
+      }}>
+        {printText(item)}
+    </MKTypography>
+      </Button>
+      <Modal 
+        open={open} 
+        onClose={handleClose}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+        >
+        <Fade in={open}>
+          <Box style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "600px",
+            height: "500px",
+            boxShadow: "24",
+            padding: "4",
+            backgroundColor: "white"
+          }}>
+
+            {data ? data[1]: "Not found"}
+          </Box>
+        </Fade>
+
+      </Modal>
+    </>
+  );
+};
+
 function AssessmentReport({ title, name, version, itemData, masterData, ...other }: any) {
   const report: string[] = [
+    "Vulnerabilities",
+    "Dependencies",
+    "License Compliance",
+    "TAVOSS Score",
     "ScoreCard",
     "Criticality Score",
-    "Vulnerabilities",
-    "License Compliance",
-    "Dependencies"
   ];
 
   return (
-  <>
 
-      {/* Getting the assessment report */}
-      {report.map((value, index) => {
-        return (
-          <>
-            
-            {/* <Grid item
-              style={{ height: "250px" }}
-              key={`Grid1${index}`}
-              xs={12} sm={6} md={6} lg={3} xl={2.4}>
-              <MKBox p={2}
-                key={`Mbox1${index}`}
-                borderRadius="lg">
-                <Grid
-                  key={`Grid2${index}`}
-                  justifyContent="center"
-                  style={{
-                    backgroundColor: "#f3f6f4",
-                    borderRadius: "5px",
-                    height: "220px",
-                    fontSize: "15px",
-                    paddingTop: "5px"
-                  }} >
-                  <Grid container
-                    key={`Grid3${index}`}
-                    justifyContent="center"
-                    alignItems="center" >
-                    <Grid item
-                      key={`Grid4${index}`}
-                      justifyContent="center">
-                      <Typography variant="h6"
-                        key={`Typo1${index}`}
-                        color="black"
-                        style={{ fontSize: "calc(0.3rem + 0.5vw)" }}>
-                        <GetHeadings Key={`Grid10${index}`} receivedValue={value} />
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid key={`Grid5${index}`}>
-                    <Grid key={`Grid6${index}`}>
-                      <Grid key={`Grid7${index}`}
-                        container
-                        justifyContent="center"
-                        alignItems="center"
-                        style={{ display: "block" }}
-                      >
-                        <Grid key={`Grid8${index}`}>
-                          <GetAssessmentData
+    <>
+      {report.map((item, index) => (
+        <Grid item xs={6} md={2}>
+          {/* <GetAssessmentData
                             Key={`Grid9${index}`}
                             version={version}
                             name={name}
-                            report={value}
+                            report={item}
                             itemData={itemData}
                             masterData={masterData}
-                          />
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </MKBox>
-            </Grid> */}
-          </>
-        );
-      })
-      }
-  </>
+                          /> */}
+          <ReportModal key={item} version={version} name={name} item={item} itemData={itemData} masterData={masterData}  />
+        </Grid>
+      ))}
+      {/* Getting the assessment report */}
+      {/* {report.map((value, index) => { */}
+      {/* // return ( */}
+      {/* //   <> */}
+
+      {/* <Grid item
+        //       style={{ height: "250px" }}
+        //       key={`Grid1${index}`}
+        //       xs={12} sm={6} md={6} lg={3} xl={2.4}>
+        //       <MKBox p={2}
+        //         key={`Mbox1${index}`}
+        //         borderRadius="lg">
+        //         <Grid
+        //           key={`Grid2${index}`}
+        //           justifyContent="center"
+        //           style={{
+        //             backgroundColor: "#f3f6f4",
+        //             borderRadius: "5px",
+        //             height: "220px",
+        //             fontSize: "15px",
+        //             paddingTop: "5px"
+        //           }} >
+        //           <Grid container
+        //             key={`Grid3${index}`}
+        //             justifyContent="center"
+        //             alignItems="center" >
+        //             <Grid item
+        //               key={`Grid4${index}`}
+        //               justifyContent="center">
+        //               <Typography variant="h6"
+        //                 key={`Typo1${index}`}
+        //                 color="black"
+        //                 style={{ fontSize: "calc(0.3rem + 0.5vw)" }}>
+        //                 <GetHeadings Key={`Grid10${index}`} receivedValue={value} />
+        //               </Typography>
+        //             </Grid>
+        //           </Grid>
+        //           <Grid key={`Grid5${index}`}>
+        //             <Grid key={`Grid6${index}`}>
+        //               <Grid key={`Grid7${index}`}
+        //                 container
+        //                 justifyContent="center"
+        //                 alignItems="center"
+        //                 style={{ display: "block" }}
+        //               >
+        //                 <Grid key={`Grid8${index}`}>
+        //                   <GetAssessmentData
+        //                     Key={`Grid9${index}`}
+        //                     version={version}
+        //                     name={name}
+        //                     report={value}
+        //                     itemData={itemData}
+        //                     masterData={masterData}
+        //                   />
+        //                 </Grid>
+        //               </Grid>
+        //             </Grid>
+        //           </Grid>
+        //         </Grid>
+        //       </MKBox>
+        //     </Grid> */}
+      {/* //   </> */}
+      {/* // ); */}
+      {/* }) */}
+      {/* } */}
+    </>
   );
 };
 

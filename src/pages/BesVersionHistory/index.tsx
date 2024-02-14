@@ -677,6 +677,19 @@ function BesVersionHistory() {
                   )} */}
                 </Card>
                 {/* For project description, languages and tags */}
+                <Grid key={`TOPGRID14${index}`} container pt={3} pb={1} spacing={1} style={{
+                    display: "flex",
+                    placeContent: "space-evenly"
+                  }}>
+
+                      <AssessmentReport
+                        title="Assessment Report"
+                        name={besName.slice(1)}
+                        version={selectedOption}
+                        itemData={item}
+                        masterData={data}
+                      />
+                  </Grid>
                 <Grid container spacing={3}
                   style={{
                     paddingTop: "30px",
@@ -817,16 +830,7 @@ function BesVersionHistory() {
                     </Card>
                   </Grid>
                 </Grid>
-                  <Grid key={`TOPGRID14${index}`} container spacing={1} p={1}>
 
-                      <AssessmentReport
-                        title="Assessment Report"
-                        name={besName.slice(1)}
-                        version={selectedOption}
-                        itemData={item}
-                        masterData={data}
-                      />
-                  </Grid>
                 <MKBox key={`TOPMKBOX7${index}`} style={{ marginTop: "12px" }}>
                   <Grid key={`TOPGRID16${index}`} container spacing={3} pt={3}>
                     <Grid
