@@ -2718,7 +2718,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
 
   let color: any
 
-  if (data && data.length == 3) {
+  if (data && data[2]) {
 
     color = data[2]
 
