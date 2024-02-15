@@ -713,6 +713,7 @@ function BesVersionHistory() {
                       <MKTypography
                         variant="h6"
                         fontWeight="bold"
+                        color="text"
                         textTransform="capitalize"
                         style={{
                           fontSize: "15px",
@@ -725,7 +726,6 @@ function BesVersionHistory() {
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{
                           fontSize: "15px",
                           display: "flex",
@@ -733,7 +733,8 @@ function BesVersionHistory() {
                           paddingLeft: "5%",
                           paddingRight: "5%",
                           paddingTop: "15px",
-                          placeContent: "center"
+                          placeContent: "center",
+                          color: "black"
 
                         }}
                       >
@@ -756,6 +757,7 @@ function BesVersionHistory() {
                       <MKTypography
                         variant="h6"
                         textTransform="capitalize"
+                        color= "text"
                         style={{
                           fontSize: "15px",
                           display: "flex",
@@ -767,14 +769,14 @@ function BesVersionHistory() {
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{
                           fontSize: "15px",
                           display: "flex",
                           textAlign: "justify",
                           placeContent: "center",
                           paddingLeft: "5%",
-                          paddingRight: "5%"
+                          paddingRight: "5%",
+                          color: "black"
                         }}
                       >
                         {languages.map((language) => (
@@ -793,6 +795,7 @@ function BesVersionHistory() {
                       <MKTypography
                         variant="h6"
                         textTransform="capitalize"
+                        color= "text"
                         style={{
                           fontSize: "15px",
                           display: "flex",
@@ -804,16 +807,15 @@ function BesVersionHistory() {
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        color="text"
                         style={{
                           fontFamily: "Arial",
                           fontSize: "15px",
-                          color: "#333",
                           display: "flex",
                           textAlign: "justify",
                           placeContent: "center",
                           paddingLeft: "5%",
-                          paddingRight: "5%"
+                          paddingRight: "5%",
+                          color: "black"
                         }}
                       >
                         {/* Parsing through the json arrays to get each tag. Also helps to add ; in between */}
