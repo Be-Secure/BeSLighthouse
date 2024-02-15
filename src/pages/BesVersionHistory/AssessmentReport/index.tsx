@@ -57,6 +57,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import { link } from "fs";
+import BasicTable from "./BasicTable";
 
 
 
@@ -186,6 +187,9 @@ export const fetchvulJsonData = async (link: any, vulTool: any, setCQData: any, 
 
 const FetchLowScores = ({ data }: any) => {
 
+  let tableData: any[] = [{}];
+  let headings = ["Issue", "Reason"];
+
   let lowscorers: any = [];
 
   let displayData: any = {};
@@ -208,43 +212,48 @@ const FetchLowScores = ({ data }: any) => {
 
   });
 
-  displayData = lowscorers.map(function (iss: any, index: number) {
+  lowscorers.map(function (iss: any, index: number) {
 
-    return (<>
+    const issue = iss.name;
+    const reason = iss.reason;
+    tableData.push({ Issue: issue, Reason: reason })
+    // return (
+    // <>
 
-      <MKTypography variant="body1"
+    //   <MKTypography variant="body1"
 
-        key={`MKTypoSC${index}`}
+    //     key={`MKTypoSC${index}`}
 
-        color="inherit"
+    //     color="inherit"
 
-        style={{
+    //     style={{
 
-          fontSize: "12px",
+    //       fontSize: "12px",
 
-          paddingLeft: "calc(0.1rem + 0.3vw)"
+    //       paddingLeft: "calc(0.1rem + 0.3vw)"
 
-        }}>
+    //     }}>
 
-        <b key={`BOLDSC${index}`}>{iss.name} </b>: {iss.reason}
+    //     <b key={`BOLDSC${index}`}>{iss.name} </b>: {iss.reason}
 
-      </MKTypography>
+    //   </MKTypography>
 
-    </>
+    // </>
 
-    )
+    // )
 
   })
 
   return (<>
 
-    <Grid key={`GRIDSC2`}
+    {/* <Grid key={`GRIDSC2`}
 
       style={{ minWidth: "200px" }}>
 
       {displayData}
 
-    </Grid>
+    </Grid> */}
+    <BasicTable tableData={tableData} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
 
   </>
 
@@ -255,10 +264,20 @@ const FetchLowScores = ({ data }: any) => {
 
 
 const FetchCS = ({ data }: any) => {
-
+  let tableData: any[] = [];
+  let headings = ["Age(months)", "Contributors", "Organizations", "Closed Issues", "Last Updated"]
+  tableData = [
+    {
+      "Age": data.created_since,
+      "Contributors": data.contributor_count,
+      "Organizations": data.org_count,
+      "Closed Issues": data.closed_issues_count,
+      "Last Updated": data.updated_since
+    }
+  ]
   return (<>
-
-    <Grid key={`GridCS1`}
+    <BasicTable tableData={tableData} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
+    {/* <Grid key={`GridCS1`}
 
       style={{ minWidth: "200px", textAlign: "left", paddingTop: "5px" }}>
 
@@ -392,7 +411,7 @@ const FetchCS = ({ data }: any) => {
 
       </Grid>
 
-    </Grid>
+    </Grid> */}
 
   </>
 
@@ -1166,7 +1185,8 @@ const FetchCS = ({ data }: any) => {
 
 const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 
-
+  let headings = ["license", "undetermined files", "licenses found"]
+  let tableData: any[] = []
 
   let license_list: string[] = [];
 
@@ -1180,7 +1200,7 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 
     if (ul.length !== 0)
 
-      license_list.push(" " + ul + ",")
+      license_list.push(ul)
 
   });
 
@@ -1204,123 +1224,133 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 
 
 
+
+
   if (JSON.stringify(Object.values(itemData).length) !== "0") {
 
-    return (<>
+    tableData = [{
+      license: project_lcesnse,
+      "undetermined files": non_lic_files,
+      "licenses found": license_list.join('; ')
+    }]
 
-      <Grid key={`GRIDL1`}
+    return (
+      <BasicTable tableData={tableData} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
+      // <>
 
-        style={{ minWidth: "200px" }}>
+      //   <Grid key={`GRIDL1`}
 
-        <Grid key={`GRIDL2`}
+      //     style={{ minWidth: "200px" }}>
 
-          container style={{ paddingLeft: "5px" }}>
+      //     <Grid key={`GRIDL2`}
 
-          <Grid item
+      //       container style={{ paddingLeft: "5px" }}>
 
-            key={`GRIDL3`}
+      //       <Grid item
 
-            xs={12}>
+      //         key={`GRIDL3`}
 
-            <MKTypography variant="body1"
+      //         xs={12}>
 
-              key={`MKTypoL1`}
+      //         <MKTypography variant="body1"
 
-              color="inherit"
+      //           key={`MKTypoL1`}
 
-              style={{
+      //           color="inherit"
 
-                fontSize: "12px",
+      //           style={{
 
-                justifyContent: "left",
+      //             fontSize: "12px",
 
-                display: "flex",
+      //             justifyContent: "left",
 
-                // paddingLeft: "calc(0.1rem + 0.3vw)"
+      //             display: "flex",
 
-              }}>
+      //             // paddingLeft: "calc(0.1rem + 0.3vw)"
 
-              <b key="BOLDL2">Project License </b>: {project_lcesnse}
+      //           }}>
 
-            </MKTypography>
+      //           <b key="BOLDL2">Project License </b>: {project_lcesnse}
 
-          </Grid>
+      //         </MKTypography>
 
-          <Grid item
+      //       </Grid>
 
-            key={`GRIDL4`}
+      //       <Grid item
 
-            xs={12}>
+      //         key={`GRIDL4`}
 
-            <MKTypography variant="body1"
+      //         xs={12}>
 
-              key={`MKTypoL2`}
+      //         <MKTypography variant="body1"
 
-              color="inherit"
+      //           key={`MKTypoL2`}
 
-              style={{
+      //           color="inherit"
 
-                fontSize: "12px",
+      //           style={{
 
-                justifyContent: "left",
+      //             fontSize: "12px",
 
-                display: "flex",
+      //             justifyContent: "left",
 
-                // paddingLeft: "calc(0.1rem + 0.3vw)"
+      //             display: "flex",
 
-              }}>
+      //             // paddingLeft: "calc(0.1rem + 0.3vw)"
 
-              <b key="BOLDL3">Non-License Files </b>: {non_lic_files}
+      //           }}>
 
-            </MKTypography>
+      //           <b key="BOLDL3">Non-License Files </b>: {non_lic_files}
 
-          </Grid>
+      //         </MKTypography>
 
-          <Grid item
+      //       </Grid>
 
-            key={`GRIDL5`}
+      //       <Grid item
 
-            xs={12}>
+      //         key={`GRIDL5`}
 
-            <MKTypography variant="body1"
+      //         xs={12}>
 
-              key={`MKTypoL3`}
+      //         <MKTypography variant="body1"
 
-              color="inherit"
+      //           key={`MKTypoL3`}
 
-              style={{
+      //           color="inherit"
 
-                fontSize: "12px",
+      //           style={{
 
-                justifyContent: "left",
+      //             fontSize: "12px",
 
-                display: "flex",
+      //             justifyContent: "left",
 
-                // paddingLeft: "calc(0.1rem + 0.3vw)"
+      //             display: "flex",
 
-              }}>
+      //             // paddingLeft: "calc(0.1rem + 0.3vw)"
 
-              <b key="BOLDL4">Unique Licenses</b>:
+      //           }}>
 
-            </MKTypography>
+      //           <b key="BOLDL4">Unique Licenses</b>:
 
-            <MKTypography
+      //         </MKTypography>
 
-              fontSize="12px"
+      //         <MKTypography
 
-            >
+      //           fontSize="12px"
 
-              {license_list}
+      //         >
 
-            </MKTypography>
+      //           {license_list}
 
-          </Grid>
+      //         </MKTypography>
 
-        </Grid>
+      //       </Grid>
 
-      </Grid>
+      //     </Grid>
 
-    </>
+      //   </Grid>
+
+      // </>
 
     );
 
@@ -1348,101 +1378,112 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 
 };
 
-function createData(
+// function createData(
 
-  id: number,
+//   id: number,
 
-  name: string,
+//   name: string,
 
-  techStack: string,
+//   techStack: string,
 
-  license: string,
+//   license: string,
 
-  link: string
+//   link: string
 
-) {
+// ) {
 
-  return { id, name, techStack, license, link };
+//   return { id, name, techStack, license, link };
 
-}
-
-
+// }
 
 
 
-let rows: any[] = [];
-
-function BasicTable() {
-
-  return (
-
-    <TableContainer component={Paper}>
-
-      <Table size="small" aria-label="a dense table" style={{ padding: "10px 10px 10px 10px", width: "100%", height: "100%" }}>
-
-        <TableHead>
-
-          <TableRow style={{ width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px" }}>
-
-            <TableCell>Project ID</TableCell>
-
-            <TableCell>Name</TableCell>
-
-            <TableCell>BeS Tech Stack</TableCell>
-
-            <TableCell>License</TableCell>
-
-            <TableCell>Link</TableCell>
-
-          </TableRow>
-
-        </TableHead>
-
-        <TableBody>
-
-          {rows.map((row) => (
-
-            <TableRow
-
-              key={row.id}
-
-              style={{ width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px" }}
-
-            >
-
-              <TableCell scope="row" style={{ position: "relative", left: "15px", right: "15px" }}>
-
-                {row.id}
-
-              </TableCell>
-
-              <TableCell >{row.name}</TableCell>
-
-              <TableCell >{row.techStack}</TableCell>
-
-              <TableCell >{row.license}</TableCell>
-
-              <TableCell >{<a href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${row.id}/:${row.name}`}>link</a>}</TableCell>
 
 
+// let rows: any[] = [];
 
-            </TableRow>
+// function BasicTable() {
 
-          ))}
+//   return (
 
-        </TableBody>
+//     <TableContainer component={Paper}>
 
-      </Table>
+//       <Table size="small" aria-label="a dense table" style={{ padding: "10px 10px 10px 10px", width: "100%", height: "100%" }}>
 
-    </TableContainer>
+//         <TableHead>
 
-  );
+//           <TableRow style={{ width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px" }}>
 
-}
+//             <TableCell>Project ID</TableCell>
+
+//             <TableCell>Name</TableCell>
+
+//             <TableCell>BeS Tech Stack</TableCell>
+
+//             <TableCell>License</TableCell>
+
+//             <TableCell>Link</TableCell>
+
+//           </TableRow>
+
+//         </TableHead>
+
+//         <TableBody>
+
+//           {rows.map((row) => (
+
+//             <TableRow
+
+//               key={row.id}
+
+//               style={{ width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px" }}
+
+//             >
+
+//               <TableCell scope="row" style={{ position: "relative", left: "15px", right: "15px" }}>
+
+//                 {row.id}
+
+//               </TableCell>
+
+//               <TableCell >{row.name}</TableCell>
+
+//               <TableCell >{row.techStack}</TableCell>
+
+//               <TableCell >{row.license}</TableCell>
+
+//               <TableCell >{<a href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${row.id}/:${row.name}`}>link</a>}</TableCell>
+
+
+
+//             </TableRow>
+
+//           ))}
+
+//         </TableBody>
+
+//       </Table>
+
+//     </TableContainer>
+
+//   );
+
+// }
 
 
 
 const FetchSBOM = ({ data, masterData, name }: any) => {
+
+  // let row_data: [{
+  //   id: "",
+  //   name: "",
+  //   bes_technology_stack: "",
+  //   license: "",
+  //   link: ""
+  // }]
+  let tableData: any[] = [{}]
+
+  const headings = ["id", "name", "bes_technology_stack", "license", "link"]
 
   let tracked: string[] = [];
 
@@ -1494,9 +1535,17 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
 
           tracked.push(dp.name);
 
+        tableData.push({
+          id: id,
+          name: name,
+          bes_technology_stack: bes_technology_stack,
+          license: license,
+          link: <a href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${id}/:${name}`}>link</a>
+        }
+        )
 
+        // rows.push(createData(id, name, bes_technology_stack, license, "link"))
 
-        rows.push(createData(id, name, bes_technology_stack, license, "link"))
 
       }
 
@@ -1552,7 +1601,7 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
 
     <Grid key={`GRIDSBOMMAIN`}
 
-      style={{ minWidth: "200px" }}>
+    >
 
       {tracked.length !== 0 ? (
 
@@ -1564,13 +1613,12 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
 
             fontSize: "15px",
 
-            display: "flex",
+            position: "relative",
 
-            placeContent: "center",
+            textAlign: "center",
 
           }}>
 
-          Dependencies tracked under BeS
 
         </MKTypography>
 
@@ -1606,7 +1654,7 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
 
     </Grid>
 
-    {BasicTable()}
+    <BasicTable tableData={tableData} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
 
   </>
 
@@ -1740,7 +1788,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
     }
 
-    return data_array = [jsonData.criticality_score.toFixed(2), <FetchCS data={jsonData} />, color_code]
+    return data_array = [jsonData.criticality_score.toFixed(2), <FetchCS data={jsonData} />, color_code, ""]
 
 
 
@@ -1822,37 +1870,37 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
 
 
-  //   if (report === "Vulnerabilities") {
+  if (report === "Vulnerabilities") {
 
-  //     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
+    pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
 
-  //     pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
+    pathNameSonar = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapSonar}`;
 
-  //     myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
+    myObjectCodeql = { pathname: pathNameCodeql, state: jsonData } as {
 
-  //       pathname: string;
+      pathname: string;
 
-  //     };
+    };
 
-  //     myObjectSonar = { pathname: pathNameSonar, state: jsonData } as {
+    myObjectSonar = { pathname: pathNameSonar, state: jsonData } as {
 
-  //       pathname: string;
+      pathname: string;
 
-  //     };
+    };
 
-  //   } else {
+  } else {
 
 
 
-  //     pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
+    pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
 
-  //     myObject = { pathname: pathName, state: jsonData } as {
+    myObject = { pathname: pathName, state: jsonData } as {
 
-  //       pathname: string;
+      pathname: string;
 
-  //     };
+    };
 
-  //   }
+  }
 
   if (report === "ScoreCard" && jsonDataLength !== 0) {
 
@@ -1886,7 +1934,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
     }
 
-    return data_array = [jsonData.score, <FetchLowScores data={jsonData} />, color_code]
+    return data_array = [jsonData.score, <FetchLowScores data={jsonData} />, color_code, myObject]
 
     // <>
 
@@ -1950,7 +1998,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
     Object.values(sonarqubeData).length === 0)) {
 
-    return (data_array = [codeQlData.length, <FetchSAST cqData={codeQlData} sqData={sonarqubeData} />, ""]);
+    return (data_array = [codeQlData.length, <FetchSAST cqData={codeQlData} sqData={sonarqubeData} />, "", myObjectCodeql]);
 
     // <>
 
@@ -2014,7 +2062,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
     let issues: any = Object.values(sonarqubeData)[5];
 
-    return (data_array = [sonarqubeData.total, <FetchSAST cqData={codeQlData} sqData={issues} />, ""]);
+    return (data_array = [sonarqubeData.total, <FetchSAST cqData={codeQlData} sqData={issues} />, "", myObjectSonar]);
 
     // <>
 
@@ -2082,7 +2130,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
 
 
-    return (data_array = [codeqllength, <FetchSAST cqData={codeqldetails} sqData={sqissues} />, ""]);
+    return (data_array = [codeqllength, <FetchSAST cqData={codeqldetails} sqData={sqissues} />, "", myObjectSonar]);
 
     //       <>
 
@@ -2820,7 +2868,20 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
 
             {data ? data[1] : "Not found"}
 
-            <Button onClick={handleClose}>close</Button>
+            {data && data[3] ? <MKTypography style={{
+
+              fontSize: "15px",
+
+              fontWeight: "bold",
+
+              color: "black",
+
+            }}>
+              <Link
+                to={data[3]}>
+                Detailed report
+              </Link>
+            </MKTypography> : ""}
 
           </Box>
 

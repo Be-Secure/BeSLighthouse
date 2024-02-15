@@ -8,16 +8,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
-function createData(
-  severity: string,
-  count: number,
-) {
-  return { severity, count};
-}
+import BasicTable from "./BasicTable"
 
 
-let rows: any[] = [];
 
 
 
@@ -43,14 +36,30 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         low++;
       }
     });
-    rows.push(createData("critical", critical))
-    rows.push(createData("high", high))
-    rows.push(createData("medium", medium))    
-    rows.push(createData("low", low))
-    return(
+    const data = [
+      {
+        severity: "high",
+        count: high
+      },
+      {
+        severity: "critical",
+        count: critical
+      },
+      {
+        severity: "medium",
+        count: medium
+      },
+      {
+        severity: "minor",
+        count: low
+      },
+    ]
+    const headings = ["severity", "count"]
 
-      BasicTable()
-    )    
+    return (
+
+      <BasicTable tableData={data} tableHeading={headings} tableStyle={{textAling: "center"}}/>
+    )
     //   // <>
     //   //   <Grid container spacing={1} pt={2}>
     //   //     <Grid item xs={6} md={6} lg={6}>
@@ -138,14 +147,34 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         sqminor++;
       }
     });
-    rows.push(createData("critical", sqcritical))
-    rows.push(createData("major", sqmajor))
-    rows.push(createData("minor", sqminor))
-    rows.push(createData("blocker", sqblocker))
-    return(
+    // rowData.push(createData(["critical", sqcritical]))
+    // rowData.push(createData(["major", sqmajor]))
+    // rowData.push(createData(["minor", sqminor]))
+    // rowData.push(createData(["blocker", sqblocker]))
+    // heading.push(createHeading(["Severity", "Count"]))
+    const data = [
+      {
+        severity: "Blocker",
+        count: sqblocker
+      },
+      {
+        severity: "critical",
+        count: sqcritical
+      },
+      {
+        severity: "major",
+        count: sqmajor
+      },
+      {
+        severity: "minor",
+        count: sqminor
+      },
+    ]
+    const headings = ["severity", "count"]
+    return (
 
-      BasicTable()
-      )
+      <BasicTable tableData={data} tableHeading={headings} tableStyle={{textAling: "center"}}/>
+    )
 
     // return (
     //   <>
@@ -243,14 +272,35 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           cqlow++;
         }
       });
-      rows.push(createData("critical",cqcritical))
-      rows.push(createData("high",cqhigh))
-      rows.push(createData("medium",cqmedium))
-      rows.push(createData("low",cqlow))
-      return(
-
-        BasicTable()
-        )    }
+      // rowData.push(createData({"critical", critical}))
+      // rowData.push(createData({"high", high}))
+      // rowData.push(createData({"medium", medium}))
+      // rowData.push(createData({"low", low}))
+      // heading.push(createHeading(["Severity", "Count"]))
+      const data = [
+        {
+        severity: "critical",
+        count: cqcritical
+        },
+        {
+          severity: "high",
+          count: cqhigh
+        },
+        {
+          severity: "low",
+          count: cqlow
+        },
+        {
+          severity: "medium",
+          count: cqmedium
+        }
+      ]
+      const headings = ["severity", "count"]
+      return (
+  
+        <BasicTable tableData={data} tableHeading={headings} tableStyle={{textAlign: "center"}}/>
+      )
+    }
 
     // if (Array.isArray(sqData)) {
     //   sqData?.forEach((vul) => {
@@ -350,32 +400,36 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
   }
 };
 
-function BasicTable() {
-  return (
-    <TableContainer component={Paper}>
-      <Table  size="small" aria-label="a dense table" style={{ padding: "10px 10px 10px 10px", width: "100%", height: "100%"}}>
-        <TableHead>
-          <TableRow style={{width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px"}}>
-            <TableCell>Severity</TableCell>
-            <TableCell style={{ position: "fixed", right: "75px"}}>Count</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.severity}
-              style={{width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px"}}
-            >
-              <TableCell scope="row" style={{ position: "relative", left: "15px", right: "15px"}}>
-                {row.severity}
-              </TableCell>
-              <TableCell >{row.count}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-}
+// function BasicTable() {
+//   return (
+//     <TableContainer component={Paper}>
+//       <Table size="small" aria-label="a dense table" style={{ padding: "10px 10px 10px 10px", width: "100%", height: "100%" }}>
+//         <TableHead>
+//           {/* <TableRow style={{width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px"}}> */}
+//           <TableRow hover tabIndex={-1} sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}>
+//             <TableCell>Severity</TableCell>
+//             <TableCell style={{ position: "fixed", right: "75px" }}>Count</TableCell>
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {rowData.map((row) => (
+//             <TableRow
+//               key={row.severity}
+//               style={{ width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px" }}
+//             >
+//               {/* <TableCell scope="row" style={{ position: "relative", left: "15px", right: "15px"}}> */}
+//               <TableCell align="left">
+//                 {row.severity}
+//               </TableCell>
+//               <TableCell align="left">
+//                 {row.count}
+//               </TableCell>
+//             </TableRow>
+//           ))}
+//         </TableBody>
+//       </Table>
+//     </TableContainer>
+//   );
+// }
 
 export default FetchSAST;
