@@ -40,7 +40,7 @@ function SeverityLevels({ chartColors, chartData }: any) {
   });
 
   return (
-    <Card style={{ height: "70%", width: "200%" }}>
+    <Card style={{ height: "328px", width: "100%" }}>
       <MKBox>
         <MKBox pt={1} pb={1} px={1}>
           <StyledChartWrapper dir="ltr">

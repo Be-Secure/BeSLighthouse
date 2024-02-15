@@ -263,7 +263,7 @@ const FetchData = ({
     if (severityData.length !== 0) {
       return (
         <>
-          <Grid key="RISKPOSTUREGRID1" item xs={6} md={6} lg={6}>
+          <Grid key="RISKPOSTUREGRID1" item xs={12} md={6} lg={6} style={{ height: "100%"}}>
             <MKBox key="RISKPOSTUREMKBOX1" mb={6}>
               <SeverityLevels
                 chartColors={["#FFBB33", "#FF8633", "#FF6133", "#DC1003"]}
@@ -418,14 +418,9 @@ function AssessmentAnalytics({
     // "Critical Issues"
   ];
   return (
-    <Card key="AAMAINCARD" sx={{ height: "100%" }}>
-      <Grid
-        key="AAMAINGRID"
-        container
-        p={2}
-        // spacing={1}
-        justifyContent={"space-evenly"}
-      >
+        <>
+        <Grid container spacing={1} style={{ display: "flex", placeContent: "center", justifyContent: "space-around"}}>
+
         {report.map((value, index) => {
           return (
             <>
@@ -434,21 +429,19 @@ function AssessmentAnalytics({
                 key={`AAMAINMAPGRID1${index}`}
                 alignItems="center"
                 p={1}
-                xs={4}
-                justifyContent="center"
+                md={6}
                 style={{
                   borderRadius: 10,
-                  height: "370px",
-                  fontSize: "calc(0.5rem + 0.5vw)"
+                  height: "92%",
+                  fontSize: "calc(0.5rem + 0.5vw)",
+                  position: "relative",
+                  textAlign: "center"
+
                 }}
               >
-                <Grid
-                  key={`AAMAINMAPGRID2${index}`}
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
+  
                   <GetHeadings receivedValue={value}></GetHeadings>
-                </Grid>
-                <Grid key={`AAMAINMAPGRID3${index}`} style={{ height: "92%" }}>
+                <Grid key={`AAMAINMAPGRID3${index}`} style={{ height: "92%", display: "flex", placeContent: "center" }} xs={12} md={6} >
                   <FetchData
                     version={version}
                     name={name}
@@ -461,8 +454,9 @@ function AssessmentAnalytics({
             </>
           );
         })}
-      </Grid>
-    </Card>
+        </Grid>
+
+        </>
   );
 }
 export default AssessmentAnalytics;
