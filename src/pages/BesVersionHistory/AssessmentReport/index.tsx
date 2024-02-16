@@ -216,141 +216,7 @@ const FetchCS = ({ data }: any) => {
         tableHeading={headings}
         tableStyle={{ textAlign: "center" }}
       />
-      {/* <Grid key={`GridCS1`}
 
-      style={{ minWidth: "200px", textAlign: "left", paddingTop: "5px" }}>
-
-      <Grid key={`GridCS2`}>
-
-        <MKTypography variant="body1"
-
-          key={`MKTypoCS1`}
-
-          color="inherit"
-
-          style={{
-
-            fontSize: "12px",
-
-
-
-            display: "flex",
-
-            paddingLeft: "calc(0.1rem + 0.3vw)"
-
-          }}>
-
-          <b key="BOLDCS5">Age </b>: {data.created_since} months
-
-        </MKTypography>
-
-      </Grid>
-
-      <Grid key={`GridCS22`}>
-
-        <MKTypography variant="body1"
-
-          key={`MKTypoCS2`}
-
-          color="inherit"
-
-          style={{
-
-            fontSize: "12px",
-
-
-
-            display: "flex",
-
-            paddingLeft: "calc(0.1rem + 0.3vw)"
-
-          }}>
-
-          <b key="BOLDCS4"> No. Of Contributors </b>: {data.contributor_count}
-
-        </MKTypography>
-
-      </Grid>
-
-      <Grid key={`GridCS3`}>
-
-        <MKTypography variant="body1"
-
-          key={`MKTypoCS3`}
-
-          color="inherit"
-
-          style={{
-
-            fontSize: "12px",
-
-
-
-            display: "flex",
-
-            paddingLeft: "calc(0.1rem + 0.3vw)"
-
-          }}>
-
-          <b key="BOLDCS3"> Organisations </b>: {data.org_count}
-
-        </MKTypography>
-
-      </Grid>
-
-      <Grid key={`GridCS4`}>
-
-        <MKTypography variant="body1"
-
-          key={`MKTypoCS4`}
-
-          color="inherit"
-
-          style={{
-
-            fontSize: "12px",
-
-
-
-            display: "flex",
-
-            paddingLeft: "calc(0.1rem + 0.3vw)"
-
-          }}>
-
-          <b key="BOLDCS2">Issue Fixed </b>: {data.closed_issues_count}
-
-        </MKTypography>
-
-      </Grid>
-
-      <Grid key={`GridCS5`}>
-
-        <MKTypography variant="body1"
-
-          key={`MKTypoCS5`}
-
-          color="inherit"
-
-          style={{
-
-            fontSize: "12px",
-
-
-
-            display: "flex",
-
-            paddingLeft: "calc(0.1rem + 0.3vw)"
-
-          }}>
-
-          <b key="BOLDCS1"> Last Updated </b>: {data.updated_since}
-
-        </MKTypography>
-
-      </Grid>
-
-    </Grid> */}
     </>
   );
 };
@@ -1035,7 +901,7 @@ function modalStyle(report: string) {
         flexWrap: "wrap",
 
         placeContent: "center",
-    };
+      };
       break;
 
     case "Criticality Score":
