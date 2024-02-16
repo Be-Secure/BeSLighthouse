@@ -1,20 +1,24 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.25c7fb3e.chunk.js",
-    "main.js.map": "/BeSLighthouse/static/js/main.25c7fb3e.chunk.js.map",
+    "main.js": "/BeSLighthouse/static/js/main.9c0bbbb2.chunk.js",
+    "main.js.map": "/BeSLighthouse/static/js/main.9c0bbbb2.chunk.js.map",
     "runtime~main.js": "/BeSLighthouse/static/js/runtime~main.579e3372.js",
     "runtime~main.js.map": "/BeSLighthouse/static/js/runtime~main.579e3372.js.map",
-    "static/js/2.c5c514cf.chunk.js": "/BeSLighthouse/static/js/2.c5c514cf.chunk.js",
-    "static/js/2.c5c514cf.chunk.js.map": "/BeSLighthouse/static/js/2.c5c514cf.chunk.js.map",
+    "static/js/2.27331772.chunk.js": "/BeSLighthouse/static/js/2.27331772.chunk.js",
+    "static/js/2.27331772.chunk.js.map": "/BeSLighthouse/static/js/2.27331772.chunk.js.map",
     "index.html": "/BeSLighthouse/index.html",
-    "precache-manifest.0d2643adc01b55eea21d35617f50480c.js": "/BeSLighthouse/precache-manifest.0d2643adc01b55eea21d35617f50480c.js",
+    "precache-manifest.39b79b606412e8d7f8cf1a18ada61cba.js": "/BeSLighthouse/precache-manifest.39b79b606412e8d7f8cf1a18ada61cba.js",
     "service-worker.js": "/BeSLighthouse/service-worker.js",
     "static/media/AIShield-watchtower-final-logo.png": "/BeSLighthouse/static/media/AIShield-watchtower-final-logo.66027f65.png",
     "static/media/aishield_logo.png": "/BeSLighthouse/static/media/aishield_logo.5ee70cda.png",
     "static/media/arc.png": "/BeSLighthouse/static/media/arc.6df46195.png",
     "static/media/bug.png": "/BeSLighthouse/static/media/bug.54809d53.png",
+    "static/media/certificate.png": "/BeSLighthouse/static/media/certificate.0b758c9f.png",
     "static/media/data-flow.png": "/BeSLighthouse/static/media/data-flow.6bf40b19.png",
     "static/media/network.png": "/BeSLighthouse/static/media/network.192b0eac.png",
-    "static/media/neuralimage.png": "/BeSLighthouse/static/media/neuralimage.41e17072.png"
+    "static/media/neuralimage.png": "/BeSLighthouse/static/media/neuralimage.41e17072.png",
+    "static/media/security-system.png": "/BeSLighthouse/static/media/security-system.5ae91155.png",
+    "static/media/speedometer.png": "/BeSLighthouse/static/media/speedometer.308e6a4b.png",
+    "static/media/verified.png": "/BeSLighthouse/static/media/verified.43a3d843.png"
   }
 }
