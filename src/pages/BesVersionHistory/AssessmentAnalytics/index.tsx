@@ -14,6 +14,7 @@ import {
   assessment_report
 } from "../../../utils/assessmentReport";
 import MKTypography from "../../../components/MKTypography";
+import Language from "../../../examples/Charts/PieChart/Languages";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
@@ -66,8 +67,7 @@ export const countSeverity = async (
     }
     setSeverity(severityForChart);
   }
-  else
-  {
+  else {
     setSeverity([]);
   }
 };
@@ -226,11 +226,11 @@ const FetchVulHistory = (versionDetails: any, setVulHistory: any) => {
 };
 
 const FetchData = ({
+  title,
   version,
   name,
   report,
   versionDetails,
-  masterData
 }: any) => {
   const [cqRiskData, setCqRiskData]: any = React.useState({});
   const [sqRiskData, setSqRiskData]: any = React.useState({});
@@ -262,16 +262,21 @@ const FetchData = ({
   if (report === "Risk Posture") {
     if (severityData.length !== 0) {
       return (
-        <>
-          <Grid key="RISKPOSTUREGRID1" item xs={6} md={6} lg={6}>
-            <MKBox key="RISKPOSTUREMKBOX1" mb={6}>
-              <SeverityLevels
-                chartColors={["#FFBB33", "#FF8633", "#FF6133", "#DC1003"]}
-                chartData={severityData}
-              />
-            </MKBox>
-          </Grid>
-        </>
+
+        <Language
+          title={title}
+          chartData={severityData}
+          chartColors={[
+            theme.palette.primary.main,
+            theme.palette.info.main,
+            theme.palette.warning.main,
+            theme.palette.error.main,
+            theme.palette.success.main,
+            theme.palette.secondary.main
+          ]}
+          height={232}
+        />
+
       );
     } else {
       return (
@@ -294,48 +299,11 @@ const FetchData = ({
       );
     }
   }
-  // else if(report === "Critical Issues"){
-  //     return (
-  //     <>
-  //     <Grid key="CIGRID1"
-  //           item
-  //           xs={12}
-  //           md={12}
-  //           lg={12}
-  //           style={{height: "100%"}}>
-  //       <MKBox key="CIMKBOX1"
-  //              mb={6}
-  //              style={{height: "100%"}}>
-  //         <Card key="CICARD1"
-  //               style={{height: "100%", width: "100%"}}
-  //               sx={{ overflowY: "scroll"}}>
-  //           <MKBox key="CIMKBOX2"
-  //                  style={{height: "100%"}}>
-  //               <MKBox key="CIMKBOX3"
-  //                      pt={1}
-  //                      pb={1}
-  //                      px={1}
-  //                      style={{height: "100%" }}>
-  //                  <FetchCritical
-  //                     cqRiskData={cqRiskData}
-  //                     sqRiskData={sqRiskData}
-  //                   />
-  //               </MKBox>
-  //           </MKBox>
-  //         </Card>
-  //       </MKBox>
-  //     </Grid>
-  //     </>
-  //     );
-  //    }
+
   else if (report === "Vulnerability History") {
     if (vulHistoryData.length !== 0) {
       return (
-        <>
-          <Grid key="VHGRID1" item xs={12} md={12} lg={12}>
-            <VulHistory vuldata={vulHistoryData} />
-          </Grid>
-        </>
+        <VulHistory vuldata={vulHistoryData} />
       );
     } else {
       return (
@@ -418,51 +386,29 @@ function AssessmentAnalytics({
     // "Critical Issues"
   ];
   return (
-    <Card key="AAMAINCARD" sx={{ height: "100%" }}>
-      <Grid
-        key="AAMAINGRID"
-        container
-        p={2}
-        // spacing={1}
-        justifyContent={"space-evenly"}
-      >
+      <Grid container pt={2} spacing={1} style={{ display: "flex", justifyContent: "space-between"}}>
+        {/* <Grid container spacing={1} pt={2} style={{ display: "flex", justifyContent: "space-around" }}> */}
+
         {report.map((value, index) => {
           return (
-            <>
-              <Grid
-                item
-                key={`AAMAINMAPGRID1${index}`}
-                alignItems="center"
-                p={1}
-                xs={4}
-                justifyContent="center"
-                style={{
-                  borderRadius: 10,
-                  height: "370px",
-                  fontSize: "calc(0.5rem + 0.5vw)"
-                }}
-              >
-                <Grid
-                  key={`AAMAINMAPGRID2${index}`}
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <GetHeadings receivedValue={value}></GetHeadings>
-                </Grid>
-                <Grid key={`AAMAINMAPGRID3${index}`} style={{ height: "92%" }}>
-                  <FetchData
-                    version={version}
-                    name={name}
-                    report={value}
-                    versionDetails={versionDetails}
-                    masterData={masterData}
-                  />
-                </Grid>
-              </Grid>
-            </>
+
+            <Grid item xs={12} md={6}
+              style={{
+                // paddingRight: "9px"
+              }}>
+              <FetchData
+                title={value}
+                version={version}
+                name={name}
+                report={value}
+                versionDetails={versionDetails}
+                masterData={masterData}
+              />
+            </Grid>
           );
         })}
       </Grid>
-    </Card>
+
   );
 }
 export default AssessmentAnalytics;
