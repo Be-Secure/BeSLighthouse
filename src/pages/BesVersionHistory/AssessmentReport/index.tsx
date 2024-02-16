@@ -1606,40 +1606,27 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
       {tracked.length !== 0 ? (
 
         <MKTypography key="MKTypoSBOMMain" variant="body1"
-
-          color="inherit"
-
-          style={{
-
-            fontSize: "15px",
-
-            position: "relative",
-
-            textAlign: "center",
-
-          }}>
-
-
+        color="inherit"
+        style={{
+          fontSize: "12px",
+          justifyContent: "left",
+          display: "flex",
+          paddingLeft: "calc(0.1rem + 0.3vw)"
+        }}>
+          <b key={`BOLDSBOM1`}>Tracked in the lab:</b> 
         </MKTypography>
 
       ) : (
 
         <MKTypography key="MKTypoSBOMMain" variant="body1"
-
-          color="inherit"
-
-
-
-          style={{
-
-            fontSize: "12px", display: "flex",
-
-            justifyContent: "center", alignItems: "center", position: "relative", top: "55px"
-
-          }}>
-
-          <b key={`BOLDSBOM1`}>No dependencies tracked under BeS</b>
-
+        color="inherit"
+        
+        style={{
+        fontSize: "12px", display: "flex",
+        justifyContent: "center", position: "relative", top: "40px",
+        paddingLeft: "calc(0.1rem + 0.5vw)"
+        }}>
+          <b key={`BOLDSBOM1`}>None of the dependencies detected are currently tracked in this lab</b>
         </MKTypography>
 
       )}
@@ -2488,10 +2475,19 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     //   );
 
   }
-
-}
-
-
+ 
+  return (
+    <MKTypography variant="h6"
+      key="TYPOSBOMMAINBLANK1"
+      color="inherit"
+      style={{
+        fontSize: "12px", display: "flex",
+        justifyContent: "center", alignItems: "center", position: "relative", top: "67px"
+      }}>
+        Assessment report not available
+    </MKTypography>
+  );
+};
 
 const GetHeadings = ({ receivedValue }: any) => {
 
