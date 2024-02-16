@@ -161,15 +161,11 @@ function ModelOfInterest() {
         setFilter={setFilterData}
       />
       <MKBox pt={2} sx={{ mx: { xs: 2, lg: 3 } }}>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Card>
-              <MKBox>
-                <ModelDisplay selectedFilter={filterData}/>
-              </MKBox>
-            </Card>
-          </Grid>
-        </Grid>
+        <Card>
+          <MKBox>
+            <ModelDisplay selectedFilter={filterData} />
+          </MKBox>
+        </Card>
       </MKBox>
     </>
   );

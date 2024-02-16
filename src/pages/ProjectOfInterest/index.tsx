@@ -166,15 +166,11 @@ function ProjectOfInterest() {
         setFilter={setFilterData}
       />
       <MKBox pt={1} pb={3}>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Card sx={{ mx: { xs: 2, lg: 3 } }}>
-              <MKBox>
-                <ProjectDisplay selectedFilter={filterData}/>
-              </MKBox>
-            </Card>
-          </Grid>
-        </Grid>
+        <Card sx={{ mx: { xs: 2, lg: 3 } }}>
+          <MKBox>
+            <ProjectDisplay selectedFilter={filterData} />
+          </MKBox>
+        </Card>
       </MKBox>
     </>
   );
