@@ -24,7 +24,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import ProjectDisplay from "../../layouts/pages/projectOfInterest/ProjectDisplay";
 import { MouseEvent } from 'react';
-import {projectTags} from "./tags"
+import { projectTags } from "./tags"
 export const osspoiMasterAndSummary = async (
   setData: any,
   besId: string,
@@ -136,18 +136,18 @@ export const ModalForEnvsAndPlaybook = (): any => {
 
   return (
     <div>
-      <Button 
-        onClick={handleOpen} 
-        size="small" 
-        title="Show compatible envs and playbooks" 
-        style={{                       
-          fontSize: "15px", 
-          color: "black", 
+      <Button
+        onClick={handleOpen}
+        size="small"
+        title="Show compatible envs and playbooks"
+        style={{
+          fontSize: "15px",
+          color: "black",
           right: "16px",
           textTransform: "capitalize",
           fontWeight: "normal",
         }}
->
+      >
         BeS Envs and Playbooks
       </Button>
       {/* <Button onClick={handleOpen}>BeS Envs and Playbooks</Button> */}
@@ -198,14 +198,14 @@ export const ModalForEnvsAndPlaybook = (): any => {
                   BeS Playbooks
                 </MKTypography>
               </Grid>
-            <MKTypography
-            style={{
-              position: "fixed",
-              bottom: 0,
-              fontSize: "12px"
-            }}>
-              Compatible BeS environments and BeS playbooks
-            </MKTypography>
+              <MKTypography
+                style={{
+                  position: "fixed",
+                  bottom: 0,
+                  fontSize: "12px"
+                }}>
+                Compatible BeS environments and BeS playbooks
+              </MKTypography>
             </Grid>
           </Box>
         </Fade>
@@ -222,10 +222,9 @@ export const ModalForEnvsAndPlaybook = (): any => {
 // }
 
 // This function is returns the full form of the project tags
-function getProjectTags(value: any)
-{
-    // projectTags is the Object name
-    return Object.keys(projectTags).filter(key => projectTags[key] === value);
+function getProjectTags(value: any) {
+  // projectTags is the Object name
+  return Object.keys(projectTags).filter(key => projectTags[key] === value);
 }
 
 function BesVersionHistory() {
@@ -442,36 +441,7 @@ function BesVersionHistory() {
                         {item.id}
                       </MKTypography>
                     </Grid>
-                    {/* <Grid
-                      item
-                      xs={6}
-                      md={3}
-                      style={{ display: "flex", paddingTop: "12px" }}
-                    >
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="bold"
-                        textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
-                      >
-                        BeS Environment: &nbsp;
-                      </MKTypography>
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="regular"
-                        color="text"
-                        style={{ fontSize: "15px" }}
-                      >
-                        {isenvpath ? (
-                          <Link key={`TOPLINK1${index}`} to={envpath}>
-                            {item.name}
-                          </Link>
-                        ) : (
-                          "Not Available"
-                        )}
-                      </MKTypography>
-                    </Grid> */}
-
+              
                     {/* For Open Source Assurance Provider */}
                     <Grid
                       item
@@ -528,34 +498,24 @@ function BesVersionHistory() {
                         textTransform="capitalize"
                         style={{ fontSize: "15px" }}
                       > */}
-                      <Button 
-                        size="small" 
-                        title="Download Assessment Summary Report" 
+                      <Button
+                        size="small"
+                        title="Download Assessment Summary Report"
                         endIcon={
-                          <DownloadIcon 
-                            style={{ 
-                              color: "black" 
-                            }} 
-                          />} 
-                        style={{ 
-                          fontSize: "15px", 
-                          color: "black", 
+                          <DownloadIcon
+                            style={{
+                              color: "black"
+                            }}
+                          />}
+                        style={{
+                          fontSize: "15px",
+                          color: "black",
                           right: "16px",
                           fontWeight: "normal"
                         }}>
                         OSAR
                       </Button>
-                      {/* <Button variant="contained" startIcon={<DownloadIcon />}>OSAR</Button> */}
 
-                      {/* </MKTypography> */}
-                      {/* <MKTypography
-                        variant="h6"
-                        fontWeight="regular"
-                        color="text"
-                        style={{ fontSize: "15px" }}
-                      >
-                        {item.id}
-                      </MKTypography> */}
                     </Grid>
                     <Grid
                       item
@@ -563,131 +523,25 @@ function BesVersionHistory() {
                       md={3}
                       style={{ display: "flex", paddingTop: "12px", position: "relative", bottom: "7px" }}
                     >
-                      {/* <MKTypography
-                        variant="h6"
-                        fontWeight="bold"
-                        textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
-                      > */}
-                      {/* <Button variant="contained" size="small" title="Show compatible envs and playbooks" style={{ fontSize: "15px", color: "black", backgroundColor: "#d7d7d7" }}>
-                        BeS Envs & Playbooks
-                      </Button> */}
-                      <ModalForEnvsAndPlaybook />
-                      {/* <Button variant="contained" startIcon={<DownloadIcon />}>OSAR</Button> */}
 
-                      {/* </MKTypography> */}
-                      {/* <MKTypography
-                        variant="h6"
-                        fontWeight="regular"
-                        color="text"
-                        style={{ fontSize: "15px" }}
-                      >
-                        {item.id}
-                      </MKTypography> */}
+                      <ModalForEnvsAndPlaybook />
+
                     </Grid>
-                    {/* The below code moves the description to the next line if the character count exceeds 100 */}
-                    {/* It also checks if the 'description' of a repo is available, if not, displays 'Not Available'  */}
-                    {/* {item.description ? (
-                      item.description.length < 100 ? (
-                        <Grid
-                          item
-                          xs={6}
-                          style={{
-                            display: "flex",
-                            paddingTop: "12px",
-                            paddingBottom: "7px"
-                          }}
-                        >
-                          <MKTypography
-                            variant="h6"
-                            fontWeight="bold"
-                            textTransform="capitalize"
-                            style={{ fontSize: "15px" }}
-                          >
-                            Description: &nbsp;
-                          </MKTypography>
-                          <MKTypography
-                            variant="h6"
-                            fontWeight="regular"
-                            color="text"
-                            style={{ fontSize: "15px" }}
-                          >
-                            {item.description}
-                          </MKTypography>
-                        </Grid>
-                      ) : (
-                        <></>
-                      )
-                    ) : (
-                      <Grid
-                        item
-                        xs={6}
-                        style={{
-                          display: "flex",
-                          paddingTop: "12px",
-                          paddingBottom: "7px"
-                        }}
-                      >
-                        <MKTypography
-                          variant="h6"
-                          fontWeight="bold"
-                          textTransform="capitalize"
-                          style={{ fontSize: "15px" }}
-                        >
-                          Description: &nbsp;
-                        </MKTypography>
-                        <MKTypography
-                          variant="h6"
-                          fontWeight="regular"
-                          color="text"
-                          style={{ fontSize: "15px" }}
-                        >
-                          Not Available
-                        </MKTypography>
-                      </Grid>
-                    )} */}
+
                   </Grid>
-                  {/* {item.description?.length > 100 ? (
-                    <MKTypography
-                      variant="h6"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                      style={{
-                        fontSize: "15px",
-                        paddingLeft: "30px",
-                        display: "flex",
-                        paddingTop: "12px",
-                        paddingBottom: "8px"
-                      }}
-                    >
-                      Description:{" "}
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="regular"
-                        color="text"
-                        style={{ fontSize: "15px", paddingLeft: "8px" }}
-                      >
-                        {item.description}
-                      </MKTypography>
-                    </MKTypography>
-                  ) : (
-                    <></>
-                  )} */}
+
                 </Card>
                 {/* For project description, languages and tags */}
-                <Grid key={`TOPGRID14${index}`} container pt={3} pb={1} spacing={1} style={{
-                    display: "flex",
-                    placeContent: "space-evenly"
-                  }}>
+                <Grid key={`TOPGRID14${index}`} container pt={2} spacing={1} style={{ display: "flex", justifyContent: "space-between", }}>
 
-                      <AssessmentReport
-                        title="Assessment Report"
-                        name={besName.slice(1)}
-                        version={selectedOption}
-                        itemData={item}
-                        masterData={data}
-                      />
-                  </Grid>
+                  <AssessmentReport
+                    title="Assessment Report"
+                    name={besName.slice(1)}
+                    version={selectedOption}
+                    itemData={item}
+                    masterData={data}
+                  />
+                </Grid>
                 <Grid container spacing={3}
                   style={{
                     paddingTop: "30px",
@@ -706,8 +560,8 @@ function BesVersionHistory() {
                       style={{
                         // height: "fit-content",
                         width: "100%",
-                        paddingBottom: "8px",
-                        paddingTop: "5px"
+                        // paddingBottom: "8px",
+                        // paddingTop: "5px"
                       }}
                     >
                       <MKTypography
@@ -747,17 +601,19 @@ function BesVersionHistory() {
                     style={{
                       paddingTop: "12px",
                       paddingBottom: "7px"
-                    }}>
+                    }}
+                    >
                     <Card
                       style={{
                         height: "fit-content",
                         paddingBottom: "8px",
                         paddingTop: "5px"
-                      }}>
+                      }}
+                      >
                       <MKTypography
                         variant="h6"
                         textTransform="capitalize"
-                        color= "text"
+                        color="text"
                         style={{
                           fontSize: "15px",
                           display: "flex",
@@ -795,7 +651,7 @@ function BesVersionHistory() {
                       <MKTypography
                         variant="h6"
                         textTransform="capitalize"
-                        color= "text"
+                        color="text"
                         style={{
                           fontSize: "15px",
                           display: "flex",
@@ -829,26 +685,13 @@ function BesVersionHistory() {
                   </Grid>
                 </Grid>
 
-                <MKBox key={`TOPMKBOX7${index}`} style={{ marginTop: "12px" }}>
-                  <Grid key={`TOPGRID16${index}`} container spacing={3} pt={3}>
-                    <Grid
-                      key={`TOPGRID17${index}`}
-                      item
-                      xs={12}
-                      md={12}
-                      lg={12}
-                      style={{ paddingTop: "5px" }}
-                    >
-                      <AssessmentAnalytics
-                        title="Assessment Analytics"
-                        name={besName.slice(1)}
-                        version={selectedOption}
-                        versionDetails={versionSummary}
-                        masterData={data}
-                      />
-                    </Grid>
-                  </Grid>
-                </MKBox>
+                <AssessmentAnalytics
+                  title="Assessment Analytics"
+                  name={besName.slice(1)}
+                  version={selectedOption}
+                  versionDetails={versionSummary}
+                  masterData={data}
+                />
               </>
             );
           }

@@ -29,24 +29,23 @@ interface TableProps {
 
 const BasicTable: React.FC<TableProps> = ({ tableData, tableHeading, tableStyle}: any) => {
     return (<>
-        {console.log(tableStyle)}
-      <TableContainer component={Paper}>
-        <Table  size="small" aria-label="a dense table" style={{ border: "1px solid black"}}>
-            <thead>
+      <TableContainer component={Paper} style={{margin: "35px 35px 35px 35px", borderRadius: "0", height: "80%"}}>
+        <Table size="small" aria-label="a dense table" style={{ height: "100%" }}>
+            <thead style={{ backgroundColor: "#8585ed", color: "white" }} >
 
           <tr>
             {tableHeading?.map((column, index) => (
-                <th key={index}>{column}</th>
+                <th style={{fontWeight: "normal"}} key={index}>{column}</th>
                 ))}
           </tr>
                 </thead>
           <tbody>
-            {tableData?.map((row, rowIndex) => (
+            {tableData?.map((row, rowIndex): any => (
                 <tr style={tableStyle}
                 key={rowIndex}
                 >
                 {tableHeading?.map((column, colIndex) => (
-                    <td  key={colIndex}>{row[column]}</td>
+                    <td style={{ backgroundColor: rowIndex % 2 === 0 ? '' : '#eaefff' }} key={colIndex}>{row[column]}</td>
                     ))}
               </tr>
             ))
