@@ -1,6 +1,14 @@
 import * as React from "react";
 import { Grid, Typography } from "@mui/material";
 import MKTypography from "../../../components/MKTypography";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import BasicTable from "./BasicTable";
 
 const FetchSAST = ({ cqData, sqData }: any): any => {
   let critical: number = 0;
@@ -24,71 +32,42 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         low++;
       }
     });
+    const data = [
+      {
+        severity: "high",
+        count: high,
+      },
+      {
+        severity: "critical",
+        count: critical,
+      },
+      {
+        severity: "medium",
+        count: medium,
+      },
+      {
+        severity: "minor",
+        count: low,
+      },
+    ];
+    const headings = ["severity", "count"];
 
     return (
       <>
-        <Grid container spacing={1} pt={2}>
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASTCQSQ7`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQ1">Critical : </b>
-              {critical}
-            </MKTypography>
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASTCQSQ7`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQ2">High : </b>
-              {high}
-            </MKTypography>
-          </Grid>
-
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASTCQSQ7`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQ3">Medium : </b>
-              {medium}
-            </MKTypography>
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASTCQSQ7`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQ4"> Low : </b> {low}
-            </MKTypography>
-          </Grid>
-        </Grid>
+        <MKTypography
+          style={{
+            paddingTop: "10px",
+            fontWeight: "bold",
+            fontSize: "18px",
+          }}
+        >
+          Summary Report
+        </MKTypography>
+        <BasicTable
+          tableData={data}
+          tableHeading={headings}
+          tableStyle={{ textAling: "center" }}
+        />
       </>
     );
   } else if (
@@ -114,74 +93,41 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
       }
     });
 
+    const data = [
+      {
+        severity: "Blocker",
+        count: sqblocker,
+      },
+      {
+        severity: "critical",
+        count: sqcritical,
+      },
+      {
+        severity: "major",
+        count: sqmajor,
+      },
+      {
+        severity: "minor",
+        count: sqminor,
+      },
+    ];
+    const headings = ["severity", "count"];
     return (
       <>
-        <Grid
-          key={`GRIDSASTSQ1`}
+        <MKTypography
           style={{
-            minWidth: "calc(10rem + 5vw)",
-            marginTop: "1.1rem",
-            marginLeft: "1.5rem"
+            paddingTop: "10px",
+            fontWeight: "bold",
+            fontSize: "18px",
           }}
         >
-          <Grid key={`GRIDSASTSQ2`} container>
-            <Grid item key={`GRIDSASTSQ3`} xs={6}>
-              <MKTypography
-                variant="body1"
-                color="inherit"
-                key={`MKTypoSASTSQ1`}
-                style={{
-                  fontSize: "calc(0.6rem + 0.5vw)",
-                  paddingLeft: "calc(0.1rem + 0.3vw)"
-                }}
-              >
-                <b key="BOLDSQ1"> Critical : </b> {sqblocker}
-              </MKTypography>
-            </Grid>
-            <Grid item key={`GRIDSASTSQ4`} xs={6}>
-              <MKTypography
-                variant="body1"
-                key={`MKTypoSASTSQ2`}
-                color="inherit"
-                style={{
-                  fontSize: "calc(0.6rem + 0.5vw)",
-                  paddingLeft: "calc(0.1rem + 0.3vw)"
-                }}
-              >
-                <b key="BOLDSQ2"> High : </b> {sqcritical}
-              </MKTypography>
-            </Grid>
-          </Grid>
-          <Grid key={`GRIDSASTSQ5}`} container>
-            <Grid item key={`GRIDSASTSQ6`} xs={6}>
-              <MKTypography
-                variant="body1"
-                key={`MKTypoSASTSQ3`}
-                color="inherit"
-                style={{
-                  fontSize: "calc(0.6rem + 0.5vw)",
-                  paddingLeft: "calc(0.1rem + 0.3vw)"
-                }}
-              >
-                <b key="BOLDSQ3">Medium : </b> {sqmajor}
-              </MKTypography>
-            </Grid>
-            <Grid item key={`GRIDSASTSQ7`} xs={6}>
-              <MKTypography
-                variant="body1"
-                key={`MKTypoSASTSQ4`}
-                color="inherit"
-                style={{
-                  fontSize: "calc(0.6rem + 0.5vw)",
-                  paddingLeft: "calc(0.1rem + 0.3vw)"
-                }}
-              >
-                <b key="BOLDSQ4">Low : </b>
-                {sqminor}
-              </MKTypography>
-            </Grid>
-          </Grid>
-        </Grid>
+          Summary Report
+        </MKTypography>
+        <BasicTable
+          tableData={data}
+          tableHeading={headings}
+          tableStyle={{ textAling: "center" }}
+        />
       </>
     );
   } else if (
@@ -210,85 +156,45 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           cqlow++;
         }
       });
-    }
-    if (Array.isArray(sqData)) {
-      sqData?.forEach((vul) => {
-        if (vul.severity === "BLOCKER") {
-          sqblocker++;
-        } else if (vul.severity === "CRITICAL") {
-          sqcritical++;
-        } else if (vul.severity === "MAJOR") {
-          sqmajor++;
-        } else if (vul.severity === "MINOR") {
-          sqminor++;
-        }
-      });
-    } else {
-      console.log("error");
-    }
 
-    return (
-      <>
-        <Grid container spacing={1} pt={2}>
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASTCQSQ5`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQSQ5">Critical </b> : {sqblocker}
-            </MKTypography>
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASRCQSQ6`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQSQ6">High</b> : {sqcritical}
-            </MKTypography>
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASTCQSQ7`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQSQ7">Medium</b> : {sqmajor}
-            </MKTypography>
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-            <MKTypography
-              variant="body1"
-              key={`MKTypoSASTCQSQ8`}
-              color="inherit"
-              style={{
-                fontSize: "14px",
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <b key="BOLDCQSQ8">Low</b>: {sqminor}
-            </MKTypography>
-          </Grid>
-        </Grid>
-      </>
-    );
+      const data = [
+        {
+          severity: "critical",
+          count: cqcritical,
+        },
+        {
+          severity: "high",
+          count: cqhigh,
+        },
+        {
+          severity: "low",
+          count: cqlow,
+        },
+        {
+          severity: "medium",
+          count: cqmedium,
+        },
+      ];
+      const headings = ["severity", "count"];
+      return (
+        <>
+          <MKTypography
+            style={{
+              paddingTop: "10px",
+              fontWeight: "bold",
+              fontSize: "18px",
+            }}
+          >
+            Summary Report
+          </MKTypography>
+          <BasicTable
+            tableData={data}
+            tableHeading={headings}
+            tableStyle={{ textAling: "center" }}
+          />
+        </>
+      );
+    }
   } else {
     return (
       <>
@@ -299,7 +205,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           style={{
             fontSize: "calc(0.3rem + 0.5vw)",
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
         >
           No SAST issues data Available

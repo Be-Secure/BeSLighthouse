@@ -5,6 +5,7 @@ import ReactApexChart from "react-apexcharts";
 import { useTheme } from "@mui/material/styles";
 import useChart from "../useChart";
 import MKBox from "../../../../components/MKBox";
+import Language from "../../PieChart/Languages";
 
 function VulHistory({ vuldata }: any) {
   const theme = useTheme();
@@ -78,20 +79,20 @@ function VulHistory({ vuldata }: any) {
   });
 
   return (
-    <Card style={{ height: "70%" }}>
+
+    <Card style={{ height: "100%" }}>
       <MKBox>
         <MKBox pt={1} pb={1} px={1}>
-          <StyledChartWrapper dir="ltr">
             <ReactApexChart
               type="bar"
               series={chartSeries}
               options={chartOptions}
               height={250}
             />
-          </StyledChartWrapper>
         </MKBox>
       </MKBox>
     </Card>
+
   );
 }
 export default VulHistory;
