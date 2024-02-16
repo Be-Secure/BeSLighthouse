@@ -172,7 +172,7 @@ const GraphDisplay = () => {
 
   return (
     <div>
-    <div id="indicator" style={{ position: "absolute", top: "0", right: "0", margin: "20px", marginTop: "60px" }}>
+    <div id="indicator" style={{ position: "absolute", top: "0", right: "0", margin: "20px", marginTop: "70px" }}>
       <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "2px", marginTop: "17px" }}>
         <div className="circle model" style={{ backgroundColor: "currentColor", width: "12px", height: "12px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
         <p style={{ fontSize: "13px" }}>Model</p>

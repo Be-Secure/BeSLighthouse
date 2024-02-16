@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
+import { modelOfInterestData } from "../../../dataStore";
 
 const ArcDiagram: React.FC = () => {
   useEffect(() => {
-    const githubRawUrl = 'https://raw.githubusercontent.com/Be-Secure/besecure-assets-store/main/models/model-metadata.json';
-
     // Fetch data from GitHub raw URL and save it into a variable as JSON
-    fetch(githubRawUrl)
+    fetch(modelOfInterestData)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Failed to fetch data. Status: ${response.status}`);
@@ -31,14 +30,29 @@ const ArcDiagram: React.FC = () => {
         const jsonData = data;
 
         // Extract unique nodes and links from the JSON data
-        const nodes: { name: string, group: string }[] = [];
+        const nodes: { name: string, group: string, color: string }[] = [];
         const links: { source: string, target: string }[] = [];
 
+        // get color
+        function getColor(type : string){
+          if (type === "Classic"){
+            return "blue";
+          } else {
+            return "#EC5800";
+          }
+        }
         jsonData.forEach(node => {
-          const mainNode = { name: node.name, group: node.group };
+          const mainNode = { name: node.name, group: node.group, color: getColor(node.type) };
           nodes.push(mainNode);
           node.dependencies.forEach(dependency => {
-            const dependentNode = { name: dependency, group: node.group };
+            // check if the dependency tracked under BeS
+            const trackedObj = jsonData.find(item => item.name === dependency);
+            let dependentNode;
+            if (trackedObj) {
+              dependentNode = { name: dependency, group: node.group, color: getColor(trackedObj.type)};
+            } else {
+              dependentNode = { name: dependency, group: node.group, color: "currentColor" };
+            }
             nodes.push(dependentNode);
             links.push({ source: mainNode.name, target: dependentNode.name });
           });
@@ -92,7 +106,7 @@ const ArcDiagram: React.FC = () => {
           .attr("cx", (d: { name: string, x: number | undefined }) => d.x !== undefined ? d.x : 0)  // Explicitly provide type information
           .attr("cy", height - 30)
           .attr("r", 8)
-          .style("fill", d => color(d.name) as string)
+          .style("fill", d => d.color)
           .attr("stroke", "white")
           .on('click', (event, d) => {
             if (isClickable(d.name) && !event.active) {
@@ -202,7 +216,27 @@ const ArcDiagram: React.FC = () => {
   }, []); // Empty dependency array ensures useEffect runs once on component mount
 
   return (
-    <div id="Arc_diagram"></div>
+    <div>
+    <div id="indicator" style={{ position: "absolute", top: "0", right: "0", margin: "20px", marginTop: "70px" }}>
+      <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "2px", marginTop: "17px" }}>
+        <div className="circle model" style={{ backgroundColor: "blue", width: "10px", height: "10px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
+        <p style={{ fontSize: "13px" }}>Classic (Model)</p>
+      </div>
+
+      <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "5px", marginTop: "2px" }}>
+        <div className="circle dependency" style={{ backgroundColor: "#EC5800", width: "10px", height: "10px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
+        <p style={{ fontSize: "13px" }}>LLM (Model)</p>
+      </div>
+
+      <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "5px", marginTop: "2px" }}>
+        <div className="circle dependency" style={{ backgroundColor: "currentColor", width: "10px", height: "10px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
+        <p style={{ fontSize: "13px" }}>Not Tracked</p>
+      </div>
+    </div>
+    <div id="Arc_diagram">
+      {/* Your graph content goes here */}
+    </div>
+  </div>
   );
 }
 
