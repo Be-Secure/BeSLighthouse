@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 
 const ArcDiagram: React.FC = () => {
   useEffect(() => {
-    const githubRawUrl = 'https://raw.githubusercontent.com/Be-Secure/besecure-assets-store/main/models/model-metadata.json';
+    const githubRawUrl = 'https://raw.githubusercontent.com/pramit-d/besecure-assets-store/main/models/model-metadata.json';
 
     // Fetch data from GitHub raw URL and save it into a variable as JSON
     fetch(githubRawUrl)
@@ -37,7 +37,7 @@ const ArcDiagram: React.FC = () => {
         // get color
         function getColor(type : string){
           if (type === "Classic"){
-            return "currentColor";
+            return "blue";
           } else {
             return "#EC5800";
           }
@@ -52,7 +52,7 @@ const ArcDiagram: React.FC = () => {
             if (trackedObj) {
               dependentNode = { name: dependency, group: node.group, color: getColor(trackedObj.type)};
             } else {
-              dependentNode = { name: dependency, group: node.group, color: "blue" };
+              dependentNode = { name: dependency, group: node.group, color: "currentColor" };
             }
             nodes.push(dependentNode);
             links.push({ source: mainNode.name, target: dependentNode.name });
@@ -220,7 +220,7 @@ const ArcDiagram: React.FC = () => {
     <div>
     <div id="indicator" style={{ position: "absolute", top: "0", right: "0", margin: "20px", marginTop: "70px" }}>
       <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "2px", marginTop: "17px" }}>
-        <div className="circle model" style={{ backgroundColor: "currentColor", width: "10px", height: "10px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
+        <div className="circle model" style={{ backgroundColor: "blue", width: "10px", height: "10px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
         <p style={{ fontSize: "13px" }}>Classic (Model)</p>
       </div>
 
@@ -230,8 +230,8 @@ const ArcDiagram: React.FC = () => {
       </div>
 
       <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "5px", marginTop: "2px" }}>
-        <div className="circle dependency" style={{ backgroundColor: "blue", width: "10px", height: "10px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
-        <p style={{ fontSize: "13px" }}>Unknown</p>
+        <div className="circle dependency" style={{ backgroundColor: "currentColor", width: "10px", height: "10px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
+        <p style={{ fontSize: "13px" }}>Not Tracked</p>
       </div>
     </div>
     <div id="Arc_diagram">
