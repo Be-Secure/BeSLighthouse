@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 
 const ArcDiagram: React.FC = () => {
   useEffect(() => {
-    const githubRawUrl = 'https://raw.githubusercontent.com/pramit-d/besecure-assets-store/main/models/model-metadata.json';
+    const githubRawUrl = 'https://raw.githubusercontent.com/Be-Secure/besecure-assets-store/main/models/model-metadata.json';
 
     // Fetch data from GitHub raw URL and save it into a variable as JSON
     fetch(githubRawUrl)
