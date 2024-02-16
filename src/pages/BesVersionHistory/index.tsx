@@ -542,9 +542,8 @@ function BesVersionHistory() {
                     masterData={data}
                   />
                 </Grid>
-                <Grid container spacing={3}
+                <Grid container spacing={1} pt={2}
                   style={{
-                    paddingTop: "30px",
                     placeContent: "space-between",
                     display: "flex"
                   }}
@@ -560,8 +559,8 @@ function BesVersionHistory() {
                       style={{
                         // height: "fit-content",
                         width: "100%",
-                        // paddingBottom: "8px",
-                        // paddingTop: "5px"
+                        paddingBottom: "8px",
+                        paddingTop: "5px"
                       }}
                     >
                       <MKTypography

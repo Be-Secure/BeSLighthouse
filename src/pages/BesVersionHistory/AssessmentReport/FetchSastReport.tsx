@@ -1,18 +1,14 @@
 import * as React from "react";
 import { Grid, Typography } from "@mui/material";
 import MKTypography from "../../../components/MKTypography";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import BasicTable from "./BasicTable"
-
-
-
-
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import BasicTable from "./BasicTable";
 
 const FetchSAST = ({ cqData, sqData }: any): any => {
   let critical: number = 0;
@@ -39,92 +35,41 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     const data = [
       {
         severity: "high",
-        count: high
+        count: high,
       },
       {
         severity: "critical",
-        count: critical
+        count: critical,
       },
       {
         severity: "medium",
-        count: medium
+        count: medium,
       },
       {
         severity: "minor",
-        count: low
+        count: low,
       },
-    ]
-    const headings = ["severity", "count"]
+    ];
+    const headings = ["severity", "count"];
 
     return (
-
-      <BasicTable tableData={data} tableHeading={headings} tableStyle={{textAling: "center"}}/>
-    )
-    //   // <>
-    //   //   <Grid container spacing={1} pt={2}>
-    //   //     <Grid item xs={6} md={6} lg={6}>
-    //   //       <MKTypography
-    //   //         variant="body1"
-    //   //         key={`MKTypoSASTCQSQ7`}
-    //   //         color="inherit"
-    //   //         style={{
-    //   //           fontSize: "14px",
-    //   //           display: "flex",
-    //   //           justifyContent: "center"
-    //   //         }}
-    //   //       >
-    //   //         <b key="BOLDCQ1">Critical : </b>
-    //   //         {critical}
-    //   //       </MKTypography>
-    //   //     </Grid>
-    //   //     <Grid item xs={6} md={6} lg={6}>
-    //   //       <MKTypography
-    //   //         variant="body1"
-    //   //         key={`MKTypoSASTCQSQ7`}
-    //   //         color="inherit"
-    //   //         style={{
-    //   //           fontSize: "14px",
-    //   //           display: "flex",
-    //   //           justifyContent: "center"
-    //   //         }}
-    //   //       >
-    //   //         <b key="BOLDCQ2">High : </b>
-    //   //         {high}
-    //   //       </MKTypography>
-    //   //     </Grid>
-
-    //   //     <Grid item xs={6} md={6} lg={6}>
-    //   //       <MKTypography
-    //   //         variant="body1"
-    //   //         key={`MKTypoSASTCQSQ7`}
-    //   //         color="inherit"
-    //   //         style={{
-    //   //           fontSize: "14px",
-    //   //           display: "flex",
-    //   //           justifyContent: "center"
-    //   //         }}
-    //   //       >
-    //   //         <b key="BOLDCQ3">Medium : </b>
-    //   //         {medium}
-    //   //       </MKTypography>
-    //   //     </Grid>
-    //   //     <Grid item xs={6} md={6} lg={6}>
-    //   //       <MKTypography
-    //   //         variant="body1"
-    //   //         key={`MKTypoSASTCQSQ7`}
-    //   //         color="inherit"
-    //   //         style={{
-    //   //           fontSize: "14px",
-    //   //           display: "flex",
-    //   //           justifyContent: "center"
-    //   //         }}
-    //   //       >
-    //   //         <b key="BOLDCQ4"> Low : </b> {low}
-    //   //       </MKTypography>
-    //   //     </Grid>
-    //   //   </Grid>
-    //   // </>
-    // );
+      <>
+        <MKTypography
+          style={{
+            paddingTop: "10px",
+            fontWeight: "bold",
+            fontSize: "18px",
+          }}
+        >
+          Summary Report
+        </MKTypography>
+        <BasicTable
+          tableData={data}
+          tableHeading={headings}
+          tableStyle={{ textAling: "center" }}
+        />
+      </>
+    );
   } else if (
     JSON.stringify(Object.values(cqData).length) === "0" &&
     sqissueslen !== 0
@@ -147,105 +92,44 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         sqminor++;
       }
     });
-    // rowData.push(createData(["critical", sqcritical]))
-    // rowData.push(createData(["major", sqmajor]))
-    // rowData.push(createData(["minor", sqminor]))
-    // rowData.push(createData(["blocker", sqblocker]))
-    // heading.push(createHeading(["Severity", "Count"]))
+
     const data = [
       {
         severity: "Blocker",
-        count: sqblocker
+        count: sqblocker,
       },
       {
         severity: "critical",
-        count: sqcritical
+        count: sqcritical,
       },
       {
         severity: "major",
-        count: sqmajor
+        count: sqmajor,
       },
       {
         severity: "minor",
-        count: sqminor
+        count: sqminor,
       },
-    ]
-    const headings = ["severity", "count"]
+    ];
+    const headings = ["severity", "count"];
     return (
-
-      <BasicTable tableData={data} tableHeading={headings} tableStyle={{textAling: "center"}}/>
-    )
-
-    // return (
-    //   <>
-    //     <Grid
-    //       key={`GRIDSASTSQ1`}
-    //       style={{
-    //         minWidth: "calc(10rem + 5vw)",
-    //         marginTop: "1.1rem",
-    //         marginLeft: "1.5rem"
-    //       }}
-    //     >
-    //       <Grid key={`GRIDSASTSQ2`} container>
-    //         <Grid item key={`GRIDSASTSQ3`} xs={6}>
-    //           <MKTypography
-    //             variant="body1"
-    //             color="inherit"
-    //             key={`MKTypoSASTSQ1`}
-    //             style={{
-    //               fontSize: "calc(0.6rem + 0.5vw)",
-    //               paddingLeft: "calc(0.1rem + 0.3vw)"
-    //             }}
-    //           >
-    //             <b key="BOLDSQ1"> Critical : </b> {sqblocker}
-    //           </MKTypography>
-    //         </Grid>
-    //         <Grid item key={`GRIDSASTSQ4`} xs={6}>
-    //           <MKTypography
-    //             variant="body1"
-    //             key={`MKTypoSASTSQ2`}
-    //             color="inherit"
-    //             style={{
-    //               fontSize: "calc(0.6rem + 0.5vw)",
-    //               paddingLeft: "calc(0.1rem + 0.3vw)"
-    //             }}
-    //           >
-    //             <b key="BOLDSQ2"> High : </b> {sqcritical}
-    //           </MKTypography>
-    //         </Grid>
-    //       </Grid>
-    //       <Grid key={`GRIDSASTSQ5}`} container>
-    //         <Grid item key={`GRIDSASTSQ6`} xs={6}>
-    //           <MKTypography
-    //             variant="body1"
-    //             key={`MKTypoSASTSQ3`}
-    //             color="inherit"
-    //             style={{
-    //               fontSize: "calc(0.6rem + 0.5vw)",
-    //               paddingLeft: "calc(0.1rem + 0.3vw)"
-    //             }}
-    //           >
-    //             <b key="BOLDSQ3">Medium : </b> {sqmajor}
-    //           </MKTypography>
-    //         </Grid>
-    //         <Grid item key={`GRIDSASTSQ7`} xs={6}>
-    //           <MKTypography
-    //             variant="body1"
-    //             key={`MKTypoSASTSQ4`}
-    //             color="inherit"
-    //             style={{
-    //               fontSize: "calc(0.6rem + 0.5vw)",
-    //               paddingLeft: "calc(0.1rem + 0.3vw)"
-    //             }}
-    //           >
-    //             <b key="BOLDSQ4">Low : </b>
-    //             {sqminor}
-    //           </MKTypography>
-    //         </Grid>
-    //       </Grid>
-    //     </Grid>
-    //   </>
-    // );
+      <>
+        <MKTypography
+          style={{
+            paddingTop: "10px",
+            fontWeight: "bold",
+            fontSize: "18px",
+          }}
+        >
+          Summary Report
+        </MKTypography>
+        <BasicTable
+          tableData={data}
+          tableHeading={headings}
+          tableStyle={{ textAling: "center" }}
+        />
+      </>
+    );
   } else if (
     JSON.stringify(Object.values(cqData).length) !== "0" &&
     sqissueslen !== 0
@@ -272,114 +156,45 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           cqlow++;
         }
       });
-      // rowData.push(createData({"critical", critical}))
-      // rowData.push(createData({"high", high}))
-      // rowData.push(createData({"medium", medium}))
-      // rowData.push(createData({"low", low}))
-      // heading.push(createHeading(["Severity", "Count"]))
+
       const data = [
         {
-        severity: "critical",
-        count: cqcritical
+          severity: "critical",
+          count: cqcritical,
         },
         {
           severity: "high",
-          count: cqhigh
+          count: cqhigh,
         },
         {
           severity: "low",
-          count: cqlow
+          count: cqlow,
         },
         {
           severity: "medium",
-          count: cqmedium
-        }
-      ]
-      const headings = ["severity", "count"]
+          count: cqmedium,
+        },
+      ];
+      const headings = ["severity", "count"];
       return (
-  
-        <BasicTable tableData={data} tableHeading={headings} tableStyle={{textAlign: "center"}}/>
-      )
+        <>
+          <MKTypography
+            style={{
+              paddingTop: "10px",
+              fontWeight: "bold",
+              fontSize: "18px",
+            }}
+          >
+            Summary Report
+          </MKTypography>
+          <BasicTable
+            tableData={data}
+            tableHeading={headings}
+            tableStyle={{ textAling: "center" }}
+          />
+        </>
+      );
     }
-
-    // if (Array.isArray(sqData)) {
-    //   sqData?.forEach((vul) => {
-    //     if (vul.severity === "BLOCKER") {
-    //       sqblocker++;
-    //     } else if (vul.severity === "CRITICAL") {
-    //       sqcritical++;
-    //     } else if (vul.severity === "MAJOR") {
-    //       sqmajor++;
-    //     } else if (vul.severity === "MINOR") {
-    //       sqminor++;
-    //     }
-    //   });
-    // } else {
-    //   console.log("error");
-    // }
-
-    // return (
-    //   <>
-    //     <Grid container spacing={1} pt={2}>
-    //       <Grid item xs={6} md={6} lg={6}>
-    //         <MKTypography
-    //           variant="body1"
-    //           key={`MKTypoSASTCQSQ5`}
-    //           color="inherit"
-    //           style={{
-    //             fontSize: "14px",
-    //             display: "flex",
-    //             justifyContent: "center"
-    //           }}
-    //         >
-    //           <b key="BOLDCQSQ5">Critical </b> : {sqblocker}
-    //         </MKTypography>
-    //       </Grid>
-    //       <Grid item xs={6} md={6} lg={6}>
-    //         <MKTypography
-    //           variant="body1"
-    //           key={`MKTypoSASRCQSQ6`}
-    //           color="inherit"
-    //           style={{
-    //             fontSize: "14px",
-    //             display: "flex",
-    //             justifyContent: "center"
-    //           }}
-    //         >
-    //           <b key="BOLDCQSQ6">High</b> : {sqcritical}
-    //         </MKTypography>
-    //       </Grid>
-    //       <Grid item xs={6} md={6} lg={6}>
-    //         <MKTypography
-    //           variant="body1"
-    //           key={`MKTypoSASTCQSQ7`}
-    //           color="inherit"
-    //           style={{
-    //             fontSize: "14px",
-    //             display: "flex",
-    //             justifyContent: "center"
-    //           }}
-    //         >
-    //           <b key="BOLDCQSQ7">Medium</b> : {sqmajor}
-    //         </MKTypography>
-    //       </Grid>
-    //       <Grid item xs={6} md={6} lg={6}>
-    //         <MKTypography
-    //           variant="body1"
-    //           key={`MKTypoSASTCQSQ8`}
-    //           color="inherit"
-    //           style={{
-    //             fontSize: "14px",
-    //             display: "flex",
-    //             justifyContent: "center"
-    //           }}
-    //         >
-    //           <b key="BOLDCQSQ8">Low</b>: {sqminor}
-    //         </MKTypography>
-    //       </Grid>
-    //     </Grid>
-    //   </>
-    // );
   } else {
     return (
       <>
@@ -390,7 +205,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           style={{
             fontSize: "calc(0.3rem + 0.5vw)",
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
         >
           No SAST issues data Available
@@ -399,37 +214,5 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     );
   }
 };
-
-// function BasicTable() {
-//   return (
-//     <TableContainer component={Paper}>
-//       <Table size="small" aria-label="a dense table" style={{ padding: "10px 10px 10px 10px", width: "100%", height: "100%" }}>
-//         <TableHead>
-//           {/* <TableRow style={{width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px"}}> */}
-//           <TableRow hover tabIndex={-1} sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}>
-//             <TableCell>Severity</TableCell>
-//             <TableCell style={{ position: "fixed", right: "75px" }}>Count</TableCell>
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {rowData.map((row) => (
-//             <TableRow
-//               key={row.severity}
-//               style={{ width: "100%", display: "inline-flex", alignItems: "flex-end", justifyContent: "space-between", paddingLeft: "30px" }}
-//             >
-//               {/* <TableCell scope="row" style={{ position: "relative", left: "15px", right: "15px"}}> */}
-//               <TableCell align="left">
-//                 {row.severity}
-//               </TableCell>
-//               <TableCell align="left">
-//                 {row.count}
-//               </TableCell>
-//             </TableRow>
-//           ))}
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//   );
-// }
 
 export default FetchSAST;

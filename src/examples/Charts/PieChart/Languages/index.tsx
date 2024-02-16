@@ -9,7 +9,7 @@ import MKBox from "../../../../components/MKBox";
 import { fNumber } from "../../../../utils/formatNumber";
 import { Typography } from "@mui/material";
 
-function Language({ title, chartColors, chartData }: any) {
+function Language({ title, chartColors, chartData, height }: any) {
   const theme = useTheme();
 
   const chartLabels = chartData.map((i: { label: any }) => i.label);
@@ -55,7 +55,7 @@ function Language({ title, chartColors, chartData }: any) {
           type="pie"
           series={chartSeries}
           options={chartOptions}
-          height={195}
+          height={height??195}
         />
       </MKBox>
     </Card>

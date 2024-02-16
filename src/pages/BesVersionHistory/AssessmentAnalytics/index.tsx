@@ -226,11 +226,11 @@ const FetchVulHistory = (versionDetails: any, setVulHistory: any) => {
 };
 
 const FetchData = ({
+  title,
   version,
   name,
   report,
   versionDetails,
-  masterData
 }: any) => {
   const [cqRiskData, setCqRiskData]: any = React.useState({});
   const [sqRiskData, setSqRiskData]: any = React.useState({});
@@ -264,7 +264,7 @@ const FetchData = ({
       return (
 
         <Language
-          title="Languages"
+          title={title}
           chartData={severityData}
           chartColors={[
             theme.palette.primary.main,
@@ -274,11 +274,9 @@ const FetchData = ({
             theme.palette.success.main,
             theme.palette.secondary.main
           ]}
+          height={232}
         />
-        // <SeverityLevels
-        //   chartColors={["#FFBB33", "#FF8633", "#FF6133", "#DC1003"]}
-        //   chartData={severityData}
-        // />
+
       );
     } else {
       return (
@@ -399,6 +397,7 @@ function AssessmentAnalytics({
                 // paddingRight: "9px"
               }}>
               <FetchData
+                title={value}
                 version={version}
                 name={name}
                 report={value}
