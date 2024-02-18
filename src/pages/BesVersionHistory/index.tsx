@@ -140,6 +140,7 @@ export const ModalForEnvsAndPlaybook = (): any => {
         onClick={handleOpen}
         size="small"
         title="Show compatible envs and playbooks"
+        disabled
         style={{
           fontSize: "15px",
           color: "black",
@@ -501,6 +502,7 @@ function BesVersionHistory() {
                       <Button
                         size="small"
                         title="Download Assessment Summary Report"
+                        disabled
                         endIcon={
                           <DownloadIcon
                             style={{
