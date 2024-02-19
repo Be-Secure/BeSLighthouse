@@ -87,7 +87,7 @@ function VulHistory({ vuldata }: any) {
               type="bar"
               series={chartSeries}
               options={chartOptions}
-              height={250}
+              height={218}
             />
         </MKBox>
       </MKBox>

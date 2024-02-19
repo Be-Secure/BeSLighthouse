@@ -274,7 +274,7 @@ const FetchData = ({
             theme.palette.success.main,
             theme.palette.secondary.main
           ]}
-          height={232}
+          height={218}
         />
 
       );
