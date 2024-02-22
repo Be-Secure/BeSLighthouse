@@ -295,7 +295,7 @@ function BesVersionHistory() {
           }
         }}
       >
-        {data.map((item: any, index: number) => {
+        {data.map((item: any, index: number) => {        
           if (`:${item.name}` === besName) {
             let definedScore: string = "0";
             if (item.hasOwnProperty("score")) definedScore = item.score;
@@ -368,7 +368,9 @@ function BesVersionHistory() {
                           height: "fit-content"
                         }}
                       >                
-                        {versionSummary.map((option: any, index1: any) => (
+                        {versionSummary
+                        .sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
+                        .map((option: any, index1: any) => (
                           <MenuItem
                             key={`TOPMENUITEM${index}${index1}`}
                             value={option.version}
