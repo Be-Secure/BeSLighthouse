@@ -34,19 +34,19 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     });
     const data = [
       {
-        severity: "high",
-        count: high,
-      },
-      {
-        severity: "critical",
+        severity: "Critical",
         count: critical,
       },
       {
-        severity: "medium",
+        severity: "High",
+        count: high,
+      },
+      {
+        severity: "Medium",
         count: medium,
       },
       {
-        severity: "minor",
+        severity: "Low",
         count: low,
       },
     ];
@@ -63,11 +63,8 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         >
           Summary Report
         </MKTypography>
-        <BasicTable
-          tableData={data}
-          tableHeading={headings}
-          tableStyle={{ textAling: "center" }}
-        />
+
+        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }}/>
       </>
     );
   } else if (
@@ -99,15 +96,15 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         count: sqblocker,
       },
       {
-        severity: "critical",
+        severity: "Critical",
         count: sqcritical,
       },
       {
-        severity: "major",
+        severity: "Major",
         count: sqmajor,
       },
       {
-        severity: "minor",
+        severity: "Minor",
         count: sqminor,
       },
     ];
@@ -123,11 +120,8 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
         >
           Summary Report
         </MKTypography>
-        <BasicTable
-          tableData={data}
-          tableHeading={headings}
-          tableStyle={{ textAling: "center" }}
-        />
+
+        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }}/>
       </>
     );
   } else if (
@@ -159,20 +153,20 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
 
       const data = [
         {
-          severity: "critical",
+          severity: "Critical",
           count: cqcritical,
         },
         {
-          severity: "high",
+          severity: "High",
           count: cqhigh,
         },
         {
-          severity: "low",
-          count: cqlow,
+          severity: "Medium",
+          count: cqmedium,
         },
         {
-          severity: "medium",
-          count: cqmedium,
+          severity: "Low",
+          count: cqlow,
         },
       ];
       const headings = ["severity", "count"];
@@ -187,11 +181,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           >
             Summary Report
           </MKTypography>
-          <BasicTable
-            tableData={data}
-            tableHeading={headings}
-            tableStyle={{ textAling: "center" }}
-          />
+          <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
         </>
       );
     }
