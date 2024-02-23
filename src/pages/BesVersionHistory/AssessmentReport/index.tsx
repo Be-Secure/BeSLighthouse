@@ -1,64 +1,30 @@
 import * as React from "react";
-
 import Icon from "@mui/material/Icon";
-
 import {
   Backdrop,
   Box,
   Button,
-  Divider,
   Fade,
   Grid,
   Modal,
-  Typography,
 } from "@mui/material";
 
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
-
 import { Link } from "react-router-dom";
-
 import { assessment_datastore } from "../../../dataStore";
-
-import MKBox from "../../../components/MKBox";
-
 import MKTypography from "../../../components/MKTypography";
-
 import {
   assessment_path,
   assessment_report,
 } from "../../../utils/assessmentReport";
-
 import FetchSAST from "./FetchSastReport";
-
-import SastToggleButton from "./SastToggleButton";
-
 import { useState } from "react";
 
 import vulnerabilityIcon from "../../../assets/images/bug.png";
-
 import dependencyIcon from "../../../assets/images/data-flow.png";
-
 import licenseIcon from "../../../assets/images/certificate.png";
-
 import scorecardIcon from "../../../assets/images/speedometer.png";
-
 import tavossIcon from "../../../assets/images/verified.png";
-
-import Table from "@mui/material/Table";
-
-import TableBody from "@mui/material/TableBody";
-
-import TableCell from "@mui/material/TableCell";
-
-import TableContainer from "@mui/material/TableContainer";
-
-import TableHead from "@mui/material/TableHead";
-
-import TableRow from "@mui/material/TableRow";
-
-import Paper from "@mui/material/Paper";
-
-import { link } from "fs";
 import BasicTable from "./BasicTable";
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
@@ -106,7 +72,6 @@ export const fetchvulJsonData = async (
 
     try {
       let data = JSON.parse(response);
-
       if (vulTool === "codeql") {
         setCQData(data);
       } else if (vulTool === "sonarqube") {
@@ -156,13 +121,6 @@ const FetchLowScores = ({ data }: any) => {
 
   return (
     <>
-      {/* <Grid key={`GRIDSC2`}
-
-      style={{ minWidth: "200px" }}>
-
-      {displayData}
-
-    </Grid> */}
       <MKTypography
         style={{
           paddingTop: "10px",
@@ -432,9 +390,8 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-
-      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
-
+      //Fix me 
+      link = `${assessment_datastore}/${name}/${version}/sast/${name}-${version}-sonarqube-report.json`;
       fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
     }
   }, [version]);
@@ -550,7 +507,6 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       myObject,
     ]);
   }
-
   if (
     report === "Vulnerabilities" &&
     Object.values(codeQlData).length !== 0 &&
@@ -568,9 +524,14 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     Object.values(codeQlData).length === 0
   ) {
     let issues: any = Object.values(sonarqubeData)[5];
-
+    let count = 0;
+    if (issues && issues.length > 0) {
+      for (let i = 0; i < issues.length; i++) {
+        if (issues[i]["severity"] === "CRITICAL" || issues[i]["severity"] === "MAJOR" || issues[i]["severity"] === "MINOR" || issues[i]["severity"] === "BLOCKER") count++;
+      }
+    }
     return (data_array = [
-      sonarqubeData.total,
+      count,
       <FetchSAST cqData={codeQlData} sqData={issues} />,
       "",
       "",
@@ -632,8 +593,6 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     ]);
   }
 
-  let flag = false;
-
   if (report === "Dependencies" && jsonDataLength !== 0) {
     if (
       !(
@@ -672,92 +631,6 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     </MKTypography>
   );
 }
-
-const GetHeadings = ({ receivedValue }: any) => {
-  if (receivedValue === "License Compliance") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          License Compatibiltity
-          <Icon
-            key={`Icon1`}
-            title="Licensing information of the OSS"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "Dependencies") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          Dependencies
-          <Icon
-            key={`Icon2`}
-            title="Software Bill Of Material"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "ScoreCard") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          OpenSSF Scorecard (0-10)
-          <Icon
-            key={`Icon3`}
-            title="Overall Security Score of the project"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "Criticality Score") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          OpenSSF Criticality Score (0-1)
-          <Icon
-            key={`Icon4`}
-            title="Score to tell how critical the OSS project"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "Vulnerabilities") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          Static Analysis Summary
-          <Icon
-            key={`Icon5`}
-            title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else {
-    return receivedValue;
-  }
-};
 
 function printText(item) {
   if (item == "Dependencies") {
@@ -1057,14 +930,6 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
       >
         <Fade in={open}>
           <Box style={modalStyle(item)}>
-            {/* <MKTypography style={{
-
-              fontSize: "20px",
-              color: "black",
-              textAling: "center"
-            }}>
-              Summary Report for {item}
-              </MKTypography> */}
             {data ? data[1] : "Not found"}
 
             {data && data[3] ? (
@@ -1091,24 +956,17 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
 };
 
 function AssessmentReport({
-  title,
   name,
   version,
   itemData,
   masterData,
-  ...other
 }: any) {
   const reports: string[] = [
     "Vulnerabilities",
-
     "Dependencies",
-
     "License Compliance",
-
     "ScoreCard",
-
     "Criticality Score",
-
     "TAVOSS Score",
   ];
 
@@ -1116,21 +974,6 @@ function AssessmentReport({
     <>
       {reports.map((item, index) => (
         <Grid item xs={6} md={2} lg={2} xl={2}>
-          {/* <GetAssessmentData
-
-                            Key={`Grid9${index}`}
-
-                            version={version}
-
-                            name={name}
-
-                            report={item}
-
-                            itemData={itemData}
-
-                            masterData={masterData}
-
-                          /> */}
 
           <ReportModal
             key={item}
@@ -1142,134 +985,6 @@ function AssessmentReport({
           />
         </Grid>
       ))}
-
-      {/* Getting the assessment report */}
-
-      {/* {report.map((value, index) => { */}
-
-      {/* // return ( */}
-
-      {/* //   <> */}
-
-      {/* <Grid item
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* //   </> */}
-
-      {/* // ); */}
-
-      {/* }) */}
-
-      {/* } */}
     </>
   );
 }

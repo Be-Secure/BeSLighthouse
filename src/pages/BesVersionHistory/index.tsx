@@ -215,13 +215,6 @@ export const ModalForEnvsAndPlaybook = (): any => {
   );
 }
 
-// function selectFilter(type: any, event: MouseEvent<HTMLAnchorElement>) {
-//   console.log("called")
-//   ProjectDisplay({type})
-//   debugger
-//   event.preventDefault();
-// }
-
 // This function is returns the full form of the project tags
 function getProjectTags(value: any) {
   // projectTags is the Object name
@@ -449,7 +442,7 @@ function BesVersionHistory() {
                         {item.id}
                       </MKTypography>
                     </Grid>
-              
+
                     {/* For Open Source Assurance Provider */}
                     <Grid
                       item
@@ -610,14 +603,14 @@ function BesVersionHistory() {
                       paddingTop: "12px",
                       paddingBottom: "7px"
                     }}
-                    >
+                  >
                     <Card
                       style={{
                         height: "fit-content",
                         paddingBottom: "8px",
                         paddingTop: "5px"
                       }}
-                      >
+                    >
                       <MKTypography
                         variant="h6"
                         textTransform="capitalize"
