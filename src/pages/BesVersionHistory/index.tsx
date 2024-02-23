@@ -259,11 +259,18 @@ function BesVersionHistory() {
   const [selectedOption, setSelectedOption] = React.useState("");
 
   try {
-    if (!selectedOption && versionSummary[0].version) {
-      setSelectedOption(versionSummary[0].version);
+    if (!selectedOption && versionSummary){
+        const latestVersion = versionSummary.reduce((latest, current) => {
+        const currentDate = new Date(current.release_date);
+        const latestDate = new Date(latest.release_date);
+        return currentDate > latestDate ? current : latest;
+      }, versionSummary[0]);
+      if (latestVersion.version){
+        setSelectedOption(latestVersion.version);
+      }
     }
   } catch (e: any) {
-    //ignore
+    console.log(e);
   }
 
   const handleOptionChange = (event: any) => {
@@ -288,7 +295,7 @@ function BesVersionHistory() {
           }
         }}
       >
-        {data.map((item: any, index: number) => {
+        {data.map((item: any, index: number) => {        
           if (`:${item.name}` === besName) {
             let definedScore: string = "0";
             if (item.hasOwnProperty("score")) definedScore = item.score;
@@ -311,8 +318,6 @@ function BesVersionHistory() {
               .join("");
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${camelCaseString}/`;
             const languages = Object.keys(item.language) // To get the list of languages
-            // console.log(item.owner)
-            // debugger
             return (
               <>
                 <Card key={`TOPCARD${index}`} style={{ marginTop: "-1.5rem", paddingTop: "6px" }}>
@@ -362,8 +367,10 @@ function BesVersionHistory() {
                           fontSize: "15px",
                           height: "fit-content"
                         }}
-                      >
-                        {versionSummary.map((option: any, index1: any) => (
+                      >                
+                        {versionSummary
+                        .sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
+                        .map((option: any, index1: any) => (
                           <MenuItem
                             key={`TOPMENUITEM${index}${index1}`}
                             value={option.version}
