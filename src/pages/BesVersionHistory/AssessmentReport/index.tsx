@@ -761,7 +761,7 @@ function modalStyle(report: string) {
 
         width: "fit-content",
 
-        height: "fit-content",
+        height: "90%",
 
         boxShadow: "24",
 
