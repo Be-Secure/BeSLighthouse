@@ -31,7 +31,7 @@ const BasicTable: React.FC<TableProps> = ({ tableData, tableHeading, tableStyle}
     return (<>
       <TableContainer component={Paper} style={{margin: "10px 40px 50px 40px", borderRadius: "0", height: "80%"}}>
         <Table size="small" aria-label="a dense table" style={{ height: "100%" }}>
-            <thead style={{ backgroundColor: "#8585ed", color: "white" }} >
+            <thead style={{ backgroundColor: "#8585ed", color: "white", position: "sticky", top: 0 }} >
 
           <tr>
             {tableHeading?.map((column, index) => (
