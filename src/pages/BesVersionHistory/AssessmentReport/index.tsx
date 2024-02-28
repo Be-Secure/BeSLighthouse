@@ -517,6 +517,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchCS data={jsonData} />,
       color_code,
       "",
+      risk_level
     ]);
   }
 
@@ -548,6 +549,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchLowScores data={jsonData} />,
       color_code,
       myObject,
+      risk_level
     ]);
   }
 
@@ -946,14 +948,17 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const [isHovered, setIsHovered] = useState(false);
   let data: any = GetAssessmentData(version, name, item, itemData, masterData);
   let color: any;
-
-  if (data && data[2]) {
+  let isRiskLevel: boolean;
+  if (data && data[2] && data[4]) {
     color = data[2];
+    isRiskLevel = true;
+    console.log("data: ", data[4]);
   } else {
     color = "";
+    isRiskLevel = false;
   }
   return (
     <>
@@ -967,7 +972,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           width: "100%",
 
           ":hover": {
-            boxShadow: "0 15px 20px rgba(0,0,0,0.1)", // Adjust the shadow level (0 to 24)
+            boxShadow: "0 15px 20px rgba(0,0,0,0.1)",
 
             transition: "box-shadow 0.5s ease-in-out",
 
@@ -995,7 +1000,44 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
             }}
           >
             {data ? data[0] : 0}
-
+            {isRiskLevel && (
+              <span
+              style={{
+                position: 'absolute',
+                fontSize: '14px',
+                cursor: 'pointer',
+                display: 'inline-block',
+                transition: 'color 0.5s',
+                color: "#36454F",
+              }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <i className="fas fa-info-circle" />
+              </span>
+            )}
+            { isHovered && (
+              <div
+              style={{
+                position: 'absolute',
+                top: '28px',
+                left: '50px',
+                //right: '50px',
+                backgroundColor: '#fff',
+                color: "black",
+                padding: '1px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                fontSize: '11px', 
+                fontWeight: 'normal', 
+                transition: 'opacity 0.5s',
+                opacity: 0.9,
+              }}
+            >
+              {data[4]}
+            </div>
+            )}
             <img
               style={{
                 width: "40px",
@@ -1029,6 +1071,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
               }}
               src={getImage(item)}
             />
+            
           </MKTypography>
         )}
 
