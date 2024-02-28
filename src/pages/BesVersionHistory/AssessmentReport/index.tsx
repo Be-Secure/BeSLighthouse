@@ -17,7 +17,7 @@ import { fetchJsonReport } from "../../../utils/fatch_json_report";
 
 import { Link } from "react-router-dom";
 
-import { assessment_datastore } from "../../../dataStore";
+import { assessment_datastore, version_details } from "../../../dataStore";
 
 import MKBox from "../../../components/MKBox";
 
@@ -296,10 +296,69 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   }
 };
 
-const FetchSBOM = ({ data, masterData, name }: any) => {
-  let tableData: any[] = [{}];
+async function checkForWeakness(dataObject, setWeakness: any) {
 
-  const headings = ["ID", "Name", "BeS Tech Stack", "License", "Link"];
+  let version: any
+  let sonarqubeLink: any
+  let codeqlLink: any
+  let weakness = ""
+  let codeqlData: any[]
+  let sonarqubeData: any
+  let foundPackages: any = {}
+  dataObject.map(async (dependency) => {
+
+  try {
+    let versionSummaryResponse: any = await fetchJsonReport(
+      version_details + dependency.id + "-" + dependency.name + "-Versiondetails.json"
+    );
+
+    let versionData: any[] = JSON.parse(versionSummaryResponse)
+    console.log(versionData[0].version)
+    version = versionData[0].version
+    sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
+  
+    codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
+  } catch (error) {
+    codeqlData = []
+    sonarqubeData = {}
+  }
+
+ try {
+    let responseCodeql: any = await fetchJsonReport(codeqlLink);
+    codeqlData = JSON.parse(responseCodeql);
+    
+  } catch (error) {
+    codeqlData = []
+  }
+
+  try {
+    let responseSonarqube: any = await fetchJsonReport(sonarqubeLink);
+    sonarqubeData = JSON.parse(responseSonarqube);
+  } catch(error) {
+    sonarqubeData = {}
+  }
+
+  if (codeqlData && codeqlData.length > 0) {
+    foundPackages.name = "Found"
+    weakness = "Found"
+  } else if (!codeqlData && sonarqubeData && sonarqubeData.total != 0) {
+    foundPackages.name = "Found"
+    weakness = "Found"
+  } else {
+    // debugger
+    foundPackages.name = "Not Found"
+  
+    weakness = "Not Found"
+  }
+
+})
+setWeakness(foundPackages)
+  
+}
+
+const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
+  let tableData: any[] = [{}];
+  const headings = ["ID", "Name", "BeS Tech Stack", "License", "Link", "Weakness"];
 
   let tracked: string[] = [];
 
@@ -332,9 +391,8 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
         const bes_technology_stack = dataObject?.bes_technology_stack;
 
         const license = dataObject?.license["spdx_id"];
-
+        // const weakness = await checkForWeakness(id, name);
         if (!duplicate) tracked.push(dp.name);
-
         tableData.push({
           ID: id,
           Name: name,
@@ -347,6 +405,7 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
               link
             </a>
           ),
+          Weakness: (weakness[name] ? "Found" : "Not Found")
         });
       }
     });
@@ -394,6 +453,7 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
 
 function GetAssessmentData(version, name, report, itemData, masterData) {
   const [jsonData, setJsonData]: any = React.useState({});
+  const [weakness, setWeakness]: any = React.useState({});
 
   const [codeQlData, setCQData]: any = React.useState([]);
 
@@ -422,10 +482,14 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
+      console.log("##################################################################")
+      console.log(assessment_path[reportNameMap])
+      if (assessment_path[reportNameMap]) {
+        link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
 
-      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
+        fetchJsonData(link, setJsonData);
+      }
 
-      fetchJsonData(link, setJsonData);
     }
   }, [version]);
 
@@ -433,19 +497,24 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     if (version?.trim()) {
       let link: string = "";
 
-      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
+      if (assessment_path[reportNameMapSonar]) {
+        link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
+    
+        fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
+      }
 
-      fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
     }
   }, [version]);
 
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
+      if (assessment_path[reportNameMapCodeql]) {
 
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
 
       fetchvulJsonData(link, "codeql", setCQData, setSQData);
+      }
     }
   }, [version]);
 
@@ -463,6 +532,17 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   let myObjectSonar;
 
   let myObject;
+
+  React.useEffect(() => {
+      
+    const dataObject = masterData?.filter(element => jsonData?.packages?.some(item => item.name === element.name));
+    console.log(jsonData)
+    if (dataObject) {
+      // debugger
+      checkForWeakness(dataObject, setWeakness);
+    }
+
+})
 
   if (report === "Vulnerabilities") {
     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
@@ -634,6 +714,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
   let flag = false;
 
+
   if (report === "Dependencies" && jsonDataLength !== 0) {
     if (
       !(
@@ -647,6 +728,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
           data={jsonData.packages}
           masterData={masterData}
           name={name}
+          weakness={weakness}
         />,
         "",
         myObject,
