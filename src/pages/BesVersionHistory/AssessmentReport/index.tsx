@@ -301,12 +301,11 @@ async function checkForWeakness(dataObject, setWeakness: any) {
   let version: any
   let sonarqubeLink: any
   let codeqlLink: any
-  let weakness = ""
   let codeqlData: any[]
   let sonarqubeData: any
-  let foundPackages: any = {}
+  let foundPackages: any = []
   dataObject.map(async (dependency) => {
-
+    debugger
   try {
     let versionSummaryResponse: any = await fetchJsonReport(
       version_details + dependency.id + "-" + dependency.name + "-Versiondetails.json"
@@ -319,16 +318,19 @@ async function checkForWeakness(dataObject, setWeakness: any) {
   
     codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
   } catch (error) {
+    
     codeqlData = []
     sonarqubeData = {}
+    debugger
   }
-
  try {
     let responseCodeql: any = await fetchJsonReport(codeqlLink);
     codeqlData = JSON.parse(responseCodeql);
     
   } catch (error) {
     codeqlData = []
+    debugger
+
   }
 
   try {
@@ -336,20 +338,19 @@ async function checkForWeakness(dataObject, setWeakness: any) {
     sonarqubeData = JSON.parse(responseSonarqube);
   } catch(error) {
     sonarqubeData = {}
+    debugger
+
   }
 
   if (codeqlData && codeqlData.length > 0) {
-    foundPackages.name = "Found"
-    weakness = "Found"
+    debugger
+
+    foundPackages.push(dependency.name) 
   } else if (!codeqlData && sonarqubeData && sonarqubeData.total != 0) {
-    foundPackages.name = "Found"
-    weakness = "Found"
-  } else {
-    // debugger
-    foundPackages.name = "Not Found"
-  
-    weakness = "Not Found"
-  }
+    debugger
+
+    foundPackages.push(dependency.name) 
+  } 
 
 })
 setWeakness(foundPackages)
@@ -453,7 +454,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
 
 function GetAssessmentData(version, name, report, itemData, masterData) {
   const [jsonData, setJsonData]: any = React.useState({});
-  const [weakness, setWeakness]: any = React.useState({});
+  const [weakness, setWeakness]: any = React.useState([]);
 
   const [codeQlData, setCQData]: any = React.useState([]);
 
@@ -534,15 +535,18 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   let myObject;
 
   React.useEffect(() => {
-      
-    const dataObject = masterData?.filter(element => jsonData?.packages?.some(item => item.name === element.name));
-    console.log(jsonData)
-    if (dataObject) {
-      // debugger
+    
+    const dataObject = masterData?.filter(element => jsonData?.packages?.some(item => item.name.toLowerCase() === element.name.toLowerCase()));
+    // debugger
+    if (dataObject.length > 0 && weakness.length) {
+      console.log(dataObject)
       checkForWeakness(dataObject, setWeakness);
     }
 
 })
+
+
+  console.log(weakness)
 
   if (report === "Vulnerabilities") {
     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
