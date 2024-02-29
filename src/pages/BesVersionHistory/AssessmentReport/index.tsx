@@ -148,15 +148,28 @@ const FetchCS = ({ data }: any) => {
     "Closed Issues",
     "Last Updated",
   ];
-  tableData = [
-    {
-      "Age(in months)": data.created_since,
-      Contributors: data.contributor_count,
-      Organizations: data.org_count,
-      "Closed Issues": data.closed_issues_count,
-      "Last Updated": data.updated_since,
-    },
-  ];
+
+  if ('default_score' in data) {
+    tableData = [
+      {
+        "Age(in months)": data.legacy.created_since,
+        Contributors: data.legacy.contributor_count,
+        Organizations: data.legacy.org_count,
+        "Closed Issues": data.legacy.closed_issues_count,
+        "Last Updated": data.legacy.updated_since,
+      },
+    ];
+  } else if ('criticality_score' in data) {
+    tableData = [
+      {
+        "Age(in months)": data.created_since,
+        Contributors: data.contributor_count,
+        Organizations: data.org_count,
+        "Closed Issues": data.closed_issues_count,
+        "Last Updated": data.updated_since,
+      },
+    ];
+  }
   return (
     <>
       <MKTypography
