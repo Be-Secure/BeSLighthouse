@@ -473,6 +473,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchCS data={jsonData} />,
       color_code,
       "",
+      risk_level
     ]);
   }
 
@@ -504,6 +505,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchLowScores data={jsonData} />,
       color_code,
       myObject,
+      risk_level
     ]);
   }
   if (
@@ -522,7 +524,6 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     Object.values(sonarqubeData).length !== 0 &&
     Object.values(codeQlData).length === 0
   ) {
-    debugger
     let issues: any = Object.values(sonarqubeData)[5];
     let count = 0;
     if (issues && issues.length > 0) {
@@ -819,17 +820,15 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const [isHovered, setIsHovered] = useState(false);
   let data: any = GetAssessmentData(version, name, item, itemData, masterData);
   let color: any;
   const countData = data[0];
-  debugger
   if (data && data[2]) {
     color = data[2];
   } else {
     color = "";
   }
-  debugger
   return (
     <>
       <Button
@@ -840,7 +839,8 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           height: "100px",
           width: "100%",
           ":hover": {
-            boxShadow: "0 15px 20px rgba(0,0,0,0.1)", // Adjust the shadow level (0 to 24)
+            boxShadow: "0 15px 20px rgba(0,0,0,0.1)",
+
             transition: "box-shadow 0.5s ease-in-out",
             border: "1px solid #5c4f4f",
             color: "blueviolet",
@@ -894,6 +894,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
               }}
               src={getImage(item)}
             />
+            
           </MKTypography>
         )}
 
@@ -904,6 +905,58 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           }}
         >
           {printText(item)}
+          {item === 'ScoreCard' || item === 'Criticality Score' ? (
+            <span
+            style={{
+              position: 'absolute',
+              fontSize: '12px',
+              cursor: 'pointer',
+              display: 'inline-block',
+              transition: 'color 0.5s',
+              color: "#36454F",
+              marginLeft: '5px'
+            }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <i className="fas fa-info-circle" />
+            </span>
+          ): ""}
+          { isHovered && (
+            <div
+            style={{
+              position: 'absolute',
+              top: '98%',
+              left: '55%',
+              backgroundColor: '#fff',
+              color: "black",
+              padding: '8px',
+              border: '1px solid #ccc',
+              borderRadius: '5px',
+              boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
+              fontSize: '11px', 
+              fontWeight: 'normal', 
+              transition: 'opacity 0.5s',
+              zIndex: 9999,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            { item === 'ScoreCard' ? (
+              <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+                <li>Low risk: 0 - 2</li>
+                <li>Medium risk: 2 - 5</li>
+                <li>High risk: 5 - 7.5</li>
+                <li>Critical risk: 7.5 - 10</li>
+              </ul>
+            ):(
+              <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+                <li>Low risk: 0.1 - 0.4</li>
+                <li>Medium risk: 0.4 - 0.6</li>
+                <li>High risk: 0.6 - 1.0</li>
+              </ul>
+            )} 
+          </div>
+          )}
         </MKTypography>
       </Button>
 
