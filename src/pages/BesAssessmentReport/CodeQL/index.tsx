@@ -71,7 +71,7 @@ export default function CodeQL({ data }: any) {
                       position: "relative",
                       minWidth:
                         headCell.id === "Start-Line" ||
-                        headCell.id === "End-Line"
+                          headCell.id === "End-Line"
                           ? "110px"
                           : ""
                     }}

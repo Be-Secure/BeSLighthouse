@@ -1,5 +1,4 @@
 import * as React from "react";
-import Icon from "@mui/material/Icon";
 import {
   Backdrop,
   Box,

@@ -1,13 +1,6 @@
 import * as React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import MKTypography from "../../../components/MKTypography";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import BasicTable from "./BasicTable";
 
 const FetchSAST = ({ cqData, sqData }: any): any => {
@@ -64,7 +57,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           Summary Report
         </MKTypography>
 
-        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }}/>
+        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
       </>
     );
   } else if (
@@ -121,7 +114,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           Summary Report
         </MKTypography>
 
-        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }}/>
+        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
       </>
     );
   } else if (
