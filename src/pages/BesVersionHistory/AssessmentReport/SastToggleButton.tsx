@@ -42,7 +42,7 @@ function switchSast(
           <MKBox key="MKBOXSASTCQMAINBODY">
             <FetchSAST
               cqData={codeQlData}
-              // sqData={sonarqubeData}
+            // sqData={sonarqubeData}
             />
           </MKBox>
         </>
@@ -120,7 +120,7 @@ export default function SastToggleButton({
           onChange={handleChange}
           aria-label="Platform"
           size="medium"
-          // style={{ display: "flex", position: "relative", top: "45px", left: "18%" }}
+        // style={{ display: "flex", position: "relative", top: "45px", left: "18%" }}
         >
           <ToggleButton disabled={sastReport === "codeql"} value="codeql">
             CodeQL

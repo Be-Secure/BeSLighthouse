@@ -1,5 +1,4 @@
 import * as React from "react";
-import Icon from "@mui/material/Icon";
 import {
   Backdrop,
   Box,
@@ -365,22 +364,15 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
 
 function GetAssessmentData(version, name, report, itemData, masterData) {
   const [jsonData, setJsonData]: any = React.useState({});
-
   const [codeQlData, setCQData]: any = React.useState([]);
-
   const [sonarqubeData, setSQData]: any = React.useState({});
-
   let reportNameMap = "";
-
   let reportNameMapCodeql = "";
-
   let reportNameMapSonar = "";
-
   if (report === "Criticality Score") {
     reportNameMap = "Criticality Score";
   } else if (report === "Vulnerabilities") {
     reportNameMapCodeql = "Codeql";
-
     reportNameMapSonar = "Sonarqube";
   } else if (report === "License Compliance") {
     reportNameMap = "Fossology";
@@ -393,9 +385,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
-
       fetchJsonData(link, setJsonData);
     }
   }, [version]);
@@ -412,26 +402,18 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-
       link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
-
       fetchvulJsonData(link, "codeql", setCQData, setSQData);
     }
   }, [version]);
 
   let jsonDataLength: number = Object.values(jsonData).length;
-
   let data_array: any[];
   let pathNameCodeql: string;
-
   let pathNameSonar: string;
-
   let pathName: string;
-
   let myObjectCodeql;
-
   let myObjectSonar;
-
   let myObject;
 
   if (report === "Vulnerabilities") {
@@ -841,6 +823,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const [isHovered, setIsHovered] = useState(false);
   let data: any = GetAssessmentData(version, name, item, itemData, masterData);
   let color: any;
+  const countData = data[0];
   if (data && data[2]) {
     color = data[2];
   } else {
@@ -851,27 +834,21 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
       <Button
         variant="contained"
         onClick={handleOpen}
-        disabled={data && data[0] ? false : true}
+        disabled={data && countData !== undefined ? false : true}
         sx={{
           height: "100px",
-
           width: "100%",
-
           ":hover": {
             boxShadow: "0 15px 20px rgba(0,0,0,0.1)",
 
             transition: "box-shadow 0.5s ease-in-out",
-
             border: "1px solid #5c4f4f",
-
             color: "blueviolet",
           },
         }}
         style={{
           backgroundColor: "white",
-
           display: "block",
-
           textAlign: "left",
         }}
       >
@@ -879,9 +856,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           <MKTypography
             style={{
               fontSize: "40px",
-
               color: color,
-
               fontWeight: "bold",
             }}
           >

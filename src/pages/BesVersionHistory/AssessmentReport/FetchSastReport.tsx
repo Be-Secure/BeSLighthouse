@@ -1,13 +1,6 @@
 import * as React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import MKTypography from "../../../components/MKTypography";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import BasicTable from "./BasicTable";
 
 const FetchSAST = ({ cqData, sqData }: any): any => {
@@ -64,7 +57,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           Summary Report
         </MKTypography>
 
-        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }}/>
+        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
       </>
     );
   } else if (
@@ -121,7 +114,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           Summary Report
         </MKTypography>
 
-        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }}/>
+        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
       </>
     );
   } else if (
@@ -193,12 +186,17 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           key={`MKTypoLBlankCQSQ1`}
           color="inherit"
           style={{
-            fontSize: "calc(0.3rem + 0.5vw)",
-            display: "flex",
-            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: "18px",
+            width: "100%",
+            height: "100%",
+            paddingBottom: "15%",
+            paddingTop: "15%",
+            margin: "0px 35px 0px 35px",
+            textAlign: 'center'
           }}
         >
-          No SAST issues data Available
+          No Weaknesses Found.
         </Typography>
       </>
     );

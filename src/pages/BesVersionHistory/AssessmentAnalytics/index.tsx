@@ -3,12 +3,10 @@ import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
-import SeverityLevels from "../../../examples/Charts/PieChart/SeverityLevels";
 import VulHistory from "../../../examples/Charts/BarChart/VulHistory";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
 import { assessment_datastore } from "../../../dataStore";
-import MKBox from "../../../components/MKBox";
 import {
   assessment_path,
   assessment_report
@@ -386,28 +384,28 @@ function AssessmentAnalytics({
     // "Critical Issues"
   ];
   return (
-      <Grid container pt={2} spacing={1} style={{ display: "flex", justifyContent: "space-between"}}>
-        {/* <Grid container spacing={1} pt={2} style={{ display: "flex", justifyContent: "space-around" }}> */}
+    <Grid container pt={2} spacing={1} style={{ display: "flex", justifyContent: "space-between" }}>
+      {/* <Grid container spacing={1} pt={2} style={{ display: "flex", justifyContent: "space-around" }}> */}
 
-        {report.map((value, index) => {
-          return (
+      {report.map((value, index) => {
+        return (
 
-            <Grid item xs={12} md={6}
-              style={{
-                // paddingRight: "9px"
-              }}>
-              <FetchData
-                title={value}
-                version={version}
-                name={name}
-                report={value}
-                versionDetails={versionDetails}
-                masterData={masterData}
-              />
-            </Grid>
-          );
-        })}
-      </Grid>
+          <Grid item xs={12} md={6}
+            style={{
+              // paddingRight: "9px"
+            }}>
+            <FetchData
+              title={value}
+              version={version}
+              name={name}
+              report={value}
+              versionDetails={versionDetails}
+              masterData={masterData}
+            />
+          </Grid>
+        );
+      })}
+    </Grid>
 
   );
 }
