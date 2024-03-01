@@ -148,15 +148,28 @@ const FetchCS = ({ data }: any) => {
     "Closed Issues",
     "Last Updated",
   ];
-  tableData = [
-    {
-      "Age(in months)": data.created_since,
-      Contributors: data.contributor_count,
-      Organizations: data.org_count,
-      "Closed Issues": data.closed_issues_count,
-      "Last Updated": data.updated_since,
-    },
-  ];
+
+  if ('default_score' in data) {
+    tableData = [
+      {
+        "Age(in months)": data.legacy.created_since,
+        Contributors: data.legacy.contributor_count,
+        Organizations: data.legacy.org_count,
+        "Closed Issues": data.legacy.closed_issues_count,
+        "Last Updated": data.legacy.updated_since,
+      },
+    ];
+  } else if ('criticality_score' in data) {
+    tableData = [
+      {
+        "Age(in months)": data.created_since,
+        Contributors: data.contributor_count,
+        Organizations: data.org_count,
+        "Closed Issues": data.closed_issues_count,
+        "Last Updated": data.updated_since,
+      },
+    ];
+  }
   return (
     <>
       <MKTypography
@@ -443,26 +456,30 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
   if (report === "Criticality Score" && jsonDataLength !== 0) {
     let color_code = "";
-
     let risk_level = "";
-
+    let criticality_score: any = 0.0;
+    if ('default_score' in jsonData) {
+      criticality_score = parseFloat(jsonData["default_score"]);
+    } else if ('criticality_score' in jsonData) {
+      criticality_score = jsonData["criticality_score"];
+    }
     if (
-      jsonData.criticality_score.toFixed(2) >= 0.1 &&
-      jsonData.criticality_score.toFixed(2) < 0.4
+      criticality_score.toFixed(2) >= 0.1 &&
+      criticality_score.toFixed(2) < 0.4
     ) {
       color_code = "#008000";
 
       risk_level = "Low risk";
     } else if (
-      jsonData.criticality_score.toFixed(2) >= 0.4 &&
-      jsonData.criticality_score.toFixed(2) < 0.6
+      criticality_score.toFixed(2) >= 0.4 &&
+      criticality_score.toFixed(2) < 0.6
     ) {
       color_code = "#FFC300";
 
       risk_level = "Medium risk";
     } else if (
-      jsonData.criticality_score.toFixed(2) >= 0.6 &&
-      jsonData.criticality_score.toFixed(2) <= 1.0
+      criticality_score.toFixed(2) >= 0.6 &&
+      criticality_score.toFixed(2) <= 1.0
     ) {
       color_code = "#FF5733";
 
@@ -470,7 +487,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     }
 
     return (data_array = [
-      jsonData.criticality_score.toFixed(2),
+      criticality_score.toFixed(2),
       <FetchCS data={jsonData} />,
       color_code,
       "",
