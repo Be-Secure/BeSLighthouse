@@ -193,12 +193,17 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
           key={`MKTypoLBlankCQSQ1`}
           color="inherit"
           style={{
-            fontSize: "calc(0.3rem + 0.5vw)",
-            display: "flex",
-            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: "18px",
+            width: "100%",
+            height: "100%",
+            paddingBottom: "15%",
+            paddingTop: "15%",
+            margin: "0px 35px 0px 35px",
+            textAlign: 'center'
           }}
         >
-          No SAST issues data Available
+          No Weaknesses Found.
         </Typography>
       </>
     );
