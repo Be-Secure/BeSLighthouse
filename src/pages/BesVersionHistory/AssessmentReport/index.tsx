@@ -841,14 +841,10 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const [isHovered, setIsHovered] = useState(false);
   let data: any = GetAssessmentData(version, name, item, itemData, masterData);
   let color: any;
-  let isRiskLevel: boolean;
-  if (data && data[2] && data[4]) {
+  if (data && data[2]) {
     color = data[2];
-    isRiskLevel = true;
-    console.log("data: ", data[4]);
   } else {
     color = "";
-    isRiskLevel = false;
   }
   return (
     <>
@@ -890,44 +886,6 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
             }}
           >
             {data ? data[0] : 0}
-            {isRiskLevel && (
-              <span
-              style={{
-                position: 'absolute',
-                fontSize: '14px',
-                cursor: 'pointer',
-                display: 'inline-block',
-                transition: 'color 0.5s',
-                color: "#36454F",
-              }}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              >
-                <i className="fas fa-info-circle" />
-              </span>
-            )}
-            { isHovered && (
-              <div
-              style={{
-                position: 'absolute',
-                top: '28px',
-                left: '50px',
-                //right: '50px',
-                backgroundColor: '#fff',
-                color: "black",
-                padding: '1px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-                fontSize: '11px', 
-                fontWeight: 'normal', 
-                transition: 'opacity 0.5s',
-                opacity: 0.9,
-              }}
-            >
-              {data[4]}
-            </div>
-            )}
             <img
               style={{
                 width: "40px",
@@ -972,6 +930,58 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           }}
         >
           {printText(item)}
+          {item === 'ScoreCard' || item === 'Criticality Score' ? (
+            <span
+            style={{
+              position: 'absolute',
+              fontSize: '12px',
+              cursor: 'pointer',
+              display: 'inline-block',
+              transition: 'color 0.5s',
+              color: "#36454F",
+              marginLeft: '5px'
+            }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <i className="fas fa-info-circle" />
+            </span>
+          ): ""}
+          { isHovered && (
+            <div
+            style={{
+              position: 'absolute',
+              top: '98%',
+              left: '55%',
+              backgroundColor: '#fff',
+              color: "black",
+              padding: '8px',
+              border: '1px solid #ccc',
+              borderRadius: '5px',
+              boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
+              fontSize: '11px', 
+              fontWeight: 'normal', 
+              transition: 'opacity 0.5s',
+              zIndex: 9999,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            { item === 'ScoreCard' ? (
+              <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+                <li>Low risk: 0 - 2</li>
+                <li>Medium risk: 2 - 5</li>
+                <li>High risk: 5 - 7.5</li>
+                <li>Critical risk: 7.5 - 10</li>
+              </ul>
+            ):(
+              <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+                <li>Low risk: 0.1 - 0.4</li>
+                <li>Medium risk: 0.4 - 0.6</li>
+                <li>High risk: 0.6 - 1.0</li>
+              </ul>
+            )} 
+          </div>
+          )}
         </MKTypography>
       </Button>
 
