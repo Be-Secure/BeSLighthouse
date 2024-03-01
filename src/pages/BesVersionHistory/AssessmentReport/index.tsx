@@ -600,6 +600,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     Object.values(sonarqubeData).length !== 0 &&
     Object.values(codeQlData).length === 0
   ) {
+    debugger
     let issues: any = Object.values(sonarqubeData)[5];
     let count = 0;
     if (issues && issues.length > 0) {
@@ -913,6 +914,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   } else {
     color = "";
   }
+  debugger
   return (
     <>
       <Button
