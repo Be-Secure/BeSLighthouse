@@ -1,19 +1,8 @@
 import * as React from "react";
-import {
-  Backdrop,
-  Box,
-  Button,
-  Fade,
-  Grid,
-  Modal,
-} from "@mui/material";
-
+import { Backdrop, Box, Button, Fade, Grid, Modal } from "@mui/material";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
-
 import { assessment_datastore, version_details } from "../../../dataStore";
-
-
 import MKTypography from "../../../components/MKTypography";
 import {
   assessment_path,
@@ -21,7 +10,6 @@ import {
 } from "../../../utils/assessmentReport";
 import FetchSAST from "./FetchSastReport";
 import { useState } from "react";
-
 import vulnerabilityIcon from "../../../assets/images/bug.png";
 import dependencyIcon from "../../../assets/images/data-flow.png";
 import licenseIcon from "../../../assets/images/certificate.png";
@@ -151,7 +139,7 @@ const FetchCS = ({ data }: any) => {
     "Last Updated",
   ];
 
-  if ('default_score' in data) {
+  if ("default_score" in data) {
     tableData = [
       {
         "Age(in months)": data.legacy.created_since,
@@ -161,7 +149,7 @@ const FetchCS = ({ data }: any) => {
         "Last Updated": data.legacy.updated_since,
       },
     ];
-  } else if ('criticality_score' in data) {
+  } else if ("criticality_score" in data) {
     tableData = [
       {
         "Age(in months)": data.created_since,
@@ -189,7 +177,6 @@ const FetchCS = ({ data }: any) => {
         tableHeading={headings}
         tableStyle={{ textAlign: "center" }}
       />
-
     </>
   );
 };
@@ -270,63 +257,70 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 };
 
 async function checkForWeakness(dataObject, setWeakness: any) {
-  let version: any
-  let sonarqubeLink: any
-  let codeqlLink: any
-  let codeqlData: any[]
-  let sonarqubeData: any
-  let foundPackages: any = {}
+  let version: any;
+  let sonarqubeLink: any;
+  let codeqlLink: any;
+  let codeqlData: any[];
+  let sonarqubeData: any;
+  let foundPackages: any = {};
   // debugger
   for (let dependency of dataObject) {
     try {
       let versionSummaryResponse: any = await fetchJsonReport(
-        version_details + dependency.id + "-" + dependency.name + "-Versiondetails.json"
+        version_details +
+          dependency.id +
+          "-" +
+          dependency.name +
+          "-Versiondetails.json"
       );
       // debugger
-      let versionData: any[] = JSON.parse(versionSummaryResponse)
-      version = versionData[0].version
+      let versionData: any[] = JSON.parse(versionSummaryResponse);
+      version = versionData[0].version;
       sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
 
       codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
     } catch (error) {
-
-      codeqlData = []
-      sonarqubeData = {}
+      codeqlData = [];
+      sonarqubeData = {};
     }
     try {
       let responseCodeql: any = await fetchJsonReport(codeqlLink);
       codeqlData = JSON.parse(responseCodeql);
-
     } catch (error) {
-      codeqlData = []
-
+      codeqlData = [];
     }
 
     try {
       let responseSonarqube: any = await fetchJsonReport(sonarqubeLink);
       sonarqubeData = JSON.parse(responseSonarqube);
     } catch (error) {
-      sonarqubeData = {}
-
+      sonarqubeData = {};
     }
 
     if (codeqlData && codeqlData.length > 0) {
-
-      foundPackages[dependency.name] = true
-    } else if (codeqlData.length === 0 && sonarqubeData && sonarqubeData.total != 0) {
-      foundPackages[dependency.name] = true
-
+      foundPackages[dependency.name] = true;
+    } else if (
+      codeqlData.length === 0 &&
+      sonarqubeData &&
+      sonarqubeData.total != 0
+    ) {
+      foundPackages[dependency.name] = true;
     }
-
   }
   // debugger
-  setWeakness(foundPackages)
-
+  setWeakness(foundPackages);
 }
 
 const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
   let tableData: any[] = [{}];
-  const headings = ["ID", "Name", "BeS Tech Stack", "License", "Link", "Weakness"];
+  const headings = [
+    "ID",
+    "Name",
+    "BeS Tech Stack",
+    "License",
+    "Link",
+    "Weakness",
+  ];
 
   let tracked: string[] = [];
 
@@ -373,7 +367,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
               link
             </a>
           ),
-          Weakness: (weakness[name] ? "Exist" : "Absent")
+          Weakness: weakness[name] ? "Exist" : "Absent",
         });
       }
     });
@@ -452,7 +446,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-      //Fix me 
+      //Fix me
       link = `${assessment_datastore}/${name}/${version}/sast/${name}-${version}-sonarqube-report.json`;
       fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
     }
@@ -475,17 +469,17 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   let myObjectSonar;
   let myObject;
 
-
   React.useEffect(() => {
-
-    const dataObject = masterData?.filter(element => jsonData?.packages?.some(item => item.name.toLowerCase() === element.name.toLowerCase()));
+    const dataObject = masterData?.filter((element) =>
+      jsonData?.packages?.some(
+        (item) => item.name.toLowerCase() === element.name.toLowerCase()
+      )
+    );
     if (dataObject.length > 0 && Object.values(weakness).length === 0) {
       // debugger
       checkForWeakness(dataObject, setWeakness);
     }
-
-  })
-
+  });
 
   // console.log(weakness)
 
@@ -513,9 +507,9 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     let color_code = "";
     let risk_level = "";
     let criticality_score: any = 0.0;
-    if ('default_score' in jsonData) {
+    if ("default_score" in jsonData) {
       criticality_score = parseFloat(jsonData["default_score"]);
-    } else if ('criticality_score' in jsonData) {
+    } else if ("criticality_score" in jsonData) {
       criticality_score = jsonData["criticality_score"];
     }
     if (
@@ -546,7 +540,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchCS data={jsonData} />,
       color_code,
       "",
-      risk_level
+      risk_level,
     ]);
   }
 
@@ -578,7 +572,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchLowScores data={jsonData} />,
       color_code,
       myObject,
-      risk_level
+      risk_level,
     ]);
   }
   if (
@@ -601,7 +595,13 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     let count = 0;
     if (issues && issues.length > 0) {
       for (let i = 0; i < issues.length; i++) {
-        if (issues[i]["severity"] === "CRITICAL" || issues[i]["severity"] === "MAJOR" || issues[i]["severity"] === "MINOR" || issues[i]["severity"] === "BLOCKER") count++;
+        if (
+          issues[i]["severity"] === "CRITICAL" ||
+          issues[i]["severity"] === "MAJOR" ||
+          issues[i]["severity"] === "MINOR" ||
+          issues[i]["severity"] === "BLOCKER"
+        )
+          count++;
       }
     }
     return (data_array = [
@@ -968,7 +968,6 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
               }}
               src={getImage(item)}
             />
-
           </MKTypography>
         )}
 
@@ -979,51 +978,65 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           }}
         >
           {printText(item)}
-          {item === 'ScoreCard' || item === 'Criticality Score' ? (
+          {item === "ScoreCard" || item === "Criticality Score" ? (
             <span
               style={{
-                position: 'absolute',
-                fontSize: '12px',
-                cursor: 'pointer',
-                display: 'inline-block',
-                transition: 'color 0.5s',
+                position: "absolute",
+                fontSize: "12px",
+                cursor: "pointer",
+                display: "inline-block",
+                transition: "color 0.5s",
                 color: "#36454F",
-                marginLeft: '5px'
+                marginLeft: "5px",
               }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
               <i className="fas fa-info-circle" />
             </span>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {isHovered && (
             <div
               style={{
-                position: 'absolute',
-                top: '98%',
-                left: '55%',
-                backgroundColor: '#fff',
+                position: "absolute",
+                top: "98%",
+                left: "55%",
+                backgroundColor: "#fff",
                 color: "black",
-                padding: '8px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
-                fontSize: '11px',
-                fontWeight: 'normal',
-                transition: 'opacity 0.5s',
+                padding: "8px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.4)",
+                fontSize: "11px",
+                fontWeight: "normal",
+                transition: "opacity 0.5s",
                 zIndex: 9999,
-                whiteSpace: 'nowrap',
+                whiteSpace: "nowrap",
               }}
             >
-              {item === 'ScoreCard' ? (
-                <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+              {item === "ScoreCard" ? (
+                <ul
+                  style={{
+                    listStyleType: "disc",
+                    margin: 0,
+                    paddingInlineStart: "14px",
+                  }}
+                >
                   <li>Low risk: 0 - 2</li>
                   <li>Medium risk: 2 - 5</li>
                   <li>High risk: 5 - 7.5</li>
                   <li>Critical risk: 7.5 - 10</li>
                 </ul>
               ) : (
-                <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+                <ul
+                  style={{
+                    listStyleType: "disc",
+                    margin: 0,
+                    paddingInlineStart: "14px",
+                  }}
+                >
                   <li>Low risk: 0.1 - 0.4</li>
                   <li>Medium risk: 0.4 - 0.6</li>
                   <li>High risk: 0.6 - 1.0</li>
@@ -1074,12 +1087,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   );
 };
 
-function AssessmentReport({
-  name,
-  version,
-  itemData,
-  masterData,
-}: any) {
+function AssessmentReport({ name, version, itemData, masterData }: any) {
   const reports: string[] = [
     "Vulnerabilities",
     "Dependencies",
@@ -1093,7 +1101,6 @@ function AssessmentReport({
     <>
       {reports.map((item, index) => (
         <Grid item xs={6} md={2} lg={2} xl={2}>
-
           <ReportModal
             key={item}
             version={version}
