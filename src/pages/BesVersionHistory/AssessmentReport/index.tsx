@@ -263,7 +263,7 @@ async function checkForWeakness(dataObject, setWeakness: any) {
   let codeqlData: any[];
   let sonarqubeData: any;
   let foundPackages: any = {};
-  // debugger
+  
   for (let dependency of dataObject) {
     try {
       let versionSummaryResponse: any = await fetchJsonReport(
@@ -273,7 +273,7 @@ async function checkForWeakness(dataObject, setWeakness: any) {
           dependency.name +
           "-Versiondetails.json"
       );
-      // debugger
+      
       let versionData: any[] = JSON.parse(versionSummaryResponse);
       version = versionData[0].version;
       sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
@@ -307,7 +307,7 @@ async function checkForWeakness(dataObject, setWeakness: any) {
       foundPackages[dependency.name] = true;
     }
   }
-  // debugger
+  
   setWeakness(foundPackages);
 }
 
@@ -353,7 +353,6 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
         const bes_technology_stack = dataObject?.bes_technology_stack;
 
         const license = dataObject?.license["spdx_id"];
-        // const weakness = await checkForWeakness(id, name);
         if (!duplicate) tracked.push(dp.name);
         tableData.push({
           ID: id,
@@ -476,12 +475,11 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       )
     );
     if (dataObject.length > 0 && Object.values(weakness).length === 0) {
-      // debugger
+      
       checkForWeakness(dataObject, setWeakness);
     }
   });
 
-  // console.log(weakness)
 
   if (report === "Vulnerabilities") {
     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
