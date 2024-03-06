@@ -1,10 +1,9 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/poi_data";
-import { Icon, IconButton, MenuItem, Select, Tooltip, Typography } from "@mui/material";
+import { MenuItem, Select, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
@@ -12,9 +11,7 @@ import AssessmentReport from "./AssessmentReport";
 import AssessmentAnalytics from "./AssessmentAnalytics";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
-import { Divider } from "@mui/material";
 import { getEnvPathStatus } from "../../utils/fatch_json_report";
-import { Tune } from "@mui/icons-material";
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
@@ -22,8 +19,6 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import ProjectDisplay from "../../layouts/pages/projectOfInterest/ProjectDisplay";
-import { MouseEvent } from 'react';
 import { projectTags } from "./tags"
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -215,13 +210,6 @@ export const ModalForEnvsAndPlaybook = (): any => {
   );
 }
 
-// function selectFilter(type: any, event: MouseEvent<HTMLAnchorElement>) {
-//   console.log("called")
-//   ProjectDisplay({type})
-//   debugger
-//   event.preventDefault();
-// }
-
 // This function is returns the full form of the project tags
 function getProjectTags(value: any) {
   // projectTags is the Object name
@@ -259,11 +247,18 @@ function BesVersionHistory() {
   const [selectedOption, setSelectedOption] = React.useState("");
 
   try {
-    if (!selectedOption && versionSummary[0].version) {
-      setSelectedOption(versionSummary[0].version);
+    if (!selectedOption && versionSummary) {
+      const latestVersion = versionSummary.reduce((latest, current) => {
+        const currentDate = new Date(current.release_date);
+        const latestDate = new Date(latest.release_date);
+        return currentDate > latestDate ? current : latest;
+      }, versionSummary[0]);
+      if (latestVersion.version) {
+        setSelectedOption(latestVersion.version);
+      }
     }
   } catch (e: any) {
-    //ignore
+    console.log(e);
   }
 
   const handleOptionChange = (event: any) => {
@@ -311,8 +306,6 @@ function BesVersionHistory() {
               .join("");
             const envpath: string = `https://github.com/Be-Secure/besecure-ce-env-repo/tree/master/${camelCaseString}/`;
             const languages = Object.keys(item.language) // To get the list of languages
-            // console.log(item.owner)
-            // debugger
             return (
               <>
                 <Card key={`TOPCARD${index}`} style={{ marginTop: "-1.5rem", paddingTop: "6px" }}>
@@ -363,14 +356,16 @@ function BesVersionHistory() {
                           height: "fit-content"
                         }}
                       >
-                        {versionSummary.map((option: any, index1: any) => (
-                          <MenuItem
-                            key={`TOPMENUITEM${index}${index1}`}
-                            value={option.version}
-                          >
-                            {option.version}
-                          </MenuItem>
-                        ))}
+                        {versionSummary
+                          .sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
+                          .map((option: any, index1: any) => (
+                            <MenuItem
+                              key={`TOPMENUITEM${index}${index1}`}
+                              value={option.version}
+                            >
+                              {option.version}
+                            </MenuItem>
+                          ))}
                       </Select>
                     </Grid>
                     <Grid
@@ -442,7 +437,7 @@ function BesVersionHistory() {
                         {item.id}
                       </MKTypography>
                     </Grid>
-              
+
                     {/* For Open Source Assurance Provider */}
                     <Grid
                       item
@@ -603,14 +598,14 @@ function BesVersionHistory() {
                       paddingTop: "12px",
                       paddingBottom: "7px"
                     }}
-                    >
+                  >
                     <Card
                       style={{
                         height: "fit-content",
                         paddingBottom: "8px",
                         paddingTop: "5px"
                       }}
-                      >
+                    >
                       <MKTypography
                         variant="h6"
                         textTransform="capitalize"

@@ -1,64 +1,32 @@
 import * as React from "react";
-
-import Icon from "@mui/material/Icon";
-
 import {
   Backdrop,
   Box,
   Button,
-  Divider,
   Fade,
   Grid,
   Modal,
-  Typography,
 } from "@mui/material";
 
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
-
 import { Link } from "react-router-dom";
 
 import { assessment_datastore, version_details } from "../../../dataStore";
 
-import MKBox from "../../../components/MKBox";
 
 import MKTypography from "../../../components/MKTypography";
-
 import {
   assessment_path,
   assessment_report,
 } from "../../../utils/assessmentReport";
-
 import FetchSAST from "./FetchSastReport";
-
-import SastToggleButton from "./SastToggleButton";
-
 import { useState } from "react";
 
 import vulnerabilityIcon from "../../../assets/images/bug.png";
-
 import dependencyIcon from "../../../assets/images/data-flow.png";
-
 import licenseIcon from "../../../assets/images/certificate.png";
-
 import scorecardIcon from "../../../assets/images/speedometer.png";
-
 import tavossIcon from "../../../assets/images/verified.png";
-
-import Table from "@mui/material/Table";
-
-import TableBody from "@mui/material/TableBody";
-
-import TableCell from "@mui/material/TableCell";
-
-import TableContainer from "@mui/material/TableContainer";
-
-import TableHead from "@mui/material/TableHead";
-
-import TableRow from "@mui/material/TableRow";
-
-import Paper from "@mui/material/Paper";
-
-import { link } from "fs";
 import BasicTable from "./BasicTable";
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
@@ -106,7 +74,6 @@ export const fetchvulJsonData = async (
 
     try {
       let data = JSON.parse(response);
-
       if (vulTool === "codeql") {
         setCQData(data);
       } else if (vulTool === "sonarqube") {
@@ -156,13 +123,6 @@ const FetchLowScores = ({ data }: any) => {
 
   return (
     <>
-      {/* <Grid key={`GRIDSC2`}
-
-      style={{ minWidth: "200px" }}>
-
-      {displayData}
-
-    </Grid> */}
       <MKTypography
         style={{
           paddingTop: "10px",
@@ -190,15 +150,28 @@ const FetchCS = ({ data }: any) => {
     "Closed Issues",
     "Last Updated",
   ];
-  tableData = [
-    {
-      "Age(in months)": data.created_since,
-      Contributors: data.contributor_count,
-      Organizations: data.org_count,
-      "Closed Issues": data.closed_issues_count,
-      "Last Updated": data.updated_since,
-    },
-  ];
+
+  if ('default_score' in data) {
+    tableData = [
+      {
+        "Age(in months)": data.legacy.created_since,
+        Contributors: data.legacy.contributor_count,
+        Organizations: data.legacy.org_count,
+        "Closed Issues": data.legacy.closed_issues_count,
+        "Last Updated": data.legacy.updated_since,
+      },
+    ];
+  } else if ('criticality_score' in data) {
+    tableData = [
+      {
+        "Age(in months)": data.created_since,
+        Contributors: data.contributor_count,
+        Organizations: data.org_count,
+        "Closed Issues": data.closed_issues_count,
+        "Last Updated": data.updated_since,
+      },
+    ];
+  }
   return (
     <>
       <MKTypography
@@ -308,43 +281,43 @@ async function checkForWeakness(dataObject, setWeakness: any) {
     try {
       let versionSummaryResponse: any = await fetchJsonReport(
         version_details + dependency.id + "-" + dependency.name + "-Versiondetails.json"
-        );
-        // debugger
-        let versionData: any[] = JSON.parse(versionSummaryResponse)
-        version = versionData[0].version
-        sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
-        
-        codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
-      } catch (error) {
-        
-        codeqlData = []
-        sonarqubeData = {}
-      }
-      try {
-        let responseCodeql: any = await fetchJsonReport(codeqlLink);
-        codeqlData = JSON.parse(responseCodeql);
-        
-      } catch (error) {
-        codeqlData = []
-        
-      }
-      
-      try {
-        let responseSonarqube: any = await fetchJsonReport(sonarqubeLink);
-        sonarqubeData = JSON.parse(responseSonarqube);
-      } catch (error) {
-        sonarqubeData = {}
-        
-      }
-      
-      if (codeqlData && codeqlData.length > 0) {
-        
-        foundPackages[dependency.name] = true
-      } else if ( codeqlData.length === 0 && sonarqubeData && sonarqubeData.total != 0) {
-        foundPackages[dependency.name] = true
-        
-      }
-      
+      );
+      // debugger
+      let versionData: any[] = JSON.parse(versionSummaryResponse)
+      version = versionData[0].version
+      sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
+
+      codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
+    } catch (error) {
+
+      codeqlData = []
+      sonarqubeData = {}
+    }
+    try {
+      let responseCodeql: any = await fetchJsonReport(codeqlLink);
+      codeqlData = JSON.parse(responseCodeql);
+
+    } catch (error) {
+      codeqlData = []
+
+    }
+
+    try {
+      let responseSonarqube: any = await fetchJsonReport(sonarqubeLink);
+      sonarqubeData = JSON.parse(responseSonarqube);
+    } catch (error) {
+      sonarqubeData = {}
+
+    }
+
+    if (codeqlData && codeqlData.length > 0) {
+
+      foundPackages[dependency.name] = true
+    } else if (codeqlData.length === 0 && sonarqubeData && sonarqubeData.total != 0) {
+      foundPackages[dependency.name] = true
+
+    }
+
   }
   // debugger
   setWeakness(foundPackages)
@@ -448,23 +421,17 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
 
 function GetAssessmentData(version, name, report, itemData, masterData) {
   const [jsonData, setJsonData]: any = React.useState({});
-
   const [codeQlData, setCQData]: any = React.useState([]);
-
   const [sonarqubeData, setSQData]: any = React.useState({});
   const [weakness, setWeakness]: any = React.useState({});
 
   let reportNameMap = "";
-
   let reportNameMapCodeql = "";
-
   let reportNameMapSonar = "";
-
   if (report === "Criticality Score") {
     reportNameMap = "Criticality Score";
   } else if (report === "Vulnerabilities") {
     reportNameMapCodeql = "Codeql";
-
     reportNameMapSonar = "Sonarqube";
   } else if (report === "License Compliance") {
     reportNameMap = "Fossology";
@@ -477,53 +444,35 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-      if (assessment_path[reportNameMap]) {
-        link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
-
-        fetchJsonData(link, setJsonData);
-      }
-
+      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
+      fetchJsonData(link, setJsonData);
     }
   }, [version]);
 
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-
-      if (assessment_path[reportNameMapSonar]) {
-        link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
-
-        fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
-      }
-
+      //Fix me 
+      link = `${assessment_datastore}/${name}/${version}/sast/${name}-${version}-sonarqube-report.json`;
+      fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
     }
   }, [version]);
 
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-      if (assessment_path[reportNameMapCodeql]) {
-
-        link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
-
-        fetchvulJsonData(link, "codeql", setCQData, setSQData);
-      }
+      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
+      fetchvulJsonData(link, "codeql", setCQData, setSQData);
     }
   }, [version]);
 
   let jsonDataLength: number = Object.values(jsonData).length;
-
   let data_array: any[];
   let pathNameCodeql: string;
-
   let pathNameSonar: string;
-
   let pathName: string;
-
   let myObjectCodeql;
-
   let myObjectSonar;
-
   let myObject;
 
 
@@ -562,26 +511,30 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
   if (report === "Criticality Score" && jsonDataLength !== 0) {
     let color_code = "";
-
     let risk_level = "";
-
+    let criticality_score: any = 0.0;
+    if ('default_score' in jsonData) {
+      criticality_score = parseFloat(jsonData["default_score"]);
+    } else if ('criticality_score' in jsonData) {
+      criticality_score = jsonData["criticality_score"];
+    }
     if (
-      jsonData.criticality_score.toFixed(2) >= 0.1 &&
-      jsonData.criticality_score.toFixed(2) < 0.4
+      criticality_score.toFixed(2) >= 0.1 &&
+      criticality_score.toFixed(2) < 0.4
     ) {
       color_code = "#008000";
 
       risk_level = "Low risk";
     } else if (
-      jsonData.criticality_score.toFixed(2) >= 0.4 &&
-      jsonData.criticality_score.toFixed(2) < 0.6
+      criticality_score.toFixed(2) >= 0.4 &&
+      criticality_score.toFixed(2) < 0.6
     ) {
       color_code = "#FFC300";
 
       risk_level = "Medium risk";
     } else if (
-      jsonData.criticality_score.toFixed(2) >= 0.6 &&
-      jsonData.criticality_score.toFixed(2) <= 1.0
+      criticality_score.toFixed(2) >= 0.6 &&
+      criticality_score.toFixed(2) <= 1.0
     ) {
       color_code = "#FF5733";
 
@@ -589,10 +542,11 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     }
 
     return (data_array = [
-      jsonData.criticality_score.toFixed(2),
+      criticality_score.toFixed(2),
       <FetchCS data={jsonData} />,
       color_code,
       "",
+      risk_level
     ]);
   }
 
@@ -624,9 +578,9 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchLowScores data={jsonData} />,
       color_code,
       myObject,
+      risk_level
     ]);
   }
-
   if (
     report === "Vulnerabilities" &&
     Object.values(codeQlData).length !== 0 &&
@@ -644,9 +598,14 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     Object.values(codeQlData).length === 0
   ) {
     let issues: any = Object.values(sonarqubeData)[5];
-
+    let count = 0;
+    if (issues && issues.length > 0) {
+      for (let i = 0; i < issues.length; i++) {
+        if (issues[i]["severity"] === "CRITICAL" || issues[i]["severity"] === "MAJOR" || issues[i]["severity"] === "MINOR" || issues[i]["severity"] === "BLOCKER") count++;
+      }
+    }
     return (data_array = [
-      sonarqubeData.total,
+      count,
       <FetchSAST cqData={codeQlData} sqData={issues} />,
       "",
       "",
@@ -708,9 +667,6 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     ]);
   }
 
-  let flag = false;
-
-
   if (report === "Dependencies" && jsonDataLength !== 0) {
     if (
       !(
@@ -750,92 +706,6 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     </MKTypography>
   );
 }
-
-const GetHeadings = ({ receivedValue }: any) => {
-  if (receivedValue === "License Compliance") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          License Compatibiltity
-          <Icon
-            key={`Icon1`}
-            title="Licensing information of the OSS"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "Dependencies") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          Dependencies
-          <Icon
-            key={`Icon2`}
-            title="Software Bill Of Material"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "ScoreCard") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          OpenSSF Scorecard (0-10)
-          <Icon
-            key={`Icon3`}
-            title="Overall Security Score of the project"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "Criticality Score") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          OpenSSF Criticality Score (0-1)
-          <Icon
-            key={`Icon4`}
-            title="Score to tell how critical the OSS project"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else if (receivedValue === "Vulnerabilities") {
-    return (
-      <>
-        {" "}
-        <MKTypography style={{ fontSize: "14px", fontWeight: "bold" }}>
-          Static Analysis Summary
-          <Icon
-            key={`Icon5`}
-            title="Provides Static Code Analysis (SAST) report by CodeQL / SonarQube"
-            sx={{ fontSize: "calc(0.3rem + 0.3vw) !important" }}
-          >
-            info
-          </Icon>
-        </MKTypography>
-      </>
-    );
-  } else {
-    return receivedValue;
-  }
-};
 
 function printText(item) {
   if (item == "Dependencies") {
@@ -966,7 +836,7 @@ function modalStyle(report: string) {
 
         width: "fit-content",
 
-        height: "fit-content",
+        height: "90%",
 
         boxShadow: "24",
 
@@ -1024,10 +894,10 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const [isHovered, setIsHovered] = useState(false);
   let data: any = GetAssessmentData(version, name, item, itemData, masterData);
   let color: any;
-
+  const countData = data[0];
   if (data && data[2]) {
     color = data[2];
   } else {
@@ -1038,27 +908,21 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
       <Button
         variant="contained"
         onClick={handleOpen}
-        disabled={data && data[0] ? false : true}
+        disabled={data && countData !== undefined ? false : true}
         sx={{
           height: "100px",
-
           width: "100%",
-
           ":hover": {
-            boxShadow: "0 15px 20px rgba(0,0,0,0.1)", // Adjust the shadow level (0 to 24)
+            boxShadow: "0 15px 20px rgba(0,0,0,0.1)",
 
             transition: "box-shadow 0.5s ease-in-out",
-
             border: "1px solid #5c4f4f",
-
             color: "blueviolet",
           },
         }}
         style={{
           backgroundColor: "white",
-
           display: "block",
-
           textAlign: "left",
         }}
       >
@@ -1066,14 +930,11 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           <MKTypography
             style={{
               fontSize: "40px",
-
               color: color,
-
               fontWeight: "bold",
             }}
           >
             {data ? data[0] : 0}
-
             <img
               style={{
                 width: "40px",
@@ -1107,6 +968,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
               }}
               src={getImage(item)}
             />
+
           </MKTypography>
         )}
 
@@ -1117,6 +979,58 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           }}
         >
           {printText(item)}
+          {item === 'ScoreCard' || item === 'Criticality Score' ? (
+            <span
+              style={{
+                position: 'absolute',
+                fontSize: '12px',
+                cursor: 'pointer',
+                display: 'inline-block',
+                transition: 'color 0.5s',
+                color: "#36454F",
+                marginLeft: '5px'
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <i className="fas fa-info-circle" />
+            </span>
+          ) : ""}
+          {isHovered && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '98%',
+                left: '55%',
+                backgroundColor: '#fff',
+                color: "black",
+                padding: '8px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
+                fontSize: '11px',
+                fontWeight: 'normal',
+                transition: 'opacity 0.5s',
+                zIndex: 9999,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {item === 'ScoreCard' ? (
+                <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+                  <li>Low risk: 0 - 2</li>
+                  <li>Medium risk: 2 - 5</li>
+                  <li>High risk: 5 - 7.5</li>
+                  <li>Critical risk: 7.5 - 10</li>
+                </ul>
+              ) : (
+                <ul style={{ listStyleType: 'disc', margin: 0, paddingInlineStart: '14px' }}>
+                  <li>Low risk: 0.1 - 0.4</li>
+                  <li>Medium risk: 0.4 - 0.6</li>
+                  <li>High risk: 0.6 - 1.0</li>
+                </ul>
+              )}
+            </div>
+          )}
         </MKTypography>
       </Button>
 
@@ -1135,14 +1049,6 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
       >
         <Fade in={open}>
           <Box style={modalStyle(item)}>
-            {/* <MKTypography style={{
-
-              fontSize: "20px",
-              color: "black",
-              textAling: "center"
-            }}>
-              Summary Report for {item}
-              </MKTypography> */}
             {data ? data[1] : "Not found"}
 
             {data && data[3] ? (
@@ -1169,24 +1075,17 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
 };
 
 function AssessmentReport({
-  title,
   name,
   version,
   itemData,
   masterData,
-  ...other
 }: any) {
   const reports: string[] = [
     "Vulnerabilities",
-
     "Dependencies",
-
     "License Compliance",
-
     "ScoreCard",
-
     "Criticality Score",
-
     "TAVOSS Score",
   ];
 
@@ -1194,21 +1093,6 @@ function AssessmentReport({
     <>
       {reports.map((item, index) => (
         <Grid item xs={6} md={2} lg={2} xl={2}>
-          {/* <GetAssessmentData
-
-                            Key={`Grid9${index}`}
-
-                            version={version}
-
-                            name={name}
-
-                            report={item}
-
-                            itemData={itemData}
-
-                            masterData={masterData}
-
-                          /> */}
 
           <ReportModal
             key={item}
@@ -1220,134 +1104,6 @@ function AssessmentReport({
           />
         </Grid>
       ))}
-
-      {/* Getting the assessment report */}
-
-      {/* {report.map((value, index) => { */}
-
-      {/* // return ( */}
-
-      {/* //   <> */}
-
-      {/* <Grid item
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* //   </> */}
-
-      {/* // ); */}
-
-      {/* }) */}
-
-      {/* } */}
     </>
   );
 }
