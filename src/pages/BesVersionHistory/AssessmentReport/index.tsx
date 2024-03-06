@@ -297,64 +297,58 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 };
 
 async function checkForWeakness(dataObject, setWeakness: any) {
-
   let version: any
   let sonarqubeLink: any
   let codeqlLink: any
   let codeqlData: any[]
   let sonarqubeData: any
-  let foundPackages: any = []
-  dataObject.map(async (dependency) => {
-    debugger
-  try {
-    let versionSummaryResponse: any = await fetchJsonReport(
-      version_details + dependency.id + "-" + dependency.name + "-Versiondetails.json"
-    );
-
-    let versionData: any[] = JSON.parse(versionSummaryResponse)
-    console.log(versionData[0].version)
-    version = versionData[0].version
-    sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
-  
-    codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
-  } catch (error) {
-    
-    codeqlData = []
-    sonarqubeData = {}
-    debugger
+  let foundPackages: any = {}
+  // debugger
+  for (let dependency of dataObject) {
+    try {
+      let versionSummaryResponse: any = await fetchJsonReport(
+        version_details + dependency.id + "-" + dependency.name + "-Versiondetails.json"
+        );
+        // debugger
+        let versionData: any[] = JSON.parse(versionSummaryResponse)
+        version = versionData[0].version
+        sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
+        
+        codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
+      } catch (error) {
+        
+        codeqlData = []
+        sonarqubeData = {}
+      }
+      try {
+        let responseCodeql: any = await fetchJsonReport(codeqlLink);
+        codeqlData = JSON.parse(responseCodeql);
+        
+      } catch (error) {
+        codeqlData = []
+        
+      }
+      
+      try {
+        let responseSonarqube: any = await fetchJsonReport(sonarqubeLink);
+        sonarqubeData = JSON.parse(responseSonarqube);
+      } catch (error) {
+        sonarqubeData = {}
+        
+      }
+      
+      if (codeqlData && codeqlData.length > 0) {
+        
+        foundPackages[dependency.name] = true
+      } else if ( codeqlData.length === 0 && sonarqubeData && sonarqubeData.total != 0) {
+        foundPackages[dependency.name] = true
+        
+      }
+      
   }
- try {
-    let responseCodeql: any = await fetchJsonReport(codeqlLink);
-    codeqlData = JSON.parse(responseCodeql);
-    
-  } catch (error) {
-    codeqlData = []
-    debugger
+  // debugger
+  setWeakness(foundPackages)
 
-  }
-
-  try {
-    let responseSonarqube: any = await fetchJsonReport(sonarqubeLink);
-    sonarqubeData = JSON.parse(responseSonarqube);
-  } catch(error) {
-    sonarqubeData = {}
-    debugger
-
-  }
-
-  if (codeqlData && codeqlData.length > 0) {
-    debugger
-
-    foundPackages.push(dependency.name) 
-  } else if (!codeqlData && sonarqubeData && sonarqubeData.total != 0) {
-    debugger
-
-    foundPackages.push(dependency.name) 
-  } 
-
-})
-setWeakness(foundPackages)
-  
 }
 
 const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
@@ -406,7 +400,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
               link
             </a>
           ),
-          Weakness: (weakness[name] ? "Found" : "Not Found")
+          Weakness: (weakness[name] ? "Exist" : "Absent")
         });
       }
     });
@@ -454,11 +448,11 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
 
 function GetAssessmentData(version, name, report, itemData, masterData) {
   const [jsonData, setJsonData]: any = React.useState({});
-  const [weakness, setWeakness]: any = React.useState([]);
 
   const [codeQlData, setCQData]: any = React.useState([]);
 
   const [sonarqubeData, setSQData]: any = React.useState({});
+  const [weakness, setWeakness]: any = React.useState({});
 
   let reportNameMap = "";
 
@@ -483,8 +477,6 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-      console.log("##################################################################")
-      console.log(assessment_path[reportNameMap])
       if (assessment_path[reportNameMap]) {
         link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMap]}/${name}-${version}-${assessment_report[reportNameMap]}-report.json`;
 
@@ -500,7 +492,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
       if (assessment_path[reportNameMapSonar]) {
         link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapSonar]}/${name}-${version}-sonarqube-report.json`;
-    
+
         fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
       }
 
@@ -512,9 +504,9 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       let link: string = "";
       if (assessment_path[reportNameMapCodeql]) {
 
-      link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
+        link = `${assessment_datastore}/${name}/${version}/${assessment_path[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
 
-      fetchvulJsonData(link, "codeql", setCQData, setSQData);
+        fetchvulJsonData(link, "codeql", setCQData, setSQData);
       }
     }
   }, [version]);
@@ -534,19 +526,19 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
 
   let myObject;
 
+
   React.useEffect(() => {
-    
+
     const dataObject = masterData?.filter(element => jsonData?.packages?.some(item => item.name.toLowerCase() === element.name.toLowerCase()));
-    // debugger
-    if (dataObject.length > 0 && weakness.length) {
-      console.log(dataObject)
+    if (dataObject.length > 0 && Object.values(weakness).length === 0) {
+      // debugger
       checkForWeakness(dataObject, setWeakness);
     }
 
-})
+  })
 
 
-  console.log(weakness)
+  // console.log(weakness)
 
   if (report === "Vulnerabilities") {
     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
