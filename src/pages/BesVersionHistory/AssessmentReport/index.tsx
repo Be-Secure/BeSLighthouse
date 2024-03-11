@@ -1010,28 +1010,28 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           {isHovered && (
             <div
             style={{
-              position: 'absolute',
-              top: '98%',
-              left: '55%',
-              transform: 'translateX(-70%)',
-              backgroundColor: '#fff',
+              position: "absolute",
+              top: "98%",
+              left: "55%",
+              transform: "translateX(-70%)",
+              backgroundColor: "#fff",
               color: "black",
-              padding: '8px',
-              border: '1px solid #ccc',
-              borderRadius: '5px',
-              boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
-              fontSize: '12px', 
-              fontWeight: 'normal', 
-              transition: 'opacity 0.5s',
+              padding: "8px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.4)",
+              fontSize: "12px", 
+              fontWeight: "normal", 
+              transition: "opacity 0.5s",
               zIndex: 9999,
-              whiteSpace: 'nowrap',
+              whiteSpace: "nowrap",
             }}
           >
-            { item === 'ScoreCard' ? (
+            { item === "ScoreCard" ? (
               <><p>
                   Scorecard is an automated tool that assesses a number of important heuristics associated
                   with software security and assigns each check a score of 0-10.
-                </p><ul style={{ listStyleType: 'disc', margin: '8px', paddingInlineStart: '14px' }}>
+                </p><ul style={{ listStyleType: "disc", margin: "8px", paddingInlineStart: "14px" }}>
                     <li>Low risk: 0 - 2</li>
                     <li>Medium risk: 2 - 5</li>
                     <li>High risk: 5 - 7.5</li>
@@ -1043,7 +1043,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                   A project's criticality score defines the influence and importance of a project.
                   It is a number between 0 (least-critical) and 1 (most-critical).
                 </p>
-                <ul style={{ listStyleType: 'disc', margin: '8px', paddingInlineStart: '14px' }}>
+                <ul style={{ listStyleType: "disc", margin: "8px", paddingInlineStart: "14px" }}>
                     <li>Low Critical: 0.1 - 0.4</li>
                     <li>Medium critical: 0.4 - 0.6</li>
                     <li>Highly critical: 0.6 - 1.0</li>
@@ -1065,8 +1065,8 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
         <Fade in={open}>
           <Box style={{
             ...modalStyle(item),
-            borderRadius: '9px',
-            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
+            borderRadius: "9px",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
           }}>
             <IconButton 
             style={{
