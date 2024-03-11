@@ -13,7 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
-import { assessment_datastore } from "../../../dataStore";
+import { assessment_datastore, version_details } from "../../../dataStore";
 import MKTypography from "../../../components/MKTypography";
 import {
   assessment_path,
@@ -21,7 +21,6 @@ import {
 } from "../../../utils/assessmentReport";
 import FetchSAST from "./FetchSastReport";
 import { useState } from "react";
-
 import vulnerabilityIcon from "../../../assets/images/bug.png";
 import dependencyIcon from "../../../assets/images/data-flow.png";
 import licenseIcon from "../../../assets/images/certificate.png";
@@ -151,7 +150,7 @@ const FetchCS = ({ data }: any) => {
     "Last Updated",
   ];
 
-  if ('default_score' in data) {
+  if ("default_score" in data) {
     tableData = [
       {
         "Age(in months)": data.legacy.created_since,
@@ -161,7 +160,7 @@ const FetchCS = ({ data }: any) => {
         "Last Updated": data.legacy.updated_since,
       },
     ];
-  } else if ('criticality_score' in data) {
+  } else if ("criticality_score" in data) {
     tableData = [
       {
         "Age(in months)": data.created_since,
@@ -189,7 +188,6 @@ const FetchCS = ({ data }: any) => {
         tableHeading={headings}
         tableStyle={{ textAlign: "center" }}
       />
-
     </>
   );
 };
@@ -269,10 +267,71 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   }
 };
 
-const FetchSBOM = ({ data, masterData, name }: any) => {
-  let tableData: any[] = [{}];
+async function checkForWeakness(dataObject, setWeakness: any) {
+  let version: any;
+  let sonarqubeLink: any;
+  let codeqlLink: any;
+  let codeqlData: any[];
+  let sonarqubeData: any;
+  let foundPackages: any = {};
+  
+  for (let dependency of dataObject) {
+    try {
+      let versionSummaryResponse: any = await fetchJsonReport(
+        version_details +
+          dependency.id +
+          "-" +
+          dependency.name +
+          "-Versiondetails.json"
+      );
+      
+      let versionData: any[] = JSON.parse(versionSummaryResponse);
+      version = versionData[0].version;
+      sonarqubeLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-sonarqube-report.json`;
 
-  const headings = ["ID", "Name", "BeS Tech Stack", "License", "Link"];
+      codeqlLink = `${assessment_datastore}/${dependency.name}/${version}/sast/${dependency.name}-${version}-codeql-report.json`;
+    } catch (error) {
+      codeqlData = [];
+      sonarqubeData = {};
+    }
+    try {
+      let responseCodeql: any = await fetchJsonReport(codeqlLink);
+      codeqlData = JSON.parse(responseCodeql);
+    } catch (error) {
+      codeqlData = [];
+    }
+
+    try {
+      let responseSonarqube: any = await fetchJsonReport(sonarqubeLink);
+      sonarqubeData = JSON.parse(responseSonarqube);
+    } catch (error) {
+      sonarqubeData = {};
+    }
+
+    if (codeqlData && codeqlData.length > 0) {
+      foundPackages[dependency.name] = true;
+    } else if (
+      codeqlData.length === 0 &&
+      sonarqubeData &&
+      sonarqubeData.total != 0
+    ) {
+      foundPackages[dependency.name] = true;
+    }
+  }
+  
+  setWeakness(foundPackages);
+}
+
+const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
+  let tableData: any[] = [{}];
+  const headings = [
+    "ID",
+    "Name",
+    "BeS Tech Stack",
+    "License",
+    "Link",
+    "Weakness",
+  ];
 
   let tracked: string[] = [];
 
@@ -305,9 +364,7 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
         const bes_technology_stack = dataObject?.bes_technology_stack;
 
         const license = dataObject?.license["spdx_id"];
-
         if (!duplicate) tracked.push(dp.name);
-
         tableData.push({
           ID: id,
           Name: name,
@@ -320,6 +377,7 @@ const FetchSBOM = ({ data, masterData, name }: any) => {
               link
             </a>
           ),
+          Weakness: weakness[name] ? "Exist" : "Absent",
         });
       }
     });
@@ -369,6 +427,8 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   const [jsonData, setJsonData]: any = React.useState({});
   const [codeQlData, setCQData]: any = React.useState([]);
   const [sonarqubeData, setSQData]: any = React.useState({});
+  const [weakness, setWeakness]: any = React.useState({});
+
   let reportNameMap = "";
   let reportNameMapCodeql = "";
   let reportNameMapSonar = "";
@@ -396,7 +456,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   React.useEffect(() => {
     if (version?.trim()) {
       let link: string = "";
-      //Fix me 
+      //Fix me
       link = `${assessment_datastore}/${name}/${version}/sast/${name}-${version}-sonarqube-report.json`;
       fetchvulJsonData(link, "sonarqube", setCQData, setSQData);
     }
@@ -418,6 +478,19 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   let myObjectCodeql;
   let myObjectSonar;
   let myObject;
+
+  React.useEffect(() => {
+    const dataObject = masterData?.filter((element) =>
+      jsonData?.packages?.some(
+        (item) => item.name.toLowerCase() === element.name.toLowerCase()
+      )
+    );
+    if (dataObject.length > 0 && Object.values(weakness).length === 0) {
+      
+      checkForWeakness(dataObject, setWeakness);
+    }
+  });
+
 
   if (report === "Vulnerabilities") {
     pathNameCodeql = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMapCodeql}`;
@@ -443,9 +516,9 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     let color_code = "";
     let risk_level = "";
     let criticality_score: any = 0.0;
-    if ('default_score' in jsonData) {
+    if ("default_score" in jsonData) {
       criticality_score = parseFloat(jsonData["default_score"]);
-    } else if ('criticality_score' in jsonData) {
+    } else if ("criticality_score" in jsonData) {
       criticality_score = jsonData["criticality_score"];
     }
     if (
@@ -476,7 +549,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchCS data={jsonData} />,
       color_code,
       "",
-      risk_level
+      risk_level,
     ]);
   }
 
@@ -508,7 +581,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
       <FetchLowScores data={jsonData} />,
       color_code,
       myObject,
-      risk_level
+      risk_level,
     ]);
   }
   if (
@@ -531,7 +604,13 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
     let count = 0;
     if (issues && issues.length > 0) {
       for (let i = 0; i < issues.length; i++) {
-        if (issues[i]["severity"] === "CRITICAL" || issues[i]["severity"] === "MAJOR" || issues[i]["severity"] === "MINOR" || issues[i]["severity"] === "BLOCKER") count++;
+        if (
+          issues[i]["severity"] === "CRITICAL" ||
+          issues[i]["severity"] === "MAJOR" ||
+          issues[i]["severity"] === "MINOR" ||
+          issues[i]["severity"] === "BLOCKER"
+        )
+          count++;
       }
     }
     return (data_array = [
@@ -610,6 +689,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
           data={jsonData.packages}
           masterData={masterData}
           name={name}
+          weakness={weakness}
         />,
         "",
         myObject,
@@ -898,7 +978,6 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
               }}
               src={getImage(item)}
             />
-            
           </MKTypography>
         )}
 
@@ -909,24 +988,26 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           }}
         >
           {printText(item)}
-          {item === 'ScoreCard' || item === 'Criticality Score' ? (
+          {item === "ScoreCard" || item === "Criticality Score" ? (
             <span
-            style={{
-              position: 'absolute',
-              fontSize: '12px',
-              cursor: 'pointer',
-              display: 'inline-block',
-              transition: 'color 0.5s',
-              color: "#36454F",
-              marginLeft: '5px'
-            }}
+              style={{
+                position: "absolute",
+                fontSize: "12px",
+                cursor: "pointer",
+                display: "inline-block",
+                transition: "color 0.5s",
+                color: "#36454F",
+                marginLeft: "5px",
+              }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
               <i className="fas fa-info-circle" />
             </span>
-          ): ""}
-          { isHovered && (
+          ) : (
+            ""
+          )}
+          {isHovered && (
             <div
             style={{
               position: 'absolute',
@@ -1022,12 +1103,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   );
 };
 
-function AssessmentReport({
-  name,
-  version,
-  itemData,
-  masterData,
-}: any) {
+function AssessmentReport({ name, version, itemData, masterData }: any) {
   const reports: string[] = [
     "Vulnerabilities",
     "Dependencies",
@@ -1041,7 +1117,6 @@ function AssessmentReport({
     <>
       {reports.map((item, index) => (
         <Grid item xs={6} md={2} lg={2} xl={2}>
-
           <ReportModal
             key={item}
             version={version}
