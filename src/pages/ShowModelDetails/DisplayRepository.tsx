@@ -3,28 +3,27 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { dividerDiv } from "./AssessmentSummary";
 
-
-
 const repository = ["Repository Type", "Repository URL"];
 export default function DisplayRepository({ data }: any): any {
   return repository.map((value, index) => {
     return (
       <>
-        {dividerDiv(index)}
+        { dividerDiv(index) }
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
             <Typography variant="subtitle1" color="inherit">
-              {value}
+              { value }
             </Typography>
           </Grid>
           <Grid item>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="subtitle1" color="inherit">
-                  {value === "Repository URL" ? (
+                  { value === "Repository URL" ? (
                     <a
-                      style={{ color: "#587f2f", cursor: "pointer" }}
-                      href={data[value]}
+                      // eslint-disable-next-line react-native/no-inline-styles
+                      style={ { color: "#587f2f", cursor: "pointer" } }
+                      href={ data[value] }
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -32,7 +31,7 @@ export default function DisplayRepository({ data }: any): any {
                     </a>
                   ) : (
                     data[value]
-                  )}
+                  ) }
                 </Typography>
               </Grid>
             </Grid>

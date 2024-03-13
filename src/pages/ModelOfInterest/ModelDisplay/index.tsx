@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { filter } from "lodash";
 import React, { useState } from "react";
 import { modelOfInterestData } from "../../../dataStore";
@@ -14,7 +15,7 @@ function applySortFilter(array: any, comparator: any, query: any) {
     return a[1] - b[1];
   });
   if (query) {
-    let search = query.trim();
+    const search = query.trim();
     return filter(array, (_user: any) => {
       if (_user.name.toLowerCase().indexOf(search.toLowerCase()) !== -1)
         return true;
@@ -84,9 +85,9 @@ export default function ModelDisplay({ selectedFilter }: any) {
   );
   return (
     <ThreeWayToggleButton
-      filteredCveReport={filteredCveReport}
-      filterName={filterName}
-      handleFilterByName={handleFilterByName}
+      filteredCveReport={ filteredCveReport }
+      filterName={ filterName }
+      handleFilterByName={ handleFilterByName }
     />
   );
 }

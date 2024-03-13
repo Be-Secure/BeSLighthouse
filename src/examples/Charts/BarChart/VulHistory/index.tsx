@@ -1,11 +1,10 @@
+/* eslint-disable react-native/no-inline-styles */
 import * as React from "react";
 import Card from "@mui/material/Card";
-import { StyledChartWrapper } from "../StyledChartWrapper";
 import ReactApexChart from "react-apexcharts";
 import { useTheme } from "@mui/material/styles";
 import useChart from "../useChart";
 import MKBox from "../../../../components/MKBox";
-import Language from "../../PieChart/Languages";
 
 function VulHistory({ vuldata }: any) {
   const theme = useTheme();
@@ -80,15 +79,15 @@ function VulHistory({ vuldata }: any) {
 
   return (
 
-    <Card style={{ height: "100%" }}>
+    <Card style={ { height: "100%" } }>
       <MKBox>
-        <MKBox pt={1} pb={1} px={1}>
-            <ReactApexChart
-              type="bar"
-              series={chartSeries}
-              options={chartOptions}
-              height={218}
-            />
+        <MKBox pt={ 1 } pb={ 1 } px={ 1 }>
+          <ReactApexChart
+            type="bar"
+            series={ chartSeries }
+            options={ chartOptions }
+            height={ 218 }
+          />
         </MKBox>
       </MKBox>
     </Card>

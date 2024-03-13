@@ -23,9 +23,9 @@ const MKBox = forwardRef(
     ref
   ) => (
     <MKBoxRoot
-      {...rest}
-      ref={ref}
-      ownerState={{
+      { ...rest }
+      ref={ ref }
+      ownerState={ {
         variant,
         bgColor,
         color,
@@ -33,7 +33,7 @@ const MKBox = forwardRef(
         borderRadius,
         shadow,
         coloredShadow,
-      }}
+      } }
     />
   )
 );

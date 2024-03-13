@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -44,80 +45,82 @@ export default function DisplayModelReport({ data }: any): any {
             <Grid item>
               <TableContainer>
                 <Table>
-                  <PoiListHead headLabel={TABLE_HEAD} requestFromOtherComponent={true} />
+                  <PoiListHead headLabel={ TABLE_HEAD } requestFromOtherComponent={ true } />
                   <TableBody>
-                    <TableRow hover key={"dddd"} tabIndex={-1}>
+                    <TableRow hover key={ "dddd" } tabIndex={ -1 }>
                       <TableCell component="th" scope="row" padding="none">
-                        {data[model[0]] > 0 ? (
+                        { data[model[0]] > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                             
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[model[0]]}
+                            { data[model[0]] }
                           </a>
                         ) : (
                           data[model[0]]
-                        )}
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[model[1]] > 0 ? (
+                        { data[model[1]] > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                             
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[model[1]]}
+                            { data[model[1]] }
                           </a>
                         ) : (
                           data[model[1]]
-                        )}
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[model[2]]["Critical"] > 0 ? (
+                        { data[model[2]].Critical > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[model[2]]["Critical"]}
+                            { data[model[2]].Critical }
                           </a>
                         ) : (
-                          data[model[2]]["Critical"]
-                        )}
+                          data[model[2]].Critical
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[model[2]]["High"] > 0 ? (
+                        { data[model[2]].High > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[model[2]]["High"]}
+                            { data[model[2]].High }
                           </a>
                         ) : (
-                          data[model[2]]["High"]
-                        )}
+                          data[model[2]].High
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[model[2]]["Medium"] > 0 ? (
+                        { data[model[2]].Medium > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[model[2]]["Medium"]}
+                            { data[model[2]].Medium }
                           </a>
                         ) : (
-                          data[model[2]]["Medium"]
-                        )}
+                          data[model[2]].Medium
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[model[2]]["Low"] > 0 ? (
+                        { data[model[2]].Low > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[model[2]]["Low"]}
+                            { data[model[2]].Low }
                           </a>
                         ) : (
-                          data[model[2]]["Low"]
-                        )}
+                          data[model[2]].Low
+                        ) }
                       </TableCell>
                     </TableRow>
                   </TableBody>

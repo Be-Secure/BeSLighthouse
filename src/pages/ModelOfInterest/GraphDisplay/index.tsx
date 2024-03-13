@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 
@@ -22,11 +23,11 @@ const GraphDisplay = () => {
 
     // Fetch data from GitHub raw URL and save it into a variable as JSON
     fetch(githubRawUrl)
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
           throw new Error(`Failed to fetch data. Status: ${response.status}`);
         }
-        return response.json();
+        return await response.json();
       })
       .then((data) => {
         // Extract unique nodes from "name" and "dependencies"
@@ -67,13 +68,13 @@ const GraphDisplay = () => {
         // Remove existing SVG content
         d3.select("#graph-container").selectAll("*").remove();
 
-    // Create a simulation with several forces.
-    const simulation = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id((d) => (d as Node).name))
-      .force("charge", d3.forceManyBody().strength(-250))
-      .force("x", d3.forceX())
-      .force("y", d3.forceY())
-      .on("tick", ticked);
+        // Create a simulation with several forces.
+        const simulation = d3.forceSimulation(nodes)
+          .force("link", d3.forceLink(links).id((d) => (d as Node).name))
+          .force("charge", d3.forceManyBody().strength(-250))
+          .force("x", d3.forceX())
+          .force("y", d3.forceY())
+          .on("tick", ticked);
 
         // Create the SVG container.
         const svg = d3.select("#graph-container")
@@ -97,9 +98,9 @@ const GraphDisplay = () => {
         const nodeGroup = svg.append("g");
 
         const drag = d3.drag<SVGCircleElement, Node>()
-            .on("start", dragstarted)
-            .on("drag", dragged)
-            .on("end", dragended);
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended);
 
         const node = nodeGroup
           .selectAll()
@@ -110,7 +111,7 @@ const GraphDisplay = () => {
           .attr("stroke-width", 1.5)
           .attr("r", 7)
           .attr("fill", (d) => (d.isDependency ? "#EC5800" : "currentColor"))
-          .on("click", (event, d) => handleNodeClick(event, d))
+          .on("click", (event, d) => { handleNodeClick(event, d); })
           .style("cursor", (d) => (d.clickable ? "pointer" : "default"))
           .call(drag);
 
@@ -126,15 +127,14 @@ const GraphDisplay = () => {
           .enter()
           .append("g")
           .style("cursor", (d) => (d.clickable ? "pointer" : "default"))
-          .on("click", (event, d) => handleNodeClick(event, d)); // Attach click event to the group
+          .on("click", (event, d) => { handleNodeClick(event, d); }); // Attach click event to the group
 
         const nodeName = nodeNameGroup.append("text")
-          .text(d => (d as Node).name)
+          .text(d => (d).name)
           .attr("font-size", 12)
           .attr("dx", 14)
           .attr("dy", 4)
-          .attr("fill", d => (d as Node).isDependency ? "#34495e" : "#2c3e50");
-
+          .attr("fill", d => (d).isDependency ? "#34495e" : "#2c3e50");
         
         // Set the position attributes of links and nodes each time the simulation ticks.
         function ticked() {
@@ -144,26 +144,26 @@ const GraphDisplay = () => {
             .attr("x2", d => (d.target as any).x || 0)
             .attr("y2", d => (d.target as any).y || 0);
 
-          node.attr("cx", d => (d as Node).x || 0).attr("cy", d => (d as Node).y || 0);
-          nodeName.attr("x", d => (d as Node).x || 0).attr("y", d => (d as Node).y || 0);
+          node.attr("cx", d => (d).x ?? 0).attr("cy", d => (d).y ?? 0);
+          nodeName.attr("x", d => (d).x ?? 0).attr("y", d => (d).y ?? 0);
         }
 
         function dragstarted(event: any, d: Node) {
-            if (!event.active) simulation.alphaTarget(0.5).restart();
-            (d as Node).fx = (d as Node).x;
-            (d as Node).fy = (d as Node).y;
-          }
+          if (!event.active) simulation.alphaTarget(0.5).restart();
+          (d).fx = (d).x;
+          (d).fy = (d).y;
+        }
       
-          function dragged(event: any, d: Node) {
-            (d as Node).fx = event.x;
-            (d as Node).fy = event.y;
-          }
+        function dragged(event: any, d: Node) {
+          (d).fx = event.x;
+          (d).fy = event.y;
+        }
       
-          function dragended(event: any, d: Node) {
-            if (!event.active) simulation.alphaTarget(0);
-            (d as Node).fx = null;
-            (d as Node).fy = null;
-          }      
+        function dragended(event: any, d: Node) {
+          if (!event.active) simulation.alphaTarget(0);
+          (d).fx = null;
+          (d).fy = null;
+        }      
       })
       .catch((error) => {
         console.error("Error fetching data:", error.message);
@@ -172,21 +172,21 @@ const GraphDisplay = () => {
 
   return (
     <div>
-    <div id="indicator" style={{ position: "absolute", top: "0", right: "0", margin: "20px", marginTop: "70px" }}>
-      <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "2px", marginTop: "17px" }}>
-        <div className="circle model" style={{ backgroundColor: "currentColor", width: "12px", height: "12px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
-        <p style={{ fontSize: "13px" }}>Model</p>
-      </div>
+      <div id="indicator" style={ { position: "absolute", top: "0", right: "0", margin: "20px", marginTop: "70px" } }>
+        <div className="container" style={ { display: "flex", alignItems: "center", marginBottom: "2px", marginTop: "17px" } }>
+          <div className="circle model" style={ { backgroundColor: "currentColor", width: "12px", height: "12px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px" } } />
+          <p style={ { fontSize: "13px" } }>Model</p>
+        </div>
 
-      <div className="container" style={{ display: "flex", alignItems: "center", marginBottom: "5px", marginTop: "2px" }}>
-        <div className="circle dependency" style={{ backgroundColor: "#EC5800", width: "12px", height: "12px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px"}}></div>
-        <p style={{ fontSize: "13px" }}>Dependency</p>
+        <div className="container" style={ { display: "flex", alignItems: "center", marginBottom: "5px", marginTop: "2px" } }>
+          <div className="circle dependency" style={ { backgroundColor: "#EC5800", width: "12px", height: "12px", borderRadius: "50%", marginRight: "5px", marginLeft: "20px" } } />
+          <p style={ { fontSize: "13px" } }>Dependency</p>
+        </div>
+      </div>
+      <div id="graph-container">
+        { /* Your graph content goes here */ }
       </div>
     </div>
-    <div id="graph-container">
-      {/* Your graph content goes here */}
-    </div>
-  </div>
   );
 };
 

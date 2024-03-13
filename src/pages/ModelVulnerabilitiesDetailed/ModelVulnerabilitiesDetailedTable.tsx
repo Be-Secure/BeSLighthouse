@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React, { useState } from "react";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
@@ -26,14 +27,14 @@ const regex = /^(.*?)(?=#).*Severity:(.*?)- (.*)/;
 function createRow(row: any, combinedMatch: any) {
   return (
     <>
-      <TableCell sx={{ fontSize: "13px" }} align="left">
-        {combinedMatch.length === 0 ? "Not Available" : combinedMatch[2]}
+      <TableCell sx={ { fontSize: "13px" } } align="left">
+        { combinedMatch.length === 0 ? "Not Available" : combinedMatch[2] }
       </TableCell>
-      <TableCell sx={{ fontSize: "13px" }} align="left">
-        {combinedMatch.length === 0 ? "Not Available" : combinedMatch[3]}
+      <TableCell sx={ { fontSize: "13px" } } align="left">
+        { combinedMatch.length === 0 ? "Not Available" : combinedMatch[3] }
       </TableCell>
-      <TableCell sx={{ fontSize: "13px" }} align="left">
-        {row.file_name}
+      <TableCell sx={ { fontSize: "13px" } } align="left">
+        { row.file_name }
       </TableCell>
     </>
   );
@@ -45,8 +46,9 @@ export default function ModelVulnerabilitiesDetailedTable() {
   let { modelName }: any = useParams();
   modelName = modelName.slice(1);
   React.useEffect(() => {
-    let link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-sast-detailed-report.json`;
+    const link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-sast-detailed-report.json`;
     fetchJsonData(link, setreport);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const modelDetails = Object.values(report);
@@ -71,72 +73,72 @@ export default function ModelVulnerabilitiesDetailedTable() {
   return (
     <>
       {
-        <TableContainer sx={{ minWidth: 800, color: "red" }}>
+        <TableContainer sx={ { minWidth: 800, color: "red" } }>
           <Table>
-            <TableHead sx={{ display: "contents" }}>
+            <TableHead sx={ { display: "contents" } }>
               <TableRow>
-                {TABLE_HEAD.map((headCell: any) => (
+                { TABLE_HEAD.map((headCell: any) => (
                   <TableCell
-                    sx={{
+                    sx={ {
                       color: "#637381",
                       backgroundColor: "#F4F6F8",
                       fontSize: "14px"
-                    }}
-                    key={headCell.id}
-                    align={headCell.alignRight ? "right" : "left"}
+                    } }
+                    key={ headCell.id }
+                    align={ headCell.alignRight ? "right" : "left" }
                   >
-                    {headCell.label}
+                    { headCell.label }
                   </TableCell>
-                ))}
+                )) }
               </TableRow>
             </TableHead>
             <TableBody>
-              {modelDetails
+              { modelDetails
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any, index: number) => {
                   let combinedMatch;
-                  if (row["scanning_reports"]["output_log"]?.[0]) {
+                  if (row.scanning_reports.output_log?.[0]) {
                     combinedMatch =
-                      row["scanning_reports"]["output_log"][0].match(regex);
+                      row.scanning_reports.output_log[0].match(regex);
                   } else {
                     combinedMatch = [];
                   }
                   return (
-                    <TableRow hover key={index} tabIndex={-1}>
-                      <TableCell align="left" sx={{ fontSize: "13px" }}>
-                        {index+1}
+                    <TableRow hover key={ index } tabIndex={ -1 }>
+                      <TableCell align="left" sx={ { fontSize: "13px" } }>
+                        { index+1 }
                       </TableCell>
                       <TableCell
                         align="left"
-                        sx={{ paddingLeft: "2px", fontSize: "13px" }}
+                        sx={ { paddingLeft: "2px", fontSize: "13px" } }
                         padding="none"
                       >
-                        {combinedMatch.length === 0
+                        { combinedMatch.length === 0
                           ? "Not Available"
-                          : combinedMatch[1]}
+                          : combinedMatch[1] }
                       </TableCell>
-                      {createRow(row, combinedMatch)}
+                      { createRow(row, combinedMatch) }
                     </TableRow>
                   );
-                })}
+                }) }
             </TableBody>
           </Table>
           <TablePagination
-            sx={{
+            sx={ {
               ".MuiTablePagination-selectLabel": {
                 margin: "auto"
               },
               ".MuiTablePagination-displayedRows": {
                 margin: "auto"
               }
-            }}
-            rowsPerPageOptions={[15, 30, 45]}
+            } }
+            rowsPerPageOptions={ [15, 30, 45] }
             component="div"
-            count={Object.keys(report).length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
+            count={ Object.keys(report).length }
+            rowsPerPage={ rowsPerPage }
+            page={ page }
+            onPageChange={ handleChangePage }
+            onRowsPerPageChange={ handleChangeRowsPerPage }
           />
         </TableContainer>
       }

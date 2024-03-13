@@ -36,15 +36,11 @@
     "start": "react-scripts start",
     "build": "CI=false && react-scripts build && cp build/index.html build/404.html",
     "predeploy": "npm run build",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -59,12 +55,23 @@
     ]
   },
   "devDependencies": {
+    "@react-native-community/eslint-config": "^3.2.0",
     "@testing-library/react": "^14.0.0",
     "@types/chroma-js": "^2.4.3",
     "@types/jest": "^27.5.2",
     "@types/lodash": "^4.14.195",
     "@types/node": "^16.18.36",
     "@types/numeral": "^2.0.2",
-    "@types/react-dom": "^18.2.15"
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "eslint": "^8.57.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-ft-flow": "^3.0.7",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.34.0"
   }
 }

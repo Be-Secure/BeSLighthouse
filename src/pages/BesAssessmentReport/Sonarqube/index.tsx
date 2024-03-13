@@ -23,7 +23,8 @@ const TABLE_HEAD = [
 export default function Sonarqube({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
+  // eslint-disable-next-line no-unused-vars
   const [filterName, setFilterName] = useState("");
 
   let sonarqubeData: any;
@@ -50,21 +51,21 @@ export default function Sonarqube({ data }: any) {
     <>
       <TableContainer>
         <Table>
-          <TableHead sx={{ display: "contents" }}>
+          <TableHead sx={ { display: "contents" } }>
             <TableRow>
-              {TABLE_HEAD.map((headCell: any) => (
+              { TABLE_HEAD.map((headCell: any) => (
                 <TableCell
-                  sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}
-                  key={headCell.id}
-                  align={headCell.alignRight ? "right" : "left"}
+                  sx={ { color: "#637381", backgroundColor: "#F4F6F8" } }
+                  key={ headCell.id }
+                  align={ headCell.alignRight ? "right" : "left" }
                 >
-                  {headCell.label}
+                  { headCell.label }
                 </TableCell>
-              ))}
+              )) }
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredUsers
+            { filteredUsers
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(
                 (
@@ -78,39 +79,39 @@ export default function Sonarqube({ data }: any) {
                 ) => {
                   const { component, type, message, line } = row;
                   return (
-                    <TableRow hover key={index} tabIndex={-1}>
+                    <TableRow hover key={ index } tabIndex={ -1 }>
                       <TableCell
                         align="left"
-                        sx={{ paddingLeft: "15px" }}
+                        sx={ { paddingLeft: "15px" } }
                         padding="none"
                       >
-                        {component}
+                        { component }
                       </TableCell>
-                      <TableCell align="left">{type}</TableCell>
-                      <TableCell align="left">{message}</TableCell>
-                      <TableCell align="left">{line}</TableCell>
+                      <TableCell align="left">{ type }</TableCell>
+                      <TableCell align="left">{ message }</TableCell>
+                      <TableCell align="left">{ line }</TableCell>
                     </TableRow>
                   );
                 }
-              )}
+              ) }
           </TableBody>
         </Table>
         <TablePagination
-          sx={{
+          sx={ {
             ".MuiTablePagination-selectLabel": {
               margin: "auto",
             },
             ".MuiTablePagination-displayedRows": {
               margin: "auto",
             },
-          }}
-          rowsPerPageOptions={[15, 30, 45]}
+          } }
+          rowsPerPageOptions={ [15, 30, 45] }
           component="div"
-          count={sonarqubeData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+          count={ sonarqubeData.length }
+          rowsPerPage={ rowsPerPage }
+          page={ page }
+          onPageChange={ handleChangePage }
+          onRowsPerPageChange={ handleChangeRowsPerPage }
         />
       </TableContainer>
     </>

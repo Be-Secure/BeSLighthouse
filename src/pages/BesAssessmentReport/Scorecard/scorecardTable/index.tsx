@@ -26,9 +26,10 @@ const TABLE_HEAD = [
 export default function ScorecardTable({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
+  // eslint-disable-next-line no-unused-vars
   const [filterName, setFilterName] = useState("");
-  let scorecardData: any = data?.checks ?? [];
+  const scorecardData: any = data?.checks ?? [];
   const filteredUsers = applySortFilter(
     scorecardData,
     getComparator("desc", "name"),
@@ -50,21 +51,21 @@ export default function ScorecardTable({ data }: any) {
     <>
       <TableContainer>
         <Table>
-          <TableHead sx={{ display: "contents" }}>
+          <TableHead sx={ { display: "contents" } }>
             <TableRow>
-              {TABLE_HEAD.map((headCell: any) => (
+              { TABLE_HEAD.map((headCell: any) => (
                 <TableCell
-                  sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}
-                  key={headCell.id}
-                  align={headCell.alignRight ? "right" : "left"}
+                  sx={ { color: "#637381", backgroundColor: "#F4F6F8" } }
+                  key={ headCell.id }
+                  align={ headCell.alignRight ? "right" : "left" }
                 >
-                  {headCell.label}
+                  { headCell.label }
                 </TableCell>
-              ))}
+              )) }
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredUsers
+            { filteredUsers
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(
                 (
@@ -78,39 +79,39 @@ export default function ScorecardTable({ data }: any) {
                 ) => {
                   const { name, score, reason, details } = row;
                   return (
-                    <TableRow hover key={index} tabIndex={-1}>
+                    <TableRow hover key={ index } tabIndex={ -1 }>
                       <TableCell
                         align="center"
-                        sx={{ paddingLeft: "10px" }}
+                        sx={ { paddingLeft: "10px" } }
                         padding="none"
                       >
-                        {name}
+                        { name }
                       </TableCell>
-                      <TableCell align="left">{score}</TableCell>
-                      <TableCell align="left">{reason}</TableCell>
-                      <TableCell align="left">{details}</TableCell>
+                      <TableCell align="left">{ score }</TableCell>
+                      <TableCell align="left">{ reason }</TableCell>
+                      <TableCell align="left">{ details }</TableCell>
                     </TableRow>
                   );
                 }
-              )}
+              ) }
           </TableBody>
         </Table>
         <TablePagination
-          sx={{
+          sx={ {
             ".MuiTablePagination-selectLabel": {
               margin: "auto"
             },
             ".MuiTablePagination-displayedRows": {
               margin: "auto"
             }
-          }}
-          rowsPerPageOptions={[15, 30, 45]}
+          } }
+          rowsPerPageOptions={ [15, 30, 45] }
           component="div"
-          count={scorecardData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+          count={ scorecardData.length }
+          rowsPerPage={ rowsPerPage }
+          page={ page }
+          onPageChange={ handleChangePage }
+          onRowsPerPageChange={ handleChangeRowsPerPage }
         />
       </TableContainer>
     </>

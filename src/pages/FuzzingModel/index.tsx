@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
@@ -12,7 +14,7 @@ import { useLocation } from "react-router-dom";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKTypography from "../../components/MKTypography";
-import aishieldLogo from "../../assets/images/aishield_logo.png"
+import aishieldLogo from "../../assets/images/aishield_logo.png";
 
 const lineOptions = {
   startPlug: "disc",
@@ -26,13 +28,13 @@ const arrow = {
 
 function evasionLineGraph(lineRefStartEvasion: any, lineRefRightEvasion: any) {
   try {
-    //left
+    // left
     lineRefStartEvasion.current = new LeaderLine(
       document.getElementById("startEvasion"),
       document.getElementById("arrowpass"),
       lineOptions
     );
-    //Right
+    // Right
     setTimeout(() => {
       lineRefRightEvasion.current = new LeaderLine(
         document.getElementById("arrowpass"),
@@ -50,13 +52,13 @@ function inferenceLineGraph(
   lineRefRightInference: any
 ) {
   try {
-    //left
+    // left
     lineRefStartInference.current = new LeaderLine(
       document.getElementById("startInference"),
       document.getElementById("arrowpass"),
       lineOptions
     );
-    //Right
+    // Right
     setTimeout(() => {
       lineRefRightInference.current = new LeaderLine(
         document.getElementById("arrowpass"),
@@ -74,13 +76,13 @@ function extractionLineGraph(
   lineRefRightExtraction: any
 ) {
   try {
-    //left
+    // left
     lineRefStartExtraction.current = new LeaderLine(
       document.getElementById("startExtraction"),
       document.getElementById("arrowpass"),
       lineOptions
     );
-    //Right
+    // Right
     setTimeout(() => {
       lineRefRightExtraction.current = new LeaderLine(
         document.getElementById("arrowpass"),
@@ -98,13 +100,13 @@ function dataPoisoningLineGraph(
   lineRefRightDataPoisoning: any
 ) {
   try {
-    //left
+    // left
     lineRefStartDataPoisoning.current = new LeaderLine(
       document.getElementById("startDataPoisoning"),
       document.getElementById("arrowpass"),
       lineOptions
     );
-    //Right
+    // Right
     setTimeout(() => {
       lineRefRightDataPoisoning.current = new LeaderLine(
         document.getElementById("arrowpass"),
@@ -133,14 +135,14 @@ function FuzzingModelPage() {
   const [extraction, extractionSetreport]: any = React.useState({});
   const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
   React.useEffect(() => {
-    let evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
-    let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/JobMetadata.json`;
-    let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/JobMetadata.json`;
-    let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/JobMetadata.json`;
+    const evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
+    const inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/JobMetadata.json`;
+    const extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/JobMetadata.json`;
+    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/JobMetadata.json`;
     fetchJsonData(evasionLink, evasionSetreport).then((data) => {
       if (data)
         setTimeout(
-          () => evasionLineGraph(lineRefStartEvasion, lineRefRightEvasion),
+          () => { evasionLineGraph(lineRefStartEvasion, lineRefRightEvasion); },
           200
         );
     });
@@ -148,7 +150,7 @@ function FuzzingModelPage() {
       if (data)
         setTimeout(
           () =>
-            inferenceLineGraph(lineRefStartInference, lineRefRightInference),
+          { inferenceLineGraph(lineRefStartInference, lineRefRightInference); },
           200
         );
     });
@@ -157,7 +159,7 @@ function FuzzingModelPage() {
       if (data)
         setTimeout(
           () =>
-            extractionLineGraph(lineRefStartExtraction, lineRefRightExtraction),
+          { extractionLineGraph(lineRefStartExtraction, lineRefRightExtraction); },
           200
         );
     });
@@ -165,85 +167,83 @@ function FuzzingModelPage() {
       if (data)
         setTimeout(
           () =>
-            dataPoisoningLineGraph(
-              lineRefStartDataPoisoning,
-              lineRefRightDataPoisoning
-            ),
+          { dataPoisoningLineGraph(
+            lineRefStartDataPoisoning,
+            lineRefRightDataPoisoning
+          ); },
           200
         );
     });
     return () => {
       try {
-        lineRefStartEvasion && lineRefStartEvasion?.current?.remove();
-        lineRefStartInference && lineRefStartInference?.current?.remove();
-        lineRefStartExtraction && lineRefStartExtraction?.current?.remove();
-        lineRefStartDataPoisoning &&
-          lineRefStartDataPoisoning?.current?.remove();
-        lineRefRightEvasion && lineRefRightEvasion?.current?.remove();
-        lineRefRightInference && lineRefRightInference?.current?.remove();
-        lineRefRightExtraction && lineRefRightExtraction?.current?.remove();
-        lineRefRightDataPoisoning &&
-          lineRefRightDataPoisoning?.current?.remove();
+        lineRefStartEvasion?.current?.remove();
+        lineRefStartInference?.current?.remove();
+        lineRefStartExtraction?.current?.remove();
+        lineRefStartDataPoisoning?.current?.remove();
+        lineRefRightEvasion?.current?.remove();
+        lineRefRightInference?.current?.remove();
+        lineRefRightExtraction?.current?.remove();
+        lineRefRightDataPoisoning?.current?.remove();
       } catch (e) {
         // ignore
-        console.log(e)
+        console.log(e);
       }
     };
   }, []);
   return (
     <div>
-      <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={9} pr={2} pl={2}>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <p style={{ paddingLeft: "15%", color: "red" }}>ATTACKS</p>
+      <DefaultNavbar routes={ routes } sticky />
+      <MKBox pt={ 9 } pr={ 2 } pl={ 2 }>
+        <Grid container spacing={ 2 }>
+          <Grid item xs={ 4 }>
+            <p style={ { paddingLeft: "15%", color: "red" } }>ATTACKS</p>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={ 6 }>
             <p
-              style={{
+              style={ {
                 paddingLeft: "12%",
                 paddingRight: "41%",
                 color: "#587f2f",
                 textAlign: "center"
-              }}
+              } }
             >
-              Model: {selectedFuzz.name}
+              Model: { selectedFuzz.name }
             </p>
           </Grid>
-          <Grid item xs={2}>
-            <p style={{ color: "red", textAlign: "center", paddingRight: "12%" }}>OUTCOMES</p>
+          <Grid item xs={ 2 }>
+            <p style={ { color: "red", textAlign: "center", paddingRight: "12%" } }>OUTCOMES</p>
           </Grid>
         </Grid>
       </MKBox>
-      <Grid container pl={2} style={{ placeContent: "space-between" }}>
+      <Grid container pl={ 2 } style={ { placeContent: "space-between" } }>
         <LeftFuzzing
-          evasion={evasion}
-          inference={inference}
-          extraction={extraction}
-          dataPoisoning={dataPoisoning}
+          evasion={ evasion }
+          inference={ inference }
+          extraction={ extraction }
+          dataPoisoning={ dataPoisoning }
         />
         <DefenseSummary />
         <RightFuzzing />
       </Grid>
 
-      <Grid container style={{ width: "100%", placeContent: "center", alignItems: "center", height: "22px", position: "absolute" }}>
+      <Grid container style={ { width: "100%", placeContent: "center", alignItems: "center", height: "22px", position: "absolute" } }>
         <Grid item>
 
-          <MKTypography style={{ fontSize: "12px" }}>
+          <MKTypography style={ { fontSize: "12px" } }>
             Powered by
           </MKTypography>
         </Grid>
-        <Grid item style={{ paddingLeft: "8px" }}>
+        <Grid item style={ { paddingLeft: "8px" } }>
           <a
-            style={{
+            style={ {
               color: "grey",
               cursor: "pointer"
-            }}
-            href={`https://www.boschaishield.com/`}
-            title={"Click to view boschaishield webpage"}
+            } }
+            href={ `https://www.boschaishield.com/` }
+            title={ "Click to view boschaishield webpage" }
             target="_blank"
           >
-            <img style={{ width: "60px", height: "75px", paddingTop: "6px" }} src={aishieldLogo} />
+            <img style={ { width: "60px", height: "75px", paddingTop: "6px" } } src={ aishieldLogo } />
           </a>
         </Grid>
       </Grid>

@@ -1,7 +1,5 @@
 import merge from "lodash/merge";
 
-// ----------------------------------------------------------------------
-
 export default function useChart(options: any) {
   const LABEL_TOTAL = {
     show: true,

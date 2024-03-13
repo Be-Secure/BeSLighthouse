@@ -1,4 +1,3 @@
-
 import pxToRem from "../../functions/pxToRem";
 
 export default {

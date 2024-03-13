@@ -1,4 +1,4 @@
-import { osspoiMaster, version_details } from "../dataStore";
+import { osspoiMaster, versionDetailsURL } from "../dataStore";
 import { fetchJsonReport } from "./fatch_json_report";
 
 export class ProjectOfInterestData {
@@ -22,11 +22,11 @@ export class ProjectOfInterestData {
   }
 
   async getJsonReportVersionSummary(
-    besId: String,
+    besId: string,
     besName: string
   ): Promise<any> {
     return await fetchJsonReport(
-      version_details + besId + "-" + besName + "-Versiondetails.json"
+      versionDetailsURL + besId + "-" + besName + "-Versiondetails.json"
     );
   }
 }

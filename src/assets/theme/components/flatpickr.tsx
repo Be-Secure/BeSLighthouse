@@ -7,6 +7,7 @@ const { info, white, gradients } = colors;
 export default {
   ".flatpickr-day:hover, .flatpickr-day:focus, .flatpickr-day.nextMonthDay:hover, .flatpickr-day.nextMonthDay:focus":
     {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       background: rgba(info.main, 0.28),
       border: "none",
     },

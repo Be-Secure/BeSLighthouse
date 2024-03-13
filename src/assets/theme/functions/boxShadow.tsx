@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import rgba from "./rgba";
 import pxToRem from "./pxToRem";
 

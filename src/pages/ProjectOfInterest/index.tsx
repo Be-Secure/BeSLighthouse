@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import * as React from "react";
 
 import MKBox from "../../components/MKBox";
@@ -33,7 +35,7 @@ async function countLanguages(
   setProject: React.Dispatch<React.SetStateAction<never[]>>,
   cache: any
 ) {
-  let supportedLanguages: any = {
+  const supportedLanguages: any = {
     python: true,
     java: true,
     javascript: true,
@@ -43,14 +45,14 @@ async function countLanguages(
   };
   const tecStackForChart: any = [];
   const osspoi = await fetchOsspoiMaterData();
-  let languageCount: any = {};
-  let besTecStack: any = {};
+  const languageCount: any = {};
+  const besTecStack: any = {};
   for (let i = 0; i < osspoi.items.length; i++) {
-    if (!besTecStack[osspoi.items[i]["bes_technology_stack"]]) {
-      besTecStack[osspoi.items[i]["bes_technology_stack"]] = 0;
+    if (!besTecStack[osspoi.items[i].bes_technology_stack]) {
+      besTecStack[osspoi.items[i].bes_technology_stack] = 0;
     }
-    besTecStack[osspoi.items[i]["bes_technology_stack"]]++;
-    for (let language of Object.keys(osspoi.items[i].language)) {
+    besTecStack[osspoi.items[i].bes_technology_stack]++;
+    for (const language of Object.keys(osspoi.items[i].language)) {
       const lan: string = language.toLocaleLowerCase().trim();
       if (supportedLanguages[lan]) {
         if (!languageCount[lan]) {
@@ -61,10 +63,10 @@ async function countLanguages(
       }
     }
   }
-  for (let tecStack of Object.keys(besTecStack)) {
+  for (const tecStack of Object.keys(besTecStack)) {
     tecStackForChart.push({ label: tecStack, value: besTecStack[tecStack] });
   }
-  for (let language of Object.keys(languageCount)) {
+  for (const language of Object.keys(languageCount)) {
     cache.push({ label: language, value: languageCount[language] });
   }
   setProject(osspoi);
@@ -91,8 +93,8 @@ function ProjectOfInterest() {
   });
   return (
     <>
-      <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={8} sx={{ mx: { xs: 2, lg: 3 } }}>
+      <DefaultNavbar routes={ routes } sticky />
+      <MKBox pt={ 8 } sx={ { mx: { xs: 2, lg: 3 } } }>
         <MKTypography variant="h3" color="black">
           Projects of Interest
         </MKTypography>
@@ -103,7 +105,7 @@ function ProjectOfInterest() {
           paddingTop="2px"
           fontSize="18px"
           width="100%"
-          style={{ fontWeight: "lighter" }}
+          style={ { fontWeight: "lighter" } }
           // fontWeight="lighter"
         >
           Empower your development teams with unparalleled insights into your
@@ -114,61 +116,61 @@ function ProjectOfInterest() {
           vulnerabilities.
         </MKTypography>
       </MKBox>
-      <MKBox pt={1} sx={{ mx: { xs: 2, lg: 3 } }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+      <MKBox pt={ 1 } sx={ { mx: { xs: 2, lg: 3 } } }>
+        <Grid container spacing={ 3 }>
+          <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
             <ProjectCount
               title="projects tracked"
-              total={project?.items?.length}
+              total={ project?.items?.length }
               color="success"
               icon={
                 <img
-                  style={{ width: "140px", top: "58px", position: "absolute" }}
+                  style={ { width: "140px", top: "58px", position: "absolute" } }
                   alt="icon"
-                  src={ProjectLogo}
+                  src={ ProjectLogo }
                 />
               }
-              sx={{ width: "100%", height: "244px" }}
+              sx={ { width: "100%", height: "244px" } }
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+          <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
             <Language
               title="Languages"
-              chartData={data}
-              chartColors={[
+              chartData={ data }
+              chartColors={ [
                 theme.palette.primary.main,
                 theme.palette.info.main,
                 theme.palette.warning.main,
                 theme.palette.error.main,
                 theme.palette.success.main,
                 theme.palette.secondary.main
-              ]}
+              ] }
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+          <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
             <TecStack
               title="Be-Secure Technology Stacks"
-              chartColors={[
+              chartColors={ [
                 theme.palette.primary.main,
                 theme.palette.info.main,
                 theme.palette.warning.main,
                 theme.palette.error.main,
                 theme.palette.success.main,
                 theme.palette.secondary.main
-              ]}
-              chartData={tecStack}
+              ] }
+              chartData={ tecStack }
             />
           </Grid>
         </Grid>
       </MKBox>
       <ScrollableTabsButtonVisible
-        filter={filterData}
-        setFilter={setFilterData}
+        filter={ filterData }
+        setFilter={ setFilterData }
       />
-      <MKBox pt={1} pb={3}>
-        <Card sx={{ mx: { xs: 2, lg: 3 } }}>
+      <MKBox pt={ 1 } pb={ 3 }>
+        <Card sx={ { mx: { xs: 2, lg: 3 } } }>
           <MKBox>
-            <ProjectDisplay selectedFilter={filterData} />
+            <ProjectDisplay selectedFilter={ filterData } />
           </MKBox>
         </Card>
       </MKBox>

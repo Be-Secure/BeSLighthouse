@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import Card from "@mui/material/Card";
 import * as React from "react";
 import MKTypography from "../../components/MKTypography";
@@ -27,11 +28,11 @@ const SkipContent: any = {
 export const dividerDiv = (index: number) => {
   if (index !== 0)
     return (
-      <Divider style={{ position: "absolute", width: "91%", margin: "0" }} />
+      <Divider style={ { position: "absolute", width: "91%", margin: "0" } } />
     );
 };
 
-function underScoreToSentence(underScoreString: String) {
+function underScoreToSentence(underScoreString: string) {
   const wordsArray = underScoreString.split("_");
   const capitalizeWords = wordsArray.map(
     (word, index) => word.charAt(0).toUpperCase() + word.slice(1)
@@ -43,16 +44,16 @@ function underScoreToSentence(underScoreString: String) {
 function tableRowForModel(keyName: any, value: any, index: number) {
   return (
     <>
-      {dividerDiv(index)}
+      { dividerDiv(index) }
       <tr>
         <td>
-          <Typography variant="subtitle1" pr={2} color="inherit">
-            {keyName}
+          <Typography variant="subtitle1" pr={ 2 } color="inherit">
+            { keyName }
           </Typography>
         </td>
         <td>
           <Typography variant="subtitle1" color="inherit">
-            {value}
+            { value }
           </Typography>
         </td>
       </tr>
@@ -60,25 +61,26 @@ function tableRowForModel(keyName: any, value: any, index: number) {
   );
 }
 
-function ShowModelContent({model}: any) {
-  const selectedModel = model.length > 0 ? model[0]: {}
+function ShowModelContent({ model }: any) {
+  const selectedModel = model.length > 0 ? model[0]: {};
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const modelObject = Object.keys(selectedModel);
   let count = 0;
   return (
-    <Card style={{height: "100%"}}>
-      <MKBox pt={2} px={3}>
+    <Card style={ { height: "100%" } }>
+      <MKBox pt={ 2 } px={ 3 }>
         <MKTypography
-          style={{ textAlign: "center" }}
+          style={ { textAlign: "center" } }
           variant="h5"
           fontWeight="medium"
         >
           Model Card
         </MKTypography>
       </MKBox>
-      <MKBox p={2}>
+      <MKBox p={ 2 }>
         <table>
           <tbody>
-            {modelObject.map((key, index) => {
+            { modelObject.map((key, index) => {
               if (SkipContent[key]) return <></>;
               if (key === "created_date" || key === "license") {
                 tableRowForModel(
@@ -97,22 +99,22 @@ function ShowModelContent({model}: any) {
               if (key === "url") {
                 return (
                   <>
-                    {dividerDiv(index)}
+                    { dividerDiv(index) }
                     <tr>
                       <td>
                         <Typography variant="subtitle1" color="inherit">
-                          {underScoreToSentence(key)}{" "}
+                          { underScoreToSentence(key) }{ " " }
                         </Typography>
                       </td>
                       <td>
                         <Typography variant="subtitle1" color="inherit">
                           <a
-                            href={selectedModel[key]}
+                            href={ selectedModel[key] }
                             target="_blank"
                             rel="noopener noreferrer"
-                            style={{ color: "#587f2f" }}
+                            style={ { color: "#587f2f" } }
                           >
-                            {selectedModel[key]}
+                            { selectedModel[key] }
                           </a>
                         </Typography>
                       </td>
@@ -125,7 +127,7 @@ function ShowModelContent({model}: any) {
                 selectedModel[key],
                 count++
               );
-            })}
+            }) }
           </tbody>
         </table>
       </MKBox>

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import * as React from "react";
 import Tab from "@mui/material/Tab";
 import { SecurityDomain } from "./filter/SecurityDomain";
@@ -8,86 +9,86 @@ import { OpenSourceProjectType } from "./filter/OpenSourceProjectType";
 import { Languages } from "./filter/Languages";
 import { BeSTechnologyStack } from "./filter/BeS-TechnologyStack";
 
-export function TabForPoi({filter, setFilter}: any) {
+export function TabForPoi({ filter, setFilter }: any) {
   return (
     <>
       <Tab
-        style={{
+        style={ {
           margin: "0",
           padding: "0",
           backgroundColor: "white",
           borderRadius: "1",
           paddingRight: "12px",
           minWidth: "302px"
-        }}
-        label={<BeSTechnologyStack filter={filter} setFilter={setFilter} />}
+        } }
+        label={ <BeSTechnologyStack filter={ filter } setFilter={ setFilter } /> }
       />
       <Tab
-        style={{
+        style={ {
           margin: "0",
           padding: "0",
           backgroundColor: "white",
           borderRadius: "1",
           paddingRight: "12px",
           minWidth: "302px"
-        }}
-        label={<SecurityDomain filter={filter} setFilter={setFilter} />}
+        } }
+        label={ <SecurityDomain filter={ filter } setFilter={ setFilter } /> }
       />
       <Tab
-        style={{
+        style={ {
           margin: "0",
           padding: "0",
           backgroundColor: "white",
           borderRadius: "1",
           paddingRight: "12px",
           minWidth: "302px"
-        }}
-        label={<TechnologyDomain filter={filter} setFilter={setFilter} />}
+        } }
+        label={ <TechnologyDomain filter={ filter } setFilter={ setFilter } /> }
       />
       <Tab
-        style={{
+        style={ {
           margin: "0",
           padding: "0",
           backgroundColor: "white",
           borderRadius: "1",
           paddingRight: "12px",
           minWidth: "250px"
-        }}
-        label={<Industry filter={filter} setFilter={setFilter} />}
+        } }
+        label={ <Industry filter={ filter } setFilter={ setFilter } /> }
       />
       <Tab
-        style={{
+        style={ {
           margin: "0",
           padding: "0",
           backgroundColor: "white",
           borderRadius: "1",
           paddingRight: "12px",
           minWidth: "302px"
-        }}
+        } }
         label={
-          <TechnologyDomainComposition filter={filter} setFilter={setFilter} />
+          <TechnologyDomainComposition filter={ filter } setFilter={ setFilter } />
         }
       />
       <Tab
-        style={{
+        style={ {
           margin: "0",
           padding: "0",
           backgroundColor: "white",
           borderRadius: "1",
           paddingRight: "12px",
           minWidth: "302px"
-        }}
-        label={<OpenSourceProjectType filter={filter} setFilter={setFilter} />}
+        } }
+        label={ <OpenSourceProjectType filter={ filter } setFilter={ setFilter } /> }
       />
       <Tab
-        style={{
+        style={ {
           margin: "0",
           padding: "0",
           backgroundColor: "white",
           borderRadius: "1",
           paddingRight: "12px"
-        }}
-        label={<Languages filter={filter} setFilter={setFilter} />}
+        } }
+        label={ <Languages filter={ filter } setFilter={ setFilter } /> }
       />
     </>
   );

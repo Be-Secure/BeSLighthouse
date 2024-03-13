@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { assessment_datastore } from "../../dataStore";
+import { assessmentDatastoreURL } from "../../dataStore";
 import {
-  assessment_path,
-  assessment_report,
+  assessmentPath,
+  assessmentReport,
 } from "../../utils/assessmentReport";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKBox from "../../components/MKBox";
@@ -26,19 +27,19 @@ export const spanStyle: any = {
 
 function displayReport(BeSName: string, besReport: any, report: any): any {
   if (besReport === "Scorecard") {
-    return <ScorecardTable data={report} />;
+    return <ScorecardTable data={ report } />;
   }
   if (besReport === "Codeql") {
-    return <CodeQL data={report} />;
+    return <CodeQL data={ report } />;
   }
   if (besReport === "Sonarqube") {
-    return <Sonarqube data={report} />;
+    return <Sonarqube data={ report } />;
   }
   if (besReport === "Fossology") {
-    return <Fossology data={report} />;
+    return <Fossology data={ report } />;
   }
   if (besReport === "SBOM") {
-    return <Sbom data={report}/>;
+    return <Sbom data={ report }/>;
   }
 }
 
@@ -49,31 +50,31 @@ function BesAssessmentReport() {
   besReport = besReport.slice(1);
   const [report, setreport]: any = useState({});
   useEffect(() => {
-    const link: string = `${assessment_datastore}/${besName}/${besVersion}/${assessment_path[besReport]}/${besName}-${besVersion}-${assessment_report[besReport]}-report.json`;
+    const link: string = `${assessmentDatastoreURL}/${besName}/${besVersion}/${assessmentPath[besReport]}/${besName}-${besVersion}-${assessmentReport[besReport]}-report.json`;
     fetchJsonData(link, setreport);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
-      <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={14} key={"cardkey"} sx={{mx: { xs: 2, lg: 3 }}}>
-        {besReport === "Scorecard" ? (
+      <DefaultNavbar routes={ routes } sticky />
+      <MKBox pt={ 14 } key={ "cardkey" } sx={ { mx: { xs: 2, lg: 3 } } }>
+        { besReport === "Scorecard" ? (
           <Scorecard
-            date={report?.date ?? ""}
-            version={report?.scorecard?.version ?? ""}
-            github={report?.repo?.name ?? ""}
-            commit={report?.scorecard?.commit ?? ""}
-            score={report?.score ?? ""}
+            date={ report?.date ?? "" }
+            version={ report?.scorecard?.version ?? "" }
+            github={ report?.repo?.name ?? "" }
+            commit={ report?.scorecard?.commit ?? "" }
+            score={ report?.score ?? "" }
           />
         ) : (
           <></>
-        )}
+        ) }
       </MKBox>
       <MKBox >
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Card sx={{mx: { xs: 2, lg: 3 }}}>
-              <MKBox >{displayReport(besName, besReport, report)}</MKBox>
+        <Grid container spacing={ 6 }>
+          <Grid item xs={ 12 }>
+            <Card sx={ { mx: { xs: 2, lg: 3 } } }>
+              <MKBox >{ displayReport(besName, besReport, report) }</MKBox>
             </Card>
           </Grid>
         </Grid>

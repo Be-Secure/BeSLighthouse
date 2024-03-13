@@ -1,4 +1,4 @@
-export const assessment_path: any = {
+export const assessmentPath: any = {
   Scorecard: "scorecard",
   "Criticality Score": "criticality_score",
   Sonarqube: "sast",
@@ -9,7 +9,7 @@ export const assessment_path: any = {
   Snyk: "snyk"
 };
 
-export const assessment_report: any = {
+export const assessmentReport: any = {
   Scorecard: "scorecard",
   "Criticality Score": "criticality_score",
   Sonarqube: "sonarqube",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import typography from "../../base/typography";
 import { colors } from "../../base/colors";
 

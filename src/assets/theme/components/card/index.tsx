@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { colors } from "../../base/colors";
 import borders from "../../base/borders";
 import boxShadows from "../../base/boxShadows";

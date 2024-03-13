@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
   Table,
   TableBody,
@@ -21,13 +23,13 @@ const TABLE_HEAD = [
 function riskPosture(attackMap: any, name: any) {
   try {
     return (
-      <TableCell align="left" sx={{ fontSize: "18px" }}>
-        {attackMap[name].vulnerability.overview.Alert}
+      <TableCell align="left" sx={ { fontSize: "18px" } }>
+        { attackMap[name].vulnerability.overview.Alert }
       </TableCell>
     );
   } catch (e) {
     return (
-      <TableCell align="left" sx={{ fontSize: "18px" }}>
+      <TableCell align="left" sx={ { fontSize: "18px" } }>
         Not Analyzed
       </TableCell>
     );
@@ -37,13 +39,13 @@ function riskPosture(attackMap: any, name: any) {
 function defenceAvailable(attackMap: any, name: any) {
   if (Object.values(attackMap[name].defence).length > 0) {
     return (
-      <TableCell align="left" sx={{ fontSize: "18px" }}>
+      <TableCell align="left" sx={ { fontSize: "18px" } }>
         Yes
       </TableCell>
     );
   } else {
     return (
-      <TableCell align="left" sx={{ fontSize: "18px" }}>
+      <TableCell align="left" sx={ { fontSize: "18px" } }>
         No
       </TableCell>
     );
@@ -52,25 +54,25 @@ function defenceAvailable(attackMap: any, name: any) {
 
 function attackGraph(selectedMenu: any, attackMap: any) {
   if (
-    attackMap["Evasion"].reportAvability ||
-    attackMap["Extraction"].reportAvability ||
-    attackMap["Inference"].reportAvability ||
+    attackMap.Evasion.reportAvability ||
+    attackMap.Extraction.reportAvability ||
+    attackMap.Inference.reportAvability ||
     attackMap["Data Poisoning"].reportAvability
   ) {
     return (
       <NavLink
-        to={{
+        to={ {
           pathname: `/BeSLighthouse/model_fuzzing/:${selectedMenu.name}`,
           search: ""
-        }}
-        state={{ selectedFuzz: selectedMenu }}
-        style={{ color: "#587f2f", cursor: "pointer" }}
+        } }
+        state={ { selectedFuzz: selectedMenu } }
+        style={ { color: "#587f2f", cursor: "pointer" } }
       >
         <MKButton
-          variant={"gradient"}
-          color={"info"}
+          variant={ "gradient" }
+          color={ "info" }
           size="Large"
-          sx={{ width: "100%" }}
+          sx={ { width: "100%" } }
         >
           Attack Graph Emulation
         </MKButton>
@@ -79,10 +81,10 @@ function attackGraph(selectedMenu: any, attackMap: any) {
   } else {
     return (
       <MKButton
-        variant={"gradient"}
-        color={"info"}
+        variant={ "gradient" }
+        color={ "info" }
         size="Large"
-        sx={{ width: "100%" }}
+        sx={ { width: "100%" } }
         disabled
       >
         Attack Graph Emulation
@@ -91,9 +93,9 @@ function attackGraph(selectedMenu: any, attackMap: any) {
   }
 }
 
-const AdversarialAttackSummary = ({model}: any) => {
+const AdversarialAttackSummary = ({ model }: any) => {
   const attackName = ["Evasion", "Extraction", "Inference", "Data Poisoning"];
-  const selectedModel = model.length > 0 ? model[0]: {}
+  const selectedModel = model.length > 0 ? model[0]: {};
   const selectedMenu = selectedModel;
   const { modelName }: any = useParams();
   const name = modelName.slice(1);
@@ -124,6 +126,7 @@ const AdversarialAttackSummary = ({model}: any) => {
     verifyLink(defenceForInference, inferenceDefenceData);
     verifyLink(dataPoisoningLink, dataPoisoningData);
     verifyLink(defenceForDataPoisoning, dataPoisoningDefenceData);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const attackMap: any = {
     Evasion: {
@@ -173,61 +176,61 @@ const AdversarialAttackSummary = ({model}: any) => {
   };
   return (
     <>
-      <Typography color="black" pt={1} pb={3}>
+      <Typography color="black" pt={ 1 } pb={ 3 }>
         Adversarial Attack Summary
       </Typography>
       <TableContainer>
         <Table>
-          <TableHead sx={{ display: "contents" }}>
+          <TableHead sx={ { display: "contents" } }>
             <TableRow>
-              {TABLE_HEAD.map((headCell: any) => (
+              { TABLE_HEAD.map((headCell: any) => (
                 <TableCell
-                  sx={{
+                  sx={ {
                     color: "#637381",
                     backgroundColor: "#F4F6F8",
                     fontSize: "14px"
-                  }}
-                  key={headCell.id}
-                  align={headCell.alignRight ? "right" : "left"}
+                  } }
+                  key={ headCell.id }
+                  align={ headCell.alignRight ? "right" : "left" }
                 >
-                  {headCell.label}
+                  { headCell.label }
                 </TableCell>
-              ))}
+              )) }
             </TableRow>
           </TableHead>
           <TableBody>
-            {attackName.map((name) => {
+            { attackName.map((name) => {
               return (
-                <TableRow hover tabIndex={-1}>
-                  <TableCell align="left" sx={{ fontSize: "18px" }}>
-                    {name}
+                <TableRow hover tabIndex={ -1 }>
+                  <TableCell align="left" sx={ { fontSize: "18px" } }>
+                    { name }
                   </TableCell>
-                  {riskPosture(attackMap, name)}
-                  {defenceAvailable(attackMap, name)}
+                  { riskPosture(attackMap, name) }
+                  { defenceAvailable(attackMap, name) }
                 </TableRow>
               );
-            })}
+            }) }
           </TableBody>
         </Table>
       </TableContainer>
       <Typography color="black" 
-        pt={2} 
-        pb={1}
-        style={{ fontSize: "12px", float: "right" }}>
+        pt={ 2 } 
+        pb={ 1 }
+        style={ { fontSize: "12px", float: "right" } }>
         Powered by <a
-                  style={{
-                    color: "grey",
-                    cursor: "pointer"
-                  }}
-                  href={`https://www.boschaishield.com/`}
-                  title={"Click to view boschaishield webpage"}
-                  target="_blank"
-                >
-                  Bosch AIShield
-                  </a>
+          style={ {
+            color: "grey",
+            cursor: "pointer"
+          } }
+          href={ `https://www.boschaishield.com/` }
+          title={ "Click to view boschaishield webpage" }
+          target="_blank"
+        >
+          Bosch AIShield
+        </a>
       </Typography>
-      {dividerDiv(1)}
-      {attackGraph(selectedMenu, attackMap)}
+      { dividerDiv(1) }
+      { attackGraph(selectedMenu, attackMap) }
     </>
   );
 };

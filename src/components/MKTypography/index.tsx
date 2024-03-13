@@ -11,18 +11,18 @@ const MKTypography = forwardRef(
     ref
   ) => (
     <MKTypographyRoot
-      {...rest}
-      ref={ref}
-      ownerState={{
+      { ...rest }
+      ref={ ref }
+      ownerState={ {
         color,
         textTransform,
         verticalAlign,
         fontWeight,
         opacity,
         textGradient,
-      }}
+      } }
     >
-      {children}
+      { children }
     </MKTypographyRoot>
   )
 );
