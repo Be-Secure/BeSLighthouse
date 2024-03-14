@@ -18,15 +18,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "noImplicitAny": false
+    "jsx": "react-jsx"
   },
   "include": [
-    "./**/*",
-    "./*",
-    ".eslintrc.js"
-  ],
-  "exclude": [
-    "node_modules"
+    "src"
   ]
 }

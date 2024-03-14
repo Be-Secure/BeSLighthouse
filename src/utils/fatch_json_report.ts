@@ -7,6 +7,7 @@ export async function fetchJsonReport(url: string): Promise<any> {
         let data = "";
 
         response.on("data", (chunk: any) => {
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           data += chunk;
         });
 

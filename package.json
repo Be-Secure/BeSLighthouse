@@ -18,29 +18,45 @@
     "classnames": "^2.3.2",
     "d3": "^7.8.5",
     "gh-pages": "^5.0.0",
+    "jest": "24.9.0",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
-    "react": "18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-countup": "^6.5.0",
-    "react-dom": "18.2.0",
     "react-leader-line": "^1.0.5",
     "react-popper": "^1.0.0-beta.6",
     "react-router-dom": "6.10.0",
-    "react-scripts": "^3.0.1",
     "simplebar-react": "^3.2.4",
+    "babel-jest": "^24.9.0",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.89",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^3.0.1",
     "typescript": "^4.9.5",
-    "web-vitals": "3.3.1"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false && react-scripts build && cp build/index.html build/404.html",
+    "build": "react-scripts build && cp build/index.html build/404.html",
     "predeploy": "npm run build",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -55,7 +71,6 @@
     ]
   },
   "devDependencies": {
-    "@react-native-community/eslint-config": "^3.2.0",
     "@testing-library/react": "^14.0.0",
     "@types/chroma-js": "^2.4.3",
     "@types/jest": "^27.5.2",
@@ -63,15 +78,18 @@
     "@types/node": "^16.18.36",
     "@types/numeral": "^2.0.2",
     "@types/react-dom": "^18.2.15",
-    "@typescript-eslint/eslint-plugin": "^7.1.1",
-    "@typescript-eslint/parser": "^7.1.1",
-    "eslint": "^8.57.0",
-    "eslint-config-standard-with-typescript": "^43.0.1",
-    "eslint-plugin-ft-flow": "^3.0.7",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
-    "eslint-plugin-react": "^7.34.0"
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard-with-typescript": "19.0.1",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.21.4",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-standard": "4.0.1",
+    "prettier": "^3.2.5"
   }
 }
