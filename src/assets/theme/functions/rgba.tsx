@@ -1,7 +1,6 @@
-
 import hexToRgb from "../functions/hexToRgb";
 
-function rgba(color: any, opacity: number) {
+function rgba(color: string | number, opacity: number) {
   return `rgba(${hexToRgb(color)}, ${opacity})`;
 }
 

@@ -1,3 +1,4 @@
+ 
 import * as React from "react";
 
 // react-router-dom components
@@ -36,50 +37,50 @@ function DefaultNavbarDropdown({
   return (
     <>
       <MKBox
-        {...rest}
-        mx={1}
-        p={1}
+        { ...rest }
+        mx={ 1 }
+        p={ 1 }
         display="flex"
         alignItems="baseline"
-        color={light ? "white" : "dark"}
-        opacity={light ? 1 : 0.6}
-        sx={{ cursor: "pointer", userSelect: "none" }}
-        {...(route && routeComponent)}
-        {...(href && linkComponent)}
+        color={ light ? "white" : "dark" }
+        opacity={ light ? 1 : 0.6 }
+        sx={ { cursor: "pointer", userSelect: "none" } }
+        { ...(route && routeComponent) }
+        { ...(href && linkComponent) }
       >
         <MKTypography
           variant="body2"
-          lineHeight={1}
+          lineHeight={ 1 }
           color="inherit"
-          sx={{ alignSelf: "center", "& *": { verticalAlign: "middle" } }}
+          sx={ { alignSelf: "center", "& *": { verticalAlign: "middle" } } }
         >
-          {icon}
+          { icon }
         </MKTypography>
         <MKTypography
           variant="button"
           fontWeight="regular"
           textTransform="capitalize"
-          color={light ? "white" : "dark"}
-          sx={{ fontWeight: "100%", ml: 1, mr: 0.25 }}
-          style={{ fontSize: "0.975rem" }}
+          color={ light ? "white" : "dark" }
+          sx={ { fontWeight: "100%", ml: 1, mr: 0.25 } }
+          style={ { fontSize: "0.975rem" } }
         >
-          {name}
+          { name }
         </MKTypography>
         <MKTypography
           variant="body2"
-          color={light ? "white" : "dark"}
+          color={ light ? "white" : "dark" }
           ml="auto"
         >
-          <Icon sx={{ fontWeight: "normal", verticalAlign: "middle" }}>
-            {collapse && "keyboard_arrow_down"}
+          <Icon sx={ { fontWeight: "normal", verticalAlign: "middle" } }>
+            { collapse && "keyboard_arrow_down" }
           </Icon>
         </MKTypography>
       </MKBox>
-      {children && (
-        <Collapse in={Boolean(collapseStatus)} timeout={400} unmountOnExit>
-          {children}
+      { children && (
+        <Collapse in={ Boolean(collapseStatus) } timeout={ 400 } unmountOnExit>
+          { children }
         </Collapse>
-      )}
+      ) }
     </>
   );
 }

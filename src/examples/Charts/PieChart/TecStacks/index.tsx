@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import * as React from "react";
 
 import Card from "@mui/material/Card";
@@ -38,7 +39,7 @@ function TecStack({ title, chartColors, chartData }: any) {
   return (
     <Card>
       <MKBox>
-        <MKBox pt={1} pb={1} px={1}>
+        <MKBox pt={ 1 } pb={ 1 } px={ 1 }>
           <Typography
             display="flex"
             justifyContent="left"
@@ -47,15 +48,15 @@ function TecStack({ title, chartColors, chartData }: any) {
             fontSize="20px"
             variant="h6"
             textTransform="capitalize"
-            pl={2}
+            pl={ 2 }
           >
-            {title}
+            { title }
           </Typography>
           <ReactApexChart
             type="pie"
-            series={chartSeries}
-            options={chartOptions}
-            height={195}
+            series={ chartSeries }
+            options={ chartOptions }
+            height={ 195 }
           />
         </MKBox>
       </MKBox>

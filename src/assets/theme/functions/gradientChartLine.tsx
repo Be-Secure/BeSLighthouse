@@ -2,7 +2,7 @@ import rgba from "../functions/rgba";
 
 function gradientChartLine(
   chart: { getContext: (arg0: string) => any },
-  color: any,
+  color: string | number,
   opacity = 0.2
 ) {
   const ctx = chart.getContext("2d");

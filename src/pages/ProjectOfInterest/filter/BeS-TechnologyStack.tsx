@@ -1,9 +1,10 @@
+ 
 import * as React from "react";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Theme, useTheme } from "@mui/material/styles";
+import Select, { type SelectChangeEvent } from "@mui/material/Select";
+import { type Theme, useTheme } from "@mui/material/styles";
 
 const names = [
   "DevOPS and Infrastructure Tool (DO)",
@@ -16,7 +17,7 @@ const names = [
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      !personName.includes(name)
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium
   };
@@ -39,34 +40,34 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
     setFilter({ ...filter });
   }
   return (
-    <div style={{ width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "lightgreen"  }}>
-      <FormControl sx={{ width: "100%" }}>
+    <div style={ { width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "lightgreen"  } }>
+      <FormControl sx={ { width: "100%" } }>
         <Select
-          multiple={false}
+          multiple={ false }
           displayEmpty
-          value={personName}
-          onChange={handleChange1}
-          input={<OutlinedInput />}
-          renderValue={(selected) => {
+          value={ personName }
+          onChange={ handleChange1 }
+          input={ <OutlinedInput /> }
+          renderValue={ (selected) => {
             if (selected.length === 0) {
               return <>Be-Secure Technology Stacks</>;
             }
             return selected.join(", ");
-          }}
-          style={{ height: "35px" }}
+          } }
+          style={ { height: "35px" } }
         >
           <MenuItem value="Be-Secure Technology Stacks">
             <>All</>
           </MenuItem>
-          {names.map((name) => (
+          { names.map((name) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={ name }
+              value={ name }
+              style={ getStyles(name, personName, theme) }
             >
-              {name}
+              { name }
             </MenuItem>
-          ))}
+          )) }
         </Select>
       </FormControl>
     </div>

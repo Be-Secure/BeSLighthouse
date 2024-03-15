@@ -1,3 +1,4 @@
+ 
 import * as React from "react";
 
 import PropTypes from "prop-types";
@@ -47,19 +48,19 @@ export default function SearchPoiList({
 }: any) {
   return (
     <StyledRoot
-      style={{
+      style={ {
         paddingLeft: "12px"
-      }}
+      } }
     >
       <StyledSearch
-        value={filterName}
-        onChange={onFilterName}
-        placeholder={placeholderName}
+        value={ filterName }
+        onChange={ onFilterName }
+        placeholder={ placeholderName }
         startAdornment={
           <InputAdornment position="start">
             <Iconify
               icon="eva:search-fill"
-              sx={{ color: "text.disabled", width: 20, height: 20 }}
+              sx={ { color: "text.disabled", width: 20, height: 20 } }
             />
           </InputAdornment>
         }

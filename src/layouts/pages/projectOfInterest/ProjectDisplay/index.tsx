@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/naming-convention */
+ 
 import * as React from "react";
 
 import {
@@ -54,8 +57,8 @@ export function applySortFilter(array: any, comparator: any, query: any) {
 }
 
 function descendingComparator(
-  a: { [x: string]: number },
-  b: { [x: string]: number },
+  a: Record<string, number>,
+  b: Record<string, number>,
   orderBy: string
 ) {
   if (b[orderBy] < a[orderBy]) {
@@ -114,7 +117,7 @@ export default function ProjectDisplay({ selectedFilter }: any) {
   if (projectOfInterestData.getPoiData("Project_of_interest")) {
     getUSERLIST = projectOfInterestData.getPoiData("Project_of_interest");
   }
-  let filterData: any = [];
+  const filterData: any = [];
   if (
     selectedFilter?.BeSTecStack &&
     !filterCheck[selectedFilter?.BeSTecStack]
@@ -191,20 +194,20 @@ export default function ProjectDisplay({ selectedFilter }: any) {
     <>
       <SearchPoiList
         placeholderName="Search project..."
-        filterName={filterName}
-        onFilterName={handleFilterByName}
+        filterName={ filterName }
+        onFilterName={ handleFilterByName }
       />
       <TableContainer>
         <Table>
           <PoiListHead
-            order={order}
-            orderBy={orderBy}
-            headLabel={TABLE_HEAD}
-            rowCount={getUSERLIST.length}
-            onRequestSort={handleRequestSort}
+            order={ order }
+            orderBy={ orderBy }
+            headLabel={ TABLE_HEAD }
+            rowCount={ getUSERLIST.length }
+            onRequestSort={ handleRequestSort }
           />
           <TableBody>
-            {filteredUsers
+            { filteredUsers
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(
                 (row: {
@@ -234,53 +237,53 @@ export default function ProjectDisplay({ selectedFilter }: any) {
                     licenseName = "Not Available";
                   }
                   return (
-                    <TableRow hover key={id} tabIndex={-1}>
+                    <TableRow hover key={ id } tabIndex={ -1 }>
                       <TableCell component="th" scope="row" padding="none">
-                        <Stack direction="row" alignItems="center" spacing={2}>
+                        <Stack direction="row" alignItems="center" spacing={ 2 }>
                           <Typography
-                            sx={{
+                            sx={ {
                               position: "relative",
                               left: "16px"
-                            }}
+                            } }
                             variant="subtitle2"
                             noWrap
                           >
-                            <Button onClick={() => openGithubLink(html_url)}>
-                              {" "}
-                              {id}{" "}
+                            <Button onClick={ () => { openGithubLink(html_url); } }>
+                              { " " }
+                              { id }{ " " }
                             </Button>
                           </Typography>
                         </Stack>
                       </TableCell>
                       <TableCell align="left">
                         <a
-                          href={`/BeSLighthouse/Project-Of-Interest/bes_version_history/:${id}/:${name}`}
+                          href={ `/BeSLighthouse/Project-Of-Interest/bes_version_history/:${id}/:${name}` }
                         >
-                          {name}{" "}
+                          { name }{ " " }
                         </a>
                       </TableCell>
-                      <TableCell align="left">{description}</TableCell>
-                      <TableCell align="left">{bes_technology_stack}</TableCell>
-                      <TableCell align="left">{licenseName}</TableCell>
+                      <TableCell align="left">{ description }</TableCell>
+                      <TableCell align="left">{ bes_technology_stack }</TableCell>
+                      <TableCell align="left">{ licenseName }</TableCell>
                     </TableRow>
                   );
                 }
-              )}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+              ) }
+            { emptyRows > 0 && (
+              <TableRow style={ { height: 53 * emptyRows } }>
+                <TableCell colSpan={ 6 } />
               </TableRow>
-            )}
+            ) }
           </TableBody>
-          {isNotFound && (
+          { isNotFound && (
             <TableBody>
               <TableRow>
-                <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                <TableCell align="center" colSpan={ 6 } sx={ { py: 3 } }>
                   <Paper
-                    sx={{
+                    sx={ {
                       textAlign: "center",
                       boxShadow: "none"
-                    }}
+                    } }
                   >
                     <Typography variant="h6" paragraph>
                       Not found
@@ -288,31 +291,31 @@ export default function ProjectDisplay({ selectedFilter }: any) {
 
                     <Typography variant="body2">
                       No results found for &nbsp;
-                      <strong>&quot;{filterName}&quot;</strong>.
+                      <strong>&quot;{ filterName }&quot;</strong>.
                       <br /> Try checking for typos or using complete words.
                     </Typography>
                   </Paper>
                 </TableCell>
               </TableRow>
             </TableBody>
-          )}
+          ) }
         </Table>
         <TablePagination
-          sx={{
+          sx={ {
             ".MuiTablePagination-selectLabel": {
               margin: "auto"
             },
             ".MuiTablePagination-displayedRows": {
               margin: "auto"
             }
-          }}
-          rowsPerPageOptions={[15, 30, 45]}
+          } }
+          rowsPerPageOptions={ [15, 30, 45] }
           component="div"
-          count={getUSERLIST.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+          count={ getUSERLIST.length }
+          rowsPerPage={ rowsPerPage }
+          page={ page }
+          onPageChange={ handleChangePage }
+          onRowsPerPageChange={ handleChangeRowsPerPage }
         />
       </TableContainer>
     </>

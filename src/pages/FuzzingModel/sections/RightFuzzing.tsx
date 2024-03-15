@@ -8,11 +8,11 @@ import { useLocation } from "react-router-dom";
 
 function RightFuzzing() {
   const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
-  let [loadingEvasion, setLoadingEvasion] = useState(true);
-  let [loadingInference, setLoadingInference] = useState(true);
-  let [loadingExtraction, setLoadingExtraction] = useState(true);
-  let [loadingDataPoisoning, setLoadingDataPoisoning] = useState(true);
+  const selectedFuzz: {name: string} = location.state.selectedFuzz;
+  const [loadingEvasion, setLoadingEvasion] = useState(true);
+  const [loadingInference, setLoadingInference] = useState(true);
+  const [loadingExtraction, setLoadingExtraction] = useState(true);
+  const [loadingDataPoisoning, setLoadingDataPoisoning] = useState(true);
   
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
@@ -26,58 +26,59 @@ function RightFuzzing() {
       setTimeout(setLoadingExtraction, 4000);
       setTimeout(setLoadingDataPoisoning, 5000);
     } catch (e) {
-      //ignore
+      // ignore
     }
-    let evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/VulnerabilityReport.json`;
-    let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/VulnerabilityReport.json`;
-    let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/VulnerabilityReport.json`;
-    let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
+    const evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/VulnerabilityReport.json`;
+    const inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/VulnerabilityReport.json`;
+    const extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/VulnerabilityReport.json`;
+    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
     fetchJsonData(evasionLink, evasionSetreport);
     fetchJsonData(inferenceLink, inferenceSetreport);
     fetchJsonData(extractionLink, extractionSetreport);
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <Grid container width={"17%"} mr={2}>
-      <Grid item width={"100%"}>
-        <MKBox mb={1}>
+    <Grid container width={ "17%" } mr={ 2 }>
+      <Grid item width={ "100%" }>
+        <MKBox mb={ 1 }>
           <AttackVulnerabilityReport
             keyvalue="RightEvasion"
-            position={{ color: "info" }}
+            position={ { color: "info" } }
             name="Evasion"
-            cardSide={true}
+            cardSide={ true }
             textAllign="center"
-            attackTimmer={loadingEvasion}
-            report={evasion}
+            attackTimmer={ loadingEvasion }
+            report={ evasion }
           />
           <AttackVulnerabilityReport
             keyvalue="RightInference"
-            position={{ color: "info" }}
+            position={ { color: "info" } }
             name="Inference"
-            cardSide={true}
+            cardSide={ true }
             textAllign="center"
-            attackTimmer={loadingInference}
-            report={inference}
+            attackTimmer={ loadingInference }
+            report={ inference }
           />
 
           <AttackVulnerabilityReport
             keyvalue="RightExtraction"
-            position={{ color: "info" }}
+            position={ { color: "info" } }
             name="Extraction"
-            cardSide={true}
+            cardSide={ true }
             textAllign="center"
-            attackTimmer={loadingExtraction}
-            report={extraction}
+            attackTimmer={ loadingExtraction }
+            report={ extraction }
           />
 
           <AttackVulnerabilityReport
             keyvalue="RightDataPoisoning"
-            position={{ color: "info" }}
+            position={ { color: "info" } }
             name="Data Poisoning"
-            cardSide={true}
+            cardSide={ true }
             textAllign="center"
-            attackTimmer={loadingDataPoisoning}
-            report={dataPoisoning}
+            attackTimmer={ loadingDataPoisoning }
+            report={ dataPoisoning }
           />
         </MKBox>
       </Grid>

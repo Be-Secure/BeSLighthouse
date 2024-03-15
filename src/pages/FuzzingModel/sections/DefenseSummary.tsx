@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+ 
+import React from "react";
 
 import Grid from "@mui/material/Grid";
 import MKBox from "../../../components/MKBox";
@@ -27,16 +28,16 @@ function CustomTabPanel(props: TabPanelProps) {
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
+      hidden={ value !== index }
+      id={ `simple-tabpanel-${index}` }
+      aria-labelledby={ `simple-tab-${index}` }
+      { ...other }
     >
-      {value === index && (
+      { value === index && (
         <Box>
-          <Typography>{children}</Typography>
+          <Typography>{ children }</Typography>
         </Box>
-      )}
+      ) }
     </div>
   );
 }
@@ -55,7 +56,7 @@ function DefenseSummary() {
     setValue(newValue);
   };
   const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
+  const selectedFuzz: {name: string} = location.state.selectedFuzz;
   
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
@@ -63,83 +64,84 @@ function DefenseSummary() {
   const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
 
   React.useEffect(() => {
-    let evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/DefenceReport.json`;
-    let inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/DefenceReport.json`;
-    let extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/DefenceReport.json`;
-    let dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/DefenceReport.json`;
+    const evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/DefenceReport.json`;
+    const inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/DefenceReport.json`;
+    const extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/DefenceReport.json`;
+    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/DefenceReport.json`;
     fetchJsonData(evasionLink, evasionSetreport);
     fetchJsonData(inferenceLink, inferenceSetreport);
     fetchJsonData(extractionLink, extractionSetreport);
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Grid
       container
-      pr={2}
-      pt={2}
-      spacing={1}
+      pr={ 2 }
+      pt={ 2 }
+      spacing={ 1 }
       width="40%"
       justifyContent="center"
       alignItems="center"
     >
       <Grid item>
         <div id="arrowpass">
-          <img style={{ display: "block", width: "255px" }} src={bgImage} />
+          <img style={ { display: "block", width: "255px" } } src={ bgImage } />
         </div>
       </Grid>
-      <Grid item width={"80%"}>
-        <Card style={{ backgroundColor: "#90ee90" }}>
+      <Grid item width={ "80%" }>
+        <Card style={ { backgroundColor: "#90ee90" } }>
           <MKBox textAlign="center">
             <MKTypography
               display="inline"
               variant="h5"
               textTransform="capitalize"
               fontWeight="regular"
-              sx={{ fontSize: "14px" }}
+              sx={ { fontSize: "14px" } }
             >
               Defense Model Capability
             </MKTypography>
-            <Box sx={{ width: "100%" }} >
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box sx={ { width: "100%" } } >
+              <Box sx={ { borderBottom: 1, borderColor: "divider" } }>
                 <Tabs
-                  value={value}
-                  onChange={handleChange}
+                  value={ value }
+                  onChange={ handleChange }
                   aria-label="basic tabs example"
-                  style={{ backgroundColor: "#90ee90" }}
+                  style={ { backgroundColor: "#90ee90" } }
                 >
                   <Tab
-                    sx={{ fontSize: "12px" }}
+                    sx={ { fontSize: "12px" } }
                     label="Evasion"
-                    {...a11yProps(0)}
+                    { ...a11yProps(0) }
                   />
                   <Tab
-                    sx={{ fontSize: "12px" }}
+                    sx={ { fontSize: "12px" } }
                     label="Inference"
-                    {...a11yProps(1)}
+                    { ...a11yProps(1) }
                   />
                   <Tab
-                    sx={{ fontSize: "12px" }}
+                    sx={ { fontSize: "12px" } }
                     label="Extraction"
-                    {...a11yProps(2)}
+                    { ...a11yProps(2) }
                   />
                   <Tab
-                    sx={{ fontSize: "12px" }}
+                    sx={ { fontSize: "12px" } }
                     label="Data Poisoning"
-                    {...a11yProps(3)}
+                    { ...a11yProps(3) }
                   />
                 </Tabs>
               </Box>
-              <CustomTabPanel value={value} index={0}>
-                <DefenceData report={evasion} reportName="evasion" />
+              <CustomTabPanel value={ value } index={ 0 }>
+                <DefenceData report={ evasion } reportName="evasion" />
               </CustomTabPanel>
-              <CustomTabPanel value={value} index={1}>
-                <DefenceData report={inference} reportName="inference" />
+              <CustomTabPanel value={ value } index={ 1 }>
+                <DefenceData report={ inference } reportName="inference" />
               </CustomTabPanel>
-              <CustomTabPanel value={value} index={2}>
-                <DefenceData report={extraction} reportName="extraction" />
+              <CustomTabPanel value={ value } index={ 2 }>
+                <DefenceData report={ extraction } reportName="extraction" />
               </CustomTabPanel>
-              <CustomTabPanel value={value} index={3}>
-                <DefenceData report={dataPoisoning} reportName="dataPoisoning"  />
+              <CustomTabPanel value={ value } index={ 3 }>
+                <DefenceData report={ dataPoisoning } reportName="dataPoisoning"  />
               </CustomTabPanel>
             </Box>
           </MKBox>

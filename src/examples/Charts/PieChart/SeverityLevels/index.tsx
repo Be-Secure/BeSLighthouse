@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+ 
 import * as React from "react";
 
 import Card from "@mui/material/Card";
@@ -7,17 +9,16 @@ import ReactApexChart from "react-apexcharts";
 import { useTheme } from "@mui/material/styles";
 import useChart from "../useChart";
 import MKBox from "../../../../components/MKBox";
-import MKTypography from "../../../../components/MKTypography";
 import { fNumber } from "../../../../utils/formatNumber";
 
 function SeverityLevels({ chartColors, chartData }: any) {
   const theme = useTheme();
-  //console.log("chartData="+JSON.stringify(chartData));
+  // console.log("chartData="+JSON.stringify(chartData));
 
   const chartLabels = chartData.map((i: { label: any }) => i.label);
   const chartSeries = chartData.map((i: { value: any }) => i.value);
-  //console.log("chartLabels="+JSON.stringify(chartLabels));
-  //console.log("chartSeries="+JSON.stringify(chartSeries));
+  // console.log("chartLabels="+JSON.stringify(chartLabels));
+  // console.log("chartSeries="+JSON.stringify(chartSeries));
 
   const chartOptions = useChart({
     colors: chartColors,
@@ -40,15 +41,15 @@ function SeverityLevels({ chartColors, chartData }: any) {
   });
 
   return (
-    <Card style={{ height: "328px", width: "100%" }}>
+    <Card style={ { height: "328px", width: "100%" } }>
       <MKBox>
-        <MKBox pt={1} pb={1} px={1}>
+        <MKBox pt={ 1 } pb={ 1 } px={ 1 }>
           <StyledChartWrapper dir="ltr">
             <ReactApexChart
               type="pie"
-              series={chartSeries}
-              options={chartOptions}
-              height={250}
+              series={ chartSeries }
+              options={ chartOptions }
+              height={ 250 }
             />
           </StyledChartWrapper>
         </MKBox>

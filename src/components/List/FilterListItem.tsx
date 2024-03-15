@@ -1,6 +1,5 @@
-import { ListItemProps } from "@mui/material";
-import { ReactElement, memo } from "react";
-
+import { type ListItemProps } from "@mui/material";
+import { type ReactElement } from "react";
 
 // export const FilterListItem = memo((props: FilterListItemProps) => {
 //     // const {
@@ -12,7 +11,6 @@ import { ReactElement, memo } from "react";
 //     //     ...rest
 //     // }: any = props;
 // })
-
 
 export interface FilterListItemProps extends Omit<ListItemProps, 'value'> {
     label: string | ReactElement;

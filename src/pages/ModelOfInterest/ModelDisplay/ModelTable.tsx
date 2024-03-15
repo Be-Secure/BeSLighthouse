@@ -1,3 +1,4 @@
+ 
 import React, { useState } from "react";
 
 import {
@@ -45,78 +46,78 @@ export default function ModelTable({ data }: any) {
   return (
     <TableContainer>
       <Table>
-        <TableHead sx={{ display: "contents" }}>
+        <TableHead sx={ { display: "contents" } }>
           <TableRow>
-            {TABLE_HEAD.map((headCell: any) => (
+            { TABLE_HEAD.map((headCell: any) => (
               <TableCell
-                sx={{ color: "#637381", backgroundColor: "#F4F6F8" }}
-                key={headCell.id}
-                align={headCell.alignRight ? "right" : "left"}
+                sx={ { color: "#637381", backgroundColor: "#F4F6F8" } }
+                key={ headCell.id }
+                align={ headCell.alignRight ? "right" : "left" }
               >
                 <TableSortLabel
                   hideSortIcon
-                  style={{
+                  style={ {
                     position: "relative",
                     minWidth: headCell.id === "type" ? "134px" : ""
-                  }}
+                  } }
                 >
-                  {headCell.label}
+                  { headCell.label }
                 </TableSortLabel>
               </TableCell>
-            ))}
+            )) }
           </TableRow>
         </TableHead>
         <TableBody>
-          {filteredModel
+          { filteredModel
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row: any, index: number) => {
+            .map((row: {name: string, type: any, id: number, organization: string, quality_control: any, created_date: any, dependencies: any}, index: number) => {
               return (
-                <TableRow hover key={index} tabIndex={-1}>
-                  <TableCell align="left">{row.id}</TableCell>
+                <TableRow hover key={ index } tabIndex={ -1 }>
+                  <TableCell align="left">{ row.id }</TableCell>
                   <TableCell align="left">
                     <NavLink
-                      to={{
+                      to={ {
                         pathname: `/BeSLighthouse/model_report/:${row.name}`,
                         search: ""
-                      }}
-                      state={{ selectedMenu: row }}
-                      style={{ color: "#587f2f", cursor: "pointer" }}
+                      } }
+                      state={ { selectedMenu: row } }
+                      style={ { color: "#587f2f", cursor: "pointer" } }
                     >
-                      {row.name}
+                      { row.name }
                     </NavLink>
                   </TableCell>
-                  <TableCell align="left">{row.type}</TableCell>
-                  <TableCell align="left">{row.organization}</TableCell>
-                  <TableCell align="left" style={{ color: "red" }}>
-                    {row.quality_control.join(" | ")}
+                  <TableCell align="left">{ row.type }</TableCell>
+                  <TableCell align="left">{ row.organization }</TableCell>
+                  <TableCell align="left" style={ { color: "red" } }>
+                    { row.quality_control.join(" | ") }
                   </TableCell>
-                  <TableCell align="left">{row.created_date}</TableCell>
+                  <TableCell align="left">{ row.created_date }</TableCell>
                   <TableCell align="left">
-                    {row.dependencies.length === 0
+                    { row.dependencies.length === 0
                       ? "None"
-                      : row.dependencies.join(" | ")}
+                      : row.dependencies.join(" | ") }
                   </TableCell>
                 </TableRow>
               );
-            })}
+            }) }
         </TableBody>
       </Table>
       <TablePagination
-        sx={{
+        sx={ {
           ".MuiTablePagination-selectLabel": {
             margin: "auto"
           },
           ".MuiTablePagination-displayedRows": {
             margin: "auto"
           }
-        }}
-        rowsPerPageOptions={[15, 30, 45]}
+        } }
+        rowsPerPageOptions={ [15, 30, 45] }
         component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+        count={ data.length }
+        rowsPerPage={ rowsPerPage }
+        page={ page }
+        onPageChange={ handleChangePage }
+        onRowsPerPageChange={ handleChangeRowsPerPage }
       />
     </TableContainer>
   );

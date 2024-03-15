@@ -1,3 +1,4 @@
+ 
 import * as React from "react";
 import { Typography } from "@mui/material";
 import MKTypography from "../../../components/MKTypography";
@@ -14,7 +15,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
   }
 
   if (cqData.length !== 0 && sqissueslen === 0) {
-    cqData.forEach((vul) => {
+    cqData.forEach((vul: { rule: { security_severity_level: string; }; }) => {
       if (vul.rule.security_severity_level === "critical") {
         critical++;
       } else if (vul.rule.security_severity_level === "high") {
@@ -48,16 +49,16 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     return (
       <>
         <MKTypography
-          style={{
+          style={ {
             paddingTop: "10px",
             fontWeight: "bold",
             fontSize: "18px",
-          }}
+          } }
         >
           Summary Report
         </MKTypography>
 
-        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
+        <BasicTable tableData={ data } tableHeading={ headings } tableStyle={ { textAlign: "center" } } />
       </>
     );
   } else if (
@@ -68,10 +69,8 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     let sqcritical: number = 0;
     let sqmajor: number = 0;
     let sqminor: number = 0;
-    let sqissues: any = "0";
-    sqissues = Object.values(sqData)[5];
 
-    sqData?.forEach((vul) => {
+    sqData?.forEach((vul: { severity: string; }) => {
       if (vul.severity === "BLOCKER") {
         sqblocker++;
       } else if (vul.severity === "CRITICAL") {
@@ -105,16 +104,16 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     return (
       <>
         <MKTypography
-          style={{
+          style={ {
             paddingTop: "10px",
             fontWeight: "bold",
             fontSize: "18px",
-          }}
+          } }
         >
           Summary Report
         </MKTypography>
 
-        <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
+        <BasicTable tableData={ data } tableHeading={ headings } tableStyle={ { textAlign: "center" } } />
       </>
     );
   } else if (
@@ -125,11 +124,6 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     let cqhigh: number = 0;
     let cqmedium: number = 0;
     let cqlow: number = 0;
-
-    let sqblocker: number = 0;
-    let sqcritical: number = 0;
-    let sqmajor: number = 0;
-    let sqminor: number = 0;
 
     if (Array.isArray(cqData)) {
       cqData?.forEach((vul) => {
@@ -166,15 +160,15 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
       return (
         <>
           <MKTypography
-            style={{
+            style={ {
               paddingTop: "10px",
               fontWeight: "bold",
               fontSize: "18px",
-            }}
+            } }
           >
             Summary Report
           </MKTypography>
-          <BasicTable tableData={data} tableHeading={headings} tableStyle={{ textAlign: "center" }} />
+          <BasicTable tableData={ data } tableHeading={ headings } tableStyle={ { textAlign: "center" } } />
         </>
       );
     }
@@ -183,9 +177,9 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
       <>
         <Typography
           variant="body1"
-          key={`MKTypoLBlankCQSQ1`}
+          key={ `MKTypoLBlankCQSQ1` }
           color="inherit"
-          style={{
+          style={ {
             fontWeight: "bold",
             fontSize: "18px",
             width: "100%",
@@ -194,7 +188,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
             paddingTop: "15%",
             margin: "0px 35px 0px 35px",
             textAlign: 'center'
-          }}
+          } }
         >
           No Weaknesses Found.
         </Typography>

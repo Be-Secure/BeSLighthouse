@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+ 
 import React, { useState } from "react";
 
 import { Card, CircularProgress, Grid } from "@mui/material";
@@ -9,37 +11,37 @@ import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { NavLink, useLocation } from "react-router-dom";
 
 function reportDisplay(report: any) {
-  return <DefenceReport report={report} />;
+  return <DefenceReport report={ report } />;
 }
 
 function loadingCircular(loading: any) {
   if (loading) {
     return (
       <CircularProgress
-        style={{
+        style={ {
           display: "flex",
           alignItems: "center",
           justifyContent: "center"
-        }}
+        } }
         color="secondary"
-        size={60}
-        thickness={4}
+        size={ 60 }
+        thickness={ 4 }
       />
     );
   }
 }
 
 export default function DefenceData({ report, reportName }: any) {
-  let [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
+  const selectedFuzz: {name: string} = location.state.selectedFuzz;
 
   const [defenceReport, setDefenceReport]: any = React.useState(false);
   const [vulnerabilityReport, setvulnerabilityReport]: any =
     React.useState(false);
 
-  let defenceReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/DefenceReport.pdf`;
-  let vulnerabilityReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/VulnerabilityReport.pdf`;
+  const defenceReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/DefenceReport.pdf`;
+  const vulnerabilityReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/VulnerabilityReport.pdf`;
   React.useEffect(() => {
     fetchJsonData(defenceReportLink, setDefenceReport);
     fetchJsonData(vulnerabilityReportLink, setvulnerabilityReport);
@@ -48,34 +50,35 @@ export default function DefenceData({ report, reportName }: any) {
     } catch (e) {
       // ignore
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const reportLength = Object.values(report).length;
   return (
     <>
-      {loading ? (
+      { loading ? (
         <Card
-          style={{
+          style={ {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "#f0f2f5",
             padding: "0.4rem",
             width: "100%"
-          }}
+          } }
         >
-          {" "}
-          {loadingCircular(loading)}
+          { " " }
+          { loadingCircular(loading) }
         </Card>
       ) : (
         <Grid container>
-          <Grid item width={"65%"}>
+          <Grid item width={ "65%" }>
             <Card
-              style={{
+              style={ {
                 backgroundColor: "#f0f2f5",
                 padding: "0.4rem",
                 width: "100%",
                 margin: "1%"
-              }}
+              } }
             >
               <MKTypography
                 variant="body2"
@@ -83,80 +86,80 @@ export default function DefenceData({ report, reportName }: any) {
                 color="text"
                 textAlign="left"
               >
-                {reportLength > 0 ? (
+                { reportLength > 0 ? (
                   reportDisplay(report)
                 ) : (
                   <MKTypography
                     color="black"
                     textAlign="center"
                     variant="h6"
-                    sx={{ margin: "auto" }}
-                    pt={8}
-                    pb={8}
+                    sx={ { margin: "auto" } }
+                    pt={ 8 }
+                    pb={ 8 }
                   >
                     Not Available
                   </MKTypography>
-                )}
+                ) }
               </MKTypography>
             </Card>
           </Grid>
-          <Grid item width={"35%"} pt={3}>
-            {defenceReport ? (
+          <Grid item width={ "35%" } pt={ 3 }>
+            { defenceReport ? (
               <NavLink
-                to={defenceReportLink}
+                to={ defenceReportLink }
                 rel="noopener noreferrer"
-                style={{ color: "#587f2f", cursor: "pointer" }}
+                style={ { color: "#587f2f", cursor: "pointer" } }
               >
                 <MKButton
-                  variant={"gradient"}
-                  color={"info"}
+                  variant={ "gradient" }
+                  color={ "info" }
                   size="small"
-                  sx={{ width: "80%" }}
+                  sx={ { width: "80%" } }
                 >
                   Defense Report
                 </MKButton>
               </NavLink>
             ) : (
               <MKButton
-                variant={"gradient"}
-                color={"info"}
+                variant={ "gradient" }
+                color={ "info" }
                 size="small"
-                sx={{ width: "80%" }}
+                sx={ { width: "80%" } }
                 disabled
               >
                 Defense Report
               </MKButton>
-            )}
+            ) }
 
-            {vulnerabilityReport ? (
+            { vulnerabilityReport ? (
               <NavLink
-                to={vulnerabilityReportLink}
+                to={ vulnerabilityReportLink }
                 rel="noopener noreferrer"
-                style={{ color: "#587f2f", cursor: "pointer" }}
+                style={ { color: "#587f2f", cursor: "pointer" } }
               >
                 <MKButton
-                  variant={"gradient"}
-                  color={"info"}
+                  variant={ "gradient" }
+                  color={ "info" }
                   size="small"
-                  sx={{ width: "80%", marginTop: "34%" }}
+                  sx={ { width: "80%", marginTop: "34%" } }
                 >
                   Vulnerability Report
                 </MKButton>
               </NavLink>
             ) : (
               <MKButton
-                variant={"gradient"}
-                color={"info"}
+                variant={ "gradient" }
+                color={ "info" }
                 size="small"
-                sx={{ width: "80%", marginTop: "34%" }}
+                sx={ { width: "80%", marginTop: "34%" } }
                 disabled
               >
                 Vulnerability Report
               </MKButton>
-            )}
+            ) }
           </Grid>
         </Grid>
-      )}
+      ) }
     </>
   );
 }

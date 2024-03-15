@@ -1,3 +1,4 @@
+ 
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
@@ -13,28 +14,28 @@ export default function ScrollableTabsButtonVisibleML({
   };
   return (
     <Box
-      sx={{
+      sx={ {
         flexGrow: 1,
         maxWidth: "100%",
         mx: { xs: 2, lg: 3 }
-      }}
-      pt={1}
+      } }
+      pt={ 1 }
     >
       <Tabs
-        value={value}
-        onChange={handleChange}
+        value={ value }
+        onChange={ handleChange }
         variant="scrollable"
         scrollButtons
         aria-label="visible arrows tabs example"
-        sx={{
+        sx={ {
           [`& .${tabsClasses.scrollButtons}`]: {
             "&.Mui-disabled": { opacity: 0.3 }
           },
           height: "43px"
-        }}
-        style={{ backgroundColor: "white" }}
+        } }
+        style={ { backgroundColor: "white" } }
       >
-        <TabForMoi filter={filter} setFilter={setFilter} />
+        <TabForMoi filter={ filter } setFilter={ setFilter } />
       </Tabs>
     </Box>
   );

@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { Box, BoxProps, List, Typography } from "@mui/material";
+import { Box, type BoxProps, List, Typography } from "@mui/material";
 
 export const FilterList = (props: FilterListProps) => {
   const { label, icon, children, ...rest }: any = props;
   return (
-    <Box {...rest}>
-      <Box mt={2} display="flex" alignItems="center">
-        <Box mr={1}>{icon}</Box>
-        <Typography variant="overline">{label}</Typography>
+    <Box { ...rest }>
+      <Box mt={ 2 } display="flex" alignItems="center">
+        <Box mr={ 1 }>{ icon }</Box>
+        <Typography variant="overline">{ label }</Typography>
       </Box>
       <List dense disablePadding>
-        {children}
+        { children }
       </List>
     </Box>
   );

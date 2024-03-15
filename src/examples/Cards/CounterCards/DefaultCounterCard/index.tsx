@@ -15,20 +15,20 @@ function DefaultCounterCard({
   ...rest
 }: any): any {
   return (
-    <MKBox p={2} textAlign="center" lineHeight={1}>
-      <MKTypography variant="h1" color={color} textGradient>
-        <CountUp end={count} duration={1} {...rest} />
+    <MKBox p={ 2 } textAlign="center" lineHeight={ 1 }>
+      <MKTypography variant="h1" color={ color } textGradient>
+        <CountUp end={ count } duration={ 1 } { ...rest } />
       </MKTypography>
-      {title && (
-        <MKTypography variant="h5" mt={2} mb={1}>
-          {title}
+      { title && (
+        <MKTypography variant="h5" mt={ 2 } mb={ 1 }>
+          { title }
         </MKTypography>
-      )}
-      {description && (
+      ) }
+      { description && (
         <MKTypography variant="body2" color="text">
-          {description}
+          { description }
         </MKTypography>
-      )}
+      ) }
     </MKBox>
   );
 }

@@ -1,4 +1,4 @@
-export const filterCheck = {
+export const filterCheck: any = {
   "Be-Secure Technology Stacks": true,
   "Open Source Project Type (COM)": true,
   "Industry (IND)": true,
@@ -8,7 +8,7 @@ export const filterCheck = {
   "Languages": true
 };
 
-export const tecStack = {
+export const tecStack: any = {
   "DevOPS and Infrastructure Tool (DO)": "DO",
   "Language & Framework (L&F)": "L&F",
   "Application (A)": "A",
@@ -16,7 +16,7 @@ export const tecStack = {
   "Open Source Security Tool (S)": "S"
 };
 
-export const SecurityDomain = {
+export const SecurityDomain: any = {
   "Security Risk Management (SD-SRM)": "SD-SRM",
   "Application Security (SD-AS)": "SD-AS",
   "Data Security (SD-DS)": "SD-DS",
@@ -29,7 +29,7 @@ export const SecurityDomain = {
   "IOT/OT Security (SD-IoTS)": "SD-IoTS"
 };
 
-export const TechnologyDomain = {
+export const TechnologyDomain: any = {
   "Web Development (TD-U-W)": "TD-U-W",
   "Artifical Intelligence / Machine Learning (TD-U-AI/ML)": "TD-U-AI/ML",
   "Database (TD-U-Db)": "TD-U-Db",
@@ -42,7 +42,7 @@ export const TechnologyDomain = {
   "Blockchain (TD-U-Bln)": "TD-U-Bln"
 };
 
-export const Industry = {
+export const Industry: any = {
   "Bank & Financial Institutions (BFSI)": "BFSI",
   "Healthcare & Life Scienses (HLS)": "HLS",
   "Consumer (CON)": "CON",
@@ -57,7 +57,7 @@ export const Industry = {
   "Cybersecurity (CyS)": "CyS"
 };
 
-export const TechnologyDomainComposition = {
+export const TechnologyDomainComposition: any = {
   "Client Application (TD-C-CA)": "TD-C-CA",
   "Server (TD-C-S)": "TD-C-S",
   "Web Application (TD-C-WA)": "TD-C-WA",
@@ -70,7 +70,7 @@ export const TechnologyDomainComposition = {
   "Wallet App (TD-C-Wlt)": "TD-C-Wlt"
 };
 
-export const OpenSourceProjectType = {
+export const OpenSourceProjectType: any = {
   "Foundation led projects (COM-F)": "COM-F",
   "Community led projects (COM-C)": "COM-C"
 };

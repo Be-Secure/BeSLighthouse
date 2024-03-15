@@ -1,3 +1,4 @@
+ 
 import * as React from "react";
 import PropTypes from "prop-types";
 
@@ -8,8 +9,6 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { fShortenNumber } from "../../utils/formatNumber";
 
-// ----------------------------------------------------------------------
-
 export default function ProjectCount({
   title,
   total,
@@ -17,45 +16,45 @@ export default function ProjectCount({
   color = "primary",
   sx,
   ...other
-}) {
+}: any) {
   return (
     <Card
-      component={Stack}
-      spacing={3}
+      component={ Stack }
+      spacing={ 3 }
       direction="row"
-      pl={1}
-      sx={{
+      pl={ 1 }
+      sx={ {
         borderRadius: 2,
         ...sx
-      }}
-      {...other}
+      } }
+      { ...other }
     >
-      <Grid container spacing={1}>
-        <Grid item xs={5} sm={5}>
-          {icon && <Box>{icon}</Box>}
+      <Grid container spacing={ 1 }>
+        <Grid item xs={ 5 } sm={ 5 }>
+          { icon && <Box>{ icon }</Box> }
         </Grid>
-        <Grid item xs={5} sm={7}>
+        <Grid item xs={ 5 } sm={ 7 }>
           <Typography
-            style={{
+            style={ {
               color: "black",
               fontSize: "80px",
               position: "absolute",
               top: "45px"
-            }}
+            } }
             variant="h1"
           >
-            {fShortenNumber(total)}
+            { fShortenNumber(total) }
           </Typography>
           <Typography
             variant="h6"
-            sx={{
+            sx={ {
               color: "black",
               fontSize: "20px",
               position: "absolute",
               top: "130px"
-            }}
+            } }
           >
-            {title}
+            { title }
           </Typography>
         </Grid>
       </Grid>

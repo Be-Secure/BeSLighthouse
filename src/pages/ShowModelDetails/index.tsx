@@ -18,14 +18,14 @@ function ShowModelDetails() {
   const model = data.filter((data: any) => data.name === modelName.slice(1));
   return (
     <>
-      <DefaultNavbar routes={routes} sticky />
-      <MKBox pt={12} sx={{ mx: { xs: 2, lg: 3 } }}>
-        <Grid container spacing={3} pt={3}>
-          <Grid item xs={12} md={6} lg={7}>
-            <ShowModelContent model={model} />
+      <DefaultNavbar routes={ routes } sticky />
+      <MKBox pt={ 12 } sx={ { mx: { xs: 2, lg: 3 } } }>
+        <Grid container spacing={ 3 } pt={ 3 }>
+          <Grid item xs={ 12 } md={ 6 } lg={ 7 }>
+            <ShowModelContent model={ model } />
           </Grid>
-          <Grid item xs={12} md={6} lg={5}>
-            <AssessmentSummary selectedName={modelName.slice(1)} selectedModel={model}/>
+          <Grid item xs={ 12 } md={ 6 } lg={ 5 }>
+            <AssessmentSummary selectedName={ modelName.slice(1) } selectedModel={ model }/>
           </Grid>
         </Grid>
       </MKBox>

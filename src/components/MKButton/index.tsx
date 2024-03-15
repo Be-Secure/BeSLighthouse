@@ -14,14 +14,14 @@ const MKButton = forwardRef(
     ref
   ) => (
     <MKButtonRoot
-      {...rest}
-      ref={ref}
+      { ...rest }
+      ref={ ref }
       color="primary"
-      variant={variant === "gradient" ? "contained" : variant}
-      size={size}
-      ownerState={{ color, variant, size, circular, iconOnly }}
+      variant={ variant === "gradient" ? "contained" : variant }
+      size={ size }
+      ownerState={ { color, variant, size, circular, iconOnly } }
     >
-      {children}
+      { children }
     </MKButtonRoot>
   )
 );

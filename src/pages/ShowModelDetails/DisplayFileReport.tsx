@@ -1,3 +1,4 @@
+ 
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -31,10 +32,10 @@ const TABLE_HEAD = [
 
 export default function DisplayFileReport({ data }: any) {
   const location = useLocation();
-  const selectedMenu = location.state.selectedMenu;
+  const selectedMenu: {name: string} = location.state.selectedMenu;
   return (
     <>
-      {dividerDiv(1)}
+      { dividerDiv(1) }
       <Grid container direction="column">
         <Grid item>
           <Grid container alignItems="center" justifyContent="space-between">
@@ -46,80 +47,80 @@ export default function DisplayFileReport({ data }: any) {
             <Grid item>
               <TableContainer>
                 <Table>
-                  <PoiListHead headLabel={TABLE_HEAD} />
+                  <PoiListHead headLabel={ TABLE_HEAD } />
                   <TableBody>
-                    <TableRow hover key={"dddd"} tabIndex={-1}>
+                    <TableRow hover key={ "dddd" } tabIndex={ -1 }>
                       <TableCell component="th" scope="row" padding="none">
-                        {data[files[0]] > 0 ? (
+                        { data[files[0]] > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[files[0]]}
+                            { data[files[0]] }
                           </a>
                         ) : (
                           data[files[0]]
-                        )}
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[files[1]] > 0 ? (
+                        { data[files[1]] > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[files[1]]}
+                            { data[files[1]] }
                           </a>
                         ) : (
                           data[files[1]]
-                        )}
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[files[2]]["Critical"] > 0 ? (
+                        { data[files[2]].Critical > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[files[2]]["Critical"]}
+                            { data[files[2]].Critical }
                           </a>
                         ) : (
-                          data[files[2]]["Critical"]
-                        )}
+                          data[files[2]].Critical
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[files[2]]["High"] > 0 ? (
+                        { data[files[2]].High > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[files[2]]["High"]}
+                            { data[files[2]].High }
                           </a>
                         ) : (
-                          data[files[2]]["High"]
-                        )}
+                          data[files[2]].High
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[files[2]]["Medium"] > 0 ? (
+                        { data[files[2]].Medium > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[files[2]]["Medium"]}
+                            { data[files[2]].Medium }
                           </a>
                         ) : (
-                          data[files[2]]["Medium"]
-                        )}
+                          data[files[2]].Medium
+                        ) }
                       </TableCell>
                       <TableCell align="left">
-                        {data[files[2]]["Low"] > 0 ? (
+                        { data[files[2]].Low > 0 ? (
                           <a
-                            style={{ color: "#587f2f", cursor: "pointer" }}
-                            href={`/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}`}
+                            style={ { color: "#587f2f", cursor: "pointer" } }
+                            href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
-                            {data[files[2]]["Low"]}
+                            { data[files[2]].Low }
                           </a>
                         ) : (
-                          data[files[2]]["Low"]
-                        )}
+                          data[files[2]].Low
+                        ) }
                       </TableCell>
                     </TableRow>
                   </TableBody>

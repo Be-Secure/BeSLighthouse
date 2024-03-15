@@ -1,3 +1,4 @@
+ 
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -33,20 +34,20 @@ async function prepPieChartData(
 
   const data: any = await fetchModelData();
   data.forEach((item: any) => {
-    if (!modelTypeCount[item["type"]]) {
-      modelTypeCount[item["type"]] = 0;
+    if (!modelTypeCount[item.type]) {
+      modelTypeCount[item.type] = 0;
     }
-    modelTypeCount[item["type"]]++;
+    modelTypeCount[item.type]++;
     // Check for the existence of quality_control
-    if (item["quality_control"]) {
-      if (item["quality_control"]?.length === 0) {
+    if (item.quality_control) {
+      if (item.quality_control?.length === 0) {
         // Handling for empty quality_control
-        if (!riskAnalysisCount["Unanalyzed"]) {
-          riskAnalysisCount["Unanalyzed"] = 0;
+        if (!riskAnalysisCount.Unanalyzed) {
+          riskAnalysisCount.Unanalyzed = 0;
         }
-        riskAnalysisCount["Unanalyzed"]++;
+        riskAnalysisCount.Unanalyzed++;
       } else {
-        item["quality_control"].forEach((qc: string) => {
+        item.quality_control.forEach((qc: string) => {
           if (!riskAnalysisCount[qc]) {
             riskAnalysisCount[qc] = 0;
           }
@@ -57,11 +58,11 @@ async function prepPieChartData(
     }
   });
 
-  for (let model of Object.keys(modelTypeCount)) {
+  for (const model of Object.keys(modelTypeCount)) {
     modelTypePieData.push({ label: model, value: modelTypeCount[model] });
   }
 
-  for (let risk of Object.keys(riskAnalysisCount)) {
+  for (const risk of Object.keys(riskAnalysisCount)) {
     riskAnalysisPieData.push({ label: risk, value: riskAnalysisCount[risk] });
   }
 
@@ -85,9 +86,9 @@ function ModelOfInterest() {
   }, []);
   return (
     <>
-      <DefaultNavbar routes={routes} sticky />
+      <DefaultNavbar routes={ routes } sticky />
 
-      <MKBox pt={8} sx={{ mx: { xs: 2, lg: 3 } }}>
+      <MKBox pt={ 8 } sx={ { mx: { xs: 2, lg: 3 } } }>
         <MKTypography variant="h3" color="black">
           Models of Interest
         </MKTypography>
@@ -98,7 +99,7 @@ function ModelOfInterest() {
           paddingTop="2px"
           fontSize="18px"
           width="100%"
-          style={{ fontWeight: "lighter" }}
+          style={ { fontWeight: "lighter" } }
           // fontWeight="lighter"
         >
           Gain visibility into vulnerabilities and security gaps within popular
@@ -109,61 +110,61 @@ function ModelOfInterest() {
           open source machine learning.
         </MKTypography>
       </MKBox>
-      <MKBox pt={1} sx={{ mx: { xs: 2, lg: 3 } }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+      <MKBox pt={ 1 } sx={ { mx: { xs: 2, lg: 3 } } }>
+        <Grid container spacing={ 3 }>
+          <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
             <ProjectCount
               title="models tracked"
-              total={report.length}
+              total={ report.length }
               color="success"
               icon={
                 <img
-                  style={{ width: "140px", top: "58px", position: "absolute" }}
+                  style={ { width: "140px", top: "58px", position: "absolute" } }
                   alt="icon"
-                  src={networkIcon}
+                  src={ networkIcon }
                 />
               }
-              sx={{ width: "100%", height: "244px" }}
+              sx={ { width: "100%", height: "244px" } }
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+          <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
             <Language
               title="Model Type"
-              chartData={modelType}
-              chartColors={[
+              chartData={ modelType }
+              chartColors={ [
                 theme.palette.primary.main,
                 theme.palette.info.main,
                 theme.palette.warning.main,
                 theme.palette.error.main,
                 theme.palette.success.main,
                 theme.palette.secondary.main
-              ]}
+              ] }
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={4}>
+          <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
             <Language
               title="Risk Analysis"
-              chartData={riskAnalysis}
-              chartColors={[
+              chartData={ riskAnalysis }
+              chartColors={ [
                 theme.palette.primary.main,
                 theme.palette.info.main,
                 theme.palette.warning.main,
                 theme.palette.error.main,
                 theme.palette.success.main,
                 theme.palette.secondary.main
-              ]}
+              ] }
             />
           </Grid>
         </Grid>
       </MKBox>
       <ScrollableTabsButtonVisibleML
-        filter={filterData}
-        setFilter={setFilterData}
+        filter={ filterData }
+        setFilter={ setFilterData }
       />
-      <MKBox pt={2} sx={{ mx: { xs: 2, lg: 3 } }}>
+      <MKBox pt={ 2 } sx={ { mx: { xs: 2, lg: 3 } } }>
         <Card>
           <MKBox>
-            <ModelDisplay selectedFilter={filterData} />
+            <ModelDisplay selectedFilter={ filterData } />
           </MKBox>
         </Card>
       </MKBox>

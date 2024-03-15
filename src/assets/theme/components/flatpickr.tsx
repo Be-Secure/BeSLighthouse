@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { colors } from "../base/colors";
 
 import rgba from "../functions/rgba";

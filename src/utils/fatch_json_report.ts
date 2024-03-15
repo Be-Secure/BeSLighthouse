@@ -1,21 +1,19 @@
-import { debug } from "console";
 import https from "https";
-import { reject } from "lodash";
-import { resolve } from "path";
 
-export function fetchJsonReport(url: string): Promise<any> {
-  return new Promise((resolve, reject) => {
+export async function fetchJsonReport(url: string): Promise<any> {
+  return await new Promise((resolve, reject) => {
     https
       .get(url, (response: any) => {
         let data = "";
 
         response.on("data", (chunk: any) => {
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           data += chunk;
         });
 
         response.on("end", () => {
           if (url.toLocaleLowerCase().endsWith(".pdf")) {
-            let regex = /404: Not Found/gm;
+            const regex = /404: Not Found/gm;
             if (regex.test(data)) {
               resolve(data);
             }
@@ -30,9 +28,9 @@ export function fetchJsonReport(url: string): Promise<any> {
   });
 }
 
-export function getEnvPathStatus(besName: string): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    
+export async function getEnvPathStatus(besName: string): Promise<boolean> {
+  return await new Promise((resolve, reject) => {
+
     const name = besName.split('-');
     const camelCaseString = name.map((part, index) => {
       return index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1);
@@ -42,22 +40,24 @@ export function getEnvPathStatus(besName: string): Promise<boolean> {
     const rturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${camelCaseString}/0.0.1/besman-${camelCaseString}-RT-env.sh`;
     https
       .get(bturl, (response: any) => {
-        let code = response.statusCode;
-        if (code === 200){
+        const code = response.statusCode;
+        if (code === 200) {
           resolve(true);
         }
       })
       .on("error", (error: any) => {
         https
           .get(rturl, (response: any) => {
-            let code = response.statusCode;
-            if (code === 200){
+            const code = response.statusCode;
+            if (code === 200) {
               resolve(true);
             }
           })
-          .on("error",(error:any) => {
+          .on("error", () => {
+            // eslint-disable-next-line prefer-promise-reject-errors
             reject(false);
           });
+        console.log("Error will getting the httpRequest", error);
       });
   });
 }

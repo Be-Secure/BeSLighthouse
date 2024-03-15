@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { Card, CardContent, Grid } from "@mui/material";
 import * as React from "react";
 import MKTypography from "../../../components/MKTypography";
@@ -11,11 +12,11 @@ export default function Scorecard({
   score
 }: any) {
   return (
-    <Card sx={{ marginBottom: 4 }}>
-      <CardContent key={"CardContentkey"}>
-        <Grid key={"gridkey1"} container spacing={1}>
-          <Grid key={"gridkey2"} item xs={4}>
-            <MKBox key="test" display="flex" py={1} pr={2}>
+    <Card sx={ { marginBottom: 4 } }>
+      <CardContent key={ "CardContentkey" }>
+        <Grid key={ "gridkey1" } container spacing={ 1 }>
+          <Grid key={ "gridkey2" } item xs={ 4 }>
+            <MKBox key="test" display="flex" py={ 1 } pr={ 2 }>
               <MKTypography
                 variant="h6"
                 fontWeight="bold"
@@ -24,12 +25,12 @@ export default function Scorecard({
                 Date: &nbsp;
               </MKTypography>
               <MKTypography variant="h6" fontWeight="regular" color="text">
-                {date}
+                { date }
               </MKTypography>
             </MKBox>
           </Grid>
-          <Grid key={"gridkey3"} item xs={4}>
-            <MKBox key="test" display="flex" py={1} pr={2}>
+          <Grid key={ "gridkey3" } item xs={ 4 }>
+            <MKBox key="test" display="flex" py={ 1 } pr={ 2 }>
               <MKTypography
                 variant="h6"
                 fontWeight="bold"
@@ -38,12 +39,12 @@ export default function Scorecard({
                 Scorecard Version: &nbsp;
               </MKTypography>
               <MKTypography variant="h6" fontWeight="regular" color="text">
-                {version}
+                { version }
               </MKTypography>
             </MKBox>
           </Grid>
-          <Grid key={"gridkey3"} item xs={4}>
-            <MKBox key="test" display="flex" py={1} pr={2}>
+          <Grid key={ "gridkey3" } item xs={ 4 }>
+            <MKBox key="test" display="flex" py={ 1 } pr={ 2 }>
               <MKTypography
                 variant="h6"
                 fontWeight="bold"
@@ -52,12 +53,12 @@ export default function Scorecard({
                 OSSP: &nbsp;
               </MKTypography>
               <MKTypography variant="h6" fontWeight="regular" color="text">
-                {`https://${github}`}
+                { `https://${github}` }
               </MKTypography>
             </MKBox>
           </Grid>
-          <Grid key={"gridkey3"} item xs={4}>
-            <MKBox key="test" display="flex" py={1} pr={2}>
+          <Grid key={ "gridkey3" } item xs={ 4 }>
+            <MKBox key="test" display="flex" py={ 1 } pr={ 2 }>
               <MKTypography
                 variant="h6"
                 fontWeight="bold"
@@ -66,12 +67,12 @@ export default function Scorecard({
                 Commit: &nbsp;
               </MKTypography>
               <MKTypography variant="h6" fontWeight="regular" color="text">
-                {commit}
+                { commit }
               </MKTypography>
             </MKBox>
           </Grid>
-          <Grid key={"gridkey3"} item xs={4}>
-            <MKBox key="test" display="flex" py={1} pr={2}>
+          <Grid key={ "gridkey3" } item xs={ 4 }>
+            <MKBox key="test" display="flex" py={ 1 } pr={ 2 }>
               <MKTypography
                 variant="h6"
                 fontWeight="bold"
@@ -80,7 +81,7 @@ export default function Scorecard({
                 Score: &nbsp;
               </MKTypography>
               <MKTypography variant="h6" fontWeight="regular" color="text">
-                {score}
+                { score }
               </MKTypography>
             </MKBox>
           </Grid>

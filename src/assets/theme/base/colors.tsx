@@ -1,4 +1,3 @@
-
 export const colors: any = {
   background: {
     default: "#f0f2f5",
