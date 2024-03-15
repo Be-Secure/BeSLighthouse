@@ -1,5 +1,3 @@
- 
- 
 import * as React from "react";
 
 import MKBox from "../../components/MKBox";
