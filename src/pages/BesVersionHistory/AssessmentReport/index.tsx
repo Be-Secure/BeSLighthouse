@@ -1,5 +1,16 @@
 import * as React from "react";
-import { Backdrop, Box, Button, Fade, Grid, Modal } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Button,
+  Fade,
+  Grid,
+  IconButton,
+  Modal,
+  Typography,
+} from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { Link } from "react-router-dom";
 import { assessment_datastore, version_details } from "../../../dataStore";
@@ -883,6 +894,7 @@ function modalStyle(report: string) {
 }
 
 const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
+  // close functionality
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -997,50 +1009,48 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           )}
           {isHovered && (
             <div
-              style={{
-                position: "absolute",
-                top: "98%",
-                left: "55%",
-                backgroundColor: "#fff",
-                color: "black",
-                padding: "8px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.4)",
-                fontSize: "11px",
-                fontWeight: "normal",
-                transition: "opacity 0.5s",
-                zIndex: 9999,
-                whiteSpace: "nowrap",
-              }}
-            >
-              {item === "ScoreCard" ? (
-                <ul
-                  style={{
-                    listStyleType: "disc",
-                    margin: 0,
-                    paddingInlineStart: "14px",
-                  }}
-                >
-                  <li>Low risk: 0 - 2</li>
-                  <li>Medium risk: 2 - 5</li>
-                  <li>High risk: 5 - 7.5</li>
-                  <li>Critical risk: 7.5 - 10</li>
-                </ul>
-              ) : (
-                <ul
-                  style={{
-                    listStyleType: "disc",
-                    margin: 0,
-                    paddingInlineStart: "14px",
-                  }}
-                >
-                  <li>Low risk: 0.1 - 0.4</li>
-                  <li>Medium risk: 0.4 - 0.6</li>
-                  <li>High risk: 0.6 - 1.0</li>
-                </ul>
-              )}
-            </div>
+            style={{
+              position: "absolute",
+              top: "98%",
+              left: "55%",
+              transform: "translateX(-70%)",
+              backgroundColor: "#fff",
+              color: "black",
+              padding: "8px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.4)",
+              fontSize: "12px", 
+              fontWeight: "normal", 
+              transition: "opacity 0.5s",
+              zIndex: 9999,
+              whiteSpace: "nowrap",
+            }}
+          >
+            { item === "ScoreCard" ? (
+              <><p>
+                  Scorecard is an automated tool that assesses a number of important heuristics associated
+                  with software security and assigns each check a score of 0-10.
+                </p><ul style={{ listStyleType: "disc", margin: "8px", paddingInlineStart: "14px" }}>
+                    <li>Low risk: 0 - 2</li>
+                    <li>Medium risk: 2 - 5</li>
+                    <li>High risk: 5 - 7.5</li>
+                    <li>Critical risk: 7.5 - 10</li>
+                  </ul></>
+            ):(
+              <>
+                <p>
+                  A project's criticality score defines the influence and importance of a project.
+                  It is a number between 0 (least-critical) and 1 (most-critical).
+                </p>
+                <ul style={{ listStyleType: "disc", margin: "8px", paddingInlineStart: "14px" }}>
+                    <li>Low Critical: 0.1 - 0.4</li>
+                    <li>Medium critical: 0.4 - 0.6</li>
+                    <li>Highly critical: 0.6 - 1.0</li>
+                  </ul>
+              </>
+            )} 
+          </div>
           )}
         </MKTypography>
       </Button>
@@ -1051,19 +1061,27 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
       >
         <Fade in={open}>
-          <Box style={modalStyle(item)}>
+          <Box style={{
+            ...modalStyle(item),
+            borderRadius: "9px",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
+          }}>
+            <IconButton 
+            style={{
+              position: "absolute",
+              top: "0px",
+              right: "0px",
+              color: "black",
+            }}
+            onClick={handleClose}>
+              <CloseIcon fontSize="medium" sx={{ ':hover': { color: 'red' } }} />
+            </IconButton>
             {data ? data[1] : "Not found"}
 
             {data && data[3] ? (
-              <MKTypography
+              <Typography
                 style={{
                   fontSize: "15px",
                   color: "black",
@@ -1071,16 +1089,16 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                   right: "40px",
                   bottom: "10px",
                 }}
-              >
-                Click to get the &nbsp;
-                <Link to={data[3]}>detailed report</Link>
-              </MKTypography>
+              >  
+                <Link to={data[3]}>Detailed Report</Link>
+              </Typography>
             ) : (
               ""
             )}
           </Box>
         </Fade>
       </Modal>
+
     </>
   );
 };
