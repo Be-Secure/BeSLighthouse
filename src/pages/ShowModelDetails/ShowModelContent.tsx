@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+ 
 import Card from "@mui/material/Card";
 import * as React from "react";
 import MKTypography from "../../components/MKTypography";
@@ -63,7 +63,7 @@ function tableRowForModel(keyName: any, value: any, index: number) {
 
 function ShowModelContent({ model }: any) {
   const selectedModel = model.length > 0 ? model[0]: {};
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+   
   const modelObject = Object.keys(selectedModel);
   let count = 0;
   return (

@@ -1,6 +1,6 @@
 // This file is used for displaying the full forms of the project tags in project card
 
-export const projectTags = {
+export const projectTags: any = {
   "DevOPS and Infrastructure Tool (DO)": "DO",
   "Language & Framework (L&F)": "L&F",
   "Application (A)": "A",

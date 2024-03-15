@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+ 
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 
@@ -32,13 +32,13 @@ const GraphDisplay = () => {
       .then((data) => {
         // Extract unique nodes from "name" and "dependencies"
         const nodesSet = new Set<string>();
-        data.forEach((item) => {
-          nodesSet.add(item.name as string);
+        data.forEach((item: { name: string; dependencies: any[]; }) => {
+          nodesSet.add(item.name);
           item.dependencies.forEach((dep) => nodesSet.add(dep as string));
         });
 
-        const isClickable = (nodeName) => {
-          const res: boolean = data.find(item => item.name === nodeName);
+        const isClickable = (nodeName: string) => {
+          const res: boolean = data.find((item: {name: string}) => item.name === nodeName);
           return res;
         };
 
@@ -51,8 +51,8 @@ const GraphDisplay = () => {
 
         // Create links based on dependencies
         const links: Link[] = [];
-        data.forEach((item) => {
-          item.dependencies.forEach((dep) => {
+        data.forEach((item: { dependencies: any[]; name: any; }) => {
+          item.dependencies.forEach((dep: string) => {
             links.push({ source: item.name, target: dep });
             // Mark dependencies for lighter color
             const depNode = nodes.find((node) => node.name === dep);
@@ -115,7 +115,7 @@ const GraphDisplay = () => {
           .style("cursor", (d) => (d.clickable ? "pointer" : "default"))
           .call(drag);
 
-        const handleNodeClick = (event, d) => {
+        const handleNodeClick = (event: { active: any; }, d: Node) => {
           if (d.clickable && !event.active) {
             window.open(`/BeSLighthouse/model_report/:${d.name}`, "_blank");
           }

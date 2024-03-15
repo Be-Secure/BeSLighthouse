@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+ 
 import React, { useState } from "react";
 
 import {
@@ -70,7 +70,7 @@ export default function ModelTable({ data }: any) {
         <TableBody>
           { filteredModel
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row: any, index: number) => {
+            .map((row: {name: string, type: any, id: number, organization: string, quality_control: any, created_date: any, dependencies: any}, index: number) => {
               return (
                 <TableRow hover key={ index } tabIndex={ -1 }>
                   <TableCell align="left">{ row.id }</TableCell>

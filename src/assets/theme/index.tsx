@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+ 
 import { createTheme } from "@mui/material/styles";
 // import Fade from "@mui/material/Fade";
 

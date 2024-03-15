@@ -1,5 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+ 
+ 
 import Card from "@mui/material/Card";
 import * as React from "react";
 import MKBox from "../../components/MKBox";
@@ -60,7 +60,7 @@ function assissmentReport(linkStatus: any, selectedModel: any) {
   );
 }
 
-function AssessmentSummary({ selectedName, selectedModel }: any) {
+const AssessmentSummary: React.FC<{selectedName: string, selectedModel: any}> = ({ selectedName, selectedModel }) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
 
   React.useEffect(() => {
@@ -100,6 +100,6 @@ function AssessmentSummary({ selectedName, selectedModel }: any) {
       ) }
     </Card>
   );
-}
+};
 
 export default AssessmentSummary;

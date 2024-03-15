@@ -1,18 +1,17 @@
-/* eslint-disable react-native/no-inline-styles */
 import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, To } from "react-router-dom";
 import MKBox from "../../../components/MKBox";
 import FetchSAST from "./FetchSastReport";
 
 function switchSast(
-  newSast,
-  myObjectCodeql,
-  myObjectSonar,
-  codeQlData,
-  sonarqubeData
+  newSast: any,
+  myObjectCodeql: To,
+  myObjectSonar: To,
+  codeQlData: string | any[],
+  sonarqubeData: any
 ) {
   switch (newSast) {
   case "codeql":
@@ -50,7 +49,7 @@ function switchSast(
       </>
     );
   case "sonarqube":
-    // eslint-disable-next-line no-case-declarations, @typescript-eslint/no-unsafe-argument
+    // eslint-disable-next-line no-case-declarations
     const issues: any = Object.values(sonarqubeData)[5];
     return (
       <>
@@ -91,7 +90,7 @@ export default function SastToggleButton({
   myObjectSonar,
   codeQlData,
   sonarqubeData
-}) {
+}: any) {
   const [sastReport, setSastReport]: any = React.useState("codeql");
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, sast: string) => {

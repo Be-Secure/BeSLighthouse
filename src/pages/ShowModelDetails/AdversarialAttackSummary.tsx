@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
   Table,
   TableBody,
@@ -52,7 +50,7 @@ function defenceAvailable(attackMap: any, name: any) {
   }
 }
 
-function attackGraph(selectedMenu: any, attackMap: any) {
+function attackGraph(selectedMenu: {name: string}, attackMap: any) {
   if (
     attackMap.Evasion.reportAvability ||
     attackMap.Extraction.reportAvability ||
@@ -98,7 +96,7 @@ const AdversarialAttackSummary = ({ model }: any) => {
   const selectedModel = model.length > 0 ? model[0]: {};
   const selectedMenu = selectedModel;
   const { modelName }: any = useParams();
-  const name = modelName.slice(1);
+  const name: string = modelName.slice(1);
   const [evasion, evasionData]: any = React.useState({});
   const [extraction, extractionData]: any = React.useState({});
   const [inference, inferenceData]: any = React.useState({});

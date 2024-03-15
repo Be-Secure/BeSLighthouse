@@ -1,5 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+ 
+ 
 import * as React from "react";
 
 import PropTypes from "prop-types";

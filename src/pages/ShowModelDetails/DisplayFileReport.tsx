@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+ 
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -32,7 +32,7 @@ const TABLE_HEAD = [
 
 export default function DisplayFileReport({ data }: any) {
   const location = useLocation();
-  const selectedMenu = location.state.selectedMenu;
+  const selectedMenu: {name: string} = location.state.selectedMenu;
   return (
     <>
       { dividerDiv(1) }

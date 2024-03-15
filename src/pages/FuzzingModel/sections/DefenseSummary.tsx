@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+ 
 import React from "react";
 
 import Grid from "@mui/material/Grid";
@@ -56,7 +56,7 @@ function DefenseSummary() {
     setValue(newValue);
   };
   const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
+  const selectedFuzz: {name: string} = location.state.selectedFuzz;
   
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});

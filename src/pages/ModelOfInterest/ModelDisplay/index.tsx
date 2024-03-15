@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { filter } from "lodash";
 import React, { useState } from "react";
 import { modelOfInterestData } from "../../../dataStore";

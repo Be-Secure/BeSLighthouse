@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 function linearGradient(color: any, colorState: any, angle = 195) {
   return `linear-gradient(${angle}deg, ${color}, ${colorState})`;
 }

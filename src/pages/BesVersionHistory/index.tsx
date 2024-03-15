@@ -1,7 +1,7 @@
-/* eslint-disable array-callback-return */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-prototype-builtins */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+ 
+ 
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -190,7 +190,7 @@ function BesVersionHistory() {
 
   try {
     if (!selectedOption && versionSummary) {
-      const latestVersion = versionSummary.reduce((latest, current) => {
+      const latestVersion = versionSummary.reduce((latest: { release_date: string | number | Date; }, current: { release_date: string | number | Date; }) => {
         const currentDate = new Date(current.release_date);
         const latestDate = new Date(latest.release_date);
         return currentDate > latestDate ? current : latest;
@@ -226,7 +226,7 @@ function BesVersionHistory() {
             if (item.hasOwnProperty("score")) definedScore = item.score;
             else definedScore = "Not Available";
             // Adding a Map
-            const techStackMap = {
+            const techStackMap: any = {
               A: "Application",
               "L&F": "Language and Framework",
               DO: "DevOps and Infrastructure Tool",
@@ -285,7 +285,7 @@ function BesVersionHistory() {
                         } }
                       >
                         { versionSummary
-                          .sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
+                          .sort((a: { release_date: string | number | Date; }, b: { release_date: string | number | Date; }) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
                           .map((option: any, index1: any) => (
                             <MenuItem
                               key={ `TOPMENUITEM${index}${index1}` }
@@ -599,7 +599,7 @@ function BesVersionHistory() {
                         } }
                       >
                         { /* Parsing through the json arrays to get each tag. Also helps to add ; in between */ }
-                        { item.tags.map((tag) => (
+                        { item.tags.map((tag: any) => (
                           getProjectTags(tag)
                           // tag
                           // Add a semicolon after each tag except for the last one

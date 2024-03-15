@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import Table from '@mui/material/Table';
 import TableContainer from '@mui/material/TableContainer';
@@ -28,17 +27,17 @@ const BasicTable: React.FC<TableProps> = ({ tableData, tableHeading, tableStyle 
         <thead style={ { backgroundColor: "#8585ed", color: "white", position: "sticky", top: 0 } } >
 
           <tr>
-            { tableHeading?.map((column, index) => (
+            { tableHeading?.map((column: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined, index: React.Key | null | undefined) => (
               <th style={ { fontWeight: "normal" } } key={ index }>{ column }</th>
             )) }
           </tr>
         </thead>
         <tbody>
-          { tableData?.map((row, rowIndex): any => (
+          { tableData?.map((row: { [x: string]: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, rowIndex: any): any => (
             <tr style={ tableStyle }
               key={ rowIndex }
             >
-              { tableHeading?.map((column, colIndex) => (
+              { tableHeading?.map((column: string | number, colIndex: React.Key | null | undefined) => (
                 <td style={ { backgroundColor: rowIndex % 2 === 0 ? '' : '#eaefff' } } key={ colIndex }>{ row[column] }</td>
               )) }
             </tr>

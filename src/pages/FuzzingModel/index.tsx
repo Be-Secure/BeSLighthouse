@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
@@ -129,7 +128,7 @@ function FuzzingModelPage() {
   const lineRefRightExtraction: any = React.useRef(null);
   const lineRefRightDataPoisoning: any = React.useRef(null);
   const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
+  const selectedFuzz: {name: string} = location.state.selectedFuzz;
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});

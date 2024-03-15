@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-prototype-builtins */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import * as React from "react";
 import {
   Backdrop,
@@ -109,7 +109,7 @@ const FetchLowScores = ({ data }: any) => {
 
   const lowscorers: any = [];
 
-  data.checks.forEach((issue) => {
+  data.checks.forEach((issue: { hasOwnProperty: (arg0: string) => any; score: number; }) => {
     if (issue.hasOwnProperty("score")) {
       if (issue.score <= 5) lowscorers.push(issue);
     } else {
@@ -205,11 +205,11 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 
   let project_lcesnse: string = "Not Found";
 
-  uniq_lic.forEach((ul) => {
+  uniq_lic.forEach((ul: any) => {
     if (ul.length !== 0) license_list.push(ul);
   });
 
-  data.forEach((ld) => {
+  data.forEach((ld: { LicenseConcluded: string | any[]; }) => {
     if (
       ld.LicenseConcluded &&
       (ld.LicenseConcluded === "NOASSERTION" ||
@@ -270,7 +270,7 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
   }
 };
 
-async function checkForWeakness(dataObject, setWeakness: any) {
+async function checkForWeakness(dataObject: any, setWeakness: any) {
   let version: any;
   let sonarqubeLink: any;
   let codeqlLink: any;
@@ -338,7 +338,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
 
   const tracked: string[] = [];
 
-  data.forEach((dp) => {
+  data.forEach((dp: { name: string; }) => {
     if (!dp.name) {
       return;
     }
@@ -347,7 +347,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
       return;
     }
 
-    masterData.forEach((tp) => {
+    masterData.forEach((tp: { name: string; }) => {
       let duplicate: boolean = false;
 
       if (dp.name.toLowerCase() === tp.name.toLowerCase()) {
@@ -356,7 +356,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
             duplicate = true;
         });
 
-        const dataObject = masterData?.find(function (item) {
+        const dataObject = masterData?.find(function (item: { name: any; }) {
           return item.name === tp.name;
         });
 
@@ -426,7 +426,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
   );
 };
 
-function GetAssessmentData(version, name, report, itemData, masterData) {
+function GetAssessmentData(version: string, name: string, report: string, itemData: any, masterData: any[]) {
   const [jsonData, setJsonData]: any = React.useState({});
   const [codeQlData, setCQData]: any = React.useState([]);
   const [sonarqubeData, setSQData]: any = React.useState({});
@@ -474,9 +474,9 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   const jsonDataLength: number = Object.values(jsonData).length;
 
   React.useEffect(() => {
-    const dataObject = masterData?.filter((element) =>
+    const dataObject = masterData?.filter((element: { name: string; }) =>
       jsonData?.packages?.some(
-        (item) => item.name.toLowerCase() === element.name.toLowerCase()
+        (item: { name: string; }) => item.name.toLowerCase() === element.name.toLowerCase()
       )
     );
     if (dataObject.length > 0 && Object.values(weakness).length === 0) {
@@ -696,7 +696,7 @@ function GetAssessmentData(version, name, report, itemData, masterData) {
   );
 }
 
-function printText(item) {
+function printText(item: string) {
   if (item === "Dependencies") {
     return item + " found";
   }

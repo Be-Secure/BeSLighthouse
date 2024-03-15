@@ -1,5 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+ 
 import * as React from "react";
 import { Typography } from "@mui/material";
 import MKTypography from "../../../components/MKTypography";
@@ -16,7 +15,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
   }
 
   if (cqData.length !== 0 && sqissueslen === 0) {
-    cqData.forEach((vul) => {
+    cqData.forEach((vul: { rule: { security_severity_level: string; }; }) => {
       if (vul.rule.security_severity_level === "critical") {
         critical++;
       } else if (vul.rule.security_severity_level === "high") {
@@ -71,7 +70,7 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
     let sqmajor: number = 0;
     let sqminor: number = 0;
 
-    sqData?.forEach((vul) => {
+    sqData?.forEach((vul: { severity: string; }) => {
       if (vul.severity === "BLOCKER") {
         sqblocker++;
       } else if (vul.severity === "CRITICAL") {

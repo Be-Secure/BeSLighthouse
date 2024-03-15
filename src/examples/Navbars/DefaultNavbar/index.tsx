@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+ 
 import * as React from "react";
 
 import { Fragment, useState } from "react";

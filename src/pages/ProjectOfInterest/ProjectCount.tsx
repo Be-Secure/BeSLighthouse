@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable react-native/no-inline-styles */
+ 
 import * as React from "react";
 import PropTypes from "prop-types";
 
@@ -17,7 +16,7 @@ export default function ProjectCount({
   color = "primary",
   sx,
   ...other
-}) {
+}: any) {
   return (
     <Card
       component={ Stack }

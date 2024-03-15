@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+ 
 import React, { useState } from "react";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
@@ -43,9 +43,10 @@ function createRow(row: any, combinedMatch: any) {
 export default function ModelVulnerabilitiesDetailedTable() {
   const [report, setreport]: any = useState([]);
 
-  let { modelName }: any = useParams();
+  let { modelName } = useParams<{modelName: any}>();
   modelName = modelName.slice(1);
   React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-sast-detailed-report.json`;
     fetchJsonData(link, setreport);
   // eslint-disable-next-line react-hooks/exhaustive-deps

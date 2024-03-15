@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+ 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { assessmentDatastoreURL } from "../../dataStore";

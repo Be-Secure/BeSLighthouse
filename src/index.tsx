@@ -6,7 +6,7 @@ import App from "./App";
 const container: any = document.getElementById("root");
 
 // Create a root.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+ 
 const root = ReactDOMClient.createRoot(container);
 
 root.render(

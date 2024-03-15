@@ -24,12 +24,10 @@ module.exports = {
     'prettier/prettier': 'off', // Turn off prettier
     // These are the rules that I use
     'react-native/no-unused-styles': 'warn',
-    'react-native/no-inline-styles': 'error',
+    'react-native/no-inline-styles': 'off',
     'react-native/no-raw-text': ['warn', {
       skip: ['CustomText']
     }],
-    // "argsIgnorePattern":"^_",
-    // "destructuredArrayIgnorePattern":"^_",
     "react-native/no-single-element-style-arrays": "warn",
     'object-curly-spacing': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -53,6 +51,7 @@ module.exports = {
     'react/jsx-indent': ['error', 2],
     "no-unused-vars": "error",
     // Indent props with 2 spaces
-    'react/jsx-indent-props': ['error', 2]
+    'react/jsx-indent-props': ['error', 2],
+    'react/no-unstable-nested-components' : 'off'
   }
 };

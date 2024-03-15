@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable react-native/no-inline-styles */
 import { Card } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
@@ -14,7 +12,7 @@ export const dividerDiv = (index: number) => {
 const card = ["Critical", "High", "Medium", "Low"];
 
 export default function StaticAnalysisSummary({ data, model }: any): any {
-  const selectedMenu = model.length > 0 ? model[0]: {};
+  const selectedMenu: {name: string} = model.length > 0 ? model[0]: {};
   return (
     <>
       <Grid container alignItems="center" justifyContent="space-between">

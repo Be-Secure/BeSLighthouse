@@ -1,5 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+ 
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 import { modelOfInterestData } from "../../../dataStore";
@@ -43,12 +43,12 @@ const ArcDiagram: React.FC = () => {
             return "#EC5800";
           }
         }
-        jsonData.forEach(node => {
+        jsonData.forEach((node: { name: any; group: any; type: string; dependencies: any[]; }) => {
           const mainNode = { name: node.name, group: node.group, color: getColor(node.type) };
           nodes.push(mainNode);
-          node.dependencies.forEach(dependency => {
+          node.dependencies.forEach((dependency: any) => {
             // check if the dependency tracked under BeS
-            const trackedObj = jsonData.find(item => item.name === dependency);
+            const trackedObj = jsonData.find((item: { name: any; }) => item.name === dependency);
             let dependentNode;
             if (trackedObj) {
               dependentNode = { name: dependency, group: node.group, color: getColor(trackedObj.type) };
@@ -117,8 +117,8 @@ const ArcDiagram: React.FC = () => {
             }
           });
 
-        const isClickable = (nodeName) => {
-          const res: boolean = data.find(item => item.name === nodeName);
+        const isClickable = (nodeName: string) => {
+          const res: boolean = data.find((item: { name: any; }) => item.name === nodeName);
           return res;
         };
             

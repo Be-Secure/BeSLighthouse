@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable react-native/no-inline-styles */
+ 
 import React from "react";
 
 import Card from "@mui/material/Card";

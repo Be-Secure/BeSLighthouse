@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 function RightFuzzing() {
   const location = useLocation();
-  const selectedFuzz: any = location.state.selectedFuzz;
+  const selectedFuzz: {name: string} = location.state.selectedFuzz;
   const [loadingEvasion, setLoadingEvasion] = useState(true);
   const [loadingInference, setLoadingInference] = useState(true);
   const [loadingExtraction, setLoadingExtraction] = useState(true);
