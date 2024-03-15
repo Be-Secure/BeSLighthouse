@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.a49653cd.chunk.js",
-    "main.js.map": "/BeSLighthouse/static/js/main.a49653cd.chunk.js.map",
-    "runtime~main.js": "/BeSLighthouse/static/js/runtime~main.579e3372.js",
-    "runtime~main.js.map": "/BeSLighthouse/static/js/runtime~main.579e3372.js.map",
-    "static/js/2.a77d9389.chunk.js": "/BeSLighthouse/static/js/2.a77d9389.chunk.js",
-    "static/js/2.a77d9389.chunk.js.map": "/BeSLighthouse/static/js/2.a77d9389.chunk.js.map",
+    "main.js": "/BeSLighthouse/static/js/main.dc5ac3c2.chunk.js",
+    "main.js.map": "/BeSLighthouse/static/js/main.dc5ac3c2.chunk.js.map",
+    "runtime-main.js": "/BeSLighthouse/static/js/runtime-main.e7c2a82e.js",
+    "runtime-main.js.map": "/BeSLighthouse/static/js/runtime-main.e7c2a82e.js.map",
+    "static/js/2.53caefbf.chunk.js": "/BeSLighthouse/static/js/2.53caefbf.chunk.js",
+    "static/js/2.53caefbf.chunk.js.map": "/BeSLighthouse/static/js/2.53caefbf.chunk.js.map",
     "index.html": "/BeSLighthouse/index.html",
-    "precache-manifest.5d312091a626f8c554a5a4089f868b32.js": "/BeSLighthouse/precache-manifest.5d312091a626f8c554a5a4089f868b32.js",
+    "precache-manifest.2fa05d82c1bcf9d20b8aa1b0ee145c08.js": "/BeSLighthouse/precache-manifest.2fa05d82c1bcf9d20b8aa1b0ee145c08.js",
     "service-worker.js": "/BeSLighthouse/service-worker.js",
+    "static/js/2.53caefbf.chunk.js.LICENSE.txt": "/BeSLighthouse/static/js/2.53caefbf.chunk.js.LICENSE.txt",
     "static/media/AIShield-watchtower-final-logo.png": "/BeSLighthouse/static/media/AIShield-watchtower-final-logo.66027f65.png",
     "static/media/aishield_logo.png": "/BeSLighthouse/static/media/aishield_logo.5ee70cda.png",
     "static/media/arc.png": "/BeSLighthouse/static/media/arc.6df46195.png",
@@ -20,5 +21,10 @@
     "static/media/security-system.png": "/BeSLighthouse/static/media/security-system.5ae91155.png",
     "static/media/speedometer.png": "/BeSLighthouse/static/media/speedometer.308e6a4b.png",
     "static/media/verified.png": "/BeSLighthouse/static/media/verified.43a3d843.png"
-  }
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e7c2a82e.js",
+    "static/js/2.53caefbf.chunk.js",
+    "static/js/main.dc5ac3c2.chunk.js"
+  ]
 }
