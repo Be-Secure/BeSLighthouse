@@ -1,11 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable no-prototype-builtins */
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import * as React from "react";
 import {
-  Backdrop,
   Box,
   Button,
   Fade,
@@ -110,6 +109,7 @@ const FetchLowScores = ({ data }: any) => {
   const lowscorers: any = [];
 
   data.checks.forEach((issue: { hasOwnProperty: (arg0: string) => any; score: number; }) => {
+    // eslint-disable-next-line no-prototype-builtins
     if (issue.hasOwnProperty("score")) {
       if (issue.score <= 5) lowscorers.push(issue);
     } else {
@@ -117,7 +117,7 @@ const FetchLowScores = ({ data }: any) => {
     }
   });
 
-  lowscorers.forEach(function (iss: any, index: number) {
+  lowscorers.map(function (iss: any, index: number) {
     const issue = iss.name;
     const reason = iss.reason;
     tableData.push({ Issue: issue, Reason: reason });
@@ -218,7 +218,7 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
       non_lic_files++;
   });
 
-  if (itemData.license?.key) {
+  if (itemData.license && itemData.license.key) {
     project_lcesnse = itemData.license.key;
   }
 
@@ -487,10 +487,10 @@ function GetAssessmentData(version: string, name: string, report: string, itemDa
 
   const pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
 
-  const myObject = { pathname: pathName, state: jsonData } satisfies {
-      pathname: string;
-      state: any;
-    };
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  const myObject = { pathname: pathName, state: jsonData } as {
+    pathname: string;
+  };
 
   if (report === "Criticality Score" && jsonDataLength !== 0) {
     let color_code = "";
@@ -637,6 +637,7 @@ function GetAssessmentData(version: string, name: string, report: string, itemDa
 
       if (
         flag === 0 &&
+        // eslint-disable-next-line no-prototype-builtins
         jsonData[i].hasOwnProperty("LicenseConcluded") &&
         jsonData[i].LicenseConcluded.length !== 0
       ) {
@@ -888,7 +889,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const data: any = GetAssessmentData(version, name, item, itemData, masterData);
   let color: any;
   const countData = data[0];
-  if (data?.[2]) {
+  if (data && data[2]) {
     color = data[2];
   } else {
     color = "";
@@ -920,7 +921,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
           <MKTypography
             style={ {
               fontSize: "40px",
-              color,
+              color: color,
               fontWeight: "bold",
             } }
           >
@@ -979,8 +980,8 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                 color: "#36454F",
                 marginLeft: "5px",
               } }
-              onMouseEnter={ () => { setIsHovered(true); } }
-              onMouseLeave={ () => { setIsHovered(false); } }
+              onMouseEnter={ () => setIsHovered(true) }
+              onMouseLeave={ () => setIsHovered(false) }
             >
               <i className="fas fa-info-circle" />
             </span>
@@ -1000,8 +1001,8 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                 border: "1px solid #ccc",
                 borderRadius: "5px",
                 boxShadow: "0 2px 5px rgba(0, 0, 0, 0.4)",
-                fontSize: "12px", 
-                fontWeight: "normal", 
+                fontSize: "12px",
+                fontWeight: "normal",
                 transition: "opacity 0.5s",
                 zIndex: 9999,
                 whiteSpace: "nowrap",
@@ -1017,7 +1018,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                   <li>High risk: 5 - 7.5</li>
                   <li>Critical risk: 7.5 - 10</li>
                 </ul></>
-              ):(
+              ) : (
                 <>
                   <p>
                     A project's criticality score defines the influence and importance of a project.
@@ -1029,7 +1030,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                     <li>Highly critical: 0.6 - 1.0</li>
                   </ul>
                 </>
-              ) } 
+              ) }
             </div>
           ) }
         </MKTypography>
@@ -1048,7 +1049,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
             borderRadius: "9px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
           } }>
-            <IconButton 
+            <IconButton
               style={ {
                 position: "absolute",
                 top: "0px",
@@ -1069,7 +1070,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                   right: "40px",
                   bottom: "10px",
                 } }
-              >  
+              >
                 <Link to={ data[3] }>Detailed Report</Link>
               </Typography>
             ) : (
