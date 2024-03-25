@@ -27,13 +27,13 @@ const TABLE_HEAD = [
 export default function Sbom({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
-   
+
   // eslint-disable-next-line no-unused-vars
   const [filterName, setFilterName] = useState("");
   let sonarqubeData: any;
   if (data?.packages) sonarqubeData = data?.packages;
   else sonarqubeData = [];
-  
+
   const filteredUsers = applySortFilter(
     sonarqubeData,
     getComparator("desc", "name"),

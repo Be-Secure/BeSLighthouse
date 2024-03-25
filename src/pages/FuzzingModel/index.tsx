@@ -128,7 +128,7 @@ function FuzzingModelPage() {
   const lineRefRightExtraction: any = React.useRef(null);
   const lineRefRightDataPoisoning: any = React.useRef(null);
   const location = useLocation();
-  const selectedFuzz: {name: string} = location.state.selectedFuzz;
+  const selectedFuzz: { name: string } = location.state.selectedFuzz;
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});
@@ -148,8 +148,7 @@ function FuzzingModelPage() {
     fetchJsonData(inferenceLink, inferenceSetreport).then((data) => {
       if (data)
         setTimeout(
-          () =>
-          { inferenceLineGraph(lineRefStartInference, lineRefRightInference); },
+          () => { inferenceLineGraph(lineRefStartInference, lineRefRightInference); },
           200
         );
     });
@@ -157,19 +156,19 @@ function FuzzingModelPage() {
     fetchJsonData(extractionLink, extractionSetreport).then((data) => {
       if (data)
         setTimeout(
-          () =>
-          { extractionLineGraph(lineRefStartExtraction, lineRefRightExtraction); },
+          () => { extractionLineGraph(lineRefStartExtraction, lineRefRightExtraction); },
           200
         );
     });
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport).then((data) => {
       if (data)
         setTimeout(
-          () =>
-          { dataPoisoningLineGraph(
-            lineRefStartDataPoisoning,
-            lineRefRightDataPoisoning
-          ); },
+          () => {
+            dataPoisoningLineGraph(
+              lineRefStartDataPoisoning,
+              lineRefRightDataPoisoning
+            );
+          },
           200
         );
     });

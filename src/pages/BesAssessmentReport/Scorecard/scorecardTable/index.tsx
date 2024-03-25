@@ -26,7 +26,7 @@ const TABLE_HEAD = [
 export default function ScorecardTable({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
-   
+
   // eslint-disable-next-line no-unused-vars
   const [filterName, setFilterName] = useState("");
   const scorecardData: any = data?.checks ?? [];

@@ -1,4 +1,4 @@
- 
+
 import React from "react";
 
 import Grid from "@mui/material/Grid";
@@ -56,8 +56,8 @@ function DefenseSummary() {
     setValue(newValue);
   };
   const location = useLocation();
-  const selectedFuzz: {name: string} = location.state.selectedFuzz;
-  
+  const selectedFuzz: { name: string } = location.state.selectedFuzz;
+
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});
@@ -72,7 +72,7 @@ function DefenseSummary() {
     fetchJsonData(inferenceLink, inferenceSetreport);
     fetchJsonData(extractionLink, extractionSetreport);
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Grid
@@ -141,7 +141,7 @@ function DefenseSummary() {
                 <DefenceData report={ extraction } reportName="extraction" />
               </CustomTabPanel>
               <CustomTabPanel value={ value } index={ 3 }>
-                <DefenceData report={ dataPoisoning } reportName="dataPoisoning"  />
+                <DefenceData report={ dataPoisoning } reportName="dataPoisoning" />
               </CustomTabPanel>
             </Box>
           </MKBox>

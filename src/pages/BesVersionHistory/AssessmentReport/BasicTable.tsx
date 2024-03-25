@@ -4,9 +4,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 
 export function createData({ tableData }: any) {
-
   return [{ tableData }];
-
 }
 
 export function createHeading(tableHeading: string[]) {
@@ -50,4 +48,5 @@ const BasicTable: React.FC<TableProps> = ({ tableData, tableHeading, tableStyle 
   </>
   );
 };
+
 export default BasicTable;

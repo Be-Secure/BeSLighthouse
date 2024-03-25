@@ -1,4 +1,4 @@
- 
+
 import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -10,7 +10,7 @@ import tableIcon from "../../../assets/images/cells.png";
 import arcIcon from "../../../assets/images/arc.png";
 import ArcDiagram from '../../../pages/ModelOfInterest/ArcDiagram';
 
-function switchView(viewValue:any, filteredCveReport: any, filterName: any, handleFilterByName: any) {
+function switchView(viewValue: any, filteredCveReport: any, filterName: any, handleFilterByName: any) {
   switch (viewValue) {
   case "table":
     return (
@@ -37,6 +37,7 @@ function switchView(viewValue:any, filteredCveReport: any, filterName: any, hand
     return null;
   }
 }
+
 export default function ThreeWayToggleButton({ filteredCveReport, filterName, handleFilterByName }: any) {
   const [view, setView] = React.useState('table');
 
@@ -46,7 +47,7 @@ export default function ThreeWayToggleButton({ filteredCveReport, filterName, ha
   ) => {
     setView(newView);
   };
-  
+
   return (
     <>
       <ToggleButtonGroup

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
- 
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { assessmentDatastoreURL } from "../../dataStore";
@@ -40,7 +40,7 @@ function displayReport(BeSName: string, besReport: any, report: any): any {
     return <Fossology data={ report } />;
   }
   if (besReport === "SBOM") {
-    return <Sbom data={ report }/>;
+    return <Sbom data={ report } />;
   }
 }
 

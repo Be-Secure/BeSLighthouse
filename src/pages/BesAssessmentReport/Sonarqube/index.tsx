@@ -23,7 +23,7 @@ const TABLE_HEAD = [
 export default function Sonarqube({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
-   
+
   // eslint-disable-next-line no-unused-vars
   const [filterName, setFilterName] = useState("");
 

@@ -1,4 +1,3 @@
- 
 import * as React from "react";
 import Tab from "@mui/material/Tab";
 import { SecurityDomain } from "./filter/SecurityDomain";

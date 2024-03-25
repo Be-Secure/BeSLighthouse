@@ -1,10 +1,9 @@
- 
 import * as React from "react";
 
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Stack from '@mui/material/Stack';  
+import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 
 import MKBox from "../../components/MKBox";
@@ -43,31 +42,32 @@ function Presentation() {
               mt={ -6 }
               mb={ 1 }
               style={ {
-                fontSize:"30px",
+                fontSize: "30px",
                 lineHeight: '1.3'
               } }
             >
               Transform next generation application security threat models and security assessment playbooks into global commons{ " " }
             </MKTypography>
-       
+
             <MKTypography
               variant="body2"
               color="white"
               textAlign="left"
               xs={ 0 }
               mt={ 1 }
-              style={ { marginBottom: '30px', 
+              style={ {
+                marginBottom: '30px',
                 marginTop: '16px',
                 lineHeight: '1.3'
               } }
             >
               BeSLighthouse provides an intuitive dashboard with actionable insights into the security posture of open-source projects, machine learning models, training dataset to foster trust and reliability in the open-source ecosystem.
             </MKTypography>
-            <Stack spacing={ 2 } direction="row">  
+            <Stack spacing={ 2 } direction="row">
               <Link to="/BeSLighthouse/Project-Of-Interest">
                 <Button variant="contained"> Try it</Button>
               </Link>
-            </Stack>  
+            </Stack>
           </Grid>
         </Container>
       </MKBox>

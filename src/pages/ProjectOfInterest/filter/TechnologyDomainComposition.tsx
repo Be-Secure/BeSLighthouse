@@ -1,4 +1,3 @@
- 
 import * as React from "react";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
@@ -50,7 +49,7 @@ export function TechnologyDomainComposition({ filter, setFilter }: any) {
         width: "100%",
         backgroundColor:
           !personName?.[0] ||
-          personName?.[0] === "Technology Domain Composition (TD-C)"
+            personName?.[0] === "Technology Domain Composition (TD-C)"
             ? "white"
             : "lightgreen"
       } }

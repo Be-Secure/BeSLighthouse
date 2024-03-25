@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
- 
+
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -17,10 +17,10 @@ import Language from "../../../examples/Charts/PieChart/Languages";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
-     
+
     const response = await fetchJsonReport(link);
     try {
-       
+
       const data = JSON.parse(response);
       setRiskData(data);
     } catch (err) {
@@ -35,7 +35,7 @@ export const countSeverity = async (
   vulnerabilityData: any,
   setSeverity: any
 ) => {
-   
+
   if (Object.keys(vulnerabilityData).length !== 0) {
     const supportedSeverityLevels: string[] = [
       "low",
@@ -60,7 +60,7 @@ export const countSeverity = async (
           severityCounts[supportedSeverityLevels[j]]++;
       }
     }
-     
+
     for (const sevStack of Object.keys(severityCounts)) {
       severityForChart.push({
         label: sevStack,

@@ -1,4 +1,3 @@
- 
 import React, { useState } from "react";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
@@ -43,13 +42,13 @@ function createRow(row: any, combinedMatch: any) {
 export default function ModelVulnerabilitiesDetailedTable() {
   const [report, setreport]: any = useState([]);
 
-  let { modelName } = useParams<{modelName: any}>();
+  let { modelName } = useParams<{ modelName: any }>();
   modelName = modelName.slice(1);
   React.useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-sast-detailed-report.json`;
     fetchJsonData(link, setreport);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const modelDetails = Object.values(report);
@@ -107,7 +106,7 @@ export default function ModelVulnerabilitiesDetailedTable() {
                   return (
                     <TableRow hover key={ index } tabIndex={ -1 }>
                       <TableCell align="left" sx={ { fontSize: "13px" } }>
-                        { index+1 }
+                        { index + 1 }
                       </TableCell>
                       <TableCell
                         align="left"

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import ModelAttack from "../AttackType/ModelAttack";
 import MKBox from "../../../components/MKBox";
 
-function LeftFuzzing({ evasion, inference, extraction, dataPoisoning  }: any) {
+function LeftFuzzing({ evasion, inference, extraction, dataPoisoning }: any) {
   return (
     <Grid container width={ "20%" }>
       <Grid item width={ "85%" }>

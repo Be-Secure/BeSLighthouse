@@ -1,4 +1,3 @@
- 
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -100,7 +99,7 @@ function ModelOfInterest() {
           fontSize="18px"
           width="100%"
           style={ { fontWeight: "lighter" } }
-          // fontWeight="lighter"
+        // fontWeight="lighter"
         >
           Gain visibility into vulnerabilities and security gaps within popular
           open source machine learning models. Empower your strategies for

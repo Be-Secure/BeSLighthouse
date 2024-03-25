@@ -12,7 +12,7 @@ const routes = [
   {
     name: "Be-Secure",
     key: "github",
-    icon: <HomeIcon fontSize="medium"/>,
+    icon: <HomeIcon fontSize="medium" />,
     href: "https://be-secure.github.io/Be-Secure/"
   },
   {

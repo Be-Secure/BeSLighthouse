@@ -104,7 +104,6 @@ function ProjectOfInterest() {
           fontSize="18px"
           width="100%"
           style={ { fontWeight: "lighter" } }
-          // fontWeight="lighter"
         >
           Empower your development teams with unparalleled insights into your
           open source software supply chain. BeSecure assesses their risk

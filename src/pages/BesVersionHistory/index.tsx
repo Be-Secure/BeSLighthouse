@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-prototype-builtins */
- 
+
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -182,7 +182,7 @@ function BesVersionHistory() {
       besName.slice(1),
       setVersionSummary
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [selectedOption, setSelectedOption] = React.useState("");

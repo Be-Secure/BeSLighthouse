@@ -1,4 +1,3 @@
- 
 import React from "react";
 import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
@@ -29,7 +28,7 @@ function ModelVulnerabilitiesDetailed() {
         <Grid item>
 
           <MKTypography style={ { fontSize: "12px" } }>
-            Powered by 
+            Powered by
           </MKTypography>
         </Grid>
         <Grid item style={ { paddingLeft: "8px" } }>
