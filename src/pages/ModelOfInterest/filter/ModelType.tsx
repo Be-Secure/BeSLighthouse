@@ -36,7 +36,7 @@ export function ModelType({ filter, setFilter }: any) {
     setFilter({ ...filter });
   }
   return (
-    <div style={ { width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Model Type') ? "white" : "lightgreen"  } }>
+    <div style={ { width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Model Type') ? "white" : "lightgreen" } }>
       <FormControl sx={ { width: "100%" } }>
         <Select
           multiple={ false }

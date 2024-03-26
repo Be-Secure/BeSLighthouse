@@ -7,31 +7,31 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow,
+  TableRow
 } from "@mui/material";
-import { applySortFilter, getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+import {
+  applySortFilter,
+  getComparator
+} from "../../../ProjectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
-  { id: "Component", label: "Component", alignRight: false },
-  { id: "Type", label: "Type", alignRight: false },
-  { id: "Messaage", label: "Messaage", alignRight: false },
-  { id: "Line", label: "Line", alignRight: false },
+  { id: "name", label: "Name", alignRight: false },
+  { id: "score", label: "Score", alignRight: false },
+  { id: "reason", label: "Reason", alignRight: false },
+  { id: "details", label: "Details", alignRight: false }
 ];
 
 // Fixme: Code refactor
 
-export default function Sonarqube({ data }: any) {
+export default function ScorecardTable({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
-   
+
   // eslint-disable-next-line no-unused-vars
   const [filterName, setFilterName] = useState("");
-
-  let sonarqubeData: any;
-  if (data?.issues) sonarqubeData = data?.issues;
-  else sonarqubeData = [];
+  const scorecardData: any = data?.checks ?? [];
   const filteredUsers = applySortFilter(
-    sonarqubeData,
+    scorecardData,
     getComparator("desc", "name"),
     filterName
   );
@@ -70,26 +70,26 @@ export default function Sonarqube({ data }: any) {
               .map(
                 (
                   row: {
-                    component: string;
-                    type: string;
-                    message: string;
-                    line: string;
+                    name: string;
+                    score: any;
+                    reason: any;
+                    details: string[];
                   },
                   index: number
                 ) => {
-                  const { component, type, message, line } = row;
+                  const { name, score, reason, details } = row;
                   return (
                     <TableRow hover key={ index } tabIndex={ -1 }>
                       <TableCell
-                        align="left"
-                        sx={ { paddingLeft: "15px" } }
+                        align="center"
+                        sx={ { paddingLeft: "10px" } }
                         padding="none"
                       >
-                        { component }
+                        { name }
                       </TableCell>
-                      <TableCell align="left">{ type }</TableCell>
-                      <TableCell align="left">{ message }</TableCell>
-                      <TableCell align="left">{ line }</TableCell>
+                      <TableCell align="left">{ score }</TableCell>
+                      <TableCell align="left">{ reason }</TableCell>
+                      <TableCell align="left">{ details }</TableCell>
                     </TableRow>
                   );
                 }
@@ -99,15 +99,15 @@ export default function Sonarqube({ data }: any) {
         <TablePagination
           sx={ {
             ".MuiTablePagination-selectLabel": {
-              margin: "auto",
+              margin: "auto"
             },
             ".MuiTablePagination-displayedRows": {
-              margin: "auto",
-            },
+              margin: "auto"
+            }
           } }
           rowsPerPageOptions={ [15, 30, 45] }
           component="div"
-          count={ sonarqubeData.length }
+          count={ scorecardData.length }
           rowsPerPage={ rowsPerPage }
           page={ page }
           onPageChange={ handleChangePage }

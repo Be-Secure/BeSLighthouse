@@ -1,9 +1,9 @@
 import { filter } from "lodash";
 import React, { useState } from "react";
 import { modelOfInterestData } from "../../../dataStore";
-import { getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+import { getComparator } from "../../ProjectOfInterest/ProjectDisplay";
 import { fetchJsonData } from "../../BesVersionHistory/AssessmentReport";
-import ThreeWayToggleButton from "../../../examples/Button/ThreeWayToggle";
+import ThreeWayToggleButton from "../../../components/Button/ThreeWayToggle";
 import { modelType, filterCheck, riskAnalysis } from "../filter/references";
 
 function applySortFilter(array: any, comparator: any, query: any) {

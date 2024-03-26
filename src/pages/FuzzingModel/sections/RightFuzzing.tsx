@@ -8,12 +8,12 @@ import { useLocation } from "react-router-dom";
 
 function RightFuzzing() {
   const location = useLocation();
-  const selectedFuzz: {name: string} = location.state.selectedFuzz;
+  const selectedFuzz: { name: string } = location.state.selectedFuzz;
   const [loadingEvasion, setLoadingEvasion] = useState(true);
   const [loadingInference, setLoadingInference] = useState(true);
   const [loadingExtraction, setLoadingExtraction] = useState(true);
   const [loadingDataPoisoning, setLoadingDataPoisoning] = useState(true);
-  
+
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});
@@ -36,7 +36,7 @@ function RightFuzzing() {
     fetchJsonData(inferenceLink, inferenceSetreport);
     fetchJsonData(extractionLink, extractionSetreport);
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Grid container width={ "17%" } mr={ 2 }>

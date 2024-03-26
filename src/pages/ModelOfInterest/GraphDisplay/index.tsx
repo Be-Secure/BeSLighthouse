@@ -1,4 +1,4 @@
- 
+
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 
@@ -38,7 +38,7 @@ const GraphDisplay = () => {
         });
 
         const isClickable = (nodeName: string) => {
-          const res: boolean = data.find((item: {name: string}) => item.name === nodeName);
+          const res: boolean = data.find((item: { name: string }) => item.name === nodeName);
           return res;
         };
 
@@ -84,7 +84,7 @@ const GraphDisplay = () => {
           .attr("viewBox", [-width / 2, -height / 2, width, height])
           .attr("style", "max-width: 100%; height: auto;")
           .append("g");
-  
+
         // Add a line for each link, with arrowheads.
         const link = svg.append("g")
           .attr("stroke", "#555")
@@ -135,7 +135,7 @@ const GraphDisplay = () => {
           .attr("dx", 14)
           .attr("dy", 4)
           .attr("fill", d => (d).isDependency ? "#34495e" : "#2c3e50");
-        
+
         // Set the position attributes of links and nodes each time the simulation ticks.
         function ticked() {
           link
@@ -153,17 +153,17 @@ const GraphDisplay = () => {
           (d).fx = (d).x;
           (d).fy = (d).y;
         }
-      
+
         function dragged(event: any, d: Node) {
           (d).fx = event.x;
           (d).fy = event.y;
         }
-      
+
         function dragended(event: any, d: Node) {
           if (!event.active) simulation.alphaTarget(0);
           (d).fx = null;
           (d).fy = null;
-        }      
+        }
       })
       .catch((error) => {
         console.error("Error fetching data:", error.message);

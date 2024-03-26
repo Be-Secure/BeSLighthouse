@@ -1,9 +1,7 @@
- 
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import MKBox from "../../components/MKBox";
 import routes from "../../routes";
 import ModelDisplay from "./ModelDisplay";
@@ -12,10 +10,11 @@ import { useState } from "react";
 import { modelOfInterestData } from "../../dataStore";
 import networkIcon from "../../assets/images/network.png";
 import ProjectCount from "../ProjectOfInterest/ProjectCount";
-import Language from "../../examples/Charts/PieChart/Languages";
 import theme from "../../assets/theme";
-import { fetchJsonReport } from "../../utils/fatch_json_report";
+import { fetchJsonReport } from "../../utils/fatchJsonReport";
 import ScrollableTabsButtonVisibleML from "./FilterMoi";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
+import Language from "../../components/Charts/PieChart/Languages";
 
 const fetchModelData = async () => {
   const moidata: any = JSON.parse(await fetchJsonReport(modelOfInterestData));
@@ -100,7 +99,7 @@ function ModelOfInterest() {
           fontSize="18px"
           width="100%"
           style={ { fontWeight: "lighter" } }
-          // fontWeight="lighter"
+        // fontWeight="lighter"
         >
           Gain visibility into vulnerabilities and security gaps within popular
           open source machine learning models. Empower your strategies for

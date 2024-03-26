@@ -1,4 +1,3 @@
- 
 import React, { useState } from "react";
 
 import {
@@ -14,7 +13,7 @@ import {
 import {
   applySortFilter,
   getComparator
-} from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+} from "../../ProjectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "descriiption", label: "Description", alignRight: false },
@@ -31,7 +30,7 @@ const TABLE_HEAD = [
 export default function CodeQL({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
-   
+
   // eslint-disable-next-line no-unused-vars
   const [filterName, setFilterName] = useState("");
 

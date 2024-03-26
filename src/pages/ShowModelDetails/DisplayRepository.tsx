@@ -4,6 +4,7 @@ import React from "react";
 import { dividerDiv } from "./AssessmentSummary";
 
 const repository = ["Repository Type", "Repository URL"];
+
 export default function DisplayRepository({ data }: any): any {
   return repository.map((value, index) => {
     return (

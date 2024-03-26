@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
- 
+
 import React, { useState } from "react";
 
 import { Card, CircularProgress, Grid } from "@mui/material";
@@ -34,7 +34,7 @@ function loadingCircular(loading: any) {
 export default function DefenceData({ report, reportName }: any) {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-  const selectedFuzz: {name: string} = location.state.selectedFuzz;
+  const selectedFuzz: { name: string } = location.state.selectedFuzz;
 
   const [defenceReport, setDefenceReport]: any = React.useState(false);
   const [vulnerabilityReport, setvulnerabilityReport]: any =
@@ -50,7 +50,7 @@ export default function DefenceData({ report, reportName }: any) {
     } catch (e) {
       // ignore
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const reportLength = Object.values(report).length;
   return (

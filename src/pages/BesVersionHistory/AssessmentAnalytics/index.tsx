@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
- 
+
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import VulHistory from "../../../examples/Charts/BarChart/VulHistory";
-import { fetchJsonReport } from "../../../utils/fatch_json_report";
+import { fetchJsonReport } from "../../../utils/fatchJsonReport";
 import { assessmentDatastoreURL } from "../../../dataStore";
 import {
   assessmentPath,
   assessmentReport
 } from "../../../utils/assessmentReport";
 import MKTypography from "../../../components/MKTypography";
-import Language from "../../../examples/Charts/PieChart/Languages";
+import VulHistory from "../../../components/Charts/BarChart/VulHistory";
+import Language from "../../../components/Charts/PieChart/Languages";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
-     
+
     const response = await fetchJsonReport(link);
     try {
-       
+
       const data = JSON.parse(response);
       setRiskData(data);
     } catch (err) {
@@ -35,7 +35,7 @@ export const countSeverity = async (
   vulnerabilityData: any,
   setSeverity: any
 ) => {
-   
+
   if (Object.keys(vulnerabilityData).length !== 0) {
     const supportedSeverityLevels: string[] = [
       "low",
@@ -60,7 +60,7 @@ export const countSeverity = async (
           severityCounts[supportedSeverityLevels[j]]++;
       }
     }
-     
+
     for (const sevStack of Object.keys(severityCounts)) {
       severityForChart.push({
         label: sevStack,
@@ -229,4 +229,5 @@ function AssessmentAnalytics({
 
   );
 }
+
 export default AssessmentAnalytics;

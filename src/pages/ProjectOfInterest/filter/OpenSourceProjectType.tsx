@@ -1,4 +1,3 @@
- 
 import * as React from "react";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
@@ -43,7 +42,7 @@ export function OpenSourceProjectType({ filter, setFilter }: any) {
         width: "100%",
         backgroundColor:
           !personName?.[0] ||
-          personName?.[0] === "Open Source Project Type (COM)"
+            personName?.[0] === "Open Source Project Type (COM)"
             ? "white"
             : "lightgreen"
       } }

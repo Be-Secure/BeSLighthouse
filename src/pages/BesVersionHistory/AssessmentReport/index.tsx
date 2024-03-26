@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
-import { fetchJsonReport } from "../../../utils/fatch_json_report";
+import { fetchJsonReport } from "../../../utils/fatchJsonReport";
 import { Link } from "react-router-dom";
 import { assessmentDatastoreURL, versionDetailsURL } from "../../../dataStore";
 import MKTypography from "../../../components/MKTypography";
@@ -23,7 +23,6 @@ import {
   assessmentPath,
   assessmentReport,
 } from "../../../utils/assessmentReport";
-import FetchSAST from "./FetchSastReport";
 import { useState } from "react";
 import vulnerabilityIcon from "../../../assets/images/bug.png";
 import dependencyIcon from "../../../assets/images/data-flow.png";
@@ -31,6 +30,7 @@ import licenseIcon from "../../../assets/images/certificate.png";
 import scorecardIcon from "../../../assets/images/speedometer.png";
 import tavossIcon from "../../../assets/images/verified.png";
 import BasicTable from "./BasicTable";
+import FetchSastReport from "./FetchSastReport";
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
@@ -571,7 +571,7 @@ function GetAssessmentData(version: string, name: string, report: string, itemDa
   ) {
     return ([
       codeQlData.length,
-      <FetchSAST cqData={ codeQlData } sqData={ sonarqubeData } />,
+      <FetchSastReport cqData={ codeQlData } sqData={ sonarqubeData } />,
       "",
       "",
     ]);
@@ -595,7 +595,7 @@ function GetAssessmentData(version: string, name: string, report: string, itemDa
     }
     return ([
       count,
-      <FetchSAST cqData={ codeQlData } sqData={ issues } />,
+      <FetchSastReport cqData={ codeQlData } sqData={ issues } />,
       "",
       "",
     ]);
@@ -612,7 +612,7 @@ function GetAssessmentData(version: string, name: string, report: string, itemDa
 
     return ([
       codeqllength,
-      <FetchSAST cqData={ codeqldetails } sqData={ sqissues } />,
+      <FetchSastReport cqData={ codeqldetails } sqData={ sqissues } />,
       "",
       "",
     ]);

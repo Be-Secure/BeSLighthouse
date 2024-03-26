@@ -4,9 +4,7 @@ import Grid from "@mui/material/Grid";
 
 // React components
 import MKBox from "../../../components/MKBox";
-
-// React examples
-import DefaultCounterCard from "../../../examples/Cards/CounterCards/DefaultCounterCard";
+import DefaultCounterCard from "../../../components/Cards/CounterCards/DefaultCounterCard";
 
 function Counters() {
   return (

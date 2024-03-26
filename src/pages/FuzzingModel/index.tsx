@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import LeaderLine from "react-leader-line";
 
@@ -14,12 +13,14 @@ import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKTypography from "../../components/MKTypography";
 import aishieldLogo from "../../assets/images/aishield_logo.png";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
 const lineOptions = {
   startPlug: "disc",
   color: "red",
   dash: { animation: true }
 };
+
 const arrow = {
   startPlug: "disc",
   color: "red"
@@ -118,7 +119,7 @@ function dataPoisoningLineGraph(
   }
 }
 
-function FuzzingModelPage() {
+function FuzzingModel() {
   const lineRefStartEvasion: any = React.useRef(null);
   const lineRefStartInference: any = React.useRef(null);
   const lineRefStartExtraction: any = React.useRef(null);
@@ -128,7 +129,7 @@ function FuzzingModelPage() {
   const lineRefRightExtraction: any = React.useRef(null);
   const lineRefRightDataPoisoning: any = React.useRef(null);
   const location = useLocation();
-  const selectedFuzz: {name: string} = location.state.selectedFuzz;
+  const selectedFuzz: { name: string } = location.state.selectedFuzz;
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});
@@ -148,8 +149,7 @@ function FuzzingModelPage() {
     fetchJsonData(inferenceLink, inferenceSetreport).then((data) => {
       if (data)
         setTimeout(
-          () =>
-          { inferenceLineGraph(lineRefStartInference, lineRefRightInference); },
+          () => { inferenceLineGraph(lineRefStartInference, lineRefRightInference); },
           200
         );
     });
@@ -157,19 +157,19 @@ function FuzzingModelPage() {
     fetchJsonData(extractionLink, extractionSetreport).then((data) => {
       if (data)
         setTimeout(
-          () =>
-          { extractionLineGraph(lineRefStartExtraction, lineRefRightExtraction); },
+          () => { extractionLineGraph(lineRefStartExtraction, lineRefRightExtraction); },
           200
         );
     });
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport).then((data) => {
       if (data)
         setTimeout(
-          () =>
-          { dataPoisoningLineGraph(
-            lineRefStartDataPoisoning,
-            lineRefRightDataPoisoning
-          ); },
+          () => {
+            dataPoisoningLineGraph(
+              lineRefStartDataPoisoning,
+              lineRefRightDataPoisoning
+            );
+          },
           200
         );
     });
@@ -251,4 +251,4 @@ function FuzzingModelPage() {
   );
 }
 
-export default FuzzingModelPage;
+export default FuzzingModel;

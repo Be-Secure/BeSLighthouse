@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
- 
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { assessmentDatastoreURL } from "../../dataStore";
@@ -9,16 +9,16 @@ import {
 } from "../../utils/assessmentReport";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKBox from "../../components/MKBox";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
-import ScorecardTable from "./Scorecard/scorecardTable";
 import CodeQL from "./CodeQL";
-import Sonarqube from "./Sonarqube";
 import Fossology from "./Fossology";
-import Sbom from "./SBOM";
+import Sbom from "./Sbom";
 import Scorecard from "./Scorecard";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
+import ScorecardTable from "./Scorecard/ScorecardTable";
+import SonarQube from "./SonarQube";
 
 export const spanStyle: any = {
   fontSize: "1rem",
@@ -34,13 +34,13 @@ function displayReport(BeSName: string, besReport: any, report: any): any {
     return <CodeQL data={ report } />;
   }
   if (besReport === "Sonarqube") {
-    return <Sonarqube data={ report } />;
+    return <SonarQube data={ report } />;
   }
   if (besReport === "Fossology") {
     return <Fossology data={ report } />;
   }
   if (besReport === "SBOM") {
-    return <Sbom data={ report }/>;
+    return <Sbom data={ report } />;
   }
 }
 
