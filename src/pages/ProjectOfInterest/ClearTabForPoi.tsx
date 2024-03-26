@@ -6,7 +6,7 @@ import { Industry } from "./filter/Industry";
 import { TechnologyDomainComposition } from "./filter/TechnologyDomainComposition";
 import { OpenSourceProjectType } from "./filter/OpenSourceProjectType";
 import { Languages } from "./filter/Languages";
-import { BeSTechnologyStack } from "./filter/BeS-TechnologyStack";
+import { BeSTechnologyStack } from "./filter/BeSTechnologyStack";
 import { Licensees } from "./filter/Licensees";
 
 export function ClearTabForPoi({ filter, setFilter }: any) {

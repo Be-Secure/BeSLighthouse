@@ -11,14 +11,14 @@ import MKTypography from "../../components/MKTypography";
 
 import Button from "../../components/MKButton";
 
-// Presentation page sections
+// LandingPages page sections
 import Counters from "./sections/Counters";
 
 // Routes
 import routes from "../../routes";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
-function Presentation() {
+function LandingPages() {
   return (
     <>
       <DefaultNavbar routes={ routes } sticky />
@@ -89,4 +89,4 @@ function Presentation() {
   );
 }
 
-export default Presentation;
+export default LandingPages;

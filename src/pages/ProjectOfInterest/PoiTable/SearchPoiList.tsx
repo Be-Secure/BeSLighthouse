@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // @mui
 import { styled, alpha } from "@mui/material/styles";
 import { Toolbar, OutlinedInput, InputAdornment } from "@mui/material";
-import Iconify from "../../iconify";
+import Iconify from "../../Iconify";
 // component
 
 // ----------------------------------------------------------------------

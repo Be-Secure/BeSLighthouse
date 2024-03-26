@@ -4,7 +4,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Typography from "@mui/material/Typography";
 import { Link, To } from "react-router-dom";
 import MKBox from "../../../components/MKBox";
-import FetchSAST from "./FetchSastReport";
+import FetchSastReport from "./FetchSastReport";
 
 function switchSast(
   newSast: any,
@@ -41,7 +41,7 @@ function switchSast(
           </Link>
         </Typography>
         <MKBox key="MKBOXSASTCQMAINBODY">
-          <FetchSAST
+          <FetchSastReport
             cqData={ codeQlData }
             // sqData={sonarqubeData}
           />
@@ -76,7 +76,7 @@ function switchSast(
           </Link>
         </Typography>
         <MKBox key="MKBOXSASTSQMAINBODY">
-          <FetchSAST cqData={ codeQlData } sqData={ issues } />
+          <FetchSastReport cqData={ codeQlData } sqData={ issues } />
         </MKBox>
       </>
     );

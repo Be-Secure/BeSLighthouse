@@ -5,7 +5,7 @@ import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import { fetchJsonReport } from "../../../utils/fatch_json_report";
+import { fetchJsonReport } from "../../../utils/fatchJsonReport";
 import { assessmentDatastoreURL } from "../../../dataStore";
 import {
   assessmentPath,
@@ -229,4 +229,5 @@ function AssessmentAnalytics({
 
   );
 }
+
 export default AssessmentAnalytics;

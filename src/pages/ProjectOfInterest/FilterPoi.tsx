@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import { TabForPoi } from "./TabForPoi";
 
+// fix me
+
 export default function ScrollableTabsButtonVisible({
   filter,
   setFilter

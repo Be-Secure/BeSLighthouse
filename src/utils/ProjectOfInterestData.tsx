@@ -1,5 +1,5 @@
 import { osspoiMaster, versionDetailsURL } from "../dataStore";
-import { fetchJsonReport } from "./fatch_json_report";
+import { fetchJsonReport } from "./fatchJsonReport";
 
 export class ProjectOfInterestData {
   public poi: any;

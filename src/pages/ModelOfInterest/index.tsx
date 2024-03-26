@@ -11,7 +11,7 @@ import { modelOfInterestData } from "../../dataStore";
 import networkIcon from "../../assets/images/network.png";
 import ProjectCount from "../ProjectOfInterest/ProjectCount";
 import theme from "../../assets/theme";
-import { fetchJsonReport } from "../../utils/fatch_json_report";
+import { fetchJsonReport } from "../../utils/fatchJsonReport";
 import ScrollableTabsButtonVisibleML from "./FilterMoi";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 import Language from "../../components/Charts/PieChart/Languages";

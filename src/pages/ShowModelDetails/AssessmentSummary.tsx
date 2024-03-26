@@ -3,7 +3,7 @@ import * as React from "react";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import Grid from "@mui/material/Grid";
-import { fetchJsonReport } from "../../utils/fatch_json_report";
+import { fetchJsonReport } from "../../utils/fatchJsonReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import StaticAnalysisSummary from "./StaticAnalysisSummary";
 import Divider from "@mui/material/Divider";

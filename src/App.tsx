@@ -9,12 +9,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import theme from "./assets/theme";
 import routes from "./routes";
-import FuzzingModelPage from "./pages/FuzzingModel";
+import FuzzingModel from "./pages/FuzzingModel";
 import BesAssessmentReport from "./pages/BesAssessmentReport";
 import BesVersionHistory from "./pages/BesVersionHistory";
 import ShowModelDetails from "./pages/ShowModelDetails";
 import ModelVulnerabilitiesDetailed from "./pages/ModelVulnerabilitiesDetailed";
-import Presentation from "./pages/Presentation";
+import LandingPages from "./pages/LandingPages";
 import ShowVulnerabilityDetails from "./pages/ShowVulnerabilityDetails";
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
       <Routes>
         { getRoutes(routes) }
         <Route path="*" element={ <Navigate to="/BeSLighthouse" /> } />
-        <Route path="/BeSLighthouse" element={ <Presentation /> } />
+        <Route path="/BeSLighthouse" element={ <LandingPages /> } />
         <Route
           path="/BeSLighthouse/Project-Of-Interest/bes_version_history/:besId/:besName"
           element={ <BesVersionHistory /> }
@@ -70,7 +70,7 @@ function App() {
         />
         <Route
           path="/BeSLighthouse/model_fuzzing/:modelName"
-          element={ <FuzzingModelPage /> }
+          element={ <FuzzingModel /> }
         />
       </Routes>
     </ThemeProvider>

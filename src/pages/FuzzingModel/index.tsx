@@ -20,6 +20,7 @@ const lineOptions = {
   color: "red",
   dash: { animation: true }
 };
+
 const arrow = {
   startPlug: "disc",
   color: "red"
@@ -118,7 +119,7 @@ function dataPoisoningLineGraph(
   }
 }
 
-function FuzzingModelPage() {
+function FuzzingModel() {
   const lineRefStartEvasion: any = React.useRef(null);
   const lineRefStartInference: any = React.useRef(null);
   const lineRefStartExtraction: any = React.useRef(null);
@@ -250,4 +251,4 @@ function FuzzingModelPage() {
   );
 }
 
-export default FuzzingModelPage;
+export default FuzzingModel;

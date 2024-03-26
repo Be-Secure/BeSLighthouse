@@ -20,7 +20,7 @@ const TABLE_HEAD = [
 
 // Fixme: Code refactor
 
-export default function Sonarqube({ data }: any) {
+export default function SonarQube({ data }: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
 

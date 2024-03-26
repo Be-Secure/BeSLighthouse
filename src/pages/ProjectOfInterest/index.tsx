@@ -6,7 +6,7 @@ import MKBox from "../../components/MKBox";
 import routes from "../../routes";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
-import { projectOfInterestData } from "../../utils/poi_data";
+import { projectOfInterestData } from "../../utils/ProjectOfInterestData";
 import Card from "@mui/material/Card";
 import ProjectDisplay from "./ProjectDisplay";
 import MKTypography from "../../components/MKTypography";
