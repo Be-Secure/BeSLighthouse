@@ -9,7 +9,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { applySortFilter, getComparator } from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+import { applySortFilter, getComparator } from "../../ProjectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "Component", label: "Component", alignRight: false },

@@ -12,7 +12,7 @@ import {
 import {
   applySortFilter,
   getComparator
-} from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+} from "../../ProjectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "Package Name", label: "Package Name", alignRight: false },

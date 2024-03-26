@@ -18,7 +18,7 @@ import {
 import { useState } from "react";
 
 import { filter } from "lodash";
-import { projectOfInterestData } from "../../../../utils/poi_data";
+import { projectOfInterestData } from "../../../utils/poi_data";
 import SearchPoiList from "../PoiTable/SearchPoiList";
 import PoiListHead from "../PoiTable/PoiListHead";
 import {
@@ -29,7 +29,7 @@ import {
   TechnologyDomainComposition,
   filterCheck,
   tecStack
-} from "../../../../pages/ProjectOfInterest/filter/references";
+} from "../filter/references";
 
 const TABLE_HEAD = [
   { id: "id", label: "BeS Id", alignRight: false },

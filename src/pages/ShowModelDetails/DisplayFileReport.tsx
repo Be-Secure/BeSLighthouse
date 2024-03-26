@@ -9,7 +9,7 @@ import {
   TableContainer,
   TableRow
 } from "@mui/material";
-import PoiListHead from "../../layouts/pages/projectOfInterest/PoiTable/PoiListHead";
+import PoiListHead from "../ProjectOfInterest/PoiTable/PoiListHead";
 import { useLocation } from "react-router-dom";
 import { dividerDiv } from "./AssessmentSummary";
 

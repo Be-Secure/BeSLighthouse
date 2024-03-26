@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
 import { projectOfInterestData } from "../../utils/poi_data";
 import Card from "@mui/material/Card";
-import ProjectDisplay from "../../layouts/pages/projectOfInterest/ProjectDisplay";
+import ProjectDisplay from "./ProjectDisplay";
 import MKTypography from "../../components/MKTypography";
 import ProjectCount from "./ProjectCount";
 

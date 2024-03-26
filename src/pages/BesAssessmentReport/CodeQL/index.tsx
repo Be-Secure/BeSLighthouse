@@ -13,7 +13,7 @@ import {
 import {
   applySortFilter,
   getComparator
-} from "../../../layouts/pages/projectOfInterest/ProjectDisplay";
+} from "../../ProjectOfInterest/ProjectDisplay";
 
 const TABLE_HEAD = [
   { id: "descriiption", label: "Description", alignRight: false },
