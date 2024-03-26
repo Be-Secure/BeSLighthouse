@@ -1,11 +1,11 @@
 import React from "react";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import MKBox from "../../components/MKBox";
 import { Card, Grid } from "@mui/material";
 import ModelVulnerabilitiesDetailedTable from "./ModelVulnerabilitiesDetailedTable";
 import MKTypography from "../../components/MKTypography";
 import watchtowerLogo from "../../assets/images/AIShield-watchtower-final-logo.png";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
 function ModelVulnerabilitiesDetailed() {
   return (

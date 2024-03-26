@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import Button from "../../components/MKButton";
 
 // Presentation page sections
@@ -17,6 +16,7 @@ import Counters from "./sections/Counters";
 
 // Routes
 import routes from "../../routes";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
 function Presentation() {
   return (
@@ -65,7 +65,7 @@ function Presentation() {
             </MKTypography>
             <Stack spacing={ 2 } direction="row">
               <Link to="/BeSLighthouse/Project-Of-Interest">
-                <Button variant="contained"> Try it</Button>
+                <Button variant="contained">Try it</Button>
               </Link>
             </Stack>
           </Grid>

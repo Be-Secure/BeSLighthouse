@@ -9,7 +9,6 @@ import {
 } from "../../utils/assessmentReport";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKBox from "../../components/MKBox";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import ScorecardTable from "./Scorecard/scorecardTable";
 import CodeQL from "./CodeQL";
@@ -19,6 +18,7 @@ import Sbom from "./SBOM";
 import Scorecard from "./Scorecard";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
 export const spanStyle: any = {
   fontSize: "1rem",

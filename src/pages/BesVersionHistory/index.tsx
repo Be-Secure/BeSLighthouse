@@ -12,7 +12,6 @@ import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import AssessmentReport from "./AssessmentReport";
 import AssessmentAnalytics from "./AssessmentAnalytics";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import { getEnvPathStatus } from "../../utils/fatch_json_report";
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -23,6 +22,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { projectTags } from "./tags";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 export const osspoiMasterAndSummary = async (
   setData: any,
   besId: string,

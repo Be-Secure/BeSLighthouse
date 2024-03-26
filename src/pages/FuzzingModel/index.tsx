@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import LeaderLine from "react-leader-line";
 
@@ -14,6 +13,7 @@ import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { fetchJsonData } from "../BesVersionHistory/AssessmentReport";
 import MKTypography from "../../components/MKTypography";
 import aishieldLogo from "../../assets/images/aishield_logo.png";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
 const lineOptions = {
   startPlug: "disc",

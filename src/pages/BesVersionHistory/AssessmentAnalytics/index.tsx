@@ -5,7 +5,6 @@ import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import VulHistory from "../../../examples/Charts/BarChart/VulHistory";
 import { fetchJsonReport } from "../../../utils/fatch_json_report";
 import { assessmentDatastoreURL } from "../../../dataStore";
 import {
@@ -13,7 +12,8 @@ import {
   assessmentReport
 } from "../../../utils/assessmentReport";
 import MKTypography from "../../../components/MKTypography";
-import Language from "../../../examples/Charts/PieChart/Languages";
+import VulHistory from "../../../components/Charts/BarChart/VulHistory";
+import Language from "../../../components/Charts/PieChart/Languages";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
