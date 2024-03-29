@@ -362,6 +362,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
 
         const id = dataObject?.id;
 
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         const name = dataObject?.name;
 
         const bes_technology_stack = dataObject?.bes_technology_stack;

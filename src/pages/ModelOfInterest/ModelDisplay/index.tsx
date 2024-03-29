@@ -24,6 +24,7 @@ function applySortFilter(array: any, comparator: any, query: any) {
 }
 
 function filterDataBasedOnUserSelecrtionOnModelType(
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   modelType: string,
   getModelLIST: any[]
 ): any {

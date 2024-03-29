@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import Grid from "@mui/material/Grid";
@@ -85,7 +84,7 @@ function DefenseSummary() {
     >
       <Grid item>
         <div id="arrowpass">
-          <img style={ { display: "block", width: "255px" } } src={ bgImage } />
+          <img alt="" style={ { display: "block", width: "255px" } } src={ bgImage } />
         </div>
       </Grid>
       <Grid item width={ "80%" }>

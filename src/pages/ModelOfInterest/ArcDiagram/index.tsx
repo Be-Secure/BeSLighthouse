@@ -105,7 +105,6 @@ const ArcDiagram: React.FC = () => {
           .selectAll("mynodes")
           .data(spacedNodes)
           .join("circle")
-          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           .attr("cx", (d: { name: string, x: number | undefined }) => d.x !== undefined ? d.x : 0)  // Explicitly provide type information
           .attr("cy", height - 30)
           .attr("r", 8)

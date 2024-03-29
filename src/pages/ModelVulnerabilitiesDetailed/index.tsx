@@ -41,7 +41,7 @@ function ModelVulnerabilitiesDetailed() {
             title={ "Click to go to AIShield Watchtower repo" }
             target="_blank"
           >
-            <img style={ { width: "70px", height: "30px" } } src={ watchtowerLogo } />
+            <img alt="" style={ { width: "70px", height: "30px" } } src={ watchtowerLogo } />
           </a>
         </Grid>
       </Grid>
