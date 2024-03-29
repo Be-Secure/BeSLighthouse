@@ -362,8 +362,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
 
         const id = dataObject?.id;
 
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        const name = dataObject?.name;
+        const projectName = dataObject?.name;
 
         const bes_technology_stack = dataObject?.bes_technology_stack;
 
@@ -371,17 +370,17 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
         if (!duplicate) tracked.push(dp.name);
         tableData.push({
           ID: id,
-          Name: name,
+          Name: projectName,
           "BeS Tech Stack": bes_technology_stack,
           License: license,
           Link: (
             <a
-              href={ `/BeSLighthouse/Project-Of-Interest/bes_version_history/:${id}/:${name}` }
+              href={ `/BeSLighthouse/Project-Of-Interest/bes_version_history/:${id}/:${projectName}` }
             >
               link
             </a>
           ),
-          Weakness: weakness[name] ? "Exist" : "Absent",
+          Weakness: weakness[projectName] ? "Exist" : "Absent",
         });
       }
     });
