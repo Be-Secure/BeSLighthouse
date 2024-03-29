@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import {
   Table,
   TableBody,
@@ -198,14 +197,14 @@ const AdversarialAttackSummary = ({ model }: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            { attackName.map((name) => {
+            { attackName.map((nameOfAttack) => {
               return (
                 <TableRow hover tabIndex={ -1 }>
                   <TableCell align="left" sx={ { fontSize: "18px" } }>
-                    { name }
+                    { nameOfAttack }
                   </TableCell>
-                  { riskPosture(attackMap, name) }
-                  { defenceAvailable(attackMap, name) }
+                  { riskPosture(attackMap, nameOfAttack) }
+                  { defenceAvailable(attackMap, nameOfAttack) }
                 </TableRow>
               );
             }) }

@@ -24,12 +24,11 @@ function applySortFilter(array: any, comparator: any, query: any) {
 }
 
 function filterDataBasedOnUserSelecrtionOnModelType(
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  modelType: string,
+  modelTypeName: string,
   getModelLIST: any[]
 ): any {
   const filteredArray = getModelLIST.filter((item) =>
-    item.type.includes(modelType)
+    item.type.includes(modelTypeName)
   );
   return filteredArray;
 }
