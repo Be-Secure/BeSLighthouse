@@ -1,4 +1,3 @@
- 
 import React from "react";
 
 import Grid from "@mui/material/Grid";
@@ -24,7 +23,6 @@ interface TabPanelProps {
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -56,8 +54,8 @@ function DefenseSummary() {
     setValue(newValue);
   };
   const location = useLocation();
-  const selectedFuzz: {name: string} = location.state.selectedFuzz;
-  
+  const selectedFuzz: { name: string } = location.state.selectedFuzz;
+
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});
@@ -72,7 +70,7 @@ function DefenseSummary() {
     fetchJsonData(inferenceLink, inferenceSetreport);
     fetchJsonData(extractionLink, extractionSetreport);
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Grid
@@ -86,7 +84,7 @@ function DefenseSummary() {
     >
       <Grid item>
         <div id="arrowpass">
-          <img style={ { display: "block", width: "255px" } } src={ bgImage } />
+          <img alt="" style={ { display: "block", width: "255px" } } src={ bgImage } />
         </div>
       </Grid>
       <Grid item width={ "80%" }>
@@ -141,7 +139,7 @@ function DefenseSummary() {
                 <DefenceData report={ extraction } reportName="extraction" />
               </CustomTabPanel>
               <CustomTabPanel value={ value } index={ 3 }>
-                <DefenceData report={ dataPoisoning } reportName="dataPoisoning"  />
+                <DefenceData report={ dataPoisoning } reportName="dataPoisoning" />
               </CustomTabPanel>
             </Box>
           </MKBox>

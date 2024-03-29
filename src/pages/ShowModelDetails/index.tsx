@@ -3,11 +3,11 @@ import Grid from "@mui/material/Grid";
 
 import ShowModelContent from "./ShowModelContent";
 import MKBox from "../../components/MKBox";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import AssessmentSummary, { verifyLink } from "./AssessmentSummary";
 import { useParams } from "react-router-dom";
 import { modelOfInterestData } from "../../dataStore";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
 function ShowModelDetails() {
   const [data, setData] = React.useState([]);

@@ -1,4 +1,3 @@
- 
 import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -10,7 +9,7 @@ import tableIcon from "../../../assets/images/cells.png";
 import arcIcon from "../../../assets/images/arc.png";
 import ArcDiagram from '../../../pages/ModelOfInterest/ArcDiagram';
 
-function switchView(viewValue:any, filteredCveReport: any, filterName: any, handleFilterByName: any) {
+function switchView(viewValue: any, filteredCveReport: any, filterName: any, handleFilterByName: any) {
   switch (viewValue) {
   case "table":
     return (
@@ -37,6 +36,7 @@ function switchView(viewValue:any, filteredCveReport: any, filterName: any, hand
     return null;
   }
 }
+
 export default function ThreeWayToggleButton({ filteredCveReport, filterName, handleFilterByName }: any) {
   const [view, setView] = React.useState('table');
 
@@ -46,7 +46,7 @@ export default function ThreeWayToggleButton({ filteredCveReport, filterName, ha
   ) => {
     setView(newView);
   };
-  
+
   return (
     <>
       <ToggleButtonGroup
@@ -56,9 +56,9 @@ export default function ThreeWayToggleButton({ filteredCveReport, filterName, ha
         aria-label="Platform"
         style={ { float: 'right', paddingTop: "2%", paddingRight: "1%" } }
       >
-        <ToggleButton style={ { color: "black", fontWeight: "bold" } } value="table" title='Table view of models'><img style={ { display: "block", width: "17px" } } src={ tableIcon } /></ToggleButton>
-        <ToggleButton style={ { color: "black", fontWeight: "bold" } } value="graph" title='Force directed graph that show the models and its dependencies'><img style={ { display: "block", width: "17px" } } src={ graphIcon } /></ToggleButton>
-        <ToggleButton style={ { color: "black", fontWeight: "bold" } } value="arc" title='Arc graph that shows the dependencies between models, vulnerabilities and projects'><img style={ { display: "block", width: "17px" } } src={ arcIcon } /></ToggleButton>
+        <ToggleButton style={ { color: "black", fontWeight: "bold" } } value="table" title='Table view of models'><img alt='' style={ { display: "block", width: "17px" } } src={ tableIcon } /></ToggleButton>
+        <ToggleButton style={ { color: "black", fontWeight: "bold" } } value="graph" title='Force directed graph that show the models and its dependencies'><img alt='' style={ { display: "block", width: "17px" } } src={ graphIcon } /></ToggleButton>
+        <ToggleButton style={ { color: "black", fontWeight: "bold" } } value="arc" title='Arc graph that shows the dependencies between models, vulnerabilities and projects'><img alt='' style={ { display: "block", width: "17px" } } src={ arcIcon } /></ToggleButton>
       </ToggleButtonGroup>
       { switchView(view, filteredCveReport, filterName, handleFilterByName) }
     </>

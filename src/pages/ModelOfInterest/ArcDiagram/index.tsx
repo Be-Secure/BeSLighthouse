@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
- 
+
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 import { modelOfInterestData } from "../../../dataStore";
@@ -23,7 +23,7 @@ const ArcDiagram: React.FC = () => {
         // append the svg object to the body of the page
         const svg = d3.select("#Arc_diagram")
           .append("svg")
-          .attr("viewBox", [0, height/2, width, height + 150])
+          .attr("viewBox", [0, height / 2, width, height + 150])
           .attr("width", width)
           .attr("height", height)
           .append("g");
@@ -36,8 +36,8 @@ const ArcDiagram: React.FC = () => {
         const links: Array<{ source: string, target: string }> = [];
 
         // get color
-        function getColor(type : string){
-          if (type === "Classic"){
+        function getColor(type: string) {
+          if (type === "Classic") {
             return "blue";
           } else {
             return "#EC5800";
@@ -105,7 +105,6 @@ const ArcDiagram: React.FC = () => {
           .selectAll("mynodes")
           .data(spacedNodes)
           .join("circle")
-          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           .attr("cx", (d: { name: string, x: number | undefined }) => d.x !== undefined ? d.x : 0)  // Explicitly provide type information
           .attr("cy", height - 30)
           .attr("r", 8)
@@ -121,7 +120,7 @@ const ArcDiagram: React.FC = () => {
           const res: boolean = data.find((item: { name: any; }) => item.name === nodeName);
           return res;
         };
-            
+
         // And give them a label
         const labelSelection = svg
           .selectAll("mylabels")
@@ -135,7 +134,7 @@ const ArcDiagram: React.FC = () => {
           .attr("font-family", "sans-serif")
           .attr("font-size", 16)
           .on('mouseover', function (event, d) {
-          // Highlight the nodes: every node is green except for him
+            // Highlight the nodes: every node is green except for him
             nodeSelection.style('opacity', node => node.group === d.group ? 0.2 : 0.1);
             d3.select(this).style('opacity', 1);
             d3.select(this).attr("cursor", isClickable(d.name) ? "pointer" : "default");
@@ -162,7 +161,7 @@ const ArcDiagram: React.FC = () => {
               .style('opacity', 1)
               .attr("cursor", isClickable(d.name) ? "pointer" : "default");
           }).on('mouseout', function () {
-          // Reset the styles on mouseout
+            // Reset the styles on mouseout
             nodeSelection.style('opacity', 1);
             d3.select(this).attr("cursor", "default");
             linkSelection

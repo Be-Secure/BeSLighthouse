@@ -1,10 +1,9 @@
- 
 import * as React from "react";
 import { Typography } from "@mui/material";
 import MKTypography from "../../../components/MKTypography";
 import BasicTable from "./BasicTable";
 
-const FetchSAST = ({ cqData, sqData }: any): any => {
+const FetchSastReport = ({ cqData, sqData }: any): any => {
   let critical: number = 0;
   let high: number = 0;
   let medium: number = 0;
@@ -197,4 +196,4 @@ const FetchSAST = ({ cqData, sqData }: any): any => {
   }
 };
 
-export default FetchSAST;
+export default FetchSastReport;

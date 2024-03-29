@@ -1,7 +1,6 @@
- 
 import * as React from "react";
 import Tab from "@mui/material/Tab";
-import { SecurityDomain } from "./filter/riskAnalysis";
+import { SecurityDomain } from "./filter/SecurityDomain";
 import { ModelType } from "./filter/ModelType";
 
 export function TabForMoi({ filter, setFilter }: any) {

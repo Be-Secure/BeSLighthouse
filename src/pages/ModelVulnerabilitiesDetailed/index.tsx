@@ -1,12 +1,11 @@
- 
 import React from "react";
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
 import routes from "../../routes";
 import MKBox from "../../components/MKBox";
 import { Card, Grid } from "@mui/material";
 import ModelVulnerabilitiesDetailedTable from "./ModelVulnerabilitiesDetailedTable";
 import MKTypography from "../../components/MKTypography";
 import watchtowerLogo from "../../assets/images/AIShield-watchtower-final-logo.png";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 
 function ModelVulnerabilitiesDetailed() {
   return (
@@ -29,7 +28,7 @@ function ModelVulnerabilitiesDetailed() {
         <Grid item>
 
           <MKTypography style={ { fontSize: "12px" } }>
-            Powered by 
+            Powered by
           </MKTypography>
         </Grid>
         <Grid item style={ { paddingLeft: "8px" } }>
@@ -42,7 +41,7 @@ function ModelVulnerabilitiesDetailed() {
             title={ "Click to go to AIShield Watchtower repo" }
             target="_blank"
           >
-            <img style={ { width: "70px", height: "30px" } } src={ watchtowerLogo } />
+            <img alt="" style={ { width: "70px", height: "30px" } } src={ watchtowerLogo } />
           </a>
         </Grid>
       </Grid>

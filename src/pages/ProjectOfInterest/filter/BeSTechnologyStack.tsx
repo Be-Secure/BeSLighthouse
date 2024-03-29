@@ -1,4 +1,3 @@
- 
 import * as React from "react";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
@@ -40,7 +39,7 @@ export function BeSTechnologyStack({ filter, setFilter }: any) {
     setFilter({ ...filter });
   }
   return (
-    <div style={ { width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "lightgreen"  } }>
+    <div style={ { width: "100%", backgroundColor: (!personName?.[0] || personName?.[0] === 'Be-Secure Technology Stacks') ? "white" : "lightgreen" } }>
       <FormControl sx={ { width: "100%" } }>
         <Select
           multiple={ false }

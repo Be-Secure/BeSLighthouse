@@ -8,14 +8,14 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import theme from "./assets/theme";
-import Presentation from "./layouts/pages/presentation";
 import routes from "./routes";
-import BesVersionHistory from "./layouts/pages/besVersionHistory";
-import BesAssessmentReport from "./layouts/pages/besAssessmentReport";
-import ShowVulnerabilityDetailsPage from "./layouts/pages/vulnerabilityDetails";
-import ShowModelDetailsPage from "./layouts/pages/modelDetails";
-import ModelVulnerabilitiesDetailedPage from "./layouts/pages/modelVulnerabilitiesDetailed";
-import FuzzingModelPage from "./pages/FuzzingModel";
+import FuzzingModel from "./pages/FuzzingModel";
+import BesAssessmentReport from "./pages/BesAssessmentReport";
+import BesVersionHistory from "./pages/BesVersionHistory";
+import ShowModelDetails from "./pages/ShowModelDetails";
+import ModelVulnerabilitiesDetailed from "./pages/ModelVulnerabilitiesDetailed";
+import LandingPages from "./pages/LandingPages";
+import ShowVulnerabilityDetails from "./pages/ShowVulnerabilityDetails";
 
 function App() {
   const { pathname } = useLocation();
@@ -47,7 +47,7 @@ function App() {
       <Routes>
         { getRoutes(routes) }
         <Route path="*" element={ <Navigate to="/BeSLighthouse" /> } />
-        <Route path="/BeSLighthouse" element={ <Presentation /> } />
+        <Route path="/BeSLighthouse" element={ <LandingPages /> } />
         <Route
           path="/BeSLighthouse/Project-Of-Interest/bes_version_history/:besId/:besName"
           element={ <BesVersionHistory /> }
@@ -58,19 +58,19 @@ function App() {
         />
         <Route
           path="/BeSLighthouse/vulnerability_report/:cveId"
-          element={ <ShowVulnerabilityDetailsPage /> }
+          element={ <ShowVulnerabilityDetails /> }
         />
         <Route
           path="/BeSLighthouse/model_report/:modelName"
-          element={ <ShowModelDetailsPage /> }
+          element={ <ShowModelDetails /> }
         />
         <Route
           path="/BeSLighthouse/model_vulnerabilities_detailed/:modelName"
-          element={ <ModelVulnerabilitiesDetailedPage /> }
+          element={ <ModelVulnerabilitiesDetailed /> }
         />
         <Route
           path="/BeSLighthouse/model_fuzzing/:modelName"
-          element={ <FuzzingModelPage /> }
+          element={ <FuzzingModel /> }
         />
       </Routes>
     </ThemeProvider>

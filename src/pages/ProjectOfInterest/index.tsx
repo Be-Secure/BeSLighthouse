@@ -2,22 +2,21 @@ import * as React from "react";
 
 import MKBox from "../../components/MKBox";
 
-import DefaultNavbar from "../../examples/Navbars/DefaultNavbar";
-
 // Routes
 import routes from "../../routes";
 import Grid from "@mui/material/Grid";
-import Language from "../../examples/Charts/PieChart/Languages";
 import { useTheme } from "@mui/material/styles";
-import { projectOfInterestData } from "../../utils/poi_data";
-import TecStack from "../../examples/Charts/PieChart/TecStacks";
+import { projectOfInterestData } from "../../utils/ProjectOfInterestData";
 import Card from "@mui/material/Card";
-import ProjectDisplay from "../../layouts/pages/projectOfInterest/ProjectDisplay";
+import ProjectDisplay from "./ProjectDisplay";
 import MKTypography from "../../components/MKTypography";
 import ProjectCount from "./ProjectCount";
 
 import ProjectLogo from "../../assets/images/bug.png";
 import ScrollableTabsButtonVisible from "./FilterPoi";
+import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
+import Language from "../../components/Charts/PieChart/Languages";
+import TecStack from "../../components/Charts/PieChart/TecStacks";
 
 export const fetchOsspoiMaterData = async () => {
   const osspoi: any = JSON.parse(
@@ -104,7 +103,6 @@ function ProjectOfInterest() {
           fontSize="18px"
           width="100%"
           style={ { fontWeight: "lighter" } }
-          // fontWeight="lighter"
         >
           Empower your development teams with unparalleled insights into your
           open source software supply chain. BeSecure assesses their risk
