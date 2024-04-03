@@ -8,8 +8,8 @@
     "gitlab": {
         "namespace": "labAdmin",
         "branch": "/raw/main",
-        "apiUrl": "",
-        "token": ""
+        "apiUrl": "http://13.127.103.235/",
+        "token": "glft-wDrJdxZ3PXTde7k9Y92t"
     },
     "activeTool": "gitlab"
 }

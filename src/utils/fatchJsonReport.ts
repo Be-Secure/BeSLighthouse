@@ -1,27 +1,37 @@
-import https from "https";
+import http from "http";
 
 export async function fetchJsonReport(url: string): Promise<any> {
+  const parsedUrl = new URL(url);
+  const options = {
+    hostname: parsedUrl.hostname,
+    path: parsedUrl.pathname,
+    headers: {
+      'PRIVATE-TOKEN': 'glft-wDrJdxZ3PXTde7k9Y92t'
+    }
+  };
+
   return await new Promise((resolve, reject) => {
-    https
-      .get(url, (response: any) => {
-        let data = "";
+    http.get(options, (response: any) => {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      let data = "";
 
-        response.on("data", (chunk: any) => {
-          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-          data += chunk;
-        });
+      response.on("data", (chunk: any) => {
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+        data += chunk;
+      });
 
-        response.on("end", () => {
-          if (url.toLocaleLowerCase().endsWith(".pdf")) {
-            const regex = /404: Not Found/gm;
-            if (regex.test(data)) {
-              resolve(data);
-            }
-            resolve('{"pdfFile":true}');
+      response.on("end", () => {
+        if (url.toLocaleLowerCase().endsWith(".pdf")) {
+          const regex = /404: Not Found/gm;
+          if (regex.test(data)) {
+            resolve(data);
           }
-          resolve(data);
-        });
-      })
+          resolve('{"pdfFile":true}');
+        }
+        resolve(data);
+      });
+    })
       .on("error", (error: any) => {
         reject(error);
       });
@@ -38,7 +48,7 @@ export async function getEnvPathStatus(besName: string): Promise<boolean> {
 
     const bturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${camelCaseString}/0.0.1/besman-${camelCaseString}-BT-env.sh`;
     const rturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${camelCaseString}/0.0.1/besman-${camelCaseString}-RT-env.sh`;
-    https
+    http
       .get(bturl, (response: any) => {
         const code = response.statusCode;
         if (code === 200) {
@@ -46,7 +56,7 @@ export async function getEnvPathStatus(besName: string): Promise<boolean> {
         }
       })
       .on("error", (error: any) => {
-        https
+        http
           .get(rturl, (response: any) => {
             const code = response.statusCode;
             if (code === 200) {
