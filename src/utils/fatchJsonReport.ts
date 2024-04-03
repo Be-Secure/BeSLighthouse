@@ -1,19 +1,8 @@
 import http from "http";
 
 export async function fetchJsonReport(url: string): Promise<any> {
-  const parsedUrl = new URL(url);
-  const options = {
-    hostname: parsedUrl.hostname,
-    path: parsedUrl.pathname,
-    headers: {
-      'PRIVATE-TOKEN': 'glft-wDrJdxZ3PXTde7k9Y92t'
-    }
-  };
-
   return await new Promise((resolve, reject) => {
-    http.get(options, (response: any) => {
-      // eslint-disable-next-line no-debugger
-      debugger;
+    http.get(url, (response: any) => {
       let data = "";
 
       response.on("data", (chunk: any) => {
