@@ -8,9 +8,9 @@
     "gitlab": {
         "namespace": "labAdmin",
         "branch": "/raw/main",
-        "apiUrl": "http://35.154.217.15:5000",
-        "gitLabUrl": "http://3.110.230.105",
-        "token": "rrrrrr"
+        "apiUrl": "",
+        "gitLabUrl": "",
+        "token": ""
     },
-    "activeTool": "gitlab"
+    "activeTool": "github"
 }
