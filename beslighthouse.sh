@@ -8,9 +8,8 @@ start() {
         beslighthousedatafile="$HOME/.bliman/beslighthousedata"
     fi
 
-    if [ ! -z $beslighthousedata ] && [ -f $beslighthousedata ];then
-       lightdir=`cat $beslighthousedata | grep "BESLIGHTHOUSE_DIR:" | awk '{print $2}'`
-
+    if [ ! -z $beslighthousedatafile ] && [ -f $beslighthousedatafile ];then
+       lightdir=`cat $beslighthousedatafile | grep "BESLIGHTHOUSE_DIR:" | awk '{print $2}'`
        cd $lightdir
        npm start &
     fi
