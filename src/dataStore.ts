@@ -1,15 +1,15 @@
-const domainName = process.env.DOMAIN_NAME ?? 'https://raw.githubusercontent.com';
-const besNameSpace = process.env.BES_NAMESPACE ?? 'Be-Secure';
-const besBranch = process.env.BES_BRANCH ?? 'main';
+import jsonData from './apiDetailsConfig.json';
+
+const toolName = jsonData.activeTool === 'github' ? 'github' : 'gitlab';
 
 export const osspoiMaster =
-  `${domainName}/${besNameSpace}/besecure-assets-store/${besBranch}/projects/project-metadata.json`;
+  jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-assets-store/${jsonData[toolName].branch}/projects/project-metadata.json` : `${jsonData[toolName].apiUrl}/osspoi_master`;
 export const versionDetailsURL: string =
-  `${domainName}/${besNameSpace}/besecure-assets-store/${besBranch}/projects/project-version/`;
+  jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-assets-store/${jsonData[toolName].branch}/projects/project-version/` : `${jsonData[toolName].apiUrl}/version_details/`;
 export const assessmentDatastoreURL =
-  `${domainName}/${besNameSpace}/besecure-assessment-datastore/${besBranch}`;
+  jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-assessment-datastore/${jsonData[toolName].branch}` : `${jsonData[toolName].apiUrl}/assessment_datastore`;
 export const vulnerabilityOffInterest =
-  `${domainName}/${besNameSpace}/besecure-assets-store/${besBranch}/vulnerabilities/vulnerability-metadata.json`;
+  jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-assets-store/${jsonData[toolName].branch}/vulnerabilities/vulnerability-metadata.json` : `${jsonData[toolName].apiUrl}/vulnerability_of_interest`;
 export const modelOfInterestData =
-  `${domainName}/${besNameSpace}/besecure-assets-store/${besBranch}/models/model-metadata.json`;
-export const besecureMlAssessmentDataStore = `${domainName}/${besNameSpace}/besecure-ml-assessment-datastore/${besBranch}/models`;
+  jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-assets-store/${jsonData[toolName].branch}/models/model-metadata.json` : `${jsonData[toolName].apiUrl}/model_of_interest`;
+export const besecureMlAssessmentDataStore = jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-ml-assessment-datastore/${jsonData[toolName].branch}/models` : `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-ml-assessment-datastore/${jsonData[toolName].branch}/models`;
