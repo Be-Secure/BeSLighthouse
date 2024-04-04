@@ -1,0 +1,13 @@
+[Unit]
+Description=Beslighthouse
+After=network.target
+ 
+[Service]
+#WorkingDirectory=/opt/beslighthouse
+ExecStart=/usr/bin/beslighthouse.sh start
+ExecStop=/usr/bin/beslighthouse.sh stop
+#Restart=always
+#RestartSec=10
+ 
+[Install]
+WantedBy=multi-user.target
