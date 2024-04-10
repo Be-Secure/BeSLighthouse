@@ -25,11 +25,10 @@ jobs:
           export NODE_OPTIONS=--openssl-legacy-provider
 
       - name: install dependency
-        run: npm install --force
+        run: npm install
       
       - name: Run Build
         run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
           npm run build
       
       - name: Deploy to GitHub Pages
