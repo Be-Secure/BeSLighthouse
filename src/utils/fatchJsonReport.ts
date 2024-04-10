@@ -8,12 +8,12 @@ export async function fetchJsonReport(url: string): Promise<any> {
     if (url.toLowerCase().endsWith(".pdf")) {
       const regex = /404: Not Found/gm;
       if (regex.test(data)) {
-        return data;
+        return JSON.stringify(data);
       }
       return '{"pdfFile":true}';
     }
 
-    return data;
+    return JSON.stringify(data);
   } catch (error) {
     throw error;
   }
