@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/default-param-last */
 import rgba from "./rgba";
 import pxToRem from "./pxToRem";
 

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 import { modelOfInterestData } from "../../../dataStore";

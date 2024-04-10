@@ -1,8 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/prefer-optional-chain */
+
 import * as React from "react";
 import {
   Box,
@@ -109,7 +106,7 @@ const FetchLowScores = ({ data }: any) => {
   const lowscorers: any = [];
 
   data.checks.forEach((issue: { hasOwnProperty: (arg0: string) => any; score: number; }) => {
-    // eslint-disable-next-line no-prototype-builtins
+
     if (issue.hasOwnProperty("score")) {
       if (issue.score <= 5) lowscorers.push(issue);
     } else {
@@ -196,14 +193,11 @@ const FetchCS = ({ data }: any) => {
 };
 
 const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
-  const headings = ["Project License", "Undetermined Files", "Licenses Found"];
   let tableData: any[] = [];
-
-  const license_list: string[] = [];
-
   let non_lic_files: number = 0;
-
+  const license_list: string[] = [];
   let project_lcesnse: string = "Not Found";
+  const headings = ["Project License", "Undetermined Files", "Licenses Found"];
 
   uniq_lic.forEach((ul: any) => {
     if (ul.length !== 0) license_list.push(ul);
@@ -335,7 +329,6 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
     "Link",
     "Weakness",
   ];
-
   const tracked: string[] = [];
 
   data.forEach((dp: { name: string; }) => {
@@ -361,9 +354,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
         });
 
         const id = dataObject?.id;
-
         const projectName = dataObject?.name;
-
         const bes_technology_stack = dataObject?.bes_technology_stack;
 
         const license = dataObject?.license.spdx_id;
@@ -487,7 +478,6 @@ function GetAssessmentData(version: string, name: string, report: string, itemDa
 
   const pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
 
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const myObject = { pathname: pathName, state: jsonData } as {
     pathname: string;
   };
@@ -637,7 +627,6 @@ function GetAssessmentData(version: string, name: string, report: string, itemDa
 
       if (
         flag === 0 &&
-        // eslint-disable-next-line no-prototype-builtins
         jsonData[i].hasOwnProperty("LicenseConcluded") &&
         jsonData[i].LicenseConcluded.length !== 0
       ) {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import typography from "../../base/typography";
 import { colors } from "../../base/colors";
 

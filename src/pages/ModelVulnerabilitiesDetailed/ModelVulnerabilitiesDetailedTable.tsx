@@ -45,7 +45,6 @@ export default function ModelVulnerabilitiesDetailedTable() {
   let { modelName } = useParams<{ modelName: any }>();
   modelName = modelName.slice(1);
   React.useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const link = `${besecureMlAssessmentDataStore}/${modelName}/sast/${modelName}-sast-detailed-report.json`;
     fetchJsonData(link, setreport);
     // eslint-disable-next-line react-hooks/exhaustive-deps

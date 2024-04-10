@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import borders from "../../base/borders";
 import { colors } from "../../base/colors";
 

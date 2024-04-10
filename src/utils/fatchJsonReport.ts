@@ -1,62 +1,47 @@
-import http from "http";
+import axios from 'axios';
 
 export async function fetchJsonReport(url: string): Promise<any> {
-  return await new Promise((resolve, reject) => {
-    http.get(url, (response: any) => {
-      let data = "";
+  try {
+    const response = await axios.get(url);
+    let data = response.data;
 
-      response.on("data", (chunk: any) => {
-        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-        data += chunk;
-      });
+    if (url.toLowerCase().endsWith(".pdf")) {
+      const regex = /404: Not Found/gm;
+      if (regex.test(data)) {
+        return data;
+      }
+      return '{"pdfFile":true}';
+    }
 
-      response.on("end", () => {
-        if (url.toLocaleLowerCase().endsWith(".pdf")) {
-          const regex = /404: Not Found/gm;
-          if (regex.test(data)) {
-            resolve(data);
-          }
-          resolve('{"pdfFile":true}');
-        }
-        resolve(data);
-      });
-    })
-      .on("error", (error: any) => {
-        reject(error);
-      });
-  });
+    return data;
+  } catch (error) {
+    throw error;
+  }
 }
 
-export async function getEnvPathStatus(besName: string): Promise<boolean> {
-  return await new Promise((resolve, reject) => {
+export async function getEnvPathStatus(besName: string): Promise<any> {
+  const name = besName.split('-');
+  const camelCaseString = name.map((part, index) => {
+    return index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1);
+  }).join('');
 
-    const name = besName.split('-');
-    const camelCaseString = name.map((part, index) => {
-      return index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1);
-    }).join('');
+  const bturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${camelCaseString}/0.0.1/besman-${camelCaseString}-BT-env.sh`;
+  const rturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${camelCaseString}/0.0.1/besman-${camelCaseString}-RT-env.sh`;
 
-    const bturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${camelCaseString}/0.0.1/besman-${camelCaseString}-BT-env.sh`;
-    const rturl = `https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/master/${camelCaseString}/0.0.1/besman-${camelCaseString}-RT-env.sh`;
-    http
-      .get(bturl, (response: any) => {
-        const code = response.statusCode;
-        if (code === 200) {
-          resolve(true);
-        }
-      })
-      .on("error", (error: any) => {
-        http
-          .get(rturl, (response: any) => {
-            const code = response.statusCode;
-            if (code === 200) {
-              resolve(true);
-            }
-          })
-          .on("error", () => {
-            // eslint-disable-next-line prefer-promise-reject-errors
-            reject(false);
-          });
-        console.log("Error will getting the httpRequest", error);
-      });
-  });
+  try {
+    const btResponse = await axios.get(bturl);
+    if (btResponse.status === 200) {
+      return true;
+    }
+  } catch (error) {
+    try {
+      const rtResponse = await axios.get(rturl);
+      if (rtResponse.status === 200) {
+        return true;
+      }
+    } catch (err) {
+      console.log("Error while getting the httpRequest", err);
+      throw false;
+    }
+  }
 }

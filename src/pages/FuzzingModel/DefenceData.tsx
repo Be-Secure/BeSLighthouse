@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-
 import React, { useState } from "react";
 
 import { Card, CircularProgress, Grid } from "@mui/material";

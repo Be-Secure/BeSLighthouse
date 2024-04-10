@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import { styled } from "@mui/material/styles";
 
 const CHART_HEIGHT = 312;

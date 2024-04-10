@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import { colors } from "./colors";
 
 const { info, dark } = colors;
