@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false && react-scripts build && cp build/index.html build/404.html",
+    "build": "react-scripts build && cp build/index.html build/404.html",
     "predeploy": "npm run build",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
