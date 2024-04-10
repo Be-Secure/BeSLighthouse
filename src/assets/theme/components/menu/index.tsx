@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import boxShadows from "../../base/boxShadows";
 import typography from "../../base/typography";
 import { colors } from "../../base/colors";

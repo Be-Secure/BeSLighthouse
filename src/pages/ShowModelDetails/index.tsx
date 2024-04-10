@@ -15,7 +15,7 @@ function ShowModelDetails() {
   React.useEffect(() => {
     verifyLink(modelOfInterestData, setData);
   }, []);
-  const model = data.filter((data: any) => data.name === modelName.slice(1));
+  const model = data.filter((item: any) => item.name === modelName.slice(1));
   return (
     <>
       <DefaultNavbar routes={ routes } sticky />

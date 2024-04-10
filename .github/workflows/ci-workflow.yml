@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, 'windows-latest']
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,7 +35,7 @@ jobs:
 
       # Run install dependencies
       - name: Install dependencies
-        run: npm i --force
+        run: npm i
 
       # Run install dependencies
       - name: Run Lint

@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable no-prototype-builtins */
-
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/ProjectOfInterestData";
 import { MenuItem, Select, Tooltip } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import AssessmentReport from "./AssessmentReport";
@@ -46,22 +43,22 @@ export const getResponse = async (name: string) => {
   return res;
 };
 
-const useStyles: any = makeStyles(() => ({
-  select: {
-    minWidth: "calc(3rem + 0.5vw)",
-    "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
-    {
-      padding: "4px"
-    },
-    "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-    {
-      padding: "4px"
-    },
-    "& .css-qiwgdb.css-qiwgdb.css-qiwgdb": {
-      padding: "4px"
-    }
-  }
-}));
+// const useStyles: any = makeStyles(() => ({
+//   select: {
+//     minWidth: "calc(3rem + 0.5vw)",
+//     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
+//     {
+//       padding: "4px"
+//     },
+//     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+//     {
+//       padding: "4px"
+//     },
+//     "& .css-qiwgdb.css-qiwgdb.css-qiwgdb": {
+//       padding: "4px"
+//     }
+//   }
+// }));
 
 // Style for Modal
 const envPlaybookModalStyle = {
@@ -171,7 +168,7 @@ function getProjectTags(value: any) {
 }
 
 function BesVersionHistory() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { besId, besName }: any = useParams();
   const [data, setData] = React.useState([]);
 
@@ -276,7 +273,7 @@ function BesVersionHistory() {
                       </MKTypography>
                       <Select
                         key={ `TOPSELECT1${index}` }
-                        className={ classes.select }
+                        // className={ classes.select }
                         value={ selectedOption }
                         onChange={ handleOptionChange }
                         style={ {

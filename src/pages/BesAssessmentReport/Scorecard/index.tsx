@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { Card, CardContent, Grid } from "@mui/material";
 import * as React from "react";
 import MKTypography from "../../../components/MKTypography";

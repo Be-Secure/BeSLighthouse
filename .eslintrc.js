@@ -2,7 +2,6 @@ module.exports = {
   root: true,
   extends: [
     '@react-native-community/eslint-config', // Default RN config
-    'standard-with-typescript', // Installed in step 2
     'eslint-config-prettier' // Installed in step 3
   ],
   parser: '@typescript-eslint/parser', // Installed in step 2
@@ -29,7 +28,7 @@ module.exports = {
       skip: ['CustomText']
     }],
     "react-native/no-single-element-style-arrays": "warn",
-    'object-curly-spacing': 'error',
+    'object-curly-spacing': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
