@@ -11,7 +11,7 @@ import {
 } from "../../../utils/assessmentReport";
 import MKTypography from "../../../components/MKTypography";
 import VulHistory from "../../../components/Charts/BarChart/VulHistory";
-import Language from "../../../components/Charts/PieChart/Languages";
+import PieChart from "../../../components/Charts/PieChart";
 
 export const getLinkData = async (link: any, setRiskData: any) => {
   try {
@@ -123,7 +123,7 @@ const FetchData = ({
     if (severityData.length !== 0) {
       return (
 
-        <Language
+        <PieChart
           title={ title }
           chartData={ severityData }
           chartColors={ [

@@ -214,6 +214,7 @@ function FuzzingModel() {
           </Grid>
         </Grid>
       </MKBox>
+
       <Grid container pl={ 2 } style={ { placeContent: "space-between" } }>
         <LeftFuzzing
           evasion={ evasion }

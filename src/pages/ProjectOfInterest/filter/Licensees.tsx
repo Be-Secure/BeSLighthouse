@@ -3,7 +3,8 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Select, { type SelectChangeEvent } from "@mui/material/Select";
-import { type Theme, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
+import { getStyles } from "../../../utils/styles";
 
 const names = [
   "apache-2.0",
@@ -13,15 +14,6 @@ const names = [
   "lgpl-2.1",
   "mit"
 ];
-
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-  return {
-    fontWeight:
-      !personName.includes(name)
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium
-  };
-}
 
 export function Licensees({ filter, setFilter }: any) {
   const theme = useTheme();

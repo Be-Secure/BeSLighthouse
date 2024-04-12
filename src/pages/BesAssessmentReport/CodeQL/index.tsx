@@ -10,10 +10,7 @@ import {
   TableRow,
   TableSortLabel
 } from "@mui/material";
-import {
-  applySortFilter,
-  getComparator
-} from "../../ProjectOfInterest/ProjectDisplay";
+import { applySortFilter, getComparator } from "../../../utils/sortFilter";
 
 const TABLE_HEAD = [
   { id: "descriiption", label: "Description", alignRight: false },

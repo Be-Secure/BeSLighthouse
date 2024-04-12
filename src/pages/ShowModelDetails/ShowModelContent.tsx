@@ -1,4 +1,4 @@
-import * as React from "react"; 
+import * as React from "react";
 import Card from "@mui/material/Card";
 import MKTypography from "../../components/MKTypography";
 import MKBox from "../../components/MKBox";
@@ -61,8 +61,8 @@ function tableRowForModel(keyName: any, value: any, index: number) {
 }
 
 function ShowModelContent({ model }: any) {
-  const selectedModel = model.length > 0 ? model[0]: {};
-   
+  const selectedModel = model.length > 0 ? model[0] : {};
+
   const modelObject = Object.keys(selectedModel);
   let count = 0;
   return (

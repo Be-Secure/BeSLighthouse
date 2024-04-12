@@ -362,7 +362,6 @@ function BesVersionHistory() {
                         { item.id }
                       </MKTypography>
                     </Grid>
-
                     { /* For Open Source Assurance Provider */ }
                     <Grid
                       item
@@ -449,10 +448,9 @@ function BesVersionHistory() {
                       <ModalForEnvsAndPlaybook />
 
                     </Grid>
-
                   </Grid>
-
                 </Card>
+
                 { /* For project description, languages and tags */ }
                 <Grid key={ `TOPGRID14${index}` } container pt={ 2 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between", } }>
 
@@ -464,6 +462,7 @@ function BesVersionHistory() {
                     masterData={ data }
                   />
                 </Grid>
+
                 <Grid container spacing={ 1 } pt={ 2 }
                   style={ {
                     placeContent: "space-between",

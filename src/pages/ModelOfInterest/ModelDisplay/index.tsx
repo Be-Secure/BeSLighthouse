@@ -1,27 +1,9 @@
-import { filter } from "lodash";
 import React, { useState } from "react";
 import { modelOfInterestData } from "../../../dataStore";
-import { getComparator } from "../../ProjectOfInterest/ProjectDisplay";
 import { fetchJsonData } from "../../BesVersionHistory/AssessmentReport";
 import ThreeWayToggleButton from "../../../components/Button/ThreeWayToggle";
 import { modelType, filterCheck, riskAnalysis } from "../filter/references";
-
-function applySortFilter(array: any, comparator: any, query: any) {
-  const stabilizedThis = array.map((el: any, index: any) => [el, index]);
-  stabilizedThis.sort((a: any, b: any) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    const search = query.trim();
-    return filter(array, (_user: any) => {
-      if (_user.name.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-        return true;
-    });
-  }
-  return stabilizedThis.map((el: any) => el[0]);
-}
+import { applySortFilter, getComparator } from "../../../utils/sortFilter";
 
 function filterDataBasedOnUserSelecrtionOnModelType(
   modelTypeName: string,

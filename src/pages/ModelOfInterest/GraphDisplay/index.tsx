@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
+import { modelOfInterestData } from "../../../dataStore";
 
 // Define the Node interface
 interface Node extends d3.SimulationNodeDatum {
@@ -17,11 +18,9 @@ interface Link extends d3.SimulationLinkDatum<Node> {
 
 const GraphDisplay = () => {
   useEffect(() => {
-    const githubRawUrl =
-      "https://raw.githubusercontent.com/Be-Secure/besecure-assets-store/main/models/model-metadata.json";
 
     // Fetch data from GitHub raw URL and save it into a variable as JSON
-    fetch(githubRawUrl)
+    fetch(modelOfInterestData)
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`Failed to fetch data. Status: ${response.status}`);

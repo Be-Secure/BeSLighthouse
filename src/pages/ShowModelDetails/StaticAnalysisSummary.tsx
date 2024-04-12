@@ -12,7 +12,7 @@ export const dividerDiv = (index: number) => {
 const card = ["Critical", "High", "Medium", "Low"];
 
 export default function StaticAnalysisSummary({ data, model }: any): any {
-  const selectedMenu: {name: string} = model.length > 0 ? model[0]: {};
+  const selectedMenu: { name: string } = model.length > 0 ? model[0] : {};
   return (
     <>
       <Grid container alignItems="center" justifyContent="space-between">
@@ -94,7 +94,7 @@ export default function StaticAnalysisSummary({ data, model }: any): any {
           }) }
         </Grid>
       ) }
-      <MKTypography 
+      <MKTypography
         pt={ 1 }
         style={ { float: "right", fontSize: "12px" } }
       >

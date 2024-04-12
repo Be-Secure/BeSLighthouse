@@ -6,7 +6,6 @@ import MKBox from "../../components/MKBox";
 import routes from "../../routes";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
-import { projectOfInterestData } from "../../utils/ProjectOfInterestData";
 import Card from "@mui/material/Card";
 import ProjectDisplay from "./ProjectDisplay";
 import MKTypography from "../../components/MKTypography";
@@ -15,61 +14,8 @@ import ProjectCount from "./ProjectCount";
 import ProjectLogo from "../../assets/images/bug.png";
 import ScrollableTabsButtonVisible from "./FilterPoi";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
-import Language from "../../components/Charts/PieChart/Languages";
-import TecStack from "../../components/Charts/PieChart/TecStacks";
-
-export const fetchOsspoiMaterData = async () => {
-  const osspoi: any = JSON.parse(
-    await projectOfInterestData.getJsonReportOsspoiMaster()
-  );
-  projectOfInterestData.updateDataPoi("Project_of_interest", osspoi.items);
-  return osspoi;
-};
-
-async function countLanguages(
-  setData: React.Dispatch<React.SetStateAction<never[]>>,
-  setTecStack: React.Dispatch<React.SetStateAction<never[]>>,
-  setProject: React.Dispatch<React.SetStateAction<never[]>>,
-  cache: any
-) {
-  const supportedLanguages: any = {
-    python: true,
-    java: true,
-    javascript: true,
-    c: true,
-    "c++": true,
-    php: true
-  };
-  const tecStackForChart: any = [];
-  const osspoi = await fetchOsspoiMaterData();
-  const languageCount: any = {};
-  const besTecStack: any = {};
-  for (let i = 0; i < osspoi.items.length; i++) {
-    if (!besTecStack[osspoi.items[i].bes_technology_stack]) {
-      besTecStack[osspoi.items[i].bes_technology_stack] = 0;
-    }
-    besTecStack[osspoi.items[i].bes_technology_stack]++;
-    for (const language of Object.keys(osspoi.items[i].language)) {
-      const lan: string = language.toLocaleLowerCase().trim();
-      if (supportedLanguages[lan]) {
-        if (!languageCount[lan]) {
-          languageCount[lan] = 1;
-          continue;
-        }
-        languageCount[lan]++;
-      }
-    }
-  }
-  for (const tecStack of Object.keys(besTecStack)) {
-    tecStackForChart.push({ label: tecStack, value: besTecStack[tecStack] });
-  }
-  for (const language of Object.keys(languageCount)) {
-    cache.push({ label: language, value: languageCount[language] });
-  }
-  setProject(osspoi);
-  setTecStack(tecStackForChart);
-  setData(cache);
-}
+import { countLanguages } from "./countLanguages";
+import PieChart from "../../components/Charts/PieChart";
 
 function ProjectOfInterest() {
   const [data, setData] = React.useState([]);
@@ -130,7 +76,7 @@ function ProjectOfInterest() {
             />
           </Grid>
           <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
-            <Language
+            <PieChart
               title="Languages"
               chartData={ data }
               chartColors={ [
@@ -144,7 +90,7 @@ function ProjectOfInterest() {
             />
           </Grid>
           <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
-            <TecStack
+            <PieChart
               title="Be-Secure Technology Stacks"
               chartColors={ [
                 theme.palette.primary.main,

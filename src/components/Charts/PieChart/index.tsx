@@ -6,12 +6,12 @@ import Card from "@mui/material/Card";
 
 import ReactApexChart from "react-apexcharts";
 import { useTheme } from "@mui/material/styles";
-import useChart from "../useChart";
-import MKBox from "../../../../components/MKBox";
-import { fNumber } from "../../../../utils/formatNumber";
+import useChart from "./useChart";
+import MKBox from "../../MKBox";
+import { fNumber } from "../../../utils/formatNumber";
 import { Typography } from "@mui/material";
 
-function Language({ title, chartColors, chartData, height }: any) {
+function PieChart({ title, chartColors, chartData, height }: any) {
   const theme = useTheme();
 
   const chartLabels = chartData.map((i: { label: any }) => i.label);
@@ -64,4 +64,4 @@ function Language({ title, chartColors, chartData, height }: any) {
   );
 }
 
-export default Language;
+export default PieChart;
