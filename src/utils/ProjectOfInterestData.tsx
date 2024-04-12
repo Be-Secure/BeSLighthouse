@@ -29,6 +29,14 @@ export class ProjectOfInterestData {
       versionDetailsURL + besId + "-" + besName + "-Versiondetails.json"
     );
   }
+
+  async fetchOsspoiMaterData() {
+    const osspoi: any = JSON.parse(
+      await projectOfInterestData.getJsonReportOsspoiMaster()
+    );
+    projectOfInterestData.updateDataPoi("Project_of_interest", osspoi.items);
+    return osspoi;
+  };
 }
 
 export const projectOfInterestData = new ProjectOfInterestData();

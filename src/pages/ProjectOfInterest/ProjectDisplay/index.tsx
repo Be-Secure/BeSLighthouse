@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import { filter } from "lodash";
 import { projectOfInterestData } from "../../../utils/ProjectOfInterestData";
 import SearchPoiList from "../PoiTable/SearchPoiList";
 import PoiListHead from "../PoiTable/PoiListHead";
@@ -27,6 +26,7 @@ import {
   filterCheck,
   tecStack
 } from "../filter/references";
+import { applySortFilter, getComparator } from "../../../utils/sortFilter";
 
 const TABLE_HEAD = [
   { id: "id", label: "BeS Id", alignRight: false },
@@ -35,43 +35,6 @@ const TABLE_HEAD = [
   { id: "BeSTechStack", label: "BeS Tech Stack", alignRight: false },
   { id: "License", label: "License", alignRight: false }
 ];
-
-export function applySortFilter(array: any, comparator: any, query: any) {
-  const stabilizedThis = array.map((el: any, index: any) => [el, index]);
-  stabilizedThis.sort((a: any, b: any) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    return filter(
-      array,
-      (_user: any) =>
-        _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
-    );
-  }
-  return stabilizedThis.map((el: any) => el[0]);
-}
-
-function descendingComparator(
-  a: Record<string, number>,
-  b: Record<string, number>,
-  orderBy: string
-) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-export function getComparator(orderBy: string, field: string) {
-  return orderBy === "desc"
-    ? (a: any, b: any) => descendingComparator(a, b, field)
-    : (a: any, b: any) => -descendingComparator(a, b, field);
-}
 
 function filterDataBasedOnUserSelecrtionOnTag(
   filterData: any[],

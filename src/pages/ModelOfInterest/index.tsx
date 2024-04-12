@@ -14,7 +14,7 @@ import theme from "../../assets/theme";
 import { fetchJsonReport } from "../../utils/fatchJsonReport";
 import ScrollableTabsButtonVisibleML from "./FilterMoi";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
-import Language from "../../components/Charts/PieChart/Languages";
+import PieChart from "../../components/Charts/PieChart";
 
 const fetchModelData = async () => {
   const moidata: any = JSON.parse(await fetchJsonReport(modelOfInterestData));
@@ -127,7 +127,7 @@ function ModelOfInterest() {
             />
           </Grid>
           <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
-            <Language
+            <PieChart
               title="Model Type"
               chartData={ modelType }
               chartColors={ [
@@ -141,7 +141,7 @@ function ModelOfInterest() {
             />
           </Grid>
           <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 } xl={ 4 }>
-            <Language
+            <PieChart
               title="Risk Analysis"
               chartData={ riskAnalysis }
               chartColors={ [
