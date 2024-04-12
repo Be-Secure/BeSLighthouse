@@ -50,7 +50,7 @@ function defenceAvailable(attackMap: any, name: any) {
   }
 }
 
-function attackGraph(selectedMenu: {name: string}, attackMap: any) {
+function attackGraph(selectedMenu: { name: string }, attackMap: any) {
   if (
     attackMap.Evasion.reportAvability ||
     attackMap.Extraction.reportAvability ||
@@ -93,7 +93,7 @@ function attackGraph(selectedMenu: {name: string}, attackMap: any) {
 
 const AdversarialAttackSummary = ({ model }: any) => {
   const attackName = ["Evasion", "Extraction", "Inference", "Data Poisoning"];
-  const selectedModel = model.length > 0 ? model[0]: {};
+  const selectedModel = model.length > 0 ? model[0] : {};
   const selectedMenu = selectedModel;
   const { modelName }: any = useParams();
   const name: string = modelName.slice(1);
@@ -124,7 +124,7 @@ const AdversarialAttackSummary = ({ model }: any) => {
     verifyLink(defenceForInference, inferenceDefenceData);
     verifyLink(dataPoisoningLink, dataPoisoningData);
     verifyLink(defenceForDataPoisoning, dataPoisoningDefenceData);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const attackMap: any = {
     Evasion: {
@@ -211,8 +211,8 @@ const AdversarialAttackSummary = ({ model }: any) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography color="black" 
-        pt={ 2 } 
+      <Typography color="black"
+        pt={ 2 }
         pb={ 1 }
         style={ { fontSize: "12px", float: "right" } }>
         Powered by <a

@@ -30,7 +30,7 @@ const TABLE_HEAD = [
 
 export default function DisplayModelReport({ data }: any): any {
   const location = useLocation();
-  const selectedMenu: {name: string} = location.state.selectedMenu;
+  const selectedMenu: { name: string } = location.state.selectedMenu;
   return (
     <>
       <Grid container direction="column">
@@ -50,7 +50,7 @@ export default function DisplayModelReport({ data }: any): any {
                       <TableCell component="th" scope="row" padding="none">
                         { data[model[0]] > 0 ? (
                           <a
-                             
+
                             style={ { color: "#587f2f", cursor: "pointer" } }
                             href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >
@@ -63,7 +63,7 @@ export default function DisplayModelReport({ data }: any): any {
                       <TableCell align="left">
                         { data[model[1]] > 0 ? (
                           <a
-                             
+
                             style={ { color: "#587f2f", cursor: "pointer" } }
                             href={ `/BeSLighthouse/model_vulnerabilities_detailed/:${selectedMenu.name}` }
                           >

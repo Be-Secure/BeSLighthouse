@@ -3,7 +3,8 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Select, { type SelectChangeEvent } from "@mui/material/Select";
-import { type Theme, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
+import { getStyles } from "../../../utils/styles";
 
 const names = [
   "Client Application (TD-C-CA)",
@@ -17,15 +18,6 @@ const names = [
   "Container (TD-C-C)",
   "Wallet App (TD-C-Wlt)"
 ];
-
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-  return {
-    fontWeight:
-      !personName.includes(name)
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium
-  };
-}
 
 export function TechnologyDomainComposition({ filter, setFilter }: any) {
   const theme = useTheme();

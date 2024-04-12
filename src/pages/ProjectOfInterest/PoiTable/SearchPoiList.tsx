@@ -1,4 +1,4 @@
- 
+
 import * as React from "react";
 
 import PropTypes from "prop-types";
@@ -7,8 +7,6 @@ import { styled, alpha } from "@mui/material/styles";
 import { Toolbar, OutlinedInput, InputAdornment } from "@mui/material";
 import Iconify from "../../Iconify";
 // component
-
-// ----------------------------------------------------------------------
 
 const StyledRoot = styled(Toolbar)(({ theme }) => ({
   height: 50,

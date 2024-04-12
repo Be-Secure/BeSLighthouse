@@ -22,7 +22,6 @@ export default function DisplayRepository({ data }: any): any {
                 <Typography variant="subtitle1" color="inherit">
                   { value === "Repository URL" ? (
                     <a
-                       
                       style={ { color: "#587f2f", cursor: "pointer" } }
                       href={ data[value] }
                       target="_blank"

@@ -31,7 +31,7 @@ const TABLE_HEAD = [
 
 export default function DisplayFileReport({ data }: any) {
   const location = useLocation();
-  const selectedMenu: {name: string} = location.state.selectedMenu;
+  const selectedMenu: { name: string } = location.state.selectedMenu;
   return (
     <>
       { dividerDiv(1) }

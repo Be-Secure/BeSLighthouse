@@ -25,7 +25,7 @@ function ShowModelDetails() {
             <ShowModelContent model={ model } />
           </Grid>
           <Grid item xs={ 12 } md={ 6 } lg={ 5 }>
-            <AssessmentSummary selectedName={ modelName.slice(1) } selectedModel={ model }/>
+            <AssessmentSummary selectedName={ modelName.slice(1) } selectedModel={ model } />
           </Grid>
         </Grid>
       </MKBox>

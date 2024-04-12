@@ -30,9 +30,9 @@ export const verifyLink = async (link: any, setLinkStatus: any) => {
 function displayModelReport(linkStatus: any, selectedModel: any) {
   return (
     <>
-      <AdversarialAttackSummary model={ selectedModel }/>
+      <AdversarialAttackSummary model={ selectedModel } />
       { dividerDiv(1) }
-      <StaticAnalysisSummary data={ linkStatus } model={ selectedModel }/>
+      <StaticAnalysisSummary data={ linkStatus } model={ selectedModel } />
     </>
   );
 }
@@ -58,13 +58,13 @@ function assissmentReport(linkStatus: any, selectedModel: any) {
   );
 }
 
-const AssessmentSummary: React.FC<{selectedName: string, selectedModel: any}> = ({ selectedName, selectedModel }) => {
+const AssessmentSummary: React.FC<{ selectedName: string, selectedModel: any }> = ({ selectedName, selectedModel }) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
 
   React.useEffect(() => {
     const link = `${besecureMlAssessmentDataStore}/${selectedName}/sast/${selectedName}-sast-summary-report.json`;
     verifyLink(link, setLinkStatus);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Card sx={ { height: "100%" } }>
