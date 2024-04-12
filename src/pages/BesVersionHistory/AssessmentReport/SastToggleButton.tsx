@@ -49,7 +49,6 @@ function switchSast(
       </>
     );
   case "sonarqube":
-    // eslint-disable-next-line no-case-declarations
     const issues: any = Object.values(sonarqubeData)[5];
     return (
       <>
