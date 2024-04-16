@@ -2,7 +2,7 @@ import { fetchOsspoiMaterData } from "../ShowVulnerabilityDetails";
 
 export async function countLanguages(
   setData: React.Dispatch<React.SetStateAction<never[]>>,
-  setTecStack: React.Dispatch<React.SetStateAction<never[]>>,
+  setTecStack: React.Dispatch<React.SetStateAction<any[]>>,
   setProject: React.Dispatch<React.SetStateAction<never[]>>,
   cache: any
 ) {
