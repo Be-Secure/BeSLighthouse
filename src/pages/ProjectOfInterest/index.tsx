@@ -18,8 +18,8 @@ import { countLanguages } from "./countLanguages";
 import PieChart from "../../components/Charts/PieChart";
 
 function ProjectOfInterest() {
-  const [data, setData] = React.useState([]);
-  const [tecStack, setTecStack] = React.useState([]);
+  const [data, setData]: any = React.useState([]);
+  const [tecStack, setTecStack]: any = React.useState([]);
   const [project, setProject]: any = React.useState([]);
   React.useEffect(() => {
     countLanguages(setData, setTecStack, setProject, []);

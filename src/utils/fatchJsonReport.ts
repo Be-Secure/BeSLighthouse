@@ -15,6 +15,11 @@ export async function fetchJsonReport(url: string): Promise<any> {
 
     return JSON.stringify(data);
   } catch (error) {
+    if (url.toLowerCase().endsWith("project-metadata.json") || url.toLowerCase().endsWith("osspoi_master")) {
+      return JSON.stringify({ items: [] });
+    } else if (url.toLowerCase().endsWith("vulnerability-metadata.json") || url.toLowerCase().endsWith("vulnerability_of_interest") || url.toLowerCase().endsWith("model-metadata.json") || url.toLowerCase().endsWith("model_of_interest")) {
+      return JSON.stringify([]);
+    }
     throw error;
   }
 }
