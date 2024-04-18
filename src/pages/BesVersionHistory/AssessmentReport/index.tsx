@@ -696,7 +696,7 @@ function printText(item: string) {
   } else if (item === "License Compliance") {
     return "unique licenses found";
   } else if (item === "ScoreCard" || item === "Criticality Score") {
-    return "on OpenSSF " + item;
+    return "OpenSSF " + item;
   } else {
     return "on " + item;
   }
@@ -1086,7 +1086,7 @@ function AssessmentReport({ name, version, itemData, masterData }: any) {
   return (
     <>
       { reports.map((item, index) => (
-        <Grid item xs={ 6 } md={ 2 } lg={ 2 } xl={ 2 }>
+        <Grid item xs={ 6 } md={ 4 } lg={ 4 } xl={ 2 }>
           <ReportModal
             key={ item }
             version={ version }
