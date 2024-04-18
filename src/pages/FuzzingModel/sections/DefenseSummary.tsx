@@ -99,49 +99,47 @@ function DefenseSummary() {
             >
               Defense Model Capability
             </MKTypography>
-            <Box sx={ { width: "100%" } } >
-              <Box sx={ { borderBottom: 1, borderColor: "divider" } }>
-                <Tabs
-                  value={ value }
-                  onChange={ handleChange }
-                  aria-label="basic tabs example"
-                  style={ { backgroundColor: "#90ee90" } }
-                >
-                  <Tab
-                    sx={ { fontSize: "12px" } }
-                    label="Evasion"
-                    { ...a11yProps(0) }
-                  />
-                  <Tab
-                    sx={ { fontSize: "12px" } }
-                    label="Inference"
-                    { ...a11yProps(1) }
-                  />
-                  <Tab
-                    sx={ { fontSize: "12px" } }
-                    label="Extraction"
-                    { ...a11yProps(2) }
-                  />
-                  <Tab
-                    sx={ { fontSize: "12px" } }
-                    label="Data Poisoning"
-                    { ...a11yProps(3) }
-                  />
-                </Tabs>
-              </Box>
-              <CustomTabPanel value={ value } index={ 0 }>
-                <DefenceData report={ evasion } reportName="evasion" />
-              </CustomTabPanel>
-              <CustomTabPanel value={ value } index={ 1 }>
-                <DefenceData report={ inference } reportName="inference" />
-              </CustomTabPanel>
-              <CustomTabPanel value={ value } index={ 2 }>
-                <DefenceData report={ extraction } reportName="extraction" />
-              </CustomTabPanel>
-              <CustomTabPanel value={ value } index={ 3 }>
-                <DefenceData report={ dataPoisoning } reportName="dataPoisoning" />
-              </CustomTabPanel>
+            <Box>
+              <Tabs
+                value={ value }
+                onChange={ handleChange }
+                aria-label="basic tabs example"
+                style={ { backgroundColor: "#90ee90" } }
+              >
+                <Tab
+                  sx={ { fontSize: "12px", minWidth: '15px' } }
+                  label="Evasion"
+                  { ...a11yProps(0) }
+                />
+                <Tab
+                  sx={ { fontSize: "12px", minWidth: '15px' } }
+                  label="Inference"
+                  { ...a11yProps(1) }
+                />
+                <Tab
+                  sx={ { fontSize: "12px", minWidth: '15px' } }
+                  label="Extraction"
+                  { ...a11yProps(2) }
+                />
+                <Tab
+                  sx={ { fontSize: "12px", minWidth: '15px' } }
+                  label="Data Poisoning"
+                  { ...a11yProps(3) }
+                />
+              </Tabs>
             </Box>
+            <CustomTabPanel value={ value } index={ 0 }>
+              <DefenceData report={ evasion } reportName="evasion" />
+            </CustomTabPanel>
+            <CustomTabPanel value={ value } index={ 1 }>
+              <DefenceData report={ inference } reportName="inference" />
+            </CustomTabPanel>
+            <CustomTabPanel value={ value } index={ 2 }>
+              <DefenceData report={ extraction } reportName="extraction" />
+            </CustomTabPanel>
+            <CustomTabPanel value={ value } index={ 3 }>
+              <DefenceData report={ dataPoisoning } reportName="dataPoisoning" />
+            </CustomTabPanel>
           </MKBox>
         </Card>
       </Grid>
