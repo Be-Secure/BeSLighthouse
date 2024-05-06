@@ -1,30 +1,21 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.dc5ac3c2.chunk.js",
-    "main.js.map": "/BeSLighthouse/static/js/main.dc5ac3c2.chunk.js.map",
-    "runtime-main.js": "/BeSLighthouse/static/js/runtime-main.e7c2a82e.js",
-    "runtime-main.js.map": "/BeSLighthouse/static/js/runtime-main.e7c2a82e.js.map",
-    "static/js/2.53caefbf.chunk.js": "/BeSLighthouse/static/js/2.53caefbf.chunk.js",
-    "static/js/2.53caefbf.chunk.js.map": "/BeSLighthouse/static/js/2.53caefbf.chunk.js.map",
+    "main.js": "/BeSLighthouse/static/js/main.738c3119.js",
+    "static/media/neuralimage.png": "/BeSLighthouse/static/media/neuralimage.0a6ca9fadd705732f3ac.png",
+    "static/media/AIShield-watchtower-final-logo.png": "/BeSLighthouse/static/media/AIShield-watchtower-final-logo.6e52458814e122cfd516.png",
+    "static/media/bug.png": "/BeSLighthouse/static/media/bug.55ee0482380aca3704a1.png",
+    "static/media/data-flow.png": "/BeSLighthouse/static/media/data-flow.57344c263ecb081abd0f.png",
+    "static/media/speedometer.png": "/BeSLighthouse/static/media/speedometer.1603ca6ef9ceeeb06a8c.png",
+    "static/media/network.png": "/BeSLighthouse/static/media/network.d43be01716cf6678725f.png",
+    "static/media/security-system.png": "/BeSLighthouse/static/media/security-system.19bd118af849ed602bd2.png",
+    "static/media/aishield_logo.png": "/BeSLighthouse/static/media/aishield_logo.8eb0c8ddb9ae3a8d2cac.png",
+    "static/media/verified.png": "/BeSLighthouse/static/media/verified.c9a0373e69a5f4eb9c05.png",
+    "static/media/arc.png": "/BeSLighthouse/static/media/arc.136fe717a39d0dff5047.png",
+    "static/media/certificate.png": "/BeSLighthouse/static/media/certificate.d97bbadc67cdb4b5540e.png",
     "index.html": "/BeSLighthouse/index.html",
-    "precache-manifest.2fa05d82c1bcf9d20b8aa1b0ee145c08.js": "/BeSLighthouse/precache-manifest.2fa05d82c1bcf9d20b8aa1b0ee145c08.js",
-    "service-worker.js": "/BeSLighthouse/service-worker.js",
-    "static/js/2.53caefbf.chunk.js.LICENSE.txt": "/BeSLighthouse/static/js/2.53caefbf.chunk.js.LICENSE.txt",
-    "static/media/AIShield-watchtower-final-logo.png": "/BeSLighthouse/static/media/AIShield-watchtower-final-logo.66027f65.png",
-    "static/media/aishield_logo.png": "/BeSLighthouse/static/media/aishield_logo.5ee70cda.png",
-    "static/media/arc.png": "/BeSLighthouse/static/media/arc.6df46195.png",
-    "static/media/bug.png": "/BeSLighthouse/static/media/bug.54809d53.png",
-    "static/media/certificate.png": "/BeSLighthouse/static/media/certificate.0b758c9f.png",
-    "static/media/data-flow.png": "/BeSLighthouse/static/media/data-flow.6bf40b19.png",
-    "static/media/network.png": "/BeSLighthouse/static/media/network.192b0eac.png",
-    "static/media/neuralimage.png": "/BeSLighthouse/static/media/neuralimage.41e17072.png",
-    "static/media/security-system.png": "/BeSLighthouse/static/media/security-system.5ae91155.png",
-    "static/media/speedometer.png": "/BeSLighthouse/static/media/speedometer.308e6a4b.png",
-    "static/media/verified.png": "/BeSLighthouse/static/media/verified.43a3d843.png"
+    "main.738c3119.js.map": "/BeSLighthouse/static/js/main.738c3119.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.e7c2a82e.js",
-    "static/js/2.53caefbf.chunk.js",
-    "static/js/main.dc5ac3c2.chunk.js"
+    "static/js/main.738c3119.js"
   ]
 }
