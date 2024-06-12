@@ -1,4 +1,5 @@
 import {
+  Box,
   Table,
   TableBody,
   TableCell,
@@ -7,16 +8,35 @@ import {
   TableRow,
   Typography
 } from "@mui/material";
+import CheckIcon from '../../assets/images/checked.png';
 import React, { useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { dividerDiv, verifyLink } from "./AssessmentSummary";
 import MKButton from "../../components/MKButton";
+import axios from "axios";
 
 const TABLE_HEAD = [
   { id: "attackType", label: "Attack Type", alignRight: false },
   { id: "riskPosture", label: "Risk Posture", alignRight: false },
   { id: "defenceAvailable", label: "Defence Available", alignRight: false }
 ];
+
+async function checkFileExists(url: string, status: any) {
+  try {
+    const response = await axios.get(url);
+    if (response.status === 200) {
+      status(true);
+    } else {
+      status(false);
+    }
+  } catch (error: any) {
+    if (error.response && error.response.status === 404) {
+      status(false);
+    } else {
+      status(false);
+    }
+  }
+}
 
 function riskPosture(attackMap: any, name: any) {
   try {
@@ -105,6 +125,10 @@ const AdversarialAttackSummary = ({ model }: any) => {
   const [dataPoisoningDefence, dataPoisoningDefenceData]: any = React.useState(
     {}
   );
+  const [getOsarReport, setOsarReportData]: any = React.useState(
+    {}
+  );
+  const [getCosignLink, setCosignLink]: any = React.useState(false);
   const [evasionDefence, evasionDefenceData]: any = React.useState({});
   const [extractionDefence, extractionDefenceData]: any = React.useState({});
   useEffect(() => {
@@ -116,6 +140,8 @@ const AdversarialAttackSummary = ({ model }: any) => {
     const defenceForInference = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/inference/DefenceReport.json`;
     const dataPoisoningLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
     const defenceForDataPoisoning = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/dataPoisoning/DefenceReport.json`;
+    const osarReportLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/${name}-osar.json`;
+    const cosignLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/cosign.pub`;
     verifyLink(evasionLink, evasionData);
     verifyLink(extractionLink, extractionData);
     verifyLink(defenceForEvasion, evasionDefenceData);
@@ -124,8 +150,22 @@ const AdversarialAttackSummary = ({ model }: any) => {
     verifyLink(defenceForInference, inferenceDefenceData);
     verifyLink(dataPoisoningLink, dataPoisoningData);
     verifyLink(defenceForDataPoisoning, dataPoisoningDefenceData);
+    verifyLink(osarReportLink, setOsarReportData);
+    checkFileExists(cosignLink, setCosignLink);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const downloadJson = () => {
+    const jsonContent = JSON.stringify(getOsarReport);
+    const blob = new Blob([jsonContent], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${name}-osar.json`);
+    document.body.appendChild(link);
+    link.click();
+  };
+
   const attackMap: any = {
     Evasion: {
       name: "evasion",
@@ -174,9 +214,35 @@ const AdversarialAttackSummary = ({ model }: any) => {
   };
   return (
     <>
-      <Typography color="black" pt={ 1 } pb={ 3 }>
-        Adversarial Attack Summary
-      </Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography color="black" pt={ 1 } pb={ 3 }>
+          Adversarial Attack Summary
+        </Typography>
+        <div style={ { display: 'flex' } }>
+          { getCosignLink ? <img style={ { position: 'relative', left: '-8px', top: '-3px' } } src={ CheckIcon } alt="Checked Icon" width={ 24 } height={ 24 } /> : <></> }
+
+          { Object.keys(getOsarReport).length === 0 ? <MKButton
+            onClick={ downloadJson }
+            style={ {top: '-7px'} }
+            variant="gradient"
+            color="info"
+            size="small"
+            endIcon={ <i className="fa fa-download" /> }
+            disabled
+          >
+            OSAR
+          </MKButton> : <MKButton
+            onClick={ downloadJson }
+            style={ {top: '-7px'} }
+            variant="gradient"
+            color="info"
+            size="small"
+            endIcon={ <i className="fa fa-download" /> }
+          >
+            OSAR
+          </MKButton> }
+        </div>
+      </Box>
       <TableContainer>
         <Table>
           <TableHead sx={ { display: "contents" } }>
