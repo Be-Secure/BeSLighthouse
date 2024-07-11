@@ -13,12 +13,9 @@ import { fNumber } from "../../../../utils/formatNumber";
 
 function SeverityLevels({ chartColors, chartData }: any) {
   const theme = useTheme();
-  // console.log("chartData="+JSON.stringify(chartData));
 
   const chartLabels = chartData.map((i: { label: any }) => i.label);
   const chartSeries = chartData.map((i: { value: any }) => i.value);
-  // console.log("chartLabels="+JSON.stringify(chartLabels));
-  // console.log("chartSeries="+JSON.stringify(chartSeries));
 
   const chartOptions = useChart({
     colors: chartColors,

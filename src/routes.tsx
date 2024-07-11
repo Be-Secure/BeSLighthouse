@@ -3,18 +3,12 @@ import * as React from "react";
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Icon from "@mui/material/Icon";
-import HomeIcon from '@mui/icons-material/Home';
 import ModelOfInterest from "./pages/ModelOfInterest";
 import VulnerabilityOfInterest from "./pages/VulnerabilityOfInterest";
 import ProjectOfInterest from "./pages/ProjectOfInterest";
+import { AddModerator } from "@mui/icons-material";
 
 const routes = [
-  {
-    name: "Be-Secure",
-    key: "github",
-    icon: <HomeIcon fontSize="medium" />,
-    href: "https://be-secure.github.io/Be-Secure/"
-  },
   {
     name: "Projects Of Interest",
     key: "Project-of-Interest",
@@ -39,9 +33,15 @@ const routes = [
   {
     name: "github",
     key: "github",
-    icon: <GitHubIcon />,
+    icon: <GitHubIcon fontSize="small"/>,
     href: "https://github.com/Be-Secure/BeSLighthouse"
-  }
+  },
+  {
+    name: "Be-Secure",
+    key: "github",
+    icon: <AddModerator fontSize="small" />,
+    href: "https://be-secure.github.io/Be-Secure/"
+  },
 ];
 
 export default routes;
