@@ -6,11 +6,11 @@
         "token": "YOUR_GITHUB_API_TOKEN"
     },
     "gitlab": {
-        "namespace": "O31E",
+        "namespace": "labAdmin",
         "branch": "/raw/main",
-        "apiUrl": "http://3.6.33.63:5000",
-        "gitLabUrl": "http://3.6.33.63:8081",
-        "token": "O31ELabSeeding32724"
+        "apiUrl": "",
+        "gitLabUrl": "",
+        "token": ""
     },
     "activeTool": "gitlab",
     "version": "0.19.0" 
