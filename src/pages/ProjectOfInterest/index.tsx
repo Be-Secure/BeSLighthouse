@@ -37,7 +37,7 @@ function ProjectOfInterest() {
   return (
     <>
       <DefaultNavbar routes={ routes } sticky />
-      <MKBox pt={ 8 } sx={ { mx: { xs: 2, lg: 3 } } }>
+      <MKBox pt={ 10 } sx={ { mx: { xs: 2, lg: 3 } } }>
         <MKTypography variant="h3" color="black">
           Projects of Interest
         </MKTypography>

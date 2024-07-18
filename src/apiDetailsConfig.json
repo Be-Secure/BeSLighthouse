@@ -12,5 +12,6 @@
         "gitLabUrl": "",
         "token": ""
     },
-    "activeTool": "github"
+    "activeTool": "github",
+    "version": "0.19.0"
 }
