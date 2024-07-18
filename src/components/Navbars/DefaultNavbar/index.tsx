@@ -24,6 +24,8 @@ import breakpoints from "../../../assets/theme/base/breakpoints";
 import MKButton from "../../../components/MKButton";
 import DefaultNavbarMobile from "./DefaultNavbarMobile";
 
+import jsonData from '../../../apiDetailsConfig.json';
+
 function DefaultNavbar({
   brand,
   routes,
@@ -504,6 +506,13 @@ function DefaultNavbar({
               style={ { display: "flex", fontSize: "0.975rem" } }
             >
               { brand }
+            </MKTypography>
+            <MKTypography
+              fontWeight="bold"
+              color={ light ? "white" : "dark" }
+              style={ { display: "flex", fontSize: "0.675rem" } }
+            >
+              Version: { jsonData.version }
             </MKTypography>
           </MKBox>
           <MKBox
