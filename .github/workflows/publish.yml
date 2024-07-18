@@ -32,6 +32,7 @@ jobs:
           npm run build
       
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
@@ -54,4 +55,4 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
-          prerelease: false 
+          prerelease: false
