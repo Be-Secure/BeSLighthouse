@@ -191,7 +191,7 @@ function BesVersionHistory() {
       <DefaultNavbar routes={ routes } />
       <MKBox
         key="TOPMKBOX"
-        pt={ 12 }
+        pt={ 14 }
         sx={ {
           mx: {
             xs: "auto",
@@ -355,13 +355,13 @@ function BesVersionHistory() {
                         variant="h6"
                         textTransform="capitalize"
                         color="text"
-                        title="Open source Assurance Provider"
+                        title="Open Source Assurance Service Provider"
                         style={ { fontSize: "15px", fontWeight: "normal" } }
                       >
                         OASP: &nbsp;
                       </MKTypography>
                       { /* Tooltip is used to provide the title for the icon */ }
-                      <Tooltip title="Organization">
+                      <Tooltip title="Lab">
                         <Science />
                       </Tooltip>
                       <MKTypography
