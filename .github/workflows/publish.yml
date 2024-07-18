@@ -1,10 +1,10 @@
 name: GitHub Pages
-
+ 
 on:
   push:
     tags:
       - '*.*.*'
-
+ 
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,30 +14,32 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-
+ 
       - name: Use Node 18.x
         uses: actions/setup-node@v1
         with:
           node-version: 18.18.2
-
+ 
       - name: set env
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
-
+ 
       - name: install dependency
         run: npm install
-      
       - name: Run Build
         run: |
           npm run build
-      
       - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
+        if: |
+          !contains(github.ref, 'rc') &&
+          !contains(github.ref, 'RC') &&
+          !contains(github.ref, 'alpha') &&
+          !contains(github.ref, 'M') &&
+          !contains(github.ref, 'beta')
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
           folder: build # Replace "dist" with the output directory of your build
-        
   release:
     needs: deploy
     runs-on: ubuntu-latest
