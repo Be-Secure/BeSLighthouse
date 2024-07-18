@@ -4,15 +4,12 @@ import Card from "@mui/material/Card";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/ProjectOfInterestData";
 import { MenuItem, Select, Tooltip } from "@mui/material";
-// import { makeStyles } from "@mui/styles";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import AssessmentReport from "./AssessmentReport";
 import AssessmentAnalytics from "./AssessmentAnalytics";
 import routes from "../../routes";
 import { getEnvPathStatus } from "../../utils/fatchJsonReport";
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -20,6 +17,8 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { projectTags } from "./tags";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
+import MKButton from "../../components/MKButton";
+import { Science } from "@mui/icons-material";
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -42,23 +41,6 @@ export const getResponse = async (name: string) => {
   const res = await getEnvPathStatus(name);
   return res;
 };
-
-// const useStyles: any = makeStyles(() => ({
-//   select: {
-//     minWidth: "calc(3rem + 0.5vw)",
-//     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
-//     {
-//       padding: "4px"
-//     },
-//     "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-//     {
-//       padding: "4px"
-//     },
-//     "& .css-qiwgdb.css-qiwgdb.css-qiwgdb": {
-//       padding: "4px"
-//     }
-//   }
-// }));
 
 // Style for Modal
 const envPlaybookModalStyle = {
@@ -209,7 +191,7 @@ function BesVersionHistory() {
       <DefaultNavbar routes={ routes } />
       <MKBox
         key="TOPMKBOX"
-        pt={ 12 }
+        pt={ 14 }
         sx={ {
           mx: {
             xs: "auto",
@@ -373,38 +355,22 @@ function BesVersionHistory() {
                         variant="h6"
                         textTransform="capitalize"
                         color="text"
-                        title="Open source Assurance Provider"
+                        title="Open Source Assurance Service Provider"
                         style={ { fontSize: "15px", fontWeight: "normal" } }
                       >
-                        OSAP: &nbsp;
+                        OASP: &nbsp;
                       </MKTypography>
+                      { /* Tooltip is used to provide the title for the icon */ }
+                      <Tooltip title="Lab">
+                        <Science />
+                      </Tooltip>
                       <MKTypography
                         variant="h6"
                         fontWeight="regular"
-                        style={ { fontSize: "15px" } }
+                        style={ { fontSize: "15px", paddingLeft: "2px" } }
                       >
                         { item.owner.login }
                       </MKTypography>
-                      { /* The osap icon is given inside MKTypography for handling its css */ }
-                      <MKTypography
-                        fontWeight="regular"
-                        color="text"
-                        style={ {
-                          position: "relative",
-                          // paddingLeft: "3px",
-                          bottom: "3px"
-                        } }>
-                        { /* {item.owner["type"] === "Organization" && (<IconButton aria-label="add" title="Organization">
-                        </IconButton> ) */ }
-                        { /* Tooltip is used to provide the title for the icon */ }
-                        <Tooltip title="Organization">
-
-                          <ApartmentIcon />
-                        </Tooltip>
-
-                        { /* {findOSAP(item)} */ }
-                        { /* <Icon component={ApartmentIcon} style={{ fontSize: "large" }} title="Organization" /> */ }
-                      </MKTypography>
                     </Grid>
                     <Grid
                       item
@@ -412,31 +378,16 @@ function BesVersionHistory() {
                       md={ 3 }
                       style={ { display: "flex", paddingTop: "12px", position: "relative", bottom: "7px" } }
                     >
-                      { /* <MKTypography
-                        variant="h6"
-                        fontWeight="bold"
-                        textTransform="capitalize"
-                        style={{ fontSize: "15px" }}
-                      > */ }
-                      <Button
+                      <MKButton
+                        // onClick={ downloadJson }
+                        variant="gradient"
+                        color="info"
                         size="small"
-                        title="Download Assessment Summary Report"
+                        endIcon={ <i className="fa fa-download" /> }
                         disabled
-                        endIcon={
-                          <DownloadIcon
-                            style={ {
-                              color: "black"
-                            } }
-                          /> }
-                        style={ {
-                          fontSize: "15px",
-                          color: "black",
-                          right: "16px",
-                          fontWeight: "normal"
-                        } }>
+                      >
                         OSAR
-                      </Button>
-
+                      </MKButton>
                     </Grid>
                     <Grid
                       item
@@ -444,9 +395,7 @@ function BesVersionHistory() {
                       md={ 3 }
                       style={ { display: "flex", paddingTop: "12px", position: "relative", bottom: "7px" } }
                     >
-
                       <ModalForEnvsAndPlaybook />
-
                     </Grid>
                   </Grid>
                 </Card>
