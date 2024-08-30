@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/ProjectOfInterestData";
-import { MenuItem, Select, Tooltip } from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import AssessmentReport from "./AssessmentReport";
@@ -17,8 +17,13 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { projectTags } from "./tags";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
-import MKButton from "../../components/MKButton";
-import { Science } from "@mui/icons-material";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import DownloadIcon from '@mui/icons-material/Download';
+
+import CheckIcon from '../../assets/images/checked.png';
+import { verifyLink } from "../ShowModelDetails/AssessmentSummary";
+import { checkFileExists } from "../ShowModelDetails/AdversarialAttackSummary";
+import { assessmentDatastoreURL } from "../../dataStore";
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -153,6 +158,11 @@ function BesVersionHistory() {
   // const classes = useStyles();
   const { besId, besName }: any = useParams();
   const [data, setData] = React.useState([]);
+  const [getOsarReport, setOsarReportData]: any = React.useState(
+    {}
+  );
+  const [selectedOption, setSelectedOption] = React.useState("");
+  const [getCosignLink, setCosignLink]: any = React.useState(false);
 
   const [versionSummary, setVersionSummary]: any = React.useState([]);
   React.useEffect(() => {
@@ -165,7 +175,29 @@ function BesVersionHistory() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [selectedOption, setSelectedOption] = React.useState("");
+  React.useEffect(() => {
+    // Call osspoiMasterAndSummary only when selectedOption changes
+    if (selectedOption) {
+
+      const osarReportLink = `${assessmentDatastoreURL}/${besName}/${selectedOption}/${besName}-osar.json`;
+      const cosignLink = `${assessmentDatastoreURL}/${besName}/${selectedOption}/cosign.pub`;
+
+      verifyLink(osarReportLink, setOsarReportData);
+      checkFileExists(cosignLink, setCosignLink);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOption]);
+
+  const downloadJson = () => {
+    const jsonContent = JSON.stringify(getOsarReport);
+    const blob = new Blob([jsonContent], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${besName}-${selectedOption}-osar.json`);
+    document.body.appendChild(link);
+    link.click();
+  };
 
   try {
     if (!selectedOption && versionSummary) {
@@ -344,7 +376,25 @@ function BesVersionHistory() {
                         { item.id }
                       </MKTypography>
                     </Grid>
-                    { /* For Open Source Assurance Provider */ }
+                    <Grid
+                      item
+                      xs={ 6 }
+                      md={ 3 }
+                      style={ { display: "flex", paddingTop: "12px" } }
+                    >
+                      <a href={ item.html_url } target="_blank" rel="noopener noreferrer" style={ { textDecoration: 'none', color: 'inherit' } }>
+                        <MKTypography
+                          variant="h6"
+                          textTransform="capitalize"
+                          color="text"
+                          title="Open Source Assurance Service Provider"
+                          style={ { fontSize: "15px", fontWeight: "normal" } }
+                        >
+                          <GitHubIcon style={ { position: 'relative', top: '3px' } } fontSize="small" />
+                          &nbsp; repository
+                        </MKTypography>
+                      </a>
+                    </Grid>
                     <Grid
                       item
                       xs={ 6 }
@@ -355,39 +405,20 @@ function BesVersionHistory() {
                         variant="h6"
                         textTransform="capitalize"
                         color="text"
-                        title="Open Source Assurance Service Provider"
                         style={ { fontSize: "15px", fontWeight: "normal" } }
                       >
-                        OASP: &nbsp;
+                        OSAR: &nbsp;
                       </MKTypography>
-                      { /* Tooltip is used to provide the title for the icon */ }
-                      <Tooltip title="Lab">
-                        <Science />
-                      </Tooltip>
-                      <MKTypography
-                        variant="h6"
-                        fontWeight="regular"
-                        style={ { fontSize: "15px", paddingLeft: "2px" } }
-                      >
-                        { item.owner.login }
-                      </MKTypography>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={ 6 }
-                      md={ 3 }
-                      style={ { display: "flex", paddingTop: "12px", position: "relative", bottom: "7px" } }
-                    >
-                      <MKButton
-                        // onClick={ downloadJson }
-                        variant="gradient"
-                        color="info"
-                        size="small"
-                        endIcon={ <i className="fa fa-download" /> }
-                        disabled
-                      >
-                        OSAR
-                      </MKButton>
+                      <div style={ { display: 'flex' } }>
+                        { Object.keys(getOsarReport).length === 0 ? <MKTypography
+                          variant="h6"
+                          fontWeight="regular"
+                          style={ { fontSize: "15px" } }
+                        >
+                          Not Available
+                        </MKTypography> : <DownloadIcon onClick={ downloadJson } style={ { cursor: "pointer" } } fontSize="medium" /> }
+                        { getCosignLink ? <img style={ { position: 'relative', top: '-2px' } } src={ CheckIcon } alt="Checked Icon" width={ 24 } height={ 24 } /> : <></> }
+                      </div>
                     </Grid>
                     <Grid
                       item
