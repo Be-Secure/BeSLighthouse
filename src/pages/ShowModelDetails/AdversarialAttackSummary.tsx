@@ -21,7 +21,7 @@ const TABLE_HEAD = [
   { id: "defenceAvailable", label: "Defence Available", alignRight: false }
 ];
 
-async function checkFileExists(url: string, status: any) {
+export async function checkFileExists(url: string, status: any) {
   try {
     const response = await axios.get(url);
     if (response.status === 200) {
