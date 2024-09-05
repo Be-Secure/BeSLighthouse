@@ -510,9 +510,12 @@ function DefaultNavbar({
             <MKTypography
               fontWeight="bold"
               color={ light ? "white" : "dark" }
-              style={ { display: "flex", fontSize: "0.675rem" } }
+              style={ { display: "flex", fontSize: "0.675rem", alignItems: "center" } }
             >
-              Version: { jsonData.version }
+              <MKTypography style={ { fontSize: "12px" } }>
+                Powered By &nbsp;
+              </MKTypography>
+              BeSLighthouse { jsonData.version }
             </MKTypography>
           </MKBox>
           <MKBox
@@ -588,7 +591,7 @@ function DefaultNavbar({
 
 // Setting default values for the props of DefaultNavbar
 DefaultNavbar.defaultProps = {
-  brand: "BeSLighthouse",
+  brand: jsonData.labName,
   transparent: false,
   light: false,
   action: false,
