@@ -179,8 +179,8 @@ function BesVersionHistory() {
     // Call osspoiMasterAndSummary only when selectedOption changes
     if (selectedOption) {
 
-      const osarReportLink = `${assessmentDatastoreURL}/${besName}/${selectedOption}/${besName}-osar.json`;
-      const cosignLink = `${assessmentDatastoreURL}/${besName}/${selectedOption}/cosign.pub`;
+      const osarReportLink = `${assessmentDatastoreURL}/${besName.slice(1)}/${selectedOption}/${besName.slice(1)}-${selectedOption}-osar.json`;
+      const cosignLink = `${assessmentDatastoreURL}/${besName.slice(1)}/${selectedOption}/cosign.pub`;
 
       verifyLink(osarReportLink, setOsarReportData);
       checkFileExists(cosignLink, setCosignLink);
@@ -194,7 +194,7 @@ function BesVersionHistory() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `${besName}-${selectedOption}-osar.json`);
+    link.setAttribute('download', `${besName.slice(1)}-${selectedOption}-osar.json`);
     document.body.appendChild(link);
     link.click();
   };

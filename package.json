@@ -40,7 +40,7 @@
     "web-vitals": "3.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=80 react-scripts start",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "predeploy": "npm run build",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
