@@ -122,7 +122,6 @@ const FetchData = ({
   if (report === "Risk Posture") {
     if (severityData.length !== 0) {
       return (
-
         <PieChart
           title={ title }
           chartData={ severityData }
@@ -134,9 +133,8 @@ const FetchData = ({
             theme.palette.success.main,
             theme.palette.secondary.main
           ] }
-          height={ 218 }
+          height={ 232 }
         />
-
       );
     } else {
       return (
@@ -158,12 +156,10 @@ const FetchData = ({
         </Card>
       );
     }
-  }
-
-  else if (report === "Vulnerability History") {
+  } else if (report === "Known Vulnerabilities") {
     if (vulHistoryData.length !== 0) {
       return (
-        <VulHistory vuldata={ vulHistoryData } />
+        <VulHistory vuldata={ vulHistoryData } title={ report } />
       );
     } else {
       return (
@@ -198,14 +194,12 @@ function AssessmentAnalytics({
 }: any) {
   const report: string[] = [
     "Risk Posture",
-    "Vulnerability History"
-    // "Critical Issues"
+    "Known Vulnerabilities"
   ];
   return (
     <Grid container pt={ 2 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between" } }>
-      { /* <Grid container spacing={1} pt={2} style={{ display: "flex", justifyContent: "space-around" }}> */ }
 
-      { report.map((value, index) => {
+      { report.map((value) => {
         return (
 
           <Grid item xs={ 12 } md={ 6 }
