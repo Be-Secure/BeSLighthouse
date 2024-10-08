@@ -140,6 +140,19 @@ const FetchData = ({
       return (
         <Card key="RISKPOSTURECARD1" style={ { height: "266px" } }>
           <MKTypography
+            variant="h6"
+            fontWeight="bold"
+            color="text"
+            textTransform="capitalize"
+            style={ {
+              fontSize: "15px",
+              display: "flex",
+              placeContent: "center",
+            } }
+          >
+            { title }
+          </MKTypography>
+          <MKTypography
             key="RISKPOSTURETYPO2"
             variant="h6"
             color="inherit"
@@ -164,6 +177,19 @@ const FetchData = ({
     } else {
       return (
         <Card key="RISKPOSTURECARD1" style={ { height: "266px" } }>
+          <MKTypography
+            variant="h6"
+            fontWeight="bold"
+            color="text"
+            textTransform="capitalize"
+            style={ {
+              fontSize: "15px",
+              display: "flex",
+              placeContent: "center",
+            } }
+          >
+            { title }
+          </MKTypography>
           <MKTypography
             key="RISKPOSTURETYPO2"
             variant="h6"
