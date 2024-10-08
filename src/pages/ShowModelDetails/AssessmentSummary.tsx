@@ -60,15 +60,21 @@ function assissmentReport(linkStatus: any, selectedModel: any) {
 
 const AssessmentSummary: React.FC<{ selectedName: string, selectedModel: any }> = ({ selectedName, selectedModel }) => {
   const [linkStatus, setLinkStatus]: any = React.useState({});
+  const [codeshieldStatus, setCodeshieldStatus]: any = React.useState({});
 
   React.useEffect(() => {
     const link = `${besecureMlAssessmentDataStore}/${selectedName}/sast/${selectedName}-sast-summary-report.json`;
     verifyLink(link, setLinkStatus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  React.useEffect(() => {
+    const link = `${besecureMlAssessmentDataStore}/${selectedName}/insecure-code-detection/${selectedName}-codeshield-summary-report.json`;
+    verifyLink(link, setCodeshieldStatus);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Card sx={ { height: "100%" } }>
-      { Object.values(linkStatus).length > 0 ? (
+      { Object.values(linkStatus).length > 0 || Object.values(codeshieldStatus).length > 0 ? (
         assissmentReport(linkStatus, selectedModel)
       ) : (
         <>
