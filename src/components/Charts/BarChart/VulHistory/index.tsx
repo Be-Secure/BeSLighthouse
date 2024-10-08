@@ -5,12 +5,13 @@ import ReactApexChart from "react-apexcharts";
 import { useTheme } from "@mui/material/styles";
 import useChart from "../useChart";
 import MKBox from "../../../../components/MKBox";
+import MKTypography from "../../../MKTypography";
 
-function VulHistory({ vuldata }: any) {
+function VulHistory({ vuldata, title }: any) {
   const theme = useTheme();
   const chartLabels = vuldata.map((i: { label: any }) => i.label);
   const chartData = vuldata.map((i: { value: any }) => i.value);
-  const chartSeries = [{ name: "series-1", data: chartData }];
+  const chartSeries = [{ name: `CVEs Reported`, data: chartData }];
 
   const chartOptions = useChart({
     xaxis: {
@@ -82,6 +83,21 @@ function VulHistory({ vuldata }: any) {
     <Card style={ { height: "100%" } }>
       <MKBox>
         <MKBox pt={ 1 } pb={ 1 } px={ 1 }>
+          {
+            (title === "Known Vulnerabilities") ? <MKTypography
+              variant="h6"
+              fontWeight="bold"
+              color="text"
+              textTransform="capitalize"
+              style={ {
+                fontSize: "15px",
+                display: "flex",
+                placeContent: "center",
+              } }
+            >
+              { title }
+            </MKTypography> : <></>
+          }
           <ReactApexChart
             type="bar"
             series={ chartSeries }

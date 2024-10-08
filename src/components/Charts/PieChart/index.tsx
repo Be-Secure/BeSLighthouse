@@ -1,5 +1,5 @@
 
- 
+
 import * as React from "react";
 
 import Card from "@mui/material/Card";
@@ -10,6 +10,7 @@ import useChart from "./useChart";
 import MKBox from "../../MKBox";
 import { fNumber } from "../../../utils/formatNumber";
 import { Typography } from "@mui/material";
+import MKTypography from "../../MKTypography";
 
 function PieChart({ title, chartColors, chartData, height }: any) {
   const theme = useTheme();
@@ -41,23 +42,40 @@ function PieChart({ title, chartColors, chartData, height }: any) {
   return (
     <Card>
       <MKBox pt={ 1 } pb={ 1 } px={ 1 }>
-        <Typography
-          display="flex"
-          justifyContent="left"
-          alignItems="left"
-          color="black"
-          fontSize="20px"
-          variant="h6"
-          pl={ 2 }
-          textTransform="capitalize"
-        >
-          { title }
-        </Typography>
+        {
+          (title === "Risk Posture") ? <MKTypography
+            variant="h6"
+            fontWeight="bold"
+            color="text"
+            textTransform="capitalize"
+            style={ {
+              fontSize: "15px",
+              display: "flex",
+              position: "relative",
+              left: "-44px",
+              placeContent: "center",
+            } }
+          >
+            { title }
+          </MKTypography> : <Typography
+            display="flex"
+            justifyContent="left"
+            alignItems="left"
+            color="black"
+            fontSize="20px"
+            variant="h6"
+            pl={ 2 }
+            textTransform="capitalize"
+          >
+            { title }
+          </Typography>
+        }
+
         <ReactApexChart
           type="pie"
           series={ chartSeries }
           options={ chartOptions }
-          height={ height??195 }
+          height={ height ?? 195 }
         />
       </MKBox>
     </Card>
