@@ -1,6 +1,9 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.86cca62b.js",
+    "main.js": "/BeSLighthouse/static/js/main.dcaa5c2f.js",
+    "static/js/239.f8861bf9.chunk.js": "/BeSLighthouse/static/js/239.f8861bf9.chunk.js",
+    "static/js/213.706908f8.chunk.js": "/BeSLighthouse/static/js/213.706908f8.chunk.js",
+    "static/js/732.4a6e7413.chunk.js": "/BeSLighthouse/static/js/732.4a6e7413.chunk.js",
     "static/media/neuralimage.png": "/BeSLighthouse/static/media/neuralimage.0a6ca9fadd705732f3ac.png",
     "static/media/AIShield-watchtower-final-logo.png": "/BeSLighthouse/static/media/AIShield-watchtower-final-logo.6e52458814e122cfd516.png",
     "static/media/bug.png": "/BeSLighthouse/static/media/bug.55ee0482380aca3704a1.png",
@@ -14,9 +17,12 @@
     "static/media/arc.png": "/BeSLighthouse/static/media/arc.136fe717a39d0dff5047.png",
     "static/media/certificate.png": "/BeSLighthouse/static/media/certificate.d97bbadc67cdb4b5540e.png",
     "index.html": "/BeSLighthouse/index.html",
-    "main.86cca62b.js.map": "/BeSLighthouse/static/js/main.86cca62b.js.map"
+    "main.dcaa5c2f.js.map": "/BeSLighthouse/static/js/main.dcaa5c2f.js.map",
+    "239.f8861bf9.chunk.js.map": "/BeSLighthouse/static/js/239.f8861bf9.chunk.js.map",
+    "213.706908f8.chunk.js.map": "/BeSLighthouse/static/js/213.706908f8.chunk.js.map",
+    "732.4a6e7413.chunk.js.map": "/BeSLighthouse/static/js/732.4a6e7413.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.86cca62b.js"
+    "static/js/main.dcaa5c2f.js"
   ]
 }
