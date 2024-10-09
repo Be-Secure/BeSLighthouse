@@ -14,6 +14,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { dividerDiv, verifyLink } from "./AssessmentSummary";
 import MKButton from "../../components/MKButton";
 import axios from "axios";
+import { generatePdfFromJson } from "../../utils/OsarPdf";
 
 const TABLE_HEAD = [
   { id: "attackType", label: "Attack Type", alignRight: false },
@@ -155,17 +156,6 @@ const AdversarialAttackSummary = ({ model }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const downloadJson = () => {
-    const jsonContent = JSON.stringify(getOsarReport);
-    const blob = new Blob([jsonContent], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `${name}-osar.json`);
-    document.body.appendChild(link);
-    link.click();
-  };
-
   const attackMap: any = {
     Evasion: {
       name: "evasion",
@@ -222,8 +212,8 @@ const AdversarialAttackSummary = ({ model }: any) => {
           { getCosignLink ? <img style={ { position: 'relative', left: '-8px', top: '-3px' } } src={ CheckIcon } alt="Checked Icon" width={ 24 } height={ 24 } /> : <></> }
 
           { Object.keys(getOsarReport).length === 0 ? <MKButton
-            onClick={ downloadJson }
-            style={ {top: '-7px'} }
+            onClick={ () => generatePdfFromJson(getOsarReport, `${name}-osar.json`, getCosignLink) }
+            style={ { top: '-7px' } }
             variant="gradient"
             color="info"
             size="small"
@@ -232,8 +222,8 @@ const AdversarialAttackSummary = ({ model }: any) => {
           >
             OSAR
           </MKButton> : <MKButton
-            onClick={ downloadJson }
-            style={ {top: '-7px'} }
+            onClick={ () => generatePdfFromJson(getOsarReport, `${name}-osar.json`, getCosignLink) } // Replace downloadJson with the generatePdfFromJson function
+            style={ { top: '-7px' } }
             variant="gradient"
             color="info"
             size="small"

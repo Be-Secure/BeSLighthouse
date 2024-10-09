@@ -19,11 +19,13 @@ import { projectTags } from "./tags";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import DownloadIcon from '@mui/icons-material/Download';
+import { Tooltip } from '@mui/material';
 
 import CheckIcon from '../../assets/images/checked.png';
 import { verifyLink } from "../ShowModelDetails/AssessmentSummary";
 import { checkFileExists } from "../ShowModelDetails/AdversarialAttackSummary";
 import { assessmentDatastoreURL } from "../../dataStore";
+import { generatePdfFromJson } from "../../utils/OsarPdf";
 
 export const osspoiMasterAndSummary = async (
   setData: any,
@@ -179,25 +181,14 @@ function BesVersionHistory() {
     // Call osspoiMasterAndSummary only when selectedOption changes
     if (selectedOption) {
 
-      const osarReportLink = `${assessmentDatastoreURL}/${besName}/${selectedOption}/${besName}-osar.json`;
-      const cosignLink = `${assessmentDatastoreURL}/${besName}/${selectedOption}/cosign.pub`;
+      const osarReportLink = `${assessmentDatastoreURL}/${besName.slice(1)}/${selectedOption}/${besName.slice(1)}-${selectedOption}-osar.json`;
+      const cosignLink = `${assessmentDatastoreURL}/${besName.slice(1)}/${selectedOption}/cosign.pub`;
 
       verifyLink(osarReportLink, setOsarReportData);
       checkFileExists(cosignLink, setCosignLink);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOption]);
-
-  const downloadJson = () => {
-    const jsonContent = JSON.stringify(getOsarReport);
-    const blob = new Blob([jsonContent], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `${besName}-${selectedOption}-osar.json`);
-    document.body.appendChild(link);
-    link.click();
-  };
 
   try {
     if (!selectedOption && versionSummary) {
@@ -406,6 +397,7 @@ function BesVersionHistory() {
                         textTransform="capitalize"
                         color="text"
                         style={ { fontSize: "15px", fontWeight: "normal" } }
+                        title="Open Source Assessment Summary Report"
                       >
                         OSAR: &nbsp;
                       </MKTypography>
@@ -416,8 +408,15 @@ function BesVersionHistory() {
                           style={ { fontSize: "15px" } }
                         >
                           Not Available
-                        </MKTypography> : <DownloadIcon onClick={ downloadJson } style={ { cursor: "pointer" } } fontSize="medium" /> }
-                        { getCosignLink ? <img style={ { position: 'relative', top: '-2px' } } src={ CheckIcon } alt="Checked Icon" width={ 24 } height={ 24 } /> : <></> }
+                        </MKTypography> : <Tooltip title="Download OSAR">
+                          <DownloadIcon
+                            onClick={ () => generatePdfFromJson(getOsarReport, `${besName.slice(1)}-${selectedOption}-osar.json`, getCosignLink) }
+                            style={ { cursor: "pointer" } }
+                            fontSize="medium"
+                            titleAccess="Download OSAR"
+                          />
+                        </Tooltip> }
+                        { getCosignLink ? <img style={ { position: 'relative', top: '-2px' } } src={ CheckIcon } title="Attested" alt="Checked Icon" width={ 24 } height={ 24 } /> : <></> }
                       </div>
                     </Grid>
                     <Grid
