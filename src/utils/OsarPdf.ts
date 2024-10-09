@@ -3,6 +3,17 @@ import 'jspdf-autotable';
 
 import CheckIcon from '../assets/images/checked.png';
 
+const checkReport: any = {
+  'insecure-code-detection': 'Insecure Code Detection',
+  'sbom': 'SBOM',
+  'criticality_score': 'Criticality Score',
+  'scorecard': 'Scorecard',
+  'sast': 'SAST',
+  'License Compliance': 'License Compliance',
+  'dast': 'DAST',
+  'LLM Benchmark': 'LLM Benchmark'
+};
+
 // Function to generate the PDF
 export function generatePdfFromJson(getOsarReport: any, filename: string, attested = false) {
   const doc: any = new jsPDF();
@@ -66,7 +77,7 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
   });
 
   // Loop through each assessment and add content dynamically
-  getOsarReport.assessments.forEach((assessment: any, index: number) => {
+  getOsarReport.assessments.forEach((assessment: any) => {
     // Ensure space before starting new sections or pages
     if (yOffset > 250) { // Adjust according to your content size
       doc.addPage();
@@ -74,17 +85,6 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
     }
 
     yOffset += 10; // Add some space before the next section
-
-    // Assessment Details Section
-    doc.setFontSize(16);
-    doc.setTextColor(0, 0, 0);
-    doc.text(`Assessment ${index + 1} Details`, 10, yOffset);
-    yOffset += 10;
-
-    // Horizontal line separator
-    doc.setLineWidth(0.5);
-    doc.line(10, yOffset, 200, yOffset);
-    yOffset += 10;
 
     const toolDetails = assessment.tool;
     const executionDetails = assessment.execution;
@@ -101,6 +101,19 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
       ["Duration", executionDetails.duration],
       ["Output", executionDetails.output_path]
     ];
+
+    // Assessment Details Section
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${checkReport[toolDetails.type]}`, 10, yOffset);
+    yOffset += 10;
+
+    // Horizontal line separator
+    doc.setLineWidth(0.5);
+    doc.line(10, yOffset, 200, yOffset);
+    yOffset += 10;
+
 
     assessmentDetails.forEach(([key, value]) => {
       doc.setFontSize(12);
@@ -123,7 +136,7 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
     // Assessment results Section
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0);
-    doc.text("Assessment results", 10, yOffset);
+    doc.text("Assessment Result", 10, yOffset);
     yOffset += 10;
 
     // Horizontal line separator
