@@ -378,7 +378,6 @@ function BesVersionHistory() {
                           variant="h6"
                           textTransform="capitalize"
                           color="text"
-                          title="Open Source Assurance Service Provider"
                           style={ { fontSize: "15px", fontWeight: "normal" } }
                         >
                           <GitHubIcon style={ { position: 'relative', top: '3px' } } fontSize="small" />
