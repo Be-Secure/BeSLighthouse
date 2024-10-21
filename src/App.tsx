@@ -1,80 +1,43 @@
-import * as React from "react";
-
-// react-router components
+import React, { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
-// @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import theme from "./assets/theme";
 import routes from "./routes";
-import FuzzingModel from "./pages/FuzzingModel";
-import BesAssessmentReport from "./pages/BesAssessmentReport";
+import { renderRoutes } from "./routeUtils";
+import LandingPages from "./pages/LandingPages";
 import BesVersionHistory from "./pages/BesVersionHistory";
+import BesAssessmentReport from "./pages/BesAssessmentReport";
+import ShowVulnerabilityDetails from "./pages/ShowVulnerabilityDetails";
 import ShowModelDetails from "./pages/ShowModelDetails";
 import ModelVulnerabilitiesDetailed from "./pages/ModelVulnerabilitiesDetailed";
-import LandingPages from "./pages/LandingPages";
-import ShowVulnerabilityDetails from "./pages/ShowVulnerabilityDetails";
+import FuzzingModel from "./pages/FuzzingModel";
 
-function App() {
+const App = () => {
   const { pathname } = useLocation();
 
-  // Setting page scroll to 0 when changing the route
-  React.useEffect(() => {
+  // Scroll to top on route change
+  useEffect(() => {
     document.documentElement.scrollTop = 0;
-    // document.scrollingElement.scrollTop = 0;
   }, [pathname]);
-
-  const getRoutes = (allRoutes: any) =>
-    allRoutes.map((route: any) => {
-      if (route.collapse) {
-        return getRoutes(route.collapse);
-      }
-
-      if (route.route) {
-        return (
-          <Route path={ route.route } element={ route.component } key={ route.key } />
-        );
-      }
-
-      return null;
-    });
 
   return (
     <ThemeProvider theme={ theme }>
       <CssBaseline />
       <Routes>
-        { getRoutes(routes) }
+        { renderRoutes(routes) } { /* Utilized renderRoutes from utils */ }
         <Route path="*" element={ <Navigate to="/BeSLighthouse" /> } />
         <Route path="/BeSLighthouse" element={ <LandingPages /> } />
-        <Route
-          path="/BeSLighthouse/Project-Of-Interest/bes_version_history/:besId/:besName"
-          element={ <BesVersionHistory /> }
-        />
-        <Route
-          path="/BeSLighthouse/bes_assessment_report/:besName/:besVersion/:besReport"
-          element={ <BesAssessmentReport /> }
-        />
-        <Route
-          path="/BeSLighthouse/vulnerability_report/:cveId"
-          element={ <ShowVulnerabilityDetails /> }
-        />
-        <Route
-          path="/BeSLighthouse/model_report/:modelName"
-          element={ <ShowModelDetails /> }
-        />
-        <Route
-          path="/BeSLighthouse/model_vulnerabilities_detailed/:modelName"
-          element={ <ModelVulnerabilitiesDetailed /> }
-        />
-        <Route
-          path="/BeSLighthouse/model_fuzzing/:modelName"
-          element={ <FuzzingModel /> }
-        />
+        <Route path="/BeSLighthouse/Project-Of-Interest/bes_version_history/:besId/:besName" element={ <BesVersionHistory /> } />
+        <Route path="/BeSLighthouse/bes_assessment_report/:besName/:besVersion/:besReport" element={ <BesAssessmentReport /> } />
+        <Route path="/BeSLighthouse/vulnerability_report/:cveId" element={ <ShowVulnerabilityDetails /> } />
+        <Route path="/BeSLighthouse/model_report/:modelName" element={ <ShowModelDetails /> } />
+        <Route path="/BeSLighthouse/model_vulnerabilities_detailed/:modelName" element={ <ModelVulnerabilitiesDetailed /> } />
+        <Route path="/BeSLighthouse/model_fuzzing/:modelName" element={ <FuzzingModel /> } />
       </Routes>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

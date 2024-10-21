@@ -1,13 +1,13 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
-
-import ShowModelContent from "./ShowModelContent";
+import React from "react";
 import MKBox from "../../components/MKBox";
-import routes from "../../routes";
-import AssessmentSummary, { verifyLink } from "./AssessmentSummary";
-import { useParams } from "react-router-dom";
-import { modelOfInterestData } from "../../dataStore";
 import DefaultNavbar from "../../components/Navbars/DefaultNavbar";
+import routes from "../../routes";
+import ModelCardDetails from "../../components/ModelReport/ModelCardDetails";
+import ModelDescription from "./ModelDescription";
+import SummaryCards from "./SummaryCards";
+import { verifyLink } from "./AssessmentSummary";
+import { modelOfInterestData } from "../../dataStore";
+import { useParams } from "react-router-dom";
 
 function ShowModelDetails() {
   const [data, setData] = React.useState([]);
@@ -15,20 +15,15 @@ function ShowModelDetails() {
   React.useEffect(() => {
     verifyLink(modelOfInterestData, setData);
   }, []);
-  const model = data.filter((item: any) => item.name === modelName.slice(1));
+  const model: any = data.filter((item: any) => item.name === modelName.slice(1));
   return (
     <>
       <DefaultNavbar routes={ routes } sticky />
       <MKBox pt={ 12 } sx={ { mx: { xs: 2, lg: 3 } } }>
-        <Grid container spacing={ 3 } pt={ 3 }>
-          <Grid item xs={ 12 } md={ 6 } lg={ 7 }>
-            <ShowModelContent model={ model } />
-          </Grid>
-          <Grid item xs={ 12 } md={ 6 } lg={ 5 }>
-            <AssessmentSummary selectedName={ modelName.slice(1) } selectedModel={ model } />
-          </Grid>
-        </Grid>
-      </MKBox>
+        <ModelCardDetails model={ model } />
+        <ModelDescription description={ model[0]?.description } />
+        <SummaryCards />
+      </MKBox >
     </>
   );
 }

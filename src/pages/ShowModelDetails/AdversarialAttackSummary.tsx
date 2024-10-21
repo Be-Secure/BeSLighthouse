@@ -1,5 +1,4 @@
 import {
-  Box,
   Table,
   TableBody,
   TableCell,
@@ -8,13 +7,12 @@ import {
   TableRow,
   Typography
 } from "@mui/material";
-import CheckIcon from '../../assets/images/checked.png';
 import React, { useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import { dividerDiv, verifyLink } from "./AssessmentSummary";
-import MKButton from "../../components/MKButton";
+import { useParams } from "react-router-dom";
+import { verifyLink } from "./AssessmentSummary";
 import axios from "axios";
-import { generatePdfFromJson } from "../../utils/OsarPdf";
+import { Tooltip, Icon } from "@mui/material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const TABLE_HEAD = [
   { id: "attackType", label: "Attack Type", alignRight: false },
@@ -48,8 +46,21 @@ function riskPosture(attackMap: any, name: any) {
     );
   } catch (e) {
     return (
-      <TableCell align="left" sx={ { fontSize: "18px" } }>
-        Not Analyzed
+      <TableCell align="left" sx={ { fontSize: "18px", padding: "8px" } }>
+        NA
+        <Tooltip title="Not Analyzed">
+          <Icon
+            sx={ {
+              verticalAlign: "top", // Aligns the icon to the top
+              fontSize: "14px",      // Adjust icon size
+              marginLeft: "4px",     // Adds space between 'NA' and icon
+              cursor: "pointer",
+              color: "#607D8B"
+            } }
+          >
+            <InfoOutlinedIcon />
+          </Icon>
+        </Tooltip>
       </TableCell>
     );
   }
@@ -71,51 +82,8 @@ function defenceAvailable(attackMap: any, name: any) {
   }
 }
 
-function attackGraph(selectedMenu: { name: string }, attackMap: any) {
-  if (
-    attackMap.Evasion.reportAvability ||
-    attackMap.Extraction.reportAvability ||
-    attackMap.Inference.reportAvability ||
-    attackMap["Data Poisoning"].reportAvability
-  ) {
-    return (
-      <NavLink
-        to={ {
-          pathname: `/BeSLighthouse/model_fuzzing/:${selectedMenu.name}`,
-          search: ""
-        } }
-        state={ { selectedFuzz: selectedMenu } }
-        style={ { color: "#587f2f", cursor: "pointer" } }
-      >
-        <MKButton
-          variant={ "gradient" }
-          color={ "info" }
-          size="Large"
-          sx={ { width: "100%" } }
-        >
-          Attack Graph Emulation
-        </MKButton>
-      </NavLink>
-    );
-  } else {
-    return (
-      <MKButton
-        variant={ "gradient" }
-        color={ "info" }
-        size="Large"
-        sx={ { width: "100%" } }
-        disabled
-      >
-        Attack Graph Emulation
-      </MKButton>
-    );
-  }
-}
-
 const AdversarialAttackSummary = ({ model }: any) => {
   const attackName = ["Evasion", "Extraction", "Inference", "Data Poisoning"];
-  const selectedModel = model.length > 0 ? model[0] : {};
-  const selectedMenu = selectedModel;
   const { modelName }: any = useParams();
   const name: string = modelName.slice(1);
   const [evasion, evasionData]: any = React.useState({});
@@ -126,10 +94,6 @@ const AdversarialAttackSummary = ({ model }: any) => {
   const [dataPoisoningDefence, dataPoisoningDefenceData]: any = React.useState(
     {}
   );
-  const [getOsarReport, setOsarReportData]: any = React.useState(
-    {}
-  );
-  const [getCosignLink, setCosignLink]: any = React.useState(false);
   const [evasionDefence, evasionDefenceData]: any = React.useState({});
   const [extractionDefence, extractionDefenceData]: any = React.useState({});
   useEffect(() => {
@@ -141,8 +105,6 @@ const AdversarialAttackSummary = ({ model }: any) => {
     const defenceForInference = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/inference/DefenceReport.json`;
     const dataPoisoningLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
     const defenceForDataPoisoning = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/fuzz-test/dataPoisoning/DefenceReport.json`;
-    const osarReportLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/${name}-osar.json`;
-    const cosignLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/cosign.pub`;
     verifyLink(evasionLink, evasionData);
     verifyLink(extractionLink, extractionData);
     verifyLink(defenceForEvasion, evasionDefenceData);
@@ -151,8 +113,6 @@ const AdversarialAttackSummary = ({ model }: any) => {
     verifyLink(defenceForInference, inferenceDefenceData);
     verifyLink(dataPoisoningLink, dataPoisoningData);
     verifyLink(defenceForDataPoisoning, dataPoisoningDefenceData);
-    verifyLink(osarReportLink, setOsarReportData);
-    checkFileExists(cosignLink, setCosignLink);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -204,35 +164,6 @@ const AdversarialAttackSummary = ({ model }: any) => {
   };
   return (
     <>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography color="black" pt={ 1 } pb={ 3 }>
-          Adversarial Attack Summary
-        </Typography>
-        <div style={ { display: 'flex' } }>
-          { getCosignLink ? <img style={ { position: 'relative', left: '-8px', top: '-3px' } } src={ CheckIcon } alt="Checked Icon" width={ 24 } height={ 24 } /> : <></> }
-
-          { Object.keys(getOsarReport).length === 0 ? <MKButton
-            onClick={ () => generatePdfFromJson(getOsarReport, `${name}-osar.json`, getCosignLink) }
-            style={ { top: '-7px' } }
-            variant="gradient"
-            color="info"
-            size="small"
-            endIcon={ <i className="fa fa-download" /> }
-            disabled
-          >
-            OSAR
-          </MKButton> : <MKButton
-            onClick={ () => generatePdfFromJson(getOsarReport, `${name}-osar.json`, getCosignLink) } // Replace downloadJson with the generatePdfFromJson function
-            style={ { top: '-7px' } }
-            variant="gradient"
-            color="info"
-            size="small"
-            endIcon={ <i className="fa fa-download" /> }
-          >
-            OSAR
-          </MKButton> }
-        </div>
-      </Box>
       <TableContainer>
         <Table>
           <TableHead sx={ { display: "contents" } }>
@@ -283,8 +214,6 @@ const AdversarialAttackSummary = ({ model }: any) => {
           Bosch AIShield
         </a>
       </Typography>
-      { dividerDiv(1) }
-      { attackGraph(selectedMenu, attackMap) }
     </>
   );
 };
