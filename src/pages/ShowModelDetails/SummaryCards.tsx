@@ -59,4 +59,3 @@ const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
 };
 
 export default SummaryCards;
-
