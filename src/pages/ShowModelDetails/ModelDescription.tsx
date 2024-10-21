@@ -49,14 +49,14 @@ const DescriptionCard: React.FC<{ title: string; description: string }> = ({
   );
 };
 
-const ModelDescription = ({ description }: { description: string }) => {
+const ModelDescription = ({ description, name }: { description: string, name: string }) => {
   return (
     <Grid container spacing={ 3 }>
       <Grid item xs={ 12 } md={ 8 }>
         <DescriptionCard title="Model Description" description={ description } />
       </Grid>
       <Grid item xs={ 12 } md={ 4 }>
-        <OSAR />
+        <OSAR name={ name }/>
       </Grid>
     </Grid>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Typography, Grid, Box, Divider } from "@mui/material";
+import { Card, Typography, Grid, Box, Divider, Button } from "@mui/material";
 
 // Custom component for displaying severity level info
 const SeverityBox: React.FC<{ title: string; count: number }> = ({ title, count }) => {
@@ -19,19 +19,30 @@ const WeaknessSummary: React.FC = () => {
       p: 3,
       minHeight: '422px',
       backgroundColor: '#F3F9FB',
-      display: 'flex'
+      display: 'flex',
+      flexDirection: 'column',
     } }>
       <Box
         display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="left"
-        height="50%"
-        textAlign="left"
+        justifyContent="space-between"
+        alignItems="center" // Align to center vertically
       >
-        <Typography variant="h6" sx={ { fontWeight: 'bold' } }>Weakness Summary</Typography>
+        <Typography variant="h6" sx={ { position: 'relative', fontWeight: 'bold', top: '-7px' } }>Weakness Summary</Typography>
+        <Button
+          sx={ {
+            top: '-12px',
+            backgroundColor: '#CCF2FF',
+            color: 'black',
+            '&:hover': {
+              backgroundColor: '#99D6FF',
+              opacity: 0.9,
+            },
+          } }
+        >
+          Report
+        </Button>
       </Box>
-      <Divider sx={ { mb: 2, opacity: 1 } } />
+      <Divider sx={ { my: 2, opacity: 1, position: 'relative', top: '-14px' } } />
 
       { /* Main container with F3F9FB background, surrounding grid items */ }
       <Box sx={ { backgroundColor: '#F3F9FB', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px' } }>

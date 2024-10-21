@@ -5,9 +5,9 @@ import routes from "../../routes";
 import ModelCardDetails from "../../components/ModelReport/ModelCardDetails";
 import ModelDescription from "./ModelDescription";
 import SummaryCards from "./SummaryCards";
-import { verifyLink } from "./AssessmentSummary";
 import { modelOfInterestData } from "../../dataStore";
 import { useParams } from "react-router-dom";
+import { verifyLink } from "../../utils/verifyLink";
 
 function ShowModelDetails() {
   const [data, setData] = React.useState([]);
@@ -21,7 +21,7 @@ function ShowModelDetails() {
       <DefaultNavbar routes={ routes } sticky />
       <MKBox pt={ 12 } sx={ { mx: { xs: 2, lg: 3 } } }>
         <ModelCardDetails model={ model } />
-        <ModelDescription description={ model[0]?.description } />
+        <ModelDescription description={ model[0]?.description } name={ model[0]?.name } />
         <SummaryCards />
       </MKBox >
     </>
