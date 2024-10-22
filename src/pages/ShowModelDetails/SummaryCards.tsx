@@ -6,16 +6,21 @@ import WeaknessSummary from "../../components/ModelReport/WeaknessSummary";
 import LLMTestSummary from "../../components/ModelReport/LLMTestSummary";
 import InsecureCodeDetection from "../../components/ModelReport/InsecureCodeDetection";
 
+interface SummaryCardProps {
+  Component: React.FC<any>; // Accept any component with props
+  [key: string]: any; // Additional props passed to the component
+}
+
 // Custom component for rendering individual summary cards
-const SummaryCard: React.FC<{ Component: React.FC }> = ({ Component }) => {
+const SummaryCard: React.FC<SummaryCardProps > = ({ Component, name }) => {
   return (
     <Grid item xs={ 12 } md={ 3 }>
-      <Component />
+      <Component name={ name }/>
     </Grid>
   );
 };
 
-const SummaryCards: React.FC = () => {
+const SummaryCards: React.FC<{ name: string }> = ({name}) => {
   return (
     <MKBox
       mt={ 20 }
@@ -29,8 +34,8 @@ const SummaryCards: React.FC = () => {
       } }
     >
       <Grid container spacing={ 3 } sx={ { position: "relative", top: "-150px", backgroundColor: "white" } }>
-        <SummaryCard Component={ AttackSummary } />
-        <SummaryCard Component={ WeaknessSummary } />
+        <SummaryCard Component={ AttackSummary } name={ name }/>
+        <SummaryCard Component={ WeaknessSummary } name={ name }/>
         <SummaryCard Component={ LLMTestSummary } />
         <SummaryCard Component={ InsecureCodeDetection } />
       </Grid>

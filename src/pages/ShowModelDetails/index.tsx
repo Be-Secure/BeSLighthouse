@@ -22,7 +22,7 @@ function ShowModelDetails() {
       <MKBox pt={ 12 } sx={ { mx: { xs: 2, lg: 3 } } }>
         <ModelCardDetails model={ model } />
         <ModelDescription description={ model[0]?.description } name={ model[0]?.name } />
-        <SummaryCards />
+        <SummaryCards name={ model[0]?.name }/>
       </MKBox >
     </>
   );
