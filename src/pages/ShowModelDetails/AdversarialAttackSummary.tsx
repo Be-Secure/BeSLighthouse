@@ -11,13 +11,29 @@ import React from "react";
 import axios from "axios";
 import { Tooltip, Icon } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { verifyLink } from "../../utils/verifyLink";
 
 const TABLE_HEAD = [
   { id: "attackType", label: "Attack Type", alignRight: false },
   { id: "riskPosture", label: "Risk Posture", alignRight: false },
   { id: "defenceAvailable", label: "Defence Available", alignRight: false }
 ];
+
+export async function checkFileExists(url: string, status: any) {
+  try {
+    const response = await axios.get(url);
+    if (response.status === 200) {
+      status(true);
+    } else {
+      status(false);
+    }
+  } catch (error: any) {
+    if (error.response && error.response.status === 404) {
+      status(false);
+    } else {
+      status(false);
+    }
+  }
+}
 
 function riskPosture(attackMap: any, name: any) {
   try {
@@ -119,6 +135,8 @@ const AdversarialAttackSummary = ({ attackMap }: any) => {
           Bosch AIShield
         </a>
       </Typography>
+      { /* { dividerDiv(1) }
+      { attackGraph(name, attackMap) } */ }
     </>
   );
 };
