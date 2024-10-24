@@ -129,16 +129,16 @@ function FuzzingModel() {
   const lineRefRightExtraction: any = React.useRef(null);
   const lineRefRightDataPoisoning: any = React.useRef(null);
   const location = useLocation();
-  const selectedFuzz: { name: string } = location.state.selectedFuzz;
+  const name: string = location.state.selectedFuzz;
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});
   const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
   React.useEffect(() => {
-    const evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
-    const inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/JobMetadata.json`;
-    const extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/JobMetadata.json`;
-    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/JobMetadata.json`;
+    const evasionLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/evasion/JobMetadata.json`;
+    const inferenceLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/inference/JobMetadata.json`;
+    const extractionLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/extraction/JobMetadata.json`;
+    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/dataPoisoning/JobMetadata.json`;
     fetchJsonData(evasionLink, evasionSetreport).then((data) => {
       if (data)
         setTimeout(
@@ -206,7 +206,7 @@ function FuzzingModel() {
                 textAlign: "center"
               } }
             >
-              Model: { selectedFuzz.name }
+              Model: { name }
             </p>
           </Grid>
           <Grid item xs={ 2 }>
