@@ -1,5 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Card, Divider, Grid, Typography } from "@mui/material";
+import { verifyLink } from "../../utils/verifyLink";
+
+interface InsecureCodeItem {
+  insecure_code: boolean;
+  test_case: string;
+  issues_found: {
+    pattern_id: string;
+    description: string;
+    severity: string;
+    line: string;
+  }[];
+  recommended_treatment: string;
+  llm_output_code: string;
+}
 
 // Custom component for displaying test case info
 const InfoBox: React.FC<{ title: string; count: number }> = ({ title, count }) => {
@@ -13,7 +27,24 @@ const InfoBox: React.FC<{ title: string; count: number }> = ({ title, count }) =
   );
 };
 
-const InsecureCodeDetection: React.FC = () => {
+const InsecureCodeDetection: React.FC<{ name: string }> = ({ name }) => {
+  const [insecureCode, setInsecureCode]: any = React.useState(
+    []
+  );
+  const insecureCodeDetection = {
+    testCase: 0,
+    InsecureCode: 0
+  };
+  useEffect(() => {
+    const insecureCodeLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/insecure-code-detection/${name}-codeshield-summary-report.json`;
+    verifyLink(insecureCodeLink, setInsecureCode);
+  }, [name]);
+  if (insecureCode?.length) {
+    insecureCodeDetection.testCase = insecureCode?.length;
+    insecureCode.forEach(({ insecure_code }: InsecureCodeItem) => {
+      if (insecure_code) insecureCodeDetection.InsecureCode++;
+    });
+  }
   return (
     <Card sx={ {
       p: 3,
@@ -38,7 +69,7 @@ const InsecureCodeDetection: React.FC = () => {
         <Grid container spacing={ 2 } justifyContent="center">
 
           { /* Test Cases */ }
-          <InfoBox title="Test Cases" count={ 5 } />
+          <InfoBox title="Test Cases" count={ insecureCodeDetection.testCase } />
 
           { /* Spacer with F3F9FB color */ }
           <Grid item xs={ 12 }>
@@ -46,7 +77,7 @@ const InsecureCodeDetection: React.FC = () => {
           </Grid>
 
           { /* Insecure Code */ }
-          <InfoBox title="Insecure Code" count={ 3 } />
+          <InfoBox title="Insecure Code" count={ insecureCodeDetection.InsecureCode } />
 
         </Grid>
       </Box>

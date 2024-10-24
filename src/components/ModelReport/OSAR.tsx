@@ -10,7 +10,7 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
   return (
     <Card sx={ { p: 2, height: '100%', display: 'flex', flexDirection: 'column' } }>
       <Box sx={ { textAlign: "center" } }>
-        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold" } }>
+        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold",right: '25px', position: 'relative' } }>
           { title }
         </Typography>
       </Box>
@@ -20,7 +20,7 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
           <>
             <Typography variant="body1" sx={ { display: 'flex', alignItems: 'center', mr: 2 } }>
               <img style={ { position: 'relative', top: '-2px' } } src={ CheckIcon } title="Attested" alt="Checked Icon" width={ 24 } height={ 24 } />
-            </Typography>
+            </Typography> 
             <Divider orientation="vertical" flexItem sx={ { height: 28, mx: 2, opacity: 1 } } />
           </>
         ) }

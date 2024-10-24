@@ -36,8 +36,8 @@ const SummaryCards: React.FC<{ name: string }> = ({name}) => {
       <Grid container spacing={ 3 } sx={ { position: "relative", top: "-150px", backgroundColor: "white" } }>
         <SummaryCard Component={ AttackSummary } name={ name }/>
         <SummaryCard Component={ WeaknessSummary } name={ name }/>
-        <SummaryCard Component={ LLMTestSummary } />
-        <SummaryCard Component={ InsecureCodeDetection } />
+        <SummaryCard Component={ LLMTestSummary } name={ name }/>
+        <SummaryCard Component={ InsecureCodeDetection } name={ name }/>
       </Grid>
     </MKBox>
   );
