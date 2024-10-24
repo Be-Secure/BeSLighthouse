@@ -23,7 +23,7 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
   return (
     <Card sx={ { p: 2, height: '100%', display: 'flex', flexDirection: 'column' } }>
       <Box sx={ { textAlign: "center" } }>
-        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold" } }>
+        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold",right: '25px', position: 'relative' } }>
           { title }
         </Typography>
       </Box>
