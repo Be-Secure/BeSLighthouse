@@ -54,7 +54,7 @@ function DefenseSummary() {
     setValue(newValue);
   };
   const location = useLocation();
-  const selectedFuzz: { name: string } = location.state.selectedFuzz;
+  const name: string = location.state.selectedFuzz;
 
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
@@ -62,16 +62,15 @@ function DefenseSummary() {
   const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
 
   React.useEffect(() => {
-    const evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/DefenceReport.json`;
-    const inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/DefenceReport.json`;
-    const extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/DefenceReport.json`;
-    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/DefenceReport.json`;
+    const evasionLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/evasion/DefenceReport.json`;
+    const inferenceLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/inference/DefenceReport.json`;
+    const extractionLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/extraction/DefenceReport.json`;
+    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/dataPoisoning/DefenceReport.json`;
     fetchJsonData(evasionLink, evasionSetreport);
     fetchJsonData(inferenceLink, inferenceSetreport);
     fetchJsonData(extractionLink, extractionSetreport);
     fetchJsonData(dataPoisoningLink, dataPoisoningSetreport);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [name]);
   return (
     <Grid
       container

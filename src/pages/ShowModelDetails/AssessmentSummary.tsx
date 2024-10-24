@@ -3,28 +3,14 @@ import * as React from "react";
 import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import Grid from "@mui/material/Grid";
-import { fetchJsonReport } from "../../utils/fatchJsonReport";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import StaticAnalysisSummary from "./StaticAnalysisSummary";
 import Divider from "@mui/material/Divider";
 import AdversarialAttackSummary from "./AdversarialAttackSummary";
+import { verifyLink } from "../../utils/verifyLink";
 
 export const dividerDiv = (index: number) => {
   if (index !== 0) return <Divider sx={ { my: 1.5 } } />;
-};
-
-export const verifyLink = async (link: any, setLinkStatus: any) => {
-  try {
-    const response = await fetchJsonReport(link);
-    try {
-      const data = JSON.parse(response);
-      setLinkStatus(data);
-    } catch (err) {
-      setLinkStatus({});
-    }
-  } catch (error) {
-    setLinkStatus({});
-  }
 };
 
 function displayModelReport(linkStatus: any, selectedModel: any) {

@@ -32,14 +32,14 @@ function loadingCircular(loading: any) {
 export default function DefenceData({ report, reportName }: any) {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-  const selectedFuzz: { name: string } = location.state.selectedFuzz;
+  const name: string = location.state.selectedFuzz;
 
   const [defenceReport, setDefenceReport]: any = React.useState(false);
   const [vulnerabilityReport, setvulnerabilityReport]: any =
     React.useState(false);
 
-  const defenceReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/DefenceReport.pdf`;
-  const vulnerabilityReportLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/${reportName}/VulnerabilityReport.pdf`;
+  const defenceReportLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/${reportName}/DefenceReport.pdf`;
+  const vulnerabilityReportLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/${reportName}/VulnerabilityReport.pdf`;
   React.useEffect(() => {
     fetchJsonData(defenceReportLink, setDefenceReport);
     fetchJsonData(vulnerabilityReportLink, setvulnerabilityReport);

@@ -22,10 +22,10 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { Tooltip } from '@mui/material';
 
 import CheckIcon from '../../assets/images/checked.png';
-import { verifyLink } from "../ShowModelDetails/AssessmentSummary";
-import { checkFileExists } from "../ShowModelDetails/AdversarialAttackSummary";
 import { assessmentDatastoreURL } from "../../dataStore";
 import { generatePdfFromJson } from "../../utils/OsarPdf";
+import { checkFileExists } from "../../utils/checkFileExists";
+import { verifyLink } from "../../utils/verifyLink";
 
 export const osspoiMasterAndSummary = async (
   setData: any,

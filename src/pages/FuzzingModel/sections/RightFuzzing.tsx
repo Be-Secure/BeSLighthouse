@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 function RightFuzzing() {
   const location = useLocation();
-  const selectedFuzz: { name: string } = location.state.selectedFuzz;
+  const modelName: string = location.state.selectedFuzz;
   const [loadingEvasion, setLoadingEvasion] = useState(true);
   const [loadingInference, setLoadingInference] = useState(true);
   const [loadingExtraction, setLoadingExtraction] = useState(true);
@@ -28,10 +28,10 @@ function RightFuzzing() {
     } catch (e) {
       // ignore
     }
-    const evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/VulnerabilityReport.json`;
-    const inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/VulnerabilityReport.json`;
-    const extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/VulnerabilityReport.json`;
-    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
+    const evasionLink = `${besecureMlAssessmentDataStore}/${modelName}/fuzz-test/evasion/VulnerabilityReport.json`;
+    const inferenceLink = `${besecureMlAssessmentDataStore}/${modelName}/fuzz-test/inference/VulnerabilityReport.json`;
+    const extractionLink = `${besecureMlAssessmentDataStore}/${modelName}/fuzz-test/extraction/VulnerabilityReport.json`;
+    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${modelName}/fuzz-test/dataPoisoning/VulnerabilityReport.json`;
     fetchJsonData(evasionLink, evasionSetreport);
     fetchJsonData(inferenceLink, inferenceSetreport);
     fetchJsonData(extractionLink, extractionSetreport);
