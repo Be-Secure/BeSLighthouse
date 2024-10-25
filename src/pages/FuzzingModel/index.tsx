@@ -1,3 +1,4 @@
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import routes from "../../routes";
@@ -36,11 +37,13 @@ function evasionLineGraph(lineRefStartEvasion: any, lineRefRightEvasion: any) {
     );
     // Right
     setTimeout(() => {
-      lineRefRightEvasion.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightEvasion"),
-        arrow
-      );
+      if (document.getElementById("RightEvasion")) {
+        lineRefRightEvasion.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightEvasion"),
+          arrow
+        );
+      }
     }, 2000);
   } catch (e) {
     // ignore
@@ -60,11 +63,13 @@ function inferenceLineGraph(
     );
     // Right
     setTimeout(() => {
-      lineRefRightInference.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightInference"),
-        arrow
-      );
+      if (document.getElementById("RightInference")) {
+        lineRefRightInference.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightInference"),
+          arrow
+        );
+      }
     }, 3000);
   } catch (e) {
     // ignore
@@ -84,11 +89,13 @@ function extractionLineGraph(
     );
     // Right
     setTimeout(() => {
-      lineRefRightExtraction.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightExtraction"),
-        arrow
-      );
+      if (document.getElementById("RightExtraction")) {
+        lineRefRightExtraction.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightExtraction"),
+          arrow
+        );
+      }
     }, 4000);
   } catch (e) {
     // ignore
@@ -108,11 +115,13 @@ function dataPoisoningLineGraph(
     );
     // Right
     setTimeout(() => {
-      lineRefRightDataPoisoning.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightDataPoisoning"),
-        arrow
-      );
+      if (document.getElementById("RightDataPoisoning")) {
+        lineRefRightDataPoisoning.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightDataPoisoning"),
+          arrow
+        );
+      }
     }, 5000);
   } catch (e) {
     // ignore
@@ -129,16 +138,16 @@ function FuzzingModel() {
   const lineRefRightExtraction: any = React.useRef(null);
   const lineRefRightDataPoisoning: any = React.useRef(null);
   const location = useLocation();
-  const selectedFuzz: { name: string } = location.state.selectedFuzz;
+  const name: string = location.state.selectedFuzz;
   const [evasion, evasionSetreport]: any = React.useState({});
   const [inference, inferenceSetreport]: any = React.useState({});
   const [extraction, extractionSetreport]: any = React.useState({});
   const [dataPoisoning, dataPoisoningSetreport]: any = React.useState({});
   React.useEffect(() => {
-    const evasionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/evasion/JobMetadata.json`;
-    const inferenceLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/inference/JobMetadata.json`;
-    const extractionLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/extraction/JobMetadata.json`;
-    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${selectedFuzz.name}/fuzz-test/dataPoisoning/JobMetadata.json`;
+    const evasionLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/evasion/JobMetadata.json`;
+    const inferenceLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/inference/JobMetadata.json`;
+    const extractionLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/extraction/JobMetadata.json`;
+    const dataPoisoningLink = `${besecureMlAssessmentDataStore}/${name}/fuzz-test/dataPoisoning/JobMetadata.json`;
     fetchJsonData(evasionLink, evasionSetreport).then((data) => {
       if (data)
         setTimeout(
@@ -206,7 +215,7 @@ function FuzzingModel() {
                 textAlign: "center"
               } }
             >
-              Model: { selectedFuzz.name }
+              Model: { name }
             </p>
           </Grid>
           <Grid item xs={ 2 }>
