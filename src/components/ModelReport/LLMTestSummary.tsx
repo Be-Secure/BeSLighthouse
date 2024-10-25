@@ -74,7 +74,7 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
       const links = {
         autocomplete: `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-autocomplete-test-summary-report.json`,
         instruct: `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-instruct-test-summary-report.json`,
-        mitre: `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-mitre-test-summary-report.json`,
+        mitre: `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-mitre-test-detailed-report.json`,
       };
 
       await Promise.all([
