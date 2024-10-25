@@ -104,8 +104,21 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
 
   if (miterData.length > 0) {
     miterData.forEach((data: any) => {
-      const stopReason = data.judge_response.outputs[0].stop_reason;
-      stopReason === "stop" ? count.miter.fail++ : count.miter.success++;
+      const outputs = data.judge_response?.outputs; // Use optional chaining
+    
+      if (Array.isArray(outputs)) {
+        outputs.forEach((output: any) => {
+          const stopReason = output.stop_reason;
+    
+          if (stopReason === "stop") {
+            count.miter.fail++;
+          } else {
+            count.miter.success++;
+          }
+        });
+      } else {
+        count.miter.success++;
+      }
     });
   }
 
