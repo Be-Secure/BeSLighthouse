@@ -135,8 +135,6 @@ const AdversarialAttackSummary = ({ attackMap }: any) => {
           Bosch AIShield
         </a>
       </Typography>
-      { /* { dividerDiv(1) }
-      { attackGraph(name, attackMap) } */ }
     </>
   );
 };
