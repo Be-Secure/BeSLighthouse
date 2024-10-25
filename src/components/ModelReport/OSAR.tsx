@@ -3,8 +3,21 @@ import { Card, Typography, Box, Divider } from "@mui/material";
 import CheckIcon from '../../assets/images/checked.png';
 import { checkFileExists } from "../../utils/checkFileExists";
 import { verifyLink } from "../../utils/verifyLink";
-import MKButton from "../MKButton";
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import IconButton from '@mui/material/IconButton';
 import { generatePdfFromJson } from "../../utils/OsarPdf";
+import DataObjectIcon from '@mui/icons-material/DataObject';
+
+const downloadJson = (osarReport: any, modelName: string) => {
+  const jsonContent = JSON.stringify(osarReport);
+  const blob = new Blob([jsonContent], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', modelName);
+  document.body.appendChild(link);
+  link.click();
+};
 
 const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigneLink: boolean }> = ({ title, osarReport, cosigneLink, name }) => {
   return (
@@ -24,17 +37,23 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
             <Divider orientation="vertical" flexItem sx={ { height: 28, mx: 2, opacity: 1 } } />
           </>
         ) }
-        <MKButton
+        <IconButton
           onClick={ () => generatePdfFromJson(osarReport, `${name}-osar.json`, cosigneLink) }
           style={ { top: '-5px' } }
-          variant="gradient"
           color="info"
-          size="small"
-          endIcon={ <i className="fa fa-download" /> }
           disabled={ Object.keys(osarReport).length === 0 }
         >
-          OSAR
-        </MKButton>
+          <PictureAsPdfIcon />
+        </IconButton>
+        <Divider orientation="vertical" flexItem sx={ { height: 28, mx: 2, opacity: 1 } } />
+        <IconButton
+          onClick={ () => downloadJson(osarReport, `${name}-osar.json`) }
+          style={ { top: '-5px' } }
+          color="info"
+          disabled={ Object.keys(osarReport).length === 0 }
+        >
+          <DataObjectIcon />
+        </IconButton>
       </Box>
     </Card>
   );

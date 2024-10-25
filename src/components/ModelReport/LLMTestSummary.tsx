@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Typography, Box, Divider, Grid, Chip, Tooltip } from "@mui/material";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { verifyLink } from "../../utils/verifyLink";
@@ -36,13 +35,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, successCount, failCou
         <Typography variant="button" display="block" sx={ { flexGrow: 1 } }>
           { text }
         </Typography>
-        { /* Chips for success and fail counts with tooltips */ }
         <Box sx={ { display: 'flex', alignItems: 'center', ml: 1 } }>
           { successCount !== undefined && (
             <Tooltip title="Success Count" arrow>
               <Chip
                 label={ successCount }
-                sx={ { backgroundColor: '#4CAF50', color: 'white', mr: 0.5, width: '40px' } } // Set a width for the chip
+                sx={ { backgroundColor: '#4CAF50', color: 'white', mr: 0.5, width: '40px' } }
               />
             </Tooltip>
           ) }
@@ -50,7 +48,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, successCount, failCou
             <Tooltip title="Fail Count" arrow>
               <Chip
                 label={ failCount }
-                sx={ { backgroundColor: '#F44336', color: 'white', width: '40px' } } // Set a width for the chip
+                sx={ { backgroundColor: '#F44336', color: 'white', width: '40px' } }
               />
             </Tooltip>
           ) }
@@ -61,56 +59,55 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, successCount, failCou
 };
 
 const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
+  const [autocompleteData, setAutocompleteData] = useState({});
+  const [miterData, setMiterData] = useState([]);
+  const [instructData, setInstructData] = useState({});
+
   const count = {
-    miter: {
-      success: 0,
-      fail: 0
-    },
-    autocomplete: {
-      success: 0,
-      fail: 0
-    },
-    instruct: {
-      success: 0,
-      fail: 0
-    }
+    miter: { success: 0, fail: 0 },
+    autocomplete: { success: 0, fail: 0 },
+    instruct: { success: 0, fail: 0 },
   };
-  const [autocompleteData, setAutocompleteData]: any = React.useState({});
-  const [miterData, setMiterData]: any = React.useState([]);
-  const [instructData, setInstructData]: any = React.useState({});
-  React.useEffect(() => {
-    const autocompleteLink = `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-autocomplete-test-summary-report.json`;
-    const instructLink = `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-instruct-test-summary-report.json`;
-    const mitreLink = `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-mitre-test-summary-report.json`;
-    verifyLink(autocompleteLink, setAutocompleteData);
-    verifyLink(mitreLink, setMiterData);
-    verifyLink(instructLink, setInstructData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const links = {
+        autocomplete: `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-autocomplete-test-summary-report.json`,
+        instruct: `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-instruct-test-summary-report.json`,
+        mitre: `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-mitre-test-summary-report.json`,
+      };
+
+      await Promise.all([
+        verifyLink(links.autocomplete, setAutocompleteData),
+        verifyLink(links.mitre, setMiterData),
+        verifyLink(links.instruct, setInstructData),
+      ]);
+    };
+
+    fetchData();
   }, [name]);
-  if (Object.keys(autocompleteData).length > 0) {
-    Object.values(autocompleteData).forEach((data: any) => {
 
-      if (data.vulnerable_suggestion_count === 0) {
-        count.autocomplete.success += 1;
+  const calculateCounts = (data: any, category: keyof typeof count) => {
+    if (Object.keys(data).length === 0) return;
+
+    Object.values(data).forEach((item: any) => {
+      if (item.vulnerable_suggestion_count === 0) {
+        count[category].success += 1;
       } else {
-        count.autocomplete.fail += data.vulnerable_suggestion_count;
+        count[category].fail += item.vulnerable_suggestion_count;
       }
     });
+  };
 
-  }
+  calculateCounts(autocompleteData, "autocomplete");
+  calculateCounts(instructData, "instruct");
 
-  if (Object.keys(instructData).length > 0) {
-    Object.values(instructData).forEach((data: any) => {
-
-      if (data.vulnerable_suggestion_count === 0) {
-        count.autocomplete.success += 1;
-      } else {
-        count.autocomplete.fail += data.vulnerable_suggestion_count;
-      }
+  if (miterData.length > 0) {
+    miterData.forEach((data: any) => {
+      const stopReason = data.judge_response.outputs[0].stop_reason;
+      stopReason === "stop" ? count.miter.fail++ : count.miter.success++;
     });
-
   }
-  const successCount = 42; // Replace with actual success count
-  const failCount = 5; // Replace with actual fail count
 
   return (
     <Card sx={ { p: 3, minHeight: '422px', backgroundColor: '#F3F9FB', display: 'flex' } }>
@@ -120,13 +117,13 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
       <Divider sx={ { mb: 2, opacity: 1 } } />
       <Grid container direction="column" spacing={ 2 } sx={ { mt: 2 } }>
         <Grid item>
-          <CustomButton text="MITRE Test" successCount={ successCount } failCount={ failCount } />
+          <CustomButton text="MITRE Test" successCount={ count.miter.success } failCount={ count.miter.fail } />
         </Grid>
         <Grid item>
-          <CustomButton text="Instruct Test" successCount={ successCount } failCount={ failCount } />
+          <CustomButton text="Instruct Test" successCount={ count.instruct.success } failCount={ count.instruct.fail } />
         </Grid>
         <Grid item>
-          <CustomButton text="Autocomplete Test" successCount={ successCount } failCount={ failCount } />
+          <CustomButton text="Autocomplete Test" successCount={ count.autocomplete.success } failCount={ count.autocomplete.fail } />
         </Grid>
       </Grid>
     </Card>
