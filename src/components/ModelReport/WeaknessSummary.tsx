@@ -84,19 +84,6 @@ const WeaknessSummary: React.FC<{ name: string }> = ({ name }) => {
       >
         <Typography variant="h6" sx={ { position: 'relative', fontWeight: 'bold', top: '-7px' } }>Weakness Summary</Typography>
         { weaknessReport(name, linkStatus, 'Report') }
-        { /* <Button
-          sx={ {
-            top: '-12px',
-            backgroundColor: '#CCF2FF',
-            color: 'black',
-            '&:hover': {
-              backgroundColor: '#99D6FF',
-              opacity: 0.9,
-            },
-          } }
-        >
-          Report
-        </Button> */ }
       </Box>
       <Divider sx={ { my: 2, opacity: 1, position: 'relative', top: '-14px' } } />
 

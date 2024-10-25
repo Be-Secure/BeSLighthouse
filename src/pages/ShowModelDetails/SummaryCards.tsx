@@ -14,7 +14,7 @@ interface SummaryCardProps {
 // Custom component for rendering individual summary cards
 const SummaryCard: React.FC<SummaryCardProps > = ({ Component, name }) => {
   return (
-    <Grid item xs={ 12 } md={ 3 }>
+    <Grid item xs={ 12 } md={ 6 }>
       <Component name={ name }/>
     </Grid>
   );

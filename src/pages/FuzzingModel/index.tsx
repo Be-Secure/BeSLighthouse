@@ -1,3 +1,4 @@
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import routes from "../../routes";
@@ -36,11 +37,13 @@ function evasionLineGraph(lineRefStartEvasion: any, lineRefRightEvasion: any) {
     );
     // Right
     setTimeout(() => {
-      lineRefRightEvasion.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightEvasion"),
-        arrow
-      );
+      if (document.getElementById("RightEvasion")) {
+        lineRefRightEvasion.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightEvasion"),
+          arrow
+        );
+      }
     }, 2000);
   } catch (e) {
     // ignore
@@ -60,11 +63,13 @@ function inferenceLineGraph(
     );
     // Right
     setTimeout(() => {
-      lineRefRightInference.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightInference"),
-        arrow
-      );
+      if (document.getElementById("RightInference")) {
+        lineRefRightInference.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightInference"),
+          arrow
+        );
+      }
     }, 3000);
   } catch (e) {
     // ignore
@@ -84,11 +89,13 @@ function extractionLineGraph(
     );
     // Right
     setTimeout(() => {
-      lineRefRightExtraction.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightExtraction"),
-        arrow
-      );
+      if (document.getElementById("RightExtraction")) {
+        lineRefRightExtraction.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightExtraction"),
+          arrow
+        );
+      }
     }, 4000);
   } catch (e) {
     // ignore
@@ -108,11 +115,13 @@ function dataPoisoningLineGraph(
     );
     // Right
     setTimeout(() => {
-      lineRefRightDataPoisoning.current = new LeaderLine(
-        document.getElementById("arrowpass"),
-        document.getElementById("RightDataPoisoning"),
-        arrow
-      );
+      if (document.getElementById("RightDataPoisoning")) {
+        lineRefRightDataPoisoning.current = new LeaderLine(
+          document.getElementById("arrowpass"),
+          document.getElementById("RightDataPoisoning"),
+          arrow
+        );
+      }
     }, 5000);
   } catch (e) {
     // ignore
