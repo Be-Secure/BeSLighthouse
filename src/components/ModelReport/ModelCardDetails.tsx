@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Divider, Grid, Card, Chip, Tooltip } from "@mui/material";
 import MKTypography from "../MKTypography";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 // Reusable component for model detail entries
 const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> = ({ label, value, isLink }) => {
@@ -15,10 +16,13 @@ const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> 
         { label }: &nbsp;
       </MKTypography>
       { isLink ? (
-        <a href={ value } target="_blank" rel="noopener noreferrer" style={ { textDecoration: 'none', color: 'inherit' } }>
-          <MKTypography variant="h6" fontWeight="regular" style={ { fontSize: "15px" } }>
-            { label === "Model URL" ? "Model Link" : "Repository" }
-          </MKTypography>
+        <a href={ value } target="_blank" rel="noopener noreferrer" style={ {
+          textDecoration: 'none', color: 'inherit', top: '-3px',
+          position: 'relative'
+        } }>
+          <Tooltip title={ label === "Model URL" ? "Open Model Link" : "Open Repository" } arrow>
+            <OpenInNewIcon style={ { fontSize: "15px", color: 'blue' } } />
+          </Tooltip>
         </a>
       ) : (
         <Tooltip title={ value?.length > 40 ? value : '' } arrow>

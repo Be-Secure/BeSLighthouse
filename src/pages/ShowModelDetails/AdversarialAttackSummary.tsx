@@ -85,8 +85,8 @@ const AdversarialAttackSummary = ({ attackMap }: any) => {
 
   return (
     <>
-      <TableContainer>
-        <Table>
+      <TableContainer sx={ { minHeight: '242px'} }>
+        <Table sx={ { minHeight: '242px'} }>
           <TableHead sx={ { display: "contents" } }>
             <TableRow>
               { TABLE_HEAD.map((headCell: any) => (

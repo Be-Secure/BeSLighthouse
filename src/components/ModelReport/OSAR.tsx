@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Typography, Box, Divider } from "@mui/material";
+import { Card, Typography, Box, Divider, Tooltip } from "@mui/material";
 import CheckIcon from '../../assets/images/checked.png';
 import { checkFileExists } from "../../utils/checkFileExists";
 import { verifyLink } from "../../utils/verifyLink";
@@ -31,29 +31,45 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
       <Box display="flex" alignItems="center" justifyContent="center">
         { cosigneLink && (
           <>
-            <Typography variant="body1" sx={ { display: 'flex', alignItems: 'center', mr: 2 } }>
+            <Tooltip title="Attested" arrow>
+              <Typography variant="body1" sx={ { display: 'flex', alignItems: 'center', mr: 2 } }>
+                <img
+                  style={ { position: 'relative', top: '-2px' } }
+                  src={ CheckIcon }
+                  alt="Checked Icon"
+                  width={ 24 }
+                  height={ 24 }
+                />
+              </Typography>
+            </Tooltip>
+            { /* <Typography variant="body1" sx={ { display: 'flex', alignItems: 'center', mr: 2 } }>
               <img style={ { position: 'relative', top: '-2px' } } src={ CheckIcon } title="Attested" alt="Checked Icon" width={ 24 } height={ 24 } />
-            </Typography> 
+            </Typography> */ }
             <Divider orientation="vertical" flexItem sx={ { height: 28, mx: 2, opacity: 1 } } />
           </>
         ) }
-        <IconButton
-          onClick={ () => generatePdfFromJson(osarReport, `${name}-osar.json`, cosigneLink) }
-          style={ { top: '-5px' } }
-          color="info"
-          disabled={ Object.keys(osarReport).length === 0 }
-        >
-          <PictureAsPdfIcon />
-        </IconButton>
+        <Tooltip title={ "Download PDF" } arrow>
+          <IconButton
+            onClick={ () => generatePdfFromJson(osarReport, `${name}-osar.json`, cosigneLink) }
+            style={ { top: '-5px' } }
+            color="info"
+            disabled={ Object.keys(osarReport).length === 0 }
+          >
+            <PictureAsPdfIcon />
+          </IconButton>
+        </Tooltip>
         <Divider orientation="vertical" flexItem sx={ { height: 28, mx: 2, opacity: 1 } } />
-        <IconButton
-          onClick={ () => downloadJson(osarReport, `${name}-osar.json`) }
-          style={ { top: '-5px' } }
-          color="info"
-          disabled={ Object.keys(osarReport).length === 0 }
-        >
-          <DataObjectIcon />
-        </IconButton>
+
+        <Tooltip title={ "Download JSON" } arrow>
+          <IconButton
+            onClick={ () => downloadJson(osarReport, `${name}-osar.json`) }
+            style={ { top: '-5px' } }
+            color="info"
+            disabled={ Object.keys(osarReport).length === 0 }
+          >
+            <DataObjectIcon />
+          </IconButton>
+        </Tooltip>
       </Box>
     </Card>
   );
@@ -66,7 +82,7 @@ const OSAR = ({ name }: { name: string }) => {
   useEffect(() => {
     const osarReportLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/${name}-osar.json`;
     const cosignLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/cosign.pub`;
-    
+
     const fetchData = async () => {
       await verifyLink(osarReportLink, setOsarReportData);
       await checkFileExists(cosignLink, setCosignLink);
