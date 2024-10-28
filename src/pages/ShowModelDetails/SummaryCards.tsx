@@ -27,17 +27,9 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ Component, name }) => {
 const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
   return (
     <MKBox
-      mt={ 20 }
-      style={ {
-        backgroundColor: "white"
-      } }
-      sx={ {
-        borderRadius: 2,
-        p: 3,
-        boxShadow: 3, // Adding shadow for card effect
-      } }
+      mt={ 20.9 }
     >
-      <Grid container spacing={ 1 } sx={ {
+      <Grid container spacing={ 2 } sx={ {
         position: "relative", top: "-150px", backgroundColor: "white", "@media (min-width: 990px) and (max-width: 1378px)": {
           "& > div": {
             minWidth: "50%",
@@ -59,4 +51,3 @@ const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
 };
 
 export default SummaryCards;
-

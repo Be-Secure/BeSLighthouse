@@ -11,25 +11,26 @@ const DescriptionCard: React.FC<{ title: string; description: string }> = ({
   return (
     <Card
       sx={ {
-        p: 2,
+        p: 1,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
+        // justifyContent: "space-between",
+        height: "100%"
       } }
     >
       { /* Title Section */ }
       <Box
         sx={ {
           textAlign: "center",
+          m: 0
         } }
       >
-        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold" } }>
+        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold", m: 0 } }>
           { title }
         </Typography>
       </Box>
 
-      <Divider sx={ { mb: 2, opacity: 1 } } />
+      <Divider sx={ { m: 1, opacity: 1 } } />
 
       { /* Description Section */ }
       <MKTypography
@@ -51,7 +52,7 @@ const DescriptionCard: React.FC<{ title: string; description: string }> = ({
 
 const ModelDescription = ({ description, name }: { description: string, name: string }) => {
   return (
-    <Grid container spacing={ 3 }>
+    <Grid container spacing={ 2 }>
       <Grid item xs={ 12 } md={ 8 }>
         <DescriptionCard title="Model Description" description={ description } />
       </Grid>

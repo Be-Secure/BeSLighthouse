@@ -21,13 +21,22 @@ const downloadJson = (osarReport: any, modelName: string) => {
 
 const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigneLink: boolean }> = ({ title, osarReport, cosigneLink, name }) => {
   return (
-    <Card sx={ { p: 2, height: '100%', display: 'flex', flexDirection: 'column' } }>
-      <Box sx={ { textAlign: "center" } }>
-        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold" } }>
+    <Card sx={ {
+      p: 1,
+      display: "flex",
+      flexDirection: "column",
+      // justifyContent: "space-between",
+      height: "100%"
+    } }>
+      <Box sx={ {
+        textAlign: "center",
+        m: 0
+      } }>
+        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold", m: 0 } }>
           { title }
         </Typography>
       </Box>
-      <Divider sx={ { mb: 2, opacity: 1 } } />
+      <Divider sx={ { m: 1, opacity: 1 } } />
       <Box display="flex" alignItems="center" justifyContent="center">
         { cosigneLink && (
           <>

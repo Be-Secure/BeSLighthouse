@@ -430,8 +430,7 @@ function BesVersionHistory() {
                 </Card>
 
                 { /* For project description, languages and tags */ }
-                <Grid key={ `TOPGRID14${index}` } container pt={ 2 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between", } }>
-
+                <Grid key={ `TOPGRID14${index}` } container pt={ 2 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between" } }>
                   <AssessmentReport
                     title="Assessment Report"
                     name={ besName.slice(1) }
