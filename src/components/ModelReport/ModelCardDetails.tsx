@@ -1,12 +1,12 @@
 import React from "react";
-import { Box, Typography, Divider, Grid, Card, Chip, Tooltip } from "@mui/material";
+import { Grid, Card, Chip, Tooltip } from "@mui/material";
 import MKTypography from "../MKTypography";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 // Reusable component for model detail entries
 const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> = ({ label, value, isLink }) => {
   return (
-    <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", paddingTop: "12px" } }>
+    <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", paddingTop: "6px" } }>
       <MKTypography
         variant="h6"
         textTransform="capitalize"
@@ -39,20 +39,7 @@ export default function ModelCardDetails({ model }: any) {
   const selectedModel = model.length > 0 ? model[0] : {};
 
   return (
-    <Card key={ `TOPCARD12` } sx={ { mb: 4, p: 3 } }>
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        height="50%"
-        textAlign="center"
-      >
-        <Typography variant="h6" gutterBottom>
-          Model Card
-        </Typography>
-      </Box>
-      <Divider sx={ { mb: 2, opacity: 1 } } />
+    <Card key={ `TOPCARD12` } sx={ { mb: 2, p: 3 } }>
       <Grid key={ `TOPGRID1` } container spacing={ 1 } pl={ 4 }>
         { [
           { label: "Name", value: selectedModel.name },
@@ -67,7 +54,7 @@ export default function ModelCardDetails({ model }: any) {
           <ModelDetail key={ `GRID${idx}` } { ...detail } />
         )) }
         { /* Dependencies moved to next line */ }
-        <Grid key={ `GRID_DEPENDENCIES` } item xs={ 12 } style={ { display: 'flex', alignItems: 'center', paddingTop: '12px', flexWrap: 'wrap' } }>
+        <Grid key={ `GRID_DEPENDENCIES` } item xs={ 12 } style={ { display: 'flex', alignItems: 'center', paddingTop: '6px', flexWrap: 'wrap' } }>
           <MKTypography
             variant="h6"
             textTransform="capitalize"
