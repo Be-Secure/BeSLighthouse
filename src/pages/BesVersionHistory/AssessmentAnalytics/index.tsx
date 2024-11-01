@@ -138,7 +138,7 @@ const FetchData = ({
       );
     } else {
       return (
-        <Card key="RISKPOSTURECARD1" style={ { height: "266px" } }>
+        <Card key="RISKPOSTURECARD1" style={ { height: "273px" } }>
           <MKTypography
             variant="h6"
             fontWeight="bold"
@@ -148,6 +148,7 @@ const FetchData = ({
               fontSize: "15px",
               display: "flex",
               placeContent: "center",
+              padding: '8px'
             } }
           >
             { title }
@@ -176,7 +177,7 @@ const FetchData = ({
       );
     } else {
       return (
-        <Card key="RISKPOSTURECARD1" style={ { height: "266px" } }>
+        <Card key="RISKPOSTURECARD1" style={ { height: "273px" } }>
           <MKTypography
             variant="h6"
             fontWeight="bold"
@@ -186,6 +187,7 @@ const FetchData = ({
               fontSize: "15px",
               display: "flex",
               placeContent: "center",
+              padding: '8px'
             } }
           >
             { title }
@@ -223,14 +225,14 @@ function AssessmentAnalytics({
     "Known Vulnerabilities"
   ];
   return (
-    <Grid container pt={ 2 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between" } }>
+    <Grid container pt={ 0.5 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between" } }>
 
       { report.map((value) => {
         return (
 
           <Grid item xs={ 12 } md={ 6 }
             style={ {
-              // paddingRight: "9px"
+              paddingBottom: '23px'
             } }>
             <FetchData
               title={ value }
