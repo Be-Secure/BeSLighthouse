@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Card, Typography, Box, Divider, Tooltip } from "@mui/material";
+import cyclonedx from '../../assets/images/owasp_cyclonedx_logo.jpg';
 import CheckIcon from '../../assets/images/checked.png';
 import { checkFileExists } from "../../utils/checkFileExists";
 import { verifyLink } from "../../utils/verifyLink";
@@ -28,12 +29,20 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
       // justifyContent: "space-between",
       height: "100%"
     } }>
-      <Box sx={ {
-        textAlign: "center",
-        m: 0
-      } }>
-        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold", m: 0 } }>
+      <Box sx={ { textAlign: "center", m: 0 } }>
+        <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold", m: 0, display: 'inline-flex', alignItems: 'center' } }>
           { title }
+          { cosigneLink && (
+            <Tooltip title="Attested" arrow>
+              <img
+                style={ { marginLeft: '8px', position: 'relative', top: '-2px', textAlign: 'left' } }
+                src={ CheckIcon }
+                alt="Checked Icon"
+                width={ 24 }
+                height={ 24 }
+              />
+            </Tooltip>
+          ) }
         </Typography>
       </Box>
       <Divider sx={ { m: 1, opacity: 1 } } />
@@ -44,16 +53,13 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
               <Typography variant="body1" sx={ { display: 'flex', alignItems: 'center', mr: 2 } }>
                 <img
                   style={ { position: 'relative', top: '-2px' } }
-                  src={ CheckIcon }
+                  src={ cyclonedx }
                   alt="Checked Icon"
                   width={ 24 }
                   height={ 24 }
                 />
               </Typography>
             </Tooltip>
-            { /* <Typography variant="body1" sx={ { display: 'flex', alignItems: 'center', mr: 2 } }>
-              <img style={ { position: 'relative', top: '-2px' } } src={ CheckIcon } title="Attested" alt="Checked Icon" width={ 24 } height={ 24 } />
-            </Typography> */ }
             <Divider orientation="vertical" flexItem sx={ { height: 28, mx: 2, opacity: 1 } } />
           </>
         ) }

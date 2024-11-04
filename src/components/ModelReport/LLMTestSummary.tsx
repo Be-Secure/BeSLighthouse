@@ -40,7 +40,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, successCount, failCou
             <Tooltip title="Success Count" arrow>
               <Chip
                 label={ successCount }
-                sx={ { backgroundColor: '#4CAF50', color: 'white', mr: 0.5, width: '40px' } }
+                sx={ { backgroundColor: '#F3F6F4', color: 'white', mr: 0.5, width: '40px' } }
               />
             </Tooltip>
           ) }
@@ -48,7 +48,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, successCount, failCou
             <Tooltip title="Fail Count" arrow>
               <Chip
                 label={ failCount }
-                sx={ { backgroundColor: '#F44336', color: 'white', width: '40px' } }
+                sx={ { backgroundColor: '#F3F6F4', color: 'white', width: '40px' } }
               />
             </Tooltip>
           ) }
@@ -105,11 +105,11 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
   if (miterData.length > 0) {
     miterData.forEach((data: any) => {
       const outputs = data.judge_response?.outputs; // Use optional chaining
-    
+
       if (Array.isArray(outputs)) {
         outputs.forEach((output: any) => {
           const stopReason = output.stop_reason;
-    
+
           if (stopReason === "stop") {
             count.miter.fail++;
           } else {
@@ -128,17 +128,19 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
         <Typography variant="h6" sx={ { fontWeight: 'bold' } }>LLM Benchmark</Typography>
       </Box>
       <Divider sx={ { mb: 2, opacity: 1 } } />
-      <Grid container direction="column" spacing={ 2 } sx={ { mt: 2 } }>
-        <Grid item>
-          <CustomButton text="MITRE Test" successCount={ count.miter.success } failCount={ count.miter.fail } />
+      <Box sx={ { flexGrow: 1, maxHeight: '300px', overflowY: 'auto' } }>
+        <Grid container direction="column" spacing={ 2 } sx={ { mt: 2 } }>
+          <Grid item>
+            <CustomButton text="MITRE Test" successCount={ count.miter.success } failCount={ count.miter.fail } />
+          </Grid>
+          <Grid item>
+            <CustomButton text="Instruct Test" successCount={ count.instruct.success } failCount={ count.instruct.fail } />
+          </Grid>
+          <Grid item>
+            <CustomButton text="Autocomplete Test" successCount={ count.autocomplete.success } failCount={ count.autocomplete.fail } />
+          </Grid>
         </Grid>
-        <Grid item>
-          <CustomButton text="Instruct Test" successCount={ count.instruct.success } failCount={ count.instruct.fail } />
-        </Grid>
-        <Grid item>
-          <CustomButton text="Autocomplete Test" successCount={ count.autocomplete.success } failCount={ count.autocomplete.fail } />
-        </Grid>
-      </Grid>
+      </Box>
     </Card>
   );
 };
