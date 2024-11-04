@@ -225,15 +225,12 @@ function AssessmentAnalytics({
     "Known Vulnerabilities"
   ];
   return (
-    <Grid container pt={ 0.5 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between" } }>
+    <Grid container pt={ 2 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between" } }>
 
       { report.map((value) => {
         return (
 
-          <Grid item xs={ 12 } md={ 6 }
-            style={ {
-              paddingBottom: '23px'
-            } }>
+          <Grid item xs={ 12 } md={ 6 }>
             <FetchData
               title={ value }
               version={ version }

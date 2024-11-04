@@ -159,15 +159,15 @@ function BesVersionHistory() {
                   />
                 </Grid>
 
-                <Grid container spacing={ 2 } pt={ 2 } style={ { display: "flex", justifyContent: "space-around" } }>
+                <Grid container spacing={ 1 } pt={ 2 } style={ { display: "flex", justifyContent: "space-around" } }>
                   { /* Project Description - Adjusted height */ }
-                  <Grid item xs={ 12 } md={ 6 } style={ { display: "flex", paddingTop: "14px", paddingBottom: "11px" } }>
+                  <Grid item xs={ 12 } md={ 6 } style={ { display: "flex"} }>
                     <DescriptionCard title="Project Description" content={ item.description } />
                   </Grid>
 
                   { /* Languages and Tags - Combined height matches Project Description */ }
-                  <Grid item xs={ 12 } md={ 6 } style={ { display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "12px 7px", height: "100%" } }>
-                    <LanguagesCard languages={ languages } style={ { flex: 1, marginBottom: "12px" } } />
+                  <Grid item xs={ 12 } md={ 6 } style={ { display: "flex", flexDirection: "column", justifyContent: "space-between" } }>
+                    <LanguagesCard languages={ languages } style={ { flex: 1 } } />
                     <TagsCard tags={ item.tags } style={ { flex: 1 } } />
                   </Grid>
                 </Grid>
