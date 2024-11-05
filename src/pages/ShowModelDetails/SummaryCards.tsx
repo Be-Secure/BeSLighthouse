@@ -18,7 +18,7 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ Component, name }) => {
     <Grid item xs={ 12 }  // Full width on extra small screens
       sm={ 6 }   // Two cards per row on small screens
       md={ 6 }   // Two cards per row on medium screens (fixed)
-      lg={ 3 }   // Four cards per row on large screens
+      lg={ 4 }   // Four cards per row on large screens
     >
       <Component name={ name } />
     </Grid >
@@ -45,14 +45,14 @@ const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
         }
       } }>
 
-        { modelType.type === "LLM" && (
+        { modelType.type === "Classic" && (
           <>
             <SummaryCard Component={ AttackSummary } name={ name } />
             <SummaryCard Component={ WeaknessSummary } name={ name } />
           </>
         ) }
 
-        { modelType.type === "Classic" && (
+        { modelType.type === "LLM" && (
           <>
             <SummaryCard Component={ LLMTestSummary } name={ name } />
             <SummaryCard Component={ InsecureCodeDetection } name={ name } />

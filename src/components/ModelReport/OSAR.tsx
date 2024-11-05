@@ -46,7 +46,7 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
         </Typography>
       </Box>
       <Divider sx={ { m: 1, opacity: 1 } } />
-      <Box display="flex" alignItems="center" justifyContent="center">
+      <Box display="flex" alignItems="center" justifyContent="center" pt={ 2 }>
         { cosigneLink && (
           <>
             <Tooltip title="Attested" arrow>

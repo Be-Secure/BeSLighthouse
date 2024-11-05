@@ -52,11 +52,11 @@ const DescriptionCard: React.FC<{ title: string; description: string }> = ({
 
 const ModelDescription = ({ description, name }: { description: string, name: string }) => {
   return (
-    <Grid container spacing={ 2 }>
-      <Grid item xs={ 12 } md={ 8 }>
+    <Grid container spacing={ 2 } style={ {height: '142px'} }>
+      <Grid item xs={ 12 } md={ 10 }>
         <DescriptionCard title="Model Description" description={ description } />
       </Grid>
-      <Grid item xs={ 12 } md={ 4 }>
+      <Grid item xs={ 12 } md={ 2 }>
         <OSAR name={ name }/>
       </Grid>
     </Grid>

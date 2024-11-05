@@ -43,13 +43,13 @@ export default function ModelCardDetails({ model }: any) {
       <Grid key={ `TOPGRID1` } container spacing={ 1 } pl={ 4 }>
         { [
           { label: "Name", value: selectedModel.name },
-          { label: "Organization", value: selectedModel.organization },
-          { label: "Created Date", value: new Date(selectedModel.created_date).toLocaleDateString() },
           { label: "Model URL", value: selectedModel.model_url, isLink: true },
-          { label: "Repository URL", value: selectedModel.url, isLink: true },
-          { label: "Modality", value: selectedModel.modality },
           { label: "Size", value: selectedModel.size },
           { label: "License", value: selectedModel.license }, // Displaying License Before Dependencies
+          { label: "Organization", value: selectedModel.organization },
+          { label: "Repository URL", value: selectedModel.url, isLink: true },
+          { label: "Modality", value: selectedModel.modality },
+          { label: "Created Date", value: new Date(selectedModel.created_date).toLocaleDateString() },
         ].map((detail, idx) => (
           <ModelDetail key={ `GRID${idx}` } { ...detail } />
         )) }
