@@ -13,7 +13,7 @@ import { besecureMlAssessmentDataStore } from "../../dataStore";
 import { verifyLink } from "../../utils/verifyLink";
 
 export default function ModelIntegritySuiteTable() {
-  const [report, setReport] = useState({});
+  const [report, setReport]: any = useState({});
   let { modelName, modelIntegrityType }: any = useParams();
   const name = modelName.slice(1);
   const modelIntegrity = modelIntegrityType.slice(1);
@@ -44,25 +44,29 @@ export default function ModelIntegritySuiteTable() {
     { id: "Description", label: "Description", alignRight: false }
   ];
 
+  let count = 1;
+
   const extractRows = (data: any) => {
     const rows: any = [];
-    for (const [key, value] of Object.entries(data)) {
-      if (value && typeof value === 'object') {
-        for (const [severity, descriptions] of Object.entries(value)) {
-          descriptions.forEach((description: any) => {
-            rows.push({
-              detector: key,
-              severity: severity,
-              description: description
-            });
+    if (!data || Object.entries(data).length === 0) return rows;
+
+    for (const [severity, descriptions] of Object.entries(data)) {
+      if (Array.isArray(descriptions)) {
+        descriptions.forEach((description: any) => {
+          rows.push({
+            detector: count++,
+            severity: severity,
+            description: description
           });
-        }
+        });
       }
     }
+
     return rows;
   };
+  // Extract rows only for the specific `modelIntegrity` key in the report
+  const rows = report[modelIntegrity] ? extractRows(report[modelIntegrity]) : [];
 
-  const rows = extractRows(report);
 
   return (
     <TableContainer sx={ { minWidth: 800 } }>
