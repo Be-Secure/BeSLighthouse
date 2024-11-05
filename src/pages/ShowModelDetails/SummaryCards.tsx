@@ -6,6 +6,7 @@ import WeaknessSummary from "../../components/ModelReport/WeaknessSummary";
 import LLMTestSummary from "../../components/ModelReport/LLMTestSummary";
 import InsecureCodeDetection from "../../components/ModelReport/InsecureCodeDetection";
 import { useLocation } from "react-router-dom";
+import ModelIntegritySuite from "../../components/ModelReport/ModelIntegritySuite";
 
 interface SummaryCardProps {
   Component: React.FC<any>; // Accept any component with props
@@ -58,6 +59,7 @@ const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
             <SummaryCard Component={ InsecureCodeDetection } name={ name } />
           </>
         ) }
+        <SummaryCard Component={ ModelIntegritySuite } name={ name } />
       </Grid>
     </MKBox>
   );

@@ -13,6 +13,9 @@ import ShowVulnerabilityDetails from "./pages/ShowVulnerabilityDetails";
 import ShowModelDetails from "./pages/ShowModelDetails";
 import ModelVulnerabilitiesDetailed from "./pages/ModelVulnerabilitiesDetailed";
 import FuzzingModel from "./pages/FuzzingModel";
+import InsecureCodeDetection from "./pages/InsecureCodeDetection";
+import LlmBenchmarReport from "./pages/LlmBenchmarkReport";
+import ModelIntegritySuite from "./pages/ModelIntegritySuite";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -34,6 +37,9 @@ const App = () => {
         <Route path="/BeSLighthouse/vulnerability_report/:cveId" element={ <ShowVulnerabilityDetails /> } />
         <Route path="/BeSLighthouse/model_report/:modelName" element={ <ShowModelDetails /> } />
         <Route path="/BeSLighthouse/model_vulnerabilities_detailed/:modelName" element={ <ModelVulnerabilitiesDetailed /> } />
+        <Route path="/BeSLighthouse/insecure_code_detection/:modelName" element={ <InsecureCodeDetection /> } />
+        <Route path="/BeSLighthouse/llm_benchmark_report/:llm_type/:modelName" element={ <LlmBenchmarReport /> } />
+        <Route path="/BeSLighthouse/model_integrity_suite/:modelIntegrityType/:modelName" element={ <ModelIntegritySuite /> } />
         <Route path="/BeSLighthouse/model_fuzzing/:modelName" element={ <FuzzingModel /> } />
       </Routes>
     </ThemeProvider>
