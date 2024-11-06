@@ -112,7 +112,7 @@ const InsecureCodeDetection: React.FC<{ name: string }> = ({ name }) => {
       <Divider sx={ { mb: 2, opacity: 1, position: 'relative', top: '-14px' } } />
 
       { /* Main container with F3F9FB background surrounding grid items */ }
-      <Box sx={ { backgroundColor: '#fffff', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px' } }>
+      <Box sx={ { backgroundColor: '#fffff', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px', position: 'relative', top: '-30px' } }>
         <Grid container spacing={ 2 } justifyContent="center">
 
           { /* Test Cases */ }

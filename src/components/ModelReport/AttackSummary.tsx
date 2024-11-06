@@ -155,7 +155,7 @@ const SummaryCard: React.FC<{ title: string; buttonLabel: string, name: string }
       <Divider sx={ { my: 2, opacity: 1, position: 'relative', top: '-14px' } } />
 
       { /* Additional content or placeholders can go here */ }
-      <Box sx={ { flexGrow: 1 } } />
+      { /* <Box sx={ { flexGrow: 1 } } /> */ }
       <AdversarialAttackSummary attackMap={ attackMap } />
     </Card>
   );

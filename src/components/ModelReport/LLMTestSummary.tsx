@@ -161,7 +161,7 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
       </Box>
       <Divider sx={ { mb: 2, opacity: 1 } } />
       <Box sx={ { flexGrow: 1, maxHeight: '300px', overflowY: 'auto' } }>
-        <Grid container direction="column" spacing={ 2 } sx={ { mt: 2 } }>
+        <Grid container direction="column" spacing={ 2 }>
           { tests.map((test) => (
             <Grid item key={ test.key }>
               <CustomButton

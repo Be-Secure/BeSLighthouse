@@ -88,7 +88,7 @@ const WeaknessSummary: React.FC<{ name: string }> = ({ name }) => {
       <Divider sx={ { my: 2, opacity: 1, position: 'relative', top: '-14px' } } />
 
       { /* Main container with F3F9FB background, surrounding grid items */ }
-      <Box sx={ { backgroundColor: '#fffff', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px' } }>
+      <Box sx={ { backgroundColor: '#fffff', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px', position: 'relative', top: '-30px' } }>
         <Grid container spacing={ 2 } sx={ { textAlign: 'center' } }>
 
           { /* Critical and High */ }
@@ -109,6 +109,7 @@ const WeaknessSummary: React.FC<{ name: string }> = ({ name }) => {
       <MKTypography
         pt={ 1 }
         component="div"
+        style= { {position: 'relative', top: '-18px'} }
       >
         <Box
           display="flex"
