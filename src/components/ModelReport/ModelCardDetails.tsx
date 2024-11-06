@@ -78,16 +78,25 @@ export default function ModelCardDetails({ model }: any) {
           </MKTypography>
 
           <Box sx={ { flexGrow: 1, maxHeight: '70px', overflowY: 'auto', width: '100%' } }>
-            { selectedModel.dependencies?.map((dep: string, idx: number) => (
-              <Tooltip key={ idx } title={ dep.length > 20 ? dep : '' } arrow>
-                <Chip
-                  label={ dep.length > 20 ? `${dep.substring(0, 20)}...` : dep }
-                  variant="outlined"
-                  size="small"
-                  sx={ { width: '100%' } }
-                />
-              </Tooltip>
-            )) }
+            { selectedModel.dependencies && selectedModel.dependencies.length > 0 ? (
+              selectedModel.dependencies.map((dep: string, idx: number) => (
+                <Tooltip key={ idx } title={ dep.length > 20 ? dep : '' } arrow>
+                  <Chip
+                    label={ dep.length > 20 ? `${dep.substring(0, 20)}...` : dep }
+                    variant="outlined"
+                    size="small"
+                    sx={ { width: '100%' } }
+                  />
+                </Tooltip>
+              ))
+            ) : (
+              <Chip
+                label="None"
+                variant="outlined"
+                size="small"
+                sx={ { width: '100%' } }
+              />
+            ) }
           </Box>
         </Grid>
       </Grid>

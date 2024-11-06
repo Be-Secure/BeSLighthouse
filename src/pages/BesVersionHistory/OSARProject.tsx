@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, Typography, Box, Divider, Tooltip } from "@mui/material";
 import cyclonedx from '../../assets/images/owasp_cyclonedx_logo.jpg';
 import CheckIcon from '../../assets/images/checked.png';
-import { checkFileExists } from "../../utils/checkFileExists";
-import { verifyLink } from "../../utils/verifyLink";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import IconButton from '@mui/material/IconButton';
-import { generatePdfFromJson } from "../../utils/OsarPdf";
 import DataObjectIcon from '@mui/icons-material/DataObject';
+import { generatePdfFromJson } from "../../utils/OsarPdf";
 
 const downloadJson = (osarReport: any, modelName: string) => {
   const jsonContent = JSON.stringify(osarReport);
@@ -20,16 +18,15 @@ const downloadJson = (osarReport: any, modelName: string) => {
   link.click();
 };
 
-const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigneLink: boolean }> = ({ title, osarReport, cosigneLink, name }) => {
+const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigneLink: boolean, selectedOption: string }> = ({ title, osarReport, cosigneLink, name, selectedOption }) => {
   return (
     <Card sx={ {
-      p: 1,
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "space-between",
-      height: "100%"
+      height: "100%",
+      flex: 1
     } }>
-      <Box sx={ { textAlign: "center", m: 0 } }>
+      <Box sx={ { textAlign: "center", m: 0, flex: 1 } }>
         <Typography variant="h6" gutterBottom sx={ { fontWeight: "bold", m: 0, display: 'inline-flex', alignItems: 'center' } }>
           { title }
           { cosigneLink && (
@@ -46,15 +43,15 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
         </Typography>
       </Box>
       <Divider sx={ { m: 1, opacity: 1 } } />
-      <Box display="flex" alignItems="center" justifyContent="center" pt={ 2 }>
+      <Box display="flex" alignItems="center" justifyContent="center" pt={ 1.5 } flex={ 1 }>
         <Tooltip title="CycloneDX" arrow>
           <Typography variant="body1" sx={ { display: 'flex', alignItems: 'center', mr: 2 } }>
             <img
               style={ {
                 position: 'relative',
                 top: '-2px',
-                opacity: 0.5, // Makes the image look disabled
-                pointerEvents: 'none' // Prevents interaction with the image
+                opacity:  0.5,
+                pointerEvents: 'none'
               } }
               src={ cyclonedx }
               alt="Checked Icon"
@@ -67,7 +64,7 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
 
         <Tooltip title={ "Download PDF" } arrow>
           <IconButton
-            onClick={ () => generatePdfFromJson(osarReport, `${name}-osar`, cosigneLink) }
+            onClick={ () => generatePdfFromJson(osarReport, `${name}-${selectedOption}-osar`, cosigneLink) }
             style={ { top: '-5px' } }
             color="info"
             disabled={ Object.keys(osarReport).length === 0 }
@@ -79,7 +76,7 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
 
         <Tooltip title={ "Download JSON" } arrow>
           <IconButton
-            onClick={ () => downloadJson(osarReport, `${name}-osar.json`) }
+            onClick={ () => downloadJson(osarReport, `${name}-${selectedOption}-osar.json`) }
             style={ { top: '-5px' } }
             color="info"
             disabled={ Object.keys(osarReport).length === 0 }
@@ -92,23 +89,8 @@ const InfoCard: React.FC<{ name: string, title: string, osarReport: any, cosigne
   );
 };
 
-const OSAR = ({ name }: { name: string }) => {
-  const [getOsarReport, setOsarReportData] = React.useState({});
-  const [getCosignLink, setCosignLink] = React.useState(false);
-
-  useEffect(() => {
-    const osarReportLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/${name}-osar.json`;
-    const cosignLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/cosign.pub`;
-
-    const fetchData = async () => {
-      await verifyLink(osarReportLink, setOsarReportData);
-      await checkFileExists(cosignLink, setCosignLink);
-    };
-
-    fetchData();
-  }, [name]); // Add `name` to the dependency array to re-run on name change
-
-  return <InfoCard title="OSAR" osarReport={ getOsarReport } cosigneLink={ getCosignLink } name={ name } />;
+const OSARProject = ({ besName, osarReportData, selectedOption, cosignLinkExists }: any) => {
+  return <InfoCard title="OSAR" osarReport={ osarReportData } cosigneLink={ cosignLinkExists } name={ besName } selectedOption={ selectedOption } />;
 };
 
-export default OSAR;
+export default OSARProject;

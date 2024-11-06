@@ -155,7 +155,7 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
   tests.forEach((test) => calculateCounts(testData[test.key], test.key));
 
   return (
-    <Card sx={ { p: 3, minHeight: '422px', backgroundColor: '#F3F9FB', display: 'flex' } }>
+    <Card sx={ { p: 3, minHeight: '422px', backgroundColor: '#fffff', display: 'flex' } }>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start" height="50%" textAlign="left">
         <Typography variant="h6" sx={ { fontWeight: 'bold' } }>LLM Benchmark</Typography>
       </Box>

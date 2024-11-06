@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
-import CheckIcon from '../assets/images/owasp_cyclonedx_logo.jpg';
+import CheckIcon from '../assets/images/checked.png';
 
 const checkReport: any = {
   'insecure-code-detection': 'Insecure Code Detection',
