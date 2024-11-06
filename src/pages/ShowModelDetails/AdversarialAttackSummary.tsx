@@ -1,4 +1,5 @@
 import {
+  Box,
   Table,
   TableBody,
   TableCell,
@@ -85,8 +86,8 @@ const AdversarialAttackSummary = ({ attackMap }: any) => {
 
   return (
     <>
-      <TableContainer sx={ { minHeight: '242px'} }>
-        <Table sx={ { minHeight: '242px'} }>
+      <TableContainer sx={ { minHeight: '242px' } }>
+        <Table sx={ { minHeight: '242px' } }>
           <TableHead sx={ { display: "contents" } }>
             <TableRow>
               { TABLE_HEAD.map((headCell: any) => (
@@ -119,21 +120,26 @@ const AdversarialAttackSummary = ({ attackMap }: any) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography color="black"
-        pt={ 2 }
-        pb={ 1 }
-        style={ { fontSize: "12px", float: "right" } }>
-        Powered by <a
-          style={ {
-            color: "grey",
-            cursor: "pointer"
-          } }
-          href={ `https://www.boschaishield.com/` }
-          title={ "Click to view boschaishield webpage" }
-          target="_blank"
+      <Typography component="div" pt={ 2 } pb={ 1 }>
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          sx={ { fontSize: "12px" } }
         >
-          Bosch AIShield
-        </a>
+          Powered by
+          <a
+            style={ {
+              color: "grey",
+              cursor: "pointer",
+              marginLeft: "4px"
+            } }
+            href={ `https://www.boschaishield.com/` }
+            title={ "Click to view boschaishield webpage" }
+            target="_blank"
+          >
+            Bosch AIShield
+          </a>
+        </Box>
       </Typography>
     </>
   );

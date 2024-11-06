@@ -2,7 +2,7 @@ import * as React from "react";
 import { Grid, MenuItem, Select, Tooltip } from "@mui/material";
 import MKTypography from "../../components/MKTypography";
 import DownloadIcon from '@mui/icons-material/Download';
-import CheckIcon from '../../assets/images/checked.png';
+import CheckIcon from '../../assets/images/owasp_cyclonedx_logo.jpg';
 import { generatePdfFromJson } from "../../utils/OsarPdf";
 
 export const InfoGridItem = ({ label, value }: any) => (

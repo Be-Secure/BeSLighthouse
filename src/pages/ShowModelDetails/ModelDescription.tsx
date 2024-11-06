@@ -39,7 +39,7 @@ const DescriptionCard: React.FC<{ title: string; description: string }> = ({
           fontSize: "15px",
           textAlign: "justify",
           color: "black",
-          maxHeight: "60px", // Restrict max height
+          maxHeight: "103px", // Restrict max height
           overflowY: "auto", // Enable vertical scrolling
           padding: "0 10px", // Add padding for readability
         } }
@@ -53,10 +53,10 @@ const DescriptionCard: React.FC<{ title: string; description: string }> = ({
 const ModelDescription = ({ description, name }: { description: string, name: string }) => {
   return (
     <Grid container spacing={ 2 }>
-      <Grid item xs={ 12 } md={ 8 }>
+      <Grid item xs={ 12 } md={ 10 }>
         <DescriptionCard title="Model Description" description={ description } />
       </Grid>
-      <Grid item xs={ 12 } md={ 4 }>
+      <Grid item xs={ 12 } md={ 2 }>
         <OSAR name={ name }/>
       </Grid>
     </Grid>

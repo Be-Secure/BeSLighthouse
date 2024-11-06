@@ -137,7 +137,7 @@ const SummaryCard: React.FC<{ title: string; buttonLabel: string, name: string }
     <Card sx={ {
       p: 3,
       minHeight: '422px',
-      backgroundColor: '#F3F9FB',
+      backgroundColor: '#fffff',
       display: 'flex',
       flexDirection: 'column',
     } }>

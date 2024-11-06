@@ -73,7 +73,7 @@ const WeaknessSummary: React.FC<{ name: string }> = ({ name }) => {
     <Card sx={ {
       p: 3,
       minHeight: '422px',
-      backgroundColor: '#F3F9FB',
+      backgroundColor: '#fffff',
       display: 'flex',
       flexDirection: 'column',
     } }>
@@ -88,7 +88,7 @@ const WeaknessSummary: React.FC<{ name: string }> = ({ name }) => {
       <Divider sx={ { my: 2, opacity: 1, position: 'relative', top: '-14px' } } />
 
       { /* Main container with F3F9FB background, surrounding grid items */ }
-      <Box sx={ { backgroundColor: '#F3F9FB', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px' } }>
+      <Box sx={ { backgroundColor: '#fffff', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px' } }>
         <Grid container spacing={ 2 } sx={ { textAlign: 'center' } }>
 
           { /* Critical and High */ }
@@ -101,26 +101,34 @@ const WeaknessSummary: React.FC<{ name: string }> = ({ name }) => {
           </Grid>
 
           { /* Medium and Low */ }
-          <SeverityBox title="Medium" count={ linkStatus?.["Total Model Vulnerabilities Found"]?.Medium ?? 0  } />
+          <SeverityBox title="Medium" count={ linkStatus?.["Total Model Vulnerabilities Found"]?.Medium ?? 0 } />
           <SeverityBox title="Low" count={ linkStatus?.["Total Model Vulnerabilities Found"]?.Low ?? 0 } />
 
         </Grid>
       </Box>
       <MKTypography
         pt={ 1 }
-        style={ { float: "right", fontSize: "12px" } }
+        component="div"
       >
-        Powered by <a
-          style={ {
-            color: "grey",
-            cursor: "pointer"
-          } }
-          href={ `https://github.com/bosch-aisecurity-aishield/watchtower` }
-          title={ "Click to go to AIShield Watchtower repo" }
-          target="_blank"
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          sx={ { fontSize: "12px" } }
         >
-          AIShield Watchtower
-        </a>
+          Powered by
+          <a
+            style={ {
+              color: "grey",
+              cursor: "pointer",
+              marginLeft: "4px"
+            } }
+            href={ `https://github.com/bosch-aisecurity-aishield/watchtower` }
+            title={ "Click to go to AIShield Watchtower repo" }
+            target="_blank"
+          >
+            AIShield Watchtower
+          </a>
+        </Box>
       </MKTypography>
     </Card>
   );

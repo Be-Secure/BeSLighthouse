@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { Box, Card, Divider, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, Divider, Grid, Typography } from "@mui/material";
 import { verifyLink } from "../../utils/verifyLink";
+import { NavLink } from "react-router-dom";
 
 interface InsecureCodeItem {
   insecure_code: boolean;
@@ -13,6 +14,53 @@ interface InsecureCodeItem {
   }[];
   recommended_treatment: string;
   llm_output_code: string;
+}
+
+
+function insecureCodeDetectionReport(selectedMenu: string, report: any, buttonLabel: string) {
+  if (report.length > 0) {
+    return (
+      <NavLink
+        to={ {
+          pathname: `/BeSLighthouse/insecure_code_detection/:${selectedMenu}`,
+          search: ""
+        } }
+        state={ { selectedFuzz: selectedMenu } }
+        style={ { color: "#587f2f", cursor: "pointer" } }
+      >
+        <Button
+          sx={ {
+            top: '-12px',
+            backgroundColor: '#CCF2FF',
+            color: 'black',
+            '&:hover': {
+              backgroundColor: '#99D6FF',
+              opacity: 0.9,
+            },
+          } }
+        >
+          { buttonLabel }
+        </Button>
+      </NavLink>
+    );
+  } else {
+    return (
+      <Button
+        sx={ {
+          top: '-12px',
+          backgroundColor: '#CCF2FF',
+          color: 'black',
+          '&:hover': {
+            backgroundColor: '#99D6FF',
+            opacity: 0.9,
+          }
+        } }
+        disabled
+      >
+        { buttonLabel }
+      </Button>
+    );
+  }
 }
 
 // Custom component for displaying test case info
@@ -49,23 +97,22 @@ const InsecureCodeDetection: React.FC<{ name: string }> = ({ name }) => {
     <Card sx={ {
       p: 3,
       minHeight: '422px',
-      backgroundColor: '#F3F9FB',
-      display: 'flex'
+      backgroundColor: '#fffff',
+      display: 'flex',
+      flexDirection: 'column',
     } }>
       <Box
         display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="left"
-        height="50%"
-        textAlign="left"
+        justifyContent="space-between"
+        alignItems="center" // Align to center vertically
       >
-        <Typography variant="h6" sx={ { fontWeight: 'bold' } }>Insecure Code Detection</Typography>
+        <Typography variant="h6" sx={ { position: 'relative', fontWeight: 'bold', top: '-7px' } }>Insecure Code Detection</Typography>
+        { insecureCodeDetectionReport(name, insecureCode, 'Report') }
       </Box>
-      <Divider sx={ { mb: 2, opacity: 1 } } />
+      <Divider sx={ { mb: 2, opacity: 1, position: 'relative', top: '-14px' } } />
 
       { /* Main container with F3F9FB background surrounding grid items */ }
-      <Box sx={ { backgroundColor: '#F3F9FB', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px' } }>
+      <Box sx={ { backgroundColor: '#fffff', width: '100%', textAlign: 'center', p: 2, borderRadius: '8px' } }>
         <Grid container spacing={ 2 } justifyContent="center">
 
           { /* Test Cases */ }

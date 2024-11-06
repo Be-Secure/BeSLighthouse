@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
+
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import { useParams } from "react-router-dom";
 import { projectOfInterestData } from "../../utils/ProjectOfInterestData";
 import MKBox from "../../components/MKBox";
@@ -17,6 +18,8 @@ import { verifyLink } from "../../utils/verifyLink";
 import { InfoGridItem, InfoGridSelect, OSARGridItem } from "../../components/InfoGridComponents/InfoGridComponents";
 import ModalForEnvsAndPlaybook from "../../components/ModalForEnvsAndPlaybook/ModalForEnvsAndPlaybook";
 import { DescriptionCard, LanguagesCard, TagsCard } from "../../components/ProjectDetailsCards/ProjectDetailsCards";
+import { Card } from "@mui/material";
+import OSARProject from "./OSARProject";
 
 const osspoiMasterAndSummary = async (
   setData: any,
@@ -98,7 +101,7 @@ function BesVersionHistory() {
       <DefaultNavbar routes={ routes } />
       <MKBox
         key="TOPMKBOX"
-        pt={ 14 }
+        pt={ 11.5 }
         sx={ {
           mx: {
             xs: "auto",
@@ -120,33 +123,47 @@ function BesVersionHistory() {
 
             return (
               <>
-                <Card key={ `TOPCARD${index}` } style={ { marginTop: "-1.5rem", paddingTop: "6px" } }>
-                  <Grid key={ `TOPGRID1${index}` } container spacing={ 1 } pl={ 4 }>
-                    <InfoGridItem label="Project Name" value={ item.name } />
-                    <InfoGridSelect
-                      label="Version"
-                      value={ selectedOption }
-                      onChange={ handleOptionChange }
-                      options={ versionSummary.sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime()).map(option => option.version) }
-                      key={ `TOPSELECT1${index}` }
-                    />
-                    <InfoGridItem label="BeS Score" value={ definedScore } />
-                    <InfoGridItem label="BeS Tech Stack" value={ techStackMap[item.bes_technology_stack] || item.bes_technology_stack } />
-                    <InfoGridItem label="BeS Tracking Id" value={ item.id } />
-                    <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", paddingTop: "12px" } }>
-                      <a href={ item.html_url } target="_blank" rel="noopener noreferrer" style={ { textDecoration: 'none', color: 'inherit' } }>
-                        <MKTypography variant="h6" textTransform="capitalize" color="text" style={ { fontSize: "15px", fontWeight: "normal" } }>
-                          <GitHubIcon style={ { position: 'relative', top: '3px' } } fontSize="small" />
-                          &nbsp; repository
-                        </MKTypography>
-                      </a>
-                    </Grid>
-                    <OSARGridItem osarReportData={ osarReportData } besName={ besName } selectedOption={ selectedOption } cosignLinkExists={ cosignLinkExists } />
-                    <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", paddingTop: "12px", position: "relative", bottom: "7px" } }>
-                      <ModalForEnvsAndPlaybook />
-                    </Grid>
+                <Grid container spacing={ 1 } alignItems="stretch">
+                  <Grid item xs={ 12 } md={ 10 } style={ { display: "flex", flexDirection: "column", height: "100%" } }>
+                    <Card key={ `TOPCARD${index}` } style={ { flex: 1 } }>
+                      <Grid key={ `TOPGRID1${index}` } container spacing={ 1 } p={ 2 }>
+                        <InfoGridItem label="Project Name" value={ item.name } />
+                        <InfoGridSelect
+                          label="Version"
+                          value={ selectedOption }
+                          onChange={ handleOptionChange }
+                          options={ versionSummary
+                            .sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime())
+                            .map(option => option.version) }
+                          key={ `TOPSELECT1${index}` }
+                        />
+                        <InfoGridItem label="BeS Score" value={ definedScore } />
+                        <InfoGridItem label="BeS Tech Stack" value={ techStackMap[item.bes_technology_stack] || item.bes_technology_stack } />
+                        <InfoGridItem label="BeS Tracking Id" value={ item.id } />
+        
+                        { /* Repository Link */ }
+                        <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", alignItems: "center" } }>
+                          <a href={ item.html_url } target="_blank" rel="noopener noreferrer" style={ { textDecoration: 'none', color: 'inherit' } }>
+                            <MKTypography variant="h6" textTransform="capitalize" color="text" style={ { fontSize: "15px", fontWeight: "normal" } }>
+                              <GitHubIcon style={ { position: 'relative', top: '3px' } } fontSize="small" />
+              &nbsp; repository
+                            </MKTypography>
+                          </a>
+                        </Grid>
+
+                        { /* Modal for Environments and Playbook */ }
+                        <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", alignItems: "center" } }>
+                          <ModalForEnvsAndPlaybook />
+                        </Grid>
+                      </Grid>
+                    </Card>
                   </Grid>
-                </Card>
+
+                  <Grid item xs={ 12 } md={ 2 } style={ { display: "flex", flexDirection: "column", height: "100%" } }>
+                    <OSARProject osarReportData={ osarReportData } besName={  besName.slice(1) } selectedOption={ selectedOption } cosignLinkExists={ cosignLinkExists } style={ { flex: 1 } } />
+                  </Grid>
+                </Grid>
+
 
                 { /* For project description, languages and tags */ }
                 <Grid key={ `TOPGRID14${index}` } container pt={ 2 } spacing={ 1 } style={ { display: "flex", justifyContent: "space-between" } }>
@@ -161,7 +178,7 @@ function BesVersionHistory() {
 
                 <Grid container spacing={ 1 } pt={ 2 } style={ { display: "flex", justifyContent: "space-around" } }>
                   { /* Project Description - Adjusted height */ }
-                  <Grid item xs={ 12 } md={ 6 } style={ { display: "flex"} }>
+                  <Grid item xs={ 12 } md={ 6 } style={ { display: "flex" } }>
                     <DescriptionCard title="Project Description" content={ item.description } />
                   </Grid>
 

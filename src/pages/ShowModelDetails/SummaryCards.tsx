@@ -5,6 +5,8 @@ import AttackSummary from "../../components/ModelReport/AttackSummary";
 import WeaknessSummary from "../../components/ModelReport/WeaknessSummary";
 import LLMTestSummary from "../../components/ModelReport/LLMTestSummary";
 import InsecureCodeDetection from "../../components/ModelReport/InsecureCodeDetection";
+import { useLocation } from "react-router-dom";
+import ModelIntegritySuite from "../../components/ModelReport/ModelIntegritySuite";
 
 interface SummaryCardProps {
   Component: React.FC<any>; // Accept any component with props
@@ -17,7 +19,7 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ Component, name }) => {
     <Grid item xs={ 12 }  // Full width on extra small screens
       sm={ 6 }   // Two cards per row on small screens
       md={ 6 }   // Two cards per row on medium screens (fixed)
-      lg={ 3 }   // Four cards per row on large screens
+      lg={ 4 }   // Four cards per row on large screens
     >
       <Component name={ name } />
     </Grid >
@@ -25,6 +27,8 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ Component, name }) => {
 };
 
 const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
+  const location = useLocation();
+  const modelType: { type: string } = location.state.selectedMenu;
   return (
     <MKBox
       mt={ 20.9 }
@@ -41,10 +45,21 @@ const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
           },
         }
       } }>
-        <SummaryCard Component={ AttackSummary } name={ name } />
-        <SummaryCard Component={ WeaknessSummary } name={ name } />
-        <SummaryCard Component={ LLMTestSummary } name={ name } />
-        <SummaryCard Component={ InsecureCodeDetection } name={ name } />
+
+        { modelType.type === "Classic" && (
+          <>
+            <SummaryCard Component={ AttackSummary } name={ name } />
+            <SummaryCard Component={ WeaknessSummary } name={ name } />
+          </>
+        ) }
+
+        { modelType.type === "LLM" && (
+          <>
+            <SummaryCard Component={ LLMTestSummary } name={ name } />
+            <SummaryCard Component={ InsecureCodeDetection } name={ name } />
+          </>
+        ) }
+        <SummaryCard Component={ ModelIntegritySuite } name={ name } />
       </Grid>
     </MKBox>
   );
