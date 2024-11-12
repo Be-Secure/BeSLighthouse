@@ -43,74 +43,124 @@ Windows Powershell / CMD
 > npm start
 ```
 
-## BeSLighthouse deployment in (BeSLab)
+## Deployment/Upgrade in any BeSLab instance
 
 Follow these steps to deploy or upgrade BeSLighthouse in a BeSLab environment:
 
-#### 1. Navigate to the BeSLighthouse installation folder
+### 1. Navigate to the BeSLighthouse installation folder
+
    Use the following command to navigate to the installation directory:  
+
    ```bash
-   cd <Path to BeSLighthouse installation folder e.g., /opt/BeSLighthouse>
+   cd <Path to BeSLighthouse installation folder e.g., /opt>
    ```
 
-#### 2. Backup important files
-   Create a backup of the `apiDetailsConfig.json` and `package.json` files:  
-   ```bash
-   cp src/apiDetailsConfig.json src/apiDetailsConfig.json.bak
-   
-   cp package.json package.json.bak
-   ```
+### 2. Download the latest BeSLighthouse release
 
-#### 3. Download the latest BeSLighthouse release 
    Download the latest version of BeSLighthouse from GitHub:  
+
    ```bash
    curl -LJO https://github.com/Be-Secure/BeSLighthouse/archive/refs/tags/<beslighthouse-version>.tar.gz
    ```
 
-#### 4. Extract the downloaded archive  
+   Replace `<beslighthouse-version>` with the desired version.
+
+### 3. Extract the downloaded archive  
+
    Extract the contents of the downloaded `.tar.gz` file:  
+
    ```bash
    tar -xvzf beslighthouse-<beslighthouse-version>.tar.gz
    ```
 
-#### 5. Navigate to the extracted folder
-   Move into the extracted BeSLighthouse folder:  
+### 4. Rename the extracted folder
+
+   Rename the extracted BeSLighthouse folder:  
+
    ```bash
-   cd BeSLighthouse-<beslighthouse-version>
+   mv BeSLighthouse-<beslighthouse-version> BeSLighthouse
    ```
 
-#### 6. Copy the content to the parent directory  
-   Copy all files and folders to the parent directory:  
-   ```bash
-   cp -rf * ../
-   ```
+### 5. Verify the port configuration in `package.json`
 
-#### 7. Navigate back to the parent directory
-   Go back to the parent directory:  
-   ```bash
-   cd ..
-   ```
-
-#### 8. Verify the port configuration in `package.json`
    Ensure that the `PORT=80` is set in the `start` script parameter of the `package.json` file.
 
-#### 9. Update `apiDetailsConfig.json`  
-   Copy the lab name and URL details from the backup `apiDetailsConfig.json.bak` into the newly copied `src/apiDetailsConfig.json` file.
+### 6. Update `apiDetailsConfig.json`  
 
-#### 10. Restart the BeSLighthouse service
+   Configure the `src/apiDetailsConfig.json` file according to your requirement.
+
+#### GitHub Configuration
+
+   If you are using **GitHub**, use the following template:
+
+   ```json
+   {
+      "github": {
+         "namespace": "Be-Secure",
+         "branch": "main",
+         "apiUrl": "https://raw.githubusercontent.com",
+         "token": "YOUR_GITHUB_API_TOKEN"
+      },
+      "gitlab": {
+         "namespace": "",
+         "branch": "",
+         "apiUrl": "",
+         "gitLabUrl": "",
+         "token": ""
+      },
+      "activeTool": "github",
+      "version": "0.20.3",
+      "labName": "Be-Secure Community Lab"
+   }
+   ```
+
+#### GitLab Configuration
+
+   If you are using **GitLab**, use the following template:
+
+   ```json
+   {
+      "github": {
+         "namespace": "",
+         "branch": "",
+         "apiUrl": "",
+         "token": ""
+      },
+      "gitlab": {
+         "namespace": "labAdmin",
+         "branch": "main",
+         "apiUrl": "https://gitlab.example.com/api/v4",
+         "gitLabUrl": "https://gitlab.example.com",
+         "token": "YOUR_GITLAB_API_TOKEN"
+      },
+      "activeTool": "gitlab",
+      "version": "0.20.3",
+      "labName": "Be-Secure Community Lab"
+   }
+   ```
+
+**Notes:**
+
+  - Replace `"YOUR_GITHUB_API_TOKEN"` or `"YOUR_GITLAB_API_TOKEN"` with your respective tokens.
+  - Adjust the `namespace`, `branch`, `apiUrl`, and `gitLabUrl` values to match your environment.
+
+For more details on generating API tokens, refer to the GitHub or GitLab documentation.
+
+### 7. Restart the BeSLighthouse service
+
    Restart the service to apply the changes:  
+
    ```bash
    systemctl restart beslighthouse.service
    ```
 
+### 8. Verify the deployment
 
-#### 11. Verify the deployment
    Open your browser and check that BeSLighthouse has been successfully upgraded to the new version.
 
 ---
 
 **Note:** Replace `<beslighthouse-version>` with the actual version you are upgrading to.
-
 
 ## Usage
 
