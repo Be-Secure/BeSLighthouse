@@ -30,7 +30,7 @@ const ArcDiagram: React.FC = () => {
         const jsonData = data;
 
         // Extract unique nodes and links from the JSON data
-        const nodes: Array<{ name: string, group: string, color: string }> = [];
+        const nodes: Array<{ name: string, group: string, color: string, type: string }> = [];
         const links: Array<{ source: string, target: string }> = [];
 
         // get color
@@ -42,16 +42,16 @@ const ArcDiagram: React.FC = () => {
           }
         }
         jsonData.forEach((node: { name: any; group: any; type: string; dependencies: any[]; }) => {
-          const mainNode = { name: node.name, group: node.group, color: getColor(node.type) };
+          const mainNode = { name: node.name, group: node.group, color: getColor(node.type), type: node.type };
           nodes.push(mainNode);
           node.dependencies.forEach((dependency: any) => {
             // check if the dependency tracked under BeS
             const trackedObj = jsonData.find((item: { name: any; }) => item.name === dependency);
             let dependentNode;
             if (trackedObj) {
-              dependentNode = { name: dependency, group: node.group, color: getColor(trackedObj.type) };
+              dependentNode = { name: dependency, group: node.group, type: node.type, color: getColor(trackedObj.type) };
             } else {
-              dependentNode = { name: dependency, group: node.group, color: "currentColor" };
+              dependentNode = { name: dependency, group: node.group, type: node.type, color: "currentColor" };
             }
             nodes.push(dependentNode);
             links.push({ source: mainNode.name, target: dependentNode.name });
@@ -108,9 +108,9 @@ const ArcDiagram: React.FC = () => {
           .attr("r", 8)
           .style("fill", d => d.color)
           .attr("stroke", "white")
-          .on('click', (event, d) => {
+          .on('click', (event, d: any) => {
             if (isClickable(d.name) && !event.active) {
-              window.open(`/BeSLighthouse/model_report/:${d.name}`, "_blank");
+              window.open(`/BeSLighthouse/model_report/:${d.name}?type=${d.type}`, "_blank");
             }
           });
 
@@ -170,9 +170,9 @@ const ArcDiagram: React.FC = () => {
             nodeSelection.style('opacity', 1);
             d3.select(this).attr("cursor", "default");
           })
-          .on('click', (event, d) => {
+          .on('click', (event, d: any) => {
             if (isClickable(d.name) && !event.active) {
-              window.open(`/BeSLighthouse/model_report/:${d.name}`, "_blank");
+              window.open(`/BeSLighthouse/model_report/:${d.name}?type=${d.type}`, "_blank");
             }
           });
         // Add the highlighting functionality

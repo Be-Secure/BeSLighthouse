@@ -28,7 +28,8 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ Component, name }) => {
 
 const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
   const location = useLocation();
-  const modelType: { type: string } = location.state.selectedMenu;
+  const queryParams = new URLSearchParams(location.search);
+  const modelType = queryParams.get('type');
   return (
     <MKBox
       mt={ 20.9 }
@@ -46,14 +47,14 @@ const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
         }
       } }>
 
-        { modelType.type === "Classic" && (
+        { modelType === "Classic" && (
           <>
             <SummaryCard Component={ AttackSummary } name={ name } />
             <SummaryCard Component={ WeaknessSummary } name={ name } />
           </>
         ) }
 
-        { modelType.type === "LLM" && (
+        { modelType === "LLM" && (
           <>
             <SummaryCard Component={ LLMTestSummary } name={ name } />
             <SummaryCard Component={ InsecureCodeDetection } name={ name } />

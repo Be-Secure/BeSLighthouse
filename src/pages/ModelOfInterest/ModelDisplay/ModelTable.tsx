@@ -77,7 +77,7 @@ export default function ModelTable({ data }: any) {
                     <NavLink
                       to={ {
                         pathname: `/BeSLighthouse/model_report/:${row.name}`,
-                        search: ""
+                        search: `?type=${row.type}`
                       } }
                       state={ { selectedMenu: row } }
                       style={ { color: "#587f2f", cursor: "pointer" } }

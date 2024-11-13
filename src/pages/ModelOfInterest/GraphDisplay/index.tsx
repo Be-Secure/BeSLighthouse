@@ -8,6 +8,7 @@ interface Node extends d3.SimulationNodeDatum {
   color: string;
   clickable: boolean;
   isDependency: boolean;
+  type?: string;
 }
 
 // Define the Link interface
@@ -40,12 +41,16 @@ const GraphDisplay = () => {
           return res;
         };
 
-        const nodes: Node[] = Array.from(nodesSet).map((name) => ({
-          name,
-          color: "#0077cc",
-          clickable: isClickable(name),
-          isDependency: false,
-        }));
+        const nodes: Node[] = Array.from(nodesSet).map((name) => {
+          const nodeData = data.find((item: { name: string }) => item.name === name);
+          return {
+            name,
+            color: "#0077cc",
+            clickable: isClickable(name),
+            isDependency: false,
+            type: nodeData?.type, // Assign 'default' if type is not provided
+          };
+        });
 
         // Create links based on dependencies
         const links: Link[] = [];
@@ -115,7 +120,7 @@ const GraphDisplay = () => {
 
         const handleNodeClick = (event: { active: any; }, d: Node) => {
           if (d.clickable && !event.active) {
-            window.open(`/BeSLighthouse/model_report/:${d.name}`, "_blank");
+            window.open(`/BeSLighthouse/model_report/:${d.name}?type=${d.type}`, "_blank");
           }
         };
 
