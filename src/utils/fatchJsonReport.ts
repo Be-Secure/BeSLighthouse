@@ -3,7 +3,7 @@ import axios from 'axios';
 export async function fetchJsonReport(url: string): Promise<any> {
   try {
     const response = await axios.get(url);
-    let data = response.data;
+    const data = response.data;
 
     if (url.toLowerCase().endsWith(".pdf")) {
       const regex = /404: Not Found/gm;

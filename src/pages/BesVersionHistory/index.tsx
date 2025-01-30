@@ -95,7 +95,6 @@ function BesVersionHistory() {
     setSelectedOption(event.target.value);
   };
 
-
   return (
     <>
       <DefaultNavbar routes={ routes } />
@@ -111,6 +110,7 @@ function BesVersionHistory() {
       >
         { data.map((item: any, index: number) => {
           if (`:${item.name}` === besName) {
+            // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
             const definedScore = item.hasOwnProperty("score") ? item.score : "Not Available";
             const techStackMap: any = {
               A: "Application",
@@ -140,27 +140,27 @@ function BesVersionHistory() {
                         <InfoGridItem label="BeS Score" value={ definedScore } />
                         <InfoGridItem label="BeS Tech Stack" value={ techStackMap[item.bes_technology_stack] || item.bes_technology_stack } />
                         <InfoGridItem label="BeS Tracking Id" value={ item.id } />
-        
+
                         { /* Repository Link */ }
                         <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", alignItems: "center" } }>
                           <a href={ item.html_url } target="_blank" rel="noopener noreferrer" style={ { textDecoration: 'none', color: 'inherit' } }>
                             <MKTypography variant="h6" textTransform="capitalize" color="text" style={ { fontSize: "15px", fontWeight: "normal" } }>
                               <GitHubIcon style={ { position: 'relative', top: '3px' } } fontSize="small" />
-              &nbsp; repository
+                              &nbsp; repository
                             </MKTypography>
                           </a>
                         </Grid>
 
                         { /* Modal for Environments and Playbook */ }
                         <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", alignItems: "center" } }>
-                          <ModalForEnvsAndPlaybook />
+                          <ModalForEnvsAndPlaybook product={ item }/>
                         </Grid>
                       </Grid>
                     </Card>
                   </Grid>
 
                   <Grid item xs={ 12 } md={ 2 } style={ { display: "flex", flexDirection: "column", height: "100%" } }>
-                    <OSARProject osarReportData={ osarReportData } besName={  besName.slice(1) } selectedOption={ selectedOption } cosignLinkExists={ cosignLinkExists } style={ { flex: 1 } } />
+                    <OSARProject osarReportData={ osarReportData } besName={ besName.slice(1) } selectedOption={ selectedOption } cosignLinkExists={ cosignLinkExists } style={ { flex: 1 } } />
                   </Grid>
                 </Grid>
 

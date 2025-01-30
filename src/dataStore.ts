@@ -13,3 +13,5 @@ export const vulnerabilityOffInterest =
 export const modelOfInterestData =
   jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-assets-store/${jsonData[toolName].branch}/models/model-metadata.json` : `${jsonData[toolName].apiUrl}/model_of_interest`;
 export const besecureMlAssessmentDataStore = jsonData.activeTool === 'github' ? `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-ml-assessment-datastore/${jsonData[toolName].branch}/models` : `${jsonData[toolName].apiUrl}/${jsonData[toolName].namespace}/besecure-ml-assessment-datastore/${jsonData[toolName].branch}/models`;
+export const besecureEnvironmentMetadata = 'https://raw.githubusercontent.com/Be-Secure/besecure-ce-env-repo/refs/heads/master/environment-metadata.json';
+export const besecurePlaybookMetadata = 'https://raw.githubusercontent.com/Be-Secure/besecure-playbooks-store/refs/heads/main/playbook-metadata.json';
