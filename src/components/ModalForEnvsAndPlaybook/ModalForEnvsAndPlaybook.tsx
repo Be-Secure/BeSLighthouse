@@ -80,7 +80,7 @@ const ModalForEnvsAndPlaybook = ({ product }: any) => {
 
   return (
     <div>
-      <Button onClick={ handleOpen } size="small" sx={ { fontSize: "15px", color: "black", padding: 0 } }>
+      <Button onClick={ handleOpen } disabled={ filteredEnvironments.length === 0 } size="small" sx={ { fontSize: "15px", color: "black", padding: 0 } }>
         BeS Envs and Playbooks
       </Button>
       <Modal
@@ -166,60 +166,48 @@ const ModalForEnvsAndPlaybook = ({ product }: any) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {
-                    filteredEnvironments.length > 0 ? (
-                      filteredEnvironments.map(
-                        (env: { name: string; version: any[]; playbooks: string[] }, index: number) => (
-                          <React.Fragment key={ index }>
-                            <TableRow>
-                              <TableCell sx={ { width: "30%" } } align="left">
-                                { env.name }
-                              </TableCell>
-                              <TableCell sx={ { width: "15%" } } align="left">
-                                { env.version.join(", ") }
-                              </TableCell>
-                              <TableCell sx={ { width: "20%" } } align="left">
-                                <Button onClick={ () => toggleExpandDetails(index) } endIcon={ <ExpandMore /> }>
-                                  { expandedDetails[index] ? "Hide" : "Show" }
-                                </Button>
-                              </TableCell>
-                              <TableCell sx={ { width: "35%" } } align="left">
-                                <Button onClick={ () => toggleExpandPlaybooks(index) } endIcon={ <ExpandMore /> }>
-                                  { expandedPlaybooks[index] ? "Hide" : "Show" }
-                                </Button>
-                              </TableCell>
-                            </TableRow>
-                            { /* Details Section */ }
-                            { expandedDetails[index] && (
-                              <TableRow>
-                                <TableCell colSpan={ 4 }>
-                                  <DetailedEnvironment environmentMetadata={ environmentMetadata } envName={ env.name } />
-                                </TableCell>
-                              </TableRow>
-                            ) }
-                            { /* Playbooks Section */ }
-                            { expandedPlaybooks[index] && (
-                              <TableRow>
-                                <TableCell colSpan={ 4 }>
-                                  <Collapse in={ expandedPlaybooks[index] } timeout="auto" unmountOnExit>
-                                    <DetailedPlaybook environmentMetadata={ environmentMetadata } envName={ env.name } playbookMetadata={ playbookMetadata } />
-                                  </Collapse>
-                                </TableCell>
-                              </TableRow>
-                            ) }
-                          </React.Fragment>
-                        )
-                      )
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan={ 4 } align="center">
-                          <Typography variant="body1" color="textSecondary">
-                            Compatible Environments not found
-                          </Typography>
-                        </TableCell>
-                      </TableRow>
+                  { filteredEnvironments.map(
+                    (env: { name: string; version: any[]; playbooks: string[] }, index: number) => (
+                      <React.Fragment key={ index }>
+                        <TableRow>
+                          <TableCell sx={ { width: "30%" } } align="left">
+                            { env.name }
+                          </TableCell>
+                          <TableCell sx={ { width: "15%" } } align="left">
+                            { env.version.join(", ") }
+                          </TableCell>
+                          <TableCell sx={ { width: "20%" } } align="left">
+                            <Button onClick={ () => toggleExpandDetails(index) } endIcon={ <ExpandMore /> }>
+                              { expandedDetails[index] ? "Hide" : "Show" }
+                            </Button>
+                          </TableCell>
+                          <TableCell sx={ { width: "35%" } } align="left">
+                            <Button onClick={ () => toggleExpandPlaybooks(index) } endIcon={ <ExpandMore /> }>
+                              { expandedPlaybooks[index] ? "Hide" : "Show" }
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                        { /* Details Section */ }
+                        { expandedDetails[index] && (
+                          <TableRow>
+                            <TableCell colSpan={ 4 }>
+                              <DetailedEnvironment environmentMetadata={ environmentMetadata } envName={ env.name } />
+                            </TableCell>
+                          </TableRow>
+                        ) }
+                        { /* Playbooks Section */ }
+                        { expandedPlaybooks[index] && (
+                          <TableRow>
+                            <TableCell colSpan={ 4 }>
+                              <Collapse in={ expandedPlaybooks[index] } timeout="auto" unmountOnExit>
+                                <DetailedPlaybook environmentMetadata={ environmentMetadata } envName={ env.name } playbookMetadata={ playbookMetadata } />
+                              </Collapse>
+                            </TableCell>
+                          </TableRow>
+                        ) }
+                      </React.Fragment>
                     )
-                  }
+                  ) }
                 </TableBody>
               </Table>
             </TableContainer>
