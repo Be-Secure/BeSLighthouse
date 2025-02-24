@@ -54,7 +54,16 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, successCount, failCou
           { !disabled && (
             <Box sx={ { display: 'flex', alignItems: 'center', ml: 1 } }>
               { successCount !== undefined && (
-                <Tooltip title="Success Count" arrow>
+                <Tooltip
+                  title={
+                    LlmName === 'prompt-injection'
+                      ? `Successful Count: ${successCount}`
+                      : LlmName === 'frr'
+                        ? `Accept Count: ${successCount}`
+                        : `Success Count: ${successCount}`
+                  }
+                  arrow
+                >
                   <Chip
                     label={ successCount }
                     sx={ { backgroundColor: '#F3F6F4', color: 'white', mr: 0.5, width: '40px' } }
@@ -62,7 +71,16 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, successCount, failCou
                 </Tooltip>
               ) }
               { failCount !== undefined && (
-                <Tooltip title="Fail Count" arrow>
+                <Tooltip
+                  title={
+                    LlmName === 'prompt-injection'
+                      ? `Unsuccessful Count: ${failCount}`
+                      : LlmName === 'frr'
+                        ? `Refusal Count: ${failCount}`
+                        : `Fail Count: ${failCount}`
+                  }
+                  arrow
+                >
                   <Chip
                     label={ failCount }
                     sx={ { backgroundColor: '#F3F6F4', color: 'white', width: '40px' } }
@@ -84,15 +102,25 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
     { key: "autocomplete", label: "Autocomplete Test" },
     { key: "instruct", label: "Instruct Test" },
     { key: "frr", label: "False Refusal Rate (FRR) Test" },
-    { key: "textualPromptInjection", label: "Textual Prompt Injection Test" },
-    { key: "visualPromptInjection", label: "Visual Prompt Injection Test" },
-    { key: "codeInterpreter", label: "Code Interpreter Test" },
-    { key: "vulnerabilityExploitation", label: "Vulnerability Exploitation Test" },
-    { key: "spearPhishing", label: "Spear Phishing Capability Test" },
-    { key: "autonomousCyberOps", label: "Autonomous Offensive Cyber Ops Test" },
+    { key: "prompt-injection", label: "Prompt Injection Test" },
+    { key: "interpreter", label: "Code Interpreter Test" },
+    { key: "spear-phishing", label: "Spear Phishing Capability Test" },
   ];
 
-  const count: any = tests.reduce((acc, test) => ({ ...acc, [test.key]: { success: 0, fail: 0 } }), {});
+  const count: any = tests.reduce((acc, test) => {
+    if (test.key === "spear-phishing" || test.key === "interpreter") {
+      return acc; // Skip these keys
+    }
+    return {
+      ...acc,
+      [test.key]: test.key === "frr"
+        ? { accept_count: 0, refusal_count: 0 }
+        : test.key === "prompt-injection"
+          ? { successful_count: 0, unsuccessful_count: 0 }
+          : { success: 0, fail: 0 },
+    };
+  }, {});
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,6 +151,7 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
 
   const calculateCounts = (data: any, category: string) => {
     if (!data) return;
+    if (category === 'interpreter' || category === 'spear-phishing') return;
     if (category === 'mitre' && Array.isArray(data)) {
       data.forEach((miterData: any) => {
         const outputs = miterData.judge_response?.outputs; // Use optional chaining
@@ -131,7 +160,7 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
           outputs.forEach((output: any) => {
             const stopReason = output.stop_reason;
 
-            if (stopReason === "stop") {
+            if (stopReason === "+") {
               count[category].fail++;
             } else {
               count[category].success++;
@@ -140,6 +169,16 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
         } else {
           count[category].success++;
         }
+      });
+    } else if (category === 'frr') {
+      count[category].accept_count = data.accept_count;
+      count[category].refusal_count = data.refusal_count;
+    } else if (category === 'prompt-injection') {
+      Object.values(data).forEach((item: any) => {
+        Object.values(item).forEach((injection_type: any) => {
+          count[category].successful_count += injection_type.injection_successful_count || 0;
+          count[category].unsuccessful_count += injection_type.injection_unsuccessful_count || 0;
+        });
       });
     } else {
       Object.values(data).forEach((item: any) => {
@@ -153,7 +192,6 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
   };
 
   tests.forEach((test) => calculateCounts(testData[test.key], test.key));
-
   return (
     <Card sx={ { p: 3, minHeight: '422px', backgroundColor: '#fffff', display: 'flex' } }>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start" height="50%" textAlign="left">
@@ -168,8 +206,20 @@ const LLMTestSummary: React.FC<{ name: string }> = ({ name }) => {
                 modelName={ name }
                 text={ test.label }
                 LlmName={ test.key }
-                successCount={ count[test.key].success }
-                failCount={ count[test.key].fail }
+                successCount={
+                  test.key === 'frr'
+                    ? count[test.key]?.accept_count
+                    : test.key === 'prompt-injection'
+                      ? count[test.key]?.successful_count
+                      : count[test.key]?.success
+                }
+                failCount={
+                  test.key === 'frr'
+                    ? count[test.key]?.refusal_count
+                    : test.key === 'prompt-injection'
+                      ? count[test.key]?.unsuccessful_count
+                      : count[test.key]?.fail
+                }
                 modelReport={ testData[test.key] }
                 disabled={ !testData[test.key] || Object.keys(testData[test.key]).length === 0 } // Disable if data is empty
               />
