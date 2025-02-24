@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TableContainer from "@mui/material/TableContainer";
-import Table from "@mui/material/Table";
 import {
+  TableContainer,
+  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -14,92 +14,90 @@ import { verifyLink } from "../../utils/verifyLink";
 
 export default function LlmBenchmarkReportTable() {
   const [report, setReport] = useState([]);
-  let { modelName, llm_type }: any = useParams();
-  const name = modelName.slice(1);
-  const type = llm_type.slice(1);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
+
+  const { modelName, llm_type } = useParams();
+  const name = modelName?.slice(1) || "";
+  const type = llm_type?.slice(1) || "";
 
   useEffect(() => {
     const fetchData = async () => {
-      const links: any = `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-${type}-test-detailed-report.json`;
-      verifyLink(links, setReport);
+      const url = `${besecureMlAssessmentDataStore}/${name}/llm-benchmark/${name}-${type}-test-detailed-report.json`;
+      verifyLink(url, setReport);
     };
     fetchData();
   }, [name, type]);
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(15);
+  const TABLE_HEAD = {
+    mitre: [
+      { id: "test_case_prompt", label: "Test Case Prompt" },
+      { id: "text", label: "Judge Response" },
+      { id: "stop_reason", label: "Stop Reason" },
+      { id: "mitre_category", label: "Mitre Category" }
+    ],
+    interpreter: [
+      { id: "test_case_prompt", label: "Test Case Prompt" },
+      { id: "text", label: "Judge Response" },
+      { id: "stop_reason", label: "Stop Reason" },
+      { id: "attack_type", label: "Attack Type" }
+    ],
+    autocomplete: [
+      { id: "test_case_prompt", label: "Test Case Prompt" },
+      { id: "cwe_identifier", label: "CWE Identifier" },
+      { id: "language", label: "Language" },
+      { id: "bleu_score", label: "BLEU Score" },
+      { id: "icd_result", label: "ICD Result" }
+    ],
+    instruct: [
+      { id: "test_case_prompt", label: "Test Case Prompt" },
+      { id: "cwe_identifier", label: "CWE Identifier" },
+      { id: "language", label: "Language" },
+      { id: "bleu_score", label: "BLEU Score" },
+      { id: "icd_result", label: "ICD Result" }
+    ],
+    frr: [
+      { id: "test_case_prompt", label: "Test Case Prompt" },
+      { id: "attack_type", label: "Attack Type" },
+      { id: "judge_response", label: "Judge Response" }
+    ],
+    "prompt-injection": [
+      { id: "test_case_prompt", label: "Test Case Prompt" },
+      { id: "user_input", label: "User Input" },
+      { id: "injection_type", label: "Injection Type" },
+      { id: "risk_category", label: "Risk Category" },
+      { id: "injection_variant", label: "Injection Variant" }
+    ],
+    "spear-phishing": [
+      { id: "dialogue_history", label: "Dialogue History" },
+      { id: "goal", label: "Goal" },
+      { id: "is_success", label: "Success" }
+    ]
+  }[type] || [];
 
-  const handleChangePage = (event: any, newPage: any) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: any) => {
-    setPage(0);
+  const handleChangePage = (_event: unknown, newPage: number) => setPage(newPage);
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
-  // Define TABLE_HEAD based on type
-  const TABLE_HEAD =
-    type === "mitre"
-      ? [
-        { id: "test_case_prompt", label: "Test Case Prompt", alignRight: false },
-        { id: "text", label: "Text", alignRight: false },
-        { id: "stop_reason", label: "Stop Reason", alignRight: false },
-        { id: "mitre_category", label: "Mitre Category", alignRight: false }
-      ]
-      : type === "autocomplete" || type === "instruct"
-        ? [
-          { id: "test_case_prompt", label: "Test Case Prompt", alignRight: false },
-          { id: "cwe_identifier", label: "CWE Identifier", alignRight: false },
-          { id: "language", label: "Language", alignRight: false },
-          { id: "bleu_score", label: "BLEU Score", alignRight: false },
-          { id: "icd_result", label: "ICD Result", alignRight: false }
-        ]
-        : []; // Default to an empty array if no type matches
 
-  const renderRowData = (row: any, index: any) => {
-    if (type === "mitre") {
-      const judgeOutput = row.judge_response?.outputs?.[0] || {};
-      const text = judgeOutput.text || "Not Available";
-      const stopReason = judgeOutput.stop_reason || "Not Available";
+  const renderRowData = (row: any, index: number) => {
+    const getValue = (key: string) => {
+      if (key === "text" || key === "stop_reason") {
+        return row.judge_response?.outputs?.[0]?.[key] || "Not Available";
+      }
+      return `${row[key]}` || "Not Available";
+    };
 
-      return (
-        <TableRow hover key={ index } tabIndex={ -1 }>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { row.test_case_prompt }
+    return (
+      <TableRow hover key={ index } tabIndex={ -1 }>
+        { TABLE_HEAD.map(({ id }) => (
+          <TableCell key={ id } align="left" sx={ { fontSize: "13px" } }>
+            { getValue(id) }
           </TableCell>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { text }
-          </TableCell>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { stopReason }
-          </TableCell>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { row.mitre_category }
-          </TableCell>
-        </TableRow>
-      );
-    } else if (type === "autocomplete" || type === "instruct") {
-      return (
-        <TableRow hover key={ index } tabIndex={ -1 }>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { row.test_case_prompt }
-          </TableCell>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { row.cwe_identifier }
-          </TableCell>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { row.language }
-          </TableCell>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { row.bleu_score }
-          </TableCell>
-          <TableCell align="left" sx={ { fontSize: "13px" } }>
-            { row.icd_result }
-          </TableCell>
-        </TableRow>
-      );
-    }
-    return null; // If type doesn't match, return nothing
+        )) }
+      </TableRow>
+    );
   };
 
   return (
@@ -123,9 +121,7 @@ export default function LlmBenchmarkReportTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          { report
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => renderRowData(row, index)) }
+          { report.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(renderRowData) }
         </TableBody>
       </Table>
       <TablePagination
