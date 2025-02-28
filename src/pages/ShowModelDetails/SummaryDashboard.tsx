@@ -245,7 +245,7 @@ const SummaryDashboard = ({ model }: any) => {
   return (
     <Grid container spacing={ 2 } pt={ 2 } pb={ 2 }>
       { /* First Row */ }
-      <Grid item xs={ 12 } md={ 3 } lg={ 1.5 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
         <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center" } }>
           <CardContent sx={ { textAlign: "center" } }>
             <Typography variant="h2" sx={ { fontSize: "5rem" } }>{ maliciousCount }</Typography>
@@ -254,7 +254,7 @@ const SummaryDashboard = ({ model }: any) => {
         </Card>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 6 } lg={ 7.5 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
             <Box sx={ { display: "flex", justifyContent: "center" } }>
@@ -267,7 +267,7 @@ const SummaryDashboard = ({ model }: any) => {
                 <XAxis dataKey="language" />
                 <YAxis />
                 <Tooltip />
-                <Legend />
+                <Legend wrapperStyle={ { fontSize: '12px' } }/>
 
                 { /* Autocomplete Category */ }
                 <Bar dataKey="AutocompleteVulnerable" name="Vulnerable (Autocomplete)" fill="#d32f2f" barSize={ 20 } />
@@ -283,7 +283,7 @@ const SummaryDashboard = ({ model }: any) => {
         </Card>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 3 } lg={ 3 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
         <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center" } }>
           <CardContent sx={ { textAlign: "center" } }>
             <Typography variant="h2" sx={ { fontSize: "2rem", color: colorCode[spearPhishingNUmber]?.color } }>{ colorCode[spearPhishingNUmber].level }</Typography>
@@ -296,7 +296,7 @@ const SummaryDashboard = ({ model }: any) => {
 
 
       { /* Second Row */ }
-      <Grid item xs={ 12 } md={ 3 } lg={ 1.5 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
         <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center" } }>
           <CardContent sx={ { textAlign: "center" } }>
             <Typography variant="h2" sx={ { fontSize: "5rem" } }>{ frrData?.refusal_count ?? 0.0 }</Typography>
@@ -307,7 +307,7 @@ const SummaryDashboard = ({ model }: any) => {
         </Card>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 6 } lg={ 7.5 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
 
@@ -321,7 +321,7 @@ const SummaryDashboard = ({ model }: any) => {
                 <XAxis dataKey="category" />
                 <YAxis />
                 <Tooltip />
-                <Legend />
+                <Legend wrapperStyle={ { fontSize: '12px' } }/>
                 <Bar dataKey="ExtremelyMalicious" stackId="a" fill="#1f77b4" barSize={ 20 } />
                 <Bar dataKey="PotentiallyMalicious" stackId="a" fill="#ff7f0e" barSize={ 20 } />
                 <Bar dataKey="NonMalicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
@@ -331,7 +331,7 @@ const SummaryDashboard = ({ model }: any) => {
         </Card>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 3 } lg={ 3 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
             <Typography variant="h2" sx={ { fontSize: "2rem", textAlign: "center" } }>Prompt Injection</Typography>
@@ -344,7 +344,7 @@ const SummaryDashboard = ({ model }: any) => {
                   )) }
                 </Pie>
                 <Tooltip />
-                <Legend />
+                <Legend  wrapperStyle={ { fontSize: '12px' } }/>
               </PieChart>
             </ResponsiveContainer>
           </CardContent>

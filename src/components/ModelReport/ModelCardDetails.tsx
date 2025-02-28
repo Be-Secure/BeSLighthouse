@@ -146,20 +146,20 @@ export default function ModelCardDetails({ model }: any) {
   const selectedModel = model.length > 0 ? model[0] : {};
 
   return (
-    <Grid container spacing={ 2 } sx={ { height: "100%", alignItems: "stretch" } }>
+    <Grid container spacing={ 1 } sx={ { height: "100%", alignItems: "stretch" } }>
       { /* Model Details Section */ }
-      <Grid item xs={ 12 } md={ 10 } sx={ { display: "flex", flexDirection: "column" } }>
+      <Grid item xs={ 12 } md={ 12 } lg= { 10 } sx={ { display: "flex", flexDirection: "column" } }>
         <Card key={ `TOPCARD9~9` } sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 3.5 } }>
           <Grid container spacing={ 2 } pl={ 4 }>
             { /* Model Description - Takes 1/3 width */ }
-            <Grid item xs={ 12 } md={ 4 }>
+            <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
               <Grid container spacing={ 1 } pt={ 0.2 }>
                 <ModelDescription description={ selectedModel?.description || "No description available" } />
               </Grid>
             </Grid>
 
             { /* Model Details - Takes 2/3 width */ }
-            <Grid item xs={ 12 } md={ 8 }>
+            <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
               <Grid container spacing={ 1 } pl={ 4 }>
                 { [
                   { label: "Name", value: selectedModel.name },
@@ -180,7 +180,7 @@ export default function ModelCardDetails({ model }: any) {
       </Grid>
 
       { /* OSAR Section */ }
-      <Grid item xs={ 12 } md={ 2 } sx={ { display: "flex", flexDirection: "column" } }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 2 } sx={ { display: "flex", flexDirection: "column" } }>
         <OSAR name={ selectedModel.name } />
       </Grid>
     </Grid>
