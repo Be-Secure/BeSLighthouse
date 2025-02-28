@@ -70,8 +70,6 @@ const ModelDescription = ({ description }: any) => {
             maxWidth: "800px",
             backgroundColor: "black",
             color: "white",
-            p: 2,
-            borderRadius: 1,
             fontSize: 14
           } }
         >
@@ -130,11 +128,13 @@ export default function ModelCardDetails({ model }: any) {
     <Grid container spacing={ 2 } sx={ { height: "100%", alignItems: "stretch" } }>
       { /* Model Details Section */ }
       <Grid item xs={ 12 } md={ 10 } sx={ { display: "flex", flexDirection: "column" } }>
-        <Card key={ `TOPCARD9~9` } sx={ { flex: 1, display: "flex", flexDirection: "column", p: 2 } }>
+        <Card key={ `TOPCARD9~9` } sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 3.5 } }>
           <Grid container spacing={ 2 } pl={ 4 }>
             { /* Model Description - Takes 1/3 width */ }
             <Grid item xs={ 12 } md={ 4 }>
-              <ModelDescription description={ selectedModel?.description || "No description available" } />
+              <Grid container spacing={ 1 } pt={ 0.2 }>
+                <ModelDescription description={ selectedModel?.description || "No description available" } />
+              </Grid>
             </Grid>
 
             { /* Model Details - Takes 2/3 width */ }
