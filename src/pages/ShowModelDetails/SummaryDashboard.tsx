@@ -233,7 +233,7 @@ const SummaryDashboard = ({ model }: any) => {
     NonMalicious: values.is_non_malicious,
   }));
 
-  const spearPhishingNUmber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
+  const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
   const promptInjectionresult = [
     { name: "Successful", value: 0, color: "#1f77b4" },
@@ -262,35 +262,52 @@ const SummaryDashboard = ({ model }: any) => {
                 Security risks in generated code using this LLM
               </Typography>
             </Box>
-            <ResponsiveContainer width="100%" height={ 200 }>
-              <BarChart data={ mergedInsecureCodingData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
-                <XAxis dataKey="language" />
-                <YAxis />
-                <Tooltip />
-                <Legend wrapperStyle={ { fontSize: '12px' } }/>
+            { mergedInsecureCodingData.length === 0 ? (
+              <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+                <Typography variant="body1" color="textSecondary">
+                  Data not available
+                </Typography>
+              </Box>
+            ) : (
+              <ResponsiveContainer width="100%" height={ 200 }>
+                <BarChart data={ mergedInsecureCodingData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
+                  <XAxis dataKey="language" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend wrapperStyle={ { fontSize: '12px' } } />
 
-                { /* Autocomplete Category */ }
-                <Bar dataKey="AutocompleteVulnerable" name="Vulnerable (Autocomplete)" fill="#d32f2f" barSize={ 20 } />
-                <Bar dataKey="AutocompletePass" name="Pass (Autocomplete)" fill="#4caf50" barSize={ 20 } />
+                  { /* Autocomplete Category */ }
+                  <Bar dataKey="AutocompleteVulnerable" name="Vulnerable (Autocomplete)" fill="#d32f2f" barSize={ 20 } />
+                  <Bar dataKey="AutocompletePass" name="Pass (Autocomplete)" fill="#4caf50" barSize={ 20 } />
 
-                { /* Instruct Category */ }
-                <Bar dataKey="InstructVulnerable" name="Vulnerable (Instruct)" fill="#ff9800" barSize={ 20 } />
-                <Bar dataKey="InstructPass" name="Pass (Instruct)" fill="#03a9f4" barSize={ 20 } />
-
-              </BarChart>
-            </ResponsiveContainer>
+                  { /* Instruct Category */ }
+                  <Bar dataKey="InstructVulnerable" name="Vulnerable (Instruct)" fill="#ff9800" barSize={ 20 } />
+                  <Bar dataKey="InstructPass" name="Pass (Instruct)" fill="#03a9f4" barSize={ 20 } />
+                </BarChart>
+              </ResponsiveContainer>
+            ) }
           </CardContent>
         </Card>
       </Grid>
 
       <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
         <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center" } }>
-          <CardContent sx={ { textAlign: "center" } }>
-            <Typography variant="h2" sx={ { fontSize: "2rem", color: colorCode[spearPhishingNUmber]?.color } }>{ colorCode[spearPhishingNUmber].level }</Typography>
-            <Typography variant="body2">
-              persuasion skill by this LLM on a victim LLM to generate Spear Phishing content
-            </Typography>
-          </CardContent>
+          { Object.keys(spearPhishingData).length === 0 ? 
+            (
+              <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+                <Typography variant="body1" color="textSecondary">
+                  Spear phishing data not available
+                </Typography>
+              </Box>
+            ) : (
+              <CardContent sx={ { textAlign: "center" } }>
+                <Typography variant="h2" sx={ { fontSize: "2rem", color: colorCode[spearPhishingNumber]?.color } }>{ colorCode[spearPhishingNumber].level }</Typography>
+                <Typography variant="body2">
+                  persuasion skill by this LLM on a victim LLM to generate Spear Phishing content
+                </Typography>
+              </CardContent>
+            )
+          }
         </Card>
       </Grid>
 
@@ -316,17 +333,25 @@ const SummaryDashboard = ({ model }: any) => {
                 Security risks posed by integrating LLMs with code interpreters
               </Typography>
             </Box>
-            <ResponsiveContainer width="100%" height={ 240 }>
-              <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
-                <XAxis dataKey="category" />
-                <YAxis />
-                <Tooltip />
-                <Legend wrapperStyle={ { fontSize: '12px' } }/>
-                <Bar dataKey="ExtremelyMalicious" stackId="a" fill="#1f77b4" barSize={ 20 } />
-                <Bar dataKey="PotentiallyMalicious" stackId="a" fill="#ff7f0e" barSize={ 20 } />
-                <Bar dataKey="NonMalicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
-              </BarChart>
-            </ResponsiveContainer>
+            { securityRisksData.length === 0 ? (
+              <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+                <Typography variant="body1" color="textSecondary">
+                  Data not available
+                </Typography>
+              </Box>
+            ) : (
+              <ResponsiveContainer width="100%" height={ 240 }>
+                <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
+                  <XAxis dataKey="category" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend wrapperStyle={ { fontSize: '12px' } }/>
+                  <Bar dataKey="ExtremelyMalicious" stackId="a" fill="#1f77b4" barSize={ 20 } />
+                  <Bar dataKey="PotentiallyMalicious" stackId="a" fill="#ff7f0e" barSize={ 20 } />
+                  <Bar dataKey="NonMalicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
+                </BarChart>
+              </ResponsiveContainer>
+            ) }
           </CardContent>
         </Card>
       </Grid>
@@ -336,17 +361,25 @@ const SummaryDashboard = ({ model }: any) => {
           <CardContent>
             <Typography variant="h2" sx={ { fontSize: "2rem", textAlign: "center" } }>Prompt Injection</Typography>
             <Typography variant="body2">Model’s susceptibility to prompt injection attack scenarios</Typography>
-            <ResponsiveContainer width="100%" height={ 180 }>
-              <PieChart>
-                <Pie data={ promptInjectionresult } dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={ 50 } label>
-                  { promptInjectionresult.map((entry, index) => (
-                    <Cell key={ `cell-${index}` } fill={ entry.color } />
-                  )) }
-                </Pie>
-                <Tooltip />
-                <Legend  wrapperStyle={ { fontSize: '12px' } }/>
-              </PieChart>
-            </ResponsiveContainer>
+            { promptInjectionresult[0].value === 0 && promptInjectionresult[1].value === 0 ? (
+              <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+                <Typography variant="body1" color="textSecondary">
+                  Data not available
+                </Typography>
+              </Box>
+            ) : (
+              <ResponsiveContainer width="100%" height={ 180 }>
+                <PieChart>
+                  <Pie data={ promptInjectionresult } dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={ 50 } label>
+                    { promptInjectionresult.map((entry, index) => (
+                      <Cell key={ `cell-${index}` } fill={ entry.color } />
+                    )) }
+                  </Pie>
+                  <Tooltip />
+                  <Legend  wrapperStyle={ { fontSize: '12px' } }/>
+                </PieChart>
+              </ResponsiveContainer>
+            ) }
           </CardContent>
         </Card>
       </Grid>
