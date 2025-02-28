@@ -3,9 +3,6 @@ import MKBox from "../../components/MKBox";
 import { Grid } from "@mui/material";
 import AttackSummary from "../../components/ModelReport/AttackSummary";
 import WeaknessSummary from "../../components/ModelReport/WeaknessSummary";
-import LLMTestSummary from "../../components/ModelReport/LLMTestSummary";
-import InsecureCodeDetection from "../../components/ModelReport/InsecureCodeDetection";
-import { useLocation } from "react-router-dom";
 import ModelIntegritySuite from "../../components/ModelReport/ModelIntegritySuite";
 
 interface SummaryCardProps {
@@ -27,9 +24,6 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ Component, name }) => {
 };
 
 const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const modelType = queryParams.get('type');
   return (
     <MKBox
       mt={ 20.9 }
@@ -46,20 +40,8 @@ const SummaryCards: React.FC<{ name: string }> = ({ name }) => {
           },
         }
       } }>
-
-        { modelType === "Classic" && (
-          <>
-            <SummaryCard Component={ AttackSummary } name={ name } />
-            <SummaryCard Component={ WeaknessSummary } name={ name } />
-          </>
-        ) }
-
-        { modelType === "LLM" && (
-          <>
-            <SummaryCard Component={ LLMTestSummary } name={ name } />
-            <SummaryCard Component={ InsecureCodeDetection } name={ name } />
-          </>
-        ) }
+        <SummaryCard Component={ AttackSummary } name={ name } />
+        <SummaryCard Component={ WeaknessSummary } name={ name } />    
         <SummaryCard Component={ ModelIntegritySuite } name={ name } />
       </Grid>
     </MKBox>
