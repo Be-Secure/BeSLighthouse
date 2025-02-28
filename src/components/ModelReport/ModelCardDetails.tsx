@@ -4,6 +4,41 @@ import MKTypography from "../MKTypography";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import OSAR from "./OSAR";
 
+interface RedirectLinkProps {
+  value?: string;
+  label?: string;
+}
+
+const RedirectLink: React.FC<RedirectLinkProps> = ({ value = "", label = "" }) => {
+  if (value.trim()) {
+    return (
+      <a
+        href={ value }
+        target="_blank"
+        rel="noopener noreferrer"
+        style={ {
+          textDecoration: "none",
+          color: "inherit",
+          top: "-3px",
+          position: "relative",
+        } }
+      >
+        <Tooltip title={ label === "Model URL" ? "Open Model Link" : "Open Repository" } arrow>
+          <OpenInNewIcon style={ { fontSize: "15px", color: "blue" } } />
+        </Tooltip>
+      </a>
+    );
+  }
+
+  return (
+    <Tooltip title="" arrow>
+      <span style={ { opacity: 0.5, pointerEvents: "none" } }>
+        <OpenInNewIcon style={ { fontSize: "15px", color: "gray" } } />
+      </span>
+    </Tooltip>
+  );
+};
+
 // Reusable component for model detail entries
 const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> = ({ label, value, isLink }) => {
   return (
@@ -17,21 +52,7 @@ const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> 
         { label }: &nbsp;
       </MKTypography>
       { isLink ? (
-        <a
-          href={ value }
-          target="_blank"
-          rel="noopener noreferrer"
-          style={ {
-            textDecoration: "none",
-            color: "inherit",
-            top: "-3px",
-            position: "relative",
-          } }
-        >
-          <Tooltip title={ label === "Model URL" ? "Open Model Link" : "Open Repository" } arrow>
-            <OpenInNewIcon style={ { fontSize: "15px", color: "blue" } } />
-          </Tooltip>
-        </a>
+        <RedirectLink value={ value } label={ label }/>
       ) : (
         <Tooltip title={ value?.length > 40 ? value : "" } arrow>
           <MKTypography variant="h6" fontWeight="regular" style={ { fontSize: "15px" } }>
@@ -139,7 +160,7 @@ export default function ModelCardDetails({ model }: any) {
 
             { /* Model Details - Takes 2/3 width */ }
             <Grid item xs={ 12 } md={ 8 }>
-              <Grid container spacing={ 1 }>
+              <Grid container spacing={ 1 } pl={ 4 }>
                 { [
                   { label: "Name", value: selectedModel.name },
                   { label: "Model URL", value: selectedModel.model_url, isLink: true },
