@@ -11,119 +11,119 @@ import { besecureMlAssessmentDataStore } from "../../dataStore";
 import MitreModal from "./MitreModal";
 
 interface AttackCategory {
-  is_extremely_malicious?: number;
-  is_potentially_malicious?: number;
-  is_non_malicious?: number;
-  total_count?: number;
-  malicious_percentage?: number;
-};
+    is_extremely_malicious?: number
+    is_potentially_malicious?: number
+    is_non_malicious?: number
+    total_count?: number
+    malicious_percentage?: number
+}
 
 interface InterpreterData {
-  [attak: string]: AttackCategory;
+    [attak: string]: AttackCategory
 }
 
 interface MitreData {
-  prompt_id?: number;
-  pass_id?: number;
-  answered?: string;
-  test_case_prompt?: {
-    prompt?: string;
-  };
-  initial_response?: string;
-  expansion_response?: {
-    outputs?: {
-      text?: string;
-      stop_reason?: string;
-    }[];
-  };
-  judge_response?: {
-    outputs?: {
-      text?: string;
-      stop_reason?: string;
-    }[];
-  };
-  mitre_category?: string;
+    prompt_id?: number
+    pass_id?: number
+    answered?: string
+    test_case_prompt?: {
+        prompt?: string
+    }
+    initial_response?: string
+    expansion_response?: {
+        outputs?: {
+            text?: string
+            stop_reason?: string
+        }[]
+    }
+    judge_response?: {
+        outputs?: {
+            text?: string
+            stop_reason?: string
+        }[]
+    }
+    mitre_category?: string
 }
 
 interface FRRData {
-  accept_count?: number;
-  refusal_count?: number;
-  refusal_rate?: number;
+    accept_count?: number
+    refusal_count?: number
+    refusal_rate?: number
 }
 
 interface ModelStats {
-  overall_score_average: number;
-  overall_score_variance: number;
-  persuasion_average: number;
-  persuasion_variance: number;
-  rapport_average: number;
-  rapport_variance: number;
-  argumentation_average: number;
-  argumentation_variance: number;
-  total_challenges_processed: number;
+    overall_score_average: number
+    overall_score_variance: number
+    persuasion_average: number
+    persuasion_variance: number
+    rapport_average: number
+    rapport_variance: number
+    argumentation_average: number
+    argumentation_variance: number
+    total_challenges_processed: number
 }
 
 interface GoalStats {
-  [goal: string]: {
-    [modelName: string]: number;
-  };
+    [goal: string]: {
+        [modelName: string]: number
+    }
 }
 
 interface SpearPhishingStats {
-  model_stats?: ModelStats;
-  goal_stats?: GoalStats;
+    model_stats?: ModelStats
+    goal_stats?: GoalStats
 }
 
 interface InjectionStats {
-  injection_successful_count?: number;
-  injection_unsuccessful_count?: number;
-  total_count?: number;
-  injection_successful_percentage?: number;
-  injection_unsuccessful_percentage?: number;
+    injection_successful_count?: number
+    injection_unsuccessful_count?: number
+    total_count?: number
+    injection_successful_percentage?: number
+    injection_unsuccessful_percentage?: number
 }
 
 interface PromptInjectionStats {
-  stat_per_model_per_injection_variant?: {
-    [variant: string]: InjectionStats;
-  };
-  stat_per_model_per_injection_type?: {
-    [type: string]: InjectionStats;
-  };
-  stat_per_model_per_risk_category?: {
-    [category: string]: InjectionStats;
-  };
-  stat_per_model_per_speaking_language?: {
-    [language: string]: InjectionStats;
-  };
-  stat_per_model?: InjectionStats;
+    stat_per_model_per_injection_variant?: {
+        [variant: string]: InjectionStats
+    }
+    stat_per_model_per_injection_type?: {
+        [type: string]: InjectionStats
+    }
+    stat_per_model_per_risk_category?: {
+        [category: string]: InjectionStats
+    }
+    stat_per_model_per_speaking_language?: {
+        [language: string]: InjectionStats
+    }
+    stat_per_model?: InjectionStats
 }
 
 export type MitreDataArray = MitreData[];
 
 interface LanguageStats {
-  bleu: number;
-  total_count: number;
-  vulnerable_percentage: number;
-  vulnerable_suggestion_count: number;
-  pass_rate: number;
+    bleu: number
+    total_count: number
+    vulnerable_percentage: number
+    vulnerable_suggestion_count: number
+    pass_rate: number
 }
 
 interface AutocompleteData {
-  [language: string]: LanguageStats;
+    [language: string]: LanguageStats
 }
 
 interface InstructData {
-  [language: string]: LanguageStats;
+    [language: string]: LanguageStats
 }
 
 interface SeverityLevel {
-  level: string;
-  severity: string;
-  color: string;
+    level: string
+    severity: string
+    color: string
 }
 
 interface ColorCode {
-  [key: number]: SeverityLevel;
+    [key: number]: SeverityLevel
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -196,6 +196,48 @@ const generateData = (mitredata: any) => {
 };
 
 const SummaryDashboard = ({ model }: any) => {
+    const selectedModel = model.length > 0 ? model[0] : {}
+    const urls = [
+        `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-interpreter-test-summary-report.json`,
+        `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-summary-report.json`,
+        `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-summary-report.json`,
+        `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-mitre-test-detailed-report.json`,
+        `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-frr-test-summary-report.json`,
+        `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-spear-phishing-test-summary-report.json`,
+        `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-summary-report.json`,
+    ]
+    const [interpreterData, setInterpreterData] = useState<InterpreterData>({})
+    const [autocompleteData, setAutocompleteData] = useState<AutocompleteData>(
+        {}
+    )
+    const [instructData, setInstructData] = useState<InstructData>({})
+    const [mitreData, setMitreData] = useState<MitreDataArray>([])
+    const [frrData, setFrrData] = useState<FRRData>({})
+    const [spearPhishingData, setSpearPhishingData] =
+        useState<SpearPhishingStats>({})
+    const [promptInjectionData, setPromptInjectionData] =
+        useState<PromptInjectionStats>({})
+    const [open, setOpen] = React.useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await Promise.all([
+                    verifyLink(urls[0], setInterpreterData),
+                    verifyLink(urls[1], setAutocompleteData),
+                    verifyLink(urls[2], setInstructData),
+                    verifyLink(urls[3], setMitreData, []),
+                    verifyLink(urls[4], setFrrData),
+                    verifyLink(urls[5], setSpearPhishingData),
+                    verifyLink(urls[6], setPromptInjectionData),
+                ])
+            } catch (err) {
+                // Fix me later
+            } finally {
+                // Fix me later
+            }
+        }
 
   const selectedModel = model.length > 0 ? model[0] : {};
   const urls = [
@@ -216,50 +258,114 @@ const SummaryDashboard = ({ model }: any) => {
   const [promptInjectionData, setPromptInjectionData] = useState<PromptInjectionStats>({});
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await Promise.all([
-          verifyLink(urls[0], setInterpreterData),
-          verifyLink(urls[1], setAutocompleteData),
-          verifyLink(urls[2], setInstructData),
-          verifyLink(urls[3], setMitreData, []),
-          verifyLink(urls[4], setFrrData),
-          verifyLink(urls[5], setSpearPhishingData),
-          verifyLink(urls[6], setPromptInjectionData)
-        ]);
-      } catch (err) {
-        // Fix me later
-      } finally {
-        // Fix me later
-      }
-    };
+    const maliciousCount = countMalicious(mitreData)
 
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedModel.name]);
+    // Transform data
+    const mergedInsecureCodingData = Array.from(languages).map((lang) => ({
+        language: lang,
+        AutocompleteVulnerable:
+            autocompleteData[lang]?.vulnerable_percentage || 0,
+        AutocompletePass: autocompleteData[lang]?.pass_rate || 0,
+        InstructVulnerable: instructData[lang]?.vulnerable_percentage || 0,
+        InstructPass: instructData[lang]?.pass_rate || 0,
+    }))
 
-  const languages = new Set([...Object.keys(autocompleteData), ...Object.keys(instructData)]);
+    const securityRisksData = Object.entries(interpreterData).map(
+        ([category, values]) => ({
+            category,
+            ExtremelyMalicious: values.is_extremely_malicious,
+            PotentiallyMalicious: values.is_potentially_malicious,
+            NonMalicious: values.is_non_malicious,
+        })
+    )
 
   const data = generateData(mitreData);
 
-  // Transform data
-  const mergedInsecureCodingData = Array.from(languages).map(lang => ({
-    language: lang,
-    AutocompleteVulnerable: autocompleteData[lang]?.vulnerable_percentage || 0,
-    AutocompletePass: autocompleteData[lang]?.pass_rate || 0,
-    InstructVulnerable: instructData[lang]?.vulnerable_percentage || 0,
-    InstructPass: instructData[lang]?.pass_rate || 0
-  }));
+    const promptInjectionresult = [
+        { name: 'Successful', value: 0, color: '#1f77b4' },
+        { name: 'Unsuccessful', value: 0, color: '#ff7f0e' },
+    ]
+    const spearPhishingDetails: any = Object.keys(spearPhishingData).length > 0 
+    ? SpearPhishingModalDetails(spearPhishingData)
+    : 0;
+    aggregateInjectionResults(promptInjectionData, promptInjectionresult)
+    return (
+        <Grid container spacing={2} pt={2} pb={2}>
+            {/* First Row */}
+            <Grid item xs={12} md={12} lg={2}>
+                <Card
+                    sx={{
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <CardContent sx={{ textAlign: 'center' }}>
+                        <Typography variant="h2" sx={{ fontSize: '5rem' }}>
+                            {maliciousCount}
+                        </Typography>
+                        <Typography variant="body2">
+                            malicious scenarios in MITRE benchmark test
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
 
-  const securityRisksData = Object.entries(interpreterData).map(([category, values]) => ({
-    category,
-    ExtremelyMalicious: values.is_extremely_malicious,
-    PotentiallyMalicious: values.is_potentially_malicious,
-    NonMalicious: values.is_non_malicious,
-  }));
+            <Grid item xs={12} md={12} lg={7}>
+                <Card sx={{ height: '100%' }}>
+                    <CardContent>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <Typography
+                                variant="h6"
+                                sx={{ textAlign: 'center' }}
+                            >
+                                Security risks in generated code using this LLM
+                            </Typography>
+                        </Box>
+                        {mergedInsecureCodingData.length === 0 ? (
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: 200,
+                                }}
+                            >
+                                <Typography
+                                    variant="body1"
+                                    color="textSecondary"
+                                >
+                                    Data not available
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <ResponsiveContainer width="100%" height={200}>
+                                <BarChart
+                                    data={mergedInsecureCodingData}
+                                    margin={{ left: 20, right: 20 }}
+                                    barGap={5}
+                                >
+                                    <XAxis dataKey="language" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend
+                                        wrapperStyle={{ fontSize: '12px' }}
+                                    />
 
-  const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
+                                    {/* Autocomplete Category */}
+                                    <Bar
+                                        dataKey="AutocompleteVulnerable"
+                                        name="Vulnerable (Autocomplete)"
+                                        fill="#d32f2f"
+                                        barSize={20}
+                                    />
+                                    <Bar
+                                        dataKey="AutocompletePass"
+                                        name="Pass (Autocomplete)"
+                                        fill="#4caf50"
+                                        barSize={20}
+                                    />
 
   const promptInjectionresult = [
     { name: "Successful", value: promptInjectionData?.stat_per_model?.injection_successful_count ?? 0, color: "#1f77b4" },
@@ -389,31 +495,92 @@ const SummaryDashboard = ({ model }: any) => {
         ) }
       </Grid>
 
-      <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
-        <Card sx={ { height: "100%" } }>
-          <CardContent>
-            <Box sx={ { display: "flex", justifyContent: "center" } }>
-              <Typography variant="h6" sx={ { textAlign: "center" } }>
-                Security risks in generated code using this LLM
-              </Typography>
-            </Box>
-            { mergedInsecureCodingData.length === 0 ? (
-              <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
-                <Typography variant="body1" color="textSecondary">
-                  Data not available
-                </Typography>
-              </Box>
-            ) : (
-              <ResponsiveContainer width="100%" height={ 200 }>
-                <BarChart data={ mergedInsecureCodingData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
-                  <XAxis dataKey="language" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend wrapperStyle={ { fontSize: '12px' } } />
+            {/* Second Row */}
+            <Grid item xs={12} md={12} lg={2}>
+                <Card
+                    sx={{
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <CardContent sx={{ textAlign: 'center' }}>
+                        <Typography variant="h2" sx={{ fontSize: '5rem' }}>
+                            {frrData?.refusal_count ?? 0.0}
+                        </Typography>
+                        <Typography variant="body2">
+                            False Refusal Rate on misinterpreting the prompt as
+                            a malicious request
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
 
-                  { /* Autocomplete Category */ }
-                  <Bar dataKey="AutocompleteVulnerable" name="Vulnerable (Autocomplete)" fill="#d32f2f" barSize={ 20 } />
-                  <Bar dataKey="AutocompletePass" name="Pass (Autocomplete)" fill="#4caf50" barSize={ 20 } />
+            <Grid item xs={12} md={12} lg={7}>
+                <Card sx={{ height: '100%' }}>
+                    <CardContent>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <Typography
+                                variant="h6"
+                                sx={{ textAlign: 'center' }}
+                            >
+                                Security risks posed by integrating LLMs with
+                                code interpreters
+                            </Typography>
+                        </Box>
+                        {securityRisksData.length === 0 ? (
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: 200,
+                                }}
+                            >
+                                <Typography
+                                    variant="body1"
+                                    color="textSecondary"
+                                >
+                                    Data not available
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <ResponsiveContainer width="100%" height={240}>
+                                <BarChart
+                                    data={securityRisksData}
+                                    margin={{ left: 20, right: 20 }}
+                                >
+                                    <XAxis dataKey="category" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend
+                                        wrapperStyle={{ fontSize: '12px' }}
+                                    />
+                                    <Bar
+                                        dataKey="ExtremelyMalicious"
+                                        stackId="a"
+                                        fill="#1f77b4"
+                                        barSize={20}
+                                    />
+                                    <Bar
+                                        dataKey="PotentiallyMalicious"
+                                        stackId="a"
+                                        fill="#ff7f0e"
+                                        barSize={20}
+                                    />
+                                    <Bar
+                                        dataKey="NonMalicious"
+                                        stackId="a"
+                                        fill="#2ca02c"
+                                        barSize={20}
+                                    />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        )}
+                    </CardContent>
+                </Card>
+            </Grid>
 
                   { /* Instruct Category */ }
                   <Bar dataKey="InstructVulnerable" name="Vulnerable (Instruct)" fill="#ff9800" barSize={ 20 } />
