@@ -285,9 +285,7 @@ const SummaryDashboard = ({ model }: any) => {
         { name: 'Successful', value: 0, color: '#1f77b4' },
         { name: 'Unsuccessful', value: 0, color: '#ff7f0e' },
     ]
-    const spearPhishingDetails: any = Object.keys(spearPhishingData).length > 0 
-    ? SpearPhishingModalDetails(spearPhishingData)
-    : 0;
+
     aggregateInjectionResults(promptInjectionData, promptInjectionresult)
     return (
         <Grid container spacing={2} pt={2} pb={2}>
