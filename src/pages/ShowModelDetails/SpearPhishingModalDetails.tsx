@@ -38,72 +38,89 @@ function SpearPhishingModalDetails(data: any) {
     }
 }
 
-export const SpearPhishingModal = ({ spearPhishingData }: any) => {
+export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     const spearPhishingDetails: any =
         Object.keys(spearPhishingData).length > 0
             ? SpearPhishingModalDetails(spearPhishingData)
             : 0
-    console.log('spearPhishingDetails', spearPhishingDetails)
+    const spearPhishingCategories : any[] =  Object.keys(spearPhishingData.goal_stats)
+    console.log("spearPhishingCategories", spearPhishingCategories)
+    const spearPhishingBarData = Array.from(spearPhishingCategories).map((category) => (console.log("category", category), {
+        category: category,
+        overall_average: spearPhishingData?.goal_stats[category][modelName] || "0"
+    }))
     return (
         <>
-                <Grid container spacing={2} pt={2} pb={2}>
-        
-            <Grid item xs={12} md={12} lg={6}>
-                {/* <Grid
-                    container
-                    spacing={1}
-                    sx={{
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                > */}
+            <Grid container spacing={1} pt={1} pb={1}>
+
+                <Grid item xs={12} md={12} lg={6}>
                     <Typography id="transition-modal-title">
                         <strong>{spearPhishingDetails.testName}</strong>{' '}
                         {spearPhishingDetails.testDetail}
                     </Typography>
-                {/* </Grid> */}
-            </Grid>
-            <Grid item xs={12} md={12} lg={6}>
-                <Card
-                    sx={{
-                        height: '100%',
-                        backgroundColor: '#e8e8e8',
-                    }}
-                >
-                    {Object.keys(spearPhishingData).length === 0 ? (
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                height: 200,
-                            }}
-                        >
-                            <Typography variant="body1" color="textSecondary">
-                                Spear phishing data not available
-                            </Typography>
-                        </Box>
-                    ) : (
-                        <CardContent sx={{ textAlign: 'center', }}>
-                            <Typography
-                                variant="h2"
+                </Grid>
+                <Grid item xs={12} md={12} lg={6}>
+                    <Card
+                        sx={{
+                            height: '100%',
+                            backgroundColor: '#e8e8e8',
+                        }}
+                    >
+                        {Object.keys(spearPhishingData).length === 0 ? (
+                            <Box
                                 sx={{
-                                    fontSize: '2rem',
-                                    // color: colorCode[spearPhishingDetails.total_challenges_processed]
-                                    //     ?.color,
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: 200,
                                 }}
                             >
-                                {spearPhishingDetails.totalChallenges}
-                            </Typography>
-                            <Typography variant="body2">
-                                challenges were processed by this LLM
-                            </Typography>
-                        </CardContent>
-                    )}
-                </Card>
+                                <Typography variant="body1" color="textSecondary">
+                                    Spear phishing data not available
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <CardContent sx={{ textAlign: 'center', }}>
+                                <Typography
+                                    variant="h2"
+                                    sx={{
+                                        fontSize: '2rem',
+
+                                    }}
+                                >
+                                    {spearPhishingDetails.totalChallenges}
+                                </Typography>
+                                <Typography variant="body2">
+                                    challenges were processed by this LLM
+                                </Typography>
+                            </CardContent>
+                        )}
+                    </Card>
+                </Grid>
             </Grid>
+            <Grid container spacing={1} pt={1} pb={1}>
+                <Grid item xs={12} md={12} lg={6}>
+                    <ResponsiveContainer width="100%" height={200}>
+                        <BarChart
+                            data={spearPhishingBarData}
+                            margin={{ left: 20, right: 20 }}
+                            barGap={5}
+                        >
+                            <XAxis dataKey="category" />
+                            <Tooltip />
+                            <Legend
+                                wrapperStyle={{ fontSize: '12px' }}
+                            />
+
+                            <Bar
+                                dataKey="overall_average"
+                                name="Overall average"
+                                fill="#d32f2f"
+                                barSize={5}
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </Grid>
             </Grid>
         </>
     )

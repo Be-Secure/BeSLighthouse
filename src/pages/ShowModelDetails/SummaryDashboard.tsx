@@ -197,6 +197,7 @@ const generateData = (mitredata: any) => {
 
 const SummaryDashboard = ({ model }: any) => {
     const selectedModel = model.length > 0 ? model[0] : {}
+    console.log('selectedModel', selectedModel)
     const urls = [
         `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-interpreter-test-summary-report.json`,
         `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-summary-report.json`,
