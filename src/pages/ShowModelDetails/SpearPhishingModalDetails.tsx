@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material'
 import {
     BarChart,
@@ -7,10 +6,7 @@ import {
     YAxis,
     Tooltip,
     Legend,
-    ResponsiveContainer,
-    PieChart,
-    Pie,
-    Cell,
+    ResponsiveContainer
 } from 'recharts'
 import { colorCode } from './SummaryDashboard'
 
@@ -77,17 +73,17 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     ]
     return (
         <>
-            <Grid container spacing={1} pt={1} pb={1}>
-
+            <Box sx={{ p: 2 }}>
+                <Grid container spacing={2}>
                     {/* <Grid container spacing={1}> */}
-                        <Grid item xs={12} md={12} lg={6}>
-                            <Typography id="transition-modal-title">
-                                <strong>{spearPhishingDetails.testName}</strong>{' '}
-                                {spearPhishingDetails.testDetail}
-                            </Typography>
+                    <Grid item xs={12} md={6} lg={8}>
+                        <Typography id="transition-modal-title">
+                            <strong>{spearPhishingDetails.testName}</strong>{' '}
+                            {spearPhishingDetails.testDetail}
+                        </Typography>
                         {/* </Grid> */}
                     </Grid>
-                    <Grid item xs={12} md={12} lg={6}>
+                    <Grid item xs={12} md={6} lg={4}>
                         <Card
                             sx={{
                                 height: '100%',
@@ -111,7 +107,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                     </Typography>
                                 </Box>
                             ) : (
-                                <CardContent sx={{ textAlign: 'center' }}>
+                                <CardContent sx={{ textAlign: 'center', alignContent: 'center' }}>
                                     <Typography
                                         variant="h2"
                                         sx={{
@@ -121,88 +117,120 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                         {spearPhishingDetails.totalChallenges}
                                     </Typography>
                                     <Typography variant="body2">
-                                        challenges were processed by this LLM
+                                        challenges were processed by this LLM to assess its spear phishing capabilities
                                     </Typography>
                                 </CardContent>
                             )}
                         </Card>
                     </Grid>
                 </Grid>
-            <Grid container spacing={1} pt={1}>
-                <Grid item xs={12} md={12} lg={6}>
-                    <ResponsiveContainer width="100%" height={500}>
-                        <BarChart
-                            data={spearPhishingBarData}
-                            margin={{ left: 20, right: 20 }}
-                            barGap={5}
-                        >
-                            <XAxis
-                                dataKey="category"
-                                angle={-45}
-                                textAnchor="end"
-                                height={100}
-                                fontSize={12}
-                            />
-                            <Tooltip />
-                            <Legend wrapperStyle={{ fontSize: '12px' }} />
+            </Box>
+            <Box sx={{ p: 2 }}>
+                <Grid container spacing={2}>
+                    {/* Left side with bar chart */}
+                    <Grid item xs={12} md={6} lg={8}>
+                        <ResponsiveContainer width="100%" height={400}>
+                            <BarChart
+                                data={spearPhishingBarData}
+                                margin={{ right: 20 }}
+                                barGap={5}
+                            >
+                                <XAxis
+                                    dataKey="category"
+                                    angle={-45}
+                                    textAnchor="end"
+                                    height={100}
+                                    fontSize={12}
+                                />
+                                <YAxis domain={[0, 1]} ticks={[0, 0.2, 0.4, 0.6, 0.8, 1.0]}/>
+                                <Tooltip />
+                                <Legend wrapperStyle={{ fontSize: '12px' }} />
+                                <Bar
+                                    dataKey="overall_average"
+                                    name="Overall average"
+                                    fill="#d32f2f"
+                                    barSize={5}
+                                />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </Grid>
 
-                            <Bar
-                                dataKey="overall_average"
-                                name="Overall average"
-                                fill="#d32f2f"
-                                barSize={5}
-                            />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </Grid>
-                {spearPhishingScoreData.map((data: any, index) => (
-                    <Grid
-                        item
-                        xs={12}
-                        md={12}
-                        lg={3}
-                        key={index}
-                        sx={{ width: '50%', height: 'fit-content', left: '0' }}
-                    >
-                        <Card
-                            sx={{ height: '100%', backgroundColor: '#e8e8e8' }}
-                        >
-                            {data.value === 'Not available' ? (
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        height: 200,
-                                    }}
-                                >
-                                    <Typography
-                                        variant="body1"
-                                        color="textSecondary"
-                                    >
-                                        Data not available for {data.name}
-                                    </Typography>
-                                </Box>
-                            ) : (
-                                <CardContent sx={{ textAlign: 'center' }}>
-                                    <Typography
-                                        variant="h2"
+                    {/* Right side with 2x2 cards */}
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Grid container spacing={2}>
+                            {spearPhishingScoreData.map((data: any, index) => (
+                                <Grid item xs={12} sm={6} key={index}>
+                                    <Card
                                         sx={{
-                                            fontSize: '2rem',
-                                            color: colorCode[data.value]?.color,
+                                            height: '100%',
+                                            backgroundColor: '#e8e8e8',
                                         }}
                                     >
-                                        {colorCode[data.value]?.level}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        {data.text}
-                                    </Typography>
-                                </CardContent>
-                            )}
-                        </Card>
+                                        {data.value === 'Not available' ? (
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    height: 200,
+                                                }}
+                                            >
+                                                <Typography
+                                                    variant="body1"
+                                                    color="textSecondary"
+                                                >
+                                                    Data not available for{' '}
+                                                    {data.name}
+                                                </Typography>
+                                            </Box>
+                                        ) : (
+                                            data.name === 'Overall Score' ? (
+                                            <CardContent
+                                                sx={{ textAlign: 'center' }}
+                                            >
+                                                <Typography
+                                                    variant="h2"
+                                                    sx={{
+                                                        fontSize: '1.5rem',
+                                                    }}
+                                                >
+                                                    {data.value}
+                                                </Typography>
+                                                <Typography variant="body2">
+                                                    {data.text}
+                                                </Typography>
+                                            </CardContent>
+                                            ) : (
+                                            <CardContent
+                                                sx={{ textAlign: 'center' }}
+                                            >
+                                                <Typography
+                                                    variant="h2"
+                                                    sx={{
+                                                        fontSize: '1.5rem',
+                                                        color: colorCode[
+                                                            data.value
+                                                        ]?.color,
+                                                    }}
+                                                >
+                                                    {
+                                                        colorCode[data.value]
+                                                            ?.level
+                                                    }
+                                                </Typography>
+                                                <Typography variant="body2">
+                                                    {data.text}
+                                                </Typography>
+                                            </CardContent>
+                                            )
+                                        )}
+                                    </Card>
+                                </Grid>
+                            ))}
+                        </Grid>
                     </Grid>
-                ))}
-            </Grid>
+                </Grid>
+            </Box>
         </>
     )
 }
