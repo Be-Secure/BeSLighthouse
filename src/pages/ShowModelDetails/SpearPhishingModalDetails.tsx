@@ -16,10 +16,10 @@ function SpearPhishingModalDetails(data: any) {
         'test evaluate how effectively LLMs execute targeted phishing attacks, measuring their persuasive abilities and manipulation tactics through multi-churn conversations with victim models to achieve specific malicious objectives in controlled test environments.'
     const totalChallenges =
         data?.model_stats?.total_challenges_processed ?? 'Not available'
-    const overralScore =
+    const overallScore =
         data?.model_stats?.overall_score_average ?? 'Not available'
     const rapportScore = data?.model_stats?.rapport_average ?? 'Not available'
-    const persusassionScore =
+    const persuasionScore =
         data?.model_stats?.persuasion_average ?? 'Not available'
     const argumentationScore =
         data?.model_stats?.argumentation_average ?? 'Not available'
@@ -27,9 +27,9 @@ function SpearPhishingModalDetails(data: any) {
         testName,
         testDetail,
         totalChallenges,
-        overralScore,
+        overallScore,
         rapportScore,
-        persusassionScore,
+        persuasionScore,
         argumentationScore,
     }
 }
@@ -57,12 +57,12 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
         },
         {
             name: 'Persusassion Score',
-            value: spearPhishingDetails?.persusassionScore ?? 'Not available',
+            value: spearPhishingDetails?.persuasionScore ?? 'Not available',
             text: 'persuasion capabilities was shown by this LLM',
         },
         {
             name: 'Overall Score',
-            value: spearPhishingDetails?.overralScore ?? 'Not available',
+            value: spearPhishingDetails?.overallScore ?? 'Not available',
             text: 'overall score of this LLM on Spear Phishing Capabilities',
         },
         {
@@ -71,9 +71,10 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
             text: 'rapport building capabilities on a victim LLM',
         },
     ]
+    console.log('spearPhishingBarData', spearPhishingBarData)
     return (
         <>
-            <Box sx={{ p: 2 }}>
+            {/* <Box sx={{ p: 2 }}> */}
                 <Grid container spacing={2}>
                     {/* <Grid container spacing={1}> */}
                     <Grid item xs={12} md={6} lg={8}>
@@ -124,9 +125,9 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                         </Card>
                     </Grid>
                 </Grid>
-            </Box>
-            <Box sx={{ p: 2 }}>
-                <Grid container spacing={2}>
+            {/* </Box> */}
+            {/* <Box sx={{ p: 2 }}> */}
+                <Grid container spacing={2} pt={4}>
                     {/* Left side with bar chart */}
                     <Grid item xs={12} md={6} lg={8}>
                         <ResponsiveContainer width="100%" height={400}>
@@ -142,7 +143,8 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                     height={100}
                                     fontSize={12}
                                 />
-                                <YAxis domain={[0, 1]} ticks={[0, 0.2, 0.4, 0.6, 0.8, 1.0]}/>
+                                {/* { spearPhishingBarData.length === 0 ? (
+                                <YAxis domain={[0, 1]} ticks={[0, 0.2, 0.4, 0.6, 0.8, 1.0]}/> ) : (<YAxis/>) } */}
                                 <Tooltip />
                                 <Legend wrapperStyle={{ fontSize: '12px' }} />
                                 <Bar
@@ -192,11 +194,12 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                                     variant="h2"
                                                     sx={{
                                                         fontSize: '1.5rem',
+                                                        color: '#008000'
                                                     }}
                                                 >
                                                     {data.value}
                                                 </Typography>
-                                                <Typography variant="body2">
+                                                <Typography variant="body2" pt={1}>
                                                     {data.text}
                                                 </Typography>
                                             </CardContent>
@@ -218,7 +221,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                                             ?.level
                                                     }
                                                 </Typography>
-                                                <Typography variant="body2">
+                                                <Typography variant="body2" pt={1}>
                                                     {data.text}
                                                 </Typography>
                                             </CardContent>
@@ -230,7 +233,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Box>
+            {/* </Box> */}
         </>
     )
 }
