@@ -53,22 +53,22 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
         {
             name: 'Argumentation Score',
             value: spearPhishingDetails?.argumentationScore ?? 'Not available',
-            text: 'argumentation capabilities was shown by this LLM',
+            text: 'argumentation capabilities was shown by this LLM on a victim LLM',
         },
         {
             name: 'Persusassion Score',
             value: spearPhishingDetails?.persuasionScore ?? 'Not available',
-            text: 'persuasion capabilities was shown by this LLM',
+            text: 'persuasion capabilities was shown by this LLM on a victim LLM',
         },
         {
             name: 'Overall Score',
             value: spearPhishingDetails?.overallScore ?? 'Not available',
-            text: 'overall score of this LLM on Spear Phishing Capabilities',
+            text: 'overall score of this LLM on Spear Phishing Capabilities on a victim LLM',
         },
         {
             name: 'Rapport Score',
             value: spearPhishingDetails?.rapportScore ?? 'Not available',
-            text: 'rapport building capabilities on a victim LLM',
+            text: 'rapport building capabilities was shown by this LLM on a victim LLM',
         },
     ]
     console.log('spearPhishingBarData', spearPhishingBarData)
@@ -113,6 +113,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                         variant="h2"
                                         sx={{
                                             fontSize: '2rem',
+                                            
                                         }}
                                     >
                                         {spearPhishingDetails.totalChallenges}
@@ -127,14 +128,13 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                 </Grid>
             {/* </Box> */}
             {/* <Box sx={{ p: 2 }}> */}
-                <Grid container spacing={2} pt={4}>
+                <Grid container spacing={2} pt={2}>
                     {/* Left side with bar chart */}
                     <Grid item xs={12} md={6} lg={8}>
                         <ResponsiveContainer width="100%" height={400}>
                             <BarChart
                                 data={spearPhishingBarData}
-                                margin={{ right: 20 }}
-                                barGap={5}
+                                margin={{ left: -20, right: 50 }}
                             >
                                 <XAxis
                                     dataKey="category"
@@ -143,8 +143,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                     height={100}
                                     fontSize={12}
                                 />
-                                {/* { spearPhishingBarData.length === 0 ? (
-                                <YAxis domain={[0, 1]} ticks={[0, 0.2, 0.4, 0.6, 0.8, 1.0]}/> ) : (<YAxis/>) } */}
+                                <YAxis domain={[0, 1]} ticks={[0, 0.2, 0.4, 0.6, 0.8, 1.0]}/> 
                                 <Tooltip />
                                 <Legend wrapperStyle={{ fontSize: '12px' }} />
                                 <Bar
@@ -193,13 +192,18 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                                 <Typography
                                                     variant="h2"
                                                     sx={{
-                                                        fontSize: '1.5rem',
-                                                        color: '#008000'
+                                                        fontSize: '1 rem',
+                                                        color: colorCode[
+                                                            data.value
+                                                        ]?.color,
+                                                        
+
                                                     }}
+                                                    
                                                 >
                                                     {data.value}
                                                 </Typography>
-                                                <Typography variant="body2" pt={1}>
+                                                <Typography variant="body2" sx={{ fontSize: '15px' }}>
                                                     {data.text}
                                                 </Typography>
                                             </CardContent>
@@ -214,6 +218,8 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                                         color: colorCode[
                                                             data.value
                                                         ]?.color,
+                                                        
+
                                                     }}
                                                 >
                                                     {
@@ -221,7 +227,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                                             ?.level
                                                     }
                                                 </Typography>
-                                                <Typography variant="body2" pt={1}>
+                                                <Typography variant="body2" pt={1} sx={{ fontSize: '15px' }}>
                                                     {data.text}
                                                 </Typography>
                                             </CardContent>
