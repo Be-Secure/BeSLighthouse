@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
+import Modal from "@mui/material/Modal";
+import Backdrop from "@mui/material/Backdrop";
+import Fade from "@mui/material/Fade";
+import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { verifyLink } from "../../utils/verifyLink";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
+import MitreModal from "./MitreModal";
 
 interface AttackCategory {
   is_extremely_malicious?: number;
@@ -92,7 +98,7 @@ interface PromptInjectionStats {
   stat_per_model?: InjectionStats;
 }
 
-type MitreDataArray = MitreData[];
+export type MitreDataArray = MitreData[];
 
 interface LanguageStats {
   bleu: number;
@@ -119,6 +125,19 @@ interface SeverityLevel {
 interface ColorCode {
   [key: number]: SeverityLevel;
 }
+
+// eslint-disable-next-line no-unused-vars
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const colorCode: ColorCode = {
   0: {
@@ -149,26 +168,32 @@ const colorCode: ColorCode = {
 };
 
 
+// eslint-disable-next-line no-unused-vars
 function countMalicious(judgeResponse: MitreDataArray) {
   return judgeResponse?.reduce((count, item) => {
     return count + (item.judge_response?.outputs || []).filter(output => output?.text?.trim() === "Malicious.").length;
   }, 0);
 }
 
-function aggregateInjectionResults(data: PromptInjectionStats, promptInjectionresult: any) {
-  Object.values(data).forEach((category) => {
-    if (typeof category === "object") {
-      Object.values(category).forEach((stats: any) => {
-        if (stats.injection_successful_count !== undefined) {
-          promptInjectionresult[0].value += stats.injection_successful_count;
-        }
-        if (stats.injection_unsuccessful_count !== undefined) {
-          promptInjectionresult[1].value += stats.injection_unsuccessful_count;
+const generateData = (mitredata: any) => {
+  const failedLabels = ["Malicious.", "Potential."];
+  let failedCount = 0;
+
+  mitredata.forEach((entry: any) => {
+    if (entry.judge_response && entry.judge_response.outputs) {
+      entry.judge_response.outputs.forEach((output: any) => {
+        if (failedLabels.includes(output.text.trim())) {
+          failedCount++; // Count failed responses
         }
       });
     }
   });
-}
+
+  return [
+    { name: "Failed", value: failedCount, color: "#E87D3E" },
+    { name: "Total", value: mitredata.length, color: "#1C4E80" }
+  ];
+};
 
 const SummaryDashboard = ({ model }: any) => {
 
@@ -189,6 +214,7 @@ const SummaryDashboard = ({ model }: any) => {
   const [frrData, setFrrData] = useState<FRRData>({});
   const [spearPhishingData, setSpearPhishingData] = useState<SpearPhishingStats>({});
   const [promptInjectionData, setPromptInjectionData] = useState<PromptInjectionStats>({});
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -215,7 +241,7 @@ const SummaryDashboard = ({ model }: any) => {
 
   const languages = new Set([...Object.keys(autocompleteData), ...Object.keys(instructData)]);
 
-  const maliciousCount = countMalicious(mitreData);
+  const data = generateData(mitreData);
 
   // Transform data
   const mergedInsecureCodingData = Array.from(languages).map(lang => ({
@@ -236,22 +262,131 @@ const SummaryDashboard = ({ model }: any) => {
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
   const promptInjectionresult = [
-    { name: "Successful", value: 0, color: "#1f77b4" },
-    { name: "Unsuccessful", value: 0, color: "#ff7f0e" },
+    { name: "Successful", value: promptInjectionData?.stat_per_model?.injection_successful_count ?? 0, color: "#1f77b4" },
+    { name: "Unsuccessful", value: promptInjectionData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#ff7f0e" },
   ];
 
-  aggregateInjectionResults(promptInjectionData, promptInjectionresult);
-
   return (
-    <Grid container spacing={ 2 } pt={ 2 } pb={ 2 }>
+    <Grid container spacing={ 1 } pt={ 1 } pb={ 2 }>
       { /* First Row */ }
       <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
-        <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center" } }>
-          <CardContent sx={ { textAlign: "center" } }>
-            <Typography variant="h2" sx={ { fontSize: "5rem" } }>{ maliciousCount }</Typography>
-            <Typography variant="body2">malicious scenarios in MITRE benchmark test</Typography>
-          </CardContent>
-        </Card>
+        { mitreData.length > 0 ? (
+          <>
+            <Card
+              onClick={ () => setOpen(true) }
+              sx={ {
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                padding: 2,
+                boxShadow: 3, // Adds slight shadow for better contrast
+                borderRadius: 2, // Matches smooth edges
+              } }
+            >
+              <CardContent sx={ { textAlign: "center", width: "100%", paddingBottom: "8px" } }>
+                { /* Title */ }
+                <Typography variant="subtitle1" sx={ { fontWeight: "bold" } }>
+                  MITRE
+                </Typography>
+                <Typography variant="subtitle2" sx={ { fontWeight: "bold" } }>
+                  Benchmark Tests
+                </Typography>
+
+                { /* Pie Chart Container */ }
+                <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", mt: 1 } }>
+                  <PieChart width={ 100 } height={ 100 }>
+                    <Pie
+                      data={ data }
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={ 30 }
+                      outerRadius={ 45 }
+                      dataKey="value"
+                      stroke="none"
+                    >
+                      { data.map((entry, index) => (
+                        <Cell key={ `cell-${index}` } fill={ entry.color } />
+                      )) }
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </Box>
+
+                { /* Legend */ }
+                <Box sx={ { display: "flex", justifyContent: "center", gap: 1, mt: 1 } }>
+                  { data.map((item) => (
+                    <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
+                      <Box
+                        sx={ {
+                          width: 10,
+                          height: 10,
+                          backgroundColor: item.color,
+                          borderRadius: "50%",
+                          mr: 0.5,
+                        } }
+                      />
+                      <Typography variant="caption" sx={ { fontSize: "14px", color: "textSecondary" } }>
+                        { item.name }
+                      </Typography>
+                    </Box>
+                  )) }
+                </Box>
+              </CardContent>
+            </Card>
+
+            { /* Modal */ }
+            <Modal
+              open={ open }
+              onClose={ () => setOpen(false) }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ { backdrop: { timeout: 500 } } }
+            >
+              <Fade in={ open }>
+                <Box
+                  sx={ {
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "80vw",
+                    maxHeight: "90vh",
+                    overflowY: "auto",
+                    bgcolor: "background.paper",
+                    boxShadow: 24,
+                    p: 4,
+                    borderRadius: 2,
+                  } }
+                >
+                  <MitreModal mitreData={ mitreData } />
+                </Box>
+              </Fade>
+            </Modal>
+          </>
+        ) : (
+          <Card
+            sx={ {
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              padding: 2,
+              boxShadow: 3, // Adds slight shadow for better contrast
+              borderRadius: 2, // Matches smooth edges
+            } }
+          >
+            <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+              <Typography variant="body1" color="textSecondary">
+                Mitre data not available
+              </Typography>
+            </Box>
+          </Card>
+        ) }
       </Grid>
 
       <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
@@ -291,38 +426,87 @@ const SummaryDashboard = ({ model }: any) => {
       </Grid>
 
       <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
-        <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center" } }>
-          { Object.keys(spearPhishingData).length === 0 ? 
-            (
-              <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
-                <Typography variant="body1" color="textSecondary">
-                  Spear phishing data not available
-                </Typography>
-              </Box>
-            ) : (
-              <CardContent sx={ { textAlign: "center" } }>
-                <Typography variant="h2" sx={ { fontSize: "2rem", color: colorCode[spearPhishingNumber]?.color } }>{ colorCode[spearPhishingNumber].level }</Typography>
-                <Typography variant="body2">
-                  persuasion skill by this LLM on a victim LLM to generate Spear Phishing content
-                </Typography>
-              </CardContent>
-            )
-          }
+        <Card
+          sx={ {
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 2,
+            boxShadow: 3, // Soft shadow for a clean look
+            borderRadius: 2, // Rounded edges
+          } }
+        >
+          { Object.keys(spearPhishingData).length === 0 ? (
+            <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+              <Typography variant="body1" color="textSecondary">
+                Spear phishing data not available
+              </Typography>
+            </Box>
+          ) : (
+            <CardContent sx={ { textAlign: "center" } }>
+              { /* Bold Persuasion Skill */ }
+              <Typography variant="body1" sx={ { fontSize: "1rem", mb: 1 } }>
+                <strong>Persuasion skill</strong> of this LLM to generate Spear Phishing content
+              </Typography>
+
+              { /* Dynamic Rating (Color Coded) */ }
+              <Typography
+                variant="h4"
+                sx={ {
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                  color: colorCode[spearPhishingNumber]?.color,
+                  mt: 1,
+                } }
+              >
+                { colorCode[spearPhishingNumber].level }
+              </Typography>
+            </CardContent>
+          ) }
         </Card>
       </Grid>
 
-
       { /* Second Row */ }
       <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
-        <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center" } }>
+        <Card
+          sx={ {
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 2,
+            boxShadow: 3, // Soft shadow
+            borderRadius: 2, // Rounded edges
+          } }
+        >
           <CardContent sx={ { textAlign: "center" } }>
-            <Typography variant="h2" sx={ { fontSize: "5rem" } }>{ frrData?.refusal_count ?? 0.0 }</Typography>
-            <Typography variant="body2">
-              False Refusal Rate on misinterpreting the prompt as a malicious request
+            { /* Bold "False Refusal Rate" */ }
+            <Typography variant="body1" sx={ { fontSize: "1rem", fontWeight: "bold", mb: 1 } }>
+              False Refusal Rate
+            </Typography>
+
+            { /* Dynamic Numeric Value (Color Coded) */ }
+            <Typography
+              variant="h4"
+              sx={ {
+                fontSize: "2rem",
+                fontWeight: "bold",
+                color: "green", // Matches the reference image
+                mt: 1,
+              } }
+            >
+              { frrData?.refusal_count ?? 0.0 }
+            </Typography>
+
+            { /* Supporting Text */ }
+            <Typography variant="body2" sx={ { mt: 1 } }>
+              on misinterpreting the prompt as a malicious request
             </Typography>
           </CardContent>
         </Card>
       </Grid>
+
 
       <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
         <Card sx={ { height: "100%" } }>
@@ -345,7 +529,7 @@ const SummaryDashboard = ({ model }: any) => {
                   <XAxis dataKey="category" />
                   <YAxis />
                   <Tooltip />
-                  <Legend wrapperStyle={ { fontSize: '12px' } }/>
+                  <Legend wrapperStyle={ { fontSize: '12px' } } />
                   <Bar dataKey="ExtremelyMalicious" stackId="a" fill="#1f77b4" barSize={ 20 } />
                   <Bar dataKey="PotentiallyMalicious" stackId="a" fill="#ff7f0e" barSize={ 20 } />
                   <Bar dataKey="NonMalicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
@@ -376,7 +560,7 @@ const SummaryDashboard = ({ model }: any) => {
                     )) }
                   </Pie>
                   <Tooltip />
-                  <Legend  wrapperStyle={ { fontSize: '12px' } }/>
+                  <Legend wrapperStyle={ { fontSize: '12px' } } />
                 </PieChart>
               </ResponsiveContainer>
             ) }
