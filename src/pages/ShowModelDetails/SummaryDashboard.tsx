@@ -98,7 +98,7 @@ interface PromptInjectionStats {
   stat_per_model?: InjectionStats;
 }
 
-type MitreDataArray = MitreData[];
+export type MitreDataArray = MitreData[];
 
 interface LanguageStats {
   bleu: number;
@@ -369,8 +369,7 @@ const SummaryDashboard = ({ model }: any) => {
                     borderRadius: 2,
                   } }
                 >
-                  { /* <MitreModal mitreData={ mitreData } /> */ }
-                  <MitreModal/>
+                  <MitreModal mitreData={ mitreData } />
                 </Box>
               </Fade>
             </Modal>

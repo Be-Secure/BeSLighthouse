@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { MitreDataArray } from "./SummaryDashboard";
 
 interface InfoCardProps {
   title: string;
@@ -20,7 +21,7 @@ interface InfoCardProps {
 
  
 const InfoCard: React.FC<InfoCardProps> = ({ title, value }) => (
-  <Card sx={ { textAlign: "center", p: 2, bgcolor: "#f4f4f4", boxShadow: 2, borderRadius: 2, height: 155 } }>
+  <Card sx={ { textAlign: "center", p: 2, bgcolor: "#f4f4f4", boxShadow: 2, borderRadius: 2, height: 170 } }>
     <CardContent>
       <Typography variant="h4" fontWeight="bold" color="#333">
         { value }
@@ -32,32 +33,6 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, value }) => (
   </Card>
 );
 
-const severityData = [
-  { name: "Malicious", value: 672, color: "#004c97" },
-  { name: "Potential", value: 96, color: "#f28e2c" },
-  { name: "Neutral", value: 25, color: "#76b041" },
-  { name: "Benign", value: 25, color: "#e15759" },
-];
-
-const answeredData = [
-  { name: "Answered", value: 900, color: "#1f77b4" },
-  { name: "Unanswered", value: 196, color: "#ff7f0e" },
-];
- 
- 
-const attackData = [
-  { category: "C2", Malicious: 5, Potential: 2, Neutral: 3, Benign: 1 },
-  { category: "Collection", Malicious: 10, Potential: 3, Neutral: 2, Benign: 0 },
-  { category: "Discovery", Malicious: 15, Potential: 4, Neutral: 3, Benign: 2 },
-  { category: "Evasion", Malicious: 12, Potential: 5, Neutral: 2, Benign: 1 },
-  { category: "Execution", Malicious: 14, Potential: 3, Neutral: 2, Benign: 1 },
-  { category: "Exfil", Malicious: 13, Potential: 4, Neutral: 3, Benign: 1 },
-  { category: "Lateral Movement", Malicious: 8, Potential: 3, Neutral: 2, Benign: 1 },
-  { category: "Persistence", Malicious: 9, Potential: 3, Neutral: 2, Benign: 1 },
-  { category: "Privilege Escalation", Malicious: 7, Potential: 3, Neutral: 2, Benign: 1 },
-  { category: "Recon", Malicious: 11, Potential: 4, Neutral: 3, Benign: 2 },
-];
-
 interface CustomPieChartProps {
   data: { name: string; value: number; color: string }[];
   title: string;
@@ -68,7 +43,7 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title }) => (
     <Typography variant="h6" gutterBottom sx={ { fontSize: "12px" } }>
       { title }
     </Typography>
-    <ResponsiveContainer width="100%" height={ 290 }>
+    <ResponsiveContainer width="100%" height={ 320 }>
       <PieChart>
         <Pie
           data={ data }
@@ -89,13 +64,110 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title }) => (
   </Grid>
 );
 
-const MitreModal: React.FC = () => {
-   
+function generateInfoCards(mitredata: MitreDataArray) {
+  let benignCount = 0;
+  let harmfulCount = 0;
+  let maliciousCount = 0;
+
+  mitredata.forEach((entry: any) => {
+    if (entry.judge_response && entry.judge_response.outputs) {
+      entry.judge_response.outputs.forEach((output: { text: string; }) => {
+        if (output.text.trim().toLowerCase() === "benign.") {
+          benignCount++;
+        } else if (output.text.trim().toLowerCase() === "potential.") {
+          harmfulCount++;
+        } else if (output.text.trim().toLowerCase() === "malicious.") {
+          maliciousCount++;
+        }
+      });
+    }
+  });
+
   const infoCards = [
-    { title: "Successful exploit attempts", value: "567" },
-    { title: "Detected threats mitigated", value: "312" },
-    { title: "Unmitigated threats", value: "89" },
+    { title: "responses generated were benign in nature", value: benignCount },
+    { title: "responses generated were potentially harmful", value: harmfulCount },
+    { title: "responses generated were malicious", value: maliciousCount },
   ];
+
+  return infoCards;
+}
+
+function generateMitreSummary(mitreData: MitreDataArray) {
+  let summary: any = {};
+
+  mitreData.forEach((entry: any) => {
+    let category = entry.mitre_category;
+    let judgment = entry.judge_response?.outputs[0].text.trim();
+
+    if (!summary[category]) {
+      summary[category] = { Malicious: 0, Potential: 0, Neutral: 0, Benign: 0 };
+    }
+
+    if (judgment === "Malicious.") {
+      summary[category].Malicious++;
+    } else if (judgment === "Potential.") {
+      summary[category].Potential++;
+    } else if (judgment === "Neutral.") {
+      summary[category].Neutral++;
+    } else if (judgment === "Benign.") {
+      summary[category].Benign++;
+    }
+  });
+
+  return Object.entries(summary).map(([category, counts]: any) => ({ category, ...counts }));
+}
+
+function generateJudgmentJSON(mitreData: MitreDataArray) {
+  const categories: any = {
+    Malicious: { value: 0, color: "#FF0000" },
+    Potential: { value: 0, color: "#f28e2c" },
+    Neutral: { value: 0, color: "#f7dc6f" },
+    Benign: { value: 0, color: "#76b041" }
+  };
+
+  // Iterate through mitreData to extract judge_response
+  mitreData.forEach((entry: any) => {
+    if (entry.judge_response && entry.judge_response.outputs) {
+      entry.judge_response.outputs.forEach((response: any) => {
+        const text = response.text.trim().replace(".", ""); // Remove trailing dot
+        if (categories.hasOwnProperty(text)) {
+          categories[text].value += 1;
+        }
+      });
+    }
+  });
+
+  // Convert the object to an array format
+  return Object.entries(categories).map(([name, data]: any) => ({
+    name,
+    value: data.value,
+    color: data.color
+  }));
+}
+
+function generateSummary(mitreData: MitreDataArray) {
+  const summary = [
+    { name: "Answered", value: 0, color: "#1f77b4" },
+    { name: "Unanswered", value: 0, color: "#ff7f0e" }
+  ];
+
+  mitreData.forEach(item => {
+    if (item.answered === "yes") {
+      summary[0].value++;
+    } else if (item.answered === "no") {
+      summary[1].value++;
+    }
+  });
+
+  return summary;
+}
+
+const MitreModal = ({ mitreData }: {mitreData: MitreDataArray}) => {
+   
+  const infoCards = generateInfoCards(mitreData);
+  const attackData = generateMitreSummary(mitreData);
+  const severityData = generateJudgmentJSON(mitreData);
+  const answeredData = generateSummary(mitreData);
 
   return (
     <Box sx={ { bgcolor: "#fff", width: "100%" } }>
@@ -109,7 +181,7 @@ const MitreModal: React.FC = () => {
               </Typography>
             </Grid>
             <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
-              <InfoCard title="Test cases with harmful intent executed" value="1096" />
+              <InfoCard title="Test cases with harmful intent executed on model" value={ mitreData.length } />
             </Grid>
           </Grid>
 
@@ -138,10 +210,10 @@ const MitreModal: React.FC = () => {
           <YAxis stroke="#555" />
           <Tooltip />
           <Legend wrapperStyle={ { fontSize: "12px" } } />
-          <Bar dataKey="Malicious" stackId="a" fill="#004c97" barSize={ 20 } />
+          <Bar dataKey="Malicious" stackId="a" fill="#FF0000" barSize={ 20 } />
           <Bar dataKey="Potential" stackId="a" fill="#f28e2c" barSize={ 20 } />
-          <Bar dataKey="Neutral" stackId="a" fill="#76b041" barSize={ 20 } />
-          <Bar dataKey="Benign" stackId="a" fill="#e15759" barSize={ 20 } />
+          <Bar dataKey="Neutral" stackId="a" fill="#f7dc6f" barSize={ 20 } />
+          <Bar dataKey="Benign" stackId="a" fill="#76b041" barSize={ 20 } />
         </BarChart>
       </ResponsiveContainer>
     </Box>
