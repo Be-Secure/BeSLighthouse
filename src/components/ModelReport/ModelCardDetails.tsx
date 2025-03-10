@@ -3,6 +3,12 @@ import { Grid, Tooltip, Card, Typography, Box } from "@mui/material";
 import MKTypography from "../MKTypography";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import OSAR from "./OSAR";
+import BusinessIcon from "@mui/icons-material/Business";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import GavelIcon from "@mui/icons-material/Gavel";
+import { ReactComponent as HuggingFaceIcon } from "../../assets/images/svgexport-1.svg";
+import GitHubIcon from "../../assets/images/github-mark.png";
+
 
 interface RedirectLinkProps {
   value?: string;
@@ -40,6 +46,8 @@ const RedirectLink: React.FC<RedirectLinkProps> = ({ value = "", label = "" }) =
 };
 
 // Reusable component for model detail entries
+ 
+// eslint-disable-next-line no-unused-vars
 const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> = ({ label, value, isLink }) => {
   return (
     <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", paddingTop: "6px" } }>
@@ -134,7 +142,7 @@ const ModelDescription = ({ description }: any) => {
           whiteSpace: "normal",
         } }
       >
-        <Typography variant="body1" sx={ { fontSize: 14 } }>
+        <Typography variant="body1" sx={ { fontSize: 14, top: "-5px", position: "relative" } }>
           <strong>{ firstWord }</strong> { words.join(" ") }
         </Typography>
       </Box>
@@ -148,31 +156,112 @@ export default function ModelCardDetails({ model }: any) {
   return (
     <Grid container spacing={ 1 } sx={ { height: "100%", alignItems: "stretch" } }>
       { /* Model Details Section */ }
-      <Grid item xs={ 12 } md={ 12 } lg= { 10 } sx={ { display: "flex", flexDirection: "column" } }>
+      <Grid item xs={ 12 } md={ 12 } lg= { 9 } sx={ { display: "flex", flexDirection: "column" } }>
         <Card key={ `TOPCARD9~9` } sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 3.5 } }>
-          <Grid container spacing={ 2 } pl={ 4 }>
+          <Grid container spacing={ 2 } pl={ 4 } sx={ { "& > .MuiGrid-item": { paddingTop: "0px" } } }>
             { /* Model Description - Takes 1/3 width */ }
-            <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
-              <Grid container spacing={ 1 } pt={ 0.2 }>
-                <ModelDescription description={ selectedModel?.description || "No description available" } />
-              </Grid>
+            <Grid 
+              item 
+              xs={ 12 } 
+              md={ 12 } 
+              lg={ 8 } 
+              container 
+              justifyContent="center"
+              alignItems="center"
+            >
+              <ModelDescription description={ selectedModel?.description || "No description available" } />
             </Grid>
 
             { /* Model Details - Takes 2/3 width */ }
-            <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
-              <Grid container spacing={ 1 } pl={ 4 }>
-                { [
-                  { label: "Name", value: selectedModel.name },
-                  { label: "Model URL", value: selectedModel.model_url, isLink: true },
-                  { label: "Size", value: selectedModel.size },
-                  { label: "License", value: selectedModel.license },
-                  { label: "Organization", value: selectedModel.organization },
-                  { label: "Repository URL", value: selectedModel.url, isLink: true },
-                  { label: "Modality", value: selectedModel.modality },
-                  { label: "Created Date", value: new Date(selectedModel.created_date).toLocaleDateString() },
-                ].map((detail, idx) => (
-                  <ModelDetail key={ `GRID${idx}` } { ...detail } />
-                )) }
+            <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
+              <Grid container spacing={ 1 } pl={ 4 } direction="column">
+                <Grid item xs={ 12 } style={ { 
+                  paddingTop: "6px", 
+                  display: "flex", 
+                  justifyContent: "center",
+                  alignItems: "center"
+                } }>
+                  <Typography
+                    variant="h6"
+                    sx={ {
+                      fontWeight: "bold",
+                      color: "white",
+                      backgroundColor: "#3A81A8",
+                      padding: "4px 8px",
+                      borderRadius: "4px",
+                      fontSize: "14px",
+                      display: "inline-block",
+                      width: "120px",
+                      textAlign: "center"
+                    } }
+                  >
+                    7b
+                  </Typography>
+                </Grid>
+                <Grid item xs={ 12 } style={ { 
+                  paddingTop: "6px", 
+                  display: "flex", 
+                  justifyContent: "center",
+                  alignItems: "center"
+                } }>
+                  <Typography
+                    sx={ {
+                      fontWeight: "bold",
+                      color: "white",
+                      backgroundColor: "#007BFF",
+                      padding: "4px 8px",
+                      borderRadius: "5px",
+                      fontSize: "14px",
+                      display: "inline-block",
+                      width: "120px",
+                      textAlign: "center"
+                    } }
+                  >
+                    Text;text
+                  </Typography>
+                </Grid>
+                <Grid 
+                  item 
+                  xs={ 12 } 
+                  style={ { 
+                    display: "flex", 
+                    justifyContent: "center",  // Centers icons horizontally
+                    alignItems: "center",       // Centers icons vertically
+                    paddingTop: "6px", 
+                    gap: "8px"                  // Adds space between icons
+                  } }
+                >
+                  <HuggingFaceIcon width={ 30 } height={ 30 } />
+                  <img src={ GitHubIcon } alt="GitHub Icon" width={ 30 } height={ 30 } />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
+              <Grid container spacing={ 1 } direction="column" >
+                <Grid item container spacing={ 1 } alignItems="center" sx={ { "& > .MuiGrid-item": { paddingTop: "6px" } } }>
+                  <Grid item>
+                    <CalendarMonthIcon sx={ { fontSize: 30, color: "black" } } />
+                  </Grid>
+                  <Grid item>
+                    <Typography sx={ { fontSize: "14px", color: "black" } }>18/02/2025</Typography>
+                  </Grid>
+                </Grid>
+                <Grid item container spacing={ 1 } alignItems="center" sx={ { "& > .MuiGrid-item": { paddingTop: "6px" } } }>
+                  <Grid item>
+                    <GavelIcon sx={ { fontSize: 20, color: "black" } } />
+                  </Grid>
+                  <Grid item>
+                    <Typography sx={ { fontSize: "14px", color: "black" } }>MIT</Typography>
+                  </Grid>
+                </Grid>
+                <Grid item container spacing={ 1 } alignItems="center" sx={ { "& > .MuiGrid-item": { paddingTop: "6px" } } }>
+                  <Grid item>
+                    <BusinessIcon sx={ { fontSize: 20, color: "black" } } />
+                  </Grid>
+                  <Grid item>
+                    <Typography sx={ { fontSize: "14px", color: "black" } }>Deepseek AI</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -180,7 +269,7 @@ export default function ModelCardDetails({ model }: any) {
       </Grid>
 
       { /* OSAR Section */ }
-      <Grid item xs={ 12 } md={ 12 } lg={ 2 } sx={ { display: "flex", flexDirection: "column" } }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 3 } sx={ { display: "flex", flexDirection: "column" } }>
         <OSAR name={ selectedModel.name } />
       </Grid>
     </Grid>
