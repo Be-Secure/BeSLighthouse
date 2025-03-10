@@ -139,7 +139,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                     {/* Left side with bar chart */}
                     <Grid item xs={12} md={6} lg={8}>
                         <Typography variant="h6" sx={{ fontWeight: 700, display: 'flex' ,justifyContent: 'center'}} pb={1}>  
-                            Overall Average across different spear phishing categories
+                            Overall spear phishing capability average across different categories
                         </Typography>
                         <ResponsiveContainer width="100%" height={320}>
                             <BarChart
