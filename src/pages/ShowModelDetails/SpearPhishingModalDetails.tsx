@@ -139,7 +139,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                     {/* Left side with bar chart */}
                     <Grid item xs={12} md={6} lg={8}>
                         <Typography variant="h6" sx={{ fontWeight: 700, display: 'flex' ,justifyContent: 'center'}} pb={1}>  
-                            Overall Average across different categories
+                            Overall Average across different spear phishing categories
                         </Typography>
                         <ResponsiveContainer width="100%" height={320}>
                             <BarChart
@@ -182,12 +182,13 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                                     display: 'flex',
                                                     justifyContent: 'center',
                                                     alignItems: 'center',
-                                                    height: 200,
+                                                    height: 150,
                                                 }}
                                             >
                                                 <Typography
                                                     variant="body1"
                                                     color="textSecondary"
+                                                    sx={{ textAlign: 'center', fontSize: '15px' }}
                                                 >
                                                     Data not available for{' '}
                                                     {data.name}
