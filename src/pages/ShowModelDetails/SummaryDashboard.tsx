@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Button, Card, CardContent, Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
@@ -9,6 +9,23 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieC
 import { verifyLink } from "../../utils/verifyLink";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 import MitreModal from "./MitreModal";
+import { SpearPhishingModal } from "./SpearPhishingModalDetails";
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  maxHeight: 'fit-content',
+  overflow: 'auto',
+  maxWidth: '90%',
+  width: 1200,
+  height: 800,
+  bgcolor: 'background.paper',
+  // border: '2px solid ',
+  boxShadow: 24,
+  p: 4,
+};
 
 interface AttackCategory {
   is_extremely_malicious?: number;
@@ -20,7 +37,7 @@ interface AttackCategory {
 
 interface InterpreterData {
   [attak: string]: AttackCategory;
-}
+};
 
 interface MitreData {
   prompt_id?: number;
@@ -139,7 +156,7 @@ const style = {
   p: 4,
 };
 
-const colorCode: ColorCode = {
+export const colorCode: ColorCode = {
   0: {
     "level": "Very Poor",
     "severity": "Minimal/No Vulnerability",
@@ -215,6 +232,10 @@ const SummaryDashboard = ({ model }: any) => {
   const [spearPhishingData, setSpearPhishingData] = useState<SpearPhishingStats>({});
   const [promptInjectionData, setPromptInjectionData] = useState<PromptInjectionStats>({});
   const [open, setOpen] = useState(false);
+  const [openSpear, setOpenSpear] = useState(false);
+  const handleOpen = () => setOpenSpear(true);
+  const handleClose = () => setOpenSpear(false);
+  const handleOpenMitre = () => setOpen(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -272,19 +293,18 @@ const SummaryDashboard = ({ model }: any) => {
       <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
         { mitreData.length > 0 ? (
           <>
-            <Card
-              onClick={ () => setOpen(true) }
+            <Button
+              onClick={ handleOpenMitre }
+              variant="contained"
               sx={ {
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                padding: 2,
-                boxShadow: 3, // Adds slight shadow for better contrast
-                borderRadius: 2, // Matches smooth edges
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textTransform: 'none',
+                width: '100%'
               } }
+              style={ { backgroundColor: 'white' } }
             >
               <CardContent sx={ { textAlign: "center", width: "100%", paddingBottom: "8px" } }>
                 { /* Title */ }
@@ -335,7 +355,8 @@ const SummaryDashboard = ({ model }: any) => {
                   )) }
                 </Box>
               </CardContent>
-            </Card>
+              { /* </Card> */ }
+            </Button>
 
             { /* Modal */ }
             <Modal
@@ -426,45 +447,84 @@ const SummaryDashboard = ({ model }: any) => {
       </Grid>
 
       <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
-        <Card
-          sx={ {
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 2,
-            boxShadow: 3, // Soft shadow for a clean look
-            borderRadius: 2, // Rounded edges
-          } }
-        >
-          { Object.keys(spearPhishingData).length === 0 ? (
+        { Object.keys(spearPhishingData).length > 0 ? (
+          <>
+            <Button
+              onClick={ handleOpen }
+              variant="contained"
+              sx={ {
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textTransform: 'none',
+              } }
+              style={ { backgroundColor: 'white' } }
+            >
+              <CardContent sx={ { textAlign: "center" } }>
+                { /* Bold Persuasion Skill */ }
+                <Typography variant="body1" sx={ { fontSize: "1rem", mb: 1 } }>
+                  <strong>Persuasion skill</strong> of this LLM to generate Spear Phishing content
+                </Typography>
+
+                { /* Dynamic Rating (Color Coded) */ }
+                <Typography
+                  variant="h4"
+                  sx={ {
+                    fontSize: "2rem",
+                    fontWeight: "bold",
+                    color: colorCode[spearPhishingNumber]?.color,
+                    mt: 1,
+                  } }
+                >
+                  { colorCode[spearPhishingNumber].level }
+                </Typography>
+              </CardContent>
+            </Button>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={ openSpear }
+              onClose={ handleClose }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ {
+                backdrop: {
+                  timeout: 500,
+                },
+              } }
+            >
+              <Fade in={ openSpear }>
+                <Box sx={ modalStyle }>
+                  <SpearPhishingModal spearPhishingData={ spearPhishingData } modelName={ selectedModel.name } />
+                  { /* <Typography id="transition-modal-description" sx={{ mt: 2 }}> */ }
+
+                  { /* </Typography> */ }
+                </Box>
+              </Fade>
+            </Modal>
+          </>
+        ) : (
+          <Card
+            sx={ {
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              padding: 2,
+              boxShadow: 3, // Adds slight shadow for better contrast
+              borderRadius: 2, // Matches smooth edges
+            } }
+          >
             <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
               <Typography variant="body1" color="textSecondary">
-                Spear phishing data not available
+                Spear Phishing data not available
               </Typography>
             </Box>
-          ) : (
-            <CardContent sx={ { textAlign: "center" } }>
-              { /* Bold Persuasion Skill */ }
-              <Typography variant="body1" sx={ { fontSize: "1rem", mb: 1 } }>
-                <strong>Persuasion skill</strong> of this LLM to generate Spear Phishing content
-              </Typography>
-
-              { /* Dynamic Rating (Color Coded) */ }
-              <Typography
-                variant="h4"
-                sx={ {
-                  fontSize: "2rem",
-                  fontWeight: "bold",
-                  color: colorCode[spearPhishingNumber]?.color,
-                  mt: 1,
-                } }
-              >
-                { colorCode[spearPhishingNumber].level }
-              </Typography>
-            </CardContent>
-          ) }
-        </Card>
+          </Card>
+        ) }
       </Grid>
 
       { /* Second Row */ }
