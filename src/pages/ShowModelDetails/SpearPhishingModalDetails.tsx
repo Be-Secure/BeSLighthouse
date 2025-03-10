@@ -42,13 +42,20 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     const spearPhishingCategories: any[] = Object.keys(
         spearPhishingData.goal_stats
     )
+    const modelNameInSmall = modelName.toLowerCase()
+    console.log('modelName', modelName) 
+    Array.from(spearPhishingCategories).map((category: string) => {
+        console.log('category', category)
+        console.log('spearPhishingData.goal_stats[category][modelName]', spearPhishingData.goal_stats[category][modelNameInSmall])
+    })
     const spearPhishingBarData = Array.from(spearPhishingCategories).map(
         (category) => ({
             category: category,
             overall_average:
-                spearPhishingData?.goal_stats[category][modelName] || '0',
+                spearPhishingData?.goal_stats[category][modelNameInSmall] ?? '0',
         })
     )
+    console.log('spearPhishingBarData', spearPhishingBarData)
     const spearPhishingScoreData = [
         {
             name: 'Argumentation Score',
@@ -63,7 +70,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
         {
             name: 'Overall Score',
             value: spearPhishingDetails?.overallScore ?? 'Not available',
-            text: 'overall score of this LLM on Spear Phishing Capabilities on a victim LLM',
+            text: 'overall score of this LLM on Spear Phishing Capabilities',
         },
         {
             name: 'Rapport Score',
@@ -131,26 +138,28 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                 <Grid container spacing={2} pt={2}>
                     {/* Left side with bar chart */}
                     <Grid item xs={12} md={6} lg={8}>
-                        <ResponsiveContainer width="100%" height={400}>
+                        <Typography variant="h6" sx={{ fontWeight: 700, display: 'flex' ,justifyContent: 'center'}} pb={1}>  
+                            Overall Average across different categories
+                        </Typography>
+                        <ResponsiveContainer width="100%" height={320}>
                             <BarChart
                                 data={spearPhishingBarData}
                                 margin={{ left: -20, right: 50 }}
                             >
                                 <XAxis
                                     dataKey="category"
-                                    angle={-45}
-                                    textAnchor="end"
-                                    height={100}
+                                    textAnchor="middle"
                                     fontSize={12}
+                                    
                                 />
-                                <YAxis domain={[0, 1]} ticks={[0, 0.2, 0.4, 0.6, 0.8, 1.0]}/> 
+                                <YAxis domain={[0,1]} ticks={[0, 1, 2, 3, 4, 5]}/> 
                                 <Tooltip />
                                 <Legend wrapperStyle={{ fontSize: '12px' }} />
                                 <Bar
                                     dataKey="overall_average"
                                     name="Overall average"
                                     fill="#d32f2f"
-                                    barSize={5}
+                                    barSize={15}
                                 />
                             </BarChart>
                         </ResponsiveContainer>
@@ -192,7 +201,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                                                 <Typography
                                                     variant="h2"
                                                     sx={{
-                                                        fontSize: '1 rem',
+                                                        fontSize: '2rem',
                                                         color: colorCode[
                                                             data.value
                                                         ]?.color,
