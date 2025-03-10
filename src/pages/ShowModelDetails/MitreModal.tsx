@@ -52,12 +52,13 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title }) => (
           cx="50%"
           cy="50%"
           outerRadius={ 90 }
-          label={ ({ percent }) => `${(percent * 100).toFixed(0)}%` } // ✅ Fixed label function
+          label={ ({ percent }) => `${(percent * 100).toFixed(0)}%` }
         >
           { data?.map((entry) => (
             <Cell key={ entry.name } fill={ entry.color } />
           )) }
         </Pie>
+        <Tooltip formatter={ (value) => `${value}` } /> { /* Added Tooltip */ }
         <Legend wrapperStyle={ { fontSize: "12px" } } />
       </PieChart>
     </ResponsiveContainer>

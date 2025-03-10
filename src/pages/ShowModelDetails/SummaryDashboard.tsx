@@ -175,21 +175,6 @@ function countMalicious(judgeResponse: MitreDataArray) {
   }, 0);
 }
 
-function aggregateInjectionResults(data: PromptInjectionStats, promptInjectionresult: any) {
-  Object.values(data).forEach((category) => {
-    if (typeof category === "object") {
-      Object.values(category).forEach((stats: any) => {
-        if (stats.injection_successful_count !== undefined) {
-          promptInjectionresult[0].value += stats.injection_successful_count;
-        }
-        if (stats.injection_unsuccessful_count !== undefined) {
-          promptInjectionresult[1].value += stats.injection_unsuccessful_count;
-        }
-      });
-    }
-  });
-}
-
 const generateData = (mitredata: any) => {
   const failedLabels = ["Malicious.", "Potential."];
   let failedCount = 0;
@@ -277,14 +262,12 @@ const SummaryDashboard = ({ model }: any) => {
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
   const promptInjectionresult = [
-    { name: "Successful", value: 0, color: "#1f77b4" },
-    { name: "Unsuccessful", value: 0, color: "#ff7f0e" },
+    { name: "Successful", value: promptInjectionData?.stat_per_model?.injection_successful_count ?? 0, color: "#1f77b4" },
+    { name: "Unsuccessful", value: promptInjectionData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#ff7f0e" },
   ];
 
-  aggregateInjectionResults(promptInjectionData, promptInjectionresult);
-
   return (
-    <Grid container spacing={ 2 } pt={ 2 } pb={ 2 }>
+    <Grid container spacing={ 1 } pt={ 1 } pb={ 2 }>
       { /* First Row */ }
       <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
         { mitreData.length > 0 ? (
@@ -315,11 +298,20 @@ const SummaryDashboard = ({ model }: any) => {
                 { /* Pie Chart Container */ }
                 <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", mt: 1 } }>
                   <PieChart width={ 100 } height={ 100 }>
-                    <Pie data={ data } cx="50%" cy="50%" innerRadius={ 30 } outerRadius={ 45 } dataKey="value" stroke="none">
+                    <Pie
+                      data={ data }
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={ 30 }
+                      outerRadius={ 45 }
+                      dataKey="value"
+                      stroke="none"
+                    >
                       { data.map((entry, index) => (
                         <Cell key={ `cell-${index}` } fill={ entry.color } />
                       )) }
                     </Pie>
+                    <Tooltip />
                   </PieChart>
                 </Box>
 
@@ -375,9 +367,25 @@ const SummaryDashboard = ({ model }: any) => {
             </Modal>
           </>
         ) : (
-          <Typography variant="body2" sx={ { color: "textSecondary", mt: 2, textAlign: "center" } }>
-            No Data Available
-          </Typography>
+          <Card
+            sx={ {
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              padding: 2,
+              boxShadow: 3, // Adds slight shadow for better contrast
+              borderRadius: 2, // Matches smooth edges
+            } }
+          >
+            <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+              <Typography variant="body1" color="textSecondary">
+                Mitre data not available
+              </Typography>
+            </Box>
+          </Card>
         ) }
       </Grid>
 

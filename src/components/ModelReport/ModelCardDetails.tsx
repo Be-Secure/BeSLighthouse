@@ -46,7 +46,7 @@ const RedirectLink: React.FC<RedirectLinkProps> = ({ value = "", label = "" }) =
 };
 
 // Reusable component for model detail entries
- 
+
 // eslint-disable-next-line no-unused-vars
 const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> = ({ label, value, isLink }) => {
   return (
@@ -60,7 +60,7 @@ const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> 
         { label }: &nbsp;
       </MKTypography>
       { isLink ? (
-        <RedirectLink value={ value } label={ label }/>
+        <RedirectLink value={ value } label={ label } />
       ) : (
         <Tooltip title={ value?.length > 40 ? value : "" } arrow>
           <MKTypography variant="h6" fontWeight="regular" style={ { fontSize: "15px" } }>
@@ -152,114 +152,163 @@ const ModelDescription = ({ description }: any) => {
 
 export default function ModelCardDetails({ model }: any) {
   const selectedModel = model.length > 0 ? model[0] : {};
-
   return (
     <Grid container spacing={ 1 } sx={ { height: "100%", alignItems: "stretch" } }>
       { /* Model Details Section */ }
-      <Grid item xs={ 12 } md={ 12 } lg= { 9 } sx={ { display: "flex", flexDirection: "column" } }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 9 } sx={ { display: "flex", flexDirection: "column" } }>
         <Card key={ `TOPCARD9~9` } sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 3.5 } }>
-          <Grid container spacing={ 2 } pl={ 4 } sx={ { "& > .MuiGrid-item": { paddingTop: "0px" } } }>
+          <Grid container spacing={ 2 } pl={ 2 } sx={ { "& > .MuiGrid-item": { paddingTop: "0px" } } }>
             { /* Model Description - Takes 1/3 width */ }
-            <Grid 
-              item 
-              xs={ 12 } 
-              md={ 12 } 
-              lg={ 8 } 
-              container 
+            <Grid
+              item
+              xs={ 12 }
+              md={ 12 }
+              lg={ 7 }
+              container
               justifyContent="center"
               alignItems="center"
             >
               <ModelDescription description={ selectedModel?.description || "No description available" } />
             </Grid>
 
-            { /* Model Details - Takes 2/3 width */ }
-            <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
-              <Grid container spacing={ 1 } pl={ 4 } direction="column">
-                <Grid item xs={ 12 } style={ { 
-                  paddingTop: "6px", 
-                  display: "flex", 
-                  justifyContent: "center",
-                  alignItems: "center"
+            <Grid
+              item xs={ 12 } md={ 12 } lg={ 2.5 }
+            >
+              <Grid
+                container
+                spacing={ 1 }
+                pl={ 4 }
+                pt={ 0 }
+                sx={ {
+                  flexDirection: { xs: "row", md: "row", lg: "column" },  // Row for small & medium, column for large
+                  alignItems: { xs: "center", md: "center", lg: "flex-start" },
+                  gap: 1
+                } }
+              >
+                { /* Size */ }
+                <Grid item style={ {
+                  paddingTop: "6px"
                 } }>
-                  <Typography
-                    variant="h6"
-                    sx={ {
-                      fontWeight: "bold",
-                      color: "white",
-                      backgroundColor: "#3A81A8",
-                      padding: "4px 8px",
-                      borderRadius: "4px",
-                      fontSize: "14px",
-                      display: "inline-block",
-                      width: "120px",
-                      textAlign: "center"
-                    } }
-                  >
-                    7b
-                  </Typography>
+                  <Tooltip title={ 'Size' } arrow>
+                    <Typography
+                      variant="h6"
+                      sx={ {
+                        fontWeight: "bold",
+                        color: "white",
+                        backgroundColor: "#3A81A8",
+                        padding: "4px 8px",
+                        borderRadius: "4px",
+                        fontSize: "14px",
+                        display: "inline-block",
+                        width: "120px",
+                        textAlign: "center"
+                      } }
+                    >
+                      { selectedModel.size === '' || selectedModel.size === undefined ? 'N/A' : selectedModel.size }
+                    </Typography>
+                  </Tooltip>
                 </Grid>
-                <Grid item xs={ 12 } style={ { 
-                  paddingTop: "6px", 
-                  display: "flex", 
-                  justifyContent: "center",
-                  alignItems: "center"
+                { /* modality */ }
+                <Grid item style={ {
+                  paddingTop: "0px"
                 } }>
-                  <Typography
-                    sx={ {
-                      fontWeight: "bold",
-                      color: "white",
-                      backgroundColor: "#007BFF",
-                      padding: "4px 8px",
-                      borderRadius: "5px",
-                      fontSize: "14px",
-                      display: "inline-block",
-                      width: "120px",
-                      textAlign: "center"
-                    } }
-                  >
-                    Text;text
-                  </Typography>
+                  <Tooltip title={ 'modality' } arrow>
+                    <Typography
+                      sx={ {
+                        fontWeight: "bold",
+                        color: "white",
+                        backgroundColor: "#007BFF",
+                        padding: "4px 8px",
+                        borderRadius: "5px",
+                        fontSize: "14px",
+                        display: "inline-block",
+                        width: "120px",
+                        textAlign: "center"
+                      } }
+                    >
+                      { selectedModel.modality === '' || selectedModel.modality === undefined ? 'N/A' : selectedModel.modality }
+                    </Typography>
+                  </Tooltip>
                 </Grid>
-                <Grid 
-                  item 
-                  xs={ 12 } 
-                  style={ { 
-                    display: "flex", 
-                    justifyContent: "center",  // Centers icons horizontally
-                    alignItems: "center",       // Centers icons vertically
-                    paddingTop: "6px", 
-                    gap: "8px"                  // Adds space between icons
+                { /* Icons */ }
+                <Grid
+                  item
+                  style={ {
+                    paddingTop: "0px"
                   } }
                 >
-                  <HuggingFaceIcon width={ 30 } height={ 30 } />
-                  <img src={ GitHubIcon } alt="GitHub Icon" width={ 30 } height={ 30 } />
+                  { selectedModel.model_url ? (
+                    <a href={ selectedModel.model_url } target="_blank" rel="noopener noreferrer">
+                      <HuggingFaceIcon width={ 30 } height={ 30 } style={ { marginRight: "18px", marginLeft: "18px" } } />
+                    </a>
+                  ) : (
+                    <HuggingFaceIcon width={ 30 } height={ 30 } style={ { opacity: 0.5, pointerEvents: "none", marginRight: "18px", marginLeft: "18px" } } />
+                  ) }
+                  { selectedModel.url ? (
+                    <a href={ selectedModel.url } target="_blank" rel="noopener noreferrer">
+                      <img src={ GitHubIcon } alt="GitHub Icon" width={ 30 } height={ 30 } />
+                    </a>
+                  ) : (
+                    <img src={ GitHubIcon } alt="GitHub Icon" width={ 30 } height={ 30 } style={ { opacity: 0.5, pointerEvents: "none" } } />
+                  ) }
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
-              <Grid container spacing={ 1 } direction="column" >
-                <Grid item container spacing={ 1 } alignItems="center" sx={ { "& > .MuiGrid-item": { paddingTop: "6px" } } }>
-                  <Grid item>
-                    <CalendarMonthIcon sx={ { fontSize: 30, color: "black" } } />
-                  </Grid>
-                  <Grid item>
-                    <Typography sx={ { fontSize: "14px", color: "black" } }>18/02/2025</Typography>
+            { /* Second Column */ }
+            <Grid
+              item xs={ 12 } md={ 12 } lg={ 2.5 }
+            >
+              <Grid
+                container
+                spacing={ 1 }
+                pl={ 4 }
+                sx={ {
+                  flexDirection: { xs: "row", md: "row", lg: "column" },  // Row for small & medium, column for large
+                  alignItems: { xs: "center", md: "center", lg: "flex-start" },
+                  gap: 1
+                } }
+              >
+                <Grid item style={ {
+                  paddingTop: "8px"
+                } }>
+                  <Grid container direction="row" alignItems="center" spacing={ 1 }>
+                    <Grid item>
+                      <CalendarMonthIcon sx={ { fontSize: 30, color: "black" } } />
+                    </Grid>
+                    <Grid item>
+                      <Typography sx={ { fontSize: "14px", color: "black", top: '-3px', position: 'relative' } }>{ selectedModel.created_date === '' || selectedModel.created_date === undefined ? 'N/A' : new Date(selectedModel.created_date).toLocaleDateString() }</Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid item container spacing={ 1 } alignItems="center" sx={ { "& > .MuiGrid-item": { paddingTop: "6px" } } }>
-                  <Grid item>
-                    <GavelIcon sx={ { fontSize: 20, color: "black" } } />
-                  </Grid>
-                  <Grid item>
-                    <Typography sx={ { fontSize: "14px", color: "black" } }>MIT</Typography>
+
+                <Grid item style={ {
+                  paddingTop: "0px"
+                } }>
+                  <Grid container direction="row" alignItems="center" spacing={ 1 }>
+                    <Grid item>
+                      <GavelIcon sx={ { fontSize: 20, color: "black" } } />
+                    </Grid>
+                    <Grid item>
+                      <Tooltip title={ 'license' } arrow>
+                        <Typography sx={ { fontSize: "14px", color: "black", top: '-3px', position: 'relative' } }>
+                          { selectedModel.license === '' || selectedModel.license === undefined ? 'N/A' : selectedModel.license }</Typography>
+                      </Tooltip>
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid item container spacing={ 1 } alignItems="center" sx={ { "& > .MuiGrid-item": { paddingTop: "6px" } } }>
-                  <Grid item>
-                    <BusinessIcon sx={ { fontSize: 20, color: "black" } } />
-                  </Grid>
-                  <Grid item>
-                    <Typography sx={ { fontSize: "14px", color: "black" } }>Deepseek AI</Typography>
+
+                <Grid item style={ {
+                  paddingTop: "0px"
+                } }>
+                  <Grid container direction="row" alignItems="center" spacing={ 1 }>
+                    <Grid item>
+                      <BusinessIcon sx={ { fontSize: 20, color: "black" } } />
+                    </Grid>
+                    <Grid item>
+                      <Tooltip title={ 'organization' } arrow>
+                        <Typography sx={ { fontSize: "14px", color: "black", top: '-3px', position: 'relative' } }>{ selectedModel.organization === '' || selectedModel.organization === undefined ? 'N/A' : selectedModel.organization }</Typography>
+                      </Tooltip>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
