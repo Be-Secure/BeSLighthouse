@@ -298,34 +298,34 @@ const SummaryDashboard = ({ model }: any) => {
               variant="contained"
               sx={ {
                 height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textTransform: 'none',
-                width: '100%'
+                width: '100%',
+                paddingTop: 2,
+                paddingLeft: 0,
+                paddingRight: 0
               } }
               style={ { backgroundColor: 'white' } }
             >
-              <CardContent sx={ { textAlign: "center", width: "100%", paddingBottom: "8px" } }>
+              <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%'} }>
                 { /* Title */ }
-                <Typography variant="subtitle1" sx={ { fontWeight: "bold" } }>
+                <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
                   MITRE
                 </Typography>
-                <Typography variant="subtitle2" sx={ { fontWeight: "bold" } }>
+                <Typography variant="subtitle2" sx={ { fontWeight: "bold", color: "gray" } }>
                   Benchmark Tests
                 </Typography>
 
                 { /* Pie Chart Container */ }
-                <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", mt: 1 } }>
-                  <PieChart width={ 100 } height={ 100 }>
+                <ResponsiveContainer width="100%" height={ 180 }>
+                  <PieChart width={ 120 } height={ 100 }>
                     <Pie
                       data={ data }
                       cx="50%"
                       cy="50%"
-                      innerRadius={ 30 }
-                      outerRadius={ 45 }
+                      innerRadius={ 40 }
+                      outerRadius={ 50 }
                       dataKey="value"
                       stroke="none"
+                      label={ ({ name, value }) => `${name}: ${value}` }
                     >
                       { data.map((entry, index) => (
                         <Cell key={ `cell-${index}` } fill={ entry.color } />
@@ -333,10 +333,10 @@ const SummaryDashboard = ({ model }: any) => {
                     </Pie>
                     <Tooltip />
                   </PieChart>
-                </Box>
+                </ResponsiveContainer>
 
                 { /* Legend */ }
-                <Box sx={ { display: "flex", justifyContent: "center", gap: 1, mt: 1 } }>
+                <Box sx={ { display: "flex", justifyContent: "center", gap: 1 } }>
                   { data.map((item) => (
                     <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
                       <Box
@@ -454,6 +454,7 @@ const SummaryDashboard = ({ model }: any) => {
               variant="contained"
               sx={ {
                 height: '100%',
+                width: '100%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -533,19 +534,23 @@ const SummaryDashboard = ({ model }: any) => {
           sx={ {
             height: "100%",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
+            textAlign: "center",
             padding: 2,
-            boxShadow: 3, // Soft shadow
-            borderRadius: 2, // Rounded edges
           } }
         >
-          <CardContent sx={ { textAlign: "center" } }>
-            { /* Bold "False Refusal Rate" */ }
-            <Typography variant="body1" sx={ { fontSize: "1rem", fontWeight: "bold", mb: 1 } }>
-              False Refusal Rate
-            </Typography>
+          <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
+            False Refusal Rate
+          </Typography>
 
+          <CardContent sx={ {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center", // Centers content inside CardContent
+            flexGrow: 1, // Takes up available space
+          } }>
             { /* Dynamic Numeric Value (Color Coded) */ }
             <Typography
               variant="h4"
@@ -601,10 +606,14 @@ const SummaryDashboard = ({ model }: any) => {
       </Grid>
 
       <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
-        <Card sx={ { height: "100%" } }>
+        <Card sx={ { height: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: 2 } }>
           <CardContent>
-            <Typography variant="h2" sx={ { fontSize: "2rem", textAlign: "center" } }>Prompt Injection</Typography>
-            <Typography variant="body2">Model’s susceptibility to prompt injection attack scenarios</Typography>
+            <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
+              PROMPT INJECTION
+            </Typography>
+            <Typography variant="subtitle2" sx={ { fontWeight: "bold", color: "gray" } }>
+              Model’s susceptibility to prompt injection attack scenarios
+            </Typography>
             { promptInjectionresult[0].value === 0 && promptInjectionresult[1].value === 0 ? (
               <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
                 <Typography variant="body1" color="textSecondary">
@@ -626,6 +635,7 @@ const SummaryDashboard = ({ model }: any) => {
             ) }
           </CardContent>
         </Card>
+
       </Grid>
     </Grid>
   );
