@@ -376,7 +376,7 @@ const SummaryDashboard = ({ model }: any) => {
                     width: "80vw",
                     maxHeight: "90vh",
                     overflowY: "auto",
-                    bgcolor: "background.paper",
+                    bgcolor: "#f4f4f4",
                     boxShadow: 24,
                     p: 4,
                     borderRadius: 2,
