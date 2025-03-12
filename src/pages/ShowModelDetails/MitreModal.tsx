@@ -52,7 +52,7 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title, padding })
       width: '100%',
       // minWidth: '311px'
     } }>
-      <Typography variant="h6" sx={ { textAlign: "center", fontWeight: "bold", margin: "1px" } }>
+      <Typography variant="h6" sx={ { textAlign: "center", fontWeight: "bold", margin: "1px", mt: "8px" } }>
         { title }
       </Typography>
       <CardContent sx={ { flexGrow: 1, p: 0 } }>
