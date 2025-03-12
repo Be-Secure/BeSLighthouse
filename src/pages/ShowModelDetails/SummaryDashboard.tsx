@@ -226,9 +226,12 @@ const SummaryDashboard = ({ model }: any) => {
   const [promptInjectionData, setPromptInjectionData] = useState<PromptInjectionStats>({});
   const [open, setOpen] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
+  const [openAutocomplete, setOpenAutocomplete] = useState(false);
   const handleOpen = () => setOpenSpear(true);
   const handleClose = () => setOpenSpear(false);
   const handleOpenMitre = () => setOpen(true);
+  const handleOpenAutocomplete = () => setOpenAutocomplete(true);
+  const handleCloseAutocomplete = () => setOpenAutocomplete(false);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -6,72 +6,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GavelIcon from "@mui/icons-material/Gavel";
 import { ReactComponent as HuggingFaceIcon } from "../../assets/images/svgexport-1.svg";
 import GitHubIcon from "../../assets/images/github-mark.png";
-<<<<<<< HEAD
-
-
-interface RedirectLinkProps {
-  value?: string;
-  label?: string;
-}
-
-const RedirectLink: React.FC<RedirectLinkProps> = ({ value = "", label = "" }) => {
-  if (value.trim()) {
-    return (
-      <a
-        href={ value }
-        target="_blank"
-        rel="noopener noreferrer"
-        style={ {
-          textDecoration: "none",
-          color: "inherit",
-          top: "-3px",
-          position: "relative",
-        } }
-      >
-        <Tooltip title={ label === "Model URL" ? "Open Model Link" : "Open Repository" } arrow>
-          <OpenInNewIcon style={ { fontSize: "15px", color: "blue" } } />
-        </Tooltip>
-      </a>
-    );
-  }
-
-  return (
-    <Tooltip title="" arrow>
-      <span style={ { opacity: 0.5, pointerEvents: "none" } }>
-        <OpenInNewIcon style={ { fontSize: "15px", color: "gray" } } />
-      </span>
-    </Tooltip>
-  );
-};
-
-// Reusable component for model detail entries
-
-// eslint-disable-next-line no-unused-vars
-const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> = ({ label, value, isLink }) => {
-  return (
-    <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", paddingTop: "6px" } }>
-      <MKTypography
-        variant="h6"
-        textTransform="capitalize"
-        color="text"
-        style={ { fontSize: "15px", fontWeight: "normal" } }
-      >
-        { label }: &nbsp;
-      </MKTypography>
-      { isLink ? (
-        <RedirectLink value={ value } label={ label } />
-      ) : (
-        <Tooltip title={ value?.length > 40 ? value : "" } arrow>
-          <MKTypography variant="h6" fontWeight="regular" style={ { fontSize: "15px" } }>
-            { value?.length > 40 ? `${value.substring(0, 40)}...` : value }
-          </MKTypography>
-        </Tooltip>
-      ) }
-    </Grid>
-  );
-};
-=======
->>>>>>> main
 
 const ModelDescription = ({ description }: any) => {
   const textRef: any = useRef(null);
@@ -144,9 +78,6 @@ const ModelDescription = ({ description }: any) => {
           top: '-8px'
         } }
       >
-<<<<<<< HEAD
-        <Typography variant="body1" sx={ { fontSize: 14, top: "-5px", position: "relative" } }>
-=======
         <Typography
           variant="body1"
           sx={ {
@@ -163,7 +94,6 @@ const ModelDescription = ({ description }: any) => {
             },
           } }
         >
->>>>>>> main
           <strong>{ firstWord }</strong> { words.join(" ") }
         </Typography>
       </Box>
@@ -212,20 +142,12 @@ export default function ModelCardDetails({ model }: any) {
                 } }>
                   <Tooltip title={ 'Size' } arrow>
                     <Typography
-<<<<<<< HEAD
-                      variant="h6"
-=======
->>>>>>> main
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
                         backgroundColor: "#3A81A8",
                         padding: "4px 8px",
-<<<<<<< HEAD
-                        borderRadius: "4px",
-=======
                         borderRadius: "5px",
->>>>>>> main
                         fontSize: "14px",
                         display: "inline-block",
                         width: "120px",
@@ -245,11 +167,7 @@ export default function ModelCardDetails({ model }: any) {
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
-<<<<<<< HEAD
-                        backgroundColor: "#007BFF",
-=======
                         backgroundColor: "#3A81A8",
->>>>>>> main
                         padding: "4px 8px",
                         borderRadius: "5px",
                         fontSize: "14px",
