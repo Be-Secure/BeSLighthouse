@@ -221,7 +221,7 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
           <Grid container spacing={ 1 } sx={ { flex: 1 } }>
             <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
               <Card sx={ { height: "100%", display: "flex", justifyContent: "center", marginLeft: '8px' } }>
-                <Typography variant="body2" color="textSecondary" style={ {paddingLeft: "10px"} }>
+                <Typography variant="body2" color="textSecondary" style={ { paddingLeft: "10px" } }>
                   <b>MITRE Tests</b> uses the MITRE ATT&CK framework to evaluate an LLM’s compliance when asked to assist in cyberattacks.
                 </Typography>
               </Card>

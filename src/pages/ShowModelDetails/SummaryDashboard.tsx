@@ -19,7 +19,7 @@ const modalStyle = {
   overflow: 'auto',
   width: '90%',
   maxHeight: "90vh",
-  bgcolor: 'background.paper',
+  bgcolor: "#eeeeee",
   // border: '2px solid ',
   boxShadow: 24,
   p: 4,
@@ -295,10 +295,7 @@ const SummaryDashboard = ({ model }: any) => {
               <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
                 { /* Title */ }
                 <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
-                  MITRE
-                </Typography>
-                <Typography variant="subtitle2" sx={ { fontWeight: "bold", color: "gray" } }>
-                  Benchmark Tests
+                  MITRE Benchmark
                 </Typography>
 
                 { /* Pie Chart Container */ }
