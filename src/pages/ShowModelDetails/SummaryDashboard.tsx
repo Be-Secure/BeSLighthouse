@@ -169,32 +169,37 @@ export const colorCode: ColorCode = {
   }
 };
 
-const generateData = (mitredata: any) => {
-  const failedLabels: any = {
-    "malicious.": "Malicious",
-    "potential.": "Potential"
-  };
+const generateData = (mitredata: MitreDataArray) => {
+  const failedLabels: [RegExp, string][] = [
+    [/malicious/i, "Malicious"],
+    [/potential/i, "Potential"]
+  ];
 
-  let failedCounts: any = {
+  const failedCounts: Record<string, number> = {
     Malicious: 0,
     Potential: 0
   };
 
-  mitredata.forEach((entry: any) => {
-    if (entry.judge_response && entry.judge_response.outputs) {
-      entry.judge_response.outputs.forEach((output: any) => {
-        const label = output.text.trim().toLowerCase();
-        if (failedLabels[label]) {
-          failedCounts[failedLabels[label]]++; // Count separately
+  mitredata.forEach((entry) => {
+    entry.judge_response?.outputs?.forEach(({ text }: any) => {
+      const label = text.trim();
+
+      for (const [regex, category] of failedLabels) {
+        if (regex.test(label)) {
+          failedCounts[category]++;
         }
-      });
-    }
+      }
+    });
   });
 
   return [
     { name: "Malicious", value: failedCounts.Malicious, color: "#C23B22" },
     { name: "Potential", value: failedCounts.Potential, color: "#f28e2c" },
-    { name: "Other", value: mitredata.length - failedCounts.Malicious - failedCounts.Potential, color: "#A0A0A0" }
+    {
+      name: "Other",
+      value: mitredata.length - (failedCounts.Malicious + failedCounts.Potential),
+      color: "#A0A0A0"
+    }
   ];
 };
 
@@ -262,9 +267,9 @@ const SummaryDashboard = ({ model }: any) => {
 
   const securityRisksData = Object.entries(interpreterData).map(([category, values]) => ({
     category,
-    ExtremelyMalicious: values.is_extremely_malicious,
-    PotentiallyMalicious: values.is_potentially_malicious,
-    NonMalicious: values.is_non_malicious,
+    "Extremely Malicious": values.is_extremely_malicious,
+    "Potentially Malicious": values.is_potentially_malicious,
+    "Non-Malicious": values.is_non_malicious,
   }));
 
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
@@ -294,7 +299,7 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
                 { /* Title */ }
-                <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
+                <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
                   MITRE Benchmark
                 </Typography>
 
@@ -315,7 +320,7 @@ const SummaryDashboard = ({ model }: any) => {
                         <Cell key={ `cell-${index}` } fill={ entry.color } />
                       )) }
                     </Pie>
-                    <Tooltip  contentStyle={ { textTransform: 'capitalize' } }/>
+                    <Tooltip contentStyle={ { textTransform: 'capitalize' } } />
                   </PieChart>
                 </ResponsiveContainer>
 
@@ -403,7 +408,7 @@ const SummaryDashboard = ({ model }: any) => {
       <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
-            <Box sx={ { display: "flex", justifyContent: "center" } }>
+            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
               <Typography variant="h6" sx={ { textAlign: "center" } }>
                 Security risks in generated code using this LLM
               </Typography>
@@ -420,7 +425,7 @@ const SummaryDashboard = ({ model }: any) => {
                   <XAxis dataKey="language" />
                   <YAxis />
                   <Tooltip />
-                  <Legend wrapperStyle={ { fontSize: '12px' } } />
+                  <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
 
                   { /* Autocomplete Category */ }
                   <Bar dataKey="AutocompleteVulnerable" name="Vulnerable (Autocomplete)" fill="#d32f2f" barSize={ 20 } />
@@ -491,6 +496,7 @@ const SummaryDashboard = ({ model }: any) => {
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      paddingBottom: "40px"
                     } }
                   >
                     <span>
@@ -594,8 +600,7 @@ const SummaryDashboard = ({ model }: any) => {
       <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
-
-            <Box sx={ { display: "flex", justifyContent: "center" } }>
+            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
               <Typography variant="h6" sx={ { textAlign: "center" } }>
                 Security risks posed by integrating LLMs with code interpreters
               </Typography>
@@ -609,13 +614,13 @@ const SummaryDashboard = ({ model }: any) => {
             ) : (
               <ResponsiveContainer width="100%" height={ 240 }>
                 <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
-                  <XAxis dataKey="category" />
+                  <XAxis dataKey="category" style={ { fontSize: "12px" } } />
                   <YAxis />
                   <Tooltip />
-                  <Legend wrapperStyle={ { fontSize: '12px' } } />
-                  <Bar dataKey="ExtremelyMalicious" stackId="a" fill="#1f77b4" barSize={ 20 } />
-                  <Bar dataKey="PotentiallyMalicious" stackId="a" fill="#ff7f0e" barSize={ 20 } />
-                  <Bar dataKey="NonMalicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
+                  <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
+                  <Bar dataKey="Extremely Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
+                  <Bar dataKey="Potentially Malicious" stackId="a" fill="#f28e2c" barSize={ 20 } />
+                  <Bar dataKey="Non-Malicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
                 </BarChart>
               </ResponsiveContainer>
             ) }
@@ -626,8 +631,8 @@ const SummaryDashboard = ({ model }: any) => {
       <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
         <Card sx={ { height: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: 2 } }>
           <CardContent>
-            <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
-              PROMPT INJECTION
+            <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
+              Prompt Injection
             </Typography>
             <Typography variant="subtitle2" sx={ { color: "gray" } }>
               Model’s susceptibility to prompt injection attack scenarios

@@ -142,13 +142,12 @@ export default function ModelCardDetails({ model }: any) {
                 } }>
                   <Tooltip title={ 'Size' } arrow>
                     <Typography
-                      variant="h6"
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
                         backgroundColor: "#3A81A8",
                         padding: "4px 8px",
-                        borderRadius: "4px",
+                        borderRadius: "5px",
                         fontSize: "14px",
                         display: "inline-block",
                         width: "120px",
@@ -168,7 +167,7 @@ export default function ModelCardDetails({ model }: any) {
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
-                        backgroundColor: "#007BFF",
+                        backgroundColor: "#3A81A8",
                         padding: "4px 8px",
                         borderRadius: "5px",
                         fontSize: "14px",

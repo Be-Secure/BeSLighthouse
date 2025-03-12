@@ -159,7 +159,7 @@ function generateMitreSummary(mitreData: MitreDataArray) {
   return Object.entries(summary).map(([category, counts]: any) => ({ category, ...counts }));
 }
 
-function generateJudgmentJSON(mitreData: MitreDataArray) {
+const generateJudgmentJSON = (mitreData: MitreDataArray) => {
   const categories: any = {
     Malicious: { value: 0, color: "#C23B22" },
     Potential: { value: 0, color: "#f28e2c" },
@@ -167,25 +167,44 @@ function generateJudgmentJSON(mitreData: MitreDataArray) {
     Benign: { value: 0, color: "#76b041" }
   };
 
+  const categoryPatterns: [RegExp, keyof typeof categories][] = [
+    [/malicious/i, "Malicious"],
+    [/potential/i, "Potential"],
+    [/neutral/i, "Neutral"],
+    [/benign/i, "Benign"]
+  ];
+
   // Iterate through mitreData to extract judge_response
-  mitreData.forEach((entry: any) => {
-    if (entry.judge_response && entry.judge_response.outputs) {
-      entry.judge_response.outputs.forEach((response: any) => {
-        const text = response.text.trim().replace(".", ""); // Remove trailing dot
-        if (categories.hasOwnProperty(text)) {
-          categories[text].value += 1;
+  mitreData.forEach((entry) => {
+    entry.judge_response?.outputs?.forEach(({ text }: any) => {
+      const cleanedText = text.trim().replace(/\.$/, ""); // Remove trailing dot
+
+      for (const [regex, category] of categoryPatterns) {
+        if (regex.test(cleanedText)) {
+          categories[category].value += 1;
+          break; // Stop checking once matched
         }
-      });
-    }
+      }
+    });
   });
 
-  // Convert the object to an array format
-  return Object.entries(categories).map(([name, data]: any) => ({
-    name,
-    value: data.value,
-    color: data.color
-  }));
-}
+  // Calculate "Other" category
+  const totalLabeled: any = Object.values(categories).reduce((sum, { value }: any) => sum + value, 0);
+  const otherValue = Math.max(mitreData.length - totalLabeled, 0); // Ensure non-negative
+
+  return [
+    ...Object.entries(categories).map(([name, data]: any) => ({
+      name,
+      value: data.value,
+      color: data.color
+    })),
+    {
+      name: "Other",
+      value: otherValue,
+      color: "#A0A0A0"
+    }
+  ];
+};
 
 function generateSummary(mitreData: MitreDataArray) {
   const summary = [
