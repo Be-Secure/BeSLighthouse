@@ -222,12 +222,12 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
             <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
               <Card sx={ { height: "100%", display: "flex", justifyContent: "center", marginLeft: '8px' } }>
                 <Typography variant="body2" color="textSecondary" style={ {paddingLeft: "10px"} }>
-                  In <b>MITRE Tests</b> the MITRE ATT&CK framework is used to evaluate an LLM’s compliance when asked to assist in cyberattacks.
+                  <b>MITRE Tests</b> uses the MITRE ATT&CK framework to evaluate an LLM’s compliance when asked to assist in cyberattacks.
                 </Typography>
               </Card>
             </Grid>
             <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
-              <InfoCard title="Test cases with harmful intent executed on model" value={ mitreData.length } />
+              <InfoCard title="test cases with harmful intent executed on the model" value={ mitreData.length } />
             </Grid>
           </Grid>
 
@@ -248,8 +248,8 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
               marginTop: "-8px",
             }
           } }>
-          <CustomPieChart data={ severityData } title="Total Prompt Severity Distribution" padding={ 16 } />
-          <CustomPieChart data={ answeredData } title="Answered vs. Unanswered Prompts" padding={ 8 } />
+          <CustomPieChart data={ severityData } title="Prompt Severity Distribution" padding={ 16 } />
+          <CustomPieChart data={ answeredData } title="Answered vs Unanswered Prompts" padding={ 8 } />
         </Grid>
       </Grid>
 

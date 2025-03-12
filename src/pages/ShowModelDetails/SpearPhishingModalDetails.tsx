@@ -44,11 +44,6 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     spearPhishingData.goal_stats
   );
   const modelNameInSmall = modelName.toLowerCase();
-  console.log('modelName', modelName);
-  Array.from(spearPhishingCategories).map((category: string) => {
-    console.log('category', category);
-    console.log('spearPhishingData.goal_stats[category][modelName]', spearPhishingData.goal_stats[category][modelNameInSmall]);
-  });
   const spearPhishingBarData = Array.from(spearPhishingCategories).map(
     (category) => ({
       category: category,
@@ -56,7 +51,6 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
         spearPhishingData?.goal_stats[category][modelNameInSmall] ?? '0',
     })
   );
-  console.log('spearPhishingBarData', spearPhishingBarData);
   const spearPhishingScoreData = [
     {
       name: 'Argumentation Score',
@@ -79,7 +73,6 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
       text: 'rapport building capabilities was shown by this LLM on a victim LLM',
     },
   ];
-  console.log('spearPhishingBarData', spearPhishingBarData);
   return (
     <>
       { /* <Box sx={{ p: 2 }}> */ }
@@ -201,21 +194,21 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                         sx={ { textAlign: 'center' } }
                       >
                         <Typography
-                          variant="h2"
+                          variant="body2"
                           sx={ {
-                            fontSize: '2rem',
-                            color: colorCode[
-                              data.value
-                            ]?.color,
-
-
+                            fontSize: '1rem',
+                            textAlign: 'center',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                           } }
-
                         >
-                          { data.value }
-                        </Typography>
-                        <Typography variant="body2" sx={ { fontSize: '15px' } }>
-                          { data.text }
+                          <span>
+                            <b style={ { color: colorCode[data.value]?.color } }>
+                              { data.value }
+                            </b> { data.text }
+                          </span>
                         </Typography>
                       </CardContent>
                     ) : (
@@ -223,23 +216,21 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                         sx={ { textAlign: 'center' } }
                       >
                         <Typography
-                          variant="h2"
+                          variant="body2"
                           sx={ {
-                            fontSize: '1.5rem',
-                            color: colorCode[
-                              data.value
-                            ]?.color,
-
-
+                            fontSize: '1rem',
+                            textAlign: 'center',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                           } }
                         >
-                          {
-                            colorCode[data.value]
-                              ?.level
-                          }
-                        </Typography>
-                        <Typography variant="body2" pt={ 1 } sx={ { fontSize: '15px' } }>
-                          { data.text }
+                          <span>
+                            <b style={ { color: colorCode[data.value]?.color } }>
+                              { colorCode[data.value]?.level }
+                            </b> { data.text }
+                          </span>
                         </Typography>
                       </CardContent>
                     )

@@ -209,7 +209,7 @@ const generateData = (mitredata: any) => {
   return [
     { name: "Malicious", value: failedCounts.Malicious, color: "#C23B22" },
     { name: "Potential", value: failedCounts.Potential, color: "#f28e2c" },
-    { name: "Total", value: mitredata.length, color: "#1C4E80" }
+    { name: "Other", value: mitredata.length - failedCounts.Malicious - failedCounts.Potential, color: "#A0A0A0" }
   ];
 };
 
@@ -333,7 +333,7 @@ const SummaryDashboard = ({ model }: any) => {
                         <Cell key={ `cell-${index}` } fill={ entry.color } />
                       )) }
                     </Pie>
-                    <Tooltip />
+                    <Tooltip  contentStyle={ { textTransform: 'capitalize' } }/>
                   </PieChart>
                 </ResponsiveContainer>
 
@@ -356,7 +356,7 @@ const SummaryDashboard = ({ model }: any) => {
                           mr: 0.5,
                         } }
                       />
-                      <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary" } }>
+                      <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary", textTransform: 'capitalize' } }>
                         { item.name }
                       </Typography>
                     </Box>
@@ -464,30 +464,61 @@ const SummaryDashboard = ({ model }: any) => {
                 height: '100%',
                 width: '100%',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 textTransform: 'none',
               } }
               style={ { backgroundColor: 'white' } }
             >
-              <CardContent sx={ { textAlign: "center" } }>
-                { /* Bold Persuasion Skill */ }
-                <Typography variant="body1" sx={ { fontSize: "1rem", mb: 1 } }>
-                  <strong>Persuasion skill</strong> of this LLM to generate Spear Phishing content
+              <CardContent sx={ {
+                textAlign: 'center',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '0%',
+              } }>
+                { /* Title */ }
+                <Typography variant="subtitle1" sx={ {
+                  fontWeight: 600,
+                  letterSpacing: 1,
+                  color: 'gray',
+                  mb: 2,
+                } }>
+                  Spear Phishing
                 </Typography>
 
-                { /* Dynamic Rating (Color Coded) */ }
-                <Typography
-                  variant="h4"
+                { /* Bold Persuasion Skill */ }
+                <Box
                   sx={ {
-                    fontSize: "2rem",
-                    fontWeight: "bold",
-                    color: colorCode[spearPhishingNumber]?.color,
-                    mt: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexGrow: 1,
                   } }
                 >
-                  { colorCode[spearPhishingNumber].level }
-                </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={ {
+                      fontSize: '1rem',
+                      textAlign: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    } }
+                  >
+                    <span>
+                      <b style={ { color: colorCode[spearPhishingNumber]?.color } }>
+                        { colorCode[spearPhishingNumber].level }
+                      </b>{ ' ' }
+                      <strong>Persuasion skill</strong> for this LLM in generating Spear Phishing content
+                    </span>
+                  </Typography>
+                </Box>
               </CardContent>
             </Button>
             <Modal
@@ -506,9 +537,6 @@ const SummaryDashboard = ({ model }: any) => {
               <Fade in={ openSpear }>
                 <Box sx={ modalStyle }>
                   <SpearPhishingModal spearPhishingData={ spearPhishingData } modelName={ selectedModel.name } />
-                  { /* <Typography id="transition-modal-description" sx={{ mt: 2 }}> */ }
-
-                  { /* </Typography> */ }
                 </Box>
               </Fade>
             </Modal>
