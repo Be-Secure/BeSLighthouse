@@ -220,9 +220,9 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
           { /* MITRE Tests Introduction */ }
           <Grid container spacing={ 1 } sx={ { flex: 1 } }>
             <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
-              <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", marginLeft: '8px' } }>
-                <Typography variant="body1" color="textSecondary">
-                  <b>MITRE Tests</b> The MITRE ATT&CK framework is used to evaluate an LLM’s compliance when asked to assist in cyberattacks.
+              <Card sx={ { height: "100%", display: "flex", justifyContent: "center", marginLeft: '8px' } }>
+                <Typography variant="body2" color="textSecondary" style={ {paddingLeft: "10px"} }>
+                  In <b>MITRE Tests</b> the MITRE ATT&CK framework is used to evaluate an LLM’s compliance when asked to assist in cyberattacks.
                 </Typography>
               </Card>
             </Grid>
@@ -253,7 +253,7 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
         </Grid>
       </Grid>
 
-      <Card sx={ { width: '100%', marginTop: '9px' } }>
+      <Card sx={ { width: '100%', marginTop: '9px', paddingTop: "10px", paddingBottom: "10px" } }>
         <Typography variant="h6" pt={ 0 } sx={ { mt: 0, textAlign: "center", fontWeight: "bold" } }>
           Prompt Severity Across Attack Categories
         </Typography>
@@ -262,7 +262,7 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
             <XAxis dataKey="category" stroke="#555" />
             <YAxis stroke="#555" />
             <Tooltip />
-            <Legend wrapperStyle={ { fontSize: "12px" } } />
+            <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } } />
             <Bar dataKey="Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
             <Bar dataKey="Potential" stackId="a" fill="#f28e2c" barSize={ 20 } />
             <Bar dataKey="Neutral" stackId="a" fill="#1f77b4" barSize={ 20 } />
