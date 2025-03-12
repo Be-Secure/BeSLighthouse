@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Grid, Tooltip, Card, Typography, Box } from "@mui/material";
-import MKTypography from "../MKTypography";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import OSAR from "./OSAR";
 import BusinessIcon from "@mui/icons-material/Business";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GavelIcon from "@mui/icons-material/Gavel";
 import { ReactComponent as HuggingFaceIcon } from "../../assets/images/svgexport-1.svg";
 import GitHubIcon from "../../assets/images/github-mark.png";
+<<<<<<< HEAD
 
 
 interface RedirectLinkProps {
@@ -71,6 +70,8 @@ const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> 
     </Grid>
   );
 };
+=======
+>>>>>>> main
 
 const ModelDescription = ({ description }: any) => {
   const textRef: any = useRef(null);
@@ -135,14 +136,34 @@ const ModelDescription = ({ description }: any) => {
         sx={ {
           display: "-webkit-box",
           WebkitBoxOrient: "vertical",
-          WebkitLineClamp: 3,
+          WebkitLineClamp: 4, // Restrict to 4 lines
           overflow: "hidden",
-          textOverflow: "ellipsis",
-          cursor: "pointer",
           whiteSpace: "normal",
+          lineHeight: "1.4em", // Adjust for clean line cutoff
+          position: "relative",
+          top: '-8px'
         } }
       >
+<<<<<<< HEAD
         <Typography variant="body1" sx={ { fontSize: 14, top: "-5px", position: "relative" } }>
+=======
+        <Typography
+          variant="body1"
+          sx={ {
+            fontSize: 14,
+            position: "relative",
+            display: "inline",
+            "&::after": {
+              content: '"..."', // Add ellipsis
+              position: "absolute",
+              right: 0,
+              bottom: 0,
+              background: "white", // Match background color to avoid artifacts
+              paddingLeft: "5px",
+            },
+          } }
+        >
+>>>>>>> main
           <strong>{ firstWord }</strong> { words.join(" ") }
         </Typography>
       </Box>
@@ -191,13 +212,20 @@ export default function ModelCardDetails({ model }: any) {
                 } }>
                   <Tooltip title={ 'Size' } arrow>
                     <Typography
+<<<<<<< HEAD
                       variant="h6"
+=======
+>>>>>>> main
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
                         backgroundColor: "#3A81A8",
                         padding: "4px 8px",
+<<<<<<< HEAD
                         borderRadius: "4px",
+=======
+                        borderRadius: "5px",
+>>>>>>> main
                         fontSize: "14px",
                         display: "inline-block",
                         width: "120px",
@@ -217,7 +245,11 @@ export default function ModelCardDetails({ model }: any) {
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
+<<<<<<< HEAD
                         backgroundColor: "#007BFF",
+=======
+                        backgroundColor: "#3A81A8",
+>>>>>>> main
                         padding: "4px 8px",
                         borderRadius: "5px",
                         fontSize: "14px",

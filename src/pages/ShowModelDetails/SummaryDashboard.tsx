@@ -17,12 +17,10 @@ const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  maxHeight: 'fit-content',
   overflow: 'auto',
-  maxWidth: '90%',
-  width: 1200,
-  height: 800,
-  bgcolor: 'background.paper',
+  width: '90%',
+  maxHeight: "90vh",
+  bgcolor: "#eeeeee",
   // border: '2px solid ',
   boxShadow: 24,
   p: 4,
@@ -144,19 +142,6 @@ interface ColorCode {
   [key: number]: SeverityLevel;
 }
 
-// eslint-disable-next-line no-unused-vars
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 export const colorCode: ColorCode = {
   0: {
     "level": "Very Poor",
@@ -185,33 +170,40 @@ export const colorCode: ColorCode = {
   }
 };
 
+const generateData = (mitredata: MitreDataArray) => {
+  const failedLabels: [RegExp, string][] = [
+    [/malicious/i, "Malicious"],
+    [/potential/i, "Potential"]
+  ];
 
-// eslint-disable-next-line no-unused-vars
-function countMalicious(judgeResponse: MitreDataArray) {
-  return judgeResponse?.reduce((count, item) => {
-    return count + (item.judge_response?.outputs || []).filter(output => output?.text?.trim() === "Malicious.").length;
-  }, 0);
-}
+  const failedCounts: Record<string, number> = {
+    Malicious: 0,
+    Potential: 0
+  };
 
-const generateData = (mitredata: any) => {
-  const failedLabels = ["Malicious.", "Potential."];
-  let failedCount = 0;
+  mitredata.forEach((entry) => {
+    entry.judge_response?.outputs?.forEach(({ text }: any) => {
+      const label = text.trim();
 
-  mitredata.forEach((entry: any) => {
-    if (entry.judge_response && entry.judge_response.outputs) {
-      entry.judge_response.outputs.forEach((output: any) => {
-        if (failedLabels.includes(output.text.trim())) {
-          failedCount++; // Count failed responses
+      for (const [regex, category] of failedLabels) {
+        if (regex.test(label)) {
+          failedCounts[category]++;
         }
-      });
-    }
+      }
+    });
   });
 
   return [
-    { name: "Failed", value: failedCount, color: "#E87D3E" },
-    { name: "Total", value: mitredata.length, color: "#1C4E80" }
+    { name: "Malicious", value: failedCounts.Malicious, color: "#C23B22" },
+    { name: "Potential", value: failedCounts.Potential, color: "#f28e2c" },
+    {
+      name: "Other",
+      value: mitredata.length - (failedCounts.Malicious + failedCounts.Potential),
+      color: "#A0A0A0"
+    }
   ];
 };
+
 
 const SummaryDashboard = ({ model }: any) => {
 
@@ -234,13 +226,9 @@ const SummaryDashboard = ({ model }: any) => {
   const [promptInjectionData, setPromptInjectionData] = useState<PromptInjectionStats>({});
   const [open, setOpen] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
-  const [openAutocomplete, setOpenAutocomplete] = useState(false);
   const handleOpen = () => setOpenSpear(true);
   const handleClose = () => setOpenSpear(false);
   const handleOpenMitre = () => setOpen(true);
-  const handleOpenAutocomplete = () => setOpenAutocomplete(true);
-  const handleCloseAutocomplete = () => setOpenAutocomplete(false);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -280,9 +268,9 @@ const SummaryDashboard = ({ model }: any) => {
 
   const securityRisksData = Object.entries(interpreterData).map(([category, values]) => ({
     category,
-    ExtremelyMalicious: values.is_extremely_malicious,
-    PotentiallyMalicious: values.is_potentially_malicious,
-    NonMalicious: values.is_non_malicious,
+    "Extremely Malicious": values.is_extremely_malicious,
+    "Potentially Malicious": values.is_potentially_malicious,
+    "Non-Malicious": values.is_non_malicious,
   }));
 
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
@@ -303,45 +291,48 @@ const SummaryDashboard = ({ model }: any) => {
               variant="contained"
               sx={ {
                 height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textTransform: 'none',
-                width: '100%'
+                width: '100%',
+                paddingTop: 2,
+                paddingLeft: 0,
+                paddingRight: 0
               } }
               style={ { backgroundColor: 'white' } }
             >
-              <CardContent sx={ { textAlign: "center", width: "100%", paddingBottom: "8px" } }>
+              <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
                 { /* Title */ }
-                <Typography variant="subtitle1" sx={ { fontWeight: "bold" } }>
-                  MITRE
-                </Typography>
-                <Typography variant="subtitle2" sx={ { fontWeight: "bold" } }>
-                  Benchmark Tests
+                <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
+                  MITRE Benchmark
                 </Typography>
 
                 { /* Pie Chart Container */ }
-                <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", mt: 1 } }>
-                  <PieChart width={ 100 } height={ 100 }>
+                <ResponsiveContainer width="100%" height={ 180 }>
+                  <PieChart width={ 120 } height={ 100 }>
                     <Pie
                       data={ data }
                       cx="50%"
                       cy="50%"
-                      innerRadius={ 30 }
-                      outerRadius={ 45 }
+                      innerRadius={ 40 }
+                      outerRadius={ 50 }
                       dataKey="value"
                       stroke="none"
+                      label={ ({ name, value }) => `${value}` }
                     >
                       { data.map((entry, index) => (
                         <Cell key={ `cell-${index}` } fill={ entry.color } />
                       )) }
                     </Pie>
-                    <Tooltip />
+                    <Tooltip contentStyle={ { textTransform: 'capitalize' } } />
                   </PieChart>
-                </Box>
+                </ResponsiveContainer>
 
                 { /* Legend */ }
-                <Box sx={ { display: "flex", justifyContent: "center", gap: 1, mt: 1 } }>
+                <Box sx={ {
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  maxWidth: "100%",
+                  gap: 1,
+                } }>
                   { data.map((item) => (
                     <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
                       <Box
@@ -353,7 +344,7 @@ const SummaryDashboard = ({ model }: any) => {
                           mr: 0.5,
                         } }
                       />
-                      <Typography variant="caption" sx={ { fontSize: "14px", color: "textSecondary" } }>
+                      <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary", textTransform: 'capitalize' } }>
                         { item.name }
                       </Typography>
                     </Box>
@@ -378,10 +369,10 @@ const SummaryDashboard = ({ model }: any) => {
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
-                    width: "80vw",
+                    width: "95%",
                     maxHeight: "90vh",
                     overflowY: "auto",
-                    bgcolor: "background.paper",
+                    bgcolor: "#f4f4f4",
                     boxShadow: 24,
                     p: 4,
                     borderRadius: 2,
@@ -418,7 +409,7 @@ const SummaryDashboard = ({ model }: any) => {
       <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
-            <Box sx={ { display: "flex", justifyContent: "center" } }>
+            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
               <Typography variant="h6" sx={ { textAlign: "center" } }>
                 Security risks in generated code using this LLM
               </Typography>
@@ -430,25 +421,22 @@ const SummaryDashboard = ({ model }: any) => {
                 </Typography>
               </Box>
             ) : (
-              <>
-                <ResponsiveContainer width="100%" height={ 200 }>
-                  <BarChart data={ mergedInsecureCodingData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
-                    <XAxis dataKey="language" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend wrapperStyle={ { fontSize: '12px' } } />
+              <ResponsiveContainer width="100%" height={ 200 }>
+                <BarChart data={ mergedInsecureCodingData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
+                  <XAxis dataKey="language" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
 
-                    { /* Autocomplete Category */ }
-                    <Bar dataKey="AutocompleteVulnerable" name="Vulnerable (Autocomplete)" fill="#d32f2f" barSize={ 20 } />
-                    <Bar dataKey="AutocompletePass" name="Pass (Autocomplete)" fill="#4caf50" barSize={ 20 } />
+                  { /* Autocomplete Category */ }
+                  <Bar dataKey="AutocompleteVulnerable" name="Vulnerable (Autocomplete)" fill="#d32f2f" barSize={ 20 } />
+                  <Bar dataKey="AutocompletePass" name="Pass (Autocomplete)" fill="#4caf50" barSize={ 20 } />
 
-                    { /* Instruct Category */ }
-                    <Bar dataKey="InstructVulnerable" name="Vulnerable (Instruct)" fill="#ff9800" barSize={ 20 } />
-                    <Bar dataKey="InstructPass" name="Pass (Instruct)" fill="#03a9f4" barSize={ 20 } />
-                  </BarChart>
-                </ResponsiveContainer>
-                
-              </>
+                  { /* Instruct Category */ }
+                  <Bar dataKey="InstructVulnerable" name="Vulnerable (Instruct)" fill="#ff9800" barSize={ 20 } />
+                  <Bar dataKey="InstructPass" name="Pass (Instruct)" fill="#03a9f4" barSize={ 20 } />
+                </BarChart>
+              </ResponsiveContainer>
             ) }
           </CardContent>
           <Grid pb={ 1 } pl={ 0.5 }>
@@ -502,31 +490,64 @@ const SummaryDashboard = ({ model }: any) => {
               variant="contained"
               sx={ {
                 height: '100%',
+                width: '100%',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 textTransform: 'none',
               } }
               style={ { backgroundColor: 'white' } }
             >
-              <CardContent sx={ { textAlign: "center" } }>
-                { /* Bold Persuasion Skill */ }
-                <Typography variant="body1" sx={ { fontSize: "1rem", mb: 1 } }>
-                  <strong>Persuasion skill</strong> of this LLM to generate Spear Phishing content
+              <CardContent sx={ {
+                textAlign: 'center',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '0%',
+              } }>
+                { /* Title */ }
+                <Typography variant="subtitle1" sx={ {
+                  fontWeight: 600,
+                  letterSpacing: 1,
+                  color: 'gray',
+                  mb: 2,
+                } }>
+                  Spear Phishing
                 </Typography>
 
-                { /* Dynamic Rating (Color Coded) */ }
-                <Typography
-                  variant="h4"
+                { /* Bold Persuasion Skill */ }
+                <Box
                   sx={ {
-                    fontSize: "2rem",
-                    fontWeight: "bold",
-                    color: colorCode[spearPhishingNumber]?.color,
-                    mt: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexGrow: 1,
                   } }
                 >
-                  { colorCode[spearPhishingNumber].level }
-                </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={ {
+                      fontSize: '1rem',
+                      textAlign: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      paddingBottom: "40px"
+                    } }
+                  >
+                    <span>
+                      <b style={ { color: colorCode[spearPhishingNumber]?.color } }>
+                        { colorCode[spearPhishingNumber].level }
+                      </b>{ ' ' }
+                      <strong>Persuasion skill</strong> for this LLM in generating Spear Phishing content
+                    </span>
+                  </Typography>
+                </Box>
               </CardContent>
             </Button>
             <Modal
@@ -545,9 +566,6 @@ const SummaryDashboard = ({ model }: any) => {
               <Fade in={ openSpear }>
                 <Box sx={ modalStyle }>
                   <SpearPhishingModal spearPhishingData={ spearPhishingData } modelName={ selectedModel.name } />
-                  { /* <Typography id="transition-modal-description" sx={{ mt: 2 }}> */ }
-
-                  { /* </Typography> */ }
                 </Box>
               </Fade>
             </Modal>
@@ -581,19 +599,23 @@ const SummaryDashboard = ({ model }: any) => {
           sx={ {
             height: "100%",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
+            textAlign: "center",
             padding: 2,
-            boxShadow: 3, // Soft shadow
-            borderRadius: 2, // Rounded edges
           } }
         >
-          <CardContent sx={ { textAlign: "center" } }>
-            { /* Bold "False Refusal Rate" */ }
-            <Typography variant="body1" sx={ { fontSize: "1rem", fontWeight: "bold", mb: 1 } }>
-              False Refusal Rate
-            </Typography>
+          <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
+            False Refusal Rate
+          </Typography>
 
+          <CardContent sx={ {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center", // Centers content inside CardContent
+            flexGrow: 1, // Takes up available space
+          } }>
             { /* Dynamic Numeric Value (Color Coded) */ }
             <Typography
               variant="h4"
@@ -619,8 +641,7 @@ const SummaryDashboard = ({ model }: any) => {
       <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
-
-            <Box sx={ { display: "flex", justifyContent: "center" } }>
+            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
               <Typography variant="h6" sx={ { textAlign: "center" } }>
                 Security risks posed by integrating LLMs with code interpreters
               </Typography>
@@ -634,13 +655,13 @@ const SummaryDashboard = ({ model }: any) => {
             ) : (
               <ResponsiveContainer width="100%" height={ 240 }>
                 <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
-                  <XAxis dataKey="category" />
+                  <XAxis dataKey="category" style={ { fontSize: "12px" } } />
                   <YAxis />
                   <Tooltip />
-                  <Legend wrapperStyle={ { fontSize: '12px' } } />
-                  <Bar dataKey="ExtremelyMalicious" stackId="a" fill="#1f77b4" barSize={ 20 } />
-                  <Bar dataKey="PotentiallyMalicious" stackId="a" fill="#ff7f0e" barSize={ 20 } />
-                  <Bar dataKey="NonMalicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
+                  <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
+                  <Bar dataKey="Extremely Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
+                  <Bar dataKey="Potentially Malicious" stackId="a" fill="#f28e2c" barSize={ 20 } />
+                  <Bar dataKey="Non-Malicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
                 </BarChart>
               </ResponsiveContainer>
             ) }
@@ -649,10 +670,14 @@ const SummaryDashboard = ({ model }: any) => {
       </Grid>
 
       <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
-        <Card sx={ { height: "100%" } }>
+        <Card sx={ { height: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: 2 } }>
           <CardContent>
-            <Typography variant="h2" sx={ { fontSize: "2rem", textAlign: "center" } }>Prompt Injection</Typography>
-            <Typography variant="body2">Model’s susceptibility to prompt injection attack scenarios</Typography>
+            <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
+              Prompt Injection
+            </Typography>
+            <Typography variant="subtitle2" sx={ { color: "gray" } }>
+              Model’s susceptibility to prompt injection attack scenarios
+            </Typography>
             { promptInjectionresult[0].value === 0 && promptInjectionresult[1].value === 0 ? (
               <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
                 <Typography variant="body1" color="textSecondary">
@@ -674,6 +699,7 @@ const SummaryDashboard = ({ model }: any) => {
             ) }
           </CardContent>
         </Card>
+
       </Grid>
     </Grid>
   );
