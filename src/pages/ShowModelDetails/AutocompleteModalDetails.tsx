@@ -25,6 +25,9 @@ function autocompleteModalDetails()
 
 export const AutocompleteModal = ({ autocompleteSummaryData }: any) => {
 
+  console.log('summarydata', Object.keys(autocompleteSummaryData));
+  const languages = Object.keys(autocompleteSummaryData);
+  
   const summaryData : any = Object.keys(autocompleteSummaryData).length > 0
     ? autocompleteModalDetails()
     : 0;
@@ -32,7 +35,7 @@ export const AutocompleteModal = ({ autocompleteSummaryData }: any) => {
     <>
       <Grid container spacing={ 2 }>
         { /* <Grid container spacing={1}> */ }
-        <Grid item xs={ 12 } md={ 6 } lg={ 8 }>
+        <Grid item xs={ 12 } md={ 4 } lg={ 4 }>
           <Typography id="transition-modal-title">
             <strong>{ summaryData.testName }</strong>{ ' ' }
             { summaryData.testDetail }
