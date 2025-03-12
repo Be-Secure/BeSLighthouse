@@ -1,76 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Grid, Tooltip, Card, Typography, Box } from "@mui/material";
-import MKTypography from "../MKTypography";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import OSAR from "./OSAR";
 import BusinessIcon from "@mui/icons-material/Business";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GavelIcon from "@mui/icons-material/Gavel";
 import { ReactComponent as HuggingFaceIcon } from "../../assets/images/svgexport-1.svg";
 import GitHubIcon from "../../assets/images/github-mark.png";
-
-
-interface RedirectLinkProps {
-  value?: string;
-  label?: string;
-}
-
-const RedirectLink: React.FC<RedirectLinkProps> = ({ value = "", label = "" }) => {
-  if (value.trim()) {
-    return (
-      <a
-        href={ value }
-        target="_blank"
-        rel="noopener noreferrer"
-        style={ {
-          textDecoration: "none",
-          color: "inherit",
-          top: "-3px",
-          position: "relative",
-        } }
-      >
-        <Tooltip title={ label === "Model URL" ? "Open Model Link" : "Open Repository" } arrow>
-          <OpenInNewIcon style={ { fontSize: "15px", color: "blue" } } />
-        </Tooltip>
-      </a>
-    );
-  }
-
-  return (
-    <Tooltip title="" arrow>
-      <span style={ { opacity: 0.5, pointerEvents: "none" } }>
-        <OpenInNewIcon style={ { fontSize: "15px", color: "gray" } } />
-      </span>
-    </Tooltip>
-  );
-};
-
-// Reusable component for model detail entries
-
-// eslint-disable-next-line no-unused-vars
-const ModelDetail: React.FC<{ label: string; value: string; isLink?: boolean }> = ({ label, value, isLink }) => {
-  return (
-    <Grid item xs={ 6 } md={ 3 } style={ { display: "flex", paddingTop: "6px" } }>
-      <MKTypography
-        variant="h6"
-        textTransform="capitalize"
-        color="text"
-        style={ { fontSize: "15px", fontWeight: "normal" } }
-      >
-        { label }: &nbsp;
-      </MKTypography>
-      { isLink ? (
-        <RedirectLink value={ value } label={ label } />
-      ) : (
-        <Tooltip title={ value?.length > 40 ? value : "" } arrow>
-          <MKTypography variant="h6" fontWeight="regular" style={ { fontSize: "15px" } }>
-            { value?.length > 40 ? `${value.substring(0, 40)}...` : value }
-          </MKTypography>
-        </Tooltip>
-      ) }
-    </Grid>
-  );
-};
 
 const ModelDescription = ({ description }: any) => {
   const textRef: any = useRef(null);
@@ -135,14 +70,30 @@ const ModelDescription = ({ description }: any) => {
         sx={ {
           display: "-webkit-box",
           WebkitBoxOrient: "vertical",
-          WebkitLineClamp: 3,
+          WebkitLineClamp: 4, // Restrict to 4 lines
           overflow: "hidden",
-          textOverflow: "ellipsis",
-          cursor: "pointer",
           whiteSpace: "normal",
+          lineHeight: "1.4em", // Adjust for clean line cutoff
+          position: "relative",
+          top: '-8px'
         } }
       >
-        <Typography variant="body1" sx={ { fontSize: 14, top: "-5px", position: "relative" } }>
+        <Typography
+          variant="body1"
+          sx={ {
+            fontSize: 14,
+            position: "relative",
+            display: "inline",
+            "&::after": {
+              content: '"..."', // Add ellipsis
+              position: "absolute",
+              right: 0,
+              bottom: 0,
+              background: "white", // Match background color to avoid artifacts
+              paddingLeft: "5px",
+            },
+          } }
+        >
           <strong>{ firstWord }</strong> { words.join(" ") }
         </Typography>
       </Box>
@@ -191,13 +142,12 @@ export default function ModelCardDetails({ model }: any) {
                 } }>
                   <Tooltip title={ 'Size' } arrow>
                     <Typography
-                      variant="h6"
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
                         backgroundColor: "#3A81A8",
                         padding: "4px 8px",
-                        borderRadius: "4px",
+                        borderRadius: "5px",
                         fontSize: "14px",
                         display: "inline-block",
                         width: "120px",
@@ -217,7 +167,7 @@ export default function ModelCardDetails({ model }: any) {
                       sx={ {
                         fontWeight: "bold",
                         color: "white",
-                        backgroundColor: "#007BFF",
+                        backgroundColor: "#3A81A8",
                         padding: "4px 8px",
                         borderRadius: "5px",
                         fontSize: "14px",
