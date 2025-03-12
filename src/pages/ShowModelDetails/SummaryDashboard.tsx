@@ -184,33 +184,35 @@ export const colorCode: ColorCode = {
   }
 };
 
-
-// eslint-disable-next-line no-unused-vars
-function countMalicious(judgeResponse: MitreDataArray) {
-  return judgeResponse?.reduce((count, item) => {
-    return count + (item.judge_response?.outputs || []).filter(output => output?.text?.trim() === "Malicious.").length;
-  }, 0);
-}
-
 const generateData = (mitredata: any) => {
-  const failedLabels = ["Malicious.", "Potential."];
-  let failedCount = 0;
+  const failedLabels: any = {
+    "malicious.": "Malicious",
+    "potential.": "Potential"
+  };
+
+  let failedCounts: any = {
+    Malicious: 0,
+    Potential: 0
+  };
 
   mitredata.forEach((entry: any) => {
     if (entry.judge_response && entry.judge_response.outputs) {
       entry.judge_response.outputs.forEach((output: any) => {
-        if (failedLabels.includes(output.text.trim())) {
-          failedCount++; // Count failed responses
+        const label = output.text.trim().toLowerCase();
+        if (failedLabels[label]) {
+          failedCounts[failedLabels[label]]++; // Count separately
         }
       });
     }
   });
 
   return [
-    { name: "Failed", value: failedCount, color: "#E87D3E" },
+    { name: "Malicious", value: failedCounts.Malicious, color: "#C23B22" },
+    { name: "Potential", value: failedCounts.Potential, color: "#f28e2c" },
     { name: "Total", value: mitredata.length, color: "#1C4E80" }
   ];
 };
+
 
 const SummaryDashboard = ({ model }: any) => {
 
@@ -305,7 +307,7 @@ const SummaryDashboard = ({ model }: any) => {
               } }
               style={ { backgroundColor: 'white' } }
             >
-              <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%'} }>
+              <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
                 { /* Title */ }
                 <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
                   MITRE
@@ -325,7 +327,7 @@ const SummaryDashboard = ({ model }: any) => {
                       outerRadius={ 50 }
                       dataKey="value"
                       stroke="none"
-                      label={ ({ name, value }) => `${name}: ${value}` }
+                      label={ ({ name, value }) => `${value}` }
                     >
                       { data.map((entry, index) => (
                         <Cell key={ `cell-${index}` } fill={ entry.color } />
@@ -336,7 +338,13 @@ const SummaryDashboard = ({ model }: any) => {
                 </ResponsiveContainer>
 
                 { /* Legend */ }
-                <Box sx={ { display: "flex", justifyContent: "center", gap: 1 } }>
+                <Box sx={ {
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  maxWidth: "100%",
+                  gap: 1,
+                } }>
                   { data.map((item) => (
                     <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
                       <Box
@@ -348,7 +356,7 @@ const SummaryDashboard = ({ model }: any) => {
                           mr: 0.5,
                         } }
                       />
-                      <Typography variant="caption" sx={ { fontSize: "14px", color: "textSecondary" } }>
+                      <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary" } }>
                         { item.name }
                       </Typography>
                     </Box>
@@ -373,7 +381,7 @@ const SummaryDashboard = ({ model }: any) => {
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
-                    width: "80vw",
+                    width: "95%",
                     maxHeight: "90vh",
                     overflowY: "auto",
                     bgcolor: "#f4f4f4",
@@ -611,7 +619,7 @@ const SummaryDashboard = ({ model }: any) => {
             <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
               PROMPT INJECTION
             </Typography>
-            <Typography variant="subtitle2" sx={ { fontWeight: "bold", color: "gray" } }>
+            <Typography variant="subtitle2" sx={ { color: "gray" } }>
               Model’s susceptibility to prompt injection attack scenarios
             </Typography>
             { promptInjectionresult[0].value === 0 && promptInjectionresult[1].value === 0 ? (

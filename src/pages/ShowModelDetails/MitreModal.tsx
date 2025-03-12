@@ -21,14 +21,9 @@ interface InfoCardProps {
 
 
 const InfoCard: React.FC<InfoCardProps> = ({ title, value }) => (
-  <Card sx={ { textAlign: "center", p: 1.2, bgcolor: "#fff", boxShadow: 2, borderRadius: 2, height: "100%" } }>
+  <Card sx={ { textAlign: "center", bgcolor: "#fff", boxShadow: 2, borderRadius: 2, height: "100%" } }>
     <CardContent>
-      <Typography variant="h5" sx={ {
-        fontWeight: 600,
-        letterSpacing: 1,
-        color: "text.secondary",
-        pt: 1
-      } }>
+      <Typography variant="h3">
         <b>{ value }</b>
       </Typography>
       <Typography variant="body2" color="textSecondary">
@@ -55,16 +50,9 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title, padding })
       display: "flex",
       flexDirection: "column",
       width: '100%',
-      minWidth: '311px'
+      // minWidth: '311px'
     } }>
-      <Typography variant="h5" sx={ {
-        fontWeight: 600,
-        letterSpacing: 1,
-        color: "text.secondary",
-        textAlign: "center",
-        alignItems: "center",
-        pt: 1
-      } }>
+      <Typography variant="h6" sx={ { textAlign: "center", fontWeight: "bold", margin: "1px" } }>
         { title }
       </Typography>
       <CardContent sx={ { flexGrow: 1, p: 0 } }>
@@ -89,7 +77,13 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title, padding })
         </ResponsiveContainer>
 
         { /* Legend */ }
-        <Box sx={ { display: "flex", justifyContent: "center", gap: 1 } }>
+        <Box sx={ {
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          maxWidth: "100%",
+          gap: 1,
+        } }>
           { data.map((item) => (
             <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
               <Box
@@ -101,7 +95,7 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title, padding })
                   mr: 0.5,
                 } }
               />
-              <Typography variant="caption" sx={ { fontSize: "14px", color: "textSecondary" } }>
+              <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary" } }>
                 { item.name }
               </Typography>
             </Box>
@@ -220,18 +214,17 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
   return (
     <Box sx={ { bgcolor: "#f4f4f4", width: "100%" } }>
       { /* min-width: 1288px; */ }
-      <Grid container spacing={ 1 } sx={ { '@media (min-width:1200px)': { minWidth: '1288px' } } } alignItems="stretch">
+      <Grid container spacing={ 1 } alignItems="stretch">
         { /* Left Section (MITRE Tests + Info Cards) */ }
         <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 6 } container spacing={ 1 } direction="column" sx={ { display: 'flex' } }>
           { /* MITRE Tests Introduction */ }
           <Grid container spacing={ 1 } sx={ { flex: 1 } }>
             <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
-              <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" } }>
+              <Card sx={ { height: "100%", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", marginLeft: '8px' } }>
                 <Typography variant="body1" color="textSecondary">
                   <b>MITRE Tests</b> The MITRE ATT&CK framework is used to evaluate an LLM’s compliance when asked to assist in cyberattacks.
                 </Typography>
               </Card>
-
             </Grid>
             <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
               <InfoCard title="Test cases with harmful intent executed on model" value={ mitreData.length } />
@@ -256,7 +249,7 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
             }
           } }>
           <CustomPieChart data={ severityData } title="Total Prompt Severity Distribution" padding={ 16 } />
-          <CustomPieChart data={ answeredData } title="Distribution of Answered vs. Unanswered Prompts" padding={ 8 } />
+          <CustomPieChart data={ answeredData } title="Answered vs. Unanswered Prompts" padding={ 8 } />
         </Grid>
       </Grid>
 
