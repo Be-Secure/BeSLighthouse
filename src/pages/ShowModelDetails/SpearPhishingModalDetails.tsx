@@ -197,11 +197,9 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                           variant="body2"
                           sx={ {
                             fontSize: '1rem',
-                            textAlign: 'center',
+                            textAlign: 'left',
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
                           } }
                         >
                           <span>
@@ -219,11 +217,9 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                           variant="body2"
                           sx={ {
                             fontSize: '1rem',
-                            textAlign: 'center',
+                            textAlign: 'left',
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
                           } }
                         >
                           <span>

@@ -16,11 +16,9 @@ const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  maxHeight: 'fit-content',
   overflow: 'auto',
-  maxWidth: '90%',
-  width: 1200,
-  height: 800,
+  width: '90%',
+  maxHeight: "90vh",
   bgcolor: 'background.paper',
   // border: '2px solid ',
   boxShadow: 24,
@@ -142,19 +140,6 @@ interface SeverityLevel {
 interface ColorCode {
   [key: number]: SeverityLevel;
 }
-
-// eslint-disable-next-line no-unused-vars
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 export const colorCode: ColorCode = {
   0: {
