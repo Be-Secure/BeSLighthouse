@@ -44,11 +44,6 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     spearPhishingData.goal_stats
   );
   const modelNameInSmall = modelName.toLowerCase();
-  console.log('modelName', modelName);
-  Array.from(spearPhishingCategories).map((category: string) => {
-    console.log('category', category);
-    console.log('spearPhishingData.goal_stats[category][modelName]', spearPhishingData.goal_stats[category][modelNameInSmall]);
-  });
   const spearPhishingBarData = Array.from(spearPhishingCategories).map(
     (category) => ({
       category: category,
@@ -56,47 +51,48 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
         spearPhishingData?.goal_stats[category][modelNameInSmall] ?? '0',
     })
   );
-  console.log('spearPhishingBarData', spearPhishingBarData);
   const spearPhishingScoreData = [
     {
       name: 'Argumentation Score',
       value: spearPhishingDetails?.argumentationScore ?? 'Not available',
-      text: 'argumentation capabilities was shown by this LLM on a victim LLM',
+      title: "Argumentation Skills",
+      text: 'in spear phishing scenario',
     },
     {
       name: 'Persusassion Score',
       value: spearPhishingDetails?.persuasionScore ?? 'Not available',
-      text: 'persuasion capabilities was shown by this LLM on a victim LLM',
+      title: "Persuasion Skills",
+      text: 'in spear phishing scenario',
     },
     {
       name: 'Overall Score',
       value: spearPhishingDetails?.overallScore ?? 'Not available',
-      text: 'overall score of this LLM on Spear Phishing Capabilities',
+      title: "Overall Score",
+      text: 'in spear phishing scenario',
     },
     {
       name: 'Rapport Score',
       value: spearPhishingDetails?.rapportScore ?? 'Not available',
-      text: 'rapport building capabilities was shown by this LLM on a victim LLM',
+      title: "Rapport Building Skills",
+      text: 'in spear phishing scenario',
     },
   ];
-  console.log('spearPhishingBarData', spearPhishingBarData);
   return (
     <>
-      { /* <Box sx={{ p: 2 }}> */ }
-      <Grid container spacing={ 2 }>
-        { /* <Grid container spacing={1}> */ }
-        <Grid item xs={ 12 } md={ 6 } lg={ 8 }>
-          <Typography id="transition-modal-title">
-            <strong>{ spearPhishingDetails.testName }</strong>{ ' ' }
-            { spearPhishingDetails.testDetail }
-          </Typography>
-          { /* </Grid> */ }
+      <Grid container spacing={ 1 }>
+        <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
+          <Card sx={ { height: "100%", display: "flex", justifyContent: "center" } }>
+            <Typography variant="body2" style={ { paddingLeft: "10px" } }>
+              <b>{ spearPhishingDetails.testName }</b> { ' ' }
+              { spearPhishingDetails.testDetail }
+            </Typography>
+          </Card>
         </Grid>
-        <Grid item xs={ 12 } md={ 6 } lg={ 4 }>
+        <Grid item xs={ 12 } md={ 12 } lg={ 5 }>
           <Card
             sx={ {
               height: '100%',
-              backgroundColor: '#e8e8e8',
+              backgroundColor: 'white'
             } }
           >
             { Object.keys(spearPhishingData).length === 0 ? (
@@ -121,7 +117,6 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                   variant="h2"
                   sx={ {
                     fontSize: '2rem',
-
                   } }
                 >
                   { spearPhishingDetails.totalChallenges }
@@ -134,47 +129,47 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
           </Card>
         </Grid>
       </Grid>
-      { /* </Box> */ }
-      { /* <Box sx={{ p: 2 }}> */ }
-      <Grid container spacing={ 2 } pt={ 2 }>
+      <Grid container spacing={ 1 } pt={ 1 }>
         { /* Left side with bar chart */ }
-        <Grid item xs={ 12 } md={ 6 } lg={ 8 }>
-          <Typography variant="h6" sx={ { fontWeight: 700, display: 'flex', justifyContent: 'center' } } pb={ 1 }>
-            Overall spear phishing capability average across different categories
-          </Typography>
-          <ResponsiveContainer width="100%" height={ 320 }>
-            <BarChart
-              data={ spearPhishingBarData }
-              margin={ { left: -20, right: 50 } }
-            >
-              <XAxis
-                dataKey="category"
-                textAnchor="middle"
-                fontSize={ 12 }
+        <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
+          <Card style={ { paddingBottom: '8px', paddingTop: '8px' } }>
+            <Typography variant="h6" sx={ { fontWeight: 700, display: 'flex', justifyContent: 'center' } } pb={ 1 }>
+              Overall spear phishing capability average across different categories
+            </Typography>
+            <ResponsiveContainer width="100%" height={ 210 }>
+              <BarChart
+                data={ spearPhishingBarData }
+                margin={ { left: -20, right: 50 } }
+              >
+                <XAxis
+                  dataKey="category"
+                  textAnchor="middle"
+                  fontSize={ 12 }
 
-              />
-              <YAxis domain={ [0, 1] } ticks={ [0, 1, 2, 3, 4, 5] } />
-              <Tooltip />
-              <Legend wrapperStyle={ { fontSize: '12px' } } />
-              <Bar
-                dataKey="overall_average"
-                name="Overall average"
-                fill="#d32f2f"
-                barSize={ 15 }
-              />
-            </BarChart>
-          </ResponsiveContainer>
+                />
+                <YAxis domain={ [0, 1] } ticks={ [0, 1, 2, 3, 4, 5] } />
+                <Tooltip />
+                <Legend wrapperStyle={ { fontSize: '12px' } } />
+                <Bar
+                  dataKey="overall_average"
+                  name="Overall average"
+                  fill="#d32f2f"
+                  barSize={ 15 }
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </Card>
         </Grid>
 
         { /* Right side with 2x2 cards */ }
-        <Grid item xs={ 12 } md={ 6 } lg={ 4 }>
-          <Grid container spacing={ 2 }>
+        <Grid item xs={ 12 } md={ 12 } lg={ 5 }>
+          <Grid container spacing={ 1 }>
             { spearPhishingScoreData.map((data: any, index) => (
               <Grid item xs={ 12 } sm={ 6 } key={ index }>
                 <Card
                   sx={ {
                     height: '100%',
-                    backgroundColor: '#e8e8e8',
+                    backgroundColor: 'white'
                   } }
                 >
                   { data.value === 'Not available' ? (
@@ -197,48 +192,33 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
                     </Box>
                   ) : (
                     data.name === 'Overall Score' ? (
-                      <CardContent
-                        sx={ { textAlign: 'center' } }
-                      >
+                      <CardContent sx={ { textAlign: 'center', padding: '16px' } }>
+                        <Typography variant="subtitle2" sx={ { fontWeight: 'bold', color: '#000' } }>
+                          { data.title }
+                        </Typography>
                         <Typography
-                          variant="h2"
-                          sx={ {
-                            fontSize: '2rem',
-                            color: colorCode[
-                              data.value
-                            ]?.color,
-
-
-                          } }
-
+                          variant="h5"
+                          sx={ { fontWeight: 'bold', color: colorCode[data.value]?.color, marginTop: '4px' } }
                         >
                           { data.value }
                         </Typography>
-                        <Typography variant="body2" sx={ { fontSize: '15px' } }>
+                        <Typography variant="body2" sx={ { color: '#000', marginTop: '4px' } }>
                           { data.text }
                         </Typography>
                       </CardContent>
+
                     ) : (
-                      <CardContent
-                        sx={ { textAlign: 'center' } }
-                      >
-                        <Typography
-                          variant="h2"
-                          sx={ {
-                            fontSize: '1.5rem',
-                            color: colorCode[
-                              data.value
-                            ]?.color,
-
-
-                          } }
-                        >
-                          {
-                            colorCode[data.value]
-                              ?.level
-                          }
+                      <CardContent sx={ { textAlign: 'center', padding: '16px' } }>
+                        <Typography variant="subtitle2" sx={ { fontWeight: 'bold', color: '#000' } }>
+                          { data.title }
                         </Typography>
-                        <Typography variant="body2" pt={ 1 } sx={ { fontSize: '15px' } }>
+                        <Typography
+                          variant="h6"
+                          sx={ { fontWeight: 'bold', color: colorCode[data.value]?.color, marginTop: '4px' } }
+                        >
+                          { colorCode[data.value]?.level }
+                        </Typography>
+                        <Typography variant="body2" sx={ { color: '#000', marginTop: '4px' } }>
                           { data.text }
                         </Typography>
                       </CardContent>
@@ -250,7 +230,6 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
           </Grid>
         </Grid>
       </Grid>
-      { /* </Box> */ }
     </>
   );
 };
