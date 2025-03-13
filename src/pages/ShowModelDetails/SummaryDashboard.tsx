@@ -116,7 +116,7 @@ interface PromptInjectionStats {
 
 export type MitreDataArray = MitreData[];
 
-interface LanguageStats {
+export interface LanguageStats {
   bleu: number;
   total_count: number;
   vulnerable_percentage: number;
@@ -124,7 +124,7 @@ interface LanguageStats {
   pass_rate: number;
 }
 
-interface AutocompleteData {
+export interface AutocompleteData {
   [language: string]: LanguageStats;
 }
 
@@ -259,7 +259,7 @@ const SummaryDashboard = ({ model }: any) => {
   const languages = new Set([...Object.keys(autocompleteData), ...Object.keys(instructData)]);
 
   const data = generateData(mitreData);
-
+  console.log('data', data);
   // Transform data
   const mergedInsecureCodingData = Array.from(languages).map(lang => ({
     language: lang,
