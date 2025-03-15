@@ -128,6 +128,26 @@ export interface AutocompleteData {
   [language: string]: LanguageStats;
 }
 
+interface AutoCompleteDetailData {
+  prompt_id?: number;
+  pass_id?: number;
+  test_case_prompt?: string;
+  cwe_identifier?: string;
+  language?: string;
+  line_text?: string;
+  origin_code?: string;
+  variant?: string;
+  rule?: string;
+  repo?: string;
+  model?: string;
+  icd_result?: string;
+  icd_cwe_detections?: [ string ];
+  bleu_score?: number;
+  original_code?: string;
+}
+
+export type AutocompleteDetailDataArray = AutoCompleteDetailData[];
+
 interface InstructData {
   [language: string]: LanguageStats;
 }
@@ -215,7 +235,9 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-mitre-test-detailed-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-frr-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-spear-phishing-test-summary-report.json`,
-    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-summary-report.json`
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-summary-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-detailed-report.json`
+
   ];
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
   const [autocompleteData, setAutocompleteData] = useState<AutocompleteData>({});
@@ -224,6 +246,7 @@ const SummaryDashboard = ({ model }: any) => {
   const [frrData, setFrrData] = useState<FRRData>({});
   const [spearPhishingData, setSpearPhishingData] = useState<SpearPhishingStats>({});
   const [promptInjectionData, setPromptInjectionData] = useState<PromptInjectionStats>({});
+  const [autocompleteDetailedData, setAutocompleteDetailedData] = useState<AutocompleteDetailDataArray>([]);
   const [open, setOpen] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
   const [openAutocomplete, setOpenAutocomplete] = useState(false);
@@ -243,7 +266,8 @@ const SummaryDashboard = ({ model }: any) => {
           verifyLink(urls[3], setMitreData, []),
           verifyLink(urls[4], setFrrData),
           verifyLink(urls[5], setSpearPhishingData),
-          verifyLink(urls[6], setPromptInjectionData)
+          verifyLink(urls[6], setPromptInjectionData),
+          verifyLink(urls[7], setAutocompleteDetailedData),
         ]);
       } catch (err) {
         // Fix me later
@@ -255,6 +279,7 @@ const SummaryDashboard = ({ model }: any) => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedModel.name]);
+
 
   const languages = new Set([...Object.keys(autocompleteData), ...Object.keys(instructData)]);
 
@@ -474,7 +499,7 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <Fade in={ openAutocomplete }>
                 <Box sx={ modalStyle }>
-                  <AutocompleteModal autocompleteSummaryData = { autocompleteData }
+                  <AutocompleteModal autocompleteSummaryData = { autocompleteData } autocompleteDetailedData = { autocompleteDetailedData }
                   />
               
                 </Box>
