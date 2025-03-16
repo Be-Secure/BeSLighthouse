@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
- 
+
+// ***Using the same modal file for Instruct and Autocomplete Modal Details***
 import React from 'react';
 
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
