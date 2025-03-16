@@ -236,7 +236,9 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-frr-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-spear-phishing-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-summary-report.json`,
-    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-detailed-report.json`
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-detailed-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-detailed-report.json`
+
 
   ];
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
@@ -247,14 +249,18 @@ const SummaryDashboard = ({ model }: any) => {
   const [spearPhishingData, setSpearPhishingData] = useState<SpearPhishingStats>({});
   const [promptInjectionData, setPromptInjectionData] = useState<PromptInjectionStats>({});
   const [autocompleteDetailedData, setAutocompleteDetailedData] = useState<AutocompleteDetailDataArray>([]);
+  const [instructTestDetailedData, setInstructTestDetailedData] = useState<AutocompleteDetailDataArray>([]);
   const [open, setOpen] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
   const [openAutocomplete, setOpenAutocomplete] = useState(false);
+  const [openInstruct, setOpenInstruct] = useState(false);
   const handleOpen = () => setOpenSpear(true);
   const handleClose = () => setOpenSpear(false);
   const handleOpenMitre = () => setOpen(true);
   const handleOpenAutocomplete = () => setOpenAutocomplete(true);
   const handleCloseAutocomplete = () => setOpenAutocomplete(false);
+  const handleOpenInstruct = () => setOpenInstruct(true);
+  const handleCloseInstruct = () => setOpenInstruct(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -268,6 +274,7 @@ const SummaryDashboard = ({ model }: any) => {
           verifyLink(urls[5], setSpearPhishingData),
           verifyLink(urls[6], setPromptInjectionData),
           verifyLink(urls[7], setAutocompleteDetailedData),
+          verifyLink(urls[8], setInstructTestDetailedData),
         ]);
       } catch (err) {
         // Fix me later
@@ -482,7 +489,7 @@ const SummaryDashboard = ({ model }: any) => {
                 
               } }
             >
-              Autocomplete Summary
+              Autocomplete Test Summary
             </Button>
             <Modal
               aria-labelledby="transition-modal-title"
@@ -499,7 +506,44 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <Fade in={ openAutocomplete }>
                 <Box sx={ modalStyle }>
-                  <AutocompleteModal autocompleteSummaryData = { autocompleteData } autocompleteDetailedData = { autocompleteDetailedData }
+                  <AutocompleteModal autocompleteSummaryData = { autocompleteData } autocompleteDetailedData = { autocompleteDetailedData } data = "Autocomplete"
+                  />
+             
+              
+                </Box>
+              </Fade>
+            </Modal>
+            <Button
+              variant="text"
+              onClick={ handleOpenInstruct }
+              sx={ {
+                textTransform: 'none',
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                  color: 'primary.main'
+                },
+                width: "fit-content",
+                
+              } }
+            >
+              Instruct Test Summary
+            </Button>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={ openInstruct }
+              onClose={ handleCloseInstruct }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ {
+                backdrop: {
+                  timeout: 500,
+                },
+              } }
+            >
+              <Fade in={ openInstruct }>
+                <Box sx={ modalStyle }>
+                  <AutocompleteModal autocompleteSummaryData = { instructData } autocompleteDetailedData = { instructTestDetailedData } data = "Instruct"
                   />
               
                 </Box>

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+ 
 import React from 'react';
 
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
@@ -27,24 +28,55 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { WidthFull } from '@mui/icons-material';
+import BasicTable from '../BesVersionHistory/AssessmentReport/BasicTable';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+/** Table Container with rounded corners & light shadow */
+export const StyledTableContainer = styled(TableContainer)(() => ({
+  borderRadius: 8,
+  overflow: 'auto',
+}));
+
+// 2. Styled table
+export const StyledTable = styled(Table)(() => ({
+  width: '100%',
+  tableLayout: 'fixed',
+  borderCollapse: 'collapse', // Ensures borders collapse
+  // Apply borders to all cells
+  '& td, & th': {
+    border: '4px solid white', // Light gray border
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
+// 3. Table head with a teal background
+export const StyledTableHead = styled(TableHead)(() => ({
+  [`& th`]: {
+    backgroundColor: '#156082',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: '0.95rem',
   },
-  // hide last border
+}));
+
+// 4. Styled body cells
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: '0.9rem',
+    color: '#333',
+    padding: '12px',
+  },
+}));
+
+// 5. Styled body rows (alternate shading + hover)
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: '#ccd2d8',
+  },
+  '&:hover': {
+    backgroundColor: '#f5f5f5',
+  },
   '&:last-child td, &:last-child th': {
-    border: 0,
+    border: 0, // Remove bottom border on last row if desired
   },
 }));
 
@@ -52,10 +84,19 @@ function createData(CWE: string, count: number) {
   return { CWE, count };
 }
 
-function autocompleteModalDetails() {
-  const testName = 'Autocomplete Test';
-  const testDetail =
-        'measures how often an LLM suggests insecure coding practices in autocomplete contexts, where the LLM predicts subsequent code based on preceding code.';
+function autocompleteModalDetails(data: string) {
+  let testName = '';
+  let testDetail = '';
+  if (data === 'Autocomplete') {
+    testName = 'Autocomplete Test';
+    testDetail =
+          'measures how often an LLM suggests insecure coding practices in autocomplete contexts, where the LLM predicts subsequent code based on preceding code.';
+  }else if (data === 'Instruct') {
+    testName = 'Instruct Test';
+    testDetail =
+          'assess an LLM\'s propensity to generate insecure code when given a specific instruction';
+  }
+
   return {
     testName,
     testDetail,
@@ -81,12 +122,12 @@ function generatePieChartData(autocompleteSummaryData: AutocompleteData) {
 
   return [
     {
-      name: 'Success',
+      name: 'Safe Code',
       value: successCount,
       color: '#156082',
     },
     {
-      name: 'Failed',
+      name: 'Insecure Code',
       value: vulnerableCount,
       color: '#E87437',
     },
@@ -132,37 +173,44 @@ function findMostCommonCWE(data: AutocompleteDetailDataArray) {
   return { mostCommonCWE, cweCount };
 }
 
-function CWETable({ rows }: { rows: any }) {
+
+export default function CWETable({ rows }: { rows: any[] }) {
   return (
-    <TableContainer component={ Paper } style={ { maxHeight: 400 } }>
-      <Table sx={ { maxWidth: 500 } } aria-label="customized table">
-        <TableHead>
+    <StyledTableContainer sx={ { height: 400 } }>
+      <StyledTable stickyHeader size="small">
+        <StyledTableHead>
           <TableRow>
-            <StyledTableCell>CWE</StyledTableCell>
+            { /* Header cells (teal background, white text) */ }
+            <StyledTableCell style={ { width: '80'} }>CWE</StyledTableCell>
             <StyledTableCell align="right">Count</StyledTableCell>
           </TableRow>
-        </TableHead>
+        </StyledTableHead>
+
         <TableBody>
-          { rows.map((row: any) => (
+          { rows.map((row) => (
             <StyledTableRow key={ row.CWE }>
+              { /* Body cells */ }
               <StyledTableCell component="th" scope="row">
                 { row.CWE }
               </StyledTableCell>
-              <StyledTableCell align="right">{ row.count }</StyledTableCell>
+              <StyledTableCell align="right">
+                { row.count }
+              </StyledTableCell>
             </StyledTableRow>
           )) }
         </TableBody>
-      </Table>
-    </TableContainer>
+      </StyledTable>
+    </StyledTableContainer>
   );
 }
-
 export const AutocompleteModal = ({
   autocompleteSummaryData,
   autocompleteDetailedData,
+  data
 }: {
     autocompleteSummaryData: AutocompleteData
     autocompleteDetailedData: AutocompleteDetailDataArray
+    data: string
 }) => {
   const pieData = generatePieChartData(autocompleteSummaryData) || [];
   const autocompleteBarData = Object.keys(autocompleteSummaryData).map(
@@ -174,7 +222,7 @@ export const AutocompleteModal = ({
   );
   const summaryData: any =
         Object.keys(autocompleteSummaryData).length > 0
-          ? autocompleteModalDetails()
+          ? autocompleteModalDetails(data)
           : { testName: '', testDetail: '' };
 
   const totalCWECount: number = getCWECount(autocompleteDetailedData);
@@ -187,42 +235,102 @@ export const AutocompleteModal = ({
       return createData(cwe, cweCount[cwe]);
     })
     : [];
-  console.log('rows', rows);
+
+    
   return (
     <>
       <Grid container spacing={ 2 }>
+        { /* LEFT COLUMN: Title & Two Cards */ }
         <Grid item xs={ 12 } md={ 4 } lg={ 4 }>
-          <Card
-            sx={ {
-              height: '100%',
-              display: 'flex',
-              marginLeft: '8px',
-              marginTop: '9px',
-              paddingTop: '10px',
-              paddingBottom: '10px',
-            } }
-          >
-            <Typography
-              id="transition-modal-title"
-              sx={ { fontSize: '16px' } }
-            >
-              <strong>{ summaryData.testName }</strong>{ ' ' }
-              { summaryData.testDetail }
-            </Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={ 12 } md={ 4 } lg={ 4 }>
-          <Grid container spacing={ 2 }>
-            <Grid item xs={ 12 } md={ 6 } lg={ 12 }>
-              { rows.length > 0 ? <CWETable rows={ rows } /> : null }
+          <Grid container spacing={ 2 } sx={ { height: '100%' } }>
+            { /* Title / Description Card */ }
+            <Grid item xs={ 12 }>
+              <Card sx={ { 
+                p: 2, 
+                height: '200px', // Fixed height to match other columns
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              } }>
+                <Typography variant="body2" style={ { paddingLeft: '10px', fontSize: '18px' } }>
+                  <b>{ summaryData.testName }</b> { ' ' }
+                  { summaryData.testDetail }
+                </Typography>
+              </Card>
+            </Grid>
+
+            { /* Two Info Cards (Total CWE & Most Common CWE) */ }
+            <Grid item xs={ 12 }>
+              <Grid container spacing={ 2 }>
+                <Grid item xs={ 12 } sm={ 6 }>
+                  <Card sx={ { 
+                    backgroundColor: '#fff', 
+                    height: '180px', // Fixed height
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center'
+                  } }>
+                    <CardContent sx={ { textAlign: 'center', p: 2 } }>
+                      <Typography variant="h5" sx={ { fontWeight: 'bold' } }>
+                        { totalCWECount }
+                      </Typography>
+                      <Typography variant="body2" sx={ { mt: 1 } }>
+                        CWEs were identified for the code generated by the LLM
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={ 12 } sm={ 6 }>
+                  <Card sx={ { 
+                    backgroundColor: '#fff', 
+                    height: '180px', // Fixed height
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center'
+                  } }>
+                    <CardContent sx={ { textAlign: 'center', p: 2 } }>
+                      <Typography variant="h5" sx={ { fontWeight: 'bold' } }>
+                        { mostCommonCWE }
+                      </Typography>
+                      <Typography variant="body2" sx={ { mt: 1 } }>
+                        is the most common CWE in the generated code
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={ 12 } md={ 8 } lg={ 8 }>
-          { /* <Card  sx={ { height: "100%", display: "flex", marginLeft: '8px', marginTop: '9px', paddingTop: "10px", paddingBottom: "10px", alignItems: 'center' } }>
-            <ResponsiveContainer style={ { alignItems: 'center' } } width={ '100%' }>
-              <>
-                <PieChart width={ 400 } height={ 300 } style={ { position: 'relative', left: '30%' } }>
+
+        { /* MIDDLE COLUMN: CWE Table */ }
+        <Grid item xs={ 12 } md={ 4 } lg={ 4 }>
+          { rows.length > 0 ? (
+            <Card sx={ { 
+              p: 2, 
+              backgroundColor: '#fff', 
+              height: '400px' // Fixed height to match left column total height
+            } }>
+              <CWETable rows={ rows } />
+            </Card>
+          ) : null }
+        </Grid>
+
+        { /* RIGHT COLUMN: Donut Chart */ }
+        <Grid item xs={ 12 } md={ 4 } lg={ 4 }>
+          <Card sx={ { 
+            height: '400px', // Fixed height to match other columns
+            p: 2, 
+            backgroundColor: '#fff',
+            display: 'flex',
+            flexDirection: 'column'
+          } }>
+            <Typography variant="h6" textAlign="center">
+              Safe vs Insecure Code Generated
+            </Typography>
+            <Box sx={ { flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' } }>
+              <ResponsiveContainer width="100%" height={ 300 }>
+                <PieChart>
                   <Pie
                     data={ pieData }
                     innerRadius={ 60 }
@@ -230,153 +338,68 @@ export const AutocompleteModal = ({
                     fill="#8884d8"
                     paddingAngle={ 3 }
                     dataKey="value"
+                    startAngle={ 120 }
+                    endAngle={ -240 }
                   >
                     { pieData.map((entry, index) => (
                       <Cell key={ `cell-${index}` } fill={ entry.color } />
-                    )) } 
+                    )) }
                   </Pie>
                 </PieChart>
-
-                <Box sx={ {
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                  maxWidth: "100%",
-                  gap: 1,
-                } }>
-                  { pieData.map((item) => (
-                    <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
-                      <Box
-                        sx={ {
-                          width: 10,
-                          height: 10,
-                          backgroundColor: item.color,
-                          borderRadius: "50%",
-                          mr: 0.5,
-                        } }
-                      />
-                      <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary", textTransform: 'capitalize' } }>
-                        { item.name }
-                      </Typography>
-                    </Box>
-                
-                  )) }
+              </ResponsiveContainer>
+            </Box>
+            <Box sx={ {
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              maxWidth: "100%",
+              gap: 1,
+            } }>
+              { pieData.map((item) => (
+                <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
+                  <Box
+                    sx={ {
+                      width: 10,
+                      height: 10,
+                      backgroundColor: item.color,
+                      borderRadius: "50%",
+                      mr: 0.5,
+                    } }
+                  />
+                  <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary", textTransform: 'capitalize' } }>
+                    { item.name }
+                  </Typography>
                 </Box>
-              </>
-            </ResponsiveContainer>
-          </Card> */ }
-        </Grid>
-        <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
-          <Grid container spacing={ 2 }>
-            <Grid item xs={ 12 } md={ 2 } lg={ 2 }>
-              <Card
-                sx={ {
-                  height: '100%',
-                  backgroundColor: 'white',
-                } }
-              >
-                <CardContent
-                  sx={ {
-                    textAlign: 'center',
-                    padding: '16px',
-                  } }
-                >
-                  <Typography
-                    variant="h5"
-                    sx={ {
-                      fontWeight: 'bold',
-                      marginTop: '4px',
-                    } }
-                  >
-                    { totalCWECount }
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={ { color: '#000', marginTop: '4px' } }
-                  >
-                    CWEs were identified for the code
-                    generated by the LLM
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={ 12 } md={ 2 } lg={ 2 }>
-              <Card
-                sx={ {
-                  height: '100%',
-                  backgroundColor: 'white',
-                } }
-              >
-                <CardContent
-                  sx={ {
-                    textAlign: 'center',
-                    padding: '16px',
-                  } }
-                >
-                  <Typography
-                    variant="h5"
-                    sx={ {
-                      fontWeight: 'bold',
-                      marginTop: '4px',
-                    } }
-                  >
-                    { mostCommonCWE }
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={ { color: '#000', marginTop: '4px' } }
-                  >
-                    is the most common CWE in the generated
-                    code
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+              )) }
+            </Box>
+          </Card>
         </Grid>
       </Grid>
-      <Grid container spacing={ 2 }>
-        <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
-          <Card
-            style={ {
-              paddingBottom: '8px',
-              paddingTop: '8px',
-              margin: '10px',
-              marginTop: '20px',
-            } }
-          >
+
+
+      { /* BOTTOM ROW: Bar Chart */ }
+      <Grid container spacing={ 2 } sx={ { mt: 2 } }>
+        <Grid item xs={ 12 }>
+          <Card sx={ { p: 2 } }>
             <Typography
               variant="h6"
-              sx={ {
-                fontWeight: 700,
-                display: 'flex',
-                justifyContent: 'center',
-              } }
+              fontWeight={ 700 }
+              textAlign="center"
               pb={ 1 }
             >
               % of Safe and Insecure Code Generated
             </Typography>
-            <ResponsiveContainer width={ '100%' } height={ 300 }>
+            <ResponsiveContainer width="100%" height={ 300 }>
               <BarChart
                 data={ autocompleteBarData }
-                margin={ {
-                  top: 20,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                } }
+                margin={ { top: 20, right: 30, left: 20, bottom: 5 } }
                 barSize={ 35 }
               >
-                <XAxis dataKey="language" name="Language" />
-                <YAxis name="Percentage" />
+                <XAxis dataKey="language" />
+                <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar
-                  dataKey="safe"
-                  name="Safe Code"
-                  stackId="a"
-                  fill="#156082"
-                />
+                <Bar dataKey="safe" name="Safe Code" stackId="a" fill="#156082" />
                 <Bar
                   dataKey="insecure"
                   name="Insecure Code"
