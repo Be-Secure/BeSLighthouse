@@ -11,6 +11,7 @@ import { besecureMlAssessmentDataStore } from "../../dataStore";
 import MitreModal from "./MitreModal";
 import { SpearPhishingModal } from "./SpearPhishingModalDetails";
 import PromptInjectionModal from "./PromptInjectionModal";
+import { AutocompleteModal } from "./AutocompleteModalDetails";
 
 const modalStyle = {
   position: 'absolute',
@@ -116,6 +117,27 @@ interface PromptInjectionStats {
 
 export type MitreDataArray = MitreData[];
 
+interface AutoCompleteDetailData {
+  prompt_id?: number;
+  pass_id?: number;
+  test_case_prompt?: string;
+  cwe_identifier?: string;
+  language?: string;
+  line_text?: string;
+  origin_code?: string;
+  variant?: string;
+  rule?: string;
+  repo?: string;
+  model?: string;
+  icd_result?: string;
+  icd_cwe_detections?: [ string ];
+  bleu_score?: number;
+  original_code?: string;
+}
+
+export type AutocompleteDetailDataArray = AutoCompleteDetailData[];
+
+
 interface PromptInjectionData {
   prompt_id: number;
   pass_id: number;
@@ -140,7 +162,7 @@ interface LanguageStats {
   pass_rate: number;
 }
 
-interface AutocompleteData {
+export interface AutocompleteData {
   [language: string]: LanguageStats;
 }
 
@@ -232,7 +254,9 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-frr-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-spear-phishing-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-summary-report.json`,
-    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-detailed-report.json`
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-detailed-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-detailed-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-detailed-report.json`
   ];
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
   const [autocompleteData, setAutocompleteData] = useState<AutocompleteData>({});
@@ -242,6 +266,10 @@ const SummaryDashboard = ({ model }: any) => {
   const [frrData, setFrrData] = useState<FRRData>({});
   const [spearPhishingData, setSpearPhishingData] = useState<SpearPhishingStats>({});
   const [promptInjectionSummaryData, setPromptInjectionSummaryData] = useState<PromptInjectionStats>({});
+  const [autocompleteDetailedData, setAutocompleteDetailedData] = useState<AutocompleteDetailDataArray>([]);
+  const [instructTestDetailedData, setInstructTestDetailedData] = useState<AutocompleteDetailDataArray>([]);
+  const [openAutocomplete, setOpenAutocomplete] = useState(false);
+  const [openInstruct, setOpenInstruct] = useState(false);
   const [open, setOpen] = useState(false);
   const [openPromptInjection, setOpenPromptInjection] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
@@ -249,6 +277,10 @@ const SummaryDashboard = ({ model }: any) => {
   const handleClose = () => setOpenSpear(false);
   const handleOpenMitre = () => setOpen(true);
   const handleOpenPromptInjection = () => setOpenPromptInjection(true);
+  const handleOpenAutocomplete = () => setOpenAutocomplete(true);
+  const handleCloseAutocomplete = () => setOpenAutocomplete(false);
+  const handleOpenInstruct = () => setOpenInstruct(true);
+  const handleCloseInstruct = () => setOpenInstruct(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -261,7 +293,9 @@ const SummaryDashboard = ({ model }: any) => {
           verifyLink(urls[4], setFrrData),
           verifyLink(urls[5], setSpearPhishingData),
           verifyLink(urls[6], setPromptInjectionSummaryData),
-          verifyLink(urls[7], setPromptInjectionData, [])
+          verifyLink(urls[7], setPromptInjectionData, []),
+          verifyLink(urls[8], setAutocompleteDetailedData, []),
+          verifyLink(urls[9], setInstructTestDetailedData, [])
         ]);
       } catch (err) {
         // Fix me later
@@ -460,6 +494,85 @@ const SummaryDashboard = ({ model }: any) => {
               </ResponsiveContainer>
             ) }
           </CardContent>
+          <Grid pb={ 1 } pl={ 0.5 }>
+
+            <Button
+              variant="text"
+              onClick={ handleOpenAutocomplete }
+              disabled={ (Object.keys(autocompleteData).length === 0) && Object.keys(autocompleteDetailedData).length === 0 }
+              sx={ {
+                textTransform: 'none',
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                  color: 'primary.main'
+                },
+                width: "fit-content",
+    
+              } }
+            >
+              Autocomplete Test Summary
+            </Button>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={ openAutocomplete }
+              onClose={ handleCloseAutocomplete }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ {
+                backdrop: {
+                  timeout: 500,
+                },
+              } }
+            >
+              <Fade in={ openAutocomplete }>
+                <Box sx={ modalStyle }>
+                  <AutocompleteModal autocompleteSummaryData = { autocompleteData } autocompleteDetailedData = { autocompleteDetailedData } data = "Autocomplete"
+                  />
+ 
+  
+                </Box>
+              </Fade>
+            </Modal>
+            <Button
+              variant="text"
+              onClick={ handleOpenInstruct }
+              disabled={ (Object.keys(instructData).length === 0) && Object.keys(instructTestDetailedData).length === 0 }
+
+              sx={ {
+                textTransform: 'none',
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                  color: 'primary.main'
+                },
+                width: "fit-content",
+    
+              } }
+            >
+              Instruct Test Summary
+            </Button>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={ openInstruct }
+              onClose={ handleCloseInstruct }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ {
+                backdrop: {
+                  timeout: 500,
+                },
+              } }
+            >
+              <Fade in={ openInstruct }>
+                <Box sx={ modalStyle }>
+                  <AutocompleteModal autocompleteSummaryData = { instructData } autocompleteDetailedData = { instructTestDetailedData } data = "Instruct"
+                  />
+  
+                </Box>
+              </Fade>
+            </Modal>
+          </Grid> 
         </Card>
       </Grid>
 
