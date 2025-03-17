@@ -190,7 +190,7 @@ const PromptInjectionModal = ({ promptInjectionData, promptInjectionSummaryData 
         </Grid>
       </Grid>
 
-      <Card sx={ { width: '100%', marginTop: '9px', paddingTop: "10px", paddingBottom: "10px" } }>
+      <Card sx={ { width: '100%', marginTop: '9px', paddingTop: "10px", paddingBottom: "10px", height: "380px" } }>
         <Typography variant="h6" pt={ 0 } sx={ { mt: 0, textAlign: "center", fontWeight: "bold" } }>
           Prompt injection variant wise distribution of violations
         </Typography>
@@ -200,11 +200,13 @@ const PromptInjectionModal = ({ promptInjectionData, promptInjectionSummaryData 
               dataKey="category"
               stroke="#555"
               style={ { fontSize: "12px" } }
+              angle={ 45 }
+              textAnchor="start"
             />
             <YAxis stroke="#555" />
             <Tooltip />
-            <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } } />
-            <Bar dataKey="Injection Successful" stackId="a" fill="#2E7D32" barSize={ 20 } />
+            <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "15px", marginTop: "40px", bottom: "-33px" } } />
+            <Bar dataKey="Injection Successful" stackId="a" fill="#2E7D32" barSize={ 20 }/>
             <Bar dataKey="Injection Unsuccessful" stackId="a" fill="#C23B22" barSize={ 20 } />
             <Bar dataKey="Total Count" stackId="a" fill="#1F77B4" barSize={ 20 } />
           </BarChart>
