@@ -287,7 +287,8 @@ const SummaryDashboard = ({ model }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedModel.name]);
 
-
+  console.log('length', Object.keys(autocompleteDetailedData).length);
+  console.log('length2', Object.keys(autocompleteData).length);
   const languages = new Set([...Object.keys(autocompleteData), ...Object.keys(instructData)]);
 
   const data = generateData(mitreData);
@@ -479,6 +480,7 @@ const SummaryDashboard = ({ model }: any) => {
             <Button
               variant="text"
               onClick={ handleOpenAutocomplete }
+              disabled={ (Object.keys(autocompleteData).length === 0) && Object.keys(autocompleteDetailedData).length === 0 }
               sx={ {
                 textTransform: 'none',
                 '&:hover': {
@@ -516,6 +518,8 @@ const SummaryDashboard = ({ model }: any) => {
             <Button
               variant="text"
               onClick={ handleOpenInstruct }
+              disabled={ (Object.keys(instructData).length === 0) && Object.keys(instructTestDetailedData).length === 0 }
+
               sx={ {
                 textTransform: 'none',
                 '&:hover': {

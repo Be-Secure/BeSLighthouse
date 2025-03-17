@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 
 // ***Using the same modal file for Instruct and Autocomplete Modal Details***
 import React from 'react';
@@ -29,55 +28,46 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { WidthFull } from '@mui/icons-material';
-import BasicTable from '../BesVersionHistory/AssessmentReport/BasicTable';
 
-/** Table Container with rounded corners & light shadow */
-export const StyledTableContainer = styled(TableContainer)(() => ({
-  borderRadius: 8,
-  overflow: 'auto',
-}));
 
 // 2. Styled table
-export const StyledTable = styled(Table)(() => ({
-  width: '100%',
-  tableLayout: 'fixed',
+const StyledTable = styled(Table)(() => ({
   borderCollapse: 'collapse', // Ensures borders collapse
   // Apply borders to all cells
   '& td, & th': {
     border: '4px solid white', // Light gray border
   },
+  borderRadius: 0,
 }));
 
 // 3. Table head with a teal background
-export const StyledTableHead = styled(TableHead)(() => ({
+const StyledTableHead = styled(TableHead)(() => ({
   [`& th`]: {
-    backgroundColor: '#156082',
-    color: '#fff',
     fontWeight: 'bold',
     fontSize: '0.95rem',
+    backgroundColor: '#156082',
   },
 }));
 
-// 4. Styled body cells
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    color: theme.palette.common.white,
+  },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: '0.9rem',
-    color: '#333',
-    padding: '12px',
+    fontSize: 14,
   },
 }));
 
-// 5. Styled body rows (alternate shading + hover)
-export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: '#ccd2d8',
+    backgroundColor: '#ccd2d8', // Color for odd rows
   },
-  '&:hover': {
-    backgroundColor: '#f5f5f5',
+  '&:nth-of-type(even)': {
+    backgroundColor: '#e7eaed', // Color for even rows
   },
+  // hide last border
   '&:last-child td, &:last-child th': {
-    border: 0, // Remove bottom border on last row if desired
+    border: 0,
   },
 }));
 
@@ -177,31 +167,26 @@ function findMostCommonCWE(data: AutocompleteDetailDataArray) {
 
 export default function CWETable({ rows }: { rows: any[] }) {
   return (
-    <StyledTableContainer sx={ { height: 400 } }>
-      <StyledTable stickyHeader size="small">
-        <StyledTableHead>
-          <TableRow>
-            { /* Header cells (teal background, white text) */ }
-            <StyledTableCell style={ { width: '80'} }>CWE</StyledTableCell>
+    <TableContainer component={ Paper } sx={ { width: '100%' } }>
+      <StyledTable aria-label="customized table">
+        <StyledTableHead sx={ { backgroundColor: '#156082 !important', color: '#fff', display: 'contents'  } }>
+          <TableRow sx={ { backgroundColor: '#156082 !important' } }>
+            <StyledTableCell sx={ { width: '100%' } }>CWE</StyledTableCell>
             <StyledTableCell align="right">Count</StyledTableCell>
           </TableRow>
         </StyledTableHead>
-
         <TableBody>
           { rows.map((row) => (
             <StyledTableRow key={ row.CWE }>
-              { /* Body cells */ }
-              <StyledTableCell component="th" scope="row">
+              <StyledTableCell component="th" scope="row" sx={ { backgroundColor: 'ccd2d8'} }>
                 { row.CWE }
               </StyledTableCell>
-              <StyledTableCell align="right">
-                { row.count }
-              </StyledTableCell>
+              <StyledTableCell align="right">{ row.count }</StyledTableCell>
             </StyledTableRow>
           )) }
         </TableBody>
       </StyledTable>
-    </StyledTableContainer>
+    </TableContainer>
   );
 }
 export const AutocompleteModal = ({
@@ -272,7 +257,7 @@ export const AutocompleteModal = ({
                     justifyContent: 'center'
                   } }>
                     <CardContent sx={ { textAlign: 'center', p: 2 } }>
-                      <Typography variant="h5" sx={ { fontWeight: 'bold' } }>
+                      <Typography sx={ { fontWeight: 'bold', fontSize: '28px' } } variant='h5'>
                         { totalCWECount }
                       </Typography>
                       <Typography variant="body2" sx={ { mt: 1 } }>
@@ -290,7 +275,7 @@ export const AutocompleteModal = ({
                     justifyContent: 'center'
                   } }>
                     <CardContent sx={ { textAlign: 'center', p: 2 } }>
-                      <Typography variant="h5" sx={ { fontWeight: 'bold' } }>
+                      <Typography sx={ { fontWeight: 'bold', fontSize: '28px' } } variant='h5'>
                         { mostCommonCWE }
                       </Typography>
                       <Typography variant="body2" sx={ { mt: 1 } }>
@@ -308,7 +293,7 @@ export const AutocompleteModal = ({
         <Grid item xs={ 12 } md={ 4 } lg={ 4 }>
           { rows.length > 0 ? (
             <Card sx={ { 
-              p: 2, 
+              p: 1, 
               backgroundColor: '#fff', 
               height: '400px' // Fixed height to match left column total height
             } }>
@@ -341,11 +326,13 @@ export const AutocompleteModal = ({
                     dataKey="value"
                     startAngle={ 120 }
                     endAngle={ -240 }
+                    label={ ({ name, value }) => `${value}` }
                   >
                     { pieData.map((entry, index) => (
                       <Cell key={ `cell-${index}` } fill={ entry.color } />
                     )) }
                   </Pie>
+                  <Tooltip contentStyle={ { textTransform: 'capitalize' } } />
                 </PieChart>
               </ResponsiveContainer>
             </Box>
@@ -388,7 +375,7 @@ export const AutocompleteModal = ({
               textAlign="center"
               pb={ 1 }
             >
-              % of Safe and Insecure Code Generated
+              Programming Language wise Distribution of Safe and Insecure Code Generated
             </Typography>
             <ResponsiveContainer width="100%" height={ 300 }>
               <BarChart
