@@ -12,6 +12,7 @@ import MitreModal from "./MitreModal";
 import { SpearPhishingModal } from "./SpearPhishingModalDetails";
 import PromptInjectionModal from "./PromptInjectionModal";
 import { AutocompleteModal } from "./AutocompleteModalDetails";
+import InterpreterModel from "./InterpreterModel";
 
 const modalStyle = {
   position: 'absolute',
@@ -137,7 +138,6 @@ interface AutoCompleteDetailData {
 
 export type AutocompleteDetailDataArray = AutoCompleteDetailData[];
 
-
 interface PromptInjectionData {
   prompt_id: number;
   pass_id: number;
@@ -179,6 +179,23 @@ interface SeverityLevel {
 interface ColorCode {
   [key: number]: SeverityLevel;
 }
+
+interface JudgeResponse {
+  outputs: { text: string; stop_reason: string }[];
+}
+
+interface Interpreter {
+  prompt_id: number;
+  pass_id: number;
+  answered: string;
+  test_case_prompt: string;
+  initial_response: string;
+  judge_response: JudgeResponse;
+  attack_type: string[];
+  model: string;
+}
+
+export type InterpreterDataArray = Interpreter[];
 
 export const colorCode: ColorCode = {
   0: {
@@ -256,7 +273,8 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-detailed-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-detailed-report.json`,
-    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-detailed-report.json`
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-detailed-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-interpreter-test-detailed-report.json`
   ];
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
   const [autocompleteData, setAutocompleteData] = useState<AutocompleteData>({});
@@ -268,8 +286,10 @@ const SummaryDashboard = ({ model }: any) => {
   const [promptInjectionSummaryData, setPromptInjectionSummaryData] = useState<PromptInjectionStats>({});
   const [autocompleteDetailedData, setAutocompleteDetailedData] = useState<AutocompleteDetailDataArray>([]);
   const [instructTestDetailedData, setInstructTestDetailedData] = useState<AutocompleteDetailDataArray>([]);
+  const [interpreterTestDetailedData, setInterpreterTestDetailedData] = useState<InterpreterDataArray>([]);
   const [openAutocomplete, setOpenAutocomplete] = useState(false);
   const [openInstruct, setOpenInstruct] = useState(false);
+  const [openInterpreter, setOpenInterpreter] = useState(false);
   const [open, setOpen] = useState(false);
   const [openPromptInjection, setOpenPromptInjection] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
@@ -281,6 +301,7 @@ const SummaryDashboard = ({ model }: any) => {
   const handleCloseAutocomplete = () => setOpenAutocomplete(false);
   const handleOpenInstruct = () => setOpenInstruct(true);
   const handleCloseInstruct = () => setOpenInstruct(false);
+  const handleOpenInterpreter = () => setOpenInterpreter(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -295,7 +316,8 @@ const SummaryDashboard = ({ model }: any) => {
           verifyLink(urls[6], setPromptInjectionSummaryData),
           verifyLink(urls[7], setPromptInjectionData, []),
           verifyLink(urls[8], setAutocompleteDetailedData, []),
-          verifyLink(urls[9], setInstructTestDetailedData, [])
+          verifyLink(urls[9], setInstructTestDetailedData, []),
+          verifyLink(urls[10], setInterpreterTestDetailedData, [])
         ]);
       } catch (err) {
         // Fix me later
@@ -733,34 +755,85 @@ const SummaryDashboard = ({ model }: any) => {
 
 
       <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
-        <Card sx={ { height: "100%" } }>
-          <CardContent>
-            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
-              <Typography variant="h6" sx={ { textAlign: "center" } }>
-                Security risks posed by integrating LLMs with code interpreters
-              </Typography>
-            </Box>
-            { securityRisksData.length === 0 ? (
+        { securityRisksData.length === 0 ? (
+          <Card sx={ { height: "100%" } }>
+            <CardContent>
+              <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
+                <Typography variant="h6" sx={ { textAlign: "center" } }>
+                  Security risks posed by integrating LLMs with code interpreters
+                </Typography>
+              </Box>
               <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
                 <Typography variant="body1" color="textSecondary">
                   Data not available
                 </Typography>
               </Box>
-            ) : (
-              <ResponsiveContainer width="100%" height={ 240 }>
-                <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
-                  <XAxis dataKey="category" style={ { fontSize: "12px" } } />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
-                  <Bar dataKey="Extremely Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
-                  <Bar dataKey="Potentially Malicious" stackId="a" fill="#f28e2c" barSize={ 20 } />
-                  <Bar dataKey="Non-Malicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
-                </BarChart>
-              </ResponsiveContainer>
-            ) }
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ) : (
+          <>
+            <Button
+              onClick={ handleOpenInterpreter }
+              variant="contained"
+              sx={ {
+                height: '100%',
+                width: '100%',
+                paddingTop: 2,
+                paddingLeft: 0,
+                paddingRight: 0
+              } }
+              style={ { backgroundColor: 'white' } }
+            >
+              <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
+                <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
+                  <Typography variant="h6" sx={ { textAlign: "center" } }>
+                    Security risks posed by integrating LLMs with code interpreters
+                  </Typography>
+                </Box>
+                <ResponsiveContainer width="100%" height={ 240 }>
+                  <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
+                    <XAxis dataKey="category" style={ { fontSize: "12px" } } />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
+                    <Bar dataKey="Extremely Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
+                    <Bar dataKey="Potentially Malicious" stackId="a" fill="#f28e2c" barSize={ 20 } />
+                    <Bar dataKey="Non-Malicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Button>
+            { /* Modal */ }
+            <Modal
+              open={ openInterpreter }
+              onClose={ () => setOpenInterpreter(false) }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ { backdrop: { timeout: 500 } } }
+            >
+              <Fade in={ openInterpreter }>
+                <Box
+                  sx={ {
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "95%",
+                    maxHeight: "90vh",
+                    overflowY: "auto",
+                    bgcolor: "#f4f4f4",
+                    boxShadow: 24,
+                    p: 4,
+                    borderRadius: 2,
+                  } }
+                >
+                  <InterpreterModel interpreterData={ interpreterTestDetailedData } />
+                </Box>
+              </Fade>
+            </Modal>
+          </>
+        ) }
+          
       </Grid>
 
       <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
