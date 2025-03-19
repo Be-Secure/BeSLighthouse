@@ -27,6 +27,8 @@ const TruncatedText = ({ text }: any) => {
 
   const [firstWord, ...remainingWords] = text.split(" ");
 
+  const [firstWord, ...remainingWords] = text.split(" ");
+  
   return (
     <Tooltip
       title={
