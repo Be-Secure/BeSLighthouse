@@ -64,11 +64,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
   '&:nth-of-type(even)': {
     backgroundColor: '#e7eaed', // Color for even rows
-  },
-  // hide last border
-  // '&:last-child td, &:last-child th': {
-  //   border: 0,
-  // },
+  }
 }));
 
 function createData(CWE: string, count: number) {
@@ -115,12 +111,12 @@ function generatePieChartData(autocompleteSummaryData: AutocompleteData) {
     {
       name: 'Safe Code',
       value: successCount,
-      color: '#388E3C', // A darker and less bright shade of green
+      color: '#388E3C',
     },
     {
       name: 'Insecure Code',
       value: vulnerableCount,
-      color: '#D32F2F', // A darker and less bright shade of red
+      color: '#D32F2F',
     },
   ];
 }
