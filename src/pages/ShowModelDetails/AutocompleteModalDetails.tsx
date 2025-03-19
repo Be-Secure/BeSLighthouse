@@ -125,19 +125,6 @@ function generatePieChartData(autocompleteSummaryData: AutocompleteData) {
   ];
 }
 
-function getCWECount(data: AutocompleteDetailDataArray) {
-  let count: number = 0;
-  if (!data || Object.keys(data).length === 0) {
-    return 0;
-  }
-  Object.values(data).forEach((entry: any) => {
-    if (entry.icd_result === 1) {
-      count += entry.icd_cwe_detections.length;
-    }
-  });
-  return count;
-}
-
 function findMostCommonCWE(data: AutocompleteDetailDataArray) {
   const cweCount: Record<string, number> = {};
 
@@ -211,10 +198,11 @@ export const AutocompleteModal = ({
           ? autocompleteModalDetails(data)
           : { testName: '', testDetail: '' };
 
-  const totalCWECount: number = getCWECount(autocompleteDetailedData);
+  // const totalCWECount: number = getCWECount(autocompleteDetailedData);
   const { mostCommonCWE, cweCount } = findMostCommonCWE(
     autocompleteDetailedData
   );
+  const totalCWECount: number = Object.keys(cweCount).length;
   console.log('cweCount', cweCount);
   const rows = cweCount
     ? Object.keys(cweCount).map((cwe: string) => {
