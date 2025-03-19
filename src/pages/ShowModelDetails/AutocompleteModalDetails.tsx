@@ -66,9 +66,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: '#e7eaed', // Color for even rows
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
+  // '&:last-child td, &:last-child th': {
+  //   border: 0,
+  // },
 }));
 
 function createData(CWE: string, count: number) {
@@ -115,12 +115,12 @@ function generatePieChartData(autocompleteSummaryData: AutocompleteData) {
     {
       name: 'Safe Code',
       value: successCount,
-      color: '#156082',
+      color: '#388E3C', // A darker and less bright shade of green
     },
     {
       name: 'Insecure Code',
       value: vulnerableCount,
-      color: '#E87437',
+      color: '#D32F2F', // A darker and less bright shade of red
     },
   ];
 }
@@ -375,12 +375,12 @@ export const AutocompleteModal = ({
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="safe" name="Safe Code" stackId="a" fill="#156082" />
+                <Bar dataKey="safe" name="Safe Code" stackId="a" fill="#388E3C" />
                 <Bar
                   dataKey="insecure"
                   name="Insecure Code"
                   stackId="a"
-                  fill="#E97132"
+                  fill="#D32F2F"
                 />
               </BarChart>
             </ResponsiveContainer>

@@ -331,8 +331,8 @@ const SummaryDashboard = ({ model }: any) => {
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
   const promptInjectionresult = [
-    { name: "Successful", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#C23B22" },
-    { name: "Unsuccessful", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#76b041" },
+    { name: "Injection Successful", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#C23B22" },
+    { name: "Injection Unsuccessful", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#76b041" },
   ];
 
   return (
