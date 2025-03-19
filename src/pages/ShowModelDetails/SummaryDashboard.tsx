@@ -48,9 +48,9 @@ interface MitreData {
     prompt?: string;
   };
   initial_response?: string;
-  expansion_response?: {
-    outputs?: {
-      text?: string;
+  expansion_response: {
+    outputs: {
+      text: string;
       stop_reason?: string;
     }[];
   };
@@ -225,7 +225,7 @@ export const colorCode: ColorCode = {
   }
 };
 
-const generateData = (mitredata: MitreDataArray) => {
+const generateData = (mitredData: MitreDataArray) => {
   const failedLabels: [RegExp, string][] = [
     [/malicious/i, "Malicious"],
     [/potential/i, "Potential"]
@@ -236,13 +236,14 @@ const generateData = (mitredata: MitreDataArray) => {
     Potential: 0
   };
 
-  mitredata.forEach((entry) => {
+  mitredData.forEach((entry) => {
     entry.judge_response?.outputs?.forEach(({ text }: any) => {
-      const label = text.trim();
+      const label = text.trim(); // Trim text to remove unwanted whitespace
 
       for (const [regex, category] of failedLabels) {
         if (regex.test(label)) {
           failedCounts[category]++;
+          break; // Exit loop early if matched
         }
       }
     });
@@ -253,12 +254,11 @@ const generateData = (mitredata: MitreDataArray) => {
     { name: "Potential", value: failedCounts.Potential, color: "#f28e2c" },
     {
       name: "Other",
-      value: mitredata.length - (failedCounts.Malicious + failedCounts.Potential),
+      value: mitredData.length - (failedCounts.Malicious + failedCounts.Potential),
       color: "#A0A0A0"
     }
   ];
 };
-
 
 const SummaryDashboard = ({ model }: any) => {
 
@@ -360,7 +360,7 @@ const SummaryDashboard = ({ model }: any) => {
   return (
     <Grid container spacing={ 1 } pt={ 1 } pb={ 2 }>
       { /* First Row */ }
-      <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         { mitreData.length > 0 ? (
           <>
             <Button
@@ -382,7 +382,7 @@ const SummaryDashboard = ({ model }: any) => {
                 </Typography>
 
                 { /* Pie Chart Container */ }
-                <ResponsiveContainer width="100%" height={ 180 }>
+                <ResponsiveContainer width="100%" height={ 240 }>
                   <PieChart width={ 120 } height={ 100 }>
                     <Pie
                       data={ data }
@@ -483,7 +483,7 @@ const SummaryDashboard = ({ model }: any) => {
         ) }
       </Grid>
 
-      <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
             <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
@@ -551,8 +551,6 @@ const SummaryDashboard = ({ model }: any) => {
                 <Box sx={ modalStyle }>
                   <AutocompleteModal autocompleteSummaryData = { autocompleteData } autocompleteDetailedData = { autocompleteDetailedData } data = "Autocomplete"
                   />
- 
-  
                 </Box>
               </Fade>
             </Modal>
@@ -560,7 +558,6 @@ const SummaryDashboard = ({ model }: any) => {
               variant="text"
               onClick={ handleOpenInstruct }
               disabled={ (Object.keys(instructData).length === 0) && Object.keys(instructTestDetailedData).length === 0 }
-
               sx={ {
                 textTransform: 'none',
                 '&:hover': {
@@ -590,7 +587,6 @@ const SummaryDashboard = ({ model }: any) => {
                 <Box sx={ modalStyle }>
                   <AutocompleteModal autocompleteSummaryData = { instructData } autocompleteDetailedData = { instructTestDetailedData } data = "Instruct"
                   />
-  
                 </Box>
               </Fade>
             </Modal>
@@ -598,7 +594,7 @@ const SummaryDashboard = ({ model }: any) => {
         </Card>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         { Object.keys(spearPhishingData).length > 0 ? (
           <>
             <Button
@@ -710,7 +706,7 @@ const SummaryDashboard = ({ model }: any) => {
       </Grid>
 
       { /* Second Row */ }
-      <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         <Card
           sx={ {
             height: "100%",
@@ -753,8 +749,7 @@ const SummaryDashboard = ({ model }: any) => {
         </Card>
       </Grid>
 
-
-      <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 7 }>
         { securityRisksData.length === 0 ? (
           <Card sx={ { height: "100%" } }>
             <CardContent>
@@ -833,10 +828,9 @@ const SummaryDashboard = ({ model }: any) => {
             </Modal>
           </>
         ) }
-          
       </Grid>
 
-      <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         <>
           <Button
             onClick={ handleOpenPromptInjection }

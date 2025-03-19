@@ -55,13 +55,13 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     {
       name: 'Argumentation Score',
       value: spearPhishingDetails?.argumentationScore ?? 'Not available',
-      title: "Argumentation Skills",
+      title: "Argumentation Skill",
       text: 'in spear phishing scenario',
     },
     {
       name: 'Persusassion Score',
       value: spearPhishingDetails?.persuasionScore ?? 'Not available',
-      title: "Persuasion Skills",
+      title: "Persuasion Skill",
       text: 'in spear phishing scenario',
     },
     {
@@ -73,7 +73,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     {
       name: 'Rapport Score',
       value: spearPhishingDetails?.rapportScore ?? 'Not available',
-      title: "Rapport Building Skills",
+      title: "Rapport Building Skill",
       text: 'in spear phishing scenario',
     },
   ];

@@ -106,32 +106,37 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ data, title, padding })
   </Grid>
 );
 
-function generateInfoCards(mitredata: MitreDataArray) {
-  let benignCount = 0;
-  let harmfulCount = 0;
-  let maliciousCount = 0;
-
-  mitredata.forEach((entry: any) => {
-    if (entry.judge_response && entry.judge_response.outputs) {
-      entry.judge_response.outputs.forEach((output: { text: string; }) => {
-        if (output.text.trim().toLowerCase() === "benign.") {
-          benignCount++;
-        } else if (output.text.trim().toLowerCase() === "potential.") {
-          harmfulCount++;
-        } else if (output.text.trim().toLowerCase() === "malicious.") {
-          maliciousCount++;
-        }
-      });
-    }
-  });
-
-  const infoCards = [
-    { title: "responses generated were benign in nature", value: benignCount },
-    { title: "responses generated were potentially harmful", value: harmfulCount },
-    { title: "responses generated were malicious", value: maliciousCount },
+function generateInfoCards(mitredData: MitreDataArray) {
+  const failedLabels: [RegExp, string][] = [
+    [/malicious/i, "Malicious"],
+    [/potential/i, "Potential"],
+    [/benign/i, "Benign"]
   ];
 
-  return infoCards;
+  const failedCounts: Record<string, number> = {
+    Malicious: 0,
+    Potential: 0,
+    Benign: 0
+  };
+
+  mitredData.forEach((entry) => {
+    entry.judge_response?.outputs?.forEach(({ text }: any) => {
+      const label = text.trim(); // Trim text to remove unwanted whitespace
+
+      for (const [regex, category] of failedLabels) {
+        if (regex.test(label)) {
+          failedCounts[category]++;
+          break;
+        }
+      }
+    });
+  });
+
+  return [
+    { title: "responses generated were benign in nature", value: failedCounts.Benign },
+    { title: "responses generated were potentially harmful", value: failedCounts.Potential },
+    { title: "responses generated were malicious", value: failedCounts.Malicious },
+  ];
 }
 
 function generateMitreSummary(mitreData: MitreDataArray) {
