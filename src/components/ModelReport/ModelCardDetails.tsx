@@ -26,7 +26,7 @@ const TruncatedText = ({ text }: any) => {
   }, [text]);
 
   const [firstWord, ...remainingWords] = text.split(" ");
-  
+
   return (
     <Tooltip
       title={
@@ -66,8 +66,8 @@ const TruncatedText = ({ text }: any) => {
         },
       } }
     >
-      <Box ref={ textRef } sx={ { display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 5, overflow: "hidden", whiteSpace: "normal", lineHeight: "1.2em", position: "relative", top: "-8px", marginRight: "5px"} }>
-        <Typography variant="body1" sx={ { fontSize: 14, display: "inline"} }>
+      <Box ref={ textRef } sx={ { display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 5, overflow: "hidden", whiteSpace: "normal", lineHeight: "1.2em", position: "relative", top: "-8px", marginRight: "30px", textAlign: "justify" } } >
+        <Typography variant="body1" sx={ { fontSize: 14, display: "inline" } } >
           <strong>{ firstWord }</strong> { remainingWords.join(" ") }
         </Typography>
       </Box>
@@ -75,52 +75,71 @@ const TruncatedText = ({ text }: any) => {
   );
 };
 
-const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: string; Icon: string }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: string | string[]; Icon: string }) => {
+  // Remove unused state since it's not being used
   useEffect(() => {
     const handleResize = debounce(() => {
-      setWindowWidth(window.innerWidth);
+      window.innerWidth; // Keep resize listener for potential future use
     }, 200); // Debounce for performance
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Truncation logic
-  let displayValue = value?.trim() || "N/A";
-  if ((windowWidth <= 1428 && value.length > 17) || value.length > 28) {
-    displayValue = `${value.substring(0, 19)}...`;
-  }
+  const displayValue = Array.isArray(value) ? value : value?.trim() || "N/A";
   return (
     <Box display="flex" alignItems="center" gap={ 1 }>
       <img src={ Icon } alt="icon" style={ { width: "27px" } } />
-      <Tooltip title={ `${title}: ${value}` } arrow>
-        <Typography
-          sx={ {
-            fontSize: 14,
-            color: "black",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            maxWidth: "150px",
-          } }
-        >
-          { displayValue }
-        </Typography>
+      <Tooltip title={ Array.isArray(value) ? value.join(" | ") : `${title} : ${value}` } arrow>
+        <Box>
+          { Array.isArray(displayValue) ? (
+            displayValue.map((line, index) => (
+              <Typography
+                key={ index }
+                sx={ {
+                  fontSize: 14,
+                  color: "black",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: "150px",
+                  lineHeight: "1.2",
+                } }
+              >
+                { line }
+              </Typography>
+            ))
+          ) : (
+            <Typography
+              sx={ {
+                fontSize: 14,
+                color: "black",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "150px",
+              } }
+            >
+              { displayValue.length > 8 ? `${displayValue.substring(0, 8)}...` : value }
+            </Typography>
+          ) }
+        </Box>
       </Tooltip>
     </Box>
   );
 };
 
-function processText(input: string): string{
+function processText(input: string): string[] {
   if (!input) {
-    return "input: N/A | output: N/A";
+    return ["input: N/A", "output: N/A"];
   }
-
   const parts = input.split(";");
-  return `input: ${parts[0]?.trim() || "N/A" } | output: ${parts[1]?.trim() || "N/A"}`;
+  return [
+    `input: ${parts[0]?.trim() || "N/A"}​​​​​​`,
+    `output: ${parts[1]?.trim() || "N/A"}​​​​​​`
+  ];
 }
+
 
 const IconLink = ({ url, icon, name }: any) => (
   <Tooltip title={ name }>
@@ -144,38 +163,73 @@ const IconLink = ({ url, icon, name }: any) => (
 export default function ModelCardDetails({ model }: any) {
   const selectedModel = model[0] || {};
 
-  const modalityInputOutput = processText(selectedModel.modality );
+  const modalityInputOutput = processText(selectedModel.modality);
 
   return (
     <Grid container spacing={ 1 } sx={ { height: "100%", alignItems: "stretch" } }>
       <Grid item xs={ 12 } xl={ 9.5 } sx={ { display: "flex", flexDirection: "column" } }>
         <Card sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 1.5 } }>
-          <Grid container spacing={ 2 } pl={ 2 }>
-            <Grid item xs={ 12 } xl={ 8 } container>
+          <Grid container spacing={ 2 } pl={ 2 } pr={ 2 }>
+            { /* Description - 80% width */ }
+            <Grid item xs={ 12 } xl={ 9 } pl={ 2 } pr={ 2 } container>
               <TruncatedText text={ selectedModel.description || "No description available" } />
             </Grid>
-
-            <Grid item xs={ 12 } xl={ 2 }>
-              <Grid container spacing={ 1 } gap={ 2 } pt={ 1 } flexDirection={ { xs: "row", lg: "column" } } alignItems={ { xs: "center", lg: "flex-start" } }>
+            { /* Info Badges - 10% width */ }
+            <Grid item xs={ 12 } xl={ 1.5 }>
+              <Grid
+                container
+                spacing={ 1 }
+                gap={ 2 }
+                pt={ 1 }
+                flexDirection={ { xs: "row", lg: "column" } }
+                alignItems={ { xs: "center", lg: "flex-start" } }
+              >
                 <InfoBadge title="Size" value={ selectedModel.size } Icon={ MaximizeIcon } />
                 <InfoBadge title="Modality(Input type; Output type)" value={ modalityInputOutput } Icon={ UpAndDownIcon } />
                 <InfoBadge title="License" value={ selectedModel.license } Icon={ GavelIcon } />
               </Grid>
             </Grid>
-
-            <Grid item xs={ 12 } xl={ 2 }>
-              <Grid container spacing={ 1 } gap={ 2 } pt={ 1 } flexDirection={ { xs: "row", lg: "column" } } alignItems={ { xs: "center", lg: "flex-start" } }>
-                <InfoBadge title="Date" value={ selectedModel.created_date ? new Date(selectedModel.created_date).toLocaleDateString() : "N/A" } Icon={ CalendarMonthIcon } />
+            { /* Date, Organization, and Links - 10% width */ }
+            <Grid item xs={ 12 } xl={ 1.5 }>
+              <Grid
+                container
+                spacing={ 1 }
+                gap={ 2 }
+                pt={ 1 }
+                flexDirection={ { xs: "row", lg: "column" } }
+                alignItems={ { xs: "center", lg: "flex-start" } }
+              >
+                <InfoBadge
+                  title="Date"
+                  value={ selectedModel.created_date ? new Date(selectedModel.created_date).toLocaleDateString() : "N/A" }
+                  Icon={ CalendarMonthIcon }
+                />
                 <InfoBadge title="Organization" value={ selectedModel.organization } Icon={ BusinessIcon } />
-                <Box display="flex" justifyContent="center" alignItems="center" gap={ 2 } sx={ {height: "40px", left: '-6px', position: 'relative'} }>
-                  <IconLink url={ selectedModel.model_url } icon={ <img src={ HuggingFaceIcon } alt="Hugging Face" width={ 40 } height={ 40 } /> } name={ "Hugging Face" } />
-                  <IconLink url={ selectedModel.url } icon={ <img src={ GitHubIcon } alt="GitHub" width={ 30 } height={ 30 } /> } name={ "GitHub" } />
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={ 2 }
+                  sx={ { height: "40px", position: "relative" } }
+                >
+                  <IconLink
+                    url={ selectedModel.model_url }
+                    icon={ <img src={ HuggingFaceIcon } alt="Hugging Face" width={ 40 } height={ 40 } /> }
+                    name="Hugging Face"
+                  />
+                  <IconLink
+                    url={ selectedModel.url }
+                    icon={ <img src={ GitHubIcon } alt="GitHub" width={ 30 } height={ 30 } /> }
+                    name="GitHub"
+                  />
                 </Box>
               </Grid>
             </Grid>
+
           </Grid>
         </Card>
       </Grid>
+
       <Grid item xs={ 12 } xl={ 2.5 } sx={ { display: "flex", flexDirection: "column" } }>
         <OSAR name={ selectedModel.name } />
       </Grid>
