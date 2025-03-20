@@ -120,7 +120,7 @@ const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: stri
                 maxWidth: "150px",
               } }
             >
-              { displayValue.length > 8 ? `${displayValue.substring(0, 8)}...` : value }
+              { displayValue.length > 9 ? `${displayValue.substring(0, 8)}...` : value }
             </Typography>
           ) }
         </Box>
