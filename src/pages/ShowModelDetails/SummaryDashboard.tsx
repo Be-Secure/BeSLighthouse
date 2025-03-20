@@ -514,7 +514,7 @@ const SummaryDashboard = ({ model }: any) => {
       <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
-            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
+            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "7px", paddingBottom: "12px" } }>
               <Typography variant="h5" sx={ { textAlign: "center" } }>
                 Security risks in generated code using this LLM
               </Typography>
@@ -803,7 +803,7 @@ const SummaryDashboard = ({ model }: any) => {
               style={ { backgroundColor: 'white', textTransform: "none" } }
             >
               <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
-                <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
+                <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "0px", paddingBottom: "12px" } }>
                   <Typography variant="h5" sx={ { textAlign: "center", textTransform: "none"  } }>
                     Security risks posed by integrating LLMs with code interpreters
                   </Typography>
