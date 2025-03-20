@@ -89,7 +89,7 @@ const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: stri
 
   // Truncation logic
   let displayValue = value?.trim() || "N/A";
-  if ((windowWidth <= 1349 && value.length > 12) || value.length > 14) {
+  if ((windowWidth <= 1360 && value.length > 12) || value.length > 14) {
     displayValue = `${value.substring(0, 9)}...`;
   }
   return (
