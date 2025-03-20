@@ -84,8 +84,8 @@ const CustomStackedBarChart = ({ data, title, padding }: any) => {
               <Tooltip />
               <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } }/>
               <Bar dataKey="Total Count" stackId="a" fill="#1F77B4" name="Total" barSize={ 20 }  />
-              <Bar dataKey="Injection Unsuccessful" stackId="a" fill="#C23B22" name="Injection Unsuccessful" barSize={ 20 }  />
-              <Bar dataKey="Injection Successful" stackId="a" fill="#2E7D32" name="Injection Successful" barSize={ 20 }  />
+              <Bar dataKey="Injection Unsuccessful" stackId="a" fill="#388E3C" name="Injection Unsuccessful" barSize={ 20 }  />
+              <Bar dataKey="Injection Successful" stackId="a" fill="#D32F2F" name="Injection Successful" barSize={ 20 }  />
             </BarChart>
           </ResponsiveContainer>
 
@@ -206,8 +206,8 @@ const PromptInjectionModal = ({ promptInjectionData, promptInjectionSummaryData 
             <YAxis stroke="#555" />
             <Tooltip />
             <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "15px", marginTop: "40px", bottom: "-33px" } } />
-            <Bar dataKey="Injection Successful" stackId="a" fill="#2E7D32" barSize={ 20 }/>
-            <Bar dataKey="Injection Unsuccessful" stackId="a" fill="#C23B22" barSize={ 20 } />
+            <Bar dataKey="Injection Successful" stackId="a" fill="#D32F2F" barSize={ 20 }/>
+            <Bar dataKey="Injection Unsuccessful" stackId="a" fill="#388E3C" barSize={ 20 } />
             <Bar dataKey="Total Count" stackId="a" fill="#1F77B4" barSize={ 20 } />
           </BarChart>
         </ResponsiveContainer>

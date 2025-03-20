@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Grid, Tooltip, Card, Typography, Box } from "@mui/material";
+import { Grid, Tooltip, Card, Typography, Box, debounce } from "@mui/material";
 import OSAR from "./OSAR";
-import BusinessIcon from "@mui/icons-material/Business";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import GavelIcon from "@mui/icons-material/Gavel";
-import { ReactComponent as HuggingFaceIcon } from "../../assets/images/svgexport-1.svg";
+import BusinessIcon from "../../assets/images/organization.png";
+import CalendarMonthIcon from "../../assets/images/calendar.png";
+import GavelIcon from "../../assets/images/gavel.png";
+import HuggingFaceIcon from "../../assets/images/hf-logo.png";
+import MaximizeIcon from "../../assets/images/maximize.png";
+import UpAndDownIcon from "../../assets/images/up-and-down.png";
 import GitHubIcon from "../../assets/images/github-mark.png";
 
-const ModelDescription = ({ description }: any) => {
+const TruncatedText = ({ text }: any) => {
   const textRef: any = useRef(null);
   // eslint-disable-next-line no-unused-vars
   const [isTruncated, setIsTruncated] = useState(false);
@@ -21,10 +23,9 @@ const ModelDescription = ({ description }: any) => {
     checkTruncation();
     window.addEventListener("resize", checkTruncation);
     return () => window.removeEventListener("resize", checkTruncation);
-  }, [description]);
+  }, [text]);
 
-  const words = description.split(" ");
-  const firstWord = words.shift();
+  const [firstWord, ...remainingWords] = text.split(" ");
 
   return (
     <Tooltip
@@ -37,7 +38,7 @@ const ModelDescription = ({ description }: any) => {
             fontSize: 14
           } }
         >
-          { description }
+          { text }
         </Box>
       }
       arrow
@@ -65,210 +66,171 @@ const ModelDescription = ({ description }: any) => {
         },
       } }
     >
-      <Box
-        ref={ textRef }
-        sx={ {
-          display: "-webkit-box",
-          WebkitBoxOrient: "vertical",
-          WebkitLineClamp: 4, // Restrict to 4 lines
-          overflow: "hidden",
-          whiteSpace: "normal",
-          lineHeight: "1.4em", // Adjust for clean line cutoff
-          position: "relative",
-          top: '-8px'
-        } }
-      >
-        <Typography
-          variant="body1"
-          sx={ {
-            fontSize: 14,
-            position: "relative",
-            display: "inline",
-            "&::after": {
-              content: '"..."', // Add ellipsis
-              position: "absolute",
-              right: 0,
-              bottom: 0,
-              background: "white", // Match background color to avoid artifacts
-              paddingLeft: "5px",
-            },
-          } }
-        >
-          <strong>{ firstWord }</strong> { words.join(" ") }
+      <Box ref={ textRef } sx={ { display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 5, overflow: "hidden", whiteSpace: "normal", lineHeight: "1.2em", position: "relative", top: "-8px", marginRight: "30px", textAlign: "justify" } } >
+        <Typography variant="body1" sx={ { fontSize: 14, display: "inline" } } >
+          <strong>{ firstWord }</strong> { remainingWords.join(" ") }
         </Typography>
       </Box>
     </Tooltip>
   );
 };
 
+const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: string | string[]; Icon: string }) => {
+  // Remove unused state since it's not being used
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      window.innerWidth; // Keep resize listener for potential future use
+    }, 200); // Debounce for performance
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const displayValue = Array.isArray(value) ? value : value?.trim() || "N/A";
+  return (
+    <Box display="flex" alignItems="center" gap={ 1 }>
+      <img src={ Icon } alt="icon" style={ { width: "27px" } } />
+      <Tooltip title={ Array.isArray(value) ? value.join(" | ") : `${title} : ${value}` } arrow>
+        <Box>
+          { Array.isArray(displayValue) ? (
+            displayValue.map((line, index) => (
+              <Typography
+                key={ index }
+                sx={ {
+                  fontSize: 14,
+                  color: "black",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: "150px",
+                  lineHeight: "1.2",
+                } }
+              >
+                { line }
+              </Typography>
+            ))
+          ) : (
+            <Typography
+              sx={ {
+                fontSize: 14,
+                color: "black",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "150px",
+              } }
+            >
+              { displayValue.length > 9 ? `${displayValue.substring(0, 8)}...` : value }
+            </Typography>
+          ) }
+        </Box>
+      </Tooltip>
+    </Box>
+  );
+};
+
+function processText(input: string): string[] {
+  if (!input) {
+    return ["input: N/A", "output: N/A"];
+  }
+  const parts = input.split(";");
+  return [
+    `input: ${parts[0]?.trim() || "N/A"}​​​​​​`,
+    `output: ${parts[1]?.trim() || "N/A"}​​​​​​`
+  ];
+}
+
+
+const IconLink = ({ url, icon, name }: any) => (
+  <Tooltip title={ name }>
+    <span> { /* Wrapping in <span> to prevent invalid DOM nesting issues */ }
+      <a
+        href={ url || undefined }
+        target={ url ? "_blank" : undefined }
+        rel={ url ? "noopener noreferrer" : undefined }
+        style={ {
+          pointerEvents: url ? "auto" : "none",
+          opacity: url ? 1 : 0.5,
+          textDecoration: url ? "none" : "line-through",
+        } }
+      >
+        { icon }
+      </a>
+    </span>
+  </Tooltip>
+);
+
 export default function ModelCardDetails({ model }: any) {
-  const selectedModel = model.length > 0 ? model[0] : {};
+  const selectedModel = model[0] || {};
+
+  const modalityInputOutput = processText(selectedModel.modality);
+
   return (
     <Grid container spacing={ 1 } sx={ { height: "100%", alignItems: "stretch" } }>
-      { /* Model Details Section */ }
-      <Grid item xs={ 12 } md={ 12 } lg={ 9 } sx={ { display: "flex", flexDirection: "column" } }>
-        <Card key={ `TOPCARD9~9` } sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 3.5 } }>
-          <Grid container spacing={ 2 } pl={ 2 } sx={ { "& > .MuiGrid-item": { paddingTop: "0px" } } }>
-            { /* Model Description - Takes 1/3 width */ }
-            <Grid
-              item
-              xs={ 12 }
-              md={ 12 }
-              lg={ 7 }
-              container
-              justifyContent="center"
-              alignItems="center"
-            >
-              <ModelDescription description={ selectedModel?.description || "No description available" } />
+      <Grid item xs={ 12 } xl={ 9.5 } sx={ { display: "flex", flexDirection: "column" } }>
+        <Card sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 1.5 } }>
+          <Grid container spacing={ 2 } pl={ 2 } pr={ 2 }>
+            { /* Description - 80% width */ }
+            <Grid item xs={ 12 } xl={ 9 } pl={ 2 } pr={ 2 } container>
+              <TruncatedText text={ selectedModel.description || "No description available" } />
             </Grid>
-
-            <Grid
-              item xs={ 12 } md={ 12 } lg={ 2.5 }
-            >
+            { /* Info Badges - 10% width */ }
+            <Grid item xs={ 12 } xl={ 1.5 }>
               <Grid
                 container
                 spacing={ 1 }
-                pl={ 4 }
-                pt={ 0 }
-                sx={ {
-                  flexDirection: { xs: "row", md: "row", lg: "column" },  // Row for small & medium, column for large
-                  alignItems: { xs: "center", md: "center", lg: "flex-start" },
-                  gap: 1
-                } }
+                gap={ 2 }
+                pt={ 1 }
+                flexDirection={ { xs: "row", lg: "column" } }
+                alignItems={ { xs: "center", lg: "flex-start" } }
               >
-                { /* Size */ }
-                <Grid item style={ {
-                  paddingTop: "6px"
-                } }>
-                  <Tooltip title={ 'Size' } arrow>
-                    <Typography
-                      sx={ {
-                        fontWeight: "bold",
-                        color: "white",
-                        backgroundColor: "#3A81A8",
-                        padding: "4px 8px",
-                        borderRadius: "5px",
-                        fontSize: "14px",
-                        display: "inline-block",
-                        width: "120px",
-                        textAlign: "center"
-                      } }
-                    >
-                      { selectedModel.size === '' || selectedModel.size === undefined ? 'N/A' : selectedModel.size }
-                    </Typography>
-                  </Tooltip>
-                </Grid>
-                { /* modality */ }
-                <Grid item style={ {
-                  paddingTop: "0px"
-                } }>
-                  <Tooltip title={ 'modality' } arrow>
-                    <Typography
-                      sx={ {
-                        fontWeight: "bold",
-                        color: "white",
-                        backgroundColor: "#3A81A8",
-                        padding: "4px 8px",
-                        borderRadius: "5px",
-                        fontSize: "14px",
-                        display: "inline-block",
-                        width: "120px",
-                        textAlign: "center"
-                      } }
-                    >
-                      { selectedModel.modality === '' || selectedModel.modality === undefined ? 'N/A' : selectedModel.modality }
-                    </Typography>
-                  </Tooltip>
-                </Grid>
-                { /* Icons */ }
-                <Grid
-                  item
-                  style={ {
-                    paddingTop: "0px"
-                  } }
+                <InfoBadge title="Size" value={ selectedModel.size } Icon={ MaximizeIcon } />
+                <InfoBadge title="Modality(Input type; Output type)" value={ modalityInputOutput } Icon={ UpAndDownIcon } />
+                <InfoBadge title="License" value={ selectedModel.license } Icon={ GavelIcon } />
+              </Grid>
+            </Grid>
+            { /* Date, Organization, and Links - 10% width */ }
+            <Grid item xs={ 12 } xl={ 1.5 }>
+              <Grid
+                container
+                spacing={ 1 }
+                gap={ 2 }
+                pt={ 1 }
+                flexDirection={ { xs: "row", lg: "column" } }
+                alignItems={ { xs: "center", lg: "flex-start" } }
+              >
+                <InfoBadge
+                  title="Date"
+                  value={ selectedModel.created_date ? new Date(selectedModel.created_date).toLocaleDateString() : "N/A" }
+                  Icon={ CalendarMonthIcon }
+                />
+                <InfoBadge title="Organization" value={ selectedModel.organization } Icon={ BusinessIcon } />
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={ 2 }
+                  sx={ { height: "40px", position: "relative" } }
                 >
-                  { selectedModel.model_url ? (
-                    <a href={ selectedModel.model_url } target="_blank" rel="noopener noreferrer">
-                      <HuggingFaceIcon width={ 30 } height={ 30 } style={ { marginRight: "18px", marginLeft: "18px" } } />
-                    </a>
-                  ) : (
-                    <HuggingFaceIcon width={ 30 } height={ 30 } style={ { opacity: 0.5, pointerEvents: "none", marginRight: "18px", marginLeft: "18px" } } />
-                  ) }
-                  { selectedModel.url ? (
-                    <a href={ selectedModel.url } target="_blank" rel="noopener noreferrer">
-                      <img src={ GitHubIcon } alt="GitHub Icon" width={ 30 } height={ 30 } />
-                    </a>
-                  ) : (
-                    <img src={ GitHubIcon } alt="GitHub Icon" width={ 30 } height={ 30 } style={ { opacity: 0.5, pointerEvents: "none" } } />
-                  ) }
-                </Grid>
+                  <IconLink
+                    url={ selectedModel.model_url }
+                    icon={ <img src={ HuggingFaceIcon } alt="Hugging Face" width={ 40 } height={ 40 } /> }
+                    name="Hugging Face"
+                  />
+                  <IconLink
+                    url={ selectedModel.url }
+                    icon={ <img src={ GitHubIcon } alt="GitHub" width={ 30 } height={ 30 } /> }
+                    name="GitHub"
+                  />
+                </Box>
               </Grid>
             </Grid>
-            { /* Second Column */ }
-            <Grid
-              item xs={ 12 } md={ 12 } lg={ 2.5 }
-            >
-              <Grid
-                container
-                spacing={ 1 }
-                pl={ 4 }
-                sx={ {
-                  flexDirection: { xs: "row", md: "row", lg: "column" },  // Row for small & medium, column for large
-                  alignItems: { xs: "center", md: "center", lg: "flex-start" },
-                  gap: 1
-                } }
-              >
-                <Grid item style={ {
-                  paddingTop: "8px"
-                } }>
-                  <Grid container direction="row" alignItems="center" spacing={ 1 }>
-                    <Grid item>
-                      <CalendarMonthIcon sx={ { fontSize: 30, color: "black" } } />
-                    </Grid>
-                    <Grid item>
-                      <Typography sx={ { fontSize: "14px", color: "black", top: '-3px', position: 'relative' } }>{ selectedModel.created_date === '' || selectedModel.created_date === undefined ? 'N/A' : new Date(selectedModel.created_date).toLocaleDateString() }</Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
 
-                <Grid item style={ {
-                  paddingTop: "0px"
-                } }>
-                  <Grid container direction="row" alignItems="center" spacing={ 1 }>
-                    <Grid item>
-                      <GavelIcon sx={ { fontSize: 20, color: "black" } } />
-                    </Grid>
-                    <Grid item>
-                      <Tooltip title={ 'license' } arrow>
-                        <Typography sx={ { fontSize: "14px", color: "black", top: '-3px', position: 'relative' } }>
-                          { selectedModel.license === '' || selectedModel.license === undefined ? 'N/A' : selectedModel.license }</Typography>
-                      </Tooltip>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid item style={ {
-                  paddingTop: "0px"
-                } }>
-                  <Grid container direction="row" alignItems="center" spacing={ 1 }>
-                    <Grid item>
-                      <BusinessIcon sx={ { fontSize: 20, color: "black" } } />
-                    </Grid>
-                    <Grid item>
-                      <Tooltip title={ 'organization' } arrow>
-                        <Typography sx={ { fontSize: "14px", color: "black", top: '-3px', position: 'relative' } }>{ selectedModel.organization === '' || selectedModel.organization === undefined ? 'N/A' : selectedModel.organization }</Typography>
-                      </Tooltip>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
           </Grid>
         </Card>
       </Grid>
 
-      { /* OSAR Section */ }
-      <Grid item xs={ 12 } md={ 12 } lg={ 3 } sx={ { display: "flex", flexDirection: "column" } }>
+      <Grid item xs={ 12 } xl={ 2.5 } sx={ { display: "flex", flexDirection: "column" } }>
         <OSAR name={ selectedModel.name } />
       </Grid>
     </Grid>

@@ -12,6 +12,7 @@ import MitreModal from "./MitreModal";
 import { SpearPhishingModal } from "./SpearPhishingModalDetails";
 import PromptInjectionModal from "./PromptInjectionModal";
 import { AutocompleteModal } from "./AutocompleteModalDetails";
+import InterpreterModel from "./InterpreterModel";
 
 const modalStyle = {
   position: 'absolute',
@@ -47,9 +48,9 @@ interface MitreData {
     prompt?: string;
   };
   initial_response?: string;
-  expansion_response?: {
-    outputs?: {
-      text?: string;
+  expansion_response: {
+    outputs: {
+      text: string;
       stop_reason?: string;
     }[];
   };
@@ -130,13 +131,12 @@ interface AutoCompleteDetailData {
   repo?: string;
   model?: string;
   icd_result?: string;
-  icd_cwe_detections?: [ string ];
+  icd_cwe_detections?: [string];
   bleu_score?: number;
   original_code?: string;
 }
 
 export type AutocompleteDetailDataArray = AutoCompleteDetailData[];
-
 
 interface PromptInjectionData {
   prompt_id: number;
@@ -180,6 +180,23 @@ interface ColorCode {
   [key: number]: SeverityLevel;
 }
 
+interface JudgeResponse {
+  outputs: { text: string; stop_reason: string }[];
+}
+
+interface Interpreter {
+  prompt_id: number;
+  pass_id: number;
+  answered: string;
+  test_case_prompt: string;
+  initial_response: string;
+  judge_response: JudgeResponse;
+  attack_type: string[];
+  model: string;
+}
+
+export type InterpreterDataArray = Interpreter[];
+
 export const colorCode: ColorCode = {
   0: {
     "level": "Very Poor",
@@ -208,7 +225,39 @@ export const colorCode: ColorCode = {
   }
 };
 
-const generateData = (mitredata: MitreDataArray) => {
+export const processData = (interpreterData: InterpreterDataArray) => {
+  const categories: any = {};
+
+  interpreterData.forEach((entry) => {
+    const attackType = entry.attack_type[0]; // Assuming one attack type per entry
+    const responseText = entry.judge_response.outputs[0].text;
+
+    let category = "Non-malicious";
+    if (/Potentially Malicious/i.test(responseText)) {
+      category = "Potentially Malicious";
+    } else if (/Extremely Malicious/i.test(responseText)) {
+      category = "Extremely Malicious";
+    } else if (/Non-Malicious/i.test(responseText)) {
+      category = "Non Malicious";
+    }
+
+    if (!categories[attackType]) {
+      categories[attackType] = {
+        "Extremely Malicious": 0,
+        "Potentially Malicious": 0,
+        "Non Malicious": 0
+      };
+    }
+
+    categories[attackType][category] += 1;
+  });
+  return Object.keys(categories).map((attack) => ({
+    category: attack,
+    ...categories[attack],
+  }));
+};
+
+const generateData = (mitredData: MitreDataArray) => {
   const failedLabels: [RegExp, string][] = [
     [/malicious/i, "Malicious"],
     [/potential/i, "Potential"]
@@ -219,13 +268,14 @@ const generateData = (mitredata: MitreDataArray) => {
     Potential: 0
   };
 
-  mitredata.forEach((entry) => {
+  mitredData.forEach((entry) => {
     entry.judge_response?.outputs?.forEach(({ text }: any) => {
-      const label = text.trim();
+      const label = text.trim(); // Trim text to remove unwanted whitespace
 
       for (const [regex, category] of failedLabels) {
         if (regex.test(label)) {
           failedCounts[category]++;
+          break; // Exit loop early if matched
         }
       }
     });
@@ -236,12 +286,11 @@ const generateData = (mitredata: MitreDataArray) => {
     { name: "Potential", value: failedCounts.Potential, color: "#f28e2c" },
     {
       name: "Other",
-      value: mitredata.length - (failedCounts.Malicious + failedCounts.Potential),
+      value: mitredData.length - (failedCounts.Malicious + failedCounts.Potential),
       color: "#A0A0A0"
     }
   ];
 };
-
 
 const SummaryDashboard = ({ model }: any) => {
 
@@ -256,8 +305,10 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-prompt-injection-test-detailed-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-autocomplete-test-detailed-report.json`,
-    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-detailed-report.json`
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-detailed-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-interpreter-test-detailed-report.json`
   ];
+  // eslint-disable-next-line no-unused-vars
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
   const [autocompleteData, setAutocompleteData] = useState<AutocompleteData>({});
   const [instructData, setInstructData] = useState<InstructData>({});
@@ -268,8 +319,10 @@ const SummaryDashboard = ({ model }: any) => {
   const [promptInjectionSummaryData, setPromptInjectionSummaryData] = useState<PromptInjectionStats>({});
   const [autocompleteDetailedData, setAutocompleteDetailedData] = useState<AutocompleteDetailDataArray>([]);
   const [instructTestDetailedData, setInstructTestDetailedData] = useState<AutocompleteDetailDataArray>([]);
+  const [interpreterTestDetailedData, setInterpreterTestDetailedData] = useState<InterpreterDataArray>([]);
   const [openAutocomplete, setOpenAutocomplete] = useState(false);
   const [openInstruct, setOpenInstruct] = useState(false);
+  const [openInterpreter, setOpenInterpreter] = useState(false);
   const [open, setOpen] = useState(false);
   const [openPromptInjection, setOpenPromptInjection] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
@@ -281,6 +334,7 @@ const SummaryDashboard = ({ model }: any) => {
   const handleCloseAutocomplete = () => setOpenAutocomplete(false);
   const handleOpenInstruct = () => setOpenInstruct(true);
   const handleCloseInstruct = () => setOpenInstruct(false);
+  const handleOpenInterpreter = () => setOpenInterpreter(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -295,7 +349,8 @@ const SummaryDashboard = ({ model }: any) => {
           verifyLink(urls[6], setPromptInjectionSummaryData),
           verifyLink(urls[7], setPromptInjectionData, []),
           verifyLink(urls[8], setAutocompleteDetailedData, []),
-          verifyLink(urls[9], setInstructTestDetailedData, [])
+          verifyLink(urls[9], setInstructTestDetailedData, []),
+          verifyLink(urls[10], setInterpreterTestDetailedData, [])
         ]);
       } catch (err) {
         // Fix me later
@@ -321,24 +376,19 @@ const SummaryDashboard = ({ model }: any) => {
     InstructPass: instructData[lang]?.pass_rate || 0
   }));
 
-  const securityRisksData = Object.entries(interpreterData).map(([category, values]) => ({
-    category,
-    "Extremely Malicious": values.is_extremely_malicious,
-    "Potentially Malicious": values.is_potentially_malicious,
-    "Non-Malicious": values.is_non_malicious,
-  }));
+  const securityRisksData = processData(interpreterTestDetailedData);
 
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
   const promptInjectionresult = [
-    { name: "Successful", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#1f77b4" },
-    { name: "Unsuccessful", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#ff7f0e" },
+    { name: "Successful", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#C23B22" },
+    { name: "Unsuccessful", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#76b041" },
   ];
 
   return (
     <Grid container spacing={ 1 } pt={ 1 } pb={ 2 }>
       { /* First Row */ }
-      <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         { mitreData.length > 0 ? (
           <>
             <Button
@@ -355,12 +405,12 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
                 { /* Title */ }
-                <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
+                <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
                   MITRE Benchmark
                 </Typography>
 
                 { /* Pie Chart Container */ }
-                <ResponsiveContainer width="100%" height={ 180 }>
+                <ResponsiveContainer width="100%" height={ 240 }>
                   <PieChart width={ 120 } height={ 100 }>
                     <Pie
                       data={ data }
@@ -461,11 +511,11 @@ const SummaryDashboard = ({ model }: any) => {
         ) }
       </Grid>
 
-      <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 7 }>
         <Card sx={ { height: "100%" } }>
           <CardContent>
-            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
-              <Typography variant="h6" sx={ { textAlign: "center" } }>
+            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "7px", paddingBottom: "12px" } }>
+              <Typography variant="h5" sx={ { textAlign: "center" } }>
                 Security risks in generated code using this LLM
               </Typography>
             </Box>
@@ -507,7 +557,7 @@ const SummaryDashboard = ({ model }: any) => {
                   color: 'primary.main'
                 },
                 width: "fit-content",
-    
+
               } }
             >
               Autocomplete Test Summary
@@ -527,10 +577,8 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <Fade in={ openAutocomplete }>
                 <Box sx={ modalStyle }>
-                  <AutocompleteModal autocompleteSummaryData = { autocompleteData } autocompleteDetailedData = { autocompleteDetailedData } data = "Autocomplete"
+                  <AutocompleteModal autocompleteSummaryData={ autocompleteData } autocompleteDetailedData={ autocompleteDetailedData } data="Autocomplete"
                   />
- 
-  
                 </Box>
               </Fade>
             </Modal>
@@ -538,7 +586,6 @@ const SummaryDashboard = ({ model }: any) => {
               variant="text"
               onClick={ handleOpenInstruct }
               disabled={ (Object.keys(instructData).length === 0) && Object.keys(instructTestDetailedData).length === 0 }
-
               sx={ {
                 textTransform: 'none',
                 '&:hover': {
@@ -546,7 +593,7 @@ const SummaryDashboard = ({ model }: any) => {
                   color: 'primary.main'
                 },
                 width: "fit-content",
-    
+
               } }
             >
               Instruct Test Summary
@@ -566,17 +613,16 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <Fade in={ openInstruct }>
                 <Box sx={ modalStyle }>
-                  <AutocompleteModal autocompleteSummaryData = { instructData } autocompleteDetailedData = { instructTestDetailedData } data = "Instruct"
+                  <AutocompleteModal autocompleteSummaryData={ instructData } autocompleteDetailedData={ instructTestDetailedData } data="Instruct"
                   />
-  
                 </Box>
               </Fade>
             </Modal>
-          </Grid> 
+          </Grid>
         </Card>
       </Grid>
 
-      <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         { Object.keys(spearPhishingData).length > 0 ? (
           <>
             <Button
@@ -603,12 +649,7 @@ const SummaryDashboard = ({ model }: any) => {
                 padding: '0%',
               } }>
                 { /* Title */ }
-                <Typography variant="subtitle1" sx={ {
-                  fontWeight: 600,
-                  letterSpacing: 1,
-                  color: 'gray',
-                  mb: 2,
-                } }>
+                <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
                   Spear Phishing
                 </Typography>
 
@@ -688,7 +729,7 @@ const SummaryDashboard = ({ model }: any) => {
       </Grid>
 
       { /* Second Row */ }
-      <Grid item xs={ 12 } md={ 12 } lg={ 2 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         <Card
           sx={ {
             height: "100%",
@@ -699,7 +740,7 @@ const SummaryDashboard = ({ model }: any) => {
             padding: 2,
           } }
         >
-          <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
+          <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
             False Refusal Rate
           </Typography>
 
@@ -731,39 +772,94 @@ const SummaryDashboard = ({ model }: any) => {
         </Card>
       </Grid>
 
-
-      <Grid item xs={ 12 } md={ 12 } lg={ 7 }>
-        <Card sx={ { height: "100%" } }>
-          <CardContent>
-            <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
-              <Typography variant="h6" sx={ { textAlign: "center" } }>
-                Security risks posed by integrating LLMs with code interpreters
-              </Typography>
-            </Box>
-            { securityRisksData.length === 0 ? (
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 7 }>
+        { securityRisksData.length === 0 ? (
+          <Card sx={ { height: "100%" } }>
+            <CardContent>
+              <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
+                <Typography variant="h5" sx={ { textAlign: "center", textTransform: "none"  } } >
+                  Security risks posed by integrating LLMs with code interpreters
+                </Typography>
+              </Box>
               <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
                 <Typography variant="body1" color="textSecondary">
                   Data not available
                 </Typography>
               </Box>
-            ) : (
-              <ResponsiveContainer width="100%" height={ 240 }>
-                <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
-                  <XAxis dataKey="category" style={ { fontSize: "12px" } } />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
-                  <Bar dataKey="Extremely Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
-                  <Bar dataKey="Potentially Malicious" stackId="a" fill="#f28e2c" barSize={ 20 } />
-                  <Bar dataKey="Non-Malicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
-                </BarChart>
-              </ResponsiveContainer>
-            ) }
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ) : (
+          <>
+            <Button
+              onClick={ handleOpenInterpreter }
+              variant="contained"
+              sx={ {
+                height: '100%',
+                width: '100%',
+                paddingTop: 2,
+                paddingLeft: 0,
+                paddingRight: 0
+              } }
+              style={ { backgroundColor: 'white', textTransform: "none" } }
+            >
+              <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
+                <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "0px", paddingBottom: "12px" } }>
+                  <Typography variant="h5" sx={ { textAlign: "center", textTransform: "none"  } }>
+                    Security risks posed by integrating LLMs with code interpreters
+                  </Typography>
+                </Box>
+                <ResponsiveContainer width="100%" height={ 300 }>
+                  <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
+                    <XAxis dataKey="category" stroke="#555" fontSize={ 12 } />
+                    <YAxis stroke="#555"
+                      label={ {
+                        value: "Count",
+                        angle: -90,
+                        position: "insideLeft",
+                        dy: 10, // Adjust label positioning
+                      } } />
+                    <Tooltip />
+                    <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } } />
+                    <Bar dataKey="Extremely Malicious" name="Extremely Malicious" fill="#C23B22" barSize={ 20 }/>
+                    <Bar dataKey="Potentially Malicious" fill="#f28e2c" barSize={ 20 } />
+                    <Bar dataKey="Non Malicious" fill="#2E7D32" barSize={ 20 } />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Button>
+            { /* Modal */ }
+            <Modal
+              open={ openInterpreter }
+              onClose={ () => setOpenInterpreter(false) }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ { backdrop: { timeout: 500 } } }
+            >
+              <Fade in={ openInterpreter }>
+                <Box
+                  sx={ {
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "95%",
+                    maxHeight: "90vh",
+                    overflowY: "auto",
+                    bgcolor: "#f4f4f4",
+                    boxShadow: 24,
+                    p: 4,
+                    borderRadius: 2,
+                  } }
+                >
+                  <InterpreterModel interpreterData={ interpreterTestDetailedData } />
+                </Box>
+              </Fade>
+            </Modal>
+          </>
+        ) }
       </Grid>
 
-      <Grid item xs={ 12 } md={ 12 } lg={ 3 }>
+      <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
         <>
           <Button
             onClick={ handleOpenPromptInjection }
@@ -777,16 +873,17 @@ const SummaryDashboard = ({ model }: any) => {
             } }
             style={ { backgroundColor: 'white' } }
           >
-            <CardContent>
-              <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
+            <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
+              { /* Title */ }
+              <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
                 Prompt Injection
               </Typography>
-              <Typography variant="subtitle2" sx={ { color: "gray" } }>
+              <Typography variant="subtitle2" sx={ { color: "gray", textTransform: "none" } }>
                 Model’s susceptibility to prompt injection attack scenarios
               </Typography>
               { promptInjectionresult[0].value === 0 && promptInjectionresult[1].value === 0 ? (
                 <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
-                  <Typography variant="body1" color="textSecondary">
+                  <Typography variant="body1" color="textSecondary" sx={ { textTransform: "none" } }>
                     Data not available
                   </Typography>
                 </Box>
@@ -799,12 +896,12 @@ const SummaryDashboard = ({ model }: any) => {
                       )) }
                     </Pie>
                     <Tooltip />
-                    <Legend wrapperStyle={ { fontSize: '12px' } } />
+                    <Legend wrapperStyle={ { fontSize: '12px', textTransform: "none", fontWeight: "normal", bottom: "-7px" } } />
                   </PieChart>
                 </ResponsiveContainer>
               ) }
             </CardContent>
-          
+
           </Button>
 
           <Modal
