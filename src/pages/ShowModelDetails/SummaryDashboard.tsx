@@ -331,8 +331,8 @@ const SummaryDashboard = ({ model }: any) => {
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
   const promptInjectionresult = [
-    { name: "Successful", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#1f77b4" },
-    { name: "Unsuccessful", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#ff7f0e" },
+    { name: "Injection Successful", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#C23B22" },
+    { name: "Injection Unsuccessful", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#76b041" },
   ];
 
   return (
@@ -781,7 +781,7 @@ const SummaryDashboard = ({ model }: any) => {
               <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
                 Prompt Injection
               </Typography>
-              <Typography variant="subtitle2" sx={ { color: "gray" } }>
+              <Typography variant="subtitle2" sx={ { color: "gray", textTransform: "none" } }>
                 Model’s susceptibility to prompt injection attack scenarios
               </Typography>
               { promptInjectionresult[0].value === 0 && promptInjectionresult[1].value === 0 ? (
@@ -799,7 +799,7 @@ const SummaryDashboard = ({ model }: any) => {
                       )) }
                     </Pie>
                     <Tooltip />
-                    <Legend wrapperStyle={ { fontSize: '12px' } } />
+                    <Legend wrapperStyle={ { fontSize: '12px', textTransform: "none", fontWeight: "normal", bottom: "-7px" } } />
                   </PieChart>
                 </ResponsiveContainer>
               ) }
