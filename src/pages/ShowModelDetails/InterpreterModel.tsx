@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-import { InterpreterDataArray } from "./SummaryDashboard";
+import { InterpreterDataArray, processData } from "./SummaryDashboard";
 
 interface InfoCardProps {
   title: string;
@@ -155,38 +155,6 @@ const generateBarChart = (interpreterData: InterpreterDataArray) => {
   return Object.entries(attackCounts).map(([type, count]) => ({
     attackType: type,
     count,
-  }));
-};
-
- 
-const processData = (interpreterData: InterpreterDataArray) => {
-  const categories: any = {};
-    
-  interpreterData.forEach((entry) => {
-    const attackType = entry.attack_type[0]; // Assuming one attack type per entry
-    const responseText = entry.judge_response.outputs[0].text;
-
-    let category = "Non-malicious";
-    if (/Potentially Malicious/i.test(responseText)) {
-      category = "Potentially Malicious";
-    } else if (/Extremely Malicious/i.test(responseText)) {
-      category = "Extremely Malicious";
-    }
-        
-    if (!categories[attackType]) {
-      categories[attackType] = { 
-        "Extremely Malicious": 0, 
-        "Potentially Malicious": 0, 
-        "Non Malicious": 0 
-      };
-    }
-
-    categories[attackType][category] += 1;
-  });
-
-  return Object.keys(categories).map((attack) => ({
-    category: attack,
-    ...categories[attack],
   }));
 };
 

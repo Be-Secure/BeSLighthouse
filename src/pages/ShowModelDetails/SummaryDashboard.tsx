@@ -225,6 +225,38 @@ export const colorCode: ColorCode = {
   }
 };
 
+export const processData = (interpreterData: InterpreterDataArray) => {
+  const categories: any = {};
+    
+  interpreterData.forEach((entry) => {
+    const attackType = entry.attack_type[0]; // Assuming one attack type per entry
+    const responseText = entry.judge_response.outputs[0].text;
+
+    let category = "Non-malicious";
+    if (/Potentially Malicious/i.test(responseText)) {
+      category = "Potentially Malicious";
+    } else if (/Extremely Malicious/i.test(responseText)) {
+      category = "Extremely Malicious";
+    } else if (/Non-Malicious/i.test(responseText)) {
+      category = "Non Malicious";
+    }
+        
+    if (!categories[attackType]) {
+      categories[attackType] = { 
+        "Extremely Malicious": 0, 
+        "Potentially Malicious": 0, 
+        "Non Malicious": 0 
+      };
+    }
+
+    categories[attackType][category] += 1;
+  });
+  return Object.keys(categories).map((attack) => ({
+    category: attack,
+    ...categories[attack],
+  }));
+};
+
 const generateData = (mitredData: MitreDataArray) => {
   const failedLabels: [RegExp, string][] = [
     [/malicious/i, "Malicious"],
@@ -276,6 +308,7 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-instruct-test-detailed-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-interpreter-test-detailed-report.json`
   ];
+  // eslint-disable-next-line no-unused-vars
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
   const [autocompleteData, setAutocompleteData] = useState<AutocompleteData>({});
   const [instructData, setInstructData] = useState<InstructData>({});
@@ -343,12 +376,7 @@ const SummaryDashboard = ({ model }: any) => {
     InstructPass: instructData[lang]?.pass_rate || 0
   }));
 
-  const securityRisksData = Object.entries(interpreterData).map(([category, values]) => ({
-    category,
-    "Extremely Malicious": values.is_extremely_malicious,
-    "Potentially Malicious": values.is_potentially_malicious,
-    "Non-Malicious": values.is_non_malicious,
-  }));
+  const securityRisksData = processData(interpreterTestDetailedData);
 
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
@@ -785,15 +813,21 @@ const SummaryDashboard = ({ model }: any) => {
                     Security risks posed by integrating LLMs with code interpreters
                   </Typography>
                 </Box>
-                <ResponsiveContainer width="100%" height={ 240 }>
-                  <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } }>
-                    <XAxis dataKey="category" style={ { fontSize: "12px" } } />
-                    <YAxis />
+                <ResponsiveContainer width="100%" height={ 300 }>
+                  <BarChart data={ securityRisksData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
+                    <XAxis dataKey="category" stroke="#555" fontSize={ 12 }/>
+                    <YAxis stroke="#555" 
+                      label={ {
+                        value: "Count",
+                        angle: -90,
+                        position: "insideLeft",
+                        dy: 10, // Adjust label positioning
+                      } } />
                     <Tooltip />
-                    <Legend wrapperStyle={ { fontSize: '12px', paddingTop: "16px" } } />
-                    <Bar dataKey="Extremely Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
-                    <Bar dataKey="Potentially Malicious" stackId="a" fill="#f28e2c" barSize={ 20 } />
-                    <Bar dataKey="Non-Malicious" stackId="a" fill="#2ca02c" barSize={ 20 } />
+                    <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } } />
+                    <Bar dataKey="Extremely Malicious" fill="#C23B22" barSize={ 20 } />
+                    <Bar dataKey="Potentially Malicious" fill="#f28e2c" barSize={ 20 } />
+                    <Bar dataKey="Non Malicious" fill="#2E7D32" barSize={ 20 } />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
