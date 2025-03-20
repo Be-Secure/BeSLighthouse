@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.f2d263ef.js",
+    "main.js": "/BeSLighthouse/static/js/main.028e387e.js",
     "static/js/239.f8861bf9.chunk.js": "/BeSLighthouse/static/js/239.f8861bf9.chunk.js",
     "static/js/213.706908f8.chunk.js": "/BeSLighthouse/static/js/213.706908f8.chunk.js",
     "static/js/732.4a6e7413.chunk.js": "/BeSLighthouse/static/js/732.4a6e7413.chunk.js",
+    "static/media/hf-logo.png": "/BeSLighthouse/static/media/hf-logo.680c5d04be8df645a376.png",
     "static/media/neuralimage.png": "/BeSLighthouse/static/media/neuralimage.0a6ca9fadd705732f3ac.png",
     "static/media/AIShield-watchtower-final-logo.png": "/BeSLighthouse/static/media/AIShield-watchtower-final-logo.6e52458814e122cfd516.png",
     "static/media/bug.png": "/BeSLighthouse/static/media/bug.55ee0482380aca3704a1.png",
@@ -12,18 +13,19 @@
     "static/media/speedometer.png": "/BeSLighthouse/static/media/speedometer.1603ca6ef9ceeeb06a8c.png",
     "static/media/network.png": "/BeSLighthouse/static/media/network.d43be01716cf6678725f.png",
     "static/media/security-system.png": "/BeSLighthouse/static/media/security-system.19bd118af849ed602bd2.png",
+    "static/media/up-and-down.png": "/BeSLighthouse/static/media/up-and-down.b5d5f8b10ddb7bc91c62.png",
     "static/media/aishield_logo.png": "/BeSLighthouse/static/media/aishield_logo.8eb0c8ddb9ae3a8d2cac.png",
     "static/media/verified.png": "/BeSLighthouse/static/media/verified.c9a0373e69a5f4eb9c05.png",
     "static/media/arc.png": "/BeSLighthouse/static/media/arc.136fe717a39d0dff5047.png",
     "static/media/certificate.png": "/BeSLighthouse/static/media/certificate.d97bbadc67cdb4b5540e.png",
-    "static/media/svgexport-1.svg": "/BeSLighthouse/static/media/svgexport-1.879b8a34a955ebabb5342cce094df222.svg",
+    "static/media/gavel.png": "/BeSLighthouse/static/media/gavel.0728ffd76239f17a3a46.png",
     "index.html": "/BeSLighthouse/index.html",
-    "main.f2d263ef.js.map": "/BeSLighthouse/static/js/main.f2d263ef.js.map",
+    "main.028e387e.js.map": "/BeSLighthouse/static/js/main.028e387e.js.map",
     "239.f8861bf9.chunk.js.map": "/BeSLighthouse/static/js/239.f8861bf9.chunk.js.map",
     "213.706908f8.chunk.js.map": "/BeSLighthouse/static/js/213.706908f8.chunk.js.map",
     "732.4a6e7413.chunk.js.map": "/BeSLighthouse/static/js/732.4a6e7413.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.f2d263ef.js"
+    "static/js/main.028e387e.js"
   ]
 }
