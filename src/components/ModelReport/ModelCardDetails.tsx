@@ -3,7 +3,7 @@ import { Grid, Tooltip, Card, Typography, Box, debounce } from "@mui/material";
 import OSAR from "./OSAR";
 import BusinessIcon from "../../assets/images/organization.png";
 import CalendarMonthIcon from "../../assets/images/calendar.png";
-import GavelIcon from "../../assets/images/mace.png";
+import GavelIcon from "../../assets/images/gavel.png";
 import HuggingFaceIcon from "../../assets/images/hf-logo.png";
 import MaximizeIcon from "../../assets/images/maximize.png";
 import UpAndDownIcon from "../../assets/images/up-and-down.png";
@@ -89,7 +89,7 @@ const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: stri
 
   // Truncation logic
   let displayValue = value?.trim() || "N/A";
-  if ((windowWidth <= 1360 && value.length > 12) || value.length > 14) {
+  if ((windowWidth <= 1520 && value.length > 12) || value.length > 14) {
     displayValue = `${value.substring(0, 9)}...`;
   }
   return (
@@ -148,18 +148,18 @@ export default function ModelCardDetails({ model }: any) {
               <Grid container spacing={ 1 } gap={ 2 } pt={ 1 } flexDirection={ { xs: "row", lg: "column" } } alignItems={ { xs: "center", lg: "flex-start" } }>
                 <InfoBadge title="Size" value={ selectedModel.size } Icon={ MaximizeIcon } />
                 <InfoBadge title="Modality(Input type; Output type)" value={ selectedModel.modality } Icon={ UpAndDownIcon } />
-                <Box display="flex" justifyContent="center" alignItems="center" gap={ 2 } sx={ {height: "40px", left: '-6px', position: 'relative'} }>
-                  <IconLink url={ selectedModel.model_url } icon={ <img src={ HuggingFaceIcon } alt="Hugging Face" width={ 40 } height={ 40 } /> } name={ "Hugging Face" } />
-                  <IconLink url={ selectedModel.url } icon={ <img src={ GitHubIcon } alt="GitHub" width={ 30 } height={ 30 } /> } name={ "GitHub" } />
-                </Box>
+                <InfoBadge title="License" value={ selectedModel.license } Icon={ GavelIcon } />
               </Grid>
             </Grid>
 
             <Grid item xs={ 12 } xl={ 1.5 }>
               <Grid container spacing={ 1 } gap={ 2 } pt={ 1 } flexDirection={ { xs: "row", lg: "column" } } alignItems={ { xs: "center", lg: "flex-start" } }>
                 <InfoBadge title="Date" value={ selectedModel.created_date ? new Date(selectedModel.created_date).toLocaleDateString() : "N/A" } Icon={ CalendarMonthIcon } />
-                <InfoBadge title="License" value={ selectedModel.license } Icon={ GavelIcon } />
-                <InfoBadge title="Organization" value={ selectedModel.name } Icon={ BusinessIcon } />
+                <InfoBadge title="Organization" value={ selectedModel.organization } Icon={ BusinessIcon } />
+                <Box display="flex" justifyContent="center" alignItems="center" gap={ 2 } sx={ {height: "40px", left: '-6px', position: 'relative'} }>
+                  <IconLink url={ selectedModel.model_url } icon={ <img src={ HuggingFaceIcon } alt="Hugging Face" width={ 40 } height={ 40 } /> } name={ "Hugging Face" } />
+                  <IconLink url={ selectedModel.url } icon={ <img src={ GitHubIcon } alt="GitHub" width={ 30 } height={ 30 } /> } name={ "GitHub" } />
+                </Box>
               </Grid>
             </Grid>
           </Grid>
