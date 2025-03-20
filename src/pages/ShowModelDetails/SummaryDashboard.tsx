@@ -405,7 +405,7 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
                 { /* Title */ }
-                <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
+                <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
                   MITRE Benchmark
                 </Typography>
 
@@ -515,7 +515,7 @@ const SummaryDashboard = ({ model }: any) => {
         <Card sx={ { height: "100%" } }>
           <CardContent>
             <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
-              <Typography variant="h6" sx={ { textAlign: "center" } }>
+              <Typography variant="h5" sx={ { textAlign: "center" } }>
                 Security risks in generated code using this LLM
               </Typography>
             </Box>
@@ -649,12 +649,7 @@ const SummaryDashboard = ({ model }: any) => {
                 padding: '0%',
               } }>
                 { /* Title */ }
-                <Typography variant="subtitle1" sx={ {
-                  fontWeight: 600,
-                  letterSpacing: 1,
-                  color: 'gray',
-                  mb: 2,
-                } }>
+                <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
                   Spear Phishing
                 </Typography>
 
@@ -745,7 +740,7 @@ const SummaryDashboard = ({ model }: any) => {
             padding: 2,
           } }
         >
-          <Typography variant="h5" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray" } }>
+          <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
             False Refusal Rate
           </Typography>
 
@@ -782,7 +777,7 @@ const SummaryDashboard = ({ model }: any) => {
           <Card sx={ { height: "100%" } }>
             <CardContent>
               <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
-                <Typography variant="h6" sx={ { textAlign: "center", textTransform: "none"  } } >
+                <Typography variant="h5" sx={ { textAlign: "center", textTransform: "none"  } } >
                   Security risks posed by integrating LLMs with code interpreters
                 </Typography>
               </Box>
@@ -809,7 +804,7 @@ const SummaryDashboard = ({ model }: any) => {
             >
               <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
                 <Box sx={ { display: "flex", justifyContent: "center", paddingTop: "6px", paddingBottom: "12px" } }>
-                  <Typography variant="h6" sx={ { textAlign: "center", textTransform: "none"  } }>
+                  <Typography variant="h5" sx={ { textAlign: "center", textTransform: "none"  } }>
                     Security risks posed by integrating LLMs with code interpreters
                   </Typography>
                 </Box>
@@ -880,7 +875,7 @@ const SummaryDashboard = ({ model }: any) => {
           >
             <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
               { /* Title */ }
-              <Typography variant="subtitle1" sx={ { fontWeight: 600, letterSpacing: 1, color: "gray", textTransform: "none" } }>
+              <Typography variant="h5" sx={ { textAlign: "center", textTransform: 'none' } }>
                 Prompt Injection
               </Typography>
               <Typography variant="subtitle2" sx={ { color: "gray", textTransform: "none" } }>
