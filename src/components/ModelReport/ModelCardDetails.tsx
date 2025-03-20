@@ -66,7 +66,7 @@ const TruncatedText = ({ text }: any) => {
         },
       } }
     >
-      <Box ref={ textRef } sx={ { display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 5, overflow: "hidden", whiteSpace: "normal", lineHeight: "1.2em", position: "relative", top: "-8px", marginRight: "43px", marginLeft: "5px" } }>
+      <Box ref={ textRef } sx={ { display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 5, overflow: "hidden", whiteSpace: "normal", lineHeight: "1.2em", position: "relative", top: "-8px", marginRight: "5px"} }>
         <Typography variant="body1" sx={ { fontSize: 14, display: "inline"} }>
           <strong>{ firstWord }</strong> { remainingWords.join(" ") }
         </Typography>
@@ -89,8 +89,8 @@ const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: stri
 
   // Truncation logic
   let displayValue = value?.trim() || "N/A";
-  if ((windowWidth <= 1520 && value.length > 12) || value.length > 14) {
-    displayValue = `${value.substring(0, 9)}...`;
+  if ((windowWidth <= 1420 && value.length > 17) || value.length > 28) {
+    displayValue = `${value.substring(0, 14)}...`;
   }
   return (
     <Box display="flex" alignItems="center" gap={ 1 }>
@@ -112,6 +112,15 @@ const InfoBadge = ({ title, value = "N/A", Icon }: { title: string; value?: stri
     </Box>
   );
 };
+
+function processText(input: string): string{
+  if (!input) {
+    return "input: N/A | output: N/A";
+  }
+
+  const parts = input.split(";");
+  return `input: ${parts[0]?.trim() || "N/A" } | output: ${parts[1]?.trim() || "N/A"}`;
+}
 
 const IconLink = ({ url, icon, name }: any) => (
   <Tooltip title={ name }>
@@ -135,24 +144,26 @@ const IconLink = ({ url, icon, name }: any) => (
 export default function ModelCardDetails({ model }: any) {
   const selectedModel = model[0] || {};
 
+  const modalityInputOutput = processText(selectedModel.modality );
+
   return (
     <Grid container spacing={ 1 } sx={ { height: "100%", alignItems: "stretch" } }>
       <Grid item xs={ 12 } xl={ 9.5 } sx={ { display: "flex", flexDirection: "column" } }>
         <Card sx={ { flex: 1, display: "flex", flexDirection: "column", pt: 1.5 } }>
           <Grid container spacing={ 2 } pl={ 2 }>
-            <Grid item xs={ 12 } xl={ 9 } container>
+            <Grid item xs={ 12 } xl={ 8 } container>
               <TruncatedText text={ selectedModel.description || "No description available" } />
             </Grid>
 
-            <Grid item xs={ 12 } xl={ 1.5 }>
+            <Grid item xs={ 12 } xl={ 2 }>
               <Grid container spacing={ 1 } gap={ 2 } pt={ 1 } flexDirection={ { xs: "row", lg: "column" } } alignItems={ { xs: "center", lg: "flex-start" } }>
                 <InfoBadge title="Size" value={ selectedModel.size } Icon={ MaximizeIcon } />
-                <InfoBadge title="Modality(Input type; Output type)" value={ selectedModel.modality } Icon={ UpAndDownIcon } />
+                <InfoBadge title="Modality(Input type; Output type)" value={ modalityInputOutput } Icon={ UpAndDownIcon } />
                 <InfoBadge title="License" value={ selectedModel.license } Icon={ GavelIcon } />
               </Grid>
             </Grid>
 
-            <Grid item xs={ 12 } xl={ 1.5 }>
+            <Grid item xs={ 12 } xl={ 2 }>
               <Grid container spacing={ 1 } gap={ 2 } pt={ 1 } flexDirection={ { xs: "row", lg: "column" } } alignItems={ { xs: "center", lg: "flex-start" } }>
                 <InfoBadge title="Date" value={ selectedModel.created_date ? new Date(selectedModel.created_date).toLocaleDateString() : "N/A" } Icon={ CalendarMonthIcon } />
                 <InfoBadge title="Organization" value={ selectedModel.organization } Icon={ BusinessIcon } />
