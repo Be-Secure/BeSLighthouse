@@ -16,7 +16,8 @@ const names = [
   "Cloud Security (SD-CS)",
   "Blockchain Security (SD-BS)",
   "Network Security (SD-NS)",
-  "IOT/OT Security (SD-IoTS)"
+  "IOT/OT Security (SD-IoTS)",
+  "Cryptography (SD-Crypto)"
 ];
 
 export function SecurityDomain({ filter, setFilter }: any) {
