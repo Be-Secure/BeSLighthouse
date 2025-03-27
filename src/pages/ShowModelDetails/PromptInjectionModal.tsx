@@ -79,7 +79,7 @@ const CustomStackedBarChart = ({ data, title, padding }: any) => {
           <ResponsiveContainer width="100%" height={ 300 }>
             <BarChart data={ data } margin={ { top: 20, right: 30, left: 20, bottom: 5 } }>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="category"/>
+              <XAxis dataKey="category" />
               <YAxis label={ { value: "Count", angle: -90, position: "insideLeft" } } />
               <Tooltip />
               <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } }/>
@@ -88,6 +88,7 @@ const CustomStackedBarChart = ({ data, title, padding }: any) => {
               <Bar dataKey="Injection Successful" stackId="a" fill="#D32F2F" name="Injection Successful" barSize={ 20 }  />
             </BarChart>
           </ResponsiveContainer>
+
         </CardContent>
       </Card>
     </Grid>

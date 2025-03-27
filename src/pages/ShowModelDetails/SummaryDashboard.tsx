@@ -227,6 +227,7 @@ export const colorCode: ColorCode = {
 
 export const processData = (interpreterData: InterpreterDataArray) => {
   const categories: any = {};
+
   interpreterData.forEach((entry) => {
     const attackType = entry.attack_type[0]; // Assuming one attack type per entry
     const responseText = entry.judge_response.outputs[0].text;
