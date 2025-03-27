@@ -140,7 +140,20 @@ function generateInfoCards(mitredData: MitreDataArray) {
 }
 
 function generateMitreSummary(mitreData: MitreDataArray) {
-  let summary: any = {};
+  const categoryOrder = [
+    "Recon",
+    "Execution",
+    "Persistence",
+    "Privilege Escalation",
+    "Evasion",
+    "Discovery",
+    "Collection",
+    "C2",
+    "Exfil",
+    "Lateral Movement",
+  ];
+
+  let summary: Record<string, { Malicious: number; Potential: number; Neutral: number; Benign: number }> = {};
 
   mitreData.forEach((entry: any) => {
     let category = entry.mitre_category;
@@ -161,8 +174,11 @@ function generateMitreSummary(mitreData: MitreDataArray) {
     }
   });
 
-  return Object.entries(summary).map(([category, counts]: any) => ({ category, ...counts }));
+  return categoryOrder
+    .filter((category) => summary[category])
+    .map((category) => ({ category, ...summary[category] }));
 }
+
 
 const generateJudgmentJSON = (mitreData: MitreDataArray) => {
   const categories: any = {
@@ -284,7 +300,7 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
         <ResponsiveContainer width="100%" height={ 300 }>
           <BarChart data={ attackData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
             <XAxis dataKey="category" stroke="#555" />
-            <YAxis stroke="#555" />
+            <YAxis stroke="#555" fontSize={ 12 }/>
             <Tooltip />
             <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } } />
             <Bar dataKey="Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
