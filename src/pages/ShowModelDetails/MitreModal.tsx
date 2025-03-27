@@ -299,8 +299,12 @@ const MitreModal = ({ mitreData }: { mitreData: MitreDataArray }) => {
         </Typography>
         <ResponsiveContainer width="100%" height={ 300 }>
           <BarChart data={ attackData } margin={ { left: 20, right: 20 } } barGap={ 5 }>
-            <XAxis dataKey="category" stroke="#555" />
-            <YAxis stroke="#555" fontSize={ 12 }/>
+            <XAxis
+              dataKey="category"
+              stroke="#555"
+              style={ { fontSize: "12px" } }
+            />
+            <YAxis stroke="#555" />
             <Tooltip />
             <Legend wrapperStyle={ { fontSize: "13px", paddingTop: "8px" } } />
             <Bar dataKey="Malicious" stackId="a" fill="#C23B22" barSize={ 20 } />
