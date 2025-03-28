@@ -335,7 +335,6 @@ const SummaryDashboard = ({ model }: any) => {
   const handleOpenInstruct = () => setOpenInstruct(true);
   const handleCloseInstruct = () => setOpenInstruct(false);
   const handleOpenInterpreter = () => setOpenInterpreter(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -381,10 +380,14 @@ const SummaryDashboard = ({ model }: any) => {
   const spearPhishingNumber = spearPhishingData.model_stats?.persuasion_average ? spearPhishingData.model_stats.persuasion_average : 0;
 
   const promptInjectionresult = [
-    { name: "Successful", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#C23B22" },
-    { name: "Unsuccessful", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#76b041" },
+    { name: "Successful Count", value: promptInjectionSummaryData?.stat_per_model?.injection_successful_count ?? 0, color: "#C23B22" },
+    { name: "Unsuccessful Count", value: promptInjectionSummaryData?.stat_per_model?.injection_unsuccessful_count ?? 0, color: "#76b041" },
   ];
 
+  const frrPieData = [
+    { name: "Accepted Count", value: frrData.accept_count ?? 0, color: "#76b041" },
+    { name: "Refusal Count", value: frrData.refusal_count ?? 0, color: "#C23B22" }
+  ];
   return (
     <Grid container spacing={ 1 } pt={ 1 } pb={ 2 }>
       { /* First Row */ }
@@ -744,30 +747,75 @@ const SummaryDashboard = ({ model }: any) => {
             False Refusal Rate
           </Typography>
 
-          <CardContent sx={ {
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center", // Centers content inside CardContent
-            flexGrow: 1, // Takes up available space
-          } }>
+          <CardContent sx={ { textAlign: "center", width: "100%", height: '100%', padding: '0%' } }>
             { /* Dynamic Numeric Value (Color Coded) */ }
-            <Typography
+            { /* <Typography
               variant="h4"
               sx={ {
                 fontSize: "2rem",
                 fontWeight: "bold",
-                color: "green", // Matches the reference image
+                color: "green", 
                 mt: 1,
               } }
             >
               { frrData?.refusal_count ?? 0.0 }
+            </Typography> */ }
+            <Typography variant="subtitle2" sx={ { color: "gray", textTransform: "none" } }>
+              Measures how often an LLM wrongly refuses benign queries.
             </Typography>
-
             { /* Supporting Text */ }
-            <Typography variant="body2" sx={ { mt: 1 } }>
-              on misinterpreting the prompt as a malicious request
-            </Typography>
+            { Object.keys(frrData).length === 0 ? (
+              <Box sx={ { display: "flex", justifyContent: "center", alignItems: "center", height: 200 } }>
+                <Typography variant="body1" color="textSecondary" sx={ { textTransform: "none" } }>
+                  Data not available
+                </Typography>
+              </Box>
+            ) : (
+              <>
+                <ResponsiveContainer width="100%" height={ 180 }>
+                  <PieChart>
+                    <Pie data={ frrPieData } dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={ 50 } label>
+                      { frrPieData.map((entry, index) => (
+                        <Cell key={ `cell-${index}` } fill={ entry.color } />
+                      )) }
+                    </Pie>
+                    <Tooltip />
+                    { /* <Legend wrapperStyle={ { fontSize: '12px', textTransform: "none", fontWeight: "normal", bottom: "-7px" } } /> */ }
+
+                  </PieChart>
+                </ResponsiveContainer>
+                <Box sx={ {
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  maxWidth: "100%",
+                  gap: 1,
+                  marginTop: "40px",
+                  marginBottom: "16px",
+                  position: "relative",
+                  top: "24px"
+                } }>
+                  { frrPieData.map((item) => {
+                    return (
+                      <Box key={ item.name } sx={ { display: "flex", alignItems: "center"} }>
+                        <Box
+                          sx={ {
+                            width: 10,
+                            height: 10,
+                            backgroundColor: item.color,
+                            borderRadius: "50%",
+                            mr: 0.5,
+                          } } />
+                        <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary", textTransform: 'capitalize' } }>
+                          { item.name }
+                        </Typography>
+                      </Box>
+                    );
+                  }) }
+                </Box>
+              </>
+            ) }
+
           </CardContent>
         </Card>
       </Grid>
@@ -888,17 +936,48 @@ const SummaryDashboard = ({ model }: any) => {
                   </Typography>
                 </Box>
               ) : (
-                <ResponsiveContainer width="100%" height={ 180 }>
-                  <PieChart>
-                    <Pie data={ promptInjectionresult } dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={ 50 } label>
-                      { promptInjectionresult.map((entry, index) => (
-                        <Cell key={ `cell-${index}` } fill={ entry.color } />
-                      )) }
-                    </Pie>
-                    <Tooltip />
-                    <Legend wrapperStyle={ { fontSize: '12px', textTransform: "none", fontWeight: "normal", bottom: "-7px" } } />
-                  </PieChart>
-                </ResponsiveContainer>
+                <>
+                  <ResponsiveContainer width="100%" height={ 180 }>
+                    <PieChart>
+                      <Pie data={ promptInjectionresult } dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={ 50 } label>
+                        { promptInjectionresult.map((entry, index) => (
+                          <Cell key={ `cell-${index}` } fill={ entry.color } />
+                        )) }
+                      </Pie>
+                      <Tooltip />
+                      { /* <Legend wrapperStyle={ { fontSize: '12px', textTransform: "none", fontWeight: "normal", bottom: "-7px" } } /> */ }
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <Box sx={ {
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    maxWidth: "100%",
+                    gap: 1,
+                    marginTop: "40px",
+                    marginBottom: "16px",
+                    position: "relative",
+                    top: "24px"
+                  } }>
+                    { promptInjectionresult.map((item) => {
+                      return (
+                        <Box key={ item.name } sx={ { display: "flex", alignItems: "center" } }>
+                          <Box
+                            sx={ {
+                              width: 10,
+                              height: 10,
+                              backgroundColor: item.color,
+                              borderRadius: "50%",
+                              mr: 0.5
+                            } } />
+                          <Typography variant="caption" sx={ { fontSize: "13px", color: "textSecondary", textTransform: 'capitalize' } }>
+                            { item.name }
+                          </Typography>
+                        </Box>
+                      );
+                    }) }
+                  </Box>
+                </>
               ) }
             </CardContent>
 
