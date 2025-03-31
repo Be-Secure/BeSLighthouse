@@ -6,7 +6,8 @@ export const assessmentPath: any = {
   SBOM: "sbom",
   Fossology: "license-compliance",
   "Fuzz Report": "fuzz",
-  Snyk: "snyk"
+  Snyk: "snyk",
+  Cryptography: 'cryptography'
 };
 
 export const assessmentReport: any = {
@@ -17,5 +18,6 @@ export const assessmentReport: any = {
   SBOM: "sbom",
   Fossology: "fossology",
   "Fuzz Report": "fuzz",
-  Snyk: "snyk"
+  Snyk: "snyk",
+  cryptography: 'cryptography'
 };

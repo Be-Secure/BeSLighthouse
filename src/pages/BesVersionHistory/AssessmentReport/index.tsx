@@ -9,6 +9,15 @@ import {
   IconButton,
   Modal,
   Typography,
+  Card,
+  TableContainer,
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  TableBody,
+  TablePagination,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -25,9 +34,16 @@ import vulnerabilityIcon from '../../../assets/images/bug.png';
 import dependencyIcon from '../../../assets/images/data-flow.png';
 import licenseIcon from '../../../assets/images/certificate.png';
 import scorecardIcon from '../../../assets/images/speedometer.png';
+import encryptionIcon from '../../../assets/images/encryption.png';
 import tavossIcon from '../../../assets/images/verified.png';
 import BasicTable from './BasicTable';
 import FetchSastReport from './FetchSastReport';
+import { PieChart, Pie, Legend, Cell, Tooltip } from 'recharts';
+
+import cryptoDictionary from '../../../resources/crypto-dictionary.json';
+
+type CryptoPrimitive = keyof typeof cryptoDictionary;
+
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
@@ -65,27 +81,27 @@ export const fetchJsonData = async (link: any, setJsonData: any) => {
 
 export const fetchvulJsonData = async (
   link: string,
-  vulTool: "codeql" | "sonarqube",
+  vulTool: 'codeql' | 'sonarqube',
   setCQData: (data: any) => void,
   setSQData: (data: any) => void
 ): Promise<boolean> => {
-  if (typeof link !== "string") return false;
+  if (typeof link !== 'string') return false;
 
   try {
     const response = await fetchJsonReport(link);
     const data = JSON.parse(response);
 
-    if (vulTool === "codeql") {
+    if (vulTool === 'codeql') {
       setCQData(data);
-    } else if (vulTool === "sonarqube") {
+    } else if (vulTool === 'sonarqube') {
       setSQData(data);
     } else {
       return false;
     }
   } catch (error) {
-    if (vulTool === "codeql") {
+    if (vulTool === 'codeql') {
       setCQData([]);
-    } else if (vulTool === "sonarqube") {
+    } else if (vulTool === 'sonarqube') {
       setSQData(Object.create(null)); // Empty object without prototype
     }
 
@@ -99,9 +115,11 @@ const FetchLowScores = ({ data }: any) => {
   const headings = ['Issue', 'Reason'];
 
   // Filter issues with scores <= 5
-  const lowscorers = data.checks?.filter(
-    (issue: { score?: number }) => issue?.score === undefined || issue.score <= 5
-  ) || [];
+  const lowscorers =
+        data.checks?.filter(
+          (issue: { score?: number }) =>
+            issue?.score === undefined || issue.score <= 5
+        ) || [];
 
   // Transform lowscorers into table data
   const tableData = lowscorers.map((issue: any) => ({
@@ -200,10 +218,10 @@ const FetchLicense = ({ data, uniq_lic, itemData }: any) => {
 
   // Count undetermined license files
   const nonLicFiles = data.filter(
-    (licenseData: { LicenseConcluded: string | any[]; }) =>
+    (licenseData: { LicenseConcluded: string | any[] }) =>
       !licenseData.LicenseConcluded ||
-      licenseData.LicenseConcluded === 'NOASSERTION' ||
-      licenseData.LicenseConcluded.length === 0
+            licenseData.LicenseConcluded === 'NOASSERTION' ||
+            licenseData.LicenseConcluded.length === 0
   ).length;
 
   // Extract project license
@@ -277,7 +295,10 @@ async function checkForWeakness(dataObject: any[], setWeakness: any) {
         ]);
 
         // Check if vulnerability exists
-        if ((codeqlData?.length ?? 0) > 0 || (sonarqubeData?.total ?? 0) > 0) {
+        if (
+          (codeqlData?.length ?? 0) > 0 ||
+                    (sonarqubeData?.total ?? 0) > 0
+        ) {
           foundPackages[dependency.name] = true;
         }
       } catch (error) {
@@ -289,15 +310,24 @@ async function checkForWeakness(dataObject: any[], setWeakness: any) {
   setWeakness(foundPackages);
 }
 
-
 const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
-  const headings = ["ID", "Name", "BeS Tech Stack", "License", "Link", "Weakness"];
+  const headings = [
+    'ID',
+    'Name',
+    'BeS Tech Stack',
+    'License',
+    'Link',
+    'Weakness',
+  ];
   const tableData: any[] = [];
   const tracked = new Set<string>(); // Use Set for efficient duplicate tracking
 
   // Create a lookup map from masterData for quick access
   const masterDataMap = new Map(
-    masterData.map((item: { name: string }) => [item.name.toLowerCase(), item])
+    masterData.map((item: { name: string }) => [
+      item.name.toLowerCase(),
+      item,
+    ])
   );
 
   data.forEach((dp: { name: string }) => {
@@ -310,8 +340,8 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
       tableData.push({
         ID: dataObject.id,
         Name: dataObject.name,
-        "BeS Tech Stack": dataObject.bes_technology_stack,
-        License: dataObject.license?.spdx_id || "N/A",
+        'BeS Tech Stack': dataObject.bes_technology_stack,
+        License: dataObject.license?.spdx_id || 'N/A',
         Link: (
           <a
             href={ `/BeSLighthouse/Project-Of-Interest/bes_version_history/:${dataObject.id}/:${dataObject.name}` }
@@ -319,7 +349,7 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
             link
           </a>
         ),
-        Weakness: weakness[dataObject.name] ? "Exist" : "Absent",
+        Weakness: weakness[dataObject.name] ? 'Exist' : 'Absent',
       });
     }
   });
@@ -328,29 +358,372 @@ const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
     <>
       { tracked.size ? (
         <>
-          <MKTypography sx={ { paddingTop: 2, fontWeight: "bold", fontSize: "18px" } }>
+          <MKTypography
+            sx={ {
+              paddingTop: 2,
+              fontWeight: 'bold',
+              fontSize: '18px',
+            } }
+          >
             Dependencies Tracked under the Lab
           </MKTypography>
-          <BasicTable tableData={ tableData } tableHeading={ headings } tableStyle={ { textAlign: "center" } } />
+          <BasicTable
+            tableData={ tableData }
+            tableHeading={ headings }
+            tableStyle={ { textAlign: 'center' } }
+          />
         </>
       ) : (
         <MKTypography
           sx={ {
-            fontWeight: "bold",
-            fontSize: "18px",
-            width: "100%",
-            height: "100%",
-            paddingY: "15%",
+            fontWeight: 'bold',
+            fontSize: '18px',
+            width: '100%',
+            height: '100%',
+            paddingY: '15%',
             marginX: 4,
           } }
         >
-          <b>None of the dependencies detected are currently tracked in this lab</b>
+          <b>
+            None of the dependencies detected are currently tracked
+            in this lab
+          </b>
         </MKTypography>
       ) }
     </>
   );
 };
 
+function generateCryptoFunctionsData(cryptography: any) {
+  const functionCounts: any = {};
+
+  cryptography.components.forEach((component: any) => {
+    const { cryptoProperties, evidence }: any = component;
+
+    if (cryptoProperties && cryptoProperties.algorithmProperties) {
+      const { cryptoFunctions } = cryptoProperties.algorithmProperties;
+
+      if (cryptoFunctions) {
+        cryptoFunctions.forEach((func: any) => {
+          if (!functionCounts[func]) {
+            functionCounts[func] = 0;
+          }
+          functionCounts[func] += evidence.occurrences.length;
+        });
+      }
+    }
+  });
+
+  // Define hardcoded colors for functions
+  const colorMap: any = {
+    keygen: '#F06292', // Pink
+    digest: '#2196F3', // Blue
+    tag: '#6A0DAD', // Purple
+  };
+
+  // Convert object to array format
+  const cryptoFunctionsData = Object.entries(functionCounts).map(
+    ([name, count]) => ({
+      name: name.charAt(0).toUpperCase() + name.slice(1), // Capitalize first letter
+      value: count,
+      color: colorMap[name.toLowerCase()] || '#757575', // Default color if not found
+    })
+  );
+
+  // Calculate total occurrences
+  // const total = cryptoFunctionsData.reduce((sum, item: any) => sum + item.value, 0);
+
+  // Normalize values to percentage
+  return cryptoFunctionsData.map((item: any) => ({
+    ...item,
+    value: item.value, // Convert to percentage
+  }));
+}
+
+function generateCryptoStats(cryptographyData: any) {
+  const primitiveCounts: any = {};
+
+  const colorMapping: any = {
+    'key-agree': '#1E88E5', // Deep Blue
+    hash: '#6A0DAD', // Purple
+    pke: '#4CAF50', // Green
+    other: '#FFC107', // Amber
+    signature: '#D32F2F', // Crimson Red
+    mac: '#795548', // Warm Brown
+    'block-cipher': '#607D8B', // Muted Cyan
+    ae: '#9C27B0', // Dark Magenta
+    kdf: '#FFD700', // Light Cyan
+  };
+  // Count occurrences of each "primitive" type
+  cryptographyData.components.forEach((component: any) => {
+    if (
+      component.cryptoProperties &&
+            component.cryptoProperties.algorithmProperties
+    ) {
+      const primitive: any =
+                component.cryptoProperties.algorithmProperties.primitive.toLowerCase() ||
+                'other';
+      const occurrenceCount: any =
+                component.evidence.occurrences.length || 0;
+
+      if (!primitiveCounts[primitive]) {
+        primitiveCounts[primitive] = {
+          count: 0,
+          color: colorMapping[primitive] || colorMapping.other,
+        };
+      }
+      primitiveCounts[primitive].count += occurrenceCount;
+    }
+  });
+
+  // Calculate total occurrences
+  // const total: any = Object.values(primitiveCounts).reduce((sum, { count }: any) => sum + count, 0);
+
+  // Convert counts to JSON format with hardcoded colors
+  return Object.entries(primitiveCounts).map(
+    ([primitive, { count, color }]: any) => ({
+      name: primitive.charAt(0).toUpperCase() + primitive.slice(1), // Capitalize first letter
+      value: count, // Convert count to percentage
+      color: color,
+    })
+  );
+}
+
+// Function to render outside segment labels
+const renderLabel = (
+  { cx, cy, midAngle, outerRadius, value, fill }: any,
+  cryptoPrimitivesData: any
+) => {
+  const total: number = cryptoPrimitivesData.reduce(
+    (sum: any, item: any) => sum + item.value,
+    0
+  );
+
+  const RADIAN = Math.PI / 180;
+  const x = cx + (outerRadius + 20) * Math.cos(-midAngle * RADIAN);
+  const y = cy + (outerRadius + 20) * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={ x }
+      y={ y }
+      fill={ fill }
+      textAnchor="middle"
+      fontSize="16px"
+      fontWeight="bold"
+    >
+      { Number(total > 0 ? (value / total) * 100 : 0).toFixed(2) }%
+    </text>
+  );
+};
+
+const TABLE_HEAD = [
+  { id: "cryptographicAsset", label: "Cryptographic asset", alignRight: false },
+  { id: "Primitive", label: "Primitive", alignRight: false },
+  { id: "Location", label: "Location", alignRight: false }
+];
+
+const CryptographyModal = ({ cryptography }: any) => {
+  const cryptoPrimitivesData = generateCryptoStats(cryptography);
+  const cryptoFunctionsData = generateCryptoFunctionsData(cryptography);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
+
+  const handleChangePage = (event: any, newPage: any) => setPage(newPage);
+  const handleChangeRowsPerPage = (event: any) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+  return (
+    <Box sx={ { bgcolor: '#f4f4f4', width: '100%', padding: '20px', paddingTop: '22px' } }>
+      <Grid container spacing={ 2 } alignItems="center" pb={ 2 }>
+        { /* Left Section (Crypto Primitives) */ }
+        <Grid
+          item
+          xs={ 12 }
+          xl={ 6 }
+          sx={ { display: 'flex', justifyContent: 'center' } }
+        >
+          <Card
+            sx={ {
+              padding: '20px',
+              textAlign: 'center',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            } }
+          >
+            <PieChart width={ 400 } height={ 400 }>
+              <Pie
+                data={ cryptoPrimitivesData }
+                cx="50%"
+                cy="50%"
+                innerRadius={ 100 }
+                outerRadius={ 140 }
+                labelLine={ true }
+                label={ (props) =>
+                  renderLabel(props, cryptoPrimitivesData)
+                }
+                dataKey="value"
+              >
+                { cryptoPrimitivesData.map((entry, index) => (
+                  <Cell
+                    key={ `cell-${index}` }
+                    fill={ entry.color }
+                  />
+                )) }
+              </Pie>
+              <Tooltip />
+              <Legend
+                wrapperStyle={ {
+                  fontSize: '13px',
+                  paddingTop: '8px',
+                } }
+              />
+              { /* Central Text Inside Donut */ }
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontSize="28px"
+                fontWeight="bold"
+              >
+                { cryptoPrimitivesData.length }
+                <tspan
+                  x="50%"
+                  dy="24px"
+                  fontSize="16px"
+                  fontWeight="normal"
+                >
+                  Crypto Primitives
+                </tspan>
+              </text>
+            </PieChart>
+          </Card>
+        </Grid>
+
+        { /* Right Section (Crypto Functions) */ }
+        <Grid
+          item
+          xs={ 12 }
+          xl={ 6 }
+          sx={ { display: 'flex', justifyContent: 'center' } }
+        >
+          <Card
+            sx={ {
+              padding: '20px',
+              textAlign: 'center',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            } }
+          >
+            <PieChart width={ 400 } height={ 400 }>
+              <Pie
+                data={ cryptoFunctionsData }
+                cx="50%"
+                cy="50%"
+                innerRadius={ 100 }
+                outerRadius={ 140 }
+                labelLine={ true }
+                label={ (props) =>
+                  renderLabel(props, cryptoPrimitivesData)
+                }
+                dataKey="value"
+              >
+                { cryptoFunctionsData.map((entry, index) => (
+                  <Cell
+                    key={ `cell-${index}` }
+                    fill={ entry.color }
+                  />
+                )) }
+              </Pie>
+              <Tooltip />
+              <Legend
+                wrapperStyle={ {
+                  fontSize: '13px',
+                  paddingTop: '8px',
+                } }
+              />
+              { /* Central Text Inside Donut */ }
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+              >
+                <tspan fontSize="28px" fontWeight="bold">
+                  3
+                </tspan>
+                <tspan x="50%" dy="24px" fontSize="16px">
+                  Crypto Functions
+                </tspan>
+              </text>
+            </PieChart>
+          </Card>
+        </Grid>
+      </Grid>
+      <TableContainer>
+        <Table>
+          <TableHead sx={ { display: "contents" } }>
+            <TableRow>
+              { TABLE_HEAD.map((headCell) => (
+                <TableCell
+                  key={ headCell.id }
+                  sx={ { color: "#637381", backgroundColor: "#F4F6F8" } }
+                  align={ headCell.alignRight ? "right" : "left" }
+                >
+                  <TableSortLabel hideSortIcon>{ headCell.label }</TableSortLabel>
+                </TableCell>
+              )) }
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            { cryptography.components
+              .flatMap((component: any) =>
+                component.evidence.occurrences.map((occurrence: any) => ({
+                  name: component.name.toUpperCase(),
+                  primitive: component.cryptoProperties?.algorithmProperties?.primitive.toUpperCase() || "Unspecified",
+                  filename: `${occurrence.location.split("/").pop()}:${occurrence.line}`,
+                }))
+              )
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) // <-- Apply pagination here
+              .map((row: any, index: any) => (
+                <TableRow key={ index }>
+                  <TableCell>{ row.name }</TableCell>
+                  <TableCell>
+                    <div >{ row.primitive }</div>
+                    <div style={ { color: "#888" } }>{ cryptoDictionary?.[row.primitive.toLowerCase() as CryptoPrimitive]?.fullName || "" }</div>
+                  </TableCell>
+                  <TableCell>{ row.filename }</TableCell>
+                </TableRow>
+              )) }
+          </TableBody>
+        </Table>
+        <TablePagination
+          rowsPerPageOptions={ [15, 30, 45] }
+          component="div"
+          count={ cryptography.components.reduce(
+            (total: any, component: any) => total + (component.evidence?.occurrences?.length || 0),
+            0
+          ) }
+          rowsPerPage={ rowsPerPage }
+          page={ page }
+          onPageChange={ handleChangePage }
+          onRowsPerPageChange={ handleChangeRowsPerPage }
+          sx={ {
+            ".MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows": {
+              margin: "auto",
+            },
+          } }
+        />
+      </TableContainer>
+    </Box>
+  );
+};
 
 function GetAssessmentData(
   version: string,
@@ -363,100 +736,83 @@ function GetAssessmentData(
   const [codeQlData, setCQData]: any = React.useState([]);
   const [sonarqubeData, setSQData]: any = React.useState({});
   const [weakness, setWeakness]: any = React.useState({});
+  const [cryptography, setCryptography]: any = React.useState({});
 
-  let reportNameMap = '';
-  let reportNameMapCodeql = '';
-  if (report === 'Criticality Score') {
-    reportNameMap = 'Criticality Score';
-  } else if (report === 'Vulnerabilities') {
-    reportNameMapCodeql = 'Codeql';
-  } else if (report === 'License Compliance') {
-    reportNameMap = 'Fossology';
-  } else if (report === 'Dependencies') {
-    reportNameMap = 'SBOM';
-  } else if (report === 'ScoreCard') {
-    reportNameMap = 'Scorecard';
-  }
+  const reportMappings: any = {
+    'Criticality Score': 'Criticality Score',
+    Vulnerabilities: 'Codeql',
+    'License Compliance': 'Fossology',
+    Dependencies: 'SBOM',
+    ScoreCard: 'Scorecard',
+    Cryptography: 'cryptography',
+  };
+
+  const reportNameMap = reportMappings[report] || '';
 
   React.useEffect(() => {
     if (version?.trim()) {
-      let link: string = '';
-      link = `${assessmentDatastoreURL}/${name}/${version}/${assessmentPath[reportNameMap]}/${name}-${version}-${assessmentReport[reportNameMap]}-report.json`;
-      fetchJsonData(link, setJsonData);
+      const baseUrl = `${assessmentDatastoreURL}/${name}/${version}`;
+      if (reportNameMap) {
+        const link = `${baseUrl}/${assessmentPath[reportNameMap]}/${name}-${version}-${assessmentReport[reportNameMap]}-report.json`;
+        fetchJsonData(link, setJsonData);
+      }
+      if (reportNameMap === 'cryptography') {
+        fetchJsonData(
+          `${baseUrl}/${reportNameMap}/${name}-${version}-${reportNameMap}-report.json`,
+          setCryptography
+        );
+      }
+      fetchvulJsonData(
+        `${baseUrl}/sast/${name}-${version}-sonarqube-report.json`,
+        'sonarqube',
+        setCQData,
+        setSQData
+      );
+      fetchvulJsonData(
+        `${baseUrl}/${assessmentPath.Codeql}/${name}-${version}-codeql-report.json`,
+        'codeql',
+        setCQData,
+        setSQData
+      );
     }
   }, [version]);
 
   React.useEffect(() => {
-    if (version?.trim()) {
-      let link: string = '';
-      // Fix me
-      link = `${assessmentDatastoreURL}/${name}/${version}/sast/${name}-${version}-sonarqube-report.json`;
-      fetchvulJsonData(link, 'sonarqube', setCQData, setSQData);
+    if (masterData && jsonData?.packages) {
+      const dataObject = masterData.filter((element) =>
+        jsonData.packages.some(
+          (item: any) =>
+            item.name.toLowerCase() === element.name.toLowerCase()
+        )
+      );
+      if (dataObject.length > 0 && Object.keys(weakness).length === 0) {
+        checkForWeakness(dataObject, setWeakness);
+      }
     }
-  }, [version]);
+  }, [jsonData, masterData]);
 
-  React.useEffect(() => {
-    if (version?.trim()) {
-      let link: string = '';
-      link = `${assessmentDatastoreURL}/${name}/${version}/${assessmentPath[reportNameMapCodeql]}/${name}-${version}-codeql-report.json`;
-      fetchvulJsonData(link, 'codeql', setCQData, setSQData);
-    }
-  }, [version]);
-
-  const jsonDataLength: number = Object.values(jsonData).length;
-
-  React.useEffect(() => {
-    const dataObject = masterData?.filter((element: { name: string }) =>
-      jsonData?.packages?.some(
-        (item: { name: string }) =>
-          item.name.toLowerCase() === element.name.toLowerCase()
-      )
-    );
-    if (dataObject.length > 0 && Object.values(weakness).length === 0) {
-      checkForWeakness(dataObject, setWeakness);
-    }
-  });
-
+  const jsonDataLength = Object.keys(jsonData).length;
   const pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
+  const myObject = { pathname: pathName, state: jsonData };
 
-  const myObject = { pathname: pathName, state: jsonData } as {
-        pathname: string
-    };
-
-  if (report === 'Criticality Score' && jsonDataLength !== 0) {
-    let color_code = '';
-    let risk_level = '';
-    let criticality_score: any = 0.0;
-    if ('default_score' in jsonData) {
-      criticality_score = parseFloat(jsonData.default_score);
-    } else if ('criticality_score' in jsonData) {
-      criticality_score = jsonData.criticality_score;
+  const getRiskColor = (score: any, ranges: any) => {
+    for (const [min, max, color, risk] of ranges) {
+      if (score >= min && score < max) return [color, risk];
     }
-    if (
-      criticality_score.toFixed(2) >= 0.1 &&
-            criticality_score.toFixed(2) < 0.4
-    ) {
-      color_code = '#008000';
+    return ['', ''];
+  };
 
-      risk_level = 'Low risk';
-    } else if (
-      criticality_score.toFixed(2) >= 0.4 &&
-            criticality_score.toFixed(2) < 0.6
-    ) {
-      color_code = '#FFC300';
-
-      risk_level = 'Medium risk';
-    } else if (
-      criticality_score.toFixed(2) >= 0.6 &&
-            criticality_score.toFixed(2) <= 1.0
-    ) {
-      color_code = '#FF5733';
-
-      risk_level = 'High risk';
-    }
-
+  if (report === 'Criticality Score' && jsonDataLength) {
+    const criticality_score = parseFloat(
+      jsonData.default_score || jsonData.criticality_score || 0
+    ).toFixed(2);
+    const [color_code, risk_level] = getRiskColor(criticality_score, [
+      [0.1, 0.4, '#008000', 'Low risk'],
+      [0.4, 0.6, '#FFC300', 'Medium risk'],
+      [0.6, 1.0, '#FF5733', 'High risk'],
+    ]);
     return [
-      criticality_score.toFixed(2),
+      criticality_score,
       <FetchCS data={ jsonData } />,
       color_code,
       '',
@@ -464,29 +820,13 @@ function GetAssessmentData(
     ];
   }
 
-  if (report === 'ScoreCard' && jsonDataLength !== 0) {
-    let color_code = '';
-
-    let risk_level = '';
-
-    if (jsonData.score >= 0 && jsonData.score <= 2) {
-      color_code = '#008000';
-
-      risk_level = 'Low risk';
-    } else if (jsonData.score > 2 && jsonData.score <= 5) {
-      color_code = '#FFC300';
-
-      risk_level = 'Medium risk';
-    } else if (jsonData.score > 5 && jsonData.score <= 7.5) {
-      color_code = '#FF5733';
-
-      risk_level = 'High risk';
-    } else if (jsonData.score > 7.5 && jsonData.score <= 10) {
-      color_code = '#C70039';
-
-      risk_level = 'Critical risk';
-    }
-
+  if (report === 'ScoreCard' && jsonDataLength) {
+    const [color_code, risk_level] = getRiskColor(jsonData.score, [
+      [0, 2, '#008000', 'Low risk'],
+      [2, 5, '#FFC300', 'Medium risk'],
+      [5, 7.5, '#FF5733', 'High risk'],
+      [7.5, 10, '#C70039', 'Critical risk'],
+    ]);
     return [
       jsonData.score,
       <FetchLowScores data={ jsonData } />,
@@ -496,86 +836,50 @@ function GetAssessmentData(
     ];
   }
 
-  if (
-    report === 'Vulnerabilities' &&
-        Object.values(codeQlData).length !== 0 &&
-        Object.values(sonarqubeData).length === 0
-  ) {
-    return [
-      codeQlData.length,
-      <FetchSastReport cqData={ codeQlData } sqData={ sonarqubeData } />,
-      '',
-      '',
-    ];
-  } else if (
-    report === 'Vulnerabilities' &&
-        Object.values(sonarqubeData).length !== 0 &&
-        Object.values(codeQlData).length === 0
-  ) {
-    const issues: any = Object.values(sonarqubeData)[5];
-    let count = 0;
-    if (issues && issues.length > 0) {
-      for (let i = 0; i < issues.length; i++) {
-        if (
-          issues[i].severity === 'CRITICAL' ||
-                    issues[i].severity === 'MAJOR' ||
-                    issues[i].severity === 'MINOR' ||
-                    issues[i].severity === 'BLOCKER'
-        )
-          count++;
-      }
+  if (report === 'Vulnerabilities') {
+    if (codeQlData.length && !Object.keys(sonarqubeData).length) {
+      return [
+        codeQlData.length,
+        <FetchSastReport cqData={ codeQlData } sqData={ sonarqubeData } />,
+        '',
+        '',
+      ];
     }
-    return [
-      count,
-      <FetchSastReport cqData={ codeQlData } sqData={ issues } />,
-      '',
-      '',
-    ];
-  } else if (
-    report === 'Vulnerabilities' &&
-        Object.values(codeQlData).length !== 0 &&
-        Object.values(sonarqubeData).length !== 0
-  ) {
-    const codeqldetails: any = Object.values(codeQlData);
-
-    const codeqllength: number = Object.values(codeQlData).length;
-
-    const sqissues: any = Object.values(sonarqubeData)[5];
-
-    return [
-      codeqllength,
-      <FetchSastReport cqData={ codeqldetails } sqData={ sqissues } />,
-      '',
-      '',
-    ];
+    if (!codeQlData.length && Object.keys(sonarqubeData).length) {
+      const issues: any = Object.values(sonarqubeData)[5] || [];
+      const count = issues.filter((issue: any) =>
+        ['CRITICAL', 'MAJOR', 'MINOR', 'BLOCKER'].includes(
+          issue.severity
+        )
+      ).length;
+      return [
+        count,
+        <FetchSastReport cqData={ codeQlData } sqData={ issues } />,
+        '',
+        '',
+      ];
+    }
+    if (codeQlData.length && Object.keys(sonarqubeData).length) {
+      return [
+        codeQlData.length,
+        <FetchSastReport
+          cqData={ codeQlData }
+          sqData={ Object.values(sonarqubeData)[5] }
+        />,
+        '',
+        '',
+      ];
+    }
   }
 
-  if (report === 'License Compliance' && jsonDataLength !== 0) {
-    const uniqueLicenses: any = [];
-
-    for (let i = 0; i < jsonData.length; i++) {
-      let flag: number = 0;
-
-      for (let j = 0; j < uniqueLicenses.length; j++) {
-        if (
-          jsonData[i].LicenseConcluded === uniqueLicenses[j] ||
-                    jsonData[i].LicenseConcluded === 'NOASSERTION'
-        ) {
-          flag = 1;
-
-          break;
-        }
-      }
-
-      if (
-        flag === 0 &&
-                jsonData[i].hasOwnProperty('LicenseConcluded') &&
-                jsonData[i].LicenseConcluded.length !== 0
-      ) {
-        uniqueLicenses.push(jsonData[i].LicenseConcluded);
-      }
-    }
-
+  if (report === 'License Compliance' && jsonDataLength) {
+    const uniqueLicenses = Array.from(
+      new Set(
+        jsonData
+          .filter((item: any) => item.LicenseConcluded && item.LicenseConcluded !== 'NOASSERTION')
+          .map((item: { LicenseConcluded: any }) => item.LicenseConcluded)
+      )
+    );
     return [
       uniqueLicenses.length,
       <FetchLicense
@@ -588,37 +892,40 @@ function GetAssessmentData(
     ];
   }
 
-  if (report === 'Dependencies' && jsonDataLength !== 0) {
-    if (
-      !(
-        jsonData.packages.length === 1 &&
-                jsonData.packages[0].name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      return [
-        jsonData.packages.length - 1,
-        <FetchSBOM
-          data={ jsonData.packages }
-          masterData={ masterData }
-          name={ name }
-          weakness={ weakness }
-        />,
-        '',
-        myObject,
-      ];
-    }
+  if (report === 'Dependencies' && jsonDataLength) {
+    const packages = jsonData.packages.filter(
+      (pkg: { name: string; }) => pkg.name.toLowerCase() !== name.toLowerCase()
+    );
+    return [
+      packages.length,
+      <FetchSBOM
+        data={ packages }
+        masterData={ masterData }
+        name={ name }
+        weakness={ weakness }
+      />,
+      '',
+      myObject,
+    ];
+  }
+
+  if (report === 'Cryptography' && Object.keys(cryptography).length) {
+    return [
+      cryptography.components.length - 1,
+      <CryptographyModal cryptography={ cryptography } />,
+      '',
+      '',
+      true,
+    ];
   }
 
   return (
     <MKTypography
       variant="h6"
-      key="TYPOSBOMMAINBLANK1"
       color="inherit"
       style={ {
         fontSize: '12px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        textAlign: 'center',
         position: 'relative',
         top: '67px',
       } }
@@ -639,6 +946,8 @@ function printText(item: string): string {
   case 'ScoreCard':
   case 'Criticality Score':
     return `OpenSSF ${item}`;
+  case 'Cryptography':
+    return `${item} dependencies`;
   default:
     return `on ${item}`;
   }
@@ -647,10 +956,11 @@ function printText(item: string): string {
 const imageMap: Record<string, any> = {
   Vulnerabilities: vulnerabilityIcon,
   Dependencies: dependencyIcon,
-  "License Compliance": licenseIcon,
-  "TAVOSS Score": tavossIcon,
+  'License Compliance': licenseIcon,
+  'TAVOSS Score': tavossIcon,
   ScoreCard: scorecardIcon,
-  "Criticality Score": scorecardIcon,
+  'Criticality Score': scorecardIcon,
+  Cryptography: encryptionIcon,
 };
 
 function getImage(report: string): any {
@@ -659,40 +969,35 @@ function getImage(report: string): any {
 
 function modalStyle(report: string) {
   const baseStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "fit-content",
-    height: "fit-content",
-    boxShadow: "24",
-    padding: "4",
-    backgroundColor: "white",
-    display: "flex",
-    flexWrap: "wrap",
-    placeContent: "center",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 'fit-content',
+    height: 'fit-content',
+    boxShadow: '24',
+    padding: '4',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexWrap: 'wrap',
+    placeContent: 'center',
   };
 
   const styleOverrides: any = {
-    Vulnerabilities: { width: "50%" },
-    ScoreCard: { height: "90%" },
+    Vulnerabilities: { width: '50%' },
+    ScoreCard: { height: '90%' },
   };
 
   return { ...baseStyle, ...styleOverrides[report] };
 }
 
 const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
-  // close functionality
   const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const [isHovered, setIsHovered] = useState(false);
+
+  const toggleOpen = () => setOpen((prev) => !prev);
+  const toggleHover = (state: any) => () => setIsHovered(state);
+
   const data: any = GetAssessmentData(
     version,
     name,
@@ -700,212 +1005,132 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
     itemData,
     masterData
   );
-  let color: any;
-  const countData = data[0];
-  if (data && data[2]) {
-    color = data[2];
-  } else {
-    color = '';
-  }
+  const color = data?.[2] || '';
+  const countData = data?.[0];
+  const hasValidData = data && countData !== undefined;
+
+  const tooltipContent =
+        item === 'ScoreCard' ? (
+          <>
+            <p>
+              Scorecard is an automated tool that assesses a number of
+              important heuristics associated with software security and
+              assigns each check a score of 0-10.
+            </p>
+            <ul>
+              <li>Low risk: 0 - 2</li>
+              <li>Medium risk: 2 - 5</li>
+              <li>High risk: 5 - 7.5</li>
+              <li>Critical risk: 7.5 - 10</li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <p>
+              A project's criticality score defines the influence and
+              importance of a project. It is a number between 0
+              (least-critical) and 1 (most-critical).
+            </p>
+            <ul>
+              <li>Low Critical: 0.1 - 0.4</li>
+              <li>Medium Critical: 0.4 - 0.6</li>
+              <li>Highly Critical: 0.6 - 1.0</li>
+            </ul>
+          </>
+        );
+
   return (
     <>
       <Button
         variant="contained"
-        onClick={ handleOpen }
-        disabled={ !(data && countData !== undefined) }
+        onClick={ toggleOpen }
+        disabled={ !hasValidData }
         sx={ {
           height: '100px',
           width: '100%',
           padding: '8px',
           ':hover': {
             boxShadow: '0 15px 20px rgba(0,0,0,0.1)',
-
             transition: 'box-shadow 0.5s ease-in-out',
             border: '1px solid #5c4f4f',
             color: 'blueviolet',
           },
         } }
-        style={ {
-          backgroundColor: 'white',
-          display: 'block',
-          textAlign: 'left',
-        } }
+        style={ { backgroundColor: 'white', textAlign: 'left' } }
       >
-        { color ? (
-          <MKTypography
-            style={ {
-              fontSize: '40px',
-              color: color,
-              fontWeight: 'bold',
-            } }
-          >
-            { data ? data[0] : 0 }
-            <img
-              style={ {
-                width: '40px',
-                float: 'right',
-                position: 'relative',
-                top: '14px',
-                height: '40px',
-              } }
-              src={ getImage(item) }
-            />
-          </MKTypography>
-        ) : (
-          <MKTypography
-            style={ {
-              fontSize: '40px',
-              fontWeight: 'bold',
-              color: 'black',
-              display: 'flex',         // Enables flexbox
-              alignItems: 'center',    // Aligns items vertically
-              width: '100%',           // Ensures full width
-            } }
-          >
-            <span style={ { flex: 8, textAlign: 'left' } }>
-              { data ? data[0] : 0 }
-            </span>
-            <img
-              style={ {
-                flex: 2,              // Allocates 20% width to the image
-                maxWidth: '80px',     // Prevents excessive stretching
-                height: '40px',
-              } }
-              src={ getImage(item) }
-            />
-          </MKTypography>
-        ) }
-
-        <MKTypography
-          textTransform="capitalize"
+        <Typography
           style={ {
-            fontSize: '12px',
+            fontSize: '40px',
+            fontWeight: 'bold',
+            color: color || 'black',
           } }
         >
+          { countData || 0 }
+          <img
+            src={ getImage(item) }
+            style={ {
+              width: '40px',
+              float: 'right',
+              height: '40px',
+            } }
+          />
+        </Typography>
+        <Typography
+          textTransform="capitalize"
+          style={ { fontSize: '12px' } }
+        >
           { printText(item) }
-          { item === 'ScoreCard' || item === 'Criticality Score' ? (
+          { (item === 'ScoreCard' || item === 'Criticality Score') && (
             <span
-              style={ {
-                position: 'absolute',
-                fontSize: '12px',
-                cursor: 'pointer',
-                display: 'inline-block',
-                transition: 'color 0.5s',
-                color: '#36454F',
-                marginLeft: '5px',
-              } }
-              onMouseEnter={ () => setIsHovered(true) }
-              onMouseLeave={ () => setIsHovered(false) }
+              style={ { cursor: 'pointer', marginLeft: '5px' } }
+              onMouseEnter={ toggleHover(true) }
+              onMouseLeave={ toggleHover(false) }
             >
               <i className="fas fa-info-circle" />
             </span>
-          ) : (
-            ''
           ) }
           { isHovered && (
-            <div
-              style={ {
-                position: 'absolute',
-                top: '98%',
-                left: '55%',
-                transform: 'translateX(-70%)',
-                backgroundColor: '#fff',
-                color: 'black',
-                padding: '8px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
-                fontSize: '12px',
-                fontWeight: 'normal',
-                transition: 'opacity 0.5s',
-                zIndex: 9999,
-                whiteSpace: 'nowrap',
-              } }
-            >
-              { item === 'ScoreCard' ? (
-                <>
-                  <p>
-                    Scorecard is an automated tool that
-                    assesses a number of important
-                    heuristics associated with software
-                    security and assigns each check a score
-                    of 0-10.
-                  </p>
-                  <ul
-                    style={ {
-                      listStyleType: 'disc',
-                      margin: '8px',
-                      paddingInlineStart: '14px',
-                    } }
-                  >
-                    <li>Low risk: 0 - 2</li>
-                    <li>Medium risk: 2 - 5</li>
-                    <li>High risk: 5 - 7.5</li>
-                    <li>Critical risk: 7.5 - 10</li>
-                  </ul>
-                </>
-              ) : (
-                <>
-                  <p>
-                    A project's criticality score defines
-                    the influence and importance of a
-                    project. It is a number between 0
-                    (least-critical) and 1 (most-critical).
-                  </p>
-                  <ul
-                    style={ {
-                      listStyleType: 'disc',
-                      margin: '8px',
-                      paddingInlineStart: '14px',
-                    } }
-                  >
-                    <li>Low Critical: 0.1 - 0.4</li>
-                    <li>Medium critical: 0.4 - 0.6</li>
-                    <li>Highly critical: 0.6 - 1.0</li>
-                  </ul>
-                </>
-              ) }
-            </div>
+            <div className="tooltip">{ tooltipContent }</div>
           ) }
-        </MKTypography>
+        </Typography>
       </Button>
 
-      <Modal
-        open={ open }
-        onClose={ handleClose }
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        closeAfterTransition
-      >
+      <Modal open={ open } onClose={ toggleOpen } closeAfterTransition>
         <Fade in={ open }>
           <Box
             style={ {
-              ...modalStyle(item),
-              borderRadius: '9px',
-              boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
+              ...(data?.[4] ? {
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "95%",
+                maxHeight: "90vh",
+                overflowY: "auto",
+                bgcolor: "#f4f4f4",
+                boxShadow: 24,
+                p: 4,
+                borderRadius: 2,
+              } : { 
+                ...modalStyle(item),
+                borderRadius: '9px',
+                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)'
+              }),
             } }
           >
             <IconButton
-              style={ {
-                position: 'absolute',
-                top: '0px',
-                right: '0px',
-                color: 'black',
-              } }
-              onClick={ handleClose }
+              style={ { position: 'absolute', top: 0, right: 0 } }
+              onClick={ toggleOpen }
             >
               <CloseIcon
                 fontSize="medium"
                 sx={ { ':hover': { color: 'red' } } }
               />
             </IconButton>
-            { data ? data[1] : 'Not found' }
-
-            { data && data[3] ? (
+            { data?.[1] || 'Not found' }
+            { data?.[3] && (
               <Typography
                 style={ {
-                  fontSize: '15px',
-                  color: 'black',
                   position: 'fixed',
                   right: '40px',
                   bottom: '10px',
@@ -913,8 +1138,6 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
               >
                 <Link to={ data[3] }>Detailed Report</Link>
               </Typography>
-            ) : (
-              ''
             ) }
           </Box>
         </Fade>
