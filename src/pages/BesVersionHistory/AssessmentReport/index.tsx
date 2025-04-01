@@ -29,7 +29,7 @@ import {
   assessmentPath,
   assessmentReport,
 } from '../../../utils/assessmentReport';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import vulnerabilityIcon from '../../../assets/images/bug.png';
 import dependencyIcon from '../../../assets/images/data-flow.png';
 import licenseIcon from '../../../assets/images/certificate.png';
@@ -41,9 +41,9 @@ import FetchSastReport from './FetchSastReport';
 import { PieChart, Pie, Legend, Cell, Tooltip } from 'recharts';
 
 import cryptoDictionary from '../../../resources/crypto-dictionary.json';
+import * as d3 from 'd3';
 
-type CryptoPrimitive = keyof typeof cryptoDictionary;
-
+type CryptoPrimitive = keyof typeof cryptoDictionary
 
 export const fetchJsonData = async (link: any, setJsonData: any) => {
   try {
@@ -518,16 +518,202 @@ const renderLabel = (
 };
 
 const TABLE_HEAD = [
-  { id: "cryptographicAsset", label: "Cryptographic asset", alignRight: false },
-  { id: "Primitive", label: "Primitive", alignRight: false },
-  { id: "Location", label: "Location", alignRight: false }
+  {
+    id: 'cryptographicAsset',
+    label: 'Cryptographic asset',
+    alignRight: false,
+  },
+  { id: 'Primitive', label: 'Primitive', alignRight: false },
+  { id: 'Location', label: 'Location', alignRight: false },
 ];
+
+type BubbleData = {
+    name: string
+    value: number
+    color: string
+    x?: number
+    y?: number
+}
+
+function getColorForName(name: string) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = (hash << 5) - hash + name.charCodeAt(i);
+    hash = hash & hash; // Convert to 32bit integer
+  }
+
+  const hue = Math.abs(hash % 360); // Hue based on the hash
+  return `hsl(${hue}, 80%, 60%)`; // HSL format with dynamic hue
+}
+
+const BubbleChart: any = ({ cryptography }: any) => {
+  const occurrenceMap: any = {};
+
+  // Loop through each component and accumulate the value (occurrences)
+  cryptography.components.forEach((component: any) => {
+    const name = component.name;
+    const count = component.evidence.occurrences.length;
+
+    if (occurrenceMap[name]) {
+      occurrenceMap[name] += count;
+    } else {
+      occurrenceMap[name] = count;
+    }
+  });
+
+  // Convert the map to an array of BubbleData objects
+  const data = Object.keys(occurrenceMap).map((name) => {
+    return {
+      name: name,
+      value: occurrenceMap[name],
+      color: getColorForName(name),
+    };
+  });
+
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const width = 400,
+      height = 400;
+
+    const svg = d3
+      .select(svgRef.current)
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .append('g')
+      .attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+    const tooltip = d3.select(tooltipRef.current);
+
+    d3.forceSimulation<BubbleData>(data)
+      .force('charge', d3.forceManyBody().strength(5))
+      .force('center', d3.forceCenter(0, 0))
+      .force(
+        'collision',
+        d3.forceCollide().radius((d: any) => d.value * 4 + 5)
+      )
+      .on('tick', ticked);
+
+    function ticked() {
+      const bubbles = svg
+        .selectAll<SVGCircleElement, BubbleData>('circle')
+        .data(data);
+
+      bubbles
+        .enter()
+        .append('circle')
+        .attr('r', (d) => d.value * 4)
+        .attr('fill', (d) => d.color)
+        .attr('stroke', '#000')
+        .merge(bubbles)
+        .attr('cx', (d: any) => d.x!)
+        .attr('cy', (d: any) => d.y!)
+        .on('mouseover', (event: MouseEvent, d: BubbleData) => {
+          d3.select(event.target as SVGCircleElement)
+            .attr('stroke-width', 3)
+            .attr('stroke', '#fff');
+
+          tooltip
+            .style('opacity', 1)
+            .style('left', `${d.x! + width / 2 + 10}px`) // Adjust left position relative to bubble
+            .style('top', `${d.y! + height / 2 - 20}px`) // Position slightly above bubble
+            .html(`<strong>${d.name}</strong> ${d.value}`);
+        })
+        .on('mouseout', (event: MouseEvent) => {
+          d3.select(event.target as SVGCircleElement)
+            .attr('stroke-width', 1)
+            .attr('stroke', '#000');
+
+          tooltip.style('opacity', 0);
+        });
+    }
+  }, []);
+
+  return (
+    <Card
+      sx={ {
+        textAlign: 'center',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      } }
+    >
+      { /* Title */ }
+      <Typography
+        variant="h5"
+        sx={ { textAlign: 'center', textTransform: 'none' } }
+      >
+        Crypto Assets
+      </Typography>
+      <svg ref={ svgRef } width={ 345 } height={ 345 } />
+
+      { /* Tooltip */ }
+      <div
+        ref={ tooltipRef }
+        style={ {
+          position: 'absolute',
+          backgroundColor: 'white',
+          padding: '5px 10px',
+          border: '1px solid black',
+          borderRadius: '5px',
+          boxShadow: '2px 2px 5px rgba(0,0,0,0.2)',
+          fontSize: '14px',
+          fontWeight: 'bold',
+          pointerEvents: 'none',
+          opacity: 0, // Hidden by default
+        } }
+      />
+
+      { /* Legend */ }
+      <Box
+        sx={ {
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '10px',
+          position: 'relative',
+          // pb: 2,
+          justifyContent: 'center', // Centers horizontally
+          alignItems: 'center', // Centers vertically
+          width: '100%', // Ensures full width
+        } }
+      >
+        { data.slice(0, 6).map((item, index) => (
+          <Box
+            key={ index }
+            sx={ {
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: '13px',
+            } }
+          >
+            <span
+              style={ {
+                width: 15,
+                height: 15,
+                backgroundColor: item.color,
+                display: 'inline-block',
+                marginRight: 5,
+              } }
+            />
+            { item.name }
+          </Box>
+        )) }
+        { data.length > 6 && (
+          <Box sx={ { fontSize: '13px', fontWeight: 'bold' } }>
+            +{ data.length - 6 } other crypto assets
+          </Box>
+        ) }
+      </Box>
+    </Card>
+  );
+};
 
 const CryptographyModal = ({ cryptography }: any) => {
   const cryptoPrimitivesData = generateCryptoStats(cryptography);
   const cryptoFunctionsData = generateCryptoFunctionsData(cryptography);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(15);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangePage = (event: any, newPage: any) => setPage(newPage);
   const handleChangeRowsPerPage = (event: any) => {
@@ -535,15 +721,21 @@ const CryptographyModal = ({ cryptography }: any) => {
     setPage(0);
   };
   return (
-    <Box sx={ { bgcolor: '#f4f4f4', width: '100%', padding: '20px', paddingTop: '22px' } }>
-      <Grid container spacing={ 2 } alignItems="center" pb={ 2 }>
+    <Box
+      sx={ {
+        bgcolor: '#f4f4f4',
+        width: '100%',
+        padding: '20px',
+        paddingTop: '22px',
+      } }
+    >
+      { /* <Grid container spacing={ 2 } alignItems="center" pb={ 2 }> */ }
+      <Grid container spacing={ 2 } alignItems="stretch" pb={ 2 } pt={ 1.2 }>
+        <Grid item xs={ 12 } xl={ 4 } sx={ { display: 'flex' } }>
+          <BubbleChart cryptography={ cryptography } />
+        </Grid>
         { /* Left Section (Crypto Primitives) */ }
-        <Grid
-          item
-          xs={ 12 }
-          xl={ 6 }
-          sx={ { display: 'flex', justifyContent: 'center' } }
-        >
+        <Grid item xs={ 12 } xl={ 4 } sx={ { display: 'flex' } }>
           <Card
             sx={ {
               padding: '20px',
@@ -554,6 +746,12 @@ const CryptographyModal = ({ cryptography }: any) => {
               alignItems: 'center',
             } }
           >
+            <Typography
+              variant="h5"
+              sx={ { textAlign: 'center', textTransform: 'none' } }
+            >
+              Crypto Primitives
+            </Typography>
             <PieChart width={ 400 } height={ 400 }>
               <Pie
                 data={ cryptoPrimitivesData }
@@ -608,7 +806,7 @@ const CryptographyModal = ({ cryptography }: any) => {
         <Grid
           item
           xs={ 12 }
-          xl={ 6 }
+          xl={ 4 }
           sx={ { display: 'flex', justifyContent: 'center' } }
         >
           <Card
@@ -621,6 +819,12 @@ const CryptographyModal = ({ cryptography }: any) => {
               alignItems: 'center',
             } }
           >
+            <Typography
+              variant="h5"
+              sx={ { textAlign: 'center', textTransform: 'none' } }
+            >
+              Crypto Functions
+            </Typography>
             <PieChart width={ 400 } height={ 400 }>
               <Pie
                 data={ cryptoFunctionsData }
@@ -656,7 +860,7 @@ const CryptographyModal = ({ cryptography }: any) => {
                 dominantBaseline="middle"
               >
                 <tspan fontSize="28px" fontWeight="bold">
-                  3
+                  { cryptoFunctionsData.length }
                 </tspan>
                 <tspan x="50%" dy="24px" fontSize="16px">
                   Crypto Functions
@@ -668,15 +872,22 @@ const CryptographyModal = ({ cryptography }: any) => {
       </Grid>
       <TableContainer>
         <Table>
-          <TableHead sx={ { display: "contents" } }>
+          <TableHead sx={ { display: 'contents' } }>
             <TableRow>
               { TABLE_HEAD.map((headCell) => (
                 <TableCell
                   key={ headCell.id }
-                  sx={ { color: "#637381", backgroundColor: "#F4F6F8" } }
-                  align={ headCell.alignRight ? "right" : "left" }
+                  sx={ {
+                    color: '#637381',
+                    backgroundColor: '#F4F6F8',
+                  } }
+                  align={
+                    headCell.alignRight ? 'right' : 'left'
+                  }
                 >
-                  <TableSortLabel hideSortIcon>{ headCell.label }</TableSortLabel>
+                  <TableSortLabel hideSortIcon>
+                    { headCell.label }
+                  </TableSortLabel>
                 </TableCell>
               )) }
             </TableRow>
@@ -684,19 +895,30 @@ const CryptographyModal = ({ cryptography }: any) => {
           <TableBody>
             { cryptography.components
               .flatMap((component: any) =>
-                component.evidence.occurrences.map((occurrence: any) => ({
-                  name: component.name.toUpperCase(),
-                  primitive: component.cryptoProperties?.algorithmProperties?.primitive.toUpperCase() || "Unspecified",
-                  filename: `${occurrence.location.split("/").pop()}:${occurrence.line}`,
-                }))
+                component.evidence.occurrences.map(
+                  (occurrence: any) => ({
+                    name: component.name.toUpperCase(),
+                    primitive:
+                                            component.cryptoProperties?.algorithmProperties?.primitive.toUpperCase() ||
+                                            'Unspecified',
+                    filename: `${occurrence.location.split('/').pop()}:${occurrence.line}`,
+                  })
+                )
               )
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) // <-- Apply pagination here
+              .slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              ) // <-- Apply pagination here
               .map((row: any, index: any) => (
                 <TableRow key={ index }>
                   <TableCell>{ row.name }</TableCell>
                   <TableCell>
-                    <div >{ row.primitive }</div>
-                    <div style={ { color: "#888" } }>{ cryptoDictionary?.[row.primitive.toLowerCase() as CryptoPrimitive]?.fullName || "" }</div>
+                    <div>{ row.primitive }</div>
+                    <div style={ { color: '#888' } }>
+                      { cryptoDictionary?.[
+                                                row.primitive.toLowerCase() as CryptoPrimitive
+                      ]?.fullName || '' }
+                    </div>
                   </TableCell>
                   <TableCell>{ row.filename }</TableCell>
                 </TableRow>
@@ -704,10 +926,12 @@ const CryptographyModal = ({ cryptography }: any) => {
           </TableBody>
         </Table>
         <TablePagination
-          rowsPerPageOptions={ [15, 30, 45] }
+          rowsPerPageOptions={ [5, 10, 15] }
           component="div"
           count={ cryptography.components.reduce(
-            (total: any, component: any) => total + (component.evidence?.occurrences?.length || 0),
+            (total: any, component: any) =>
+              total +
+                            (component.evidence?.occurrences?.length || 0),
             0
           ) }
           rowsPerPage={ rowsPerPage }
@@ -715,9 +939,10 @@ const CryptographyModal = ({ cryptography }: any) => {
           onPageChange={ handleChangePage }
           onRowsPerPageChange={ handleChangeRowsPerPage }
           sx={ {
-            ".MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows": {
-              margin: "auto",
-            },
+            '.MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows':
+                            {
+                              margin: 'auto',
+                            },
           } }
         />
       </TableContainer>
@@ -876,8 +1101,15 @@ function GetAssessmentData(
     const uniqueLicenses = Array.from(
       new Set(
         jsonData
-          .filter((item: any) => item.LicenseConcluded && item.LicenseConcluded !== 'NOASSERTION')
-          .map((item: { LicenseConcluded: any }) => item.LicenseConcluded)
+          .filter(
+            (item: any) =>
+              item.LicenseConcluded &&
+                            item.LicenseConcluded !== 'NOASSERTION'
+          )
+          .map(
+            (item: { LicenseConcluded: any }) =>
+              item.LicenseConcluded
+          )
       )
     );
     return [
@@ -894,7 +1126,8 @@ function GetAssessmentData(
 
   if (report === 'Dependencies' && jsonDataLength) {
     const packages = jsonData.packages.filter(
-      (pkg: { name: string; }) => pkg.name.toLowerCase() !== name.toLowerCase()
+      (pkg: { name: string }) =>
+        pkg.name.toLowerCase() !== name.toLowerCase()
     );
     return [
       packages.length,
@@ -1067,12 +1300,14 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
         >
           { countData || 0 }
           <img
-            src={ getImage(item) }
             style={ {
               width: '40px',
               float: 'right',
+              position: 'relative',
+              top: '14px',
               height: '40px',
             } }
+            src={ getImage(item) }
           />
         </Typography>
         <Typography
@@ -1099,23 +1334,26 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
         <Fade in={ open }>
           <Box
             style={ {
-              ...(data?.[4] ? {
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: "95%",
-                maxHeight: "90vh",
-                overflowY: "auto",
-                bgcolor: "#f4f4f4",
-                boxShadow: 24,
-                p: 4,
-                borderRadius: 2,
-              } : { 
-                ...modalStyle(item),
-                borderRadius: '9px',
-                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)'
-              }),
+              ...(data?.[4]
+                ? {
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '95%',
+                  maxHeight: '90vh',
+                  overflowY: 'auto',
+                  bgcolor: '#f4f4f4',
+                  boxShadow: 24,
+                  p: 4,
+                  borderRadius: 2,
+                }
+                : {
+                  ...modalStyle(item),
+                  borderRadius: '9px',
+                  boxShadow:
+                                          '0px 0px 10px rgba(0, 0, 0, 0.6)',
+                }),
             } }
           >
             <IconButton
