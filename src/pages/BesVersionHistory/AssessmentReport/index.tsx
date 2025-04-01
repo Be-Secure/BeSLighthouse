@@ -536,7 +536,9 @@ type BubbleData = {
 function getColorForName(name: string) {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
+    // eslint-disable-next-line no-bitwise
     hash = (hash << 5) - hash + name.charCodeAt(i);
+    // eslint-disable-next-line no-bitwise
     hash = hash & hash; // Convert to 32bit integer
   }
 
@@ -928,8 +930,7 @@ const CryptographyModal = ({ cryptography }: any) => {
           component="div"
           count={ cryptography.components.reduce(
             (total: any, component: any) =>
-              total +
-                            (component.evidence?.occurrences?.length || 0),
+              total + (component.evidence?.occurrences?.length || 0),
             0
           ) }
           rowsPerPage={ rowsPerPage }
@@ -937,10 +938,9 @@ const CryptographyModal = ({ cryptography }: any) => {
           onPageChange={ handleChangePage }
           onRowsPerPageChange={ handleChangeRowsPerPage }
           sx={ {
-            '.MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows':
-                            {
-                              margin: 'auto',
-                            },
+            '.MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows':{
+              margin: 'auto',
+            },
           } }
         />
       </TableContainer>
@@ -1158,7 +1158,11 @@ function GetAssessmentData(
 
   if (report === 'Cryptography' && Object.keys(cryptography).length) {
     return [
-      cryptography.components.length - 1,
+      cryptography.components.reduce(
+        (total: any, component: any) =>
+          total + (component.evidence?.occurrences?.length || 0),
+        0
+      ),
       <CryptographyModal cryptography={ cryptography } />,
       '',
       '',
