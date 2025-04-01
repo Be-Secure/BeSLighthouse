@@ -72,7 +72,7 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
     },
     {
       name: 'Rapport Score',
-      value: spearPhishingDetails?.rapportScore ?? 'Not available',
+      value: Math.floor(spearPhishingDetails?.rapportScore) ?? 'Not available',
       title: "Rapport Building Skill",
       text: 'in spear phishing scenario',
     },
