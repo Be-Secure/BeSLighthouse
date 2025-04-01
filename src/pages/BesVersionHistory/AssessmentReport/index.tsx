@@ -115,11 +115,9 @@ const FetchLowScores = ({ data }: any) => {
   const headings = ['Issue', 'Reason'];
 
   // Filter issues with scores <= 5
-  const lowscorers =
-        data.checks?.filter(
-          (issue: { score?: number }) =>
-            issue?.score === undefined || issue.score <= 5
-        ) || [];
+  const lowscorers = data.checks?.filter(
+    (issue: { score?: number }) => issue?.score === undefined || issue.score <= 5
+  ) || [];
 
   // Transform lowscorers into table data
   const tableData = lowscorers.map((issue: any) => ({
@@ -1045,13 +1043,29 @@ function GetAssessmentData(
     ];
   }
 
-  if (report === 'ScoreCard' && jsonDataLength) {
-    const [color_code, risk_level] = getRiskColor(jsonData.score, [
-      [0, 2, '#008000', 'Low risk'],
-      [2, 5, '#FFC300', 'Medium risk'],
-      [5, 7.5, '#FF5733', 'High risk'],
-      [7.5, 10, '#C70039', 'Critical risk'],
-    ]);
+  if (report === 'ScoreCard' && jsonDataLength !== 0) {
+    let color_code = '';
+
+    let risk_level = '';
+
+    if (jsonData.score >= 0 && jsonData.score <= 2) {
+      color_code = '#008000';
+
+      risk_level = 'Low risk';
+    } else if (jsonData.score > 2 && jsonData.score <= 5) {
+      color_code = '#FFC300';
+
+      risk_level = 'Medium risk';
+    } else if (jsonData.score > 5 && jsonData.score <= 7.5) {
+      color_code = '#FF5733';
+
+      risk_level = 'High risk';
+    } else if (jsonData.score > 7.5 && jsonData.score <= 10) {
+      color_code = '#C70039';
+
+      risk_level = 'Critical risk';
+    }
+
     return [
       jsonData.score,
       <FetchLowScores data={ jsonData } />,
@@ -1148,7 +1162,8 @@ function GetAssessmentData(
       <CryptographyModal cryptography={ cryptography } />,
       '',
       '',
-      true,
+      '',
+      true
     ];
   }
 
@@ -1229,7 +1244,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const toggleOpen = () => setOpen((prev) => !prev);
-  const toggleHover = (state: any) => () => setIsHovered(state);
+  // const toggleHover = (state: any) => () => setIsHovered(state);
 
   const data: any = GetAssessmentData(
     version,
@@ -1243,34 +1258,49 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
   const hasValidData = data && countData !== undefined;
 
   const tooltipContent =
-        item === 'ScoreCard' ? (
-          <>
-            <p>
-              Scorecard is an automated tool that assesses a number of
-              important heuristics associated with software security and
-              assigns each check a score of 0-10.
-            </p>
-            <ul>
-              <li>Low risk: 0 - 2</li>
-              <li>Medium risk: 2 - 5</li>
-              <li>High risk: 5 - 7.5</li>
-              <li>Critical risk: 7.5 - 10</li>
-            </ul>
-          </>
-        ) : (
-          <>
-            <p>
-              A project's criticality score defines the influence and
-              importance of a project. It is a number between 0
-              (least-critical) and 1 (most-critical).
-            </p>
-            <ul>
-              <li>Low Critical: 0.1 - 0.4</li>
-              <li>Medium Critical: 0.4 - 0.6</li>
-              <li>Highly Critical: 0.6 - 1.0</li>
-            </ul>
-          </>
-        );
+  item === 'ScoreCard' ? (
+    <>
+      <p>
+        Scorecard is an automated tool that
+        assesses a number of important
+        heuristics associated with software
+        security and assigns each check a score
+        of 0-10.
+      </p>
+      <ul
+        style={ {
+          listStyleType: 'disc',
+          margin: '8px',
+          paddingInlineStart: '14px',
+        } }
+      >
+        <li>Low risk: 0 - 2</li>
+        <li>Medium risk: 2 - 5</li>
+        <li>High risk: 5 - 7.5</li>
+        <li>Critical risk: 7.5 - 10</li>
+      </ul>
+    </>
+  ) : (
+    <>
+      <p>
+        A project's criticality score defines
+        the influence and importance of a
+        project. It is a number between 0
+        (least-critical) and 1 (most-critical).
+      </p>
+      <ul
+        style={ {
+          listStyleType: 'disc',
+          margin: '8px',
+          paddingInlineStart: '14px',
+        } }
+      >
+        <li>Low Critical: 0.1 - 0.4</li>
+        <li>Medium critical: 0.4 - 0.6</li>
+        <li>Highly critical: 0.6 - 1.0</li>
+      </ul>
+    </>
+  );
 
   return (
     <>
@@ -1289,52 +1319,111 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
             color: 'blueviolet',
           },
         } }
-        style={ { backgroundColor: 'white', textAlign: 'left' } }
+        style={ { backgroundColor: 'white', display: 'block', textAlign: 'left' } }
       >
-        <Typography
+        
+        { color ? (
+          <MKTypography
+            style={ {
+              fontSize: '40px',
+              color: color,
+              fontWeight: 'bold',
+            } }
+          >
+            { data ? data[0] : 0 }
+            <img
+              style={ {
+                width: '40px',
+                float: 'right',
+                position: 'relative',
+                top: '14px',
+                height: '40px',
+              } }
+              src={ getImage(item) }
+            />
+          </MKTypography>
+        ) : (
+          <MKTypography
+            style={ {
+              fontSize: '40px',
+              fontWeight: 'bold',
+              color: 'black',
+              display: 'flex',         // Enables flexbox
+              alignItems: 'center',    // Aligns items vertically
+              width: '100%',           // Ensures full width
+            } }
+          >
+            <span style={ { flex: 8, textAlign: 'left' } }>
+              { data ? data[0] : 0 }
+            </span>
+            <img
+              style={ {
+                flex: 2,              // Allocates 20% width to the image
+                maxWidth: '80px',     // Prevents excessive stretching
+                height: '40px',
+              } }
+              src={ getImage(item) }
+            />
+          </MKTypography>
+        ) }
+
+        <MKTypography
+          textTransform="capitalize"
           style={ {
-            fontSize: '40px',
-            fontWeight: 'bold',
-            color: color || 'black',
+            fontSize: '12px',
           } }
         >
-          { countData || 0 }
-          <img
-            style={ {
-              width: '40px',
-              float: 'right',
-              position: 'relative',
-              top: '14px',
-              height: '40px',
-            } }
-            src={ getImage(item) }
-          />
-        </Typography>
-        <Typography
-          textTransform="capitalize"
-          style={ { fontSize: '12px' } }
-        >
           { printText(item) }
-          { (item === 'ScoreCard' || item === 'Criticality Score') && (
+          { item === 'ScoreCard' || item === 'Criticality Score' ? (
             <span
-              style={ { cursor: 'pointer', marginLeft: '5px' } }
-              onMouseEnter={ toggleHover(true) }
-              onMouseLeave={ toggleHover(false) }
+              style={ {
+                position: 'absolute',
+                fontSize: '12px',
+                cursor: 'pointer',
+                display: 'inline-block',
+                transition: 'color 0.5s',
+                color: '#36454F',
+                marginLeft: '5px',
+              } }
+              onMouseEnter={ () => setIsHovered(true) }
+              onMouseLeave={ () => setIsHovered(false) }
             >
               <i className="fas fa-info-circle" />
             </span>
+          ) : (
+            ''
           ) }
           { isHovered && (
-            <div className="tooltip">{ tooltipContent }</div>
+            <div
+              style={ {
+                position: 'absolute',
+                top: '98%',
+                left: '55%',
+                transform: 'translateX(-70%)',
+                backgroundColor: '#fff',
+                color: 'black',
+                padding: '8px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
+                fontSize: '12px',
+                fontWeight: 'normal',
+                transition: 'opacity 0.5s',
+                zIndex: 9999,
+                whiteSpace: 'nowrap',
+              } }
+            >
+              { tooltipContent }
+            </div>
           ) }
-        </Typography>
+        </MKTypography>
       </Button>
 
       <Modal open={ open } onClose={ toggleOpen } closeAfterTransition>
         <Fade in={ open }>
           <Box
             style={ {
-              ...(data?.[4]
+              ...(data?.[5]
                 ? {
                   position: 'absolute',
                   top: '50%',
@@ -1351,8 +1440,7 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
                 : {
                   ...modalStyle(item),
                   borderRadius: '9px',
-                  boxShadow:
-                                          '0px 0px 10px rgba(0, 0, 0, 0.6)',
+                  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
                 }),
             } }
           >
@@ -1369,6 +1457,8 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
             { data?.[3] && (
               <Typography
                 style={ {
+                  fontSize: '15px',
+                  color: 'black',
                   position: 'fixed',
                   right: '40px',
                   bottom: '10px',
