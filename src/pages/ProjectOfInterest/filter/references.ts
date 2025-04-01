@@ -26,7 +26,8 @@ export const SecurityDomain: any = {
   "Cloud Security (SD-CS)": "SD-CS",
   "Blockchain Security (SD-BS)": "SD-BS",
   "Network Security (SD-NS)": "SD-NS",
-  "IOT/OT Security (SD-IoTS)": "SD-IoTS"
+  "IOT/OT Security (SD-IoTS)": "SD-IoTS",
+  "Cryptography (SD-Crypto)": "SD-Crypto",
 };
 
 export const TechnologyDomain: any = {

@@ -16,6 +16,7 @@ export const projectTags: any = {
   "Blockchain Security (SD-BS)": "SD-BS",
   "Network Security (SD-NS)": "SD-NS",
   "IOT/OT Security (SD-IoTS)": "SD-IoTS",
+  "Cryptography (SD-Crypto)": "SD-Crypto",
   "Web Development (TD-U-W)": "TD-U-W",
   "Artifical Intelligence / Machine Learning (TD-U-AI/ML)": "TD-U-AI/ML",
   "Database (TD-U-Db)": "TD-U-Db",
