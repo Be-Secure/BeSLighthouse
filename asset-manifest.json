@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.3beea095.js",
+    "main.js": "/BeSLighthouse/static/js/main.7e75bd23.js",
     "static/js/239.f8861bf9.chunk.js": "/BeSLighthouse/static/js/239.f8861bf9.chunk.js",
     "static/js/213.706908f8.chunk.js": "/BeSLighthouse/static/js/213.706908f8.chunk.js",
     "static/js/732.4a6e7413.chunk.js": "/BeSLighthouse/static/js/732.4a6e7413.chunk.js",
@@ -9,6 +9,7 @@
     "static/media/AIShield-watchtower-final-logo.png": "/BeSLighthouse/static/media/AIShield-watchtower-final-logo.6e52458814e122cfd516.png",
     "static/media/bug.png": "/BeSLighthouse/static/media/bug.55ee0482380aca3704a1.png",
     "static/media/checked.png": "/BeSLighthouse/static/media/checked.861324da99611e46145f.png",
+    "static/media/encryption.png": "/BeSLighthouse/static/media/encryption.e7b26a24152953a942e0.png",
     "static/media/data-flow.png": "/BeSLighthouse/static/media/data-flow.57344c263ecb081abd0f.png",
     "static/media/speedometer.png": "/BeSLighthouse/static/media/speedometer.1603ca6ef9ceeeb06a8c.png",
     "static/media/network.png": "/BeSLighthouse/static/media/network.d43be01716cf6678725f.png",
@@ -20,12 +21,12 @@
     "static/media/certificate.png": "/BeSLighthouse/static/media/certificate.d97bbadc67cdb4b5540e.png",
     "static/media/gavel.png": "/BeSLighthouse/static/media/gavel.0728ffd76239f17a3a46.png",
     "index.html": "/BeSLighthouse/index.html",
-    "main.3beea095.js.map": "/BeSLighthouse/static/js/main.3beea095.js.map",
+    "main.7e75bd23.js.map": "/BeSLighthouse/static/js/main.7e75bd23.js.map",
     "239.f8861bf9.chunk.js.map": "/BeSLighthouse/static/js/239.f8861bf9.chunk.js.map",
     "213.706908f8.chunk.js.map": "/BeSLighthouse/static/js/213.706908f8.chunk.js.map",
     "732.4a6e7413.chunk.js.map": "/BeSLighthouse/static/js/732.4a6e7413.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.3beea095.js"
+    "static/js/main.7e75bd23.js"
   ]
 }
