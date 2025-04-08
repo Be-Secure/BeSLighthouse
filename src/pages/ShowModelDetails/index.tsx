@@ -28,7 +28,7 @@ function ShowModelDetails() {
           <SummaryCards name={ model[0]?.name }/>
         ) }
 
-        { modelType === "LLM" && (
+        { modelType === "LLM" || modelType === "SLM" && (
           <SummaryDashboard model={ model }/>
         ) }
       </MKBox >
