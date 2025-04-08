@@ -8,7 +8,8 @@ import { getStyles } from "../../../utils/styles";
 
 const names = [
   "Classic",
-  "LLM"
+  "LLM",
+  "SLM"
 ];
 
 export function ModelType({ filter, setFilter }: any) {
