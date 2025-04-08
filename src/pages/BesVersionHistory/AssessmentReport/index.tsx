@@ -308,6 +308,7 @@ async function checkForWeakness(dataObject: any[], setWeakness: any) {
   setWeakness(foundPackages);
 }
 
+
 const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
   const headings = [
     'ID',
