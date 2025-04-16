@@ -1806,7 +1806,7 @@ const SummaryDashboard = ({ model }: any) => {
                       } }
                     >
                       <StyledTableCell>
-                        Probe Category
+                        Category
                       </StyledTableCell>
                       <StyledTableCell>
                         Sub Category
