@@ -1773,7 +1773,7 @@ const SummaryDashboard = ({ model }: any) => {
                 pt: 1,
               } }
             >
-              Vulnerability Analysis
+              LLM Robustness Audit
             </Typography>
             <TableContainer
               component={ Paper }
@@ -1838,7 +1838,7 @@ const SummaryDashboard = ({ model }: any) => {
                             variant="body1"
                             color="textSecondary"
                           >
-                            Vulnerability analysis data not
+                            LLM Robustness Audit data not
                             available
                           </Typography>
                         </Box>
