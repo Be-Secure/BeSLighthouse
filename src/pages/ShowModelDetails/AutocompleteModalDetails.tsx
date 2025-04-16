@@ -172,6 +172,7 @@ export default function CWETable({ rows }: { rows: any[] }) {
     </TableContainer>
   );
 }
+
 export const AutocompleteModal = ({
   autocompleteSummaryData,
   autocompleteDetailedData,
