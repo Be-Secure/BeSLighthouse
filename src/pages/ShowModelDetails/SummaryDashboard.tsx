@@ -1773,7 +1773,7 @@ const SummaryDashboard = ({ model }: any) => {
                 pt: 1,
               } }
             >
-              Security Benchmark
+              Vulnerability Analysis
             </Typography>
             <TableContainer
               component={ Paper }
@@ -1838,7 +1838,7 @@ const SummaryDashboard = ({ model }: any) => {
                             variant="body1"
                             color="textSecondary"
                           >
-                            Security Benchmark data not
+                            Vulnerability analysis data not
                             available
                           </Typography>
                         </Box>
