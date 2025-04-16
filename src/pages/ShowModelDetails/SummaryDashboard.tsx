@@ -1650,102 +1650,116 @@ const SummaryDashboard = ({ model }: any) => {
             </Typography>
             <TableContainer
               component={ Paper }
-              sx={ { height: '312px', padding: '4px' } }
+              sx={ {
+                height: '315px',
+                borderBottomLeftRadius: '12px',
+                borderBottomRightRadius: '12px',
+                overflow: 'hidden', // <-- this is the key for scrollable + rounded
+              } }
             >
-              <StyledTable aria-label="customized table">
-                <StyledTableHead
-                  sx={ {
-                    backgroundColor: '#156082 !important',
-                    color: '#fff',
-                    display: 'contents',
-                  } }
-                >
-                  <TableRow
+              <Box
+                sx={ {
+                  maxHeight: '315px',
+                  overflowY: 'auto',
+                  borderBottomLeftRadius: 'inherit',
+                  borderBottomRightRadius: 'inherit',
+                } }
+              >
+                <StyledTable aria-label="customized table">
+                  <StyledTableHead
                     sx={ {
                       backgroundColor: '#156082 !important',
+                      color: '#fff',
+                      display: 'contents',
                     } }
                   >
-                    <StyledTableCell sx={ { width: '80%' } }>
-                      Hazards Category
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      Grade
-                    </StyledTableCell>
-                  </TableRow>
-                </StyledTableHead>
-                <TableBody>
-                  { safetyBenchmark?.scores?.length === undefined || safetyBenchmark?.scores?.length === 0 ? (
-                    <StyledTableRow>
-                      <StyledTableCell
-                        colSpan={ 2 }
-                        align="center"
-                        sx={ {
-                          height: '270px',
-                          verticalAlign: 'middle',
-                          backgroundColor: '#fff',
-                        } }
-                      >
-                        <Typography
-                          variant="body1"
-                          color="textSecondary"
-                        >
-                          Safety Benchmark data not
-                          available
-                        </Typography>
+                    <TableRow
+                      sx={ {
+                        backgroundColor: '#156082 !important',
+                      } }
+                    >
+                      <StyledTableCell sx={ { width: '80%' } }>
+                        Hazards Category
                       </StyledTableCell>
-                    </StyledTableRow>
-                  ) : (
-                    safetyBenchmark?.scores?.map(
-                      (score: any, scoreIndex: number) =>
-                        score.hazard_scores?.map(
-                          (
-                            hazard: any,
-                            hazardIndex: number
-                          ) => {
-                            const hazardType: string = extractHazardType(hazard.hazard_definition.uid || '');
+                      <StyledTableCell align="center">
+                        Grade
+                      </StyledTableCell>
+                    </TableRow>
+                  </StyledTableHead>
+                  <TableBody>
+                    { safetyBenchmark?.scores?.length === undefined || safetyBenchmark?.scores?.length === 0 ? (
+                      <StyledTableRow>
+                        <StyledTableCell
+                          colSpan={ 2 }
+                          align="center"
+                          sx={ {
+                            height: '270px',
+                            verticalAlign: 'middle',
+                            backgroundColor: '#fff',
+                          } }
+                        >
+                          <Typography
+                            variant="body1"
+                            color="textSecondary"
+                          >
+                            Safety Benchmark data not
+                            available
+                          </Typography>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ) : (
+                      safetyBenchmark?.scores?.map(
+                        (score: any, scoreIndex: number) =>
+                          score.hazard_scores?.map(
+                            (
+                              hazard: any,
+                              hazardIndex: number
+                            ) => {
+                              const hazardType: string = extractHazardType(hazard.hazard_definition.uid || '');
 
-                            return (
-                              <StyledTableRow
-                                key={ `${scoreIndex}-${hazardIndex}` }
-                              >
-                                <StyledTableCell
-                                  component="th"
-                                  scope="row"
-                                  sx={ {
-                                    backgroundColor: 'ccd2d8',
-                                  } }
+                              return (
+                                <StyledTableRow
+                                  key={ `${scoreIndex}-${hazardIndex}` }
                                 >
-                                  {
-                                    uid[
-                                      hazardType
-                                    ]
-                                  }
-                                </StyledTableCell>
-                                <StyledTableCell
-                                  align="center"
-                                  sx={ {
-                                    color: grade[
-                                      hazard
-                                        .text_grade
-                                    ].color,
-                                    fontWeight: 'bold',
-                                  } }
-                                >
-                                  {
-                                    grade[
-                                      hazard
-                                        .text_grade
-                                    ].name
-                                  }
-                                </StyledTableCell>
-                              </StyledTableRow>
-                            );
-                          }
-                        )
-                    )
-                  ) }
-                </TableBody>
-              </StyledTable>
+                                  <StyledTableCell
+                                    component="th"
+                                    scope="row"
+                                    sx={ {
+                                      backgroundColor: 'ccd2d8',
+                                    } }
+                                  >
+                                    {
+                                      uid[
+                                        hazardType
+                                      ]
+                                    }
+                                  </StyledTableCell>
+                                  <StyledTableCell
+                                    align="center"
+                                    sx={ {
+                                      color: grade[
+                                        hazard
+                                          .text_grade
+                                      ].color,
+                                      fontWeight: 'bold',
+                                    } }
+                                  >
+                                    {
+                                      grade[
+                                        hazard
+                                          .text_grade
+                                      ].name
+                                    }
+                                  </StyledTableCell>
+                                </StyledTableRow>
+                              );
+                            }
+                          )
+                      )
+                    ) }
+                  </TableBody>
+                </StyledTable>
+              </Box>
             </TableContainer>
           </Card>
         </Grid>
@@ -1763,92 +1777,106 @@ const SummaryDashboard = ({ model }: any) => {
             </Typography>
             <TableContainer
               component={ Paper }
-              sx={ { height: '312px' } }
+              sx={ {
+                height: '315px',
+                borderBottomLeftRadius: '12px',
+                borderBottomRightRadius: '12px',
+                overflow: 'hidden', // <-- this is the key for scrollable + rounded
+              } }
             >
-              <StyledTable aria-label="customized table">
-                <StyledTableHead
-                  sx={ {
-                    backgroundColor: '#156082 !important',
-                    color: '#fff',
-                    display: 'contents',
-                  } }
-                >
-                  <TableRow
+              <Box
+                sx={ {
+                  maxHeight: '315px',
+                  overflowY: 'auto',
+                  borderBottomLeftRadius: 'inherit',
+                  borderBottomRightRadius: 'inherit',
+                } }
+              >
+                <StyledTable aria-label="customized table">
+                  <StyledTableHead
                     sx={ {
                       backgroundColor: '#156082 !important',
+                      color: '#fff',
+                      display: 'contents',
                     } }
                   >
-                    <StyledTableCell>
-                      Probe Category
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      Sub Category
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      Fail %
-                    </StyledTableCell>
-                  </TableRow>
-                </StyledTableHead>
-                <TableBody>
-                  { flattenedMockData.length === 0 ? (
-                    <StyledTableCell
-                      colSpan={ 3 }
-                      align="center"
+                    <TableRow
                       sx={ {
-                        height: '270px',
-                        backgroundColor: '#fff',
-                        p: 0, // remove extra padding
+                        backgroundColor: '#156082 !important',
                       } }
                     >
-                      <Box
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        height="100%"
-                        width="100%"
+                      <StyledTableCell>
+                        Probe Category
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        Sub Category
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        Fail %
+                      </StyledTableCell>
+                    </TableRow>
+                  </StyledTableHead>
+                  <TableBody>
+                    { flattenedMockData.length === 0 ? (
+                      <StyledTableCell
+                        colSpan={ 3 }
+                        align="center"
+                        sx={ {
+                          height: '270px',
+                          backgroundColor: '#fff',
+                          p: 0, // remove extra padding
+                        } }
                       >
-                        <Typography
-                          variant="body1"
-                          color="textSecondary"
+                        <Box
+                          display="flex"
+                          justifyContent="center"
+                          alignItems="center"
+                          height="100%"
+                          width="100%"
                         >
-                          Security Benchmark data not
-                          available
-                        </Typography>
-                      </Box>
-                    </StyledTableCell>
-                  ) : (
-                    flattenedMockData.map((item, index) => {
-                      const isFirst = index === 0 || flattenedMockData[index - 1] .probeCategory !== item.probeCategory;
+                          <Typography
+                            variant="body1"
+                            color="textSecondary"
+                          >
+                            Security Benchmark data not
+                            available
+                          </Typography>
+                        </Box>
+                      </StyledTableCell>
+                    ) : (
+                      flattenedMockData.map((item, index) => {
+                        const isFirst = index === 0 || flattenedMockData[index - 1] .probeCategory !== item.probeCategory;
 
-                      const rowSpan = flattenedMockData.filter(
-                        (d) => d.probeCategory === item.probeCategory
-                      ).length;
+                        const rowSpan = flattenedMockData.filter(
+                          (d) => d.probeCategory === item.probeCategory
+                        ).length;
 
-                      return (
-                        <StyledTableRow key={ index }>
-                          { isFirst && (
-                            <StyledTableCell
-                              rowSpan={ rowSpan }
-                              sx={ {
-                                fontWeight: 'bold',
-                                backgroundColor: '#e0e6ec',
-                              } }
-                            >
-                              { item.probeCategory }
+                        return (
+                          <StyledTableRow key={ index }>
+                            { isFirst && (
+                              <StyledTableCell
+                                rowSpan={ rowSpan }
+                                sx={ {
+                                  fontWeight: 'bold',
+                                  backgroundColor: '#e0e6ec',
+                                } }
+                              >
+                                { item.probeCategory }
+                              </StyledTableCell>
+                            ) }
+                            <StyledTableCell>
+                              { item.subCategory }
                             </StyledTableCell>
-                          ) }
-                          <StyledTableCell>
-                            { item.subCategory }
-                          </StyledTableCell>
-                          <StyledTableCell>
-                            { item.failPercent }
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      );
-                    })
-                  ) }
-                </TableBody>
-              </StyledTable>
+                            <StyledTableCell>
+                              { item.failPercent }
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        );
+                      })
+                    ) }
+                  </TableBody>
+                </StyledTable>
+              </Box>
             </TableContainer>
           </Card>
         </Grid>
