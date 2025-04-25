@@ -109,7 +109,6 @@ export default function ProjectDisplay({ selectedFilter }: any) {
     );
   }
   if (Object.values(filterData).length !== 0) {
-    debugger;
     getUSERLIST = filterDataBasedOnUserSelecrtionOnTag(filterData, getUSERLIST);
   }
 
