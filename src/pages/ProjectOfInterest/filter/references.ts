@@ -44,18 +44,18 @@ export const TechnologyDomain: any = {
 };
 
 export const Industry: any = {
-  "Bank & Financial Institutions (BFSI)": "BFSI",
-  "Healthcare & Life Scienses (HLS)": "HLS",
-  "Consumer (CON)": "CON",
-  "Retail (RT)": "RT",
-  "Agritech (AgT)": "AgT",
-  "Education (ED)": "ED",
-  "Non Profit & Govt (NG)": "NG",
-  "Energy & Utilities (ENU)": "ENU",
-  "All (ALL)": "ALL",
-  "Automotive (AM)": "AM",
-  "Telecom (TEL)": "TEL",
-  "Cybersecurity (CyS)": "CyS"
+  "Bank & Financial Institutions (BFSI)": "IND-BFSI",
+  "Healthcare & Life Scienses (HLS)": "IND-HLS",
+  "Consumer (CON)": "IND-CON",
+  "Retail (RT)": "IND-RT",
+  "Agritech (AgT)": "IND-AgT",
+  "Education (ED)": "IND-ED",
+  "Non Profit & Govt (NG)": "IND-NG",
+  "Energy & Utilities (ENU)": "IND-ENU",
+  "All (ALL)": "IND-ALL",
+  "Automotive (AM)": "IND-AM",
+  "Telecom (TEL)": "IND-TEL",
+  "Cybersecurity (CyS)": "IND-CyS"
 };
 
 export const TechnologyDomainComposition: any = {
