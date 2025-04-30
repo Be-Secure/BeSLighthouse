@@ -68,28 +68,34 @@ function BesVersionHistory() {
 
   React.useEffect(() => {
     const fetchData = async () => {
+      // Step 1: Fetch data and update versionSummary via setVersionSummary
       await osspoiMasterAndSummary(setData, besId.slice(1), besName.slice(1), setVersionSummary);
-
-      // Set the default selected option if none is selected
-      if (!selectedOption && versionSummary.length > 0) {
-        const latestVersion = getLatestVersion(versionSummary);
-        if (latestVersion.version) {
-          setSelectedOption(latestVersion.version);
-        }
-      }
-
-      // If selectedOption is set, create links and verify them
-      if (selectedOption) {
-        const osarReportLink = createOsarReportLink(besName, selectedOption);
-        const cosignLink = createCosignLink(besName, selectedOption);
-
-        verifyLink(osarReportLink, setOsarReportData);
-        checkFileExists(cosignLink, setCosignLinkExists);
-      }
     };
 
     fetchData();
-  }, [besId, besName, selectedOption, versionSummary]);
+  }, [besId, besName]);
+
+  React.useEffect(() => {
+    // Step 2: When versionSummary is populated, set default selectedOption if not already set
+    if (!selectedOption && versionSummary.length > 0) {
+      const latestVersion = getLatestVersion(versionSummary);
+      if (latestVersion.version) {
+        setSelectedOption(latestVersion.version);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [versionSummary.length, selectedOption]);
+
+  React.useEffect(() => {
+    // Step 3: When selectedOption is ready, handle link creation and verification
+    if (selectedOption) {
+      const osarReportLink = createOsarReportLink(besName, selectedOption);
+      const cosignLink = createCosignLink(besName, selectedOption);
+
+      verifyLink(osarReportLink, setOsarReportData);
+      checkFileExists(cosignLink, setCosignLinkExists);
+    }
+  }, [selectedOption, besName]);
 
   const handleOptionChange: any = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);

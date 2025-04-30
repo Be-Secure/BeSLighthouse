@@ -36,7 +36,7 @@ import encryptionIcon from '../../../assets/images/encryption.png';
 import tavossIcon from '../../../assets/images/verified.png';
 import BasicTable from './BasicTable';
 import FetchSastReport from './FetchSastReport';
-import { PieChart, Pie, Legend, Cell, Tooltip } from 'recharts';
+import { PieChart, Pie, Legend, Cell, Tooltip, Sector } from 'recharts';
 
 import cryptoDictionary from '../../../resources/crypto-dictionary.json';
 import * as d3 from 'd3';
@@ -741,6 +741,8 @@ const BubbleChart: React.FC<{ cryptography: any }> = ({ cryptography }) => {
     const updateItemsPerPageOnResize = () => {
       if (window.innerWidth >= 1200 && window.innerWidth <= 1345) {
         setItemsPerPage(3); // Set to 3 when window width is between 1200px and 1345px
+      } else if (window.innerWidth >= 1346 && window.innerWidth <= 1496) {
+        setItemsPerPage(4); // Set to 3 when window width is between 1200px and 1345px
       } else {
         setItemsPerPage(5); // Default to 5 for wider windows
       }
@@ -853,9 +855,13 @@ const BubbleChart: React.FC<{ cryptography: any }> = ({ cryptography }) => {
                     borderRadius: '50%',
                   } }
                 />
-                { item.name.length > 4
-                  ? item.name.slice(0, 4) + '...'
-                  : item.name }
+                { item.name.length > 10
+                  ? item.name.trim().slice(0, 3) + '...'
+                  : item.name.length > 6
+                    ? item.name.trim().slice(0, 6) + '...'
+                    : item.name
+                }
+
               </Box>
             )) }
         </Box>
@@ -885,11 +891,68 @@ const BubbleChart: React.FC<{ cryptography: any }> = ({ cryptography }) => {
   );
 };
 
+const SortedLegend = ({
+  data,
+  onHover,
+}: {
+  data: any[];
+  onHover: (index: number | null) => void;
+}) => {
+  const sorted = [...data].sort((a, b) => b.value - a.value);
+
+  return (
+    <div
+      style={ {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '4px 8px',
+        padding: '12px 16px',
+      } }
+    >
+      { sorted.map((entry, index) => {
+        const originalIndex = data.findIndex((d) => d.name === entry.name);
+
+        return (
+          <div
+            key={ `item-${index}` }
+            onMouseEnter={ () => onHover(originalIndex) }
+            onMouseLeave={ () => {
+              console.log('Mouse left entire legend block');
+              onHover(null);
+            } }
+            style={ {
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: '13px',
+              cursor: 'pointer',
+            } }
+          >
+            <span
+              style={ {
+                display: 'inline-block',
+                width: 10,
+                height: 10,
+                backgroundColor: entry.color,
+                borderRadius: 2,
+                marginRight: 6,
+              } }
+            />
+            <span style={ { whiteSpace: 'nowrap' } }>{ entry.name }</span>
+          </div>
+        );
+      }) }
+    </div>
+  );
+};
+
 const CryptographyModal = ({ cryptography }: any) => {
   const cryptoPrimitivesData = generateCryptoStats(cryptography);
   const cryptoFunctionsData = generateCryptoFunctionsData(cryptography);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [activeIndexCryptoPrimitives, setActiveIndexCryptoPrimitives] = useState<number | null>(null);
+  const [activeIndexCryptoFunctions, setActiveIndexCryptoFunctions] = useState<number | null>(null);
 
   const handleChangePage = (event: any, newPage: any) => setPage(newPage);
   const handleChangeRowsPerPage = (event: any) => {
@@ -937,25 +1000,42 @@ const CryptographyModal = ({ cryptography }: any) => {
                 innerRadius={ 100 }
                 outerRadius={ 140 }
                 labelLine={ true }
+                activeIndex={ activeIndexCryptoPrimitives !== null ? activeIndexCryptoPrimitives : undefined }
+                activeShape={ (props: any) => (
+                  <Sector
+                    { ...props }
+                    outerRadius={ 150 }
+                    stroke="#000"
+                    strokeWidth={ 2 }
+                  />
+                ) }
                 label={ (props) =>
                   renderLabel(props, cryptoPrimitivesData)
                 }
                 dataKey="value"
               >
                 { cryptoPrimitivesData.map((entry, index) => (
-                  <Cell
-                    key={ `cell-${index}` }
-                    fill={ entry.color }
-                  />
+                  <Cell key={ `cell-${index}` } fill={ entry.color } />
                 )) }
               </Pie>
+
               <Tooltip />
+
               <Legend
+                content={ () => (
+                  <SortedLegend
+                    data={ cryptoPrimitivesData }
+                    onHover={ setActiveIndexCryptoPrimitives }
+                  />
+                ) }
                 wrapperStyle={ {
                   fontSize: '13px',
                   paddingTop: '8px',
+                  position: 'relative',
+                  bottom: '74px',
                 } }
               />
+
               { /* Central Text Inside Donut */ }
               <text
                 x="50%"
@@ -1011,25 +1091,40 @@ const CryptographyModal = ({ cryptography }: any) => {
                 innerRadius={ 100 }
                 outerRadius={ 140 }
                 labelLine={ true }
-                label={ (props) =>
-                  renderLabel(props, cryptoPrimitivesData)
-                }
+                activeIndex={ activeIndexCryptoFunctions !== null ? activeIndexCryptoFunctions : undefined }
+                activeShape={ (props: any) => (
+                  <Sector
+                    { ...props }
+                    outerRadius={ 150 }
+                    stroke="#000"
+                    strokeWidth={ 2 }
+                  />
+                ) }
+                label={ (props) => renderLabel(props, cryptoFunctionsData) }
                 dataKey="value"
               >
                 { cryptoFunctionsData.map((entry, index) => (
-                  <Cell
-                    key={ `cell-${index}` }
-                    fill={ entry.color }
-                  />
+                  <Cell key={ `cell-${index}` } fill={ entry.color } />
                 )) }
               </Pie>
+
               <Tooltip />
+
               <Legend
+                content={ () => (
+                  <SortedLegend
+                    data={ cryptoFunctionsData }
+                    onHover={ setActiveIndexCryptoFunctions }
+                  />
+                ) }
                 wrapperStyle={ {
                   fontSize: '13px',
                   paddingTop: '8px',
+                  position: 'relative',
+                  bottom: '74px',
                 } }
               />
+
               { /* Central Text Inside Donut */ }
               <text
                 x="50%"
