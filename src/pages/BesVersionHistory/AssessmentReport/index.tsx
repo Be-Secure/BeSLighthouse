@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import * as React from 'react';
 import {
   Box,
@@ -38,10 +36,11 @@ import encryptionIcon from '../../../assets/images/encryption.png';
 import tavossIcon from '../../../assets/images/verified.png';
 import BasicTable from './BasicTable';
 import FetchSastReport from './FetchSastReport';
-import { PieChart, Pie, Legend, Cell, Tooltip } from 'recharts';
+import { PieChart, Pie, Legend, Cell, Tooltip, Sector } from 'recharts';
 
 import cryptoDictionary from '../../../resources/crypto-dictionary.json';
 import * as d3 from 'd3';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 type CryptoPrimitive = keyof typeof cryptoDictionary
 
@@ -308,7 +307,6 @@ async function checkForWeakness(dataObject: any[], setWeakness: any) {
   setWeakness(foundPackages);
 }
 
-
 const FetchSBOM = ({ data, masterData, name, weakness }: any) => {
   const headings = [
     'ID',
@@ -547,36 +545,113 @@ function getColorForName(name: string) {
   return `hsl(${hue}, 80%, 60%)`; // HSL format with dynamic hue
 }
 
-const BubbleChart: any = ({ cryptography }: any) => {
-  const occurrenceMap: any = {};
+const sanitizeKey = (key: string) => key.replace(/["'<>]/g, ''); // safe key for selector
 
-  // Loop through each component and accumulate the value (occurrences)
-  cryptography.components.forEach((component: any) => {
-    const name = component.name;
-    const count = component.evidence.occurrences.length;
-
-    if (occurrenceMap[name]) {
-      occurrenceMap[name] += count;
-    } else {
-      occurrenceMap[name] = count;
-    }
-  });
-
-  // Convert the map to an array of BubbleData objects
-  const data = Object.keys(occurrenceMap).map((name) => {
-    return {
-      name: name,
-      value: occurrenceMap[name],
-      color: getColorForName(name),
-    };
-  });
-
+const BubbleChart: React.FC<{ cryptography: any }> = ({ cryptography }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
 
+  const [startIdx, setStartIdx] = useState(1);
+  const [endIdx, setEndIdx] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+
+  const occurrenceMap: Record<string, number> = {};
+
+  cryptography.components.forEach((component: any) => {
+    const name = component.name;
+    const count = component.evidence.occurrences.length;
+    occurrenceMap[name] = (occurrenceMap[name] || 0) + count;
+  });
+
+  const data: BubbleData[] = Object.keys(occurrenceMap).map((name) => ({
+    name,
+    value: occurrenceMap[name],
+    color: getColorForName(name),
+  }));
+
+  const updateIndexes = (direction: number) => {
+    setStartIdx((prev) => {
+      let newStart = prev + direction * itemsPerPage;
+      if (newStart < 1) newStart = 1;
+      if (newStart > data.length)
+        newStart = data.length - (data.length % itemsPerPage) + 1;
+      return newStart;
+    });
+  };
+
+  const handleLegendHover = (name: string) => {
+    const safeName = sanitizeKey(name);
+    const targetData = data.find((item) => item.name === name);
+
+    if (targetData && svgRef.current && tooltipRef.current) {
+      const svg = d3.select(svgRef.current);
+      const bubbles = svg.selectAll<SVGCircleElement, BubbleData>(
+        'circle'
+      );
+      const matchedBubble = bubbles.filter(
+        (d) => sanitizeKey(d.name) === safeName
+      );
+
+      const originalRadius = parseFloat(matchedBubble.attr('r'));
+
+      // Bring bubble to front
+      matchedBubble.each(function () {
+        ;(this as SVGCircleElement).parentNode?.appendChild(this);
+      });
+
+      // Animate the bubble
+      matchedBubble
+        .transition()
+        .duration(300)
+        .attr('r', originalRadius * 1.2)
+        .attr('stroke-width', 4)
+        .attr('stroke', '#ff0');
+
+      const nodeData = matchedBubble.data()[0];
+
+      if (nodeData) {
+        const width = 400; // same as in your useEffect setup
+        const height = 400;
+
+        d3.select(tooltipRef.current)
+          .style('opacity', 1)
+          .style('left', `${nodeData.x! + width / 2 + 10}px`)
+          .style('top', `${nodeData.y! + height / 2 - 20}px`)
+          .html(
+            `<strong>${targetData.name}</strong> ${targetData.value}`
+          );
+      }
+    }
+  };
+
+  const handleLegendLeave = (name: string) => {
+    const safeName = sanitizeKey(name);
+
+    if (svgRef.current && tooltipRef.current) {
+      const svg = d3.select(svgRef.current);
+      const bubbles = svg.selectAll<SVGCircleElement, BubbleData>(
+        'circle'
+      );
+      const matchedBubble = bubbles.filter(
+        (d) => sanitizeKey(d.name) === safeName
+      );
+
+      const originalRadius = parseFloat(matchedBubble.attr('r')) / 1.2; // reverse the enlarge effect
+
+      matchedBubble
+        .transition()
+        .duration(300)
+        .attr('r', originalRadius) // Reset to original size
+        .attr('stroke-width', 1) // Reset border
+        .attr('stroke', '#000'); // Original stroke color
+    }
+
+    d3.select(tooltipRef.current).style('opacity', 0);
+  };
+
   useEffect(() => {
-    const width = 400,
-      height = 400;
+    const width = 400;
+    const height = 400;
 
     const svg = d3
       .select(svgRef.current)
@@ -586,27 +661,42 @@ const BubbleChart: any = ({ cryptography }: any) => {
 
     const tooltip = d3.select(tooltipRef.current);
 
-    d3.forceSimulation<BubbleData>(data)
+    const radiusScale = d3
+      .scaleSqrt()
+      .domain([
+        d3.min(data, (d) => d.value) || 1,
+        d3.max(data, (d) => d.value) || 100,
+      ])
+      .range([10, 50]);
+
+    const simulation = d3
+      .forceSimulation<BubbleData>(data)
       .force('charge', d3.forceManyBody().strength(5))
       .force('center', d3.forceCenter(0, 0))
       .force(
         'collision',
-        d3.forceCollide().radius((d: any) => d.value * 4 + 5)
+        d3.forceCollide().radius((d: any) => radiusScale(d.value) + 2)
       )
       .on('tick', ticked);
 
     function ticked() {
       const bubbles = svg
         .selectAll<SVGCircleElement, BubbleData>('circle')
-        .data(data);
+        .data(data, (d: any) => d.name);
+
+      const texts = svg
+        .selectAll<SVGTextElement, BubbleData>('text')
+        .data(data, (d: any) => d.name);
 
       bubbles
         .enter()
         .append('circle')
-        .attr('r', (d) => d.value * 4)
+        .attr('r', (d) => radiusScale(d.value))
         .attr('fill', (d) => d.color)
         .attr('stroke', '#000')
-        .merge(bubbles)
+        .attr('stroke-width', 1)
+        .attr('data-name', (d) => sanitizeKey(d.name))
+        .merge(bubbles as any)
         .attr('cx', (d: any) => d.x!)
         .attr('cy', (d: any) => d.y!)
         .on('mouseover', (event: MouseEvent, d: BubbleData) => {
@@ -616,8 +706,8 @@ const BubbleChart: any = ({ cryptography }: any) => {
 
           tooltip
             .style('opacity', 1)
-            .style('left', `${d.x! + width / 2 + 10}px`) // Adjust left position relative to bubble
-            .style('top', `${d.y! + height / 2 - 20}px`) // Position slightly above bubble
+            .style('left', `${d.x! + width / 2 + 10}px`)
+            .style('top', `${d.y! + height / 2 - 20}px`)
             .html(`<strong>${d.name}</strong> ${d.value}`);
         })
         .on('mouseout', (event: MouseEvent) => {
@@ -627,8 +717,48 @@ const BubbleChart: any = ({ cryptography }: any) => {
 
           tooltip.style('opacity', 0);
         });
+
+      texts
+        .enter()
+        .append('text')
+        .attr('text-anchor', 'middle')
+        .attr('alignment-baseline', 'middle')
+        .style('pointer-events', 'none')
+        .style('font-size', '10px')
+        .style('fill', '#fff')
+        .merge(texts as any)
+        .attr('x', (d: any) => d.x!)
+        .attr('y', (d: any) => d.y!);
     }
+
+    return () => {
+      simulation.stop();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const updateItemsPerPageOnResize = () => {
+      if (window.innerWidth >= 1200 && window.innerWidth <= 1345) {
+        setItemsPerPage(3); // Set to 3 when window width is between 1200px and 1345px
+      } else if (window.innerWidth >= 1346 && window.innerWidth <= 1496) {
+        setItemsPerPage(4); // Set to 3 when window width is between 1200px and 1345px
+      } else {
+        setItemsPerPage(5); // Default to 5 for wider windows
+      }
+    };
+
+    updateItemsPerPageOnResize(); // Initial check
+    window.addEventListener('resize', updateItemsPerPageOnResize); // Listen for window resize
+
+    return () =>
+      window.removeEventListener('resize', updateItemsPerPageOnResize); // Cleanup
+  }, []);
+
+  useEffect(() => {
+    const end = Math.min(startIdx + itemsPerPage - 1, data.length);
+    setEndIdx(end);
+  }, [startIdx, itemsPerPage, data.length]);
 
   return (
     <Card
@@ -636,20 +766,23 @@ const BubbleChart: any = ({ cryptography }: any) => {
         textAlign: 'center',
         width: '100%',
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         alignItems: 'center',
+        padding: '20px',
+        position: 'relative',
+        height: '468px',
       } }
     >
-      { /* Title */ }
       <Typography
         variant="h5"
-        sx={ { textAlign: 'center', textTransform: 'none' } }
+        sx={ { textAlign: 'center', textTransform: 'none', mb: 2 } }
       >
         Crypto Assets
       </Typography>
+
       <svg ref={ svgRef } width={ 345 } height={ 345 } />
 
-      { /* Tooltip */ }
       <div
         ref={ tooltipRef }
         style={ {
@@ -662,51 +795,154 @@ const BubbleChart: any = ({ cryptography }: any) => {
           fontSize: '14px',
           fontWeight: 'bold',
           pointerEvents: 'none',
-          opacity: 0, // Hidden by default
+          opacity: 0,
         } }
       />
-
-      { /* Legend */ }
       <Box
         sx={ {
           display: 'flex',
-          flexWrap: 'wrap',
-          gap: '10px',
+          alignItems: 'center',
+          width: '100%',
+          mt: 2,
           position: 'relative',
-          // pb: 2,
-          justifyContent: 'center', // Centers horizontally
-          alignItems: 'center', // Centers vertically
-          width: '100%', // Ensures full width
+          top: '16px',
         } }
       >
-        { data.slice(0, 6).map((item, index) => (
-          <Box
-            key={ index }
-            sx={ {
+        <IconButton
+          onClick={ () => updateIndexes(-1) }
+          disabled={ startIdx === 1 }
+        >
+          <ArrowBackIos />
+        </IconButton>
+
+        <Box
+          sx={ {
+            display: 'flex',
+            gap: '10px',
+            alignItems: 'center',
+            flexGrow: 1,
+            justifyContent: 'center',
+            overflow: 'hidden', // 💡 clip anything outside
+          } }
+        >
+          { [...data]
+            .sort((a, b) => b.value - a.value)
+            .slice(startIdx - 1, endIdx)
+            .map((item, index) => (
+              <Box
+                key={ index }
+                sx={ {
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: '13px',
+                  flexShrink: 0,
+                  cursor: 'pointer',
+                } }
+                onMouseEnter={ () =>
+                  handleLegendHover(item.name)
+                }
+                onMouseLeave={ () =>
+                  handleLegendLeave(item.name)
+                }
+              >
+                <span
+                  style={ {
+                    width: 15,
+                    height: 15,
+                    backgroundColor: item.color,
+                    display: 'inline-block',
+                    marginRight: 5,
+                    borderRadius: '50%',
+                  } }
+                />
+                { item.name.length > 10
+                  ? item.name.trim().slice(0, 3) + '...'
+                  : item.name.length > 6
+                    ? item.name.trim().slice(0, 6) + '...'
+                    : item.name
+                }
+
+              </Box>
+            )) }
+        </Box>
+
+        <IconButton
+          onClick={ () => updateIndexes(1) }
+          disabled={ endIdx >= data.length }
+        >
+          <ArrowForwardIos />
+        </IconButton>
+      </Box>
+
+      <Box
+        sx={ {
+          mt: 1,
+          fontSize: '13px',
+          fontWeight: 'bold',
+          textAlign: 'right',
+          alignSelf: 'flex-end', // ✅ pushes it to the right inside a flex column
+          position: 'relative',
+          right: '20px',
+        } }
+      >
+        { startIdx }–{ endIdx } of { data.length }
+      </Box>
+    </Card>
+  );
+};
+
+const SortedLegend = ({
+  data,
+  onHover,
+}: {
+  data: any[];
+  onHover: (index: number | null) => void;
+}) => {
+  const sorted = [...data].sort((a, b) => b.value - a.value);
+
+  return (
+    <div
+      style={ {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '4px 8px',
+        padding: '12px 16px',
+      } }
+    >
+      { sorted.map((entry, index) => {
+        const originalIndex = data.findIndex((d) => d.name === entry.name);
+
+        return (
+          <div
+            key={ `item-${index}` }
+            onMouseEnter={ () => onHover(originalIndex) }
+            onMouseLeave={ () => {
+              console.log('Mouse left entire legend block');
+              onHover(null);
+            } }
+            style={ {
               display: 'flex',
               alignItems: 'center',
               fontSize: '13px',
+              cursor: 'pointer',
             } }
           >
             <span
               style={ {
-                width: 15,
-                height: 15,
-                backgroundColor: item.color,
                 display: 'inline-block',
-                marginRight: 5,
+                width: 10,
+                height: 10,
+                backgroundColor: entry.color,
+                borderRadius: 2,
+                marginRight: 6,
               } }
             />
-            { item.name }
-          </Box>
-        )) }
-        { data.length > 6 && (
-          <Box sx={ { fontSize: '13px', fontWeight: 'bold' } }>
-            +{ data.length - 6 } other crypto assets
-          </Box>
-        ) }
-      </Box>
-    </Card>
+            <span style={ { whiteSpace: 'nowrap' } }>{ entry.name }</span>
+          </div>
+        );
+      }) }
+    </div>
   );
 };
 
@@ -715,6 +951,8 @@ const CryptographyModal = ({ cryptography }: any) => {
   const cryptoFunctionsData = generateCryptoFunctionsData(cryptography);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [activeIndexCryptoPrimitives, setActiveIndexCryptoPrimitives] = useState<number | null>(null);
+  const [activeIndexCryptoFunctions, setActiveIndexCryptoFunctions] = useState<number | null>(null);
 
   const handleChangePage = (event: any, newPage: any) => setPage(newPage);
   const handleChangeRowsPerPage = (event: any) => {
@@ -745,6 +983,7 @@ const CryptographyModal = ({ cryptography }: any) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              height: '468px',
             } }
           >
             <Typography
@@ -761,25 +1000,42 @@ const CryptographyModal = ({ cryptography }: any) => {
                 innerRadius={ 100 }
                 outerRadius={ 140 }
                 labelLine={ true }
+                activeIndex={ activeIndexCryptoPrimitives !== null ? activeIndexCryptoPrimitives : undefined }
+                activeShape={ (props: any) => (
+                  <Sector
+                    { ...props }
+                    outerRadius={ 150 }
+                    stroke="#000"
+                    strokeWidth={ 2 }
+                  />
+                ) }
                 label={ (props) =>
                   renderLabel(props, cryptoPrimitivesData)
                 }
                 dataKey="value"
               >
                 { cryptoPrimitivesData.map((entry, index) => (
-                  <Cell
-                    key={ `cell-${index}` }
-                    fill={ entry.color }
-                  />
+                  <Cell key={ `cell-${index}` } fill={ entry.color } />
                 )) }
               </Pie>
+
               <Tooltip />
+
               <Legend
+                content={ () => (
+                  <SortedLegend
+                    data={ cryptoPrimitivesData }
+                    onHover={ setActiveIndexCryptoPrimitives }
+                  />
+                ) }
                 wrapperStyle={ {
                   fontSize: '13px',
                   paddingTop: '8px',
+                  position: 'relative',
+                  bottom: '74px',
                 } }
               />
+
               { /* Central Text Inside Donut */ }
               <text
                 x="50%"
@@ -818,6 +1074,7 @@ const CryptographyModal = ({ cryptography }: any) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              height: '468px',
             } }
           >
             <Typography
@@ -834,25 +1091,40 @@ const CryptographyModal = ({ cryptography }: any) => {
                 innerRadius={ 100 }
                 outerRadius={ 140 }
                 labelLine={ true }
-                label={ (props) =>
-                  renderLabel(props, cryptoPrimitivesData)
-                }
+                activeIndex={ activeIndexCryptoFunctions !== null ? activeIndexCryptoFunctions : undefined }
+                activeShape={ (props: any) => (
+                  <Sector
+                    { ...props }
+                    outerRadius={ 150 }
+                    stroke="#000"
+                    strokeWidth={ 2 }
+                  />
+                ) }
+                label={ (props) => renderLabel(props, cryptoFunctionsData) }
                 dataKey="value"
               >
                 { cryptoFunctionsData.map((entry, index) => (
-                  <Cell
-                    key={ `cell-${index}` }
-                    fill={ entry.color }
-                  />
+                  <Cell key={ `cell-${index}` } fill={ entry.color } />
                 )) }
               </Pie>
+
               <Tooltip />
+
               <Legend
+                content={ () => (
+                  <SortedLegend
+                    data={ cryptoFunctionsData }
+                    onHover={ setActiveIndexCryptoFunctions }
+                  />
+                ) }
                 wrapperStyle={ {
                   fontSize: '13px',
                   paddingTop: '8px',
+                  position: 'relative',
+                  bottom: '74px',
                 } }
               />
+
               { /* Central Text Inside Donut */ }
               <text
                 x="50%"
@@ -999,7 +1271,7 @@ function GetAssessmentData(
         setSQData
       );
     }
-  }, [version]);
+  }, [version, reportNameMap, name]);
 
   React.useEffect(() => {
     if (masterData && jsonData?.packages) {
@@ -1013,7 +1285,7 @@ function GetAssessmentData(
         checkForWeakness(dataObject, setWeakness);
       }
     }
-  }, [jsonData, masterData]);
+  }, [jsonData, masterData, weakness]);
 
   const jsonDataLength = Object.keys(jsonData).length;
   const pathName = `/BeSLighthouse/bes_assessment_report/:${name}/:${version}/:${reportNameMap}`;
@@ -1168,7 +1440,7 @@ function GetAssessmentData(
       '',
       '',
       '',
-      true
+      true,
     ];
   }
 
@@ -1326,7 +1598,6 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
         } }
         style={ { backgroundColor: 'white', display: 'block', textAlign: 'left' } }
       >
-        
         { color ? (
           <MKTypography
             style={ {
@@ -1353,9 +1624,9 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
               fontSize: '40px',
               fontWeight: 'bold',
               color: 'black',
-              display: 'flex',         // Enables flexbox
-              alignItems: 'center',    // Aligns items vertically
-              width: '100%',           // Ensures full width
+              display: 'flex', // Enables flexbox
+              alignItems: 'center', // Aligns items vertically
+              width: '100%', // Ensures full width
             } }
           >
             <span style={ { flex: 8, textAlign: 'left' } }>
@@ -1363,8 +1634,8 @@ const ReportModal = ({ version, name, item, itemData, masterData }: any) => {
             </span>
             <img
               style={ {
-                flex: 2,              // Allocates 20% width to the image
-                maxWidth: '80px',     // Prevents excessive stretching
+                flex: 2, // Allocates 20% width to the image
+                maxWidth: '80px', // Prevents excessive stretching
                 height: '40px',
               } }
               src={ getImage(item) }
