@@ -579,20 +579,24 @@ const SummaryDashboard = ({ model }: any) => {
   }, [selectedModel.name]);
 
   const flattenedMockData = Object.entries(garakTestSummary).flatMap(
-    ([probeCategory, subCategories]) =>
-      Object.entries(subCategories || {}).map(
-        ([subCategory, data]: any) => {
-          const failPercent = (
-            ((data.total - data.passed) / data.total) * 100
-          ).toFixed(2);
-          return {
-            probeCategory,
-            subCategory,
-            failPercent: `${failPercent}%`,
-          };
-        }
+    ([category, subCategories]) =>
+      Object.entries(subCategories || {}).flatMap(
+        ([subCategory, detectors]: any) =>
+          Object.entries(detectors || {}).map(([detector, data]: any) => {
+            const failPercent =
+              data.total > 0
+                ? (((data.total - data.passed) / data.total) * 100).toFixed(2)
+                : '0.00';
+  
+            return {
+              category,
+              subCategory,
+              detector,
+              failPercent: `${failPercent}%`,
+            };
+          })
       )
-  );
+  );  
 
   const languages = new Set([
     ...Object.keys(autocompleteData),
@@ -1781,7 +1785,7 @@ const SummaryDashboard = ({ model }: any) => {
                 height: '315px',
                 borderBottomLeftRadius: '12px',
                 borderBottomRightRadius: '12px',
-                overflow: 'hidden', // <-- this is the key for scrollable + rounded
+                overflow: 'hidden',
               } }
             >
               <Box
@@ -1805,26 +1809,21 @@ const SummaryDashboard = ({ model }: any) => {
                         backgroundColor: '#156082 !important',
                       } }
                     >
-                      <StyledTableCell>
-                        Category
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        Sub Category
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        Fail %
-                      </StyledTableCell>
+                      <StyledTableCell>Category</StyledTableCell>
+                      <StyledTableCell>Sub Category</StyledTableCell>
+                      <StyledTableCell>Detector</StyledTableCell>
+                      <StyledTableCell>Fail %</StyledTableCell>
                     </TableRow>
                   </StyledTableHead>
                   <TableBody>
                     { flattenedMockData.length === 0 ? (
                       <StyledTableCell
-                        colSpan={ 3 }
+                        colSpan={ 4 }
                         align="center"
                         sx={ {
                           height: '270px',
                           backgroundColor: '#fff',
-                          p: 0, // remove extra padding
+                          p: 0,
                         } }
                       >
                         <Box
@@ -1834,42 +1833,45 @@ const SummaryDashboard = ({ model }: any) => {
                           height="100%"
                           width="100%"
                         >
-                          <Typography
-                            variant="body1"
-                            color="textSecondary"
-                          >
-                            Vulnerability Analysis data not
-                            available
+                          <Typography variant="body1" color="textSecondary">
+                            Vulnerability Analysis data not available
                           </Typography>
                         </Box>
                       </StyledTableCell>
                     ) : (
                       flattenedMockData.map((item, index) => {
-                        const isFirst = index === 0 || flattenedMockData[index - 1] .probeCategory !== item.probeCategory;
+                        const isFirstCategory = index === 0 || flattenedMockData[index - 1].category !== item.category;
+                        const isFirstSubCategory = index === 0 || flattenedMockData[index - 1].subCategory !== item.subCategory;
 
-                        const rowSpan = flattenedMockData.filter(
-                          (d) => d.probeCategory === item.probeCategory
+                        const categoryRowSpan = flattenedMockData.filter(
+                          (d) => d.category === item.category
+                        ).length;
+
+                        const subCategoryRowSpan = flattenedMockData.filter(
+                          (d) =>
+                            d.category === item.category && d.subCategory === item.subCategory
                         ).length;
 
                         return (
                           <StyledTableRow key={ index }>
-                            { isFirst && (
+                            { isFirstCategory && (
                               <StyledTableCell
-                                rowSpan={ rowSpan }
+                                rowSpan={ categoryRowSpan }
                                 sx={ {
                                   fontWeight: 'bold',
                                   backgroundColor: '#e0e6ec',
                                 } }
                               >
-                                { item.probeCategory }
+                                { item.category }
                               </StyledTableCell>
                             ) }
-                            <StyledTableCell>
-                              { item.subCategory }
-                            </StyledTableCell>
-                            <StyledTableCell>
-                              { item.failPercent }
-                            </StyledTableCell>
+                            { isFirstSubCategory && (
+                              <StyledTableCell rowSpan={ subCategoryRowSpan }>
+                                { item.subCategory }
+                              </StyledTableCell>
+                            ) }
+                            <StyledTableCell>{ item.detector }</StyledTableCell>
+                            <StyledTableCell>{ item.failPercent }</StyledTableCell>
                           </StyledTableRow>
                         );
                       })
@@ -1880,6 +1882,7 @@ const SummaryDashboard = ({ model }: any) => {
             </TableContainer>
           </Card>
         </Grid>
+
       </Grid>
     </>
   );
