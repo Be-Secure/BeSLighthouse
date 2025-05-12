@@ -11,7 +11,8 @@ const checkReport: any = {
   'sast': 'SAST',
   'License Compliance': 'License Compliance',
   'dast': 'DAST',
-  'LLM Benchmark': 'LLM Benchmark'
+  'LLM Benchmark': 'LLM Benchmark',
+  'Security Benchmark': 'Security Benchmark'
 };
 
 // Function to generate the PDF
@@ -78,14 +79,6 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
 
   // Loop through each assessment and add content dynamically
   getOsarReport.assessments.forEach((assessment: any) => {
-    // Ensure space before starting new sections or pages
-    if (yOffset > 250) { // Adjust according to your content size
-      doc.addPage();
-      yOffset = 20; // Reset yOffset for the new page
-    }
-
-    yOffset += 10; // Add some space before the next section
-
     const toolDetails = assessment.tool;
     const executionDetails = assessment.execution;
 
@@ -102,7 +95,15 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
       ["Output", executionDetails.output_path]
     ];
 
-    // Assessment Details Section
+    // Check space before Assessment Details section header
+    if (yOffset + 30 > 280) {
+      doc.addPage();
+      yOffset = 20;
+    }
+
+    yOffset += 10; // Some space before the next section
+
+    // --- Assessment Details Section Header ---
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0);
     doc.setFont("helvetica", "bold");
@@ -114,16 +115,36 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
     doc.line(10, yOffset, 200, yOffset);
     yOffset += 10;
 
-
+    // --- Loop through assessmentDetails ---
     assessmentDetails.forEach(([key, value]) => {
+    // Check space before each detail row
+      if (yOffset + 10 > 280) {
+        doc.addPage();
+        yOffset = 20;
+
+        // Re-add the Assessment Details section header on the new page
+        doc.setFontSize(16);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(`${checkReport[toolDetails.type]} (continued)`, 10, yOffset);
+        yOffset += 10;
+        doc.setLineWidth(0.5);
+        doc.line(10, yOffset, 200, yOffset);
+        yOffset += 10;
+      }
+
       doc.setFontSize(12);
       doc.setFont("helvetica", "bold");
       doc.text(`${key}:`, 10, yOffset);
       doc.setFont("helvetica", "normal");
       if (key === "Output") {
-        // Make Output URL clickable and styled
+        // Print "Output:" label
+        doc.setTextColor(0, 0, 0);
+        doc.text(`${key}:`, 10, yOffset);
+
+        // Make the word "Link" clickable
         doc.setTextColor(0, 0, 255);
-        doc.textWithLink(value, 50, yOffset, { url: value });
+        doc.textWithLink("Link", 50, yOffset, { url: value });
       } else {
         doc.setTextColor(0, 0, 0);
         doc.text(value, 50, yOffset);
@@ -131,9 +152,14 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
       yOffset += 8;
     });
 
-    yOffset += 15; // Add space before the results table
+    yOffset += 15; // Space before the Assessment Results section
 
-    // Assessment results Section
+    // --- Assessment Results Section ---
+    if (yOffset + 30 > 280) {
+      doc.addPage();
+      yOffset = 20;
+    }
+
     doc.setFontSize(16);
     doc.setTextColor(0, 0, 0);
     doc.text("Assessment Result", 10, yOffset);
@@ -144,7 +170,7 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
     doc.line(10, yOffset, 200, yOffset);
     yOffset += 10;
 
-    // Results Table
+    // --- Results Table ---
     const results = assessment.results.map((item: any) => ({
       feature: item.feature,
       aspect: item.aspect,
@@ -152,18 +178,28 @@ export function generatePdfFromJson(getOsarReport: any, filename: string, attest
       value: item.value.toString() // Convert boolean to string for display
     }));
 
-    // Create the table using autoTable
     doc.autoTable({
-      startY: yOffset, // Position the table below the content
-      head: [['Feature', 'Aspect', 'Attribute', 'Value']], // Table headers
-      body: results.map((result: any) => [result.feature, result.aspect, result.attribute, result.value]), // Table rows
+      startY: yOffset,
+      head: [['Feature', 'Aspect', 'Attribute', 'Value']],
+      body: results.map((result: any) => [result.feature, result.aspect, result.attribute, result.value]),
       styles: { fontSize: 10, cellPadding: 3 },
-      headStyles: { fillColor: [34, 139, 34] } // Green header for the table
+      headStyles: { fillColor: [34, 139, 34] },
+      didDrawPage: (data: any) => {
+        if (data.pageNumber > 1) {
+        // Re-add the Assessment Result header on new pages during table rendering
+          doc.setFontSize(16);
+          doc.setTextColor(0, 0, 0);
+          doc.text(`${checkReport[toolDetails.type]} - Assessment Result (continued)`, 10, 15);
+          doc.setLineWidth(0.5);
+          doc.line(10, 20, 200, 20);
+        }
+      }
     });
 
     // Update yOffset after the table
-    yOffset = doc.autoTable.previous.finalY + 10; // Move below the table for next section
+    yOffset = doc.autoTable.previous.finalY + 10;
   });
+
 
   // Save the PDF
   doc.save(`${filename}.pdf`);
