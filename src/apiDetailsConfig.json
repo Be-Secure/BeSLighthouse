@@ -7,7 +7,7 @@
     },
     "gitlab": {
         "namespace": "labAdmin",
-        "branch": "/raw/main",
+        "branch": "main",
         "apiUrl": "",
         "gitLabUrl": "",
         "token": ""
