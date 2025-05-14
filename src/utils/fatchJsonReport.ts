@@ -1,9 +1,14 @@
 import axios from 'axios';
 
-export async function fetchJsonReport(url: string): Promise<any> {
+export async function fetchJsonReport(url: string, defaultResult?: any): Promise<any> {
   try {
     const response = await axios.get(url);
     const data = response.data;
+    if (data && typeof data === 'object' && data.error) {
+      console.error("Logical API error:", data.details || data.error);
+      // You can decide how to handle this - return empty, default, or rethrow
+      return JSON.stringify(defaultResult);
+    }
 
     if (url.toLowerCase().endsWith(".pdf")) {
       const regex = /404: Not Found/gm;
@@ -19,6 +24,9 @@ export async function fetchJsonReport(url: string): Promise<any> {
       return JSON.stringify({ items: [] });
     } else if (url.toLowerCase().endsWith("vulnerability-metadata.json") || url.toLowerCase().endsWith("vulnerability_of_interest") || url.toLowerCase().endsWith("model-metadata.json") || url.toLowerCase().endsWith("model_of_interest")) {
       return JSON.stringify([]);
+    }
+    if (defaultResult) {
+      return JSON.stringify(defaultResult);
     }
     throw error;
   }

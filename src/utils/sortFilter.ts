@@ -1,6 +1,9 @@
 import { filter } from "lodash";
 
 export function applySortFilter(array: any, comparator: any, query: any) {
+  if (!Array.isArray(array)) {
+    return [];
+  }
   const stabilizedThis = array.map((el: any, index: any) => [el, index]);
   stabilizedThis.sort((a: any, b: any) => {
     const order = comparator(a[0], b[0]);

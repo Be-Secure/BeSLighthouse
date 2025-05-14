@@ -8,6 +8,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import IconButton from '@mui/material/IconButton';
 import { generatePdfFromJson } from "../../utils/OsarPdf";
 import DataObjectIcon from '@mui/icons-material/DataObject';
+import { besecureMlAssessmentDataStore } from "../../dataStore";
 
 const downloadJson = (osarReport: any, modelName: string) => {
   const jsonContent = JSON.stringify(osarReport);
@@ -97,8 +98,8 @@ const OSAR = ({ name }: { name: string }) => {
   const [getCosignLink, setCosignLink] = React.useState(false);
 
   useEffect(() => {
-    const osarReportLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/${name}-osar.json`;
-    const cosignLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/cosign.pub`;
+    const osarReportLink = `${besecureMlAssessmentDataStore}/${name}/${name}-osar.json`;
+    const cosignLink = `${besecureMlAssessmentDataStore}/${name}/cosign.pub`;
 
     const fetchData = async () => {
       await verifyLink(osarReportLink, setOsarReportData);
