@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Button, Card, Divider, Grid, Typography } from "@mui/material";
 import { verifyLink } from "../../utils/verifyLink";
 import { NavLink } from "react-router-dom";
+import { besecureMlAssessmentDataStore } from "../../dataStore";
 
 interface InsecureCodeItem {
   insecure_code: boolean;
@@ -84,7 +85,7 @@ const InsecureCodeDetection: React.FC<{ name: string }> = ({ name }) => {
     InsecureCode: 0
   };
   useEffect(() => {
-    const insecureCodeLink = `https://raw.githubusercontent.com/Be-Secure/besecure-ml-assessment-datastore/main/models/${name}/insecure-code-detection/${name}-codeshield-summary-report.json`;
+    const insecureCodeLink = `${besecureMlAssessmentDataStore}/${name}/insecure-code-detection/${name}-codeshield-summary-report.json`;
     verifyLink(insecureCodeLink, setInsecureCode);
   }, [name]);
   if (insecureCode?.length) {

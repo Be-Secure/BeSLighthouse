@@ -7,12 +7,12 @@
     },
     "gitlab": {
         "namespace": "labAdmin",
-        "branch": "/raw/main",
+        "branch": "main",
         "apiUrl": "",
         "gitLabUrl": "",
         "token": ""
     },
     "activeTool": "github",
-    "version": "0.28.3",
+    "version": "0.28.5",
     "labName": "Be-Secure Community Lab"
 }

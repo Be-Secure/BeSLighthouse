@@ -550,6 +550,7 @@ const SummaryDashboard = ({ model }: any) => {
   const handleCloseInstruct = () => setOpenInstruct(false);
   const handleOpenInterpreter = () => setOpenInterpreter(true);
   useEffect(() => {
+    if (!selectedModel.name) return;
     const fetchData = async () => {
       try {
         await Promise.all([

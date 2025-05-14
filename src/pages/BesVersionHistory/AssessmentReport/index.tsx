@@ -44,9 +44,9 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 type CryptoPrimitive = keyof typeof cryptoDictionary
 
-export const fetchJsonData = async (link: any, setJsonData: any) => {
+export const fetchJsonData = async (link: any, setJsonData: any, defaultJson?: any) => {
   try {
-    const response = await fetchJsonReport(link);
+    const response = await fetchJsonReport(link, defaultJson);
 
     try {
       const data = JSON.parse(response);
@@ -1255,7 +1255,8 @@ function GetAssessmentData(
       if (reportNameMap === 'cryptography') {
         fetchJsonData(
           `${baseUrl}/${reportNameMap}/${name}-${version}-${reportNameMap}-report.json`,
-          setCryptography
+          setCryptography,
+          {}
         );
       }
       fetchvulJsonData(
@@ -1358,7 +1359,7 @@ function GetAssessmentData(
       ];
     }
     if (!codeQlData.length && Object.keys(sonarqubeData).length) {
-      const issues: any = Object.values(sonarqubeData)[5] || [];
+      const issues: any = sonarqubeData?.issues ?? [];
       const count = issues.filter((issue: any) =>
         ['CRITICAL', 'MAJOR', 'MINOR', 'BLOCKER'].includes(
           issue.severity
