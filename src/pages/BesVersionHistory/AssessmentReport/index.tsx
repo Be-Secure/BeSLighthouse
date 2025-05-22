@@ -1201,7 +1201,7 @@ const CryptographyModal = ({ cryptography }: any) => {
         <TablePagination
           rowsPerPageOptions={ [5, 10, 15] }
           component="div"
-          count={ cryptography.components.reduce(
+          count={ cryptography?.components?.reduce(
             (total: any, component: any) =>
               total + (component.evidence?.occurrences?.length || 0),
             0
@@ -1432,7 +1432,7 @@ function GetAssessmentData(
 
   if (report === 'Cryptography' && Object.keys(cryptography).length) {
     return [
-      cryptography.components.reduce(
+      cryptography?.components?.reduce(
         (total: any, component: any) =>
           total + (component.evidence?.occurrences?.length || 0),
         0
