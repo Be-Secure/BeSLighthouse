@@ -1279,7 +1279,7 @@ function GetAssessmentData(
       const dataObject = masterData.filter((element) =>
         jsonData.packages.some(
           (item: any) =>
-            item.name.toLowerCase() === element.name.toLowerCase()
+            item?.name?.toLowerCase() === element?.name?.toLowerCase()
         )
       );
       if (dataObject.length > 0 && Object.keys(weakness).length === 0) {
@@ -1414,8 +1414,8 @@ function GetAssessmentData(
 
   if (report === 'Dependencies' && jsonDataLength) {
     const packages = jsonData.packages.filter(
-      (pkg: { name: string }) =>
-        pkg.name.toLowerCase() !== name.toLowerCase()
+      (pkg: { name?: string }) =>
+        pkg.name && pkg.name.toLowerCase() !== name.toLowerCase()
     );
     return [
       packages.length,
