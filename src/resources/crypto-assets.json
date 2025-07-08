@@ -1,0 +1,130 @@
+{
+    "ECDH": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can recover private keys).",
+        "Mitigation": "Transition to post-quantum key exchange (e.g., Kyber) or hybrid key exchange."
+    },
+    "SHA1": {
+        "Quantum Threat": "Weak against classical and quantum attacks. Grover’s algorithm halves security.",
+        "Mitigation": "Replace with SHA-256 or SHA-3 for better quantum and classical resistance."
+    },
+    "EC": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can recover private keys).",
+        "Mitigation": "Move to post-quantum or hybrid signature/key exchange schemes."
+    },
+    "EC-secp521r1": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm. Curve: secp521r1.",
+        "Mitigation": "Move to post-quantum or hybrid signature/key exchange schemes."
+    },
+    "key": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length.",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "RAW": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length.",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "EdDSA": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can break signatures).",
+        "Mitigation": "Use post-quantum signature algorithms (e.g., Dilithium, Falcon)."
+    },
+    "HMAC-SHA256": {
+        "Quantum Threat": "Grover’s algorithm halves effective key security.",
+        "Mitigation": "Use longer keys (e.g., 256 bits) and quantum-resistant hash functions."
+    },
+    "RSA-2048": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can factor 2048-bit keys).",
+        "Mitigation": "Transition to post-quantum public key algorithms (e.g., lattice-based)."
+    },
+    "DSA": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can break signatures).",
+        "Mitigation": "Transition to post-quantum signature algorithms."
+    },
+    "Ed25519": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can break signatures).",
+        "Mitigation": "Use post-quantum signature algorithms."
+    },
+    "secret-key": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length.",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "EC-secp384r1": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm. Curve: ${curve}. Key size: ${keySize};",
+        "Mitigation": "Move to post-quantum or hybrid signature/key exchange schemes."
+    },
+    "AES": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length (e.g., AES-256 → 128 bits).",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "SHA512": {
+        "Quantum Threat": "Hash Function: Reduces security margin with the usage of a quantum computer",
+        "Mitigation": "Shift to SHA3-512 or SPHINCS+ to remain secure in quantum era"
+    },
+    "TLS": {
+        "Quantum Threat": "Protocol: TLS 1.2 uses RSA which is a threat due to Shor’s Algorithm",
+        "Mitigation": "Move to post-quantum or hybrid key exchange schemes, TLS 1.3 with Kyber 512(PQC)"
+    },
+    "HMACSHA2": {
+        "Quantum Threat": "Hash Function with Secret: Vulnerable due to Grover’s algorithm quadratic speed up.",
+        "Mitigation": "For long term confidentiality, it's good to have HMAC with PQC safe key exchange."
+    },
+    "MGF1": {
+        "Quantum Threat": "Mask Generation Function: Vulnerable due to Grover’s algorithm quadratic speed up.",
+        "Mitigation": "Move to post-quantum or hybrid key exchange schemes"
+    },
+    "AES128-CBC-PKCS5": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length.",
+        "Mitigation": "Move to post-quantum or hybrid key exchange schemes"
+    },
+    "AES128-GCM": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length (e.g., AES-256 → 128 bits).",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "ConcatenationKDF": {
+        "Quantum Threat": "Key Derivation Function: Due to Grover’s algorithm for the underlying hash function.",
+        "Mitigation": "Move to post-quantum or hybrid key exchange schemes."
+    },
+    "SHA256": {
+        "Quantum Threat": "Hash Function: Reduces security margin with the usage of a quantum computer",
+        "Mitigation": "Shift to SHA3-512 or SPHINCS+ to remain secure in quantum era"
+    },
+    "AES128": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length (e.g., AES-256 → 128 bits).",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "RSASSA-PSS": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can factor ${keySize}-bit keys).",
+        "Mitigation": "Transition to post-quantum public key algorithms (e.g., lattice-based);"
+    },
+    "EC-secp256r1": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm. Curve: ${curve}. Key size: ${keySize};",
+        "Mitigation": "Move to post-quantum or hybrid signature/key exchange schemes."
+    },
+    "RSA-4096": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm (quantum computers can factor ${keySize}-bit keys).",
+        "Mitigation": "Transition to post-quantum public key algorithms (e.g., lattice-based);"
+    },
+    "MD5": {
+        "Quantum Threat": "Hash Function: Not even safe in classical context;",
+        "Mitigation": "Shift to SHA3-512 or SPHINCS+ to remain secure in quantum era"
+    },
+    "HMAC-SHA512": {
+        "Quantum Threat": "Hash Function with Secret: Partially safe to quantum computer;",
+        "Mitigation": "For long term confidentiality, it's good to have HMAC with PQC safe key exchange."
+    },
+    "ELGAMAL": {
+        "Quantum Threat": "Vulnerable to Shor’s algorithm. Curve: ${curve}. Key size: ${keySize};",
+        "Mitigation": "Move to post-quantum or hybrid signature/key exchange schemes."
+    },
+    "PBES2": {
+        "Quantum Threat": "KDF Symmetric keys: Grover’s algorithm halves effective key length (e.g., AES-256 → 128 bits).",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "AES256": {
+        "Quantum Threat": "Symmetric keys: Grover’s algorithm halves effective key length (e.g., AES-256 → 128 bits).",
+        "Mitigation": "Use 256-bit symmetric keys or higher for long-term security."
+    },
+    "PBKDF2-HMAC-SHA512": {
+        "Quantum Threat": "Hash Function with Secret: Partially safe to quantum computer;",
+        "Mitigation": "For long term confidentiality, it's good to have HMAC with PQC safe key exchange."
+    }
+}
