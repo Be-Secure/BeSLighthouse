@@ -1003,7 +1003,7 @@ const renderThreatInfo = (row: any, cryptoGraphyAsset: any) => {
 
   return {
     threat: interpolate(threatInfo["Quantum Threat"], context),
-    mitigation: interpolate(threatInfo["Mitigation"], context),
+    mitigation: interpolate(threatInfo.Mitigation, context),
     isKnown: true
   };
 };
