@@ -39,10 +39,24 @@ import FetchSastReport from './FetchSastReport';
 import { PieChart, Pie, Legend, Cell, Tooltip, Sector } from 'recharts';
 
 import cryptoDictionary from '../../../resources/crypto-dictionary.json';
+import rawCryptoAsset from '../../../resources/crypto-assets.json';
+
 import * as d3 from 'd3';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 type CryptoPrimitive = keyof typeof cryptoDictionary
+
+type CryptoAssetEntry = {
+  "Quantum Threat": string;
+  Mitigation: string;
+};
+
+type CryptoAssetMap = {
+  [key: string]: CryptoAssetEntry; // index signature
+};
+
+const cryptoAsset = rawCryptoAsset as CryptoAssetMap;
+
 
 export const fetchJsonData = async (link: any, setJsonData: any, defaultJson?: any) => {
   try {
@@ -522,6 +536,8 @@ const TABLE_HEAD = [
   },
   { id: 'Primitive', label: 'Primitive', alignRight: false },
   { id: 'Location', label: 'Location', alignRight: false },
+  { id: 'Quantum Threat', label: 'Quantum Threat', alignRight: false },
+  { id: 'Mitigation', label: 'Mitigation', alignRight: false },
 ];
 
 type BubbleData = {
@@ -946,6 +962,52 @@ const SortedLegend = ({
   );
 };
 
+const interpolate = (template: string, context: Record<string, any>) => {
+  return template.replace(/\$\{(\w+)\}/g, (_, key) =>
+    context[key] !== undefined && context[key] !== null ? context[key] : 'unknown'
+  );
+};
+
+const getBaseName = (str: string) =>
+  str.split('@')[0] || str;
+
+const getMatchKey = (name: string, cryptoGraphyAsset: any) => {
+  const baseName = getBaseName(name).toLowerCase();
+  return (
+    Object.keys(cryptoGraphyAsset).find(
+      (key) => key.toLowerCase() === baseName
+    ) || 'Unspecified'
+  );
+};
+
+const renderThreatInfo = (row: any, cryptoGraphyAsset: any) => {
+  const props = row.cryptoProperties || {};
+  const algProps = props.algorithmProperties || {};
+  const relProps = props.relatedCryptoMaterialProperties || {};
+  const primitive = algProps.primitive || relProps.type || '';
+  const curve = algProps.curve || '';
+  const keySize = algProps.parameterSetIdentifier || 'unknown';
+  const usage = (algProps.cryptoFunctions || []).join(', ') || '';
+
+  const matchKey = getMatchKey(row.name, cryptoGraphyAsset);
+  const threatInfo = cryptoGraphyAsset[matchKey];
+
+  const context = { keySize, curve, usage, primitive };
+  if (matchKey === "Unspecified") {
+    return {
+      threat: "Quantum threat unknown or not assessed.",
+      mitigation: "Review cryptographic asset for quantum-safe alternatives.",
+      isKnown: false
+    };
+  }
+
+  return {
+    threat: interpolate(threatInfo["Quantum Threat"], context),
+    mitigation: interpolate(threatInfo["Mitigation"], context),
+    isKnown: true
+  };
+};
+
 const CryptographyModal = ({ cryptography }: any) => {
   const cryptoPrimitivesData = generateCryptoStats(cryptography);
   const cryptoFunctionsData = generateCryptoFunctionsData(cryptography);
@@ -1172,9 +1234,10 @@ const CryptographyModal = ({ cryptography }: any) => {
                   (occurrence: any) => ({
                     name: component.name.toUpperCase(),
                     primitive:
-                                            component.cryptoProperties?.algorithmProperties?.primitive.toUpperCase() ||
-                                            'Unspecified',
+                      component.cryptoProperties?.algorithmProperties?.primitive.toUpperCase() ||
+                      'Unspecified',
                     filename: `${occurrence.location.split('/').pop()}:${occurrence.line}`,
+                    cryptoProperties: component.cryptoProperties,
                   })
                 )
               )
@@ -1182,20 +1245,27 @@ const CryptographyModal = ({ cryptography }: any) => {
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage
               ) // <-- Apply pagination here
-              .map((row: any, index: any) => (
-                <TableRow key={ index }>
+              .map((row: any, index: any) => {
+                const threat = renderThreatInfo(row, cryptoAsset);
+                return (<TableRow key={ index }>
                   <TableCell>{ row.name }</TableCell>
                   <TableCell>
                     <div>{ row.primitive }</div>
                     <div style={ { color: '#888' } }>
                       { cryptoDictionary?.[
-                                                row.primitive.toLowerCase() as CryptoPrimitive
+                        row.primitive.toLowerCase() as CryptoPrimitive
                       ]?.fullName || '' }
                     </div>
                   </TableCell>
                   <TableCell>{ row.filename }</TableCell>
-                </TableRow>
-              )) }
+                  <TableCell style={ { color: threat.isKnown ? '#c9302c' : '#d9534f' } }>
+                    { threat.threat }
+                  </TableCell>
+                  <TableCell style={ { color: threat.isKnown ? '#449d44' : '#5cb85c' } }>
+                    { threat.mitigation }
+                  </TableCell>
+                </TableRow>);
+              }) }
           </TableBody>
         </Table>
         <TablePagination
