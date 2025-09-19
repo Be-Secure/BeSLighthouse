@@ -10,6 +10,21 @@ import { AddModerator } from "@mui/icons-material";
 
 const routes = [
   {
+    name: "Demo",
+    key: "Demo",
+    icon: <Icon>play_circle</Icon>,
+    collapse: [
+      {
+        name: "ART",
+        href: "https://art.o31e.com/"
+      },
+      {
+        name: "Promtptfoo",
+        href: "https://promptfoo.o31e.com/"
+      },
+    ],
+  },
+  {
     name: "Projects Of Interest",
     key: "Project-of-Interest",
     icon: <Icon>library_books</Icon>,
