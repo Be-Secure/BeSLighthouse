@@ -326,13 +326,19 @@ function DefaultNavbar({
     >
       { ({ TransitionProps }) => (
         <Grow { ...TransitionProps }>
-          <MKBox borderRadius="lg">
+          <MKBox borderRadius="lg" bgcolor="white">
             <MKTypography variant="h1" color="white">
               <Icon ref={ setArrowRef } sx={ { mt: -3 } }>
                 arrow_drop_up
               </Icon>
             </MKTypography>
-            <MKBox shadow="lg" borderRadius="lg" p={ 2 } mt={ 2 }>
+            <MKBox
+              shadow="lg"
+              borderRadius="lg"
+              p={ 2 }
+              mt={ 2 }
+              sx={ { backgroundColor: "#fff" } }
+            >
               { renderRoutes }
             </MKBox>
           </MKBox>
