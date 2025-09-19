@@ -326,7 +326,7 @@ function DefaultNavbar({
     >
       { ({ TransitionProps }) => (
         <Grow { ...TransitionProps }>
-          <MKBox borderRadius="lg" p={ 2 } mt={ 2 } bgcolor="white">
+          <MKBox borderRadius="lg" bgcolor="white">
             <MKTypography variant="h1" color="white">
               <Icon ref={ setArrowRef } sx={ { mt: -3 } }>
                 arrow_drop_up
