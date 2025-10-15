@@ -1,206 +1,343 @@
+// pdfGenerator.ts
 import { jsPDF } from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
+import CheckIcon from '../assets/images/checked.png'; // imported URL (CRA/Vite/etc)
 
-import CheckIcon from '../assets/images/checked.png';
+// ---- Types ----
+export interface Asset {
+  type?: string;
+  name?: string;
+  version?: string;
+  environment?: string;
+  url?: string;
+  [k: string]: any;
+}
+export interface Tool {
+  name?: string;
+  type?: string;
+  version?: string;
+  playbook?: string;
+  [k: string]: any;
+}
+export interface Execution {
+  type?: string;
+  id?: string;
+  status?: string;
+  timestamp?: string;
+  duration?: string;
+  output_path?: string;
+  [k: string]: any;
+}
+export interface Result {
+  feature?: string;
+  aspect?: string;
+  attribute?: string;
+  value?: any;
+  [k: string]: any;
+}
+export interface Assessment {
+  tool?: Tool;
+  execution?: Execution;
+  results?: Result[];
+  [k: string]: any;
+}
+export interface OSARReport {
+  schema_version?: string;
+  asset?: Asset;
+  assessments?: Assessment[];
+  [k: string]: any;
+}
 
-const checkReport: any = {
+// ---- Label mapping (normalized keys) ----
+const checkReport: Record<string, string> = {
   'insecure-code-detection': 'Insecure Code Detection',
   'sbom': 'SBOM',
   'criticality_score': 'Criticality Score',
   'scorecard': 'Scorecard',
   'sast': 'SAST',
-  'License Compliance': 'License Compliance',
+  'license-compliance': 'License Compliance',
   'dast': 'DAST',
-  'LLM Benchmark': 'LLM Benchmark',
-  'Security Benchmark': 'Security Benchmark'
+  'llm-benchmark': 'LLM Benchmark',
+  'security-benchmark': 'Security Benchmark'
 };
 
-// Function to generate the PDF
-export function generatePdfFromJson(getOsarReport: any, filename: string, attested = false) {
-  const doc: any = new jsPDF();
-  let yOffset = 20; // Initial vertical offset for the content
+// ---- Helpers ----
+function safeText(value: unknown): string {
+  if (value === null || value === undefined) return '-';
+  if (typeof value === 'string') return value;
+  if (typeof value === 'boolean' || typeof value === 'number') return String(value);
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+}
+function mapToolTypeToLabel(toolType?: string): string {
+  if (!toolType) return 'Assessment';
+  const normalized = toolType.toLowerCase().replace(/\s+/g, '-').replace(/_+/g, '-');
+  return checkReport[normalized] ?? checkReport[toolType] ?? toolType;
+}
+
+// Load imported URL into an HTMLImageElement so jsPDF.addImage accepts it
+async function loadImageFromUrl(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = (err) => reject(err);
+    img.src = url;
+  });
+}
+
+// ---- Main generator ----
+// Note: function is async because we load the CheckIcon image element before adding it to the PDF.
+export async function generatePdfFromJson(
+  getOsarReport: OSARReport,
+  filename: string,
+  attested = false
+): Promise<void> {
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  doc.setProperties({ title: 'Open Source Assessment Report (OSAR)', subject: 'OSAR' });
+
+  let y = 20; // vertical cursor
+  const pageBottom = 287; // safe bottom margin for A4
+  const leftMargin = 10;
+  const rightMargin = 200;
 
   // Title
   doc.setFontSize(22);
-  doc.setFont("helvetica", "bold");
-  doc.setTextColor(34, 139, 34); // Set title color to green
-  doc.text("Open Source Assessment Report (OSAR)", 105, yOffset, { align: 'center' });
-  const imgWidth = 13; // Width of the image
-  const imgHeight = 13; // Height of the image
-  const imgX = 185; // X position (aligned right of the title)
-  const imgY = yOffset - 9; // Y position (aligned vertically with the title)
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(34, 139, 34);
+  doc.text('Open Source Assessment Report (OSAR)', 105, y, { align: 'center' });
 
-  // Adding the image right next to the title text
-  if (attested) doc.addImage(CheckIcon, "PNG", imgX, imgY, imgWidth, imgHeight);
-  yOffset += 15;
+  // Attestation icon: load HTMLImageElement from imported URL and draw if attested
+  if (attested) {
+    try {
+      const img = await loadImageFromUrl(CheckIcon);
+      const imgW = 13;
+      const imgH = 13;
+      const imgX = 185;
+      const imgY = y - 9;
+      // jsPDF accepts HTMLImageElement here
+      doc.addImage(img as any, 'PNG', imgX, imgY, imgW, imgH);
+    } catch (err) {
+      // don't block PDF generation on image load failure
+      // console.warn('Could not load CheckIcon', err);
+    }
+  }
 
-  // Add a subtitle
+  y += 15;
+
+  // Subtitle: schema version
   doc.setFontSize(16);
-  doc.setTextColor(0, 0, 0); // Reset color for subtitle text
-  doc.text(`Schema Version: ${getOsarReport.schema_version}`, 105, yOffset, { align: 'center' });
-  yOffset += 15;
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(0, 0, 0);
+  doc.text(`Schema Version: ${safeText(getOsarReport?.schema_version)}`, 105, y, { align: 'center' });
+  y += 15;
 
-  // Asset Details Section
+  // Asset Details header
   doc.setFontSize(16);
-  doc.setTextColor(0, 0, 0); // Reset to black color
-  doc.text("Asset Details", 10, yOffset);
-  yOffset += 10;
-
-  // Horizontal line separator
+  doc.setFont('helvetica', 'bold');
+  doc.text('Asset Details', leftMargin, y);
+  y += 8;
   doc.setLineWidth(0.5);
-  doc.line(10, yOffset, 200, yOffset);
-  yOffset += 10;
+  doc.line(leftMargin, y, rightMargin, y);
+  y += 8;
 
-  // Asset Details Content
-  const asset = getOsarReport.asset;
-  const assetDetails = [
-    ["Type", asset.type],
-    ["Name", asset.name],
-    ["Version", asset.version],
-    ["Environment", asset.environment],
-    ["URL", asset.url]
+  // Asset content
+  const asset: Asset = getOsarReport?.asset ?? {};
+  const assetDetails: [string, any][] = [
+    ['Type', asset.type],
+    ['Name', asset.name],
+    ['Version', asset.version],
+    ['Environment', asset.environment],
+    ['URL', asset.url]
   ];
 
-  assetDetails.forEach(([key, value]) => {
+  for (const [k, v] of assetDetails) {
+    if (y + 10 > pageBottom) {
+      doc.addPage();
+      y = 20;
+    }
     doc.setFontSize(12);
-    doc.setFont("helvetica", "bold");
-    doc.text(`${key}:`, 10, yOffset);
-    doc.setFont("helvetica", "normal");
-    if (key === "URL") {
-      // Make URL clickable and styled
-      doc.setTextColor(0, 0, 255);
-      doc.textWithLink(value, 50, yOffset, { url: value });
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${k}:`, leftMargin, y);
+    doc.setFont('helvetica', 'normal');
+
+    if (k === 'URL' && v) {
+      try {
+        doc.setTextColor(0, 0, 255);
+        doc.textWithLink(safeText(v), leftMargin + 40, y, { url: String(v) });
+      } catch {
+        doc.setTextColor(0, 0, 0);
+        doc.text(safeText(v), leftMargin + 40, y);
+      } finally {
+        doc.setTextColor(0, 0, 0);
+      }
     } else {
       doc.setTextColor(0, 0, 0);
-      doc.text(value, 50, yOffset);
+      doc.text(safeText(v), leftMargin + 40, y);
     }
-    yOffset += 8;
-  });
+    y += 8;
+  }
 
-  // Loop through each assessment and add content dynamically
-  getOsarReport.assessments.forEach((assessment: any) => {
-    const toolDetails = assessment.tool;
-    const executionDetails = assessment.execution;
+  // Assessments
+  const assessments: Assessment[] = Array.isArray(getOsarReport?.assessments) ? getOsarReport.assessments : [];
 
-    const assessmentDetails = [
-      ["Tool Name", toolDetails.name],
-      ["Tool Type", toolDetails.type],
-      ["Tool Version", toolDetails.version],
-      ["Playbook", toolDetails.playbook],
-      ["Execution Type", executionDetails.type],
-      ["Execution ID", executionDetails.id],
-      ["Status", executionDetails.status],
-      ["Timestamp", executionDetails.timestamp],
-      ["Duration", executionDetails.duration],
-      ["Output", executionDetails.output_path]
+  for (const assessment of assessments) {
+    const toolDetails: Tool = assessment?.tool ?? {};
+    const executionDetails: Execution = assessment?.execution ?? {};
+    const toolLabel = mapToolTypeToLabel(toolDetails.type ?? toolDetails.name);
+
+    // ensure room for header
+    if (y + 40 > pageBottom) {
+      doc.addPage();
+      y = 20;
+    }
+    y += 8;
+
+    // Section header
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(0, 0, 0);
+    doc.text(toolLabel, leftMargin, y);
+    y += 8;
+    doc.setLineWidth(0.5);
+    doc.line(leftMargin, y, rightMargin, y);
+    y += 8;
+
+    // Assessment details
+    const assessmentDetails: [string, any][] = [
+      ['Tool Name', toolDetails.name],
+      ['Tool Type', toolDetails.type],
+      ['Tool Version', toolDetails.version],
+      ['Playbook', toolDetails.playbook],
+      ['Execution Type', executionDetails.type],
+      ['Execution ID', executionDetails.id],
+      ['Status', executionDetails.status],
+      ['Timestamp', executionDetails.timestamp],
+      ['Duration', executionDetails.duration],
+      ['Output', executionDetails.output_path]
     ];
 
-    // Check space before Assessment Details section header
-    if (yOffset + 30 > 280) {
-      doc.addPage();
-      yOffset = 20;
-    }
-
-    yOffset += 10; // Some space before the next section
-
-    // --- Assessment Details Section Header ---
-    doc.setFontSize(16);
-    doc.setTextColor(0, 0, 0);
-    doc.setFont("helvetica", "bold");
-    doc.text(`${checkReport[toolDetails.type]}`, 10, yOffset);
-    yOffset += 10;
-
-    // Horizontal line separator
-    doc.setLineWidth(0.5);
-    doc.line(10, yOffset, 200, yOffset);
-    yOffset += 10;
-
-    // --- Loop through assessmentDetails ---
-    assessmentDetails.forEach(([key, value]) => {
-    // Check space before each detail row
-      if (yOffset + 10 > 280) {
+    for (const [key, value] of assessmentDetails) {
+      if (y + 12 > pageBottom) {
         doc.addPage();
-        yOffset = 20;
-
-        // Re-add the Assessment Details section header on the new page
-        doc.setFontSize(16);
-        doc.setTextColor(0, 0, 0);
-        doc.setFont("helvetica", "bold");
-        doc.text(`${checkReport[toolDetails.type]} (continued)`, 10, yOffset);
-        yOffset += 10;
-        doc.setLineWidth(0.5);
-        doc.line(10, yOffset, 200, yOffset);
-        yOffset += 10;
+        y = 20;
+        // redraw header on new page
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${toolLabel} (continued)`, leftMargin, y);
+        y += 8;
+        doc.line(leftMargin, y, rightMargin, y);
+        y += 8;
       }
 
       doc.setFontSize(12);
-      doc.setFont("helvetica", "bold");
-      doc.text(`${key}:`, 10, yOffset);
-      doc.setFont("helvetica", "normal");
-      if (key === "Output") {
-        // Print "Output:" label
-        doc.setTextColor(0, 0, 0);
-        doc.text(`${key}:`, 10, yOffset);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`${key}:`, leftMargin, y);
+      doc.setFont('helvetica', 'normal');
 
-        // Make the word "Link" clickable
-        doc.setTextColor(0, 0, 255);
-        doc.textWithLink("Link", 50, yOffset, { url: value });
+      if (key === 'Output') {
+        const out = value ? String(value) : '';
+        if (out) {
+          try {
+            doc.setTextColor(0, 0, 255);
+            doc.textWithLink('Link', leftMargin + 40, y, { url: out });
+          } catch {
+            doc.setTextColor(0, 0, 0);
+            doc.text(safeText(out), leftMargin + 40, y);
+          } finally {
+            doc.setTextColor(0, 0, 0);
+          }
+        } else {
+          doc.setTextColor(0, 0, 0);
+          doc.text('-', leftMargin + 40, y);
+        }
       } else {
         doc.setTextColor(0, 0, 0);
-        doc.text(value, 50, yOffset);
+        doc.text(safeText(value), leftMargin + 40, y);
       }
-      yOffset += 8;
-    });
 
-    yOffset += 15; // Space before the Assessment Results section
-
-    // --- Assessment Results Section ---
-    if (yOffset + 30 > 280) {
-      doc.addPage();
-      yOffset = 20;
+      y += 8;
     }
 
+    y += 8;
+
+    // Results header
+    if (y + 40 > pageBottom) {
+      doc.addPage();
+      y = 20;
+    }
     doc.setFontSize(16);
-    doc.setTextColor(0, 0, 0);
-    doc.text("Assessment Result", 10, yOffset);
-    yOffset += 10;
-
-    // Horizontal line separator
+    doc.setFont('helvetica', 'bold');
+    doc.text('Assessment Result', leftMargin, y);
+    y += 8;
     doc.setLineWidth(0.5);
-    doc.line(10, yOffset, 200, yOffset);
-    yOffset += 10;
+    doc.line(leftMargin, y, rightMargin, y);
+    y += 8;
 
-    // --- Results Table ---
-    const results = assessment.results.map((item: any) => ({
-      feature: item.feature,
-      aspect: item.aspect,
-      attribute: item.attribute,
-      value: item.value.toString() // Convert boolean to string for display
-    }));
+    // Prepare table body
+    const results: Result[] = Array.isArray(assessment?.results) ? assessment.results : [];
+    const body = results.map((r) => [
+      safeText(r.feature),
+      safeText(r.aspect),
+      safeText(r.attribute),
+      safeText(r.value)
+    ]);
 
-    doc.autoTable({
-      startY: yOffset,
+    // Table start and repeated header coordination
+    const tableStartY = y;
+    const repeatedHeaderY = 18; // location of repeated header on continued pages
+    const repeatedHeaderHeight = 8;
+    const marginTopForTablePages = repeatedHeaderY + repeatedHeaderHeight + 2; // ~28
+    const startingPage = (doc as any).getNumberOfPages ? (doc as any).getNumberOfPages() : 1;
+
+    // Call autoTable with margin.top so continued pages leave space for our repeated header
+    autoTable(doc, {
+      startY: tableStartY,
       head: [['Feature', 'Aspect', 'Attribute', 'Value']],
-      body: results.map((result: any) => [result.feature, result.aspect, result.attribute, result.value]),
-      styles: { fontSize: 10, cellPadding: 3 },
+      body,
+      styles: { fontSize: 10, cellPadding: 3, overflow: 'linebreak' },
       headStyles: { fillColor: [34, 139, 34] },
+      margin: { left: leftMargin, right: 10, top: marginTopForTablePages },
       didDrawPage: (data: any) => {
-        if (data.pageNumber > 1) {
-        // Re-add the Assessment Result header on new pages during table rendering
-          doc.setFontSize(16);
+        // Only draw the repeated header on pages AFTER the starting page
+        if (data.pageNumber > startingPage) {
+          doc.setFontSize(14);
+          doc.setFont('helvetica', 'bold');
           doc.setTextColor(0, 0, 0);
-          doc.text(`${checkReport[toolDetails.type]} - Assessment Result (continued)`, 10, 15);
+          doc.text(`${toolLabel} - Assessment Result (continued)`, leftMargin, repeatedHeaderY);
+
+          const separatorY = repeatedHeaderY + 4;
           doc.setLineWidth(0.5);
-          doc.line(10, 20, 200, 20);
+          doc.line(leftMargin, separatorY, rightMargin, separatorY);
+        }
+      },
+      didDrawCell: (data: any) => {
+        // If value cell looks like URL, render a clickable link
+        if (data.section === 'body' && data.column.index === 3) {
+          const text = (data.cell.text || []).join('');
+          if (/^https?:\/\//i.test(text)) {
+            const x = data.cell.x + 2;
+            const yCell = data.cell.y + data.cell.height / 2 + 3;
+            try {
+              doc.setTextColor(0, 0, 255);
+              doc.textWithLink(text, x, yCell, { url: text });
+              doc.setTextColor(0, 0, 0);
+            } catch {
+              // ignore
+            }
+          }
         }
       }
     });
 
-    // Update yOffset after the table
-    yOffset = doc.autoTable.previous.finalY + 10;
-  });
+    // Update vertical cursor y from lastAutoTable.finalY (most reliable)
+    const lastFinalY = (doc as any).lastAutoTable?.finalY ?? (doc as any).autoTable?.previous?.finalY;
+    y = lastFinalY ? lastFinalY + 10 : tableStartY + 10;
+  }
 
-
-  // Save the PDF
+  // Save doc
   doc.save(`${filename}.pdf`);
 }
