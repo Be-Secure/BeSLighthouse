@@ -9,7 +9,8 @@ import { getStyles } from "../../../utils/styles";
 const names = [
   "Classic",
   "LLM",
-  "SLM"
+  "SLM",
+  "DL Model"
 ];
 
 export function ModelType({ filter, setFilter }: any) {

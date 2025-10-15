@@ -24,7 +24,7 @@ function ShowModelDetails() {
       <DefaultNavbar routes={ routes } sticky />
       <MKBox pt={ 11 } sx={ { mx: { xs: 'auto', lg: 3 }} }>
         <ModelCardDetails model={ model } />
-        { modelType === "Classic" && (
+        { (modelType === "Classic" || modelType === "DL Model") && (
           <SummaryCards name={ model[0]?.name }/>
         ) }
 
