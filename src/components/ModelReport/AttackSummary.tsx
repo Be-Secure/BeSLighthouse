@@ -87,7 +87,7 @@ const SummaryCard: React.FC<{ title: string; buttonLabel: string, name: string }
     verifyLink(dataPoisoningLink, dataPoisoningData);
     verifyLink(defenceForDataPoisoning, dataPoisoningDefenceData);
   }, [name]);
-
+  debugger;
   const attackMap: any = {
     Evasion: {
       name: "evasion",

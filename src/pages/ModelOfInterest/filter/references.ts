@@ -12,5 +12,6 @@ export const riskAnalysis: any = {
 export const modelType: any = {
   "Classic": "Classic",
   "LLM": "LLM",
-  "SLM": "SLM"
+  "SLM": "SLM",
+  "DL Model": "DL Model"
 };
