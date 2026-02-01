@@ -34,6 +34,7 @@ function filterDataBasedOnUserSelecrtionOnRiskriskAnalysis(
 export default function ModelDisplay({ selectedFilter }: any) {
   const [filterName, setFilterName] = useState("");
   const [report, setreport]: any = useState([]);
+
   React.useEffect(() => {
     fetchJsonData(modelOfInterestData, setreport);
   }, []);
@@ -45,6 +46,7 @@ export default function ModelDisplay({ selectedFilter }: any) {
       getModelLIST
     );
   }
+
   if (
     selectedFilter?.RiskAnalysis &&
     !filterCheck[selectedFilter?.RiskAnalysis]
@@ -64,6 +66,7 @@ export default function ModelDisplay({ selectedFilter }: any) {
     getComparator("asc", "id"),
     filterName
   );
+
   return (
     <ThreeWayToggleButton
       filteredCveReport={ filteredCveReport }
