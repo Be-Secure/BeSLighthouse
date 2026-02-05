@@ -354,7 +354,21 @@ export default function CompareModelsModal({
       </DialogContent>
 
       <DialogActions sx={{ p: 2 }}>
-        <Button variant="contained" onClick={onClose}>
+        <Button
+          variant="contained"
+          size="medium"
+          onClick={onClose}
+          sx={{
+            backgroundColor: "#1976d2",
+            color: "#ffffff",
+            textTransform: "none",
+            fontWeight: 600,
+            mr: 1,
+            "&:hover": {
+              backgroundColor: "#1565c0"
+            }
+          }}
+        >
           Close
         </Button>
       </DialogActions>
