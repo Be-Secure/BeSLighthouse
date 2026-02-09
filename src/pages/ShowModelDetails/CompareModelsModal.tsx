@@ -67,9 +67,7 @@ const buildUrls = (modelName: string) => {
  Potential   -> Potentially Malicious
  Other       -> Non Malicious
 */
-
 const parseMitreLikeDashboard = (mitreData: any[]) => {
-
   let malicious = 0;
   let potential = 0;
 
@@ -127,38 +125,42 @@ const bodyCellBase = {
 
 /* ===================== COMPONENT ===================== */
 
-export default function CompareModelsModal({
-  open,
-  onClose,
-  models
-}: Props) {
-
+export default function CompareModelsModal({ open, onClose, models }: Props) {
   const [selectedModels, setSelectedModels] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(false);
 
-  /* ===== LOAD DEFAULT MODEL ===== */
+  // show only LLM models in list
+  const llmModels = React.useMemo(
+    () => (models ?? []).filter((m) => m?.type === "LLM"),
+    [models]
+  );
 
+  /* ===== LOAD DEFAULT MODEL ===== */
   React.useEffect(() => {
     if (!open || !models?.length) return;
 
     const loadDefault = async () => {
+      // ✅ default should also be LLM
+      const firstLlmModel = (models ?? []).find((m) => m?.type === "LLM");
+      if (!firstLlmModel) {
+        setSelectedModels([]);
+        return;
+      }
 
-      const firstModel = models[0];
       setLoading(true);
 
       try {
-
-        const urls = buildUrls(firstModel.name);
+        const urls = buildUrls(firstLlmModel.name);
 
         const [mitreRes, frrRes] = await Promise.all([
-          fetch(urls.mitre).then(r => r.json()),
-          fetch(urls.frr).then(r => r.json())
+          fetch(urls.mitre).then((r) => r.json()),
+          fetch(urls.frr).then((r) => r.json())
         ]);
 
         const mitreCounts = parseMitreLikeDashboard(mitreRes);
 
         const enrichedModel = {
-          ...firstModel,
+          ...firstLlmModel,
           mitre: mitreCounts,
           frr: {
             accepted: frrRes?.accept_count ?? 0,
@@ -168,7 +170,6 @@ export default function CompareModelsModal({
         };
 
         setSelectedModels([enrichedModel]);
-
       } catch (err) {
         console.error("Compare default load failed", err);
       } finally {
@@ -177,27 +178,25 @@ export default function CompareModelsModal({
     };
 
     loadDefault();
-
   }, [open, models]);
 
   /* ===== ON MODEL SELECTION ===== */
-
   const handleChange = async (_: any, value: any[]) => {
+    // dedupe by id (safety)
+    const unique = Array.from(new Map(value.map((m) => [m.id, m])).values());
 
-    if (value.length > MAX_COMPARE) return;
+    if (unique.length > MAX_COMPARE) return;
 
     setLoading(true);
 
     try {
-
       const enriched = await Promise.all(
-        value.map(async (model) => {
-
+        unique.map(async (model) => {
           const urls = buildUrls(model.name);
 
           const [mitreRes, frrRes] = await Promise.all([
-            fetch(urls.mitre).then(r => r.json()),
-            fetch(urls.frr).then(r => r.json())
+            fetch(urls.mitre).then((r) => r.json()),
+            fetch(urls.frr).then((r) => r.json())
           ]);
 
           const mitreCounts = parseMitreLikeDashboard(mitreRes);
@@ -215,7 +214,6 @@ export default function CompareModelsModal({
       );
 
       setSelectedModels(enriched);
-
     } catch (err) {
       console.error("Compare fetch failed", err);
     } finally {
@@ -227,19 +225,17 @@ export default function CompareModelsModal({
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth scroll="body">
-
-      <DialogTitle sx={{ fontWeight: 600 }}>
-        Compare Models
-      </DialogTitle>
+      <DialogTitle sx={{ fontWeight: 600 }}>Compare Models</DialogTitle>
 
       <DialogContent sx={{ pt: 2 }}>
-
         {/* ===== MODEL SELECTOR ===== */}
-
         <Autocomplete
           multiple
-          options={models}
+          // only LLM models shown
+          options={llmModels}
           value={selectedModels}
+          // prevents duplicate selection when objects are re-created/enriched
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           getOptionLabel={(o: any) => o.name}
           onChange={handleChange}
           disableCloseOnSelect
@@ -256,7 +252,7 @@ export default function CompareModelsModal({
           renderInput={(params) => (
             <TextField
               {...params}
-              placeholder="Select up to 3 models"
+              placeholder="Select up to 3 LLM models"
               size="small"
             />
           )}
@@ -265,12 +261,11 @@ export default function CompareModelsModal({
 
         {loading && (
           <Box textAlign="center" py={2}>
-            Loading MITRE & FRR data...
+            Loading MITRE &amp; FRR data...
           </Box>
         )}
 
         {/* ===== TABLE ===== */}
-
         {selectedModels.length > 0 && (
           <Box
             sx={{
@@ -282,7 +277,6 @@ export default function CompareModelsModal({
             }}
           >
             <Table stickyHeader size="small" sx={{ tableLayout: "fixed" }}>
-
               <colgroup>
                 <col style={{ width: ATTRIBUTE_COL_WIDTH }} />
                 {selectedModels.map((model) => (
@@ -290,7 +284,15 @@ export default function CompareModelsModal({
                 ))}
               </colgroup>
 
-              <TableHead sx={{ display: "table-header-group", "& .MuiTableCell-root": { paddingTop: "16px", paddingBottom: "16px" } }} >
+              <TableHead
+                sx={{
+                  display: "table-header-group",
+                  "& .MuiTableCell-root": {
+                    paddingTop: "16px",
+                    paddingBottom: "16px"
+                  }
+                }}
+              >
                 <TableRow>
                   <TableCell
                     sx={{
@@ -323,7 +325,6 @@ export default function CompareModelsModal({
               <TableBody>
                 {ATTRIBUTES.map((attr) => (
                   <TableRow key={attr.key}>
-
                     <TableCell
                       sx={{
                         ...bodyCellBase,
@@ -338,19 +339,19 @@ export default function CompareModelsModal({
                     </TableCell>
 
                     {selectedModels.map((model) => (
-                      <TableCell key={model.id} sx={bodyCellBase}>
+                      <TableCell
+                        key={`${model.id}-${attr.key}`}
+                        sx={bodyCellBase}
+                      >
                         {resolveValue(model, attr.key)}
                       </TableCell>
                     ))}
-
                   </TableRow>
                 ))}
               </TableBody>
-
             </Table>
           </Box>
         )}
-
       </DialogContent>
 
       <DialogActions sx={{ p: 2 }}>
@@ -372,7 +373,6 @@ export default function CompareModelsModal({
           Close
         </Button>
       </DialogActions>
-
     </Dialog>
   );
 }
