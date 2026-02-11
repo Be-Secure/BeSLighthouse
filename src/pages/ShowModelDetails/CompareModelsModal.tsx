@@ -17,13 +17,10 @@ import {
 } from "@mui/material";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 
-/* ===================== CONSTANTS ===================== */
-
 const MAX_COMPARE = 3;
 const ATTRIBUTE_COL_WIDTH = 240;
 const MODEL_COL_WIDTH = 220;
 
-/* Header row is taller ONLY via padding */
 const HEADER_PADDING_Y = "16px";
 const BODY_PADDING_Y = "8px";
 
@@ -44,8 +41,6 @@ const ATTRIBUTES = [
   { key: "frr.rate", label: "FRR – Refusal Rate" }
 ];
 
-/* ===================== HELPERS ===================== */
-
 const resolveValue = (model: any, key: string) => {
   if (!key.includes(".")) return model?.[key] ?? "-";
   const [section, field] = key.split(".");
@@ -54,7 +49,6 @@ const resolveValue = (model: any, key: string) => {
 
 const buildUrls = (modelName: string) => {
   const encoded = encodeURIComponent(modelName);
-
   return {
     mitre: `${besecureMlAssessmentDataStore}/${encoded}/llm-benchmark/${encoded}-mitre-test-detailed-report.json`,
     frr: `${besecureMlAssessmentDataStore}/${encoded}/llm-benchmark/${encoded}-frr-test-summary-report.json`
@@ -96,15 +90,11 @@ const parseMitreLikeDashboard = (mitreData: any[]) => {
   };
 };
 
-/* ===================== PROPS ===================== */
-
 interface Props {
   open: boolean;
   onClose: () => void;
   models: any[];
 }
-
-/* ===================== CELL STYLES ===================== */
 
 const headerCellBase = {
   padding: `${HEADER_PADDING_Y} 12px`,
@@ -123,34 +113,97 @@ const bodyCellBase = {
   verticalAlign: "middle"
 };
 
-/* ===================== COMPONENT ===================== */
+/** Try HEAD first, fallback to GET if HEAD is blocked by server/CORS. */
+async function urlLooksLikeJson(url: string): Promise<boolean> {
+  try {
+    const head = await fetch(url, { method: "HEAD" });
+    if (head.ok) return true;
+  } catch {
+    // ignore and fallback to GET
+  }
+
+  try {
+    const res = await fetch(url, { method: "GET" });
+    if (!res.ok) return false;
+    // Validate it is actually JSON (and not an HTML error page).
+    await res.clone().json();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function hasBothReports(modelName: string): Promise<boolean> {
+  const urls = buildUrls(modelName);
+  const [mitreOk, frrOk] = await Promise.all([
+    urlLooksLikeJson(urls.mitre),
+    urlLooksLikeJson(urls.frr)
+  ]);
+  return mitreOk && frrOk;
+}
 
 export default function CompareModelsModal({ open, onClose, models }: Props) {
   const [selectedModels, setSelectedModels] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(false);
 
-  // show only LLM models in list
+  // NEW: only models that have BOTH files
+  const [eligibleModels, setEligibleModels] = React.useState<any[]>([]);
+  const [eligibilityLoading, setEligibilityLoading] = React.useState(false);
+
   const llmModels = React.useMemo(
     () => (models ?? []).filter((m) => m?.type === "LLM"),
     [models]
   );
 
-  /* ===== LOAD DEFAULT MODEL ===== */
+  // NEW: compute eligible list on open
   React.useEffect(() => {
-    if (!open || !models?.length) return;
+    if (!open) return;
+
+    let cancelled = false;
+
+    const run = async () => {
+      setEligibilityLoading(true);
+      try {
+        const checks = await Promise.all(
+          llmModels.map(async (m) => {
+            const ok = await hasBothReports(m.name);
+            return ok ? m : null;
+          })
+        );
+
+        const eligible = checks.filter(Boolean) as any[];
+        if (!cancelled) setEligibleModels(eligible);
+      } catch (e) {
+        console.error("Eligibility check failed", e);
+        if (!cancelled) setEligibleModels([]);
+      } finally {
+        if (!cancelled) setEligibilityLoading(false);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [open, llmModels]);
+
+  // UPDATED: default load uses first eligible model
+  React.useEffect(() => {
+    if (!open) return;
+    if (!eligibleModels.length) {
+      setSelectedModels([]);
+      return;
+    }
+
+    let cancelled = false;
 
     const loadDefault = async () => {
-      // ✅ default should also be LLM
-      const firstLlmModel = (models ?? []).find((m) => m?.type === "LLM");
-      if (!firstLlmModel) {
-        setSelectedModels([]);
-        return;
-      }
-
+      const first = eligibleModels[0];
       setLoading(true);
 
       try {
-        const urls = buildUrls(firstLlmModel.name);
+        const urls = buildUrls(first.name);
 
         const [mitreRes, frrRes] = await Promise.all([
           fetch(urls.mitre).then((r) => r.json()),
@@ -160,7 +213,7 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
         const mitreCounts = parseMitreLikeDashboard(mitreRes);
 
         const enrichedModel = {
-          ...firstLlmModel,
+          ...first,
           mitre: mitreCounts,
           frr: {
             accepted: frrRes?.accept_count ?? 0,
@@ -169,22 +222,24 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
           }
         };
 
-        setSelectedModels([enrichedModel]);
+        if (!cancelled) setSelectedModels([enrichedModel]);
       } catch (err) {
         console.error("Compare default load failed", err);
+        if (!cancelled) setSelectedModels([]);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     loadDefault();
-  }, [open, models]);
 
-  /* ===== ON MODEL SELECTION ===== */
+    return () => {
+      cancelled = true;
+    };
+  }, [open, eligibleModels]);
+
   const handleChange = async (_: any, value: any[]) => {
-    // dedupe by id (safety)
     const unique = Array.from(new Map(value.map((m) => [m.id, m])).values());
-
     if (unique.length > MAX_COMPARE) return;
 
     setLoading(true);
@@ -221,24 +276,21 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
     }
   };
 
-  /* ===================== UI ===================== */
-
   return (
     <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth scroll="body">
       <DialogTitle sx={{ fontWeight: 600 }}>Compare Models</DialogTitle>
 
       <DialogContent sx={{ pt: 2 }}>
-        {/* ===== MODEL SELECTOR ===== */}
         <Autocomplete
           multiple
-          // only LLM models shown
-          options={llmModels}
+          options={eligibleModels}
           value={selectedModels}
-          // prevents duplicate selection when objects are re-created/enriched
           isOptionEqualToValue={(option, value) => option.id === value.id}
           getOptionLabel={(o: any) => o.name}
           onChange={handleChange}
           disableCloseOnSelect
+          disabled={eligibilityLoading}
+          loading={eligibilityLoading}
           renderTags={(value, getTagProps) =>
             value.map((o: any, i: number) => (
               <Chip
@@ -252,20 +304,23 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
           renderInput={(params) => (
             <TextField
               {...params}
-              placeholder="Select up to 3 LLM models"
+              placeholder={
+                eligibilityLoading
+                  ? "Checking available reports..."
+                  : "Select up to 3 LLM models"
+              }
               size="small"
             />
           )}
           sx={{ mb: 3 }}
         />
 
-        {loading && (
+        {(eligibilityLoading || loading) && (
           <Box textAlign="center" py={2}>
             Loading MITRE &amp; FRR data...
           </Box>
         )}
 
-        {/* ===== TABLE ===== */}
         {selectedModels.length > 0 && (
           <Box
             sx={{
@@ -350,6 +405,12 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
                 ))}
               </TableBody>
             </Table>
+          </Box>
+        )}
+
+        {!eligibilityLoading && eligibleModels.length === 0 && (
+          <Box textAlign="center" py={2}>
+            No LLM models found with both MITRE and FRR reports.
           </Box>
         )}
       </DialogContent>
