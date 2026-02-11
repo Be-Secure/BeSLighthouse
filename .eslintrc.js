@@ -36,11 +36,7 @@ module.exports = {
     '@typescript-eslint/require-array-sort-compare': ['error', {
       ignoreStringArrays: true
     }],
-    'react/jsx-curly-spacing': ['error', {
-      when: 'always',
-      allowMultiline: true,
-      children: true
-    }],
+    'react/jsx-curly-spacing': 'off',
     'eol-last': ['error', 'always'],
     'no-multiple-empty-lines': 'error',
     semi: ['error', 'always'],

@@ -83,6 +83,7 @@ function ModelOfInterest() {
   React.useEffect(() => {
     prepPieChartData(setModelType, setRiskAnalysis, setReport);
   }, []);
+
   return (
     <>
       <DefaultNavbar routes={ routes } sticky />
