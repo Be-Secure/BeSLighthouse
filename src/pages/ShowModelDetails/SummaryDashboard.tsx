@@ -350,7 +350,7 @@ export const processData = (interpreterData: InterpreterDataArray) => {
 
   interpreterData.forEach((entry) => {
     const attackType = entry.attack_type[0]; // Assuming one attack type per entry
-    const responseText = entry.judge_response.outputs[0].text;
+    const responseText = entry.judge_response?.outputs?.[0]?.text ?? entry.judge_response;
 
     let category = 'Non-malicious';
     if (/Potentially Malicious/i.test(responseText)) {
