@@ -299,6 +299,14 @@ interface Interpreter {
     model: string
 }
 
+interface Vulnerability {
+    [vulnerabilityType: string]: {
+        [language: string]: {
+            [modelName: string]: number
+        }
+    }
+}
+
 interface LeakReplayEntry {
     entry_type: string
     probe: string
@@ -508,6 +516,7 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-interpreter-test-detailed-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-safetyBenchmark/${selectedModel.name}-modelbench-detailed-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-garak-test-summary-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-vulnerability-exploitation-test-summary-report.json`,
   ];
 
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
@@ -534,6 +543,8 @@ const SummaryDashboard = ({ model }: any) => {
   );
   const [garakTestSummary, setGarakTestSummaryData] =
         useState<LeakReplayData>({});
+  const [vulnerabilityData, setVulnerabilityData] =
+        useState<Vulnerability>({});
   const [openAutocomplete, setOpenAutocomplete] = useState(false);
   const [openInstruct, setOpenInstruct] = useState(false);
   const [openInterpreter, setOpenInterpreter] = useState(false);
@@ -567,6 +578,7 @@ const SummaryDashboard = ({ model }: any) => {
           verifyLink(urls[10], setInterpreterTestDetailedData, []),
           verifyLink(urls[11], setSafetyBenchmarkData),
           verifyLink(urls[12], setGarakTestSummaryData),
+          verifyLink(urls[13], setVulnerabilityData),
         ]);
       } catch (err) {
         // Fix me later
@@ -578,6 +590,35 @@ const SummaryDashboard = ({ model }: any) => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedModel.name]);
+
+  const processVulnerabilityData = (vulnData: Vulnerability) => {
+    const languageMap: Record<string, any> = {};
+
+    Object.entries(vulnData).forEach(([vulnType, languages]) => {
+      Object.entries(languages).forEach(([language, models]) => {
+        if (!languageMap[language]) {
+          languageMap[language] = { language };
+        }
+        Object.entries(models).forEach(([model, score]) => {
+          languageMap[language][vulnType] = (score * 100).toFixed(2);
+        });
+      });
+    });
+
+    return Object.values(languageMap);
+  };
+
+  const vulnerabilityChartData = processVulnerabilityData(vulnerabilityData);
+
+  const vulnerabilityTypes = Object.keys(vulnerabilityData);
+
+  const vulnerabilityColors: Record<string, string> = {
+    constraint_satisfaction: '#FF6B6B',
+    buffer_overflow: '#4ECDC4',
+    memory_corruption: '#FFE66D',
+    sql_injection: '#95E1D3',
+    xss: '#F38181',
+  };
 
   const flattenedMockData = Object.entries(garakTestSummary).flatMap(
     ([category, subCategories]) =>
@@ -1641,6 +1682,71 @@ const SummaryDashboard = ({ model }: any) => {
         </Grid>
       </Grid>
       <Grid container spacing={ 1 } style={ { marginTop: '1px' } } pb={ 2 }>
+        <Grid item xs={ 12 } md={ 12 }>
+          <Card sx={ { height: '100%' } }>
+            <CardContent>
+              <Box
+                sx={ {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  paddingTop: '7px',
+                  paddingBottom: '12px',
+                } }
+              >
+                <Typography
+                  variant="h5"
+                  sx={ { textAlign: 'center' } }
+                >
+                  Vulnerability Exploitation
+                </Typography>
+              </Box>
+              { vulnerabilityChartData.length === 0 ? (
+                <Box
+                  sx={ {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 200,
+                  } }
+                >
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                  >
+                    Vulnerability data not available
+                  </Typography>
+                </Box>
+              ) : (
+                <ResponsiveContainer width="100%" height={ 300 }>
+                  <BarChart
+                    data={ vulnerabilityChartData }
+                    margin={ { left: 20, right: 20, top: 20, bottom: 20 } }
+                    barGap={ 5 }
+                  >
+                    <XAxis dataKey="language" />
+                    <YAxis label={ { value: 'Score (%)', angle: -90, position: 'insideLeft' } } />
+                    <Tooltip />
+                    <Legend
+                      wrapperStyle={ {
+                        fontSize: '12px',
+                        paddingTop: '16px',
+                      } }
+                    />
+                    { vulnerabilityTypes.map((vulnType) => (
+                      <Bar
+                        key={ vulnType }
+                        dataKey={ vulnType }
+                        name={ vulnType.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()) }
+                        fill={ vulnerabilityColors[vulnType] || '#999' }
+                        barSize={ 30 }
+                      />
+                    )) }
+                  </BarChart>
+                </ResponsiveContainer>
+              ) }
+            </CardContent>
+          </Card>
+        </Grid>
         <Grid item xs={ 12 } md={ 6 }>
           <Card>
             <Typography
