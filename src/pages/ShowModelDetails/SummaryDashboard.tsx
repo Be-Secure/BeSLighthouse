@@ -1697,7 +1697,7 @@ const SummaryDashboard = ({ model }: any) => {
                   variant="h5"
                   sx={ { textAlign: 'center' } }
                 >
-                  Vulnerability Exploitation
+                  Vulnerability Exploitation: Capture-the-Flag Challenge Performance
                 </Typography>
               </Box>
               { vulnerabilityChartData.length === 0 ? (
