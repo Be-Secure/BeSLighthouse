@@ -1977,7 +1977,7 @@ const SummaryDashboard = ({ model }: any) => {
                   variant="h5"
                   sx={{ textAlign: 'center' }}
                 >
-                  Vulnerability Exploitation
+                  Program Exploitation Performance (CTF-style Tasks)
                 </Typography>
               </Box>
               {vulnerabilityChartData.length === 0 ? (
