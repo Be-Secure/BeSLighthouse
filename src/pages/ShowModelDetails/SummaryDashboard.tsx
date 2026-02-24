@@ -39,6 +39,7 @@ import { SpearPhishingModal } from './SpearPhishingModalDetails';
 import PromptInjectionModal from './PromptInjectionModal';
 import { AutocompleteModal } from './AutocompleteModalDetails';
 import InterpreterModel from './InterpreterModel';
+import ThreatIntelligenceModal from './ThreatIntelligenceModal';
 
 interface Metadata {
     format_version: number
@@ -323,6 +324,57 @@ interface LeakReplayData {
     leakreplay?: LeakReplay
 }
 
+export interface ModelStatsBase {
+  avg_score: number;
+  total_score: number;
+  correct_mc_count: number;
+  incorrect_mc_count: number;
+  response_parsing_error_count: number;
+  correct_mc_pct: number;
+  fail_to_query_count?: number;
+}
+
+export interface ThreatIntelModelData {
+  stat_per_model: ModelStatsBase;
+
+  stat_per_model_per_report: Record<
+    string, // report id like "adroxgh0st"
+    ModelStatsBase
+  >;
+
+  stat_per_model_per_source: Record<
+    string, // source like "CISA", "NSA"
+    ModelStatsBase
+  >;
+}
+
+export interface ThreatIntelData {
+  [modelName: string]: ThreatIntelModelData;
+}
+
+export interface MalwareModelData {
+  stat_per_model: ModelStatsBase;
+
+  stat_per_model_per_topic: Record<
+    string, // topic name
+    ModelStatsBase
+  >;
+
+  stat_per_model_per_difficulty: Record<
+    string, // easy | medium | hard
+    ModelStatsBase
+  >;
+
+  stat_per_model_per_attack: Record<
+    string, // infostealers, ransomware etc.
+    ModelStatsBase
+  >;
+}
+
+export interface MalwareData {
+  [modelName: string]: MalwareModelData;
+}
+
 export type InterpreterDataArray = Interpreter[]
 
 export const colorCode: ColorCode = {
@@ -517,6 +569,8 @@ const SummaryDashboard = ({ model }: any) => {
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-safetyBenchmark/${selectedModel.name}-modelbench-detailed-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-garak-test-summary-report.json`,
     `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-vulnerability-exploitation-test-summary-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-malware-test-summary-report.json`,
+    `${besecureMlAssessmentDataStore}/${selectedModel.name}/llm-benchmark/${selectedModel.name}-threat-intel-test-summary-report.json`,
   ];
 
   const [interpreterData, setInterpreterData] = useState<InterpreterData>({});
@@ -545,16 +599,22 @@ const SummaryDashboard = ({ model }: any) => {
         useState<LeakReplayData>({});
   const [vulnerabilityData, setVulnerabilityData] =
         useState<Vulnerability>({});
+  const [malwareSummary, setMalwareSummary] =
+        useState<MalwareData>({});
+  const [threatIntelSummary, setThreatIntelSummary] =
+        useState<ThreatIntelData>({});
   const [openAutocomplete, setOpenAutocomplete] = useState(false);
   const [openInstruct, setOpenInstruct] = useState(false);
   const [openInterpreter, setOpenInterpreter] = useState(false);
   const [open, setOpen] = useState(false);
   const [openPromptInjection, setOpenPromptInjection] = useState(false);
+  const [openThreatIntel, setOpenThreatIntel] = useState(false);
   const [openSpear, setOpenSpear] = useState(false);
   const handleOpen = () => setOpenSpear(true);
   const handleClose = () => setOpenSpear(false);
   const handleOpenMitre = () => setOpen(true);
   const handleOpenPromptInjection = () => setOpenPromptInjection(true);
+  const handleOpenThreatIntel = () => setOpenThreatIntel(true);
   const handleOpenAutocomplete = () => setOpenAutocomplete(true);
   const handleCloseAutocomplete = () => setOpenAutocomplete(false);
   const handleOpenInstruct = () => setOpenInstruct(true);
@@ -579,6 +639,8 @@ const SummaryDashboard = ({ model }: any) => {
           verifyLink(urls[11], setSafetyBenchmarkData),
           verifyLink(urls[12], setGarakTestSummaryData),
           verifyLink(urls[13], setVulnerabilityData),
+          verifyLink(urls[14], setMalwareSummary),
+          verifyLink(urls[15], setThreatIntelSummary),
         ]);
       } catch (err) {
         // Fix me later
@@ -591,6 +653,66 @@ const SummaryDashboard = ({ model }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedModel.name]);
 
+  const malwareStats: any = malwareSummary?.stat_per_model ?? undefined;
+
+  const malwarePieData = [
+    {
+      name: 'Correct',
+      value: malwareStats?.correct_mc_count ?? 0,
+      color: '#76b041',
+    },
+    {
+      name: 'Incorrect',
+      value: malwareStats?.incorrect_mc_count ?? 0,
+      color: '#C23B22',
+    },
+    {
+      name: 'Parsing Error',
+      value: malwareStats?.response_parsing_error_count ?? 0,
+      color: '#f28e2c',
+    },
+  ];
+
+  const malwareTotal =
+  (malwareStats?.correct_mc_count ?? 0) +
+  (malwareStats?.incorrect_mc_count ?? 0) +
+  (malwareStats?.response_parsing_error_count ?? 0);
+
+  const hasMalwareData = malwareTotal > 0;
+
+  const threatIntelStats: any = threatIntelSummary?.stat_per_model ?? undefined;
+
+  const threatIntelPieData = [
+    {
+      name: 'Correct',
+      value: threatIntelStats?.correct_mc_count ?? 0,
+      color: '#76b041',
+    },
+    {
+      name: 'Incorrect',
+      value: threatIntelStats?.incorrect_mc_count ?? 0,
+      color: '#C23B22',
+    },
+    {
+      name: 'Parsing Error',
+      value: threatIntelStats?.response_parsing_error_count ?? 0,
+      color: '#f28e2c',
+    },
+    {
+      name: 'Fail to Query',
+      value: threatIntelStats?.fail_to_query_count ?? 0,
+      color: '#9e9e9e',
+    },
+  ];
+
+  const threatIntelTotal =
+    (threatIntelStats?.correct_mc_count ?? 0) +
+    (threatIntelStats?.incorrect_mc_count ?? 0) +
+    (threatIntelStats?.response_parsing_error_count ?? 0) +
+    (threatIntelStats?.fail_to_query_count ?? 0);
+
+  const hasThreatIntelData = threatIntelTotal > 0;
+
   const processVulnerabilityData = (vulnData: Vulnerability) => {
     const languageMap: Record<string, any> = {};
 
@@ -599,7 +721,7 @@ const SummaryDashboard = ({ model }: any) => {
         if (!languageMap[language]) {
           languageMap[language] = { language };
         }
-        Object.entries(models).forEach(([model, score]) => {
+        Object.entries(models).forEach(([, score]) => {
           languageMap[language][vulnType] = (score * 100).toFixed(2);
         });
       });
@@ -1680,9 +1802,130 @@ const SummaryDashboard = ({ model }: any) => {
             </Modal>
           </>
         </Grid>
-      </Grid>
-      <Grid container spacing={ 1 } style={ { marginTop: '1px' } } pb={ 2 }>
-        <Grid item xs={ 12 } md={ 12 }>
+
+        { /* Third Row */ }
+
+        <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
+          <Card
+            sx={ {
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              padding: 2,
+            } }
+          >
+            <Typography
+              variant="h5"
+              sx={ { textAlign: 'center', textTransform: 'none' } }
+            >
+              Malware Analysis
+            </Typography>
+
+            <CardContent
+              sx={ {
+                textAlign: 'center',
+                width: '100%',
+                height: '100%',
+                padding: '0%',
+              } }
+            >
+              <Typography
+                variant="subtitle2"
+                sx={ { color: 'gray', textTransform: 'none' } }
+              >
+                Accuracy in spotting malicious behaviours from malware scenarios.
+              </Typography>
+              {!hasMalwareData ? (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 200,
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                    sx={{ textTransform: 'none' }}
+                  >
+                    Data not available
+                  </Typography>
+                </Box>
+              ) : (
+                <>
+                  <ResponsiveContainer width="100%" height={180}>
+                    <PieChart>
+                      <Pie
+                        data={malwarePieData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={50}
+                        label
+                      >
+                        {malwarePieData.map((entry, index) => (
+                          <Cell key={`malware-cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+
+                  {/* Legend */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'center',
+                      maxWidth: '100%',
+                      gap: 1,
+                      marginTop: '40px',
+                      marginBottom: '16px',
+                      position: 'relative',
+                      top: '24px',
+                    }}
+                  >
+                    {malwarePieData.map((item) => (
+                      <Box
+                        key={item.name}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: 10,
+                            height: 10,
+                            backgroundColor: item.color,
+                            borderRadius: '50%',
+                            mr: 0.5,
+                          }}
+                        />
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontSize: '13px',
+                            color: 'textSecondary',
+                            textTransform: 'capitalize',
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 7 }>
           <Card sx={ { height: '100%' } }>
             <CardContent>
               <Box
@@ -1747,6 +1990,173 @@ const SummaryDashboard = ({ model }: any) => {
             </CardContent>
           </Card>
         </Grid>
+
+        <Grid item xs={ 12 } md={ 12 } lg={ 12 } xl={ 2.5 }>
+          <>
+            <Button
+              onClick={ handleOpenThreatIntel }
+              variant="contained"
+              sx={ {
+                height: '100%',
+                width: '100%',
+                paddingTop: 2,
+                paddingLeft: 0,
+                paddingRight: 0,
+              } }
+              style={ { backgroundColor: 'white' } }
+            >
+              <CardContent
+                sx={ {
+                  textAlign: 'center',
+                  width: '100%',
+                  height: '100%',
+                  padding: '0%',
+                } }
+              >
+                { /* Title */ }
+                <Typography
+                  variant="h5"
+                  sx={ {
+                    textAlign: 'center',
+                    textTransform: 'none',
+                  } }
+                >
+                  Threat Intelligence Reasoning
+                </Typography>
+                <Typography
+                  variant="subtitle2"
+                  sx={ {
+                    color: 'gray',
+                    textTransform: 'none',
+                  } }
+                >
+                  Accuracy in extracting actions from
+                  unstructured threat reports.
+                </Typography>
+                {!hasThreatIntelData ? (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: 200,
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      color="textSecondary"
+                      sx={{ textTransform: 'none' }}
+                    >
+                      Data not available
+                    </Typography>
+                  </Box>
+                ) : (
+                  <>
+                    <ResponsiveContainer width="100%" height={180}>
+                      <PieChart>
+                        <Pie
+                          data={threatIntelPieData}
+                          dataKey="value"
+                          nameKey="name"
+                          cx="50%"
+                          cy="50%"
+                          outerRadius={50}
+                          label
+                        >
+                          {threatIntelPieData.map((entry, index) => (
+                            <Cell key={`ti-cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+
+                    {/* Legend */}
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        maxWidth: '100%',
+                        gap: 1,
+                        marginTop: '40px',
+                        marginBottom: '16px',
+                        position: 'relative',
+                        top: '24px',
+                      }}
+                    >
+                      {threatIntelPieData.map((item) => (
+                        <Box
+                          key={item.name}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              width: 10,
+                              height: 10,
+                              backgroundColor: item.color,
+                              borderRadius: '50%',
+                              mr: 0.5,
+                            }}
+                          />
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              fontSize: '13px',
+                              color: 'textSecondary',
+                              textTransform: 'capitalize',
+                            }}
+                          >
+                            {item.name}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  </>
+                )}
+              </CardContent>
+            </Button>
+
+            <Modal
+              open={ openThreatIntel }
+              onClose={ () => setOpenThreatIntel(false) }
+              closeAfterTransition
+              slots={ { backdrop: Backdrop } }
+              slotProps={ { backdrop: { timeout: 500 } } }
+            >
+              <Fade in={ openThreatIntel }>
+                <Box
+                  sx={ {
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '95%',
+                    maxHeight: '90vh',
+                    overflowY: 'auto',
+                    bgcolor: '#f4f4f4',
+                    boxShadow: 24,
+                    p: 4,
+                    borderRadius: 2,
+                  } }
+                >
+                  <ThreatIntelligenceModal
+                    threatIntelligenceSummary={
+                      threatIntelSummary
+                    }
+                  />
+                </Box>
+              </Fade>
+            </Modal>
+          </>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={ 1 } style={ { marginTop: '1px' } } pb={ 2 }>
+
         <Grid item xs={ 12 } md={ 6 }>
           <Card>
             <Typography
