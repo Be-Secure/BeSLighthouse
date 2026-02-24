@@ -2065,6 +2065,8 @@ const SummaryDashboard = ({ model }: any) => {
                   sx={{
                     color: 'gray',
                     textTransform: 'none',
+                    marginLeft: '10px',
+                    marginRight: '10px',
                   }}
                 >
                   Accuracy in extracting actions from

@@ -29,7 +29,7 @@ type SourceStats = {
 };
 
 const InfoCard: React.FC<InfoCardProps> = ({ title, value }) => (
-  <Card sx={ { textAlign: "center", bgcolor: "#fff", boxShadow: 2, borderRadius: 2, height: "100%" } }>
+  <Card sx={ { textAlign: "center", bgcolor: "#fff", display: "flex", justifyContent: "center", boxShadow: 2, borderRadius: 2, height: "100%" } }>
     <CardContent>
       <Typography variant="h3">
         <b>{ value }</b>
@@ -178,26 +178,26 @@ const ThreatIntelligenceModal = ({ threatIntelligenceSummary }: any) => {
           <Grid container spacing={ 1 } sx={ { flex: 1 } }>
             <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
               <Card sx={ { height: "100%", display: "flex", justifyContent: "center", marginLeft: '8px' } }>
-                <Typography variant="body2" color="textSecondary" style={ { paddingLeft: "10px", marginLeft: "10px", marginRight: "10px" } }>
+                <Typography variant="body2" color="textSecondary" style={ { paddingLeft: "10px"} }>
                   <b>Threat Intelligence Reasoning</b> uses the MITRE ATT&CK framework to evaluate an LLM’s compliance when asked to assist in cyberattacks.
                 </Typography>
               </Card>
             </Grid>
             <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
-              <InfoCard title="correct count" value={ threatIntelligenceSummary?.stat_per_model?.correct_mc_count ?? 0 } />
+              <InfoCard title={ "Total score" } value={ Number(threatIntelligenceSummary?.stat_per_model?.total_score ?? 0).toFixed(2) } />
             </Grid>
           </Grid>
   
           { /* Info Cards */ }
           <Grid item container spacing={ 1 } sx={ { flex: 1 } }>
             <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
-              <InfoCard title={ "incorrect count" } value={ threatIntelligenceSummary?.stat_per_model?.incorrect_mc_count ?? 0 } />
+              <InfoCard title={ "MCQs were answered incorrectly" } value={ threatIntelligenceSummary?.stat_per_model?.incorrect_mc_count ?? 0 } />
             </Grid>
             <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
-              <InfoCard title={ "response parsing error count" } value={ threatIntelligenceSummary?.stat_per_model?.response_parsing_error_count ?? 0 } />
+              <InfoCard title="MCQs were answered correctly" value={ threatIntelligenceSummary?.stat_per_model?.correct_mc_count ?? 0 } />
             </Grid>
             <Grid item xs={ 12 } md={ 12 } lg={ 4 }>
-              <InfoCard title={ "fail to query count" } value={ threatIntelligenceSummary?.stat_per_model?.fail_to_query_count ?? 0 } />
+              <InfoCard title={ "Avg score" } value={ Number(threatIntelligenceSummary?.stat_per_model?.avg_score ?? 0).toFixed(2) } />
             </Grid>
           </Grid>
         </Grid>
@@ -215,7 +215,7 @@ const ThreatIntelligenceModal = ({ threatIntelligenceSummary }: any) => {
 
       <Card sx={ { width: '100%', marginTop: '9px', paddingTop: "10px", paddingBottom: "10px" } }>
         <Typography variant="h6" pt={ 0 } sx={ { mt: 0, textAlign: "center", fontWeight: "bold" } }>
-          Threat Intelligence Reasoning - Source Wise Distribution of Violations
+          Threat Intelligence Reasoning - Source Wise Distribution
         </Typography>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart
