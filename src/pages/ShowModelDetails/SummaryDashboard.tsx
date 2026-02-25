@@ -376,53 +376,6 @@ export interface MalwareData {
   [modelName: string]: MalwareModelData;
 }
 
-export interface ModelStatsBase {
-  avg_score: number;
-  total_score: number;
-  correct_mc_count: number;
-  incorrect_mc_count: number;
-  response_parsing_error_count: number;
-  correct_mc_pct: number;
-  fail_to_query_count?: number;
-}
-
-export interface ThreatIntelModelData {
-  stat_per_model: ModelStatsBase;
-
-  stat_per_model_per_report: Record<
-    string, // report id like "adroxgh0st"
-    ModelStatsBase
-  >;
-
-  stat_per_model_per_source: Record<
-    string, // source like "CISA", "NSA"
-    ModelStatsBase
-  >;
-}
-
-export interface MalwareModelData {
-  stat_per_model: ModelStatsBase;
-
-  stat_per_model_per_topic: Record<
-    string, // topic name
-    ModelStatsBase
-  >;
-
-  stat_per_model_per_difficulty: Record<
-    string, // easy | medium | hard
-    ModelStatsBase
-  >;
-
-  stat_per_model_per_attack: Record<
-    string, // infostealers, ransomware etc.
-    ModelStatsBase
-  >;
-}
-
-export interface MalwareData {
-  [modelName: string]: MalwareModelData;
-}
-
 export type InterpreterDataArray = Interpreter[]
 
 export const colorCode: ColorCode = {
