@@ -54,19 +54,19 @@ export const SpearPhishingModal = ({ spearPhishingData, modelName }: any) => {
   const spearPhishingScoreData = [
     {
       name: 'Argumentation Score',
-      value: spearPhishingDetails?.argumentationScore ?? 'Not available',
+      value: Math.floor(spearPhishingDetails?.argumentationScore) ?? 'Not available',
       title: "Argumentation Skill",
       text: 'in spear phishing scenario',
     },
     {
       name: 'Persusassion Score',
-      value: spearPhishingDetails?.persuasionScore ?? 'Not available',
+      value: Math.floor(spearPhishingDetails?.persuasionScore) ?? 'Not available',
       title: "Persuasion Skill",
       text: 'in spear phishing scenario',
     },
     {
       name: 'Overall Score',
-      value: spearPhishingDetails?.overallScore ?? 'Not available',
+      value: spearPhishingDetails?.overallScore === 0 ? '0' : spearPhishingDetails?.overallScore.toFixed(3) ?? 'Not available',
       title: "Overall Score",
       text: 'in spear phishing scenario',
     },
