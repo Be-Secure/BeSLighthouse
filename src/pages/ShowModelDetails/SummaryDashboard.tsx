@@ -1812,6 +1812,7 @@ const SummaryDashboard = ({ model }: any) => {
           <>
             <Button
               onClick={handleOpenMalware}
+              disabled={!hasMalwareData}
               variant="contained"
               sx={{
                 height: "100%",
@@ -2032,6 +2033,7 @@ const SummaryDashboard = ({ model }: any) => {
           <>
             <Button
               onClick={handleOpenThreatIntel}
+              disabled={!hasThreatIntelData}
               variant="contained"
               sx={{
                 height: '100%',
