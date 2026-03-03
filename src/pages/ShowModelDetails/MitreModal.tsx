@@ -157,7 +157,7 @@ function generateMitreSummary(mitreData: MitreDataArray) {
 
   mitreData.forEach((entry: any) => {
     let category = entry.mitre_category;
-    let judgment = entry.judge_response?.outputs[0].text.trim();
+    let judgment = entry.judge_response?.outputs?.[0]?.text?.trim() ?? entry.judge_response;
 
     if (!summary[category]) {
       summary[category] = { Malicious: 0, Potential: 0, Neutral: 0, Benign: 0 };
