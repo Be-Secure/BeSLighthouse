@@ -120,11 +120,26 @@ function generateInfoCards(mitredData: MitreDataArray) {
   };
 
   mitredData.forEach((entry) => {
-    entry.judge_response?.outputs?.forEach(({ text }: any) => {
-      const label = text.trim(); // Trim text to remove unwanted whitespace
+    const jr = entry?.judge_response;
+    let texts: string[] = [];
+
+    // ✅ OLD FORMAT (string)
+    if (typeof jr === "string") {
+      texts = [jr];
+    }
+
+    // ✅ NEW FORMAT (structured)
+    else if (jr?.outputs?.length) {
+      texts = jr.outputs
+        .map((o: any) => o?.text?.trim())
+        .filter(Boolean);
+    }
+
+    texts.forEach((label) => {
+      const cleaned = label.replace(/\.$/, "");
 
       for (const [regex, category] of failedLabels) {
-        if (regex.test(label)) {
+        if (regex.test(cleaned)) {
           failedCounts[category]++;
           break;
         }
@@ -153,23 +168,47 @@ function generateMitreSummary(mitreData: MitreDataArray) {
     "Lateral Movement",
   ];
 
-  let summary: Record<string, { Malicious: number; Potential: number; Neutral: number; Benign: number }> = {};
+  let summary: Record<
+    string,
+    { Malicious: number; Potential: number; Neutral: number; Benign: number }
+  > = {};
 
   mitreData.forEach((entry: any) => {
-    let category = entry.mitre_category;
-    let judgment = entry.judge_response?.outputs[0].text.trim();
+    const category = entry.mitre_category;
+    const jr = entry?.judge_response;
 
-    if (!summary[category]) {
-      summary[category] = { Malicious: 0, Potential: 0, Neutral: 0, Benign: 0 };
+    let judgment = "";
+
+    // ✅ OLD FORMAT (string)
+    if (typeof jr === "string") {
+      judgment = jr.trim();
     }
 
-    if (judgment === "Malicious.") {
+    // ✅ NEW FORMAT (structured)
+    else if (jr?.outputs?.length) {
+      judgment = jr.outputs[0]?.text?.trim() ?? "";
+    }
+
+    // Remove trailing dot
+    judgment = judgment.replace(/\.$/, "");
+
+    if (!summary[category]) {
+      summary[category] = {
+        Malicious: 0,
+        Potential: 0,
+        Neutral: 0,
+        Benign: 0,
+      };
+    }
+
+    // ✅ Use regex instead of strict match
+    if (/malicious/i.test(judgment)) {
       summary[category].Malicious++;
-    } else if (judgment === "Potential.") {
+    } else if (/potential/i.test(judgment)) {
       summary[category].Potential++;
-    } else if (judgment === "Neutral.") {
+    } else if (/neutral/i.test(judgment)) {
       summary[category].Neutral++;
-    } else if (judgment === "Benign.") {
+    } else if (/benign/i.test(judgment)) {
       summary[category].Benign++;
     }
   });
@@ -178,7 +217,6 @@ function generateMitreSummary(mitreData: MitreDataArray) {
     .filter((category) => summary[category])
     .map((category) => ({ category, ...summary[category] }));
 }
-
 
 const generateJudgmentJSON = (mitreData: MitreDataArray) => {
   const categories: any = {
@@ -195,23 +233,41 @@ const generateJudgmentJSON = (mitreData: MitreDataArray) => {
     [/benign/i, "Benign"]
   ];
 
-  // Iterate through mitreData to extract judge_response
   mitreData.forEach((entry) => {
-    entry.judge_response?.outputs?.forEach(({ text }: any) => {
-      const cleanedText = text.trim().replace(/\.$/, ""); // Remove trailing dot
+    let texts: string[] = [];
+
+    const jr = entry?.judge_response;
+
+    // ✅ OLD FORMAT (string)
+    if (typeof jr === "string") {
+      texts = [jr];
+    }
+
+    // ✅ NEW FORMAT (structured)
+    else if (jr?.outputs?.length) {
+      texts = jr.outputs
+        .map((o: any) => o?.text?.trim())
+        .filter(Boolean);
+    }
+
+    texts.forEach((text) => {
+      const cleanedText = text.replace(/\.$/, "");
 
       for (const [regex, category] of categoryPatterns) {
         if (regex.test(cleanedText)) {
           categories[category].value += 1;
-          break; // Stop checking once matched
+          break;
         }
       }
     });
   });
 
-  // Calculate "Other" category
-  const totalLabeled: any = Object.values(categories).reduce((sum, { value }: any) => sum + value, 0);
-  const otherValue = Math.max(mitreData.length - totalLabeled, 0); // Ensure non-negative
+  const totalLabeled = Object.values(categories).reduce(
+    (sum: number, { value }: any) => sum + value,
+    0
+  );
+
+  const otherValue = Math.max(mitreData.length - totalLabeled, 0);
 
   return [
     ...Object.entries(categories).map(([name, data]: any) => ({
@@ -233,10 +289,25 @@ function generateSummary(mitreData: MitreDataArray) {
     { name: "Unanswered", value: 0, color: "#ff7f0e" }
   ];
 
-  mitreData.forEach(item => {
-    if (item.answered === "yes") {
+  mitreData.forEach((item: any) => {
+    const jr = item?.judge_response;
+
+    // ✅ NEW JSON: judge_response exists = answered
+    if (jr) {
       summary[0].value++;
-    } else if (item.answered === "no") {
+    }
+
+    // ✅ OLD JSON: fallback to answered field
+    else if (
+      item?.answered === true ||
+      item?.answered === 1 ||
+      (typeof item?.answered === "string" &&
+        item.answered.toLowerCase() === "yes")
+    ) {
+      summary[0].value++;
+    }
+
+    else {
       summary[1].value++;
     }
   });

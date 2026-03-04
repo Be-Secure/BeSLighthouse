@@ -117,10 +117,8 @@ const ThreatIntelligenceModal = ({ threatIntelligenceSummary }: any) => {
 
   const series = useMemo(
     () => [
-      { key: "correct_mc_count", label: "Correct", fill: "#D32F2F" },
-      { key: "incorrect_mc_count", label: "Incorrect", fill: "#388E3C" },
-      { key: "response_parsing_error_count", label: "Parsing Errors", fill: "#1F77B4" },
-      { key: "fail_to_query_count", label: "Fail to Query", fill: "#9467BD" },
+      { key: "correct_mc_count", label: "Correct", fill: "#388E3C" },
+      { key: "incorrect_mc_count", label: "Incorrect", fill: "#D32F2F" }
     ],
     []
   );
@@ -179,7 +177,7 @@ const ThreatIntelligenceModal = ({ threatIntelligenceSummary }: any) => {
             <Grid item xs={ 12 } md={ 12 } lg={ 8 }>
               <Card sx={ { height: "100%", display: "flex", justifyContent: "center", marginLeft: '8px' } }>
                 <Typography variant="body2" color="textSecondary" style={ { paddingLeft: "10px"} }>
-                  <b>Threat Intelligence Reasoning</b> uses the MITRE ATT&CK framework to evaluate an LLM’s compliance when asked to assist in cyberattacks.
+                  <b>Threat Intelligence Reasoning</b> Evaluates an AI's ability to parse unstructured threat intelligence reports and extract actionable insights via multiple choice questions where multiple options may be correct.
                 </Typography>
               </Card>
             </Grid>
