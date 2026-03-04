@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/BeSLighthouse/static/js/main.89070050.js",
+    "main.js": "/BeSLighthouse/static/js/main.60df5dd9.js",
     "static/js/239.a3296b3c.chunk.js": "/BeSLighthouse/static/js/239.a3296b3c.chunk.js",
     "static/js/977.475f3977.chunk.js": "/BeSLighthouse/static/js/977.475f3977.chunk.js",
     "static/js/455.76b1eec9.chunk.js": "/BeSLighthouse/static/js/455.76b1eec9.chunk.js",
@@ -21,12 +21,12 @@
     "static/media/certificate.png": "/BeSLighthouse/static/media/certificate.d97bbadc67cdb4b5540e.png",
     "static/media/gavel.png": "/BeSLighthouse/static/media/gavel.0728ffd76239f17a3a46.png",
     "index.html": "/BeSLighthouse/index.html",
-    "main.89070050.js.map": "/BeSLighthouse/static/js/main.89070050.js.map",
+    "main.60df5dd9.js.map": "/BeSLighthouse/static/js/main.60df5dd9.js.map",
     "239.a3296b3c.chunk.js.map": "/BeSLighthouse/static/js/239.a3296b3c.chunk.js.map",
     "977.475f3977.chunk.js.map": "/BeSLighthouse/static/js/977.475f3977.chunk.js.map",
     "455.76b1eec9.chunk.js.map": "/BeSLighthouse/static/js/455.76b1eec9.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.89070050.js"
+    "static/js/main.60df5dd9.js"
   ]
 }
