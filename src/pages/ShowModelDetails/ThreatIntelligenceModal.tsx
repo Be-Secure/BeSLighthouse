@@ -118,9 +118,7 @@ const ThreatIntelligenceModal = ({ threatIntelligenceSummary }: any) => {
   const series = useMemo(
     () => [
       { key: "correct_mc_count", label: "Correct", fill: "#388E3C" },
-      { key: "incorrect_mc_count", label: "Incorrect", fill: "#D32F2F" },
-      { key: "response_parsing_error_count", label: "Parsing Errors", fill: "#1F77B4" },
-      { key: "fail_to_query_count", label: "Fail to Query", fill: "#9467BD" },
+      { key: "incorrect_mc_count", label: "Incorrect", fill: "#D32F2F" }
     ],
     []
   );
