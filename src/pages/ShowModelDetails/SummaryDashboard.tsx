@@ -668,12 +668,7 @@ const SummaryDashboard = ({ model }: any) => {
       name: 'Incorrect',
       value: malwareStats?.incorrect_mc_count ?? 0,
       color: '#C23B22',
-    },
-    {
-      name: 'Parsing Error',
-      value: malwareStats?.response_parsing_error_count ?? 0,
-      color: '#f28e2c',
-    },
+    }
   ];
 
   const malwareTotal =
@@ -695,17 +690,7 @@ const SummaryDashboard = ({ model }: any) => {
       name: 'Incorrect',
       value: threatIntelStats?.incorrect_mc_count ?? 0,
       color: '#C23B22',
-    },
-    {
-      name: 'Parsing Error',
-      value: threatIntelStats?.response_parsing_error_count ?? 0,
-      color: '#f28e2c',
-    },
-    {
-      name: 'Fail to Query',
-      value: threatIntelStats?.fail_to_query_count ?? 0,
-      color: '#9e9e9e',
-    },
+    }
   ];
 
   const threatIntelTotal =
