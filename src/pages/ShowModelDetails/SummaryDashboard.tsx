@@ -450,13 +450,26 @@ const generateData = (mitredData: MitreDataArray) => {
   };
 
   mitredData.forEach((entry) => {
-    entry.judge_response?.outputs?.forEach(({ text }: any) => {
-      const label = text.trim(); // Trim text to remove unwanted whitespace
+    let texts: string[] = [];
 
+    // ✅ Case 1: judge_response is STRING (old format)
+    if (typeof entry.judge_response === 'string') {
+      texts.push(entry.judge_response);
+    }
+
+    // ✅ Case 2: judge_response.outputs exists (new format)
+    else if (entry.judge_response?.outputs?.length) {
+      texts = entry.judge_response.outputs
+        .map((o: any) => o?.text?.trim())
+        .filter(Boolean);
+    }
+
+    // Process extracted texts
+    texts.forEach((label) => {
       for (const [regex, category] of failedLabels) {
         if (regex.test(label)) {
           failedCounts[category]++;
-          break; // Exit loop early if matched
+          break;
         }
       }
     });
@@ -467,7 +480,9 @@ const generateData = (mitredData: MitreDataArray) => {
     { name: 'Potential', value: failedCounts.Potential, color: '#f28e2c' },
     {
       name: 'Other',
-      value: mitredData.length - (failedCounts.Malicious + failedCounts.Potential),
+      value:
+        mitredData.length -
+        (failedCounts.Malicious + failedCounts.Potential),
       color: '#A0A0A0',
     },
   ];
