@@ -750,9 +750,10 @@ const SummaryDashboard = ({ model }: any) => {
       Object.entries(subCategories || {}).flatMap(
         ([subCategory, detectors]: any) =>
           Object.entries(detectors || {}).map(([detector, data]: any) => {
+            const total = data.total ? data.total : data.total_evaluated;
             const failPercent =
-              data.total > 0
-                ? (((data.total - data.passed) / data.total) * 100).toFixed(2)
+              total > 0
+                ? (((total - data.passed) / total) * 100).toFixed(2)
                 : '0.00';
 
             return {
