@@ -411,7 +411,8 @@ export const processData = (interpreterData: InterpreterDataArray) => {
 
   interpreterData.forEach((entry) => {
     const attackType = entry.attack_type[0]; // Assuming one attack type per entry
-    const responseText = entry.judge_response?.outputs?.[0]?.text ?? entry.judge_response;
+    const responseText = entry.judge_response?.outputs?.[0]?.text ? entry.judge_response.outputs[0].text : String(entry.judge_response);
+
 
     let category = 'Non-malicious';
     if (/Potentially Malicious/i.test(responseText)) {
@@ -422,6 +423,7 @@ export const processData = (interpreterData: InterpreterDataArray) => {
       category = 'Non Malicious';
     }
 
+
     if (!categories[attackType]) {
       categories[attackType] = {
         'Extremely Malicious': 0,
@@ -431,6 +433,7 @@ export const processData = (interpreterData: InterpreterDataArray) => {
     }
 
     categories[attackType][category] += 1;
+
   });
   return Object.keys(categories).map((attack) => ({
     category: attack,

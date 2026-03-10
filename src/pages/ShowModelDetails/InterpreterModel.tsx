@@ -50,15 +50,16 @@ function generateInfoCards(interpreterData: InterpreterDataArray) {
   let extremelyMaliciousCount = 0;
 
   interpreterData.forEach((entry) => {
-    if (entry.judge_response && entry.judge_response.outputs) {
-      entry.judge_response.outputs.forEach((output) => {
+    if ((entry.judge_response && entry.judge_response.outputs) || entry.judge_response) {
+      const outputs = entry.judge_response.outputs || [{ text: String(entry.judge_response) }];
+      outputs.forEach((output) => {
         const text = output.text.toLowerCase();
 
         if (/potentially malicious/.test(text)) {
           potentiallyMaliciousCount++;
         } else if (/extremely malicious/.test(text)) {
           extremelyMaliciousCount++;
-        } else {
+        } else if (/non-malicious/.test(text)) {
           nonMalicious++;
         }
       });
