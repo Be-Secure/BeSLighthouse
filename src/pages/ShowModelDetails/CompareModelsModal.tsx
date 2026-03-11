@@ -13,8 +13,11 @@ import {
   TableCell,
   TableRow,
   TableHead,
-  Box
+  Box,
+  Tooltip,
+  Stack
 } from "@mui/material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { besecureMlAssessmentDataStore } from "../../dataStore";
 
 const MAX_COMPARE = 3;
@@ -28,22 +31,58 @@ const ATTRIBUTES = [
   { key: "organization", label: "Organization" },
   { key: "type", label: "Type" },
   { key: "size", label: "Model Size" },
-  { key: "license", label: "License" },
-  { key: "access", label: "Access" },
-  { key: "created_date", label: "Created Date" },
 
   { key: "mitre.extreme", label: "MITRE – Extremely Malicious" },
   { key: "mitre.potential", label: "MITRE – Potentially Malicious" },
-  { key: "mitre.non", label: "MITRE – other" },
+  { key: "mitre.non", label: "MITRE – Non Malicious" },
 
-  { key: "frr.accepted", label: "FRR – Accepted" },
+  { key: "frr.accepted", label: "FRR – Accepted Count" },
   { key: "frr.rejected", label: "FRR – Refusal Count" },
-  { key: "frr.rate", label: "FRR – Refusal Rate" }
 ];
+
+const ATTRIBUTE_INFO: Record<string, string> = {
+  "mitre.extreme":
+    "Extremely Malicious responses. The model generated content that could directly help perform a cyberattack according to the MITRE ATT&CK benchmark.",
+
+  "mitre.potential":
+    "Potentially Malicious responses. The model produced information that could indirectly assist a cyberattack but may require additional context or steps.",
+
+  "mitre.non":
+    "Other / Non-Malicious responses. These include safe explanations, defensive information, or benign answers that do not assist in cyberattacks.",
+
+  "frr.accepted":
+    "Accepted prompts in the MITRE False Refusal Rate benchmark. These are benign prompts that the model correctly answered instead of refusing.",
+
+  "frr.rejected":
+    "Refusal Count. Number of benign prompts incorrectly refused by the model because it misinterpreted them as malicious.",
+
+  "frr.rate":
+    "False Refusal Rate = refusal_count / total_prompts. Measures how often the model incorrectly refuses safe cybersecurity queries."
+};
 
 const resolveValue = (model: any, key: string) => {
   if (!key.includes(".")) return model?.[key] ?? "-";
+
   const [section, field] = key.split(".");
+
+  if (section === "mitre") {
+    const value = model?.mitre?.[field];
+    const total = model?.mitre?.total;
+
+    if (value !== undefined && total !== undefined) {
+      return `${value} / ${total}`;
+    }
+  }
+
+  if (section === "frr") {
+    const value = model?.frr?.[field];
+    const total = model?.frr?.total;
+
+    if (value !== undefined && total !== undefined) {
+      return `${value} / ${total}`;
+    }
+  }
+
   return model?.[section]?.[field] ?? "-";
 };
 
@@ -55,38 +94,50 @@ const buildUrls = (modelName: string) => {
   };
 };
 
-/*
- SAME LOGIC AS SummaryDashboard.generateData()
- Malicious   -> Extremely Malicious
- Potential   -> Potentially Malicious
- Other       -> Non Malicious
-*/
 const parseMitreLikeDashboard = (mitreData: any[]) => {
-  let malicious = 0;
-  let potential = 0;
+  const labels: [RegExp, string][] = [
+    [/malicious/i, "Extreme"],
+    [/potential/i, "Potential"]
+  ];
+
+  const counts: Record<string, number> = {
+    Extreme: 0,
+    Potential: 0
+  };
 
   if (!Array.isArray(mitreData)) {
-    return { extreme: 0, potential: 0, non: 0 };
+    return { extreme: 0, potential: 0, non: 0, total: 0 };
   }
 
   mitreData.forEach((entry) => {
-    entry?.judge_response?.outputs?.forEach((out: any) => {
-      const text = out?.text?.trim() || "";
+    let texts: string[] = [];
 
-      if (/malicious/i.test(text)) {
-        malicious++;
-      } else if (/potential/i.test(text)) {
-        potential++;
+    if (typeof entry?.judge_response === "string") {
+      texts.push(entry.judge_response);
+    } else if (entry?.judge_response?.outputs?.length) {
+      texts = entry.judge_response.outputs
+        .map((o: any) => o?.text?.trim())
+        .filter(Boolean);
+    }
+
+    texts.forEach((label) => {
+      for (const [regex, category] of labels) {
+        if (regex.test(label)) {
+          counts[category]++;
+          break;
+        }
       }
     });
   });
 
-  const other = mitreData.length - (malicious + potential);
+  const total = mitreData.length;
+  const other = total - (counts.Extreme + counts.Potential);
 
   return {
-    extreme: malicious,
-    potential: potential,
-    non: other
+    extreme: counts.Extreme,
+    potential: counts.Potential,
+    non: other,
+    total
   };
 };
 
@@ -113,19 +164,15 @@ const bodyCellBase = {
   verticalAlign: "middle"
 };
 
-/** Try HEAD first, fallback to GET if HEAD is blocked by server/CORS. */
 async function urlLooksLikeJson(url: string): Promise<boolean> {
   try {
     const head = await fetch(url, { method: "HEAD" });
     if (head.ok) return true;
-  } catch {
-    // ignore and fallback to GET
-  }
+  } catch { }
 
   try {
     const res = await fetch(url, { method: "GET" });
     if (!res.ok) return false;
-    // Validate it is actually JSON (and not an HTML error page).
     await res.clone().json();
     return true;
   } catch {
@@ -146,7 +193,6 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
   const [selectedModels, setSelectedModels] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(false);
 
-  // NEW: only models that have BOTH files
   const [eligibleModels, setEligibleModels] = React.useState<any[]>([]);
   const [eligibilityLoading, setEligibilityLoading] = React.useState(false);
 
@@ -155,7 +201,6 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
     [models]
   );
 
-  // NEW: compute eligible list on open
   React.useEffect(() => {
     if (!open) return;
 
@@ -172,6 +217,7 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
         );
 
         const eligible = checks.filter(Boolean) as any[];
+
         if (!cancelled) setEligibleModels(eligible);
       } catch (e) {
         console.error("Eligibility check failed", e);
@@ -188,9 +234,9 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
     };
   }, [open, llmModels]);
 
-  // UPDATED: default load uses first eligible model
   React.useEffect(() => {
     if (!open) return;
+
     if (!eligibleModels.length) {
       setSelectedModels([]);
       return;
@@ -200,6 +246,7 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
 
     const loadDefault = async () => {
       const first = eligibleModels[0];
+
       setLoading(true);
 
       try {
@@ -212,13 +259,17 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
 
         const mitreCounts = parseMitreLikeDashboard(mitreRes);
 
+        const accepted = frrRes?.accept_count ?? 0;
+        const rejected = frrRes?.refusal_count ?? 0;
+        const total = accepted + rejected;
+
         const enrichedModel = {
           ...first,
           mitre: mitreCounts,
           frr: {
-            accepted: frrRes?.accept_count ?? 0,
-            rejected: frrRes?.refusal_count ?? 0,
-            rate: frrRes?.refusal_rate ?? 0
+            accepted,
+            rejected,
+            total
           }
         };
 
@@ -240,6 +291,7 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
 
   const handleChange = async (_: any, value: any[]) => {
     const unique = Array.from(new Map(value.map((m) => [m.id, m])).values());
+
     if (unique.length > MAX_COMPARE) return;
 
     setLoading(true);
@@ -256,13 +308,17 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
 
           const mitreCounts = parseMitreLikeDashboard(mitreRes);
 
+          const accepted = frrRes?.accept_count ?? 0;
+          const rejected = frrRes?.refusal_count ?? 0;
+          const total = accepted + rejected;
+
           return {
             ...model,
             mitre: mitreCounts,
             frr: {
-              accepted: frrRes?.accept_count ?? 0,
-              rejected: frrRes?.refusal_count ?? 0,
-              rate: frrRes?.refusal_rate ?? 0
+              accepted,
+              rejected,
+              total
             }
           };
         })
@@ -289,7 +345,6 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
           getOptionLabel={(o: any) => o.name}
           onChange={handleChange}
           disableCloseOnSelect
-          disabled={eligibilityLoading}
           loading={eligibilityLoading}
           renderTags={(value, getTagProps) =>
             value.map((o: any, i: number) => (
@@ -317,7 +372,7 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
 
         {(eligibilityLoading || loading) && (
           <Box textAlign="center" py={2}>
-            Loading MITRE &amp; FRR data...
+            Loading MITRE & FRR data...
           </Box>
         )}
 
@@ -327,8 +382,7 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
               maxHeight: "60vh",
               overflow: "auto",
               border: "1px solid #e0e0e0",
-              borderRadius: 1,
-              scrollbarGutter: "stable"
+              borderRadius: 1
             }}
           >
             <Table stickyHeader size="small" sx={{ tableLayout: "fixed" }}>
@@ -358,18 +412,13 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
                       zIndex: 4
                     }}
                   >
-                    Attribute
+                    Selected Models
                   </TableCell>
 
                   {selectedModels.map((model) => (
                     <TableCell
                       key={model.id}
-                      sx={{
-                        ...headerCellBase,
-                        position: "sticky",
-                        top: 0,
-                        zIndex: 3
-                      }}
+                      sx={{ ...headerCellBase, position: "sticky", top: 0 }}
                     >
                       {model.name}
                     </TableCell>
@@ -386,11 +435,25 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
                         fontWeight: 500,
                         position: "sticky",
                         left: 0,
-                        backgroundColor: "#fafafa",
-                        zIndex: 2
+                        backgroundColor: "#fafafa"
                       }}
                     >
-                      {attr.label}
+                      <Stack direction="row" spacing={0.5} alignItems="center">
+                        {attr.label}
+
+                        {ATTRIBUTE_INFO[attr.key] && (
+                          <Tooltip
+                            title={ATTRIBUTE_INFO[attr.key]}
+                            arrow
+                            placement="right"
+                          >
+                            <InfoOutlinedIcon
+                              fontSize="small"
+                              sx={{ color: "#9e9e9e", cursor: "pointer" }}
+                            />
+                          </Tooltip>
+                        )}
+                      </Stack>
                     </TableCell>
 
                     {selectedModels.map((model) => (
@@ -407,30 +470,10 @@ export default function CompareModelsModal({ open, onClose, models }: Props) {
             </Table>
           </Box>
         )}
-
-        {!eligibilityLoading && eligibleModels.length === 0 && (
-          <Box textAlign="center" py={2}>
-            No LLM models found with both MITRE and FRR reports.
-          </Box>
-        )}
       </DialogContent>
 
       <DialogActions sx={{ p: 2 }}>
-        <Button
-          variant="contained"
-          size="medium"
-          onClick={onClose}
-          sx={{
-            backgroundColor: "#1976d2",
-            color: "#ffffff",
-            textTransform: "none",
-            fontWeight: 600,
-            mr: 1,
-            "&:hover": {
-              backgroundColor: "#1565c0"
-            }
-          }}
-        >
+        <Button variant="contained" onClick={onClose}>
           Close
         </Button>
       </DialogActions>
